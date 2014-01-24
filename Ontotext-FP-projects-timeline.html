@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>Ontotext FP Projects Timeline</title>
+  </head>
+  <body>
+    <div id="visualization"/>
+
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load('visualization', '1', {packages: ['corechart']});
+
+      function drawVisualization() {
+        // To see the data that this visualization uses, browse to
+        // http://spreadsheets.google.com/ccc?key=0ArBFygWDV2_PdF9BOUx2N3hyZldRVG1KT0tBcm9Dbmc
+        var query = new google.visualization.Query(
+          'http://spreadsheets.google.com/tq?key=0ArBFygWDV2_PdF9BOUx2N3hyZldRVG1KT0tBcm9Dbmc&range=B1:N35');
+        // Send the query with a callback function.
+        query.send(handleQueryResponse);
+      }
+
+      function handleQueryResponse(response) {
+        if (response.isError()) {
+          alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+          return;
+        }
+        var data = response.getDataTable();
+        data.setColumnProperties(1,{role: 'tooltip', html: true}); // MUST come right after the domain (acronym) column
+
+        // compute tooltip
+        var tooltipFormat = new google.visualization.PatternFormat(
+          // {0} acronym, {1} start, {2} finish, {3} name, {4} logo
+          '<table border="0" width="500px"><tr valign="middle"><td width="200px"><img src="{4}" width="190px"/></td><td><b>{0}</b><br/>{3}<br/>'
+            + '<b>Start</b> {1}, <b>Finish</b> {2}</td></tr></table>'
+        );
+        tooltipFormat.format(data, [0,4,5,8,10], 1);
+
+        var view = new google.visualization.DataView(data);
+        view.setColumns([0,1,2,3]); // rest are used only for the tooltip
+
+        var options = {
+          width: 650, height: 500,
+          theme: 'maximized', bar: {groupWidth: "80%"},
+          legend: {position: 'none'},
+          hAxis: {viewWindow: {min: 1998, max: 2017}, viewWindowMode: 'explicit', gridlines: {count: 10}, format: '####'},
+          vAxis: {textStyle: {bold: true}},
+          colors: [0,'red'], // START bar rendered with the background color
+          focusTarget: 'category',
+          tooltip: {isHtml: true}, // render tooltips using HTML not SVG
+          isStacked: true
+        };
+
+        function selectHandler() {
+          var selection = visualization.getSelection()[0];
+          // websites: 9 ontotext, 12 project, 11 cordis
+          var url = data.getValue(selection.row,9) || data.getValue(selection.row,12) || data.getValue(selection.row,11);
+          if (url) {window.open(url,'_top')}
+        }
+
+        visualization = new google.visualization.BarChart(document.getElementById('visualization'));
+        google.visualization.events.addListener(visualization, 'select', selectHandler);
+        visualization.draw(view, options);
+      }
+
+      google.setOnLoadCallback(drawVisualization);
+    </script>
+  </body>
+</html>
