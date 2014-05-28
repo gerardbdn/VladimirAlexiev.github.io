@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="windows-1251"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Linguistic Linked Data and Ontologies</title>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1251"/>
 <meta name="title" content="Linguistic Linked Data and Ontologies"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2014-05-19"/>
+<meta name="generated" content="2014-05-28"/>
 <meta name="author" content="Vladimir Alexiev, Ontotext Corp"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -43,7 +43,7 @@
 <div id='controls'></div>
 <div id='currentSlide'></div>
 <div id='header'></div>
-<div id='footer'><h1>Linguistic Linked Data and Ontologies</h1><h2>Vladimir Alexiev, Ontotext Corp &#8226; 2014-05-19</h2></div>
+<div id='footer'><h1>Linguistic Linked Data and Ontologies</h1><h2>Vladimir Alexiev, Ontotext Corp &#8226; 2014-05-28</h2></div>
 </div>
 <div class='presentation'>
 <div class='slide front'>
@@ -106,6 +106,19 @@
 <ul>
 <li>Zotero Bibliography
 </li>
+<li>Linguistic ontologies
+<ul>
+<li>NIF
+</li>
+<li>OLIA and its constituents, ITS2
+</li>
+<li>LEMON
+</li>
+<li>GOLD, ISOcat (?)
+</li>
+</ul>
+
+</li>
 <li>Linguistic Linked Datasets
 <ul>
 <li>WordNet, Lingvo, Lexvo: in FactForge
@@ -117,19 +130,6 @@
 <li>BabelNet
 </li>
 <li>UBYlemon
-</li>
-</ul>
-
-</li>
-<li>Linguistic ontologies
-<ul>
-<li>NIF
-</li>
-<li>OLIA and its constituents
-</li>
-<li>LEMON
-</li>
-<li>GOLD, ISOcat (?)
 </li>
 </ul>
 
@@ -189,8 +189,74 @@
 </div>
 
 <div id="outline-container-5-" class="outline-2">
-<h2 id="sec-5-">Linguistic Linked Data in FactForge</h2>
+<h2 id="sec-5-">Linguistic Ontologies</h2>
 <div class="outline-text-2" id="text-5-">
+
+<p>There's been a flurry of activity in the last 5 years for representing Linguistic data as RDF
+</p><ul>
+<li>Covers both Lexical resources (eg WordNet) and Corpora (eg MASC)
+</li>
+<li>Working groups:
+<ul>
+<li><a href="http://wiki.okfn.org/Working_Groups/Linguistics">Open Knowledge Foundation's WG on Open Data in Linguistics</a>
+</li>
+<li><a href="http://www.w3.org/community/ontolex">W3C Ontology-Lexica Community Group</a> (OntoLex)
+</li>
+</ul>
+
+</li>
+<li>Intro: Christian Chiarcos, John McCrae, Philipp Cimiano, and Christiane Fellbaum. <a href="http://www.lemon-model.net/papers/open-data-for-linguistics.pdf">Towards Open Data for Linguistics: Linguistic Linked Data</a>. In New Trends of Research in Ontologies and Lexical Resources. Theory and Applications of Natural Language Processing. Springer Berlin Heidelberg, 2013.
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-6-" class="outline-2">
+<h2 id="sec-6-">Linguistic Linked Data</h2>
+<div class="outline-text-2" id="text-6-">
+
+<p>In the following slides I describe large-scale Linguistic resources.<br/>
+Datasets already integrated in FactForge:
+</p><ul>
+<li><a href="http://wordnet.princeton.edu/">WordNet</a>: well-known and prototypical lexical resource
+<ul>
+<li>117k synsets, glosses, numerous synonyms (words/phrases). Hyponyms/hyperonyms, meronyms, antonyms
+</li>
+<li>FactForge includes the W3C RDF representation of WordNet 3.1
+</li>
+</ul>
+
+</li>
+<li>Lingvoj, Lexvo: info about languages
+</li>
+</ul>
+
+<p><a href="http://www.image-net.org"><img src="./img/imagenet.jpg" alt="imagenet.jpg"/></a> includes sample images (5k per noun synset!). Enables automatic image annotation.
+</p><ul>
+<li>human-curated bounding boxes, eg "fox" and "airplane"
+</li>
+</ul>
+
+<p><img src="./img/imagenet-bbox-fox.jpg"  alt="./img/imagenet-bbox-fox.jpg" /><img src="./img/imagenet-bbox-airplane.jpg"  alt="./img/imagenet-bbox-airplane.jpg" />
+</p></div>
+
+</div>
+
+<div id="outline-container-7-" class="outline-2">
+<h2 id="sec-7-">Linguistic LOD</h2>
+<div class="outline-text-2" id="text-7-">
+
+<p><img src="./img/llod-for-multisensor.png"  alt="./img/llod-for-multisensor.png" />
+</p></div>
+
+</div>
+
+<div id="outline-container-8-" class="outline-2">
+<h2 id="sec-8-">Linguistic Linked Data in FactForge</h2>
+<div class="outline-text-2" id="text-8-">
 
 <p>Datasets already integrated in FactForge:
 </p><ul>
@@ -218,33 +284,8 @@
 
 </div>
 
-<div id="outline-container-6-" class="outline-2">
-<h2 id="sec-6-">WordNet RDF</h2>
-<div class="outline-text-2" id="text-6-">
-
-</div>
-
-</div>
-
-<div id="outline-container-7-" class="outline-2">
-<h2 id="sec-7-">Wiktionary</h2>
-<div class="outline-text-2" id="text-7-">
-
-</div>
-
-</div>
-
-<div id="outline-container-8-" class="outline-2">
-<h2 id="sec-8-">BabelNet</h2>
-<div class="outline-text-2" id="text-8-">
-
-<p>Useful for Multilingual Joint Word Sense Disambiguation
-</p></div>
-
-</div>
-
 <div id="outline-container-9-" class="outline-2">
-<h2 id="sec-9-">UBYlemon</h2>
+<h2 id="sec-9-">WordNet RDF</h2>
 <div class="outline-text-2" id="text-9-">
 
 </div>
@@ -252,42 +293,81 @@
 </div>
 
 <div id="outline-container-10-" class="outline-2">
-<h2 id="sec-10-">Linguistic Ontologies</h2>
+<h2 id="sec-10-">Wiktionary</h2>
 <div class="outline-text-2" id="text-10-">
-
-<p>There's been a flurry of activity in the last 5 years for representing Linguistic data as RDF
-</p><ul>
-<li>Covers both Lexical resources (eg WordNet) and Corpora (eg MASC)
-</li>
-<li>Working groups: 
-<ul>
-<li><a href="http://wiki.okfn.org/Working_Groups/Linguistics">Open Knowledge Foundation’s WG on Open Data in Linguistics</a>
-</li>
-<li><a href="http://www.w3.org/community/ontolex">W3C Ontology-Lexica Community Group</a> (OntoLex)
-</li>
-</ul>
-
-</li>
-<li>Intro: Christian Chiarcos, John McCrae, Philipp Cimiano, and Christiane Fellbaum. <a href="http://www.lemon-model.net/papers/open-data-for-linguistics.pdf">Towards Open Data for Linguistics: Linguistic Linked Data</a>. In New Trends of Research in Ontologies and Lexical Resources. Theory and Applications of Natural Language Processing. Springer Berlin Heidelberg, 2013. 
-</li>
-</ul>
 
 </div>
 
 </div>
 
 <div id="outline-container-11-" class="outline-2">
-<h2 id="sec-11-">Linguistic LOD</h2>
+<h2 id="sec-11-">BabelNet</h2>
 <div class="outline-text-2" id="text-11-">
 
-<p><img src="./img/llod-for-multisensor.png"  alt="./img/llod-for-multisensor.png" />
-</p></div>
+<ul>
+<li>50 languages covered
+</li>
+<li>seamless integration of WordNet, Open Multilingual WordNet, Wikipedia, OmegaWiki, Wikidata (NEW!), Wiktionary (NEW!)
+</li>
+<li>9.3M Babel synsets
+</li>
+<li>67M Babel senses
+</li>
+<li>21.7M textual definitions
+</li>
+<li>262M semantic relations
+</li>
+<li>7.7M synset-associated images
+</li>
+<li>1.1 billion RDF triples!
+</li>
+<li>Available for download together with Java APIs for programmatic access
+</li>
+<li>Also available in RDF/Lemon format and via a public SPARQL endpoint
+</li>
+</ul>
+
+</div>
 
 </div>
 
 <div id="outline-container-12-" class="outline-2">
-<h2 id="sec-12-">News ontology</h2>
+<h2 id="sec-12-">BabelNet</h2>
 <div class="outline-text-2" id="text-12-">
+
+<p>Useful for Multilingual Joint Word Sense Disambiguation
+<a href="http://babelfy.org/index.jsp">Babelfy</a> (just released)<br/>
+<img src="./img/babelfy.png"  alt="./img/babelfy.png" />
+</p></div>
+
+</div>
+
+<div id="outline-container-13-" class="outline-2">
+<h2 id="sec-13-">UBY-Lemon</h2>
+<div class="outline-text-2" id="text-13-">
+
+<p><a href="http://lemon-model.net/lexica/uby/"><img src="./img/uby-lemon.png" alt="uby-lemon.png"/></a>
+Integrates in LEMON format:
+</p><ul>
+<li>FrameNet
+</li>
+<li>OmegaWiki (English, German)
+</li>
+<li>VerbNet
+</li>
+<li>Wiktionary (English, German)
+</li>
+<li>Princeton WordNet 3.0
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-14-" class="outline-2">
+<h2 id="sec-14-">News Ontology</h2>
+<div class="outline-text-2" id="text-14-">
 
 <p>rnews (newsML, IPTC)
 </p></div>
