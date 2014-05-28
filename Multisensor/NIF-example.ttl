@@ -1,0 +1,314 @@
+# Get a lot of the used prefixes from:
+# http://prefix.cc/dbr,dbo,dc,fise,itsrdf,nif,olia,owl,penn,sioc,stanford,xsd,yago.ttl
+@prefix dbr:      <http://dbpedia.org/resource/>.
+@prefix dbo:      <http://dbpedia.org/ontology/>.
+@prefix dc:       <http://purl.org/dc/elements/1.1/>.
+@prefix fise:     <http://fise.iks-project.eu/ontology/>.
+@prefix itsrdf:   <http://www.w3.org/2005/11/its/rdf#>.
+@prefix marl:     <http://purl.org/marl/ns#>.
+@prefix nerd:     <http://nerd.eurecom.fr/ontology#>.
+@prefix nif:      <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#>.
+@prefix olia:     <http://purl.org/olia/olia.owl#>.
+@prefix owl:      <http://www.w3.org/2002/07/owl#>.
+@prefix penn:     <http://purl.org/olia/penn.owl#>.
+@prefix sioc:     <http://rdfs.org/sioc/ns#>.
+@prefix stanford: <http://purl.org/olia/stanford.owl#>.
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#>.
+@prefix yago:     <http://yago-knowledge.org/resource/>.
+
+############################## Context
+# Assume that http://example.com/blog/1 is a blog post with the text "Germany is the work horse of the European Union".
+# First we represent the text as a whole, pointing to its nif:sourceUrl
+@base <http://example.com/blog/1/> .
+<#char=0,47> a nif:Context; # the complete text
+  nif:isString "Germany is the work horse of the European Union";
+    # "*is*String" means this Context is considered EQUIVALENT to its string value.
+  nif:sourceUrl <>. # Where the text came from, same as the @base
+
+############################## Position URLs
+# The recommended NIF URLs are position-based (following RFC 5147): <#char=x,y> .
+# The count is 0-based and spaces are skipped (NIF 2.0 Core Spec, String Counting and Determination of Length).
+# Here are the positions of each word:
+#   Germany is   the   work  horse of    the   European Union
+#   0,7     8,10 11,14 15,19 20,25 26,28 29,32 33,41    42,47
+# All position URLs must refer to the context; nif:beginIndex/nif:endIndex are counted in it.
+# We indicate the datatype of nif:beginIndex/nif:endIndex explicitly, as specified in NIF, and unlike examples which omit it.
+# Please note that in Turtle a number like 7 means "7"^^xsd:integer, not "7"^^xsd:nonNegativeInteger (http://www.w3.org/TR/turtle/#abbrev)
+<#char=0,7>   a nif:RFC5147String; nif:referenceContext <#char=0,47>;
+  nif:beginIndex "0"^^xsd:nonNegativeInteger;  nif:endIndex "7"^^xsd:nonNegativeInteger.
+<#char=8,10>  a nif:RFC5147String; nif:referenceContext <#char=0,47>;
+  nif:beginIndex "8"^^xsd:nonNegativeInteger;  nif:endIndex "10"^^xsd:nonNegativeInteger.
+<#char=11,14> a nif:RFC5147String; nif:referenceContext <#char=0,47>;
+  nif:beginIndex "11"^^xsd:nonNegativeInteger; nif:endIndex "14"^^xsd:nonNegativeInteger.
+<#char=15,19> a nif:RFC5147String; nif:referenceContext <#char=0,47>;
+  nif:beginIndex "15"^^xsd:nonNegativeInteger; nif:endIndex "19"^^xsd:nonNegativeInteger.
+<#char=20,25> a nif:RFC5147String; nif:referenceContext <#char=0,47>;
+  nif:beginIndex "20"^^xsd:nonNegativeInteger; nif:endIndex "25"^^xsd:nonNegativeInteger.
+<#char=26,28> a nif:RFC5147String; nif:referenceContext <#char=0,47>;
+  nif:beginIndex "26"^^xsd:nonNegativeInteger; nif:endIndex "28"^^xsd:nonNegativeInteger.
+<#char=29,32> a nif:RFC5147String; nif:referenceContext <#char=0,47>;
+  nif:beginIndex "29"^^xsd:nonNegativeInteger; nif:endIndex "32"^^xsd:nonNegativeInteger.
+<#char=33,41> a nif:RFC5147String; nif:referenceContext <#char=0,47>;
+  nif:beginIndex "33"^^xsd:nonNegativeInteger; nif:endIndex "41"^^xsd:nonNegativeInteger.
+<#char=42,47> a nif:RFC5147String; nif:referenceContext <#char=0,47>;
+  nif:beginIndex "42"^^xsd:nonNegativeInteger; nif:endIndex "47"^^xsd:nonNegativeInteger.
+
+# We also introduce URLs for a couple of phrases.
+<#char=15,25> a nif:RFC5147String; nif:referenceContext <#char=0,47>;
+  nif:beginIndex "15"^^xsd:nonNegativeInteger; nif:endIndex "25"^^xsd:nonNegativeInteger.
+<#char=33,47> a nif:RFC5147String; nif:referenceContext <#char=0,47>;
+  nif:beginIndex "33"^^xsd:nonNegativeInteger; nif:endIndex "47"^^xsd:nonNegativeInteger.
+
+############################## Position URLs to Word URLs
+# Here we introduce word-based URLs, which will make following statements more clear
+# (especially for Stanford Dependency Parse).
+# owl:sameAs makes two resources equivalent, so all their statements are "copied" between each other
+# The URLs don't make any semantic difference, so we'll just use position-based for simpler implementation.
+# We also introduce URLs for the text as a whole, and a couple of phrases
+<#char=0,47>  owl:sameAs <#ROOT-0>.
+<#char=0,7>   owl:sameAs <#Germany-1>.
+<#char=8,10>  owl:sameAs <#is-2>.
+<#char=11,14> owl:sameAs <#the-3>.
+<#char=15,19> owl:sameAs <#work-4>.
+<#char=20,25> owl:sameAs <#horse-5>.
+<#char=26,28> owl:sameAs <#of-6>.
+<#char=29,32> owl:sameAs <#the-7>.
+<#char=33,41> owl:sameAs <#European-8>.
+<#char=42,47> owl:sameAs <#Union-9>.
+<#char=15,25> owl:sameAs <#work-horse>.
+<#char=33,47> owl:sameAs <#European-Union>.
+
+############################## Strings and basic structure (Word, Phrase, Sentence)
+# NLP tools would usually record whether each URL is a Word, Phrase, Sentence...
+# URLs *may* state the corresponding word with nif:anchorOf. But this is redundant, since it can be inferred from the context and indexes.
+<#ROOT-0> a nif:Sentence. # no nif:anchorOf because it already has the mandatory subprop nif:isString
+<#Germany-1>      nif:anchorOf "Germany";        a nif:Word.
+<#is-2>           nif:anchorOf "is";             a nif:Word.
+<#the-3>          nif:anchorOf "the";            a nif:Word.
+<#work-4>         nif:anchorOf "work";           a nif:Word.
+<#horse-5>        nif:anchorOf "horse";          a nif:Word.
+<#of-6>           nif:anchorOf "of";             a nif:Word.
+<#the-7>          nif:anchorOf "the";            a nif:Word.
+<#European-8>     nif:anchorOf "European";       a nif:Word.
+<#Union-9>        nif:anchorOf "Union";          a nif:Word.
+<#work-horse>     nif:anchorOf "work horse";     a nif:Phrase.
+<#European-Union> nif:anchorOf "European Union"; a nif:Phrase.
+
+############################## Stemming/Lemmatization
+<#European-8> nif:lemma "Europe".
+
+# More interesting examples. I don't know what's stem vs lemma, but I hope you do :-)
+<#favourite-10> nif:stem  "favourit". # Snowball Stemmer
+<#favourite-10> nif:lemma "favorite". # Stanford Core NLP
+
+############################## Part of Speech using the Penn tagset
+# http://nlp.stanford.edu:8080/parser/index.jsp
+# Germany/NNP is/VBZ the/DT work/NN horse/NN of/IN the/DT European/NNP Union/NNP
+# nif:oliaLink is an owl:Individual, nif:oliaClass is an owl:Class.
+# Since in penn.owl the individuals are declared to have rdf:type the class, you only need one, the other is redundant.
+<#Germany-1>   nif:oliaLink penn:NNP; nif:oliaClass penn:ProperNoun.
+<#is-2>        nif:oliaLink penn:VBZ; nif:oliaClass penn:BePresentTense.
+<#the-3>       nif:oliaLink penn:DT;  nif:oliaClass penn:Determiner.
+<#work-4>      nif:oliaLink penn:NN;  nif:oliaClass penn:CommonNoun. # wrong, actually here is JJ=Adjective
+<#horse-5>     nif:oliaLink penn:NN;  nif:oliaClass penn:CommonNoun.
+<#of-6>        nif:oliaLink penn:IN;  nif:oliaClass penn:PrepositionOrSubordinatingConjunction.
+<#the-7>       nif:oliaLink penn:DT;  nif:oliaClass penn:Determiner.
+<#European-8>  nif:oliaLink penn:NNP; nif:oliaClass penn:ProperNoun.
+<#Union-9>     nif:oliaLink penn:NNP; nif:oliaClass penn:ProperNoun.
+
+# One could consume this at a higher level (OLIA), since it abstracts the particular NLP tagset.
+# penn-link.owl defines Penn classes as subclasses of OLIA classes, so you could consume OLIA only.
+# If you are producing a reduced tagset yourself (eg only ProperNouns), use the olia class directly.
+# Please note that nif:oliaLink doesn't apply here.
+<#Germany-1>   nif:oliaClass olia:ProperNoun.
+<#is-2>        nif:oliaClass [owl:unionOf (olia:FiniteVerb olia:StrictAuxiliaryVerb)],
+                             [a owl:Restriction; owl:onProperty olia:hasTense; owl:allValuesFrom olia:Present].
+<#the-3>       nif:oliaClass penn:Determiner. # "Not clear whether this corresponds to OLiA/EAGLES determiners"
+<#work-4>      nif:oliaClass olia:CommonNoun. 
+<#horse-5>     nif:oliaClass olia:CommonNoun.
+<#of-6>        nif:oliaClass [owl:unionOf (olia:Preposition olia:SubordinatingConjunction)].
+<#the-7>       nif:oliaClass penn:Determiner. # "Not clear whether this corresponds to OLiA/EAGLES determiners"
+<#European-8>  nif:oliaClass olia:ProperNoun.
+<#Union-9>     nif:oliaClass olia:ProperNoun.
+# As you see above, the OLIA abstraction doesn't work perfectly in all cases:
+# - penn:Determiner doesn't have a precise OLIA mapping
+# - penn:PrepositionOrSubordinatingConjunction maps to a unionOf (disjunction), but you can't query by such class
+# - penn:BePresentTense is worse: it's also a unionOf;
+#   further a reasoner will restrict any olia:hasTense property to have type olia:Present. 
+#   But Penn doesn't define any values for that property!
+
+# TODO: Example: attaching NLP features to words
+<#is-2> a olia:Verb;
+  olia:hasTense ms:VerySpecialPresentTense.
+ms:VerySpecialPresentTense a olia:Present; olia:Tense.
+
+############################## Stanford Dependency Parse
+# http://nlp.stanford.edu:8080/parser/index.jsp
+# FORMAT: individual(gov,dep): a class<superclass<superclass
+# WHERE individual is an owl:Individual having rdf:type the class (and all superclasses) 
+# nsubj(horse-5,Germany-1): a NominalSubject<Subject<Argument<Dependent<DependencyLabel
+# cop(horse-5,is-2):        a Copula<Auxiliary<Dependent<DependencyLabel
+# det(horse-5,the-3):       a Determiner<Modifier<Dependent<DependencyLabel
+# nn(horse-5,work-4):       a NounCompoundModifier<Modifier<Dependent<DependencyLabel
+# root(ROOT-0,horse-5):     a Root<DependencyLabel
+# prep(horse-5,of-6):       a PrepositionalModifier<Modifier<Dependent<DependencyLabel
+# det(Union-9,the-7):       a Determiner<Modifier<Dependent<DependencyLabel
+# amod(Union-9,European-8): a AdjectivalModifier<Modifier<Dependent<DependencyLabel
+# pobj(of-6,Union-9):       a ObjectOfPreposition<Object<Complement<Argument<Dependent<DependencyLabel
+
+# There are two ways to represent this:
+## 1. The easy way: use a single property (nif:dependency), ignore the Stanford individual (since POS carries similar sort of info).
+<#horse-5> nif:dependency <#Germany-1>. 
+<#horse-5> nif:dependency <#is-2>.        
+<#horse-5> nif:dependency <#the-3>.       
+<#horse-5> nif:dependency <#work-4>.       
+<#ROOT-0>  nif:dependency <#horse-5>.     
+<#horse-5> nif:dependency <#of-6>.       
+<#Union-9> nif:dependency <#the-7>.       
+<#Union-9> nif:dependency <#European-8>. 
+<#of-6>    nif:dependency <#Union-9>.       
+
+# TODO: Kiril says, put the relation type on the target:
+<#Germany-1> a stanford:NominalSubject.
+
+## 2. The hard way: make separate DependencyLabel nodes
+## We use <#individual(gov,dep)> for URL (that includes numbered words, so is guaranteed unique).
+## stanford:DependencyLabel<olia_sys:Feature<LinguisticAnnotation ~ Relation(hasSource,hasTarget)
+<#nsubj(horse-5,Germany-1)> a olia:Relation, stanford:NominalSubject;        olia:hasSource <#horse-5>; olia:hasTarget <#Germany-1>.
+<#cop(horse-5,is-2)>        a olia:Relation, stanford:Copula;         	     olia:hasSource <#horse-5>; olia:hasTarget <#is-2>.
+<#det(horse-5,the-3)>       a olia:Relation, stanford:Determiner;     	     olia:hasSource <#horse-5>; olia:hasTarget <#the-3>.
+<#nn(horse-5,work-4)>       a olia:Relation, stanford:NounCompoundModifier;  olia:hasSource <#horse-5>; olia:hasTarget <#work-4>.
+<#root(ROOT-0,horse-5)>     a olia:Relation, stanford:Root; 	             olia:hasSource <#ROOT-0>;  olia:hasTarget <#horse-5>.
+<#prep(horse-5,of-6)>       a olia:Relation, stanford:PrepositionalModifier; olia:hasSource <#horse-5>; olia:hasTarget <#of-6>.
+<#det(Union-9,the-7)>       a olia:Relation, stanford:Determiner; 	     olia:hasSource <#Union-9>; olia:hasTarget <#the-7>.
+<#amod(Union-9,European-8)> a olia:Relation, stanford:AdjectivalModifier;    olia:hasSource <#Union-9>; olia:hasTarget <#European-8>.
+<#pobj(of-6,Union-9)>       a olia:Relation, stanford:ObjectOfPreposition;   olia:hasSource <#of-6>;    olia:hasTarget <#Union-9>.
+
+
+############################## Named Entity Recognition
+############### If you can recognize only the entity type:
+<#Germany-1>      itsrdf:taClassRef nerd:Country.
+<#European-Union> itsrdf:taClassRef nerd:Country. # or AdministrativeRegion or Location?
+
+# NERD Core (top-level) classes:
+## Thing Amount Animal Event Function Location Organization Person Product Time
+# NERD specific classes:
+## AdministrativeRegion Aircraft Airline Airport Album Ambassador Architect Artist Astronaut Athlete Automobile Band Bird Book Bridge Broadcast Canal Celebrity City ComicsCharacter Company Continent Country Criminal Drug EducationalInstitution EmailAddress FictionalCharacter Holiday Hospital Insect Island Lake Legislature Lighthouse Magazine Mayor MilitaryConflict Mountain Movie Museum MusicalArtist Newspaper NonProfitOrganization OperatingSystem Park PhoneNumber PoliticalEvent Politician ProgrammingLanguage RadioProgram RadioStation Restaurant River Road SchoolNewspaper ShoppingMall SoccerClub SoccerPlayer Software Song Spacecraft SportEvent SportsLeague SportsTeam Stadium Station TVStation TennisPlayer URL University Valley VideoGame Weapon Website
+
+############### If you can recognize specific entities in LOD datasets
+##### For phrases we can use Wordnet RDF
+# Search: http://wordnet-rdf.princeton.edu/search?query=workhorse then pick the correct sense (not really a horse)
+<#work-horse> itsrdf:taIdentRef <http://wordnet-rdf.princeton.edu/wn31/104608649-n>.
+
+# the sem rep http://wordnet-rdf.princeton.edu/wn31/104608649-n.ttl includes useful info:
+# wn:gloss "machine that performs dependably under heavy use"
+# wn:sample "the IBM main frame computers have been the workhorse of the business world"
+# It is also declared owl:sameAs
+# older rep (in FactForge): http://www.w3.org/2006/03/wn/wn20/instances/synset-workhorse-noun-1
+# newer rep: http://lemon-model.net/lexica/uby/wn/WN_Synset_25709
+
+##### For real-word entities we prefer DBpedia, since it has extra info (eg population, area...)
+<#Germany-1>      itsrdf:taIdentRef dbr:Germany.
+<#European-Union> itsrdf:taIdentRef dbr:European_union.
+# DBpedia itself includes class info, so there's no need to use itsrdf:taClassRef nerd:Country.
+dbr:European_union a dbo:Country, dbo:Place, dbo:PopulatedPlace, yago:G20Nations, yago:InternationalOrganizationsOfEurope. # etc
+dbr:Germany        a dbo:Country, dbo:Place, dbo:PopulatedPlace, yago:FederalCountries, yago:EuropeanUnionMemberEconomies. # etc
+# But other NERD classes may be useful, eg Phone, Email: for those you can't refer to DBpedia and must use itsrdf:taClassRef
+
+############### NER provenance (tool & confidence)
+# Simple case: only one annotation, from one NER tool
+<#Germany-1>
+  itsrdf:taAnnotatorsRef "NER-extraction|http://linguatec.com";
+  itsrdf:confidence 0.9.
+# 0.9 means the same as "0.9"^^xsd:double
+
+# Complex case: several annotations or NER tools. Need to use the NIF Stanbol profile (FISE) instead of ITSRDF
+<#Germany-1-enrichment-1> # separate node for each annotation
+  a fise:EntityAnnotation;
+  fise:extracted-from <#Germany-1>;
+  fise:entity-type nerd:Country;
+  fise:entity-reference dbr:Germany; # if you can recognize only the entity type, skip this
+  dc:creator "NER-extraction|http://linguatec.com"; # or better use dct:creator with a URL
+  fise:confidence "0.9"^^xsd:float.
+
+# I think it's a very bad practice to use two completely different property sets for these two situations.
+# Just because in the second case there's an intermediate node for the annotation,
+# doesn't mean the properties should be completely different.
+# https://github.com/NLP2RDF/specification/issues/2
+
+############################## Sentiment Analysis
+############### Opinion representation with MARL
+# Assume there are some comments about our blog:
+
+<comment/1> a sioc:Post; # sic: there's no sioc:Comment, they are simply a sort of sioc:Post
+  sioc:reply_of <>;
+  sioc:has_creator <http://example.com/users/Hans>;
+  sioc:content "Yes, we Germans are the hardest-working people in the world".
+<comment/2> a sioc:Post;
+  sioc:reply_of <>;
+  sioc:has_creator <http://example.com/users/Dimitrios>;
+  sioc:content "Bullshit! We Greeks are harder-working".
+
+# Now assume a sentiment analysis algorithm detects the sentiment of the comment posts.
+<opinion/1> a marl:Opinion;
+  marl:extractedFrom <comment/1>;
+  marl:describesObject <>;
+  marl:opinionText "Yes";
+  marl:polarityValue 0.9;
+  marl:minPolarityValue -1;
+  marl:maxPolarityValue 1;
+  marl:hasPolarity marl:Positive.
+<opinion/2> a marl:Opinion;
+  marl:extractedFrom <comment/2>;
+  marl:describesObject <>;
+  marl:opinionText "Bullshit!";
+  marl:polarityValue -1;
+  marl:minPolarityValue -1;
+  marl:maxPolarityValue 1;
+  marl:hasPolarity marl:Negative.
+# The following properties are useful for products, eg appliances:
+# - marl:describesObjectPart (eg battery, screen)
+# - marl:describesFeature (eg for battery: battery life, weight)
+
+# Often you want to aggregate opinions, so you don't have to deal with individual opinions
+<opinions> a marl:AggregatedOpinion;
+  marl:describesObject <>;
+  marl:aggregatesOpinion <opinion/1>, <opinion/2>; # you could omit the individual opinions, and this
+  marl:opinionCount 2;
+  marl:positiveOpinionsCount 1; # sic, this property is spelled in plural
+  marl:negativeOpinionCount 1;
+  marl:polarityValue -0.05; # simple average
+  marl:minPolarityValue -1;
+  marl:maxPolarityValue 1;
+  marl:hasPolarity marl:Neutral.
+
+############### Opinion representation with NIF
+# NIF integrates MARL using property nif:opinion from nif:String to marl:Opinion.
+# But that's declared inverseOf marl:extractedFrom, which in the MARL example points to sioc:Post (not the nif:String content of the post).
+# So something doesn't mesh here. We could mix sioc and nif properties on <comment/1>, but nif:sourceUrl points to itself...
+# Posted https://github.com/NLP2RDF/specification/issues/1
+<comment/1> a nif:Context; 
+  nif:sourceUrl <comment/1>;
+  nif:isString "Yes, we Germans are the hardest-working people in the world";
+  nif:opinion <opinion/1>.
+<comment/2> a nif:Context;
+  nif:sourceUrl <comment/2>;
+  nif:isString "Bullshit! We Greeks are harder-working";
+  nif:opinion <opinion/2>.
+
+# It may be more meaningful to use NIF to express which word carries the opinion (like marl:opinionText)
+<comment/1#char=0,> a nif:Context; 
+  nif:sourceUrl <comment/1>;
+  nif:isString "Yes, we Germans are the hardest-working people in the world".
+<comment/1#char=0,3> a nif:String;
+  nif:referenceContext <comment/1#char=0,>;
+  nif:anchorOf "Yes";
+  nif:opinion <opinion/1>.
+
+<comment/2#char=0,> a nif:Context;
+  nif:sourceUrl <comment/2>;
+  nif:isString "Bullshit! We Greeks are harder-working".
+<comment/2#char=0,9> a nif:String;
+  nif:referenceContext <comment/2#char=0,>;
+  nif:anchorOf "Bullhshit!";
+  nif:opinion <opinion/2>.

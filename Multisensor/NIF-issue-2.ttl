@@ -1,0 +1,17 @@
+</char=0,7> a nif:Word;
+  nif:anchorOf "Germany".
+
+# one NER tool, one annotation
+</char=0,7>
+  itsrdf:taClassRef nerd:Country;
+  itsrdf:taIdentRef dbp:Germany;
+  itsrdf:taAnnotatorsRef "some tool";
+  itsrdf:confidence 0.9.
+
+# separate node for each annotation
+</char=0,7/enrichment=1> a fise:EntityAnnotation;
+  fise:extracted-from <#char=0,7>;
+  fise:entity-type nerd:Country;
+  fise:entity-reference dbp:Germany;
+  dc:creator "some tool";
+  fise:confidence "0.9"^^xsd:float.

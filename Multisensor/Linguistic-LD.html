@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Linguistic Linked Data and Ontologies</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="Linguistic Linked Data and Ontologies"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2014-05-19"/>
+<meta name="author" content="Vladimir Alexiev, Ontotext Corp"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<!-- configuration parameters --> <meta name='defaultView' content='slideshow' /> <meta name='controlVis' content='hidden' /> <!-- style sheet links --> <link rel='stylesheet' href='ui/default/slides.css' type='text/css' media='projection' id='slideProj' /> <link rel='stylesheet' href='ui/default/outline.css' type='text/css' media='screen' id='outlineStyle' /> <link rel='stylesheet' href='ui/default/print.css' type='text/css' media='print' id='slidePrint' /> <link rel='stylesheet' href='ui/default/opera.css' type='text/css' media='projection' id='operaFix' /><!-- S5 JS --> <script src='ui/jquery.js' type='text/javascript'></script> <script src='ui/org-slides.js' type='text/javascript'></script> <script src='ui/default/slides.js' type='text/javascript'></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+
+<div id="preamble">
+<div class='layout'>
+<div id='controls'></div>
+<div id='currentSlide'></div>
+<div id='header'></div>
+<div id='footer'><h1>Linguistic Linked Data and Ontologies</h1><h2>Vladimir Alexiev, Ontotext Corp &#8226; 2014-05-19</h2></div>
+</div>
+<div class='presentation'>
+<div class='slide front'>
+  <div id='front-logo'></div>
+<h1 class='front'>Linguistic Linked Data and Ontologies</h1><h3>Vladimir Alexiev, Ontotext Corp</h3></div>
+</div>
+
+<div id="content">
+<h1 class="title">Linguistic Linked Data and Ontologies</h1>
+
+
+<div id="outline-container-1-" class="outline-2">
+<h2 id="sec-1-">Navigating This Presentation</h2>
+<div class="outline-text-2" id="text-1-">
+
+<ul>
+<li>Ext links shown icon, eg <a href="http://www.ontotext.com">http://www.ontotext.com</a>
+</li>
+<li>This web-based presentation is made with <a href="http://meyerweb.com/eric/tools/s5/">S5</a> and plain text
+</li>
+<li><i>Press F11 for full-screen now</i> (on small screen or Opera)
+</li>
+<li>Navigating:
+<ul>
+<li><span style="text-decoration:underline;">Click, Right, Down, PageDown</span>: next slide (Opera: only PageDown)
+</li>
+<li><span style="text-decoration:underline;">Left, Up, PageUp</span>: prev slide (Opera: only PageUp)
+</li>
+<li><span style="text-decoration:underline;">Home</span>: first slide
+</li>
+<li><span style="text-decoration:underline;">End</span>: last slide
+</li>
+<li><i>nn</i> <span style="text-decoration:underline;">Enter</span>: go to slide <i>nn</i>
+</li>
+<li><span style="text-decoration:underline;">t</span>: toggle between slide view and single-page HTML view (for printing)
+</li>
+<li><span style="text-decoration:underline;">c</span> (or hover at bottom-right corner): show control panel<br/>
+    <img src="./img/s5-control-panel.png" width=150 alt="./img/s5-control-panel.png" />
+<ul>
+<li>toggle, prev, next icons
+</li>
+<li><b>table of contents</b> listbox
+</li>
+</ul>
+
+</li>
+</ul>
+
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-2-" class="outline-2">
+<h2 id="sec-2-">Outline</h2>
+<div class="outline-text-2" id="text-2-">
+
+<ul>
+<li>Zotero Bibliography
+</li>
+<li>Linguistic Linked Datasets
+<ul>
+<li>WordNet, Lingvo, Lexvo: in FactForge
+</li>
+<li>WordNet RDF
+</li>
+<li>Wiktionary
+</li>
+<li>BabelNet
+</li>
+<li>UBYlemon
+</li>
+</ul>
+
+</li>
+<li>Linguistic ontologies
+<ul>
+<li>NIF
+</li>
+<li>OLIA and its constituents
+</li>
+<li>LEMON
+</li>
+<li>GOLD, ISOcat (?)
+</li>
+</ul>
+
+</li>
+<li>News ontology
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-" class="outline-2">
+<h2 id="sec-3-">Zotero Bibliography</h2>
+<div class="outline-text-2" id="text-3-">
+
+<p>Collaborative bibliography on Linguistic Linked Data: representing language resources and text annotations as RDF.
+</p><ul>
+<li>Covers these topics: GOLD, ISOcat, ITS2, LAF, LD4LT, LEMON, LIME, LMF, Multitext, NIF, NLP2RDF, OLIA, OntoLex, OntoLing, OntoTag, etc
+</li>
+<li><a href="https://www.zotero.org/groups/linguistic_ld">https://www.zotero.org/groups/linguistic_ld</a>: ask to join, so you can collaborate
+</li>
+<li><a href="https://www.zotero.org/groups/linguistic_ld/items">https://www.zotero.org/groups/linguistic_ld/items</a>: library on the web<br/>
+</li>
+</ul>
+
+<p><img src="./img/zotero-web.png"  alt="./img/zotero-web.png" />
+</p></div>
+
+</div>
+
+<div id="outline-container-4-" class="outline-2">
+<h2 id="sec-4-">Zotero Collaboration</h2>
+<div class="outline-text-2" id="text-4-">
+
+<ul>
+<li>Install Zotero and use the desktop version! (I use Zotero Standalone + Chrome)
+</li>
+<li>Collaborative tags (must add for each resource):
+<ul>
+<li>The topics above; add new topics freely
+</li>
+<li>HasRead: someone's read it, please add some Notes
+</li>
+<li>MustRead: likely to be used in Multisensor
+</li>
+</ul>
+
+</li>
+<li>If possible, add abstract, URL, the article itself.
+</li>
+</ul>
+
+<p><img src="./img/zotero-standalone.png"  alt="./img/zotero-standalone.png" />
+</p></div>
+
+</div>
+
+<div id="outline-container-5-" class="outline-2">
+<h2 id="sec-5-">Linguistic Linked Data in FactForge</h2>
+<div class="outline-text-2" id="text-5-">
+
+<p>Datasets already integrated in FactForge:
+</p><ul>
+<li><a href="http://wordnet.princeton.edu/">WordNet</a>: well-known and prototypical lexical resource
+<ul>
+<li>117k synsets, glosses, numerous synonyms (words/phrases). Hyponyms/hyperonyms, meronyms, antonyms
+</li>
+<li>FactForge includes the W3C RDF representation of WordNet 3.1
+</li>
+</ul>
+
+</li>
+<li>Lingvoj, Lexvo: info about languages
+</li>
+</ul>
+
+<p><a href="http://www.image-net.org"><img src="./img/imagenet.jpg" alt="imagenet.jpg"/></a> includes sample images (5k per noun synset!). Enables automatic image annotation.
+</p><ul>
+<li>human-curated bounding boxes, eg "fox" and "airplane"
+</li>
+</ul>
+
+<p><img src="./img/imagenet-bbox-fox.jpg"  alt="./img/imagenet-bbox-fox.jpg" /><img src="./img/imagenet-bbox-airplane.jpg"  alt="./img/imagenet-bbox-airplane.jpg" />
+</p></div>
+
+</div>
+
+<div id="outline-container-6-" class="outline-2">
+<h2 id="sec-6-">WordNet RDF</h2>
+<div class="outline-text-2" id="text-6-">
+
+</div>
+
+</div>
+
+<div id="outline-container-7-" class="outline-2">
+<h2 id="sec-7-">Wiktionary</h2>
+<div class="outline-text-2" id="text-7-">
+
+</div>
+
+</div>
+
+<div id="outline-container-8-" class="outline-2">
+<h2 id="sec-8-">BabelNet</h2>
+<div class="outline-text-2" id="text-8-">
+
+<p>Useful for Multilingual Joint Word Sense Disambiguation
+</p></div>
+
+</div>
+
+<div id="outline-container-9-" class="outline-2">
+<h2 id="sec-9-">UBYlemon</h2>
+<div class="outline-text-2" id="text-9-">
+
+</div>
+
+</div>
+
+<div id="outline-container-10-" class="outline-2">
+<h2 id="sec-10-">Linguistic Ontologies</h2>
+<div class="outline-text-2" id="text-10-">
+
+<p>There's been a flurry of activity in the last 5 years for representing Linguistic data as RDF
+</p><ul>
+<li>Covers both Lexical resources (eg WordNet) and Corpora (eg MASC)
+</li>
+<li>Working groups: 
+<ul>
+<li><a href="http://wiki.okfn.org/Working_Groups/Linguistics">Open Knowledge Foundation’s WG on Open Data in Linguistics</a>
+</li>
+<li><a href="http://www.w3.org/community/ontolex">W3C Ontology-Lexica Community Group</a> (OntoLex)
+</li>
+</ul>
+
+</li>
+<li>Intro: Christian Chiarcos, John McCrae, Philipp Cimiano, and Christiane Fellbaum. <a href="http://www.lemon-model.net/papers/open-data-for-linguistics.pdf">Towards Open Data for Linguistics: Linguistic Linked Data</a>. In New Trends of Research in Ontologies and Lexical Resources. Theory and Applications of Natural Language Processing. Springer Berlin Heidelberg, 2013. 
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-11-" class="outline-2">
+<h2 id="sec-11-">Linguistic LOD</h2>
+<div class="outline-text-2" id="text-11-">
+
+<p><img src="./img/llod-for-multisensor.png"  alt="./img/llod-for-multisensor.png" />
+</p></div>
+
+</div>
+
+<div id="outline-container-12-" class="outline-2">
+<h2 id="sec-12-">News ontology</h2>
+<div class="outline-text-2" id="text-12-">
+
+<p>rnews (newsML, IPTC)
+</p></div>
+</div>
+</div>
+
+<div id="postamble">
+</div>
+</div>
+</body>
+</html>
