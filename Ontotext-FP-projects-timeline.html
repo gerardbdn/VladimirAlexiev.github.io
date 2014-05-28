@@ -6,11 +6,13 @@
   </head>
   <body>
     <div id="visualization"/>
-
-    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script type="text/javascript">
-      google.load('visualization', '1', {packages: ['corechart']});
-
+	  // In this way we can keep all the logic about the chart in a single script tag.
+	  // This may become necessary at any stage.
+	  var scr = document.createElement("script");
+      scr.setAttribute("src",'https://www.google.com/jsapi?autoload={"modules":[{"name":"visualization","version":"1","packages":["corechart"],"callback":"drawVisualization"}]}');
+      document.head.appendChild(scr);	
+      
       function drawVisualization() {
         // To see the data that this visualization uses, browse to
         // http://spreadsheets.google.com/ccc?key=0ArBFygWDV2_PdF9BOUx2N3hyZldRVG1KT0tBcm9Dbmc
@@ -62,8 +64,6 @@
         google.visualization.events.addListener(visualization, 'select', selectHandler);
         visualization.draw(view, options);
       }
-
-      google.setOnLoadCallback(drawVisualization);
     </script>
   </body>
 </html>
