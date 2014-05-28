@@ -1,7 +1,7 @@
 #+TITLE:     Linguistic Linked Data and Ontologies
 #+AUTHOR:    Vladimir Alexiev, Ontotext Corp
 #+EMAIL:     vladimir.alexiev@ontotext.com
-#+DATE:      2014-05-21
+#+DATE:      2014-05-28
 #+LANGUAGE:  en
 #+STARTUP:   noinlineimages showall
 #+SETUPFILE: ~/emacs/org-mode-my/s5.org
@@ -59,9 +59,20 @@ Collaborative bibliography on Linguistic Linked Data: representing language reso
 There's been a flurry of activity in the last 5 years for representing Linguistic data as RDF
 - Covers both Lexical resources (eg WordNet) and Corpora (eg MASC)
 - Working groups:
-  - [[http://wiki.okfn.org/Working_Groups/Linguistics][Open Knowledge Foundation’s WG on Open Data in Linguistics]]
+  - [[http://wiki.okfn.org/Working_Groups/Linguistics][Open Knowledge Foundation's WG on Open Data in Linguistics]]
   - [[http://www.w3.org/community/ontolex][W3C Ontology-Lexica Community Group]] (OntoLex)
 - Intro: Christian Chiarcos, John McCrae, Philipp Cimiano, and Christiane Fellbaum. [[http://www.lemon-model.net/papers/open-data-for-linguistics.pdf][Towards Open Data for Linguistics: Linguistic Linked Data]]. In New Trends of Research in Ontologies and Lexical Resources. Theory and Applications of Natural Language Processing. Springer Berlin Heidelberg, 2013.
+
+* Linguistic Linked Data
+In the following slides I describe large-scale Linguistic resources.\\
+Datasets already integrated in FactForge:
+- [[http://wordnet.princeton.edu/][WordNet]]: well-known and prototypical lexical resource
+  - 117k synsets, glosses, numerous synonyms (words/phrases). Hyponyms/hyperonyms, meronyms, antonyms
+  - FactForge includes the W3C RDF representation of WordNet 3.1
+- Lingvoj, Lexvo: info about languages
+[[http://www.image-net.org][./img/imagenet.jpg]] includes sample images (5k per noun synset!). Enables automatic image annotation.
+- human-curated bounding boxes, eg "fox" and "airplane"
+[[./img/imagenet-bbox-fox.jpg]][[./img/imagenet-bbox-airplane.jpg]]
 * Linguistic LOD
 [[./img/llod-for-multisensor.png]]
 * Linguistic Linked Data in FactForge
@@ -76,21 +87,6 @@ Datasets already integrated in FactForge:
 * WordNet RDF
 * Wiktionary
 * BabelNet
-Useful for Multilingual Joint Word Sense Disambiguation
-[[http://babelfy.org/index.jsp][Babelfy]] (just released)\\
-[[./img/babelfy.png]]
-
-* Lemon-UBY
-[[http://lemon-model.net/lexica/uby/][./img/uby-lemon.png]]
-Integrates in LEMON format:
-- FrameNet
-- OmegaWiki (English, German)
-- VerbNet
-- Wiktionary (English, German)
-- Princeton WordNet 3.0
-* News Ontology
-rnews (newsML, IPTC)
-* BabelNet
 - 50 languages covered
 - seamless integration of WordNet, Open Multilingual WordNet, Wikipedia, OmegaWiki, Wikidata (NEW!), Wiktionary (NEW!)
 - 9.3M Babel synsets
@@ -101,3 +97,17 @@ rnews (newsML, IPTC)
 - 1.1 billion RDF triples!
 - Available for download together with Java APIs for programmatic access
 - Also available in RDF/Lemon format and via a public SPARQL endpoint
+* BabelNet
+Useful for Multilingual Joint Word Sense Disambiguation
+[[http://babelfy.org/index.jsp][Babelfy]] (just released)\\
+[[./img/babelfy.png]]
+* UBY-Lemon
+[[http://lemon-model.net/lexica/uby/][./img/uby-lemon.png]]
+Integrates in LEMON format:
+- FrameNet
+- OmegaWiki (English, German)
+- VerbNet
+- Wiktionary (English, German)
+- Princeton WordNet 3.0
+* News Ontology
+rnews (newsML, IPTC)
