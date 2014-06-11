@@ -10,10 +10,10 @@
 #+REVEAL_EXTRA_JS: {src: 'js/reveal-help.js', async: true, condition: function() {return !!document.body.classList}}, {src: 'js/reveal-tagcloud.js', async: true, condition: function() {return !!document.body.classList}}
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <h2>%t</h2><h3>%e</h3><h3>SmartCulture Conference</h3><h3>%d, Brussels</h3>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p/><p/><p class='center'>
-#+REVEAL_TITLE_SLIDE_TEMPLATE: 2D interactive presentation. 
-#+REVEAL_TITLE_SLIDE_TEMPLATE: Press <a href='javascript:Reveal.toggleOverview()'>O for overview</a>, 
-#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='reveal-help.html' target='_blank'>H for help</a>.
-#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href="Semantic Technologies for Cultural Heritage.pdf">Printable version</a>.</p>
+#+REVEAL_TITLE_SLIDE_TEMPLATE: 2D <a href="index.html">interactive presentation</a>
+#+REVEAL_TITLE_SLIDE_TEMPLATE: (<a href="Semantic Technologies for Cultural Heritage.pdf">printable version</a>).
+#+REVEAL_TITLE_SLIDE_TEMPLATE: Press <a href='javascript:Reveal.toggleOverview()'>O for overview</a>,
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='reveal-help.html' target='_blank'>H for help</a>.</p>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: Proudly made in plain text with 
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='https://github.com/hakimel/reveal.js/'>reveal.js</a>, 
@@ -40,9 +40,8 @@
 ** Some Ontotext Clients
 [[./img/Ontotext-Clients.png]]
 ** Ontotext Research Projects (FP5-FP7)
-Bulgaria's largest participant: over 30. Domains:\\
-semantic databases, reasoning, semantic search, eGovernment, life sciences, cultural heritage...\\
-#+ATTR_HTML: :width 800
+- Bulgaria's largest participant: over 30 projects
+#+ATTR_HTML: :style width:850px
 [[./img/Ontotext-FP-projects-timeline.png]]
 * Semantic Technologies
 - *Web 1.0*: hyperlinked documents (World Wide Web)
@@ -55,21 +54,21 @@ Is this something new?
 - Buzzwords: Big Data, Semantic Analytics, Concept Extraction, Sentiment Analysis...
 ** Linked Open Data Cloud
 - This is from Mar 2009, now has grown 10x!
-- Just the part hosted on http://www.factforge.net
-#+ATTR_HTML: :width 900
+- Part at http://factforge.net, http://linkedlifedata.com
+#+ATTR_HTML: :style width:800px
 [[./img/lod-datasets-2009-03-27-FactForge-LLD.jpg]]
 ** Linguistic Linked Data
-#+ATTR_HTML: :width 800
+#+ATTR_HTML: :style width:750px
 [[./img/llod-for-multisensor.png]]
 ** First Ontotext GLAM Project: UK National Archives
 [[./img/TNA-SKB.png]]
 * Cultural Heritage LOD Cloud
-#+ATTR_HTML: :width 900
+#+ATTR_HTML: :style width:850px
 [[./img/Culture-datacloud-large.png]]
 ** Europeana Recognizes Importance of Semantic Technologies 
 [[./img/Europeana-semantic-whitepaper-press-release.png]]
 ** Europeana Sem Tech MindMap
-#+ATTR_HTML: :width 1100
+#+ATTR_HTML: :style width:900px
 [[./img/Europeana-semantic-activities-mindmap.png]]
 ** Europeana Sem Tech MindMap Detail
 [[./img/Europeana-semantic-activities-detail.png]]
@@ -91,21 +90,22 @@ Is this something new?
 [[./img/RS-image-annotation-susanna-xRay.png]]
 * Bulgariana
 - A Bulgarian aggregator to Europeana
-#+ATTR_HTML: :width 1000
+#+ATTR_HTML: :style width:850px
 [[./img/bulgariana-collections.png]]
-** Example: Thracian Gold (Rhyton)
+** Bulgariana Collection: Thracian Gold
 [[./img/rhyton-at-bulgariana.png]]
 ** Rhyton at Europeana
 - Now any European citizen can find it!
 [[./img/rhyton-at-europeana.png]]
 ** Rhyton at Europeana Open Culture
-- Others take your data and make beautiful apps with it
-#+ATTR_HTML: :width 900
+- Others make beautiful apps with your data!
+#+ATTR_HTML: :style width:850px
 [[./img/rhyton-europeanaopenculture.png]]
 ** Bulgariana Collection Featured in Open Culture
+- And publicize it for you to an audience you couldn't reach!
 [[./img/rhyton-EuropeanaOpenCulture-news.png]]
 * Europeana Creative
-#+ATTR_HTML: :width 800
+#+ATTR_HTML: :style width:800px
 [[./img/eCreative-poster_1.png]]
 ** Europeana Creative
 [[./img/eCreative-poster_2.png]]
@@ -117,7 +117,7 @@ Is this something new?
 ** In 5 pilot areas: tourism, social networks, design, nature, history 
 [[./img/eCreative-plan-fragment.png]]
 ** Creative Open Challenges and Incubation Support
-#+ATTR_HTML: :width 1000
+#+ATTR_HTML: :style width:1000px
 [[./img/eCreative 2nd Challenges and Incubation Support.png]]
 ** Ontotext in Europeana
 Ontotext works on fundamental backend technologies important for KPIs 
@@ -131,7 +131,7 @@ Ontotext hosts the Europeana semantic data (EDM) in OWLIM
 - http://europeana-test.ontotext.com/sparql\\
   working with Europeana to update it
 - Provides SPARQL querying
-** SPARQL Queries
+** SPARQL 1.1 Queries
 Eg Polish Periodicals by library and decade\\
 http://europeana-test.ontotext.com/sparql
 #+BEGIN_SRC
@@ -151,7 +151,7 @@ select
 } group by ?date order by ?date
 #+END_SRC
 ** SPARQL Analytics
-Eg Polish Periodicals by library and decade (you can [[http://jsfiddle.net/valexiev/t4aX9/][jsfiddle]] with it)\\
+Eg Polish Periodicals by library & decade (you can [[http://jsfiddle.net/valexiev/t4aX9/][jsfiddle]] with it)\\
 [[./img/EDM-sgvizler2.png]]
 ** EDM Object Graph
 [[./img/europeana-graph.png]] 
