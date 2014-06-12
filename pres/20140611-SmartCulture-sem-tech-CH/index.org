@@ -10,8 +10,8 @@
 #+REVEAL_EXTRA_JS: {src: 'js/reveal-help.js', async: true, condition: function() {return !!document.body.classList}}, {src: 'js/reveal-tagcloud.js', async: true, condition: function() {return !!document.body.classList}}
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <h2>%t</h2><h3>%e</h3><h3>SmartCulture Conference</h3><h3>%d, Brussels</h3>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p/><p/><p class='center'>
-#+REVEAL_TITLE_SLIDE_TEMPLATE: 2D <a href="index.html">interactive presentation</a>
-#+REVEAL_TITLE_SLIDE_TEMPLATE: (<a href="Semantic Technologies for Cultural Heritage.pdf">printable version</a>).
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://VladimirAlexiev.github.io/pres/20140611-SmartCulture-sem-tech-CH/index.html' target='_blank'>2D interactive version</a>,
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://www.slideshare.net/valexiev1/semantic-technologies-for-cultural-heritage-35749530' target='_blank'>printable version</a>.
 #+REVEAL_TITLE_SLIDE_TEMPLATE: Press <a href='javascript:Reveal.toggleOverview()'>O for overview</a>,
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='reveal-help.html' target='_blank'>H for help</a>.</p>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>

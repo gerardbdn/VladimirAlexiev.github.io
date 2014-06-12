@@ -1,4 +1,4 @@
-Reveal.configure ({mouseWheel:true, previewLinks:true, viewDistance:4,
+Reveal.configure ({mouseWheel:true, previewLinks:false, viewDistance:4,
   keyboard:{
     85:function(){ // U=show slide number in URL/history
       // var r = Reveal.getIndices();
