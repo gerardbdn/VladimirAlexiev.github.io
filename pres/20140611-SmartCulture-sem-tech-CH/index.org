@@ -1,7 +1,7 @@
 #+TITLE:     Semantic Technologies for Cultural Heritage
 #+AUTHOR:    Vladimir Alexiev, Ontotext Corp
 #+EMAIL:     vladimir.alexiev@ontotext.com
-#+DATE:      2014-06-11
+#+DATE:      2014-06-12
 #+LANGUAGE:  en
 #+STARTUP:   noinlineimages content
 #+OPTIONS:   num:nil toc:1
@@ -11,7 +11,8 @@
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <h2>%t</h2><h3>%e</h3><h3>SmartCulture Conference</h3><h3>%d, Brussels</h3>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p/><p/><p class='center'>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://VladimirAlexiev.github.io/pres/20140611-SmartCulture-sem-tech-CH/index.html' target='_blank'>2D interactive version</a>,
-#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://www.slideshare.net/valexiev1/semantic-technologies-for-cultural-heritage-35749530' target='_blank'>printable version</a>.
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://VladimirAlexiev.github.io/pres/20140611-SmartCulture-sem-tech-CH/Semantic Technologies for Cultural Heritage.pdf'>pdf</a>,
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://www.slideshare.net/valexiev1/semantic-technologies-for-cultural-heritage-35749530' target='_blank'>slideshare</a>.
 #+REVEAL_TITLE_SLIDE_TEMPLATE: Press <a href='javascript:Reveal.toggleOverview()'>O for overview</a>,
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='reveal-help.html' target='_blank'>H for help</a>.</p>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>
