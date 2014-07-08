@@ -4307,7 +4307,7 @@ ul
 <p class="MsoNormal">See also sections <a href="#SKOS_Inference">SKOS Inference</a> and <a href="#SKOS-XL_Inference">SKOS-XL Inference</a> in this document.</p>
 <h3><a name="ISO_25964"></a>1.8.3<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> ISO 25964</h3>
 <p class="MsoNormal c30"><a href="http://www.niso.org/schemas/iso25964">ISO 25964 - the international standard for thesauri and interoperability with other vocabularies</a> is the latest ISO standard on thesauri. The ISO 25964 domain model is shown below:</p>
-<p class="MsoNormal c57"><img border="0"  alt="002-ISO_25964_Model-ISO_25964_Model.jpg" src="002-ISO_25964_Model-ISO_25964_Model.jpg" /></p>
+<p class="MsoNormal c57"><img border="0"  src="002-ISO_25964_Model.jpg" alt="002-ISO_25964_Model.jpg" /></p>
 <p class="MsoNormal">A lot of it corresponds to SKOS/SKOS-XL, see <a href="http://www.niso.org/schemas/iso25964/correspondencesSKOS/">Correspondence between ISO 25964 and SKOS/SKOS-XL Models</a>. But it has additional constructs not covered by SKOS. In particular, skos:Collection has these limitations:</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> you can't put them under a Concept</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> you can't say explicitly which are Top Collections in a scheme</p>
@@ -4342,11 +4342,11 @@ ul
 <p class="MsoNormal">The PROV-DC mapping illustrates the complexity of PROV best. Below are two examples:</p>
 <h4><a name="dct_modified">1.8.6.1<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> dct:modified</a></h4>
 <p class="MsoNormal c30">A single statement <a href="http://www.w3.org/TR/prov-dc/#dct-modified">dct:modified is mapped</a> to a network of 6 nodes and 9 statements:</p>
-<p class="MsoNormal c57"><img border="0"  alt="003-PROV-modified-PROV-modified.png" src="003-PROV-modified-PROV-modified.png" alt="PROV-modified" /></p>
+<p class="MsoNormal c57"><img border="0"  src="003-PROV-modified.png" alt="003-PROV-modified.png" /></p>
 <p class="MsoNormal">PROV considers that the prov:Modify activity uses an unknown old entity (<b>_:input</b>) and generates an unknown new entity (<b>_:output</b>), both being specializations of the <b>entity</b> under consideration. Furthermore, we need to use a prov:Generation node to be able to use <a href="http://www.w3.org/TR/prov-o/#atTime">prov:atTime</a> and reflect accurately that the modification is in fact a <a href="http://www.w3.org/TR/prov-o/#InstantaneousEvent">prov:InstantaneousEvent</a>.</p>
 <h4><a name="dct_creator_dct_created">1.8.6.2<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> dct:creator+dct:created</a></h4>
 <p class="MsoNormal c30">Two statements&nbsp; <a href="http://www.w3.org/TR/prov-dc/#figure_cleanup1">dct:creator and dct:created are mapped</a> to a network of 8 nodes and 11 statements:</p>
-<p class="MsoNormal c57"><img border="0"  alt="004-PROV-created-PROV-created.png" src="004-PROV-created-PROV-created.png" alt="PROV-cleanup1" /></p>
+<p class="MsoNormal c57"><img border="0"  src="004-PROV-created.png" alt="004-PROV-created.png" /></p>
 <h3><a name="Geographic_Ontologies"></a>1.8.7<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> Geographic Ontologies</h3>
 <p class="MsoNormal">There is a plethora of ontologies related to geography out there. Here are some lists:</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> <a href="http://lov.okfn.org/dataset/lov/details/vocabularySpace_Geography.html">LOV Space and Geography vocabs</a>: 20 ontologies</p>
@@ -4397,7 +4397,7 @@ These are analogous to skos:broader and friends, but apply to any subject type, 
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> Classes are shown like this: <i>&lt;&lt;gvp:Facet&gt;&gt;</i>. * is a wildcard, e.g. gvp:*Concept stands for gvp:Concept, gvp:PhysPlaceConcept, gvp:AdminPlaceConcept, or gvp:PhysAdminPlaceConcept</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> URLs are shown below the classes, where {x} indicates a numeric ID. * is a wildcard that stands for aat or tgn.</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> (…|…) indicates a choice, e.g. gvp:broader( |Non)Preferred stands for gvp:broaderPreferred or gvp:broaderNonPreferred</p>
-<p class="MsoNormal c57"><img border="0"   alt="005-semantic-overview-semantic-overview.png" src="005-semantic-overview-semantic-overview.png" /></p>
+<p class="MsoNormal c57"><img border="0"   src="005-semantic-overview.png" alt="005-semantic-overview.png" /></p>
 <p class="MsoNormal">The diagram shows pretty much everything but glosses over some details:</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> <a href="#Subject">Subjects</a> are the main entities of GVP vocabularies. They have various <a href="#Subject_Types">Subject Types</a> including <a href="#Obsolete_Subject">Obsolete Subject</a> (details are glossed over in the diagram).</p>
 <p class="MsoListBullet2"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> They are implemented using the standard types skos:Collection, iso:ThesaurusArray, skos:Concept</p>
@@ -4640,7 +4640,7 @@ These are analogous to skos:broader and friends, but apply to any subject type, 
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> (G): common GVP classes</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> (A): AAT-specific classes</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> (T): TGN-specific classes</p>
-<p class="MsoNormal c57"><img border="0"  alt="006-subject-classes-subject-classes.png" src="006-subject-classes-subject-classes.png" /></p>
+<p class="MsoNormal c57"><img border="0"  src="006-subject-classes.png" alt="006-subject-classes.png" /></p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> All are subclasses of <b>gvp:Subject</b>, to allow the user to find all GVP subjects with a single query</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> gvp:Facet, gvp:Hierarchy and gvp:GuideTerm are implemented as a subclass of <b>iso:ThesaurusArray</b> (which itself is a subclass of skos:Collection) since they can hold other subjects, but cannot be used for indexing</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> gvp:*Concept are implemented as a subclass of <b>skos:Concept</b>, since they are used for indexing</p>
@@ -5141,12 +5141,12 @@ skos:narrower</p>
 </tr>
 </table>
 <p class="MsoNormal c30">The following diagram illustrates the same nesting possibilities:</p>
-<p class="MsoNormal c57"><img border="0"   alt="007-subject-hierarchy-subject-hierarchy.png" src="007-subject-hierarchy-subject-hierarchy.png" alt="subject-hierarchy" /></p>
+<p class="MsoNormal c57"><img border="0"   src="007-subject-hierarchy.png" alt="007-subject-hierarchy.png" /></p>
 <p class="MsoNormal">You can see that the standard representation is not uniform (uses different properties in the different cases). You may also notice the right-most link skos:narrower: although it's not in the original hierarchy, we insert it, so as to thread the Concepts through the hierarchy. We call this a "thread-through" skos:narrower.</p>
 <p class="MsoNormal">Keep in mind that adjacent nodes are also connected uniformly by <a href="#GVP_Hierarchical_Relations">GVP Hierarchical Relations</a> (e.g. gvp:narrower going down). Because skos:narrower connects only Concepts but "jumps levels" as in the example above, it is neither a sub-property nor a super-property of gvp:narrower.</p>
 <h3><a name="Top_Concepts"></a>2.3.4<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> Top Concepts</h3>
 <p class="MsoNormal">Consider this example from the AAT hierarchy. Legend: S=scheme, F=facet, H=hierarhchy, G=guide term, C=concept. (Some levels are skipped for brevity, inverses and inferred properties are not shown). Every subject in the hierarchy has a link to the&nbsp; AAT ConceptScheme: skos:inScheme aat:</p>
-<p class="MsoNormal c57"><img border="0"  alt="008-complex-hierarchy-complex-hierarchy.png" src="008-complex-hierarchy-complex-hierarchy.png" /></p>
+<p class="MsoNormal c57"><img border="0"  src="008-complex-hierarchy.png" alt="008-complex-hierarchy.png" /></p>
 <p class="MsoNormal">Consider the Concept "containers (receptacles)": it has a thread-through skos:narrower to "vessels (containers)". Furthermore, it is a Top Concept, because there are only Facets, Hierarchies and Guide Terms above it.</p>
 <p class="MsoNormal">Many SKOS thesauri use skos:topConceptOf (a sub-property of skos:inScheme) to link such Concepts to the ConceptScheme. Even flat concept lists do that, e.g. LoC's MARC Relators are declared topConceptOf <a href="http://id.loc.gov/vocabulary/relators">http://id.loc.gov/vocabulary/relators</a> (see <a href="http://id.loc.gov/vocabulary/relators.html">HTML</a> and <a href="http://id.loc.gov/vocabulary/relators.skos.nt">RDF</a>).</p>
 <p class="MsoNormal">In a previous version of AAT we did the same, but it has some counter-intuitive consequences. E.g. <a href="http://www.getty.edu/vow/AATHierarchy?find=rhyta&amp;logic=AND&amp;note=&amp;page=1&amp;subjectid=300054031">aat:300054031</a> "drawing (metalworking)" is a top concept, although it's nested 8 levels deep:</p>
@@ -5174,16 +5174,16 @@ skos:narrower</p>
 <h4><a name="skos_member_Structure"></a>2.4.1.1<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> skos:member Structure</h4>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> The Guide Term (G) is represented as an iso:ThesaurusArray with skosxl:Label "&lt;Aegean Bronze Age periods&gt;"</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> The Concept (C) "Minoan" is represented as skos:Concept. But it also has an iso:subordinateArray (A), that is an iso:ThesaurusArray, is <i>anonymous</i>, and serves only to hold the skos:OrderedCollection. <i>The anonymous array should not be displayed as a level in the hierarchy.</i></p>
-<p class="MsoNormal c57"><img border="0"   alt="009-ordered-collection-ordered-collection.png" src="009-ordered-collection-ordered-collection.png" alt="ordered-collection" /></p>
+<p class="MsoNormal c57"><img border="0"   src="009-ordered-collection.png" alt="009-ordered-collection.png" /></p>
 <h4><a name="skos_memberList_Structure"></a>2.4.1.2<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> skos:memberList Structure</h4>
 <p class="MsoNormal c30">While the skos:member links establish collection membership (used both with unordered skos:Collection and ordered skos:OrderedCollection), additional skos:memberList structure provides the ordering of the members.</p>
 <p class="MsoNormal c30">This uses the standard rdf:List construct. People often use blank nodes for rdf:List elements (and there is a special Turtle shortcut for this), but we use explicit URIs since this way it's easier to thread the list with the tooling used (R2RML).</p>
 <p class="MsoNormal c30">The list URIs have the form <b>{p}-list-{c}</b> where {p} is the parent ID (owner of the list) and {c} is the child ID corresponding to the current list element.</p>
 <p class="MsoNormal c30">For pedagogical purposes, we first show only the list of (G) &lt;Aegean Bronze Age periods&gt;. See the next section for the list of (C) "Minoan" (i.e. the full representation).</p>
-<p class="MsoNormal c57"><img border="0"   alt="010-ordered-list-ordered-list.png" src="010-ordered-list-ordered-list.png" alt="ordered-list" /></p>
+<p class="MsoNormal c57"><img border="0"   src="010-ordered-list.png" alt="010-ordered-list.png" /></p>
 <h4><a name="Full_Representation">2.4.1.3<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> Full Representation</a></h4>
 <p class="MsoNormal c30">Adding the skos:memberList of (C) "Minoan", we get the full representation (not for the faint of heart!)</p>
-<p class="MsoNormal c57"><img border="0"   alt="011-ordered-list-full-ordered-list-full.png" src="011-ordered-list-full-ordered-list-full.png" alt="ordered-list-full" /></p>
+<p class="MsoNormal c57"><img border="0"   src="011-ordered-list-full.png" alt="011-ordered-list-full.png" /></p>
 <p class="MsoNormal c57">&nbsp;</p>
 <h2 class='c23'><a name="Associative_Relationships"></a>2.5<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> Associative Relationships</h2>
 <p class="MsoNormal">GVP defines a plethora of associative relations between concepts:</p>
@@ -5983,7 +5983,7 @@ Language tags MAY also be normalized by converting all to lower case, but BCP47 
 <h1><a name="TGN_Specifics"></a>3<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> TGN Specifics</h1>
 <p class="MsoNormal">All of the information in the previous section applies equally to AAT and TGN. TGN has additional information, which is shown below and described in the following sub-sections.</p>
 <h2><a name="TGN_Overview"></a><span lang="BG">3.1<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> <span lang="BG">TGN Overview</span></h2>
-<p class="MsoNormal c57"><img border="0"  alt="012-TGN-overview-TGN-overview.png" src="012-TGN-overview-TGN-overview.png" /></p>
+<p class="MsoNormal c57"><img border="0"  src="012-TGN-overview.png" alt="012-TGN-overview.png" /></p>
 <p class="MsoNormal">The additional information is attached to the gvp:*PlaceConcept <b>tgn:{c}</b>:</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> The TGN concept has <a href="#Additional_Features">TGN Place Types</a> that are AAT concepts. This relation carries gvp:displayOrder (see <a href="#Sort_Order">Sort Order</a>) and <a href="#Historic_Information">Historic Information</a></p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> Following a <a href="#TGN_Place_Types">Concept vs Place Duality</a> principle, the PlaceConcept points to a separate node <b>tgn:{c}-place</b> using foaf:focus. It carries the WGS coordinate information, but the Schema coordinate information is in yet another node <b>tgn:{c}-geometry</b>.</p>
@@ -6026,7 +6026,7 @@ Language tags MAY also be normalized by converting all to lower case, but BCP47 
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> A concept (skos:Concept):&nbsp;<a href="http://id.loc.gov/authorities/subjects/sh85089767">http://id.loc.gov/authorities/subjects/sh85089767</a>: a "conceptualisation of" the Napoleonic Wars, a social and technological artifact "designed to help interconnect", an "abstraction" created by the authors of LCSH for the purposes of classifying works</p>
 <p class="MsoNormal">It is an established practice to use <b>foaf:focus</b> for the denotation link.</p>
 <p class="MsoNormal">The 3 URLs are illustrated below, with some typically used types and relations:</p>
-<p class="MsoNormal c57"><img border="0"  alt="013-concept-and-denotation-concept-and-denotation.png" src="013-concept-and-denotation-concept-and-denotation.png" /></p>
+<p class="MsoNormal c57"><img border="0"  src="013-concept-and-denotation.png" alt="013-concept-and-denotation.png" /></p>
 <p class="MsoNormal">You could also read the post&nbsp;<a href="http://www.jenitennison.com/blog/node/159">What Do URIs Mean Anyway?</a>&nbsp;by&nbsp;<a href="https://theodi.org/team/jeni-tennison">Jenni Tennison</a>, UK Open Data Institute, Jul 2011.</p>
 <h3><a name="Cons_of_the_Dual_Approach">3.3.1<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> Cons of the Dual Approach</a></h3>
 <p class="MsoNormal">The cons of this approach include:</p>
@@ -6067,10 +6067,10 @@ Language tags MAY also be normalized by converting all to lower case, but BCP47 
 <p class="MsoNormal">The dual URLs are rendered as &lt;person/&gt; and &lt;person/#skos:Concept&gt;</p>
 <h3><a name="FR_BnF__pro">3.3.4<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> FR BnF: pro</a></h3>
 <p class="MsoNormal">The National Library of France (BnF) uses the dual practice. In the middle of the BnF data model is skos:Concept that has foaf:focus to AUTEUR (foaf:Agent) and OEUVRE (frbr-rda:Work):</p>
-<p class="MsoNormal"><img border="0"  alt="014-BnF-data-model-BnF-data-model.jpg" src="014-BnF-data-model-BnF-data-model.jpg" /></p>
+<p class="MsoNormal"><img border="0"  src="014-BnF-data-model.jpg" alt="014-BnF-data-model.jpg" /></p>
 <h3><a name="UK_BL__pro">3.3.5<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> UK BL: pro</a></h3>
 <p class="MsoNormal">The British Library (BL) uses the dual practice. The British National Bibliography's <a href="http://www.bl.uk/bibliographic/pdfs/bldatamodelbook.pdf">Data&nbsp;Ìodel for Books</a>&nbsp;(version 1.4, August 2012)&nbsp;represents agents (persons, families, organizations) in a dual way, distinguishing between Concept and Agent, and links Concept to Agent using foaf:focus:</p>
-<p class="MsoNormal"><img border="0"  alt="015-BL-data-model-book-BL-data-model-book.png" src="015-BL-data-model-book-BL-data-model-book.png" /></p>
+<p class="MsoNormal"><img border="0"  src="015-BL-data-model-book.png" alt="015-BL-data-model-book.png" /></p>
 <div class='c56'>
 <p class="Code c55">&lt;Person-as-Concept BL URI&gt; a blt:PersonConcept; # rdfs:subClassOf skos:Concept</p>
 <p class="Code c55">&nbsp;&nbsp;foaf:focus &lt;Person-as-Agent BL URI&gt;;</p>
@@ -6164,7 +6164,7 @@ S=symmetric, I=inverse, T=transitive, D=disjoint:</p>
 <p class="Code c55">&nbsp;&nbsp;&nbsp; skos:narrowMatch (I)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 </div>
 <p class="MsoNormal c30">The following diagram shows a bit more information:</p>
-<p class="MsoNormal c57"><img border="0"   alt="016-SKOS-properties-SKOS-properties.png" src="016-SKOS-properties-SKOS-properties.png" alt="SKOS-properties" /></p>
+<p class="MsoNormal c57"><img border="0"   src="016-SKOS-properties.png" alt="016-SKOS-properties.png" /></p>
 <p class="MsoNormal">The definitions of SKOS properties dictate the inferences shown above. The following constructs are used in the SKOS ontology:</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> <b>rdfs:subPropertyOf</b>, e.g. to infer broader <span class='c68'>à</span> broaderTransitive</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> <b>owl:TransitiveProperty</b>: to make the transitive closure, e.g. of broaderTransitive</p>
@@ -6270,7 +6270,7 @@ S=symmetric, I=inverse, T=transitive, D=disjoint:</p>
 <div class='c56'>
 <p class="Code c55">{?x BTI ?y. ?x BTP ?z. ?z BTI ?t} =&gt; {?y BTP ?t}</p>
 </div>
-<p class="MsoNormal c57"><img border="0"  alt="017-statue-pedestal-statue-pedestal.png" src="017-statue-pedestal-statue-pedestal.png" alt="statue-pedestal" /></p>
+<p class="MsoNormal c57"><img border="0"  src="017-statue-pedestal.png" alt="017-statue-pedestal.png" /></p>
 <p class="MsoNormal">But in I9 we have only 3 nodes in sequence, not 4 nodes.</p>
 <h3><a name="BTG_BTP_BTI_Axioms">4.1.5<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> BTG, BTP, BTI Axioms</a></h3>
 <p class="MsoNormal">For these inferences we cannot use a finite number of INSERTs because&nbsp; the property chains involved are recursive. We need to use rule-based inference. OWLIM easily makes such inferences using the OWL RL ruleset (but the default Horst ruleset is faster).</p>
@@ -6394,7 +6394,7 @@ S=symmetric, I=inverse, T=transitive, D=disjoint:</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> The red arrows and "and" mean that the target relation is a conjunction of the two source relations</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> "Concept-Array" means the target relation is a restriction of the source relation over immediately connected nodes of type skos:Concept and iso:ThesaurusArray. "Array-*" is a restriction from iso:ThesaurusArray to any immediately connected node. "Concept-Concept" is a restriction over two immediately connected skos:Concepts.</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> Note: the source relations gvp:broader( |Non)Preferred and gvp:broader(Generic|Partitive|Instantial) are always used together (a total of 6 combinations), and gvp:broader can be inferred from any one of them. The diagram shows inference from gvp:broader( |Non)Preferred only, just to keep it tidier.</p>
-<p class="MsoNormal"><img border="0"  alt="018-hierarchicalRelationsInference.png" src="018-hierarchicalRelationsInference.png" /></p>
+<p class="MsoNormal"><img border="0"  src="018-hierarchicalRelationsInference.png" alt="018-hierarchicalRelationsInference.png" /></p>
 <h3><a name="FTS_Insert_Queries">4.1.9<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> FTS Insert Queries</a></h3>
 <p class="MsoNormal">OWLIM includes a <a href="https://confluence.ontotext.com/display/OWLIMv53/OWLIM-SE+Full-text+Search#OWLIM-SEFull-textSearch-RDFSearchFullTextSearchusingLucene">Full-Text Search extension</a>. We use it to provide <a href="#Full_Text_Search">Full Text Search</a> in the UI (also see <a href="#Full_Text_Search_Query">Full Text Search Query</a>). To create the two FTS indexes, use the following queries. (luc:setParam&nbsp; is a space-separated list of the full URLs of properties to include in indexing):</p>
 <div class='c56'>
@@ -6452,7 +6452,7 @@ S=symmetric, I=inverse, T=transitive, D=disjoint:</p>
 </div>
 <h2><a name="Forest_UI"></a>4.3<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> Forest UI</h2>
 <p class="MsoNormal c30">Forest is a UI framework for creating semantic applications by Ontotext. GVP uses a customized version of Forest that provides the following features (the red numbers on the screen-shots are explained in the text below).</p>
-<p class="MsoNormal"><img border="0"   alt="019-AAT-Forest1.png" src="019-AAT-Forest1.png" alt="AAT-Forest1" /></p>
+<p class="MsoNormal"><img border="0"   src="019-AAT-Forest1.png" alt="019-AAT-Forest1.png" /></p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> <a href="#Full_Text_Search">Full Text Search</a> (1)</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> SPARQL query endpoint (2), supporting SPARQL 1.1</p>
 <p class="MsoListBullet2"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> Accessible both through REST URL, and through an interactive form with syntax highlighting and auto-indent (3)</p>
@@ -6460,7 +6460,7 @@ S=symmetric, I=inverse, T=transitive, D=disjoint:</p>
 <p class="MsoListBullet2"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> You can specify whether to expand results across owl:sameAs and return owl:sameAs assertions. (This applies to <a href="#Language_Dual_URLs">Language Dual URLs</a>) (5)</p>
 <p class="MsoListBullet2"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> All <a href="#External_Prefixes">External Prefixes</a> and <a href="#GVP_URLs_and_Prefixes">GVP Prefixes</a> used by the representation are predefined in the repository, so you don't need to add them. There is a function to append a predefined namespace (6), but you won't need to use it, except to examine these namespaces</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> <a href="#Sample_Queries">Sample Queries</a>, accessible through links below the SPARQL query box (7)</p>
-<p class="MsoNormal"><img border="0"   alt="020-AAT-Forest2.png" src="020-AAT-Forest2.png" alt="AAT-Forest2" /></p>
+<p class="MsoNormal"><img border="0"   src="020-AAT-Forest2.png" alt="020-AAT-Forest2.png" /></p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> Editing of the previous query (8).<br />
 Click on the query link "Results for…" and <b>not</b> on the SPARQL link in the header</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> Number displayed and total number of results (9).</p>
@@ -6468,7 +6468,7 @@ Click on the query link "Results for…" and <b>not</b> on the SPARQL link in th
 RDF/XML and Turtle are available only for CONSTRUCT queries</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> Query result pagination (for HTML)</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> <a href="#_Semantic_Resolution">Semantic Resolution</a> of resources (GVP URLs), including content negotiation</p>
-<p class="MsoNormal"><img border="0"   alt="021-AAT-Forest3.png" src="021-AAT-Forest3.png" alt="AAT-Forest3" />&nbsp;</p>
+<p class="MsoNormal"><img border="0"   src="021-AAT-Forest3.png" alt="021-AAT-Forest3.png" />&nbsp;</p>
 <p class="MsoNormal">Resource representations in HTML, RDF/XML, Turtle, NTriples, JSON (11).</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> Label of the resource. For subjects this is usually but not always the first prefLabel (12)</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> Tabs to show triples where the resource plays different roles (subject, predicate, object) or all triples (13)</p>
@@ -6506,9 +6506,9 @@ This is the same link as rdfs:seeAlso (16) but it would take an extra click if y
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> We hope that our descriptive info fulfills the <a href="http://esw.w3.org/TaskForces/CommunityProjects/LinkingOpenData/DataSets/CKANmetainformation">Guidelines for Collecting Metadata on Linked Datasets in the Data Hub</a>, and intend to validate this with <a href="http://validator.lod-cloud.net/">http://validator.lod-cloud.net/</a></p>
 <h3><a name="VOID"></a>4.5.1<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> VOID</h3>
 <p class="MsoNormal c30">Vocabulary of Interlinked Datasets (VOID) is the main ontology for describing RDF datasets. The VOID specification <a href="http://www.w3.org/TR/void/">Describing Linked Datasets with the VoID Vocabulary</a> was published by W3C on 3 March 2011. The&nbsp; <a href="http://rdfs.org/ns/void">VoID vocabulary definition</a> (namespace document) provides a reference of all classes and properties, and the following domain model:</p>
-<p class="MsoNormal"><img border="0"   alt="022-void-Neologism.png" src="022-void-Neologism.png" /></p>
+<p class="MsoNormal"><img border="0"   src="022-void-Neologism.png" alt="022-void-Neologism.png" /></p>
 <p class="MsoNormal c30">The slideshare presentation <a href="http://www.slideshare.net/cygri/void-metadata-for-rdf-datasets">VoID: Metadata for RDF Datasets</a> (Richard Cyganiak, May 14, 2012<span lang="BG">,</span> p.13) provides a more lucid domain model:</p>
-<p class="MsoNormal"><img border="0"  alt="023-void.png" src="023-void.png" /></p>
+<p class="MsoNormal"><img border="0"  src="023-void.png" alt="023-void.png" /></p>
 <p class="MsoNormal">&nbsp;</p>
 <p class="MsoNormal">VOID covers a number of areas:</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> Descriptive info (who, when, what) using DC, DCT</p>
@@ -6519,18 +6519,18 @@ This is the same link as rdfs:seeAlso (16) but it would take an extra click if y
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> Resource URI patterns</p>
 <h3><a name="DCAT">4.5.2<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> DCAT</a></h3>
 <p class="MsoNormal c30">The <a href="http://www.w3.org/TR/vocab-dcat/">Data Catalog Vocabulary</a> (DCAT) is a W3C Recommendation published on 16 January 2014. It is used to describe datasets and data catalogs.</p>
-<p class="MsoNormal"><img border="0"   alt="024-dcat-domain-model.jpg" src="024-dcat-domain-model.jpg" /></p>
+<p class="MsoNormal"><img border="0"   src="024-dcat-domain-model.jpg" alt="024-dcat-domain-model.jpg" /></p>
 <h3 class='c31'><a name="ADMS">4.5.3<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> ADMS</a></h3>
 <p class="MsoNormal c30">The Asset Description Metadata Schema (ADMS) is a metadata vocabulary created by the Interoperability Solutions for European Public Administrations (ISA) Programme of the European Commission.</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> While DCAT describes data sets, ADMS describes reusable metadata (e.g. xml schemata, generic data models) and reference data (e.g. code lists, taxonomies, dictionaries, vocabularies).</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> While DCAT is focused on data catalogs, ADMS is focused on the assets within a catalog</p>
 <p class="MsoNormal c30">Version 1.00 was released on 18 April 2012. The <a href="http://www.w3.org/2012/05/ADMS_Conceptual_Model.png">ADMS Conceptual Model</a> is based on an earlier ontology called RADION and is fairly complex:</p>
-<p class="MsoNormal"><img border="0"  alt="025-ADMS_Conceptual_Model.png" src="025-ADMS_Conceptual_Model.png" />A <a href="https://joinup.ec.europa.eu/asset/adms/document/generate-adms-asset-descriptions-spreadsheet-refine-rdf">spreadsheet template</a> is provided, so a user can fill your dataset's metadata, and then Google Refine can create appropriate RDF.</p>
+<p class="MsoNormal"><img border="0"  src="025-ADMS_Conceptual_Model.png" alt="025-ADMS_Conceptual_Model.png" />A <a href="https://joinup.ec.europa.eu/asset/adms/document/generate-adms-asset-descriptions-spreadsheet-refine-rdf">spreadsheet template</a> is provided, so a user can fill your dataset's metadata, and then Google Refine can create appropriate RDF.</p>
 <p class="MsoNormal">The <a href="http://open-data.europa.eu/en/">EU Open Data Portal</a> uses a metadata vocabulary (EC-ODP) that's quite close to ADMS. For example, see the <a href="http://open-data.europa.eu/en/data/dataset/I57spZ6CMZMFAIvArDiHaw">description</a> of EuroVoc (EU's multilingual thesaurus), and the corresponding <a href="http://open-data.europa.eu/en/data/dataset/I57spZ6CMZMFAIvArDiHaw.rdf">RDF file</a></p>
 <h4><a name="W3C_ADMS">4.5.3.1<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> W3C ADMS</a></h4>
 <p class="MsoNormal c30">After version 1.00, ADMS was contributed to W3C's <a href="http://www.w3.org/2011/gld/">Government Linked Data Working Group</a> for further development. W3C streamlined the ADMS and converted it to a DCAT profile. This version of ADMS re-uses and subclasses DCAT and other standard vocabularies (e.g. SKOS, DCT) wherever possible and therefore defines a minimal set of classes and properties of its own. The ADMS specification was published on 1 August 2013 as a W3C note.</p>
 <p class="MsoNormal c30">The domain model was simplified significantly. We work with this streamlined W3C version.</p>
-<p class="MsoNormal"><img border="0"  alt="026-ADMS_Conceptual_W3C.png" src="026-ADMS_Conceptual_W3C.png" /></p>
+<p class="MsoNormal"><img border="0"  src="026-ADMS_Conceptual_W3C.png" alt="026-ADMS_Conceptual_W3C.png" /></p>
 <h3 class='c31'><a name="Descriptive_Entities">4.5.4<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> Descriptive Entities</a></h3>
 <p class="MsoNormal">We describe the following entities. Luckily, the domain models of VOID, DCAT and ADMS are fairly well aligned, so the entities can be assigned a consistent set of classes. Then the entities are interlinked with <a href="#_Descriptive_Relations">Descriptive Relations</a>, more info is attached as <a href="#Descriptive_Properties">Descriptive Properties</a>, and more is computed as <a href="#VOID_Subsets">Dynamic Descriptive Properties</a>.</p>
 <table class="MsoTableGrid c29" border="1" cellspacing="0" cellpadding="0">
@@ -6667,7 +6667,7 @@ This is the same link as rdfs:seeAlso (16) but it would take an extra click if y
 </tr>
 </table>
 <p class="MsoNormal c30"><a name="_Descriptive_Relations"></a>A diagram of the entities and their relations follows:</p>
-<p class="MsoNormal"><img border="0"  alt="027-AAT-describe-dot.png" src="027-AAT-describe-dot.png" /></p>
+<p class="MsoNormal"><img border="0"  src="027-AAT-describe-dot.png" alt="027-AAT-describe-dot.png" /></p>
 <h3><a name="Descriptive_Relations"></a>4.5.5<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> Descriptive Relations</h3>
 <p class="MsoNormal c30">The main descriptive entities are linked with the following relations:</p>
 <table class="MsoTableGrid c29" border="1" cellspacing="0" cellpadding="0">
@@ -7502,7 +7502,7 @@ This is the same link as rdfs:seeAlso (16) but it would take an extra click if y
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> rdf:Statements describing a relation where the subject plays the role of rdf:subject</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> rdf:List nodes of skos:member</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> schema:Place and schema:Geo* nodes for TGN subjects that have them</p>
-<p class="MsoNormal"><img border="0"   alt="028-construct-subject.png" src="028-construct-subject.png" /></p>
+<p class="MsoNormal"><img border="0"   src="028-construct-subject.png" alt="028-construct-subject.png" /></p>
 <h3><a name="Total_Exports"></a>4.6.3<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> Total Exports</h3>
 <p class="MsoNormal">This file includes all statements (explicit and inferred) of all independent entities.&nbsp; It's a concatenation of the <a href="#Per-Entity_Exports">Per-Entity Exports</a> in NTriples format. Because it includes all required <a href="#Inference">Inference</a>, you can load it to any repository (even one without RDFS reasoning). You still want to load the ontologies to get descriptions of properties, associative relations, etc.</p>
 <p class="MsoListBullet"><span class='c18'>·<span class='c16'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> First load the <a href="#External_Ontologies">External Ontologies</a> (SKOS, SKOS-XL, ISO 25964): links are provided in that section</p>
@@ -8577,7 +8577,7 @@ aat:300024978, aat:300024979, aat:300024980, aat:300025426, aat:300025427, aat:3
 </tr>
 </table>
 <p class="MsoNormal c30">You can click on the value URLs (first column) and then the Object tab to explore terms having that characteristic. For example, there are 628 AAT terms that have Term Flag "Vernacular":</p>
-<p class="MsoNormal c57"><img border="0"   alt="029-terms-Vernacular.png" src="029-terms-Vernacular.png" /></p>
+<p class="MsoNormal c57"><img border="0"   src="029-terms-Vernacular.png" alt="029-terms-Vernacular.png" /></p>
 <p class="MsoNormal"><a name="_Data_Quality_Queries"></a><a name="_Check_Duplicate_Language"></a>&nbsp;</p>
 </div>
 <div><br clear="all" />
