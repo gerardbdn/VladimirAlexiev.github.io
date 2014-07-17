@@ -1,10 +1,10 @@
-#+TITLE:     Multisensor Linked Data and Ontologies
+﻿#+TITLE:     Multisensor Linked Data and Ontologies
 #+AUTHOR:    Vladimir Alexiev, Ontotext Corp
 #+EMAIL:     vladimir.alexiev@ontotext.com
-#+DATE:      2014-05-28
+#+DATE:      2014-06-03
 #+LANGUAGE:  en
 #+STARTUP:   noinlineimages showall
-#+SETUPFILE: ~/emacs/org-mode-my/s5.org
+#+SETUPFILE: ~/emacs/org-my/s5.org
 #+OPTIONS:   H:1 num:nil toc:nil \n:nil @:t ::t |:t ^:{} -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
@@ -115,12 +115,12 @@ http://dbpedia.org/resource/Wuppertal_Institute_for_Climate,_Environment_and_Ene
 |                 | Business Manager                                                             | say what?                    |
 |                 | Prof. Dr. Manfred Fischedick                                                 | string  (no own data)        |
 |                 | Prof. Dr. Uwe Schneidewind                                                   | string  (no own data)        |
-| owl:sameAs      | http://de.dbpedia.org/resource/Wuppertal_Institut_fР“С�r_Klima,_Umwelt,_Energie | identity link to DE resource |
+| owl:sameAs      | http://de.dbpedia.org/resource/Wuppertal_Institut_für_Klima,_Umwelt,_Energie | identity link to DE resource |
 To use owl:sameAs effectively, must use a powerful repo (eg OWLIM)
 - Semantics: "smush" the two resources, so they obtain the same statements
 - [[http://www.ontotext.com/owlim/owl-sameas-optimisation][OWLIM sameAs optimization]]
 
-http://de.dbpedia.org/resource/Wuppertal_Institut_fР“С�r_Klima,_Umwelt,_Energie
+http://de.dbpedia.org/resource/Wuppertal_Institut_für_Klima,_Umwelt,_Energie
 - (click "Back to old DBpedia" to see all data, this "NEW DBpedia" is no good)
 | *prop*                        | *object*                                                            | *comment*                       |
 | dbpedia-owl:individualisedGnd | 2133644-1                                                           | Nice, link to DNB GND           |
@@ -128,7 +128,7 @@ http://de.dbpedia.org/resource/Wuppertal_Institut_fР“С�r_Klima,_Umwelt,_Ener
 |                               | dbpedia-de:Manfred_Fischedick                                       |                                 |
 |                               | dbpedia-de:Brigitte_Mutert-Breidbach                                |                                 |
 | prop-de:leitung               | * Uwe Schneidewind * Manfred Fischedick * Brigitte Mutert-Breidbach | All 3 in one string??           |
-| owl:sameAs                    | dbpedia-de:Wuppertal Institut fР“С�r Klima, Umwelt, Energie            | same as itself? Very useful ;-) | 
+| owl:sameAs                    | dbpedia-de:Wuppertal Institut für Klima, Umwelt, Energie            | same as itself? Very useful ;-) | 
 * FreeBase
 [[https://www.freebase.com/][./img/freebase-logo.png]]
 - 43.7M "topics": like WikiPedia pages or DBpedia resources, 
@@ -487,9 +487,9 @@ The GoodRelations ontology is the clear leader for eCommerce
 - Uptake by Google, Yahoo, WalMart...
 General approaches for converting product catalogs to RDF (links available):
 - Servant, F.-P., Chevalier, E.: Describing Customizable Products on the Web of Data.
-- Hepp, M., de Bruijn, J.: GenTax: A generic methodology for deriving OWL and RDF-S ontologies from hierarchical classifications, thesauri, and inconsistent taxonomies. The Semantic Web: Research and Applications. pp. 129вЂ“144. Springer (2007).
-- Ozacar, T.: IRIS: A ProtГ©gГ© Plug-in to Extract and Serialize Product Attribute Name-Value Pairs.
-- Stolz, A., Rodriguez-Castro, B., Radinger, A., Hepp, M.: PCS2OWL: A Generic Approach for Deriving Web Ontologies from Product Classification Systems. The Semantic Web: Trends and Challenges. pp. 644вЂ“658. Springer (2014).
+- Hepp, M., de Bruijn, J.: GenTax: A generic methodology for deriving OWL and RDF-S ontologies from hierarchical classifications, thesauri, and inconsistent taxonomies. The Semantic Web: Research and Applications. pp. 129РІР‚вЂњ144. Springer (2007).
+- Ozacar, T.: IRIS: A ProtР“В©gР“В© Plug-in to Extract and Serialize Product Attribute Name-Value Pairs.
+- Stolz, A., Rodriguez-Castro, B., Radinger, A., Hepp, M.: PCS2OWL: A Generic Approach for Deriving Web Ontologies from Product Classification Systems. The Semantic Web: Trends and Challenges. pp. 644РІР‚вЂњ658. Springer (2014).
 Datasets:
 - [[http://www.ebusiness-unibw.org/ontologies/consumerelectronics/v1][Consumer Electronics Ontology]]: cameras, printers, smart phones...
 - [[http://linkedopencommerce.com/][LinkedOpenCommerce]]: computers, washing machines... (see model on next slide)

@@ -95,9 +95,11 @@
 <#European-Union> nif:anchorOf "European Union"; a nif:Phrase.
 
 ############################## Stemming/Lemmatization
-<#European-8> nif:lemma "Europe".
+<#Germany-1>    nif:lemma "Germany". # same for all words, except:
+<#European-8>   nif:lemma "Europe".
 
-# More interesting examples. I don't know what's stem vs lemma, but I hope you do :-)
+# For a more interesting example, let's assume there's a 10th word "favourite".
+# I don't know what's stem vs lemma, but I hope you do :-)
 <#favourite-10> nif:stem  "favourit". # Snowball Stemmer
 <#favourite-10> nif:lemma "favorite". # Stanford Core NLP
 
@@ -109,7 +111,7 @@
 <#Germany-1>   nif:oliaLink penn:NNP; nif:oliaClass penn:ProperNoun.
 <#is-2>        nif:oliaLink penn:VBZ; nif:oliaClass penn:BePresentTense.
 <#the-3>       nif:oliaLink penn:DT;  nif:oliaClass penn:Determiner.
-<#work-4>      nif:oliaLink penn:NN;  nif:oliaClass penn:CommonNoun. # wrong, actually here is JJ=Adjective
+<#work-4>      nif:oliaLink penn:NN;  nif:oliaClass penn:CommonNoun. # POS is NNP, but the syntactic role is Adjective
 <#horse-5>     nif:oliaLink penn:NN;  nif:oliaClass penn:CommonNoun.
 <#of-6>        nif:oliaLink penn:IN;  nif:oliaClass penn:PrepositionOrSubordinatingConjunction.
 <#the-7>       nif:oliaLink penn:DT;  nif:oliaClass penn:Determiner.
@@ -124,20 +126,20 @@
 <#is-2>        nif:oliaClass [owl:unionOf (olia:FiniteVerb olia:StrictAuxiliaryVerb)],
                              [a owl:Restriction; owl:onProperty olia:hasTense; owl:allValuesFrom olia:Present].
 <#the-3>       nif:oliaClass penn:Determiner. # "Not clear whether this corresponds to OLiA/EAGLES determiners"
-<#work-4>      nif:oliaClass olia:CommonNoun. 
+<#work-4>      nif:oliaClass olia:CommonNoun.
 <#horse-5>     nif:oliaClass olia:CommonNoun.
 <#of-6>        nif:oliaClass [owl:unionOf (olia:Preposition olia:SubordinatingConjunction)].
 <#the-7>       nif:oliaClass penn:Determiner. # "Not clear whether this corresponds to OLiA/EAGLES determiners"
 <#European-8>  nif:oliaClass olia:ProperNoun.
 <#Union-9>     nif:oliaClass olia:ProperNoun.
 # As you see above, the OLIA abstraction doesn't work perfectly in all cases:
-# - penn:Determiner doesn't have a precise OLIA mapping
+# - penn:Determiner doesn't have an OLIA mapping
 # - penn:PrepositionOrSubordinatingConjunction maps to a unionOf (disjunction), but you can't query by such class
 # - penn:BePresentTense is worse: it's also a unionOf;
-#   further a reasoner will restrict any olia:hasTense property to have type olia:Present. 
-#   But Penn doesn't define any values for that property!
+#   further a reasoner will restrict any olia:hasTense property to have type olia:Present.
+#   But neither OLIA nor Penn define any values for that property!
 
-# TODO: Example: attaching NLP features to words
+# Example: attaching NLP features directly to words
 <#is-2> a olia:Verb;
   olia:hasTense ms:VerySpecialPresentTense.
 ms:VerySpecialPresentTense a olia:Present; olia:Tense.
@@ -145,7 +147,7 @@ ms:VerySpecialPresentTense a olia:Present; olia:Tense.
 ############################## Stanford Dependency Parse
 # http://nlp.stanford.edu:8080/parser/index.jsp
 # FORMAT: individual(gov,dep): a class<superclass<superclass
-# WHERE individual is an owl:Individual having rdf:type the class (and all superclasses) 
+# WHERE individual is an owl:Individual having rdf:type the class (and all superclasses)
 # nsubj(horse-5,Germany-1): a NominalSubject<Subject<Argument<Dependent<DependencyLabel
 # cop(horse-5,is-2):        a Copula<Auxiliary<Dependent<DependencyLabel
 # det(horse-5,the-3):       a Determiner<Modifier<Dependent<DependencyLabel
@@ -157,30 +159,27 @@ ms:VerySpecialPresentTense a olia:Present; olia:Tense.
 # pobj(of-6,Union-9):       a ObjectOfPreposition<Object<Complement<Argument<Dependent<DependencyLabel
 
 # There are two ways to represent this:
-## 1. The easy way: use a single property (nif:dependency), ignore the Stanford individual (since POS carries similar sort of info).
-<#horse-5> nif:dependency <#Germany-1>. 
-<#horse-5> nif:dependency <#is-2>.        
-<#horse-5> nif:dependency <#the-3>.       
-<#horse-5> nif:dependency <#work-4>.       
-<#ROOT-0>  nif:dependency <#horse-5>.     
-<#horse-5> nif:dependency <#of-6>.       
-<#Union-9> nif:dependency <#the-7>.       
-<#Union-9> nif:dependency <#European-8>. 
-<#of-6>    nif:dependency <#Union-9>.       
-
-# TODO: Kiril says, put the relation type on the target:
-<#Germany-1> a stanford:NominalSubject.
+## 1. The easy way: use a single property (nif:dependency), attach the Stanford Dependency class to target
+<#horse-5> nif:dependency <#Germany-1>.  <#Germany-1>  a stanford:NominalSubject.
+<#horse-5> nif:dependency <#is-2>.       <#is-2>       a stanford:Copula.
+<#horse-5> nif:dependency <#the-3>.      <#the-3>      a stanford:Determiner.
+<#horse-5> nif:dependency <#work-4>.     <#work-4>     a stanford:NounCompoundModifier.
+<#ROOT-0>  nif:dependency <#horse-5>.    <#horse-5>    a stanford:Root.
+<#horse-5> nif:dependency <#of-6>.       <#of-6>       a stanford:PrepositionalModifier.
+<#Union-9> nif:dependency <#the-7>.      <#the-7>      a stanford:Determiner.
+<#Union-9> nif:dependency <#European-8>. <#European-8> a stanford:AdjectivalModifier.
+<#of-6>    nif:dependency <#Union-9>.    <#Union-9>    a stanford:ObjectOfPreposition.
 
 ## 2. The hard way: make separate DependencyLabel nodes
 ## We use <#individual(gov,dep)> for URL (that includes numbered words, so is guaranteed unique).
 ## stanford:DependencyLabel<olia_sys:Feature<LinguisticAnnotation ~ Relation(hasSource,hasTarget)
 <#nsubj(horse-5,Germany-1)> a olia:Relation, stanford:NominalSubject;        olia:hasSource <#horse-5>; olia:hasTarget <#Germany-1>.
-<#cop(horse-5,is-2)>        a olia:Relation, stanford:Copula;         	     olia:hasSource <#horse-5>; olia:hasTarget <#is-2>.
-<#det(horse-5,the-3)>       a olia:Relation, stanford:Determiner;     	     olia:hasSource <#horse-5>; olia:hasTarget <#the-3>.
+<#cop(horse-5,is-2)>        a olia:Relation, stanford:Copula;                olia:hasSource <#horse-5>; olia:hasTarget <#is-2>.
+<#det(horse-5,the-3)>       a olia:Relation, stanford:Determiner;            olia:hasSource <#horse-5>; olia:hasTarget <#the-3>.
 <#nn(horse-5,work-4)>       a olia:Relation, stanford:NounCompoundModifier;  olia:hasSource <#horse-5>; olia:hasTarget <#work-4>.
-<#root(ROOT-0,horse-5)>     a olia:Relation, stanford:Root; 	             olia:hasSource <#ROOT-0>;  olia:hasTarget <#horse-5>.
+<#root(ROOT-0,horse-5)>     a olia:Relation, stanford:Root;                  olia:hasSource <#ROOT-0>;  olia:hasTarget <#horse-5>.
 <#prep(horse-5,of-6)>       a olia:Relation, stanford:PrepositionalModifier; olia:hasSource <#horse-5>; olia:hasTarget <#of-6>.
-<#det(Union-9,the-7)>       a olia:Relation, stanford:Determiner; 	     olia:hasSource <#Union-9>; olia:hasTarget <#the-7>.
+<#det(Union-9,the-7)>       a olia:Relation, stanford:Determiner;            olia:hasSource <#Union-9>; olia:hasTarget <#the-7>.
 <#amod(Union-9,European-8)> a olia:Relation, stanford:AdjectivalModifier;    olia:hasSource <#Union-9>; olia:hasTarget <#European-8>.
 <#pobj(of-6,Union-9)>       a olia:Relation, stanford:ObjectOfPreposition;   olia:hasSource <#of-6>;    olia:hasTarget <#Union-9>.
 
@@ -287,7 +286,7 @@ dbr:Germany        a dbo:Country, dbo:Place, dbo:PopulatedPlace, yago:FederalCou
 # But that's declared inverseOf marl:extractedFrom, which in the MARL example points to sioc:Post (not the nif:String content of the post).
 # So something doesn't mesh here. We could mix sioc and nif properties on <comment/1>, but nif:sourceUrl points to itself...
 # Posted https://github.com/NLP2RDF/specification/issues/1
-<comment/1> a nif:Context; 
+<comment/1> a nif:Context;
   nif:sourceUrl <comment/1>;
   nif:isString "Yes, we Germans are the hardest-working people in the world";
   nif:opinion <opinion/1>.
@@ -297,7 +296,7 @@ dbr:Germany        a dbo:Country, dbo:Place, dbo:PopulatedPlace, yago:FederalCou
   nif:opinion <opinion/2>.
 
 # It may be more meaningful to use NIF to express which word carries the opinion (like marl:opinionText)
-<comment/1#char=0,> a nif:Context; 
+<comment/1#char=0,> a nif:Context;
   nif:sourceUrl <comment/1>;
   nif:isString "Yes, we Germans are the hardest-working people in the world".
 <comment/1#char=0,3> a nif:String;

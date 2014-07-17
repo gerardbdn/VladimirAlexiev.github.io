@@ -1,3 +1,6 @@
+# https://github.com/NLP2RDF/specification/issues/1
+# nif:opinion vs marl:extractedFrom
+
 @base <http://example.com/blog/1/>
 
 # assume theres's a blog post at the base URL, and some comments about it
@@ -41,4 +44,3 @@
   nif:sourceUrl <comment/2>;
   nif:isString "Bullshit! We Greeks are harder-working";
   nif:opinion <opinion/2>.
-

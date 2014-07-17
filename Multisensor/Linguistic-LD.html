@@ -1,175 +1,260 @@
-<?xml version="1.0" encoding="windows-1251"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Linguistic Linked Data and Ontologies</title>
-<meta http-equiv="Content-Type" content="text/html;charset=windows-1251"/>
-<meta name="title" content="Linguistic Linked Data and Ontologies"/>
-<meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2014-05-28"/>
-<meta name="author" content="Vladimir Alexiev, Ontotext Corp"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
-<!-- configuration parameters --> <meta name='defaultView' content='slideshow' /> <meta name='controlVis' content='hidden' /> <!-- style sheet links --> <link rel='stylesheet' href='ui/default/slides.css' type='text/css' media='projection' id='slideProj' /> <link rel='stylesheet' href='ui/default/outline.css' type='text/css' media='screen' id='outlineStyle' /> <link rel='stylesheet' href='ui/default/print.css' type='text/css' media='print' id='slidePrint' /> <link rel='stylesheet' href='ui/default/opera.css' type='text/css' media='projection' id='operaFix' /><!-- S5 JS --> <script src='ui/jquery.js' type='text/javascript'></script> <script src='ui/org-slides.js' type='text/javascript'></script> <script src='ui/default/slides.js' type='text/javascript'></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
+<meta charset="utf-8"/>
+<title>Linguistic LOD &amp; Ontologies</title>
+<meta name="author" content="(Vladimir Alexiev, Ontotext Corp)"/>
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.6.2/css/reveal.min.css"/>
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.6.2/css/theme/default.css" id="theme"/>
 
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'http://cdn.jsdelivr.net/reveal.js/2.6.2/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<style>th, td {border: 1px; border-style: none solid; border-spacing:0; padding:0px 2px}</style>
+<style>
+.reveal .slides {text-align:left}
+h1,h2,h3,h4,h5,h6,.center {text-align:center}
+img {width:1200px}
+.reveal th, .reveal td {border-width: 1px; border-style: none solid; border-spacing:0; padding:0px 2px}
+span.clouditem {padding-left: 0.15em; padding-right: 0.15em; line-height: 90%}
+</style>
 </head>
 <body>
-
-<div id="preamble">
-<div class='layout'>
-<div id='controls'></div>
-<div id='currentSlide'></div>
-<div id='header'></div>
-<div id='footer'><h1>Linguistic Linked Data and Ontologies</h1><h2>Vladimir Alexiev, Ontotext Corp &#8226; 2014-05-28</h2></div>
-</div>
-<div class='presentation'>
-<div class='slide front'>
-  <div id='front-logo'></div>
-<h1 class='front'>Linguistic Linked Data and Ontologies</h1><h3>Vladimir Alexiev, Ontotext Corp</h3></div>
-</div>
-
-<div id="content">
-<h1 class="title">Linguistic Linked Data and Ontologies</h1>
-
-
-<div id="outline-container-1-" class="outline-2">
-<h2 id="sec-1-">Navigating This Presentation</h2>
-<div class="outline-text-2" id="text-1-">
-
+<div class="reveal">
+<div class="slides">
+<section>
+<h1>Linguistic LOD &amp; Ontologies</h1>
+<h2>Vladimir Alexiev, Ontotext Corp</h2>
+<h2><a href="mailto:vladimir.alexiev@ontotext.com">vladimir.alexiev@ontotext.com</a></h2>
+<h2>2014-06-03</h2>
+<br/><br/><br/><br/><br/><br/>
+<p class='center'>
+Press <a href='javascript:Reveal.toggleOverview()'>O for overview</a>, <a href='reveal-help.html' target='_blank'>H for help</a>.</p>
+<p class='center'>
+Made with <a href='https://github.com/hakimel/reveal.js/'>reveal.js</a> and <a href='https://github.com/yjwen/org-reveal'>org-reveal</a>.</p></section>
+<section>
+<h2>Table of Contents</h2><ul>
+<li>
+<a href="#sec-1">Motivation</a>
 <ul>
-<li>Ext links shown icon, eg <a href="http://www.ontotext.com">http://www.ontotext.com</a>
+<li>
+<a href="#sec-1-1">Artifacts</a>
 </li>
-<li>This web-based presentation is made with <a href="http://meyerweb.com/eric/tools/s5/">S5</a> and plain text
+<li>
+<a href="#sec-1-2">Tag Cloud</a>
 </li>
-<li><i>Press F11 for full-screen now</i> (on small screen or Opera)
+<li>
+<a href="#sec-1-3">Zotero Bibliography</a>
 </li>
-<li>Navigating:
-<ul>
-<li><span style="text-decoration:underline;">Click, Right, Down, PageDown</span>: next slide (Opera: only PageDown)
-</li>
-<li><span style="text-decoration:underline;">Left, Up, PageUp</span>: prev slide (Opera: only PageUp)
-</li>
-<li><span style="text-decoration:underline;">Home</span>: first slide
-</li>
-<li><span style="text-decoration:underline;">End</span>: last slide
-</li>
-<li><i>nn</i> <span style="text-decoration:underline;">Enter</span>: go to slide <i>nn</i>
-</li>
-<li><span style="text-decoration:underline;">t</span>: toggle between slide view and single-page HTML view (for printing)
-</li>
-<li><span style="text-decoration:underline;">c</span> (or hover at bottom-right corner): show control panel<br/>
-    <img src="./img/s5-control-panel.png" width=150 alt="./img/s5-control-panel.png" />
-<ul>
-<li>toggle, prev, next icons
-</li>
-<li><b>table of contents</b> listbox
+<li>
+<a href="#sec-1-4">Linguistic LOD</a>
 </li>
 </ul>
-
+<li>
+<a href="#sec-2">NLP Example</a>
 </li>
-</ul>
-
-</li>
-</ul>
-
-</div>
-
-</div>
-
-<div id="outline-container-2-" class="outline-2">
-<h2 id="sec-2-">Outline</h2>
-<div class="outline-text-2" id="text-2-">
-
+<li>
+<a href="#sec-3">Linguistic ontologies</a>
 <ul>
-<li>Zotero Bibliography
+<li>
+<a href="#sec-3-1">NIF: Overall Idea</a>
 </li>
-<li>Linguistic ontologies
+<li>
+<a href="#sec-3-2">NIF: Example (Merging Triples)</a>
+</li>
+<li>
+<a href="#sec-3-3">NIF: Representation Profiles</a>
+</li>
+<li>
+<a href="#sec-3-4">NIF: Domain Model</a>
+</li>
+<li>
+<a href="#sec-3-5">OLIA and Constituents</a>
+</li>
+<li>
+<a href="#sec-3-6">ITS2</a>
+</li>
+<li>
+<a href="#sec-3-7">NERD</a>
+</li>
+<li>
+<a href="#sec-3-8">FISE (Stanbol)</a>
+</li>
+<li>
+<a href="#sec-3-9">MARL</a>
+</li>
+<li>
+<a href="#sec-3-10">LEMON</a>
+</li>
+</ul>
+<li>
+<a href="#sec-4">Linguistic thesauri</a>
 <ul>
-<li>NIF
+<li>
+<a href="#sec-4-1">ISOcat</a>
 </li>
-<li>OLIA and its constituents, ITS2
-</li>
-<li>LEMON
-</li>
-<li>GOLD, ISOcat (?)
+<li>
+<a href="#sec-4-2">GOLD</a>
 </li>
 </ul>
-
-</li>
-<li>Linguistic Linked Datasets
+<li>
+<a href="#sec-5">Linguistic Linked Datasets</a>
 <ul>
-<li>WordNet, Lingvo, Lexvo: in FactForge
+<li>
+<a href="#sec-5-1">WordNet</a>
 </li>
-<li>WordNet RDF
+<li>
+<a href="#sec-5-2">WordNet RDF</a>
 </li>
-<li>Wiktionary
+<li>
+<a href="#sec-5-3">Wiktionary</a>
 </li>
-<li>BabelNet
+<li>
+<a href="#sec-5-4">BabelNet</a>
 </li>
-<li>UBYlemon
-</li>
-</ul>
-
-</li>
-<li>News ontology
-</li>
-</ul>
-
-</div>
-
-</div>
-
-<div id="outline-container-3-" class="outline-2">
-<h2 id="sec-3-">Zotero Bibliography</h2>
-<div class="outline-text-2" id="text-3-">
-
-<p>Collaborative bibliography on Linguistic Linked Data: representing language resources and text annotations as RDF.
-</p><ul>
-<li>Covers these topics: GOLD, ISOcat, ITS2, LAF, LD4LT, LEMON, LIME, LMF, Multitext, NIF, NLP2RDF, OLIA, OntoLex, OntoLing, OntoTag, etc
-</li>
-<li><a href="https://www.zotero.org/groups/linguistic_ld">https://www.zotero.org/groups/linguistic_ld</a>: ask to join, so you can collaborate
-</li>
-<li><a href="https://www.zotero.org/groups/linguistic_ld/items">https://www.zotero.org/groups/linguistic_ld/items</a>: library on the web<br/>
+<li>
+<a href="#sec-5-5">UBY-Lemon</a>
 </li>
 </ul>
+</section>
 
-<p><img src="./img/zotero-web.png"  alt="./img/zotero-web.png" />
-</p></div>
+<section>
+<section id="sec-1" >
 
-</div>
+<h2>Motivation</h2>
+<p>
+There's been a flurry of activity in recent years to represent NLP data as RDF.
+</p>
+<ul class="org-ul">
+<li><b>Covers</b>: Text Annotation (eg NIF, OLIA), Lexical Resources (eg WordNetRDF),
+Corpora (eg MASC), Semantic Annotation, Opinion/Sentiment Analysis
+</li>
+<li><b>Working groups</b>: <a href="http://www.w3.org/community/ontolex">OntoLex</a> (W3C; Cimiano, Bielefeld), <a href="http://wiki.okfn.org/Working_Groups/Linguistics">OLWG</a> (OKFN; Chiarcos,
+Frankfurt), <i>LD4LT</i> (W3C; Lewis, Trinity Dublin), BPMLOD (W3C; Gracia, UPM)
+</li>
+<li><b>Projects</b>: MultilingualWeb, <a href="http://lider-project.eu/">LIDER</a>, FALCON, BabelNet, etc, etc
+</li>
+</ul>
+<p>
+NLP data is usually large, why represent it in RDF?
+</p>
+<ul class="org-ul">
+<li>Graph model is flexible and universal, appropriate for NLP
+</li>
+<li>RDF adds schemas and reasoning
+</li>
+<li>Large linguistic resources are available that may be used profitably
+</li>
+</ul>
+</section>
+<section id="sec-1-1" >
 
-<div id="outline-container-4-" class="outline-2">
-<h2 id="sec-4-">Zotero Collaboration</h2>
-<div class="outline-text-2" id="text-4-">
+<h3>Artifacts</h3>
+<ul class="org-ul">
+<li><b>XML schemas</b>: GRaF, ITS2, LAF, LMF (ISO standards), UBY
+</li>
+<li><b>Ontologies</b>: FISE, ITS2 (W3C standard), LEMON, LIME, MARL, NERD, NIF (NLP2RDF),
+OLIA, OntoLing, OntoTag, Penn, Stanford
+</li>
+<li><b>Linguistic thesauri</b>: GOLD, ISOcat, NERD
+</li>
+<li><b>Lexical resources</b>: BabelNet, FrameNet, LemonUBY, OmegaNet, VerbNet,
+Wiktionary2RDF, WordNetRDF
+</li>
+<li><b>Corpora</b>: Multitext, MASC?
+</li>
+</ul>
+</section>
+<section id="sec-1-2"  tagcloud>
 
-<ul>
-<li>Install Zotero and use the desktop version! (I use Zotero Standalone + Chrome)
+<h3>Tag Cloud</h3>
+Text Annotation
+Lexical Resources
+Corpora
+Semantic Annotation
+Opinion/Sentiment Analysis
+Working Groups:
+OntoLex
+LD4LT
+BPMLOD
+Projects: 
+MultilingualWeb
+LIDER
+FALCON
+XML schemas:
+GRaF
+ITS2
+LAF
+LMF
+UBY
+Ontologies:
+FISE
+ITS2
+LEMON
+LIME
+MARL
+NERD
+NIF
+NLP2RDF
+OLIA
+OntoLing
+OntoTag
+Penn
+Stanford
+Linguistic thesauri:
+GOLD
+ISOcat
+NERD
+Lexical resources:
+BabelNet
+FrameNet
+LemonUBY
+OmegaNet
+VerbNet
+Wiktionary2RDF
+WordNetRDF
+Corpora:
+Multitext
+MASC
+</section>
+<section id="sec-1-3" >
+
+<h3>Zotero Bibliography</h3>
+<p>
+Collaborative bibliography on Linguistic LOD: representing language
+resources and text annotations as RDF.
+</p>
+<ul class="org-ul">
+<li><a href="https://www.zotero.org/groups/linguistic_ld">Zotero Group</a>: join so you can collaborate
+</li>
+<li><a href="https://www.zotero.org/groups/linguistic_ld/items">Zotero Library</a>: accessible on the web
+</li>
+</ul>
+<img src="./img/zotero-web.png" alt="zotero-web.png" />
+<ul class="org-ul">
+<li>Intro: Christian Chiarcos, John McCrae, Philipp Cimiano, and Christiane
+Fellbaum. <a href="http://www.lemon-model.net/papers/open-data-for-linguistics.pdf">Towards Open Data for Linguistics: Linguistic Linked Data</a>. In New
+Trends of Research in Ontologies and Lexical Resources. Theory and Applications
+of Natural Language Processing. Springer Berlin Heidelberg, 2013.
+</li>
+</ul>
+</section>
+<section id="sec-1-3-1" >
+
+<h4>Zotero Collaboration</h4>
+<ul class="org-ul">
+<li>Install Zotero (FireFox plugin, or Zotero Standalone+Chrome), see below
 </li>
 <li>Collaborative tags (must add for each resource):
-<ul>
+<ul class="org-ul">
 <li>The topics above; add new topics freely
 </li>
 <li>HasRead: someone's read it, please add some Notes
@@ -177,141 +262,216 @@
 <li>MustRead: likely to be used in Multisensor
 </li>
 </ul>
-
 </li>
 <li>If possible, add abstract, URL, the article itself.
 </li>
 </ul>
+<img src="./img/zotero-standalone.png" alt="zotero-standalone.png" />
+</section>
+<section id="sec-1-4" >
 
-<p><img src="./img/zotero-standalone.png"  alt="./img/zotero-standalone.png" />
-</p></div>
+<h3>Linguistic LOD</h3>
+<img src="./img/llod-for-multisensor.png" alt="llod-for-multisensor.png" />
+</section>
+</section>
+<section>
+<section id="sec-2" >
 
-</div>
-
-<div id="outline-container-5-" class="outline-2">
-<h2 id="sec-5-">Linguistic Ontologies</h2>
-<div class="outline-text-2" id="text-5-">
-
-<p>There's been a flurry of activity in the last 5 years for representing Linguistic data as RDF
-</p><ul>
-<li>Covers both Lexical resources (eg WordNet) and Corpora (eg MASC)
+<h2>NLP Example</h2>
+<p>
+Detailed example of annotating one sentence
+</p>
+<ul class="org-ul">
+<li>Integrates knowledge about many of the ontologies described here
 </li>
-<li>Working groups:
-<ul>
-<li><a href="http://wiki.okfn.org/Working_Groups/Linguistics">Open Knowledge Foundation's WG on Open Data in Linguistics</a>
-</li>
-<li><a href="http://www.w3.org/community/ontolex">W3C Ontology-Lexica Community Group</a> (OntoLex)
-</li>
-</ul>
-
-</li>
-<li>Intro: Christian Chiarcos, John McCrae, Philipp Cimiano, and Christiane Fellbaum. <a href="http://www.lemon-model.net/papers/open-data-for-linguistics.pdf">Towards Open Data for Linguistics: Linguistic Linked Data</a>. In New Trends of Research in Ontologies and Lexical Resources. Theory and Applications of Natural Language Processing. Springer Berlin Heidelberg, 2013.
+<li><a href="http://vladimiralexiev.github.io/Multisensor/NIF-example.ttl">http://vladimiralexiev.github.io/Multisensor/NIF-example.ttl</a>
 </li>
 </ul>
+<p>
+Areas covered include:
+</p>
+<ul class="org-ul">
+<li>Binding to text (NIF)
+</li>
+<li>Lemma/stem (NIF)
+</li>
+<li>POS tagging (Penn)
+</li>
+<li>Dependency parsing (Stanford)
+</li>
+<li>Semantic annotation classes (NERD, ITS2)
+</li>
+<li>Semantic annotation individuals (DBpedia, WordNet, ITS2)
+</li>
+<li>Multiple semantic annotations (FISE/Stanbol)
+</li>
+<li>Opinion/sentiment (MARL)
+</li>
+</ul>
+</section>
+</section>
+<section>
+<section id="sec-3" >
 
+<h2>Linguistic ontologies</h2>
+<p>
+We describe briefly the following linguistic ontologies
+</p>
+<ul class="org-ul">
+<li>NIF (NLP2RDF): bind nodes to text, basic NLP properties
+</li>
+<li>OLIA: tagsets, morphological/syntactic/parsing representations
+</li>
+<li>Some OLIA constituents: Penn, Stanford
+</li>
+<li>ITS2: semantic annotation properties
+</li>
+<li>NERD: Semantic annotation classes
+</li>
+<li>FISE (Stanbol): multiple semantic annotations
+</li>
+<li>MARL: Opinion/sentiment
+</li>
+<li>LEMON, LIME (?TODO): lexicographic info (dictionaries)
+</li>
+</ul>
+</section>
+<section id="sec-3-1" >
 
-</div>
+<h3>NIF: Overall Idea</h3>
+<img src="./img/NIF-idea.png" alt="NIF-idea.png" />
+</section>
+<section id="sec-3-2" >
 
-</div>
+<h3>NIF: Example (Merging Triples)</h3>
+<img src="./img/NIF-example-favourite-actress.png" alt="NIF-example-favourite-actress.png" />
+</section>
+<section id="sec-3-3" >
 
-<div id="outline-container-6-" class="outline-2">
-<h2 id="sec-6-">Linguistic Linked Data</h2>
-<div class="outline-text-2" id="text-6-">
+<h3>NIF: Representation Profiles</h3>
+<img src="./img/NIF-profiles.png" alt="NIF-profiles.png" />
+</section>
+<section id="sec-3-4" >
 
-<p>In the following slides I describe large-scale Linguistic resources.<br/>
+<h3>NIF: Domain Model</h3>
+<img src="./img/NIF-schema.png" alt="NIF-schema.png" />
+</section>
+<section id="sec-3-5" >
+
+<h3>OLIA and Constituents</h3>
+</section>
+<section id="sec-3-5-1" >
+
+<h4>Penn</h4>
+</section>
+<section id="sec-3-5-2" >
+
+<h4>Stanford</h4>
+</section>
+<section id="sec-3-6" >
+
+<h3>ITS2</h3>
+</section>
+<section id="sec-3-7" >
+
+<h3>NERD</h3>
+</section>
+<section id="sec-3-8" >
+
+<h3>FISE (Stanbol)</h3>
+</section>
+<section id="sec-3-9" >
+
+<h3>MARL</h3>
+</section>
+<section id="sec-3-10" >
+
+<h3>LEMON</h3>
+</section>
+</section>
+<section>
+<section id="sec-4" >
+
+<h2>Linguistic thesauri</h2>
+</section>
+<section id="sec-4-1" >
+
+<h3>ISOcat</h3>
+</section>
+<section id="sec-4-2" >
+
+<h3>GOLD</h3>
+</section>
+</section>
+<section>
+<section id="sec-5" >
+
+<h2>Linguistic Linked Datasets</h2>
+<p>
+In the following slides I describe large-scale Linguistic resources.<br  />
 Datasets already integrated in FactForge:
-</p><ul>
-<li><a href="http://wordnet.princeton.edu/">WordNet</a>: well-known and prototypical lexical resource
-<ul>
-<li>117k synsets, glosses, numerous synonyms (words/phrases). Hyponyms/hyperonyms, meronyms, antonyms
-</li>
-<li>FactForge includes the W3C RDF representation of WordNet 3.1
-</li>
-</ul>
-
+</p>
+<ul class="org-ul">
+<li>WordNet (includes the W3C RDF representation of WordNet 3.1)
 </li>
 <li>Lingvoj, Lexvo: info about languages
 </li>
 </ul>
+</section>
+<section id="sec-5-1" >
 
-<p><a href="http://www.image-net.org"><img src="./img/imagenet.jpg" alt="imagenet.jpg"/></a> includes sample images (5k per noun synset!). Enables automatic image annotation.
-</p><ul>
+<h3>WordNet</h3>
+<p>
+<a href="http://wordnet.princeton.edu/">WordNet</a>: well-known and prototypical lexical resource
+</p>
+<ul class="org-ul">
+<li>117k synsets, glosses, numerous synonyms (words/phrases).
+</li>
+<li>Hyponyms/hyperonyms, meronyms, antonyms
+</li>
+<li>Uses its own properties
+</li>
+<li>Ontology developed by W3C in 2005
+</li>
+</ul>
+</section>
+<section id="sec-5-1-1" >
+
+<h4>ImageNet</h4>
+<p>
+<a href="http://www.image-net.org">./img/imagenet.jpg</a> includes sample images for WordNet
+</p>
+<ul class="org-ul">
+<li>5k images per noun synset!
+</li>
+<li>enables automatic image annotation
+</li>
 <li>human-curated bounding boxes, eg "fox" and "airplane"
 </li>
 </ul>
+<p>
+<img src="./img/imagenet-bbox-fox.jpg" alt="imagenet-bbox-fox.jpg" /><img src="./img/imagenet-bbox-airplane.jpg" alt="imagenet-bbox-airplane.jpg" />
+</p>
+</section>
+<section id="sec-5-2" >
 
-<p><img src="./img/imagenet-bbox-fox.jpg"  alt="./img/imagenet-bbox-fox.jpg" /><img src="./img/imagenet-bbox-airplane.jpg"  alt="./img/imagenet-bbox-airplane.jpg" />
-</p></div>
+<h3>WordNet RDF</h3>
+</section>
+<section id="sec-5-3" >
 
-</div>
+<h3>Wiktionary</h3>
+</section>
+<section id="sec-5-4" >
 
-<div id="outline-container-7-" class="outline-2">
-<h2 id="sec-7-">Linguistic LOD</h2>
-<div class="outline-text-2" id="text-7-">
-
-<p><img src="./img/llod-for-multisensor.png"  alt="./img/llod-for-multisensor.png" />
-</p></div>
-
-</div>
-
-<div id="outline-container-8-" class="outline-2">
-<h2 id="sec-8-">Linguistic Linked Data in FactForge</h2>
-<div class="outline-text-2" id="text-8-">
-
-<p>Datasets already integrated in FactForge:
-</p><ul>
-<li><a href="http://wordnet.princeton.edu/">WordNet</a>: well-known and prototypical lexical resource
-<ul>
-<li>117k synsets, glosses, numerous synonyms (words/phrases). Hyponyms/hyperonyms, meronyms, antonyms
-</li>
-<li>FactForge includes the W3C RDF representation of WordNet 3.1
-</li>
-</ul>
-
-</li>
-<li>Lingvoj, Lexvo: info about languages
-</li>
-</ul>
-
-<p><a href="http://www.image-net.org"><img src="./img/imagenet.jpg" alt="imagenet.jpg"/></a> includes sample images (5k per noun synset!). Enables automatic image annotation.
-</p><ul>
-<li>human-curated bounding boxes, eg "fox" and "airplane"
-</li>
-</ul>
-
-<p><img src="./img/imagenet-bbox-fox.jpg"  alt="./img/imagenet-bbox-fox.jpg" /><img src="./img/imagenet-bbox-airplane.jpg"  alt="./img/imagenet-bbox-airplane.jpg" />
-</p></div>
-
-</div>
-
-<div id="outline-container-9-" class="outline-2">
-<h2 id="sec-9-">WordNet RDF</h2>
-<div class="outline-text-2" id="text-9-">
-
-</div>
-
-</div>
-
-<div id="outline-container-10-" class="outline-2">
-<h2 id="sec-10-">Wiktionary</h2>
-<div class="outline-text-2" id="text-10-">
-
-</div>
-
-</div>
-
-<div id="outline-container-11-" class="outline-2">
-<h2 id="sec-11-">BabelNet</h2>
-<div class="outline-text-2" id="text-11-">
-
-<ul>
+<h3>BabelNet</h3>
+<ul class="org-ul">
 <li>50 languages covered
 </li>
-<li>seamless integration of WordNet, Open Multilingual WordNet, Wikipedia, OmegaWiki, Wikidata (NEW!), Wiktionary (NEW!)
+<li>Integrates WordNet, Open Multilingual WordNet, Wikipedia, OmegaWiki, Wikidata, Wiktionary
 </li>
-<li>9.3M Babel synsets
+<li>Useful for multilingual joint Word Sense Disambiguation
 </li>
-<li>67M Babel senses
+<li>9.3M synsets, 67M senses
 </li>
 <li>21.7M textual definitions
 </li>
@@ -319,36 +479,32 @@ Datasets already integrated in FactForge:
 </li>
 <li>7.7M synset-associated images
 </li>
-<li>1.1 billion RDF triples!
+<li>1.1 billion triples in RDF/Lemon, available for download, public SPARQL endpoint
 </li>
-<li>Available for download together with Java APIs for programmatic access
-</li>
-<li>Also available in RDF/Lemon format and via a public SPARQL endpoint
+<li>Java APIs for programmatic access
 </li>
 </ul>
+</section>
+<section id="sec-5-4-1" >
 
-</div>
+<h4>Babelfy</h4>
+<p>
+<a href="http://babelfy.org/index.jsp">Babelfy</a>: annotation API based on BabelNet (just released)
+</p>
+<ul class="org-ul">
+<li>Evaluation on Energy news item (green: ok concepts, yellow: ok entities, orange: missed/irrelevant, red: wrong)
+</li>
+</ul>
+<img src="./img/babelfy.png" alt="babelfy.png" />
+</section>
+<section id="sec-5-5" >
 
-</div>
-
-<div id="outline-container-12-" class="outline-2">
-<h2 id="sec-12-">BabelNet</h2>
-<div class="outline-text-2" id="text-12-">
-
-<p>Useful for Multilingual Joint Word Sense Disambiguation
-<a href="http://babelfy.org/index.jsp">Babelfy</a> (just released)<br/>
-<img src="./img/babelfy.png"  alt="./img/babelfy.png" />
-</p></div>
-
-</div>
-
-<div id="outline-container-13-" class="outline-2">
-<h2 id="sec-13-">UBY-Lemon</h2>
-<div class="outline-text-2" id="text-13-">
-
-<p><a href="http://lemon-model.net/lexica/uby/"><img src="./img/uby-lemon.png" alt="uby-lemon.png"/></a>
+<h3>UBY-Lemon</h3>
+<p>
+<a href="http://lemon-model.net/lexica/uby/">./img/uby-lemon.png</a><br  />
 Integrates in LEMON format:
-</p><ul>
+</p>
+<ul class="org-ul">
 <li>FrameNet
 </li>
 <li>OmegaWiki (English, German)
@@ -360,22 +516,65 @@ Integrates in LEMON format:
 <li>Princeton WordNet 3.0
 </li>
 </ul>
+</section>
+</section>
+</div>
+</div>
+<script>
+Reveal.configure ({mouseWheel:true, previewLinks:true, viewDistance:4,
+  keyboard:{
+    72:function(){ // H=toggle history
+      // var r = Reveal.getIndices();
+      Reveal.configure({history:!window.location.hash}); 
+      if (!!window.location.hash) {window.location.hash=''}; 
+      window.location.reload;
+      // Reveal.slide(r.h,r.v)
+      // unfortunately goes to first slide when history is turned off, last line doesn't fix
+      // https://github.com/hakimel/reveal.js/issues/934
+    },
+    63:function(){ // ?=keyboard help
+      window.open('reveal-help.html#/1','_blank','width=720,height=540,location=0,menubar=0,scrollbars=0,status=0,titlebar=0,toolbar=0');
+    }}})
+</script>
+<script src="http://cdn.jsdelivr.net/reveal.js/2.6.2/lib/js/head.min.js"></script>
+<script src="http://cdn.jsdelivr.net/reveal.js/2.6.2/js/reveal.min.js"></script>
+<script>
 
-</div>
+        		// Full list of configuration options available here:
+        		// https://github.com/hakimel/reveal.js#configuration
+        		Reveal.initialize({
+        			controls: true,
+        			progress: true,
+        			history: false,
+        			center: true,
+                                slideNumber: true,
+        			rollingLinks: false,
+        			keyboard: true,
+        			overview: true,
+        			width: 1200, // slide width
+        			height: 900, // slide height
+        			 // slide margin
+        			 // slide minimum scaling factor
+        			 // slide maximum scaling factor
 
-</div>
 
-<div id="outline-container-14-" class="outline-2">
-<h2 id="sec-14-">News Ontology</h2>
-<div class="outline-text-2" id="text-14-">
+        			theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        			transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+        			transitionSpeed: 'default',
 
-<p>rnews (newsML, IPTC)
-</p></div>
-</div>
-</div>
-
-<div id="postamble">
-</div>
-</div>
+        			// Optional libraries used to extend on reveal.js
+        			dependencies: [
+        				{ src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/lib/js/classList.js', condition: function() { return !document.body.classList; } }
+        				//,{ src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } }
+        				//,{ src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } }
+        				,{ src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        				,{ src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } }
+        				,{ src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        				//,{ src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+        				//,{ src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+         				,{src: 'js/reveal-help.js', async: true, condition: function() {return !!document.body.classList}}, {src: 'js/reveal-tagcloud.js', async: true, condition: function() {return !!document.body.classList}}
+        			]
+        		});
+</script>
 </body>
 </html>

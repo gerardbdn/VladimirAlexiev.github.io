@@ -1,113 +1,196 @@
-#+TITLE:     Linguistic Linked Data and Ontologies
+#+TITLE:     Linguistic LOD & Ontologies
 #+AUTHOR:    Vladimir Alexiev, Ontotext Corp
 #+EMAIL:     vladimir.alexiev@ontotext.com
-#+DATE:      2014-05-28
+#+DATE:      2014-07-17
 #+LANGUAGE:  en
-#+STARTUP:   noinlineimages showall
-#+SETUPFILE: ~/emacs/org-mode-my/s5.org
-#+OPTIONS:   H:1 num:nil toc:nil \n:nil @:t ::t |:t ^:{} -:t f:t *:t <:t
-#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
-#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
-#+EXPORT_SELECT_TAGS: export
-#+EXPORT_EXCLUDE_TAGS: noexport
+#+STARTUP:   noinlineimages content
+#+OPTIONS:   num:nil toc:2
+#+NO_OPTIONS: H:1 \n:nil @:t ::t |:t ^:{} -:t f:t *:t <:t TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+REVEAL_HLEVEL: 1
+#+REVEAL_EXTRA_JS: {src: 'js/reveal-help.js', async: true, condition: function() {return !!document.body.classList}}, {src: 'js/reveal-tagcloud.js', async: true, condition: function() {return !!document.body.classList}}
 
-* Navigating This Presentation
-- Ext links shown icon, eg http://www.ontotext.com
-- This web-based presentation is made with [[http://meyerweb.com/eric/tools/s5/][S5]] and plain text
-- /Press F11 for full-screen now/ (on small screen or Opera)
-- Navigating:
-  - _Click, Right, Down, PageDown_: next slide (Opera: only PageDown)
-  - _Left, Up, PageUp_: prev slide (Opera: only PageUp)
-  - _Home_: first slide
-  - _End_: last slide
-  - /nn/ _Enter_: go to slide /nn/
-  - _t_: toggle between slide view and single-page HTML view (for printing)
-  - _c_ (or hover at bottom-right corner): show control panel\\
-    #+ATTR_HTML: width=150
-    [[./img/s5-control-panel.png]]
-    - toggle, prev, next icons
-    - *table of contents* listbox
-* Outline
-- Zotero Bibliography
-- Linguistic ontologies
-  - NIF
-  - OLIA and its constituents, ITS2
-  - LEMON
-  - GOLD, ISOcat (?)
-- Linguistic Linked Datasets
-  - WordNet, Lingvo, Lexvo: in FactForge
-  - WordNet RDF
-  - Wiktionary
-  - BabelNet
-  - UBYlemon
-- News ontology
-* Zotero Bibliography
-Collaborative bibliography on Linguistic Linked Data: representing language resources and text annotations as RDF.
-- Covers these topics: GOLD, ISOcat, ITS2, LAF, LD4LT, LEMON, LIME, LMF, Multitext, NIF, NLP2RDF, OLIA, OntoLex, OntoLing, OntoTag, etc
-- https://www.zotero.org/groups/linguistic_ld: ask to join, so you can collaborate
-- https://www.zotero.org/groups/linguistic_ld/items: library on the web\\
+* Motivation
+There's been a flurry of activity in recent years to represent NLP data as RDF.
+- *Covers*: Text Annotation (eg NIF, OLIA), Lexical Resources (eg WordNetRDF),
+  Corpora (eg MASC), Semantic Annotation, Opinion/Sentiment Analysis
+- *Working groups*: [[http://www.w3.org/community/ontolex][OntoLex]] (W3C; Cimiano, Bielefeld), [[http://wiki.okfn.org/Working_Groups/Linguistics][OLWG]] (OKFN; Chiarcos,
+  Frankfurt), [[www.w3.org/community/ld4lt/][LD4LT]] (W3C; Lewis, Trinity Dublin), BPMLOD (W3C; Gracia, UPM)
+- *Projects*: MultilingualWeb, [[http://lider-project.eu/][LIDER]], FALCON, BabelNet, etc, etc
+NLP data is usually large, why represent it in RDF?
+- Graph model is flexible and universal, appropriate for NLP
+- RDF adds schemas and reasoning
+- Large linguistic resources are available that may be used profitably
+** Artifacts
+- *XML schemas*: GRaF, ITS2, LAF, LMF (ISO standards), UBY
+- *Ontologies*: FISE, ITS2 (W3C standard), LEMON, LIME, MARL, NERD, NIF (NLP2RDF),
+  OLIA, OntoLing, OntoTag, Penn, Stanford
+- *Linguistic thesauri*: GOLD, ISOcat, NERD
+- *Lexical resources*: BabelNet, FrameNet, LemonUBY, OmegaNet, VerbNet,
+  Wiktionary2RDF, WordNetRDF
+- *Corpora*: Multitext, MASC?
+** Tag Cloud 
+:PROPERTIES: 
+:REVEAL_EXTRA_ATTR: tagcloud
+:END:
+#+BEGIN_HTML
+Text Annotation
+Lexical Resources
+Corpora
+Semantic Annotation
+Opinion/Sentiment Analysis
+Working Groups:
+OntoLex
+LD4LT
+BPMLOD
+Projects: 
+MultilingualWeb
+LIDER
+FALCON
+XML schemas:
+GRaF
+ITS2
+LAF
+LMF
+UBY
+Ontologies:
+FISE
+ITS2
+LEMON
+LIME
+MARL
+NERD
+NIF
+NLP2RDF
+OLIA
+OntoLing
+OntoTag
+Penn
+Stanford
+Linguistic thesauri:
+GOLD
+ISOcat
+NERD
+Lexical resources:
+BabelNet
+FrameNet
+LemonUBY
+OmegaNet
+VerbNet
+Wiktionary2RDF
+WordNetRDF
+Corpora:
+Multitext
+MASC
+#+END_HTML
+** Zotero Bibliography
+Collaborative bibliography on Linguistic LOD: representing language
+resources and text annotations as RDF.
+- [[https://www.zotero.org/groups/linguistic_ld][Zotero Group]]: join so you can collaborate
+- [[https://www.zotero.org/groups/linguistic_ld/items][Zotero Library]]: accessible on the web
 [[./img/zotero-web.png]]
-* Zotero Collaboration
-- Install Zotero and use the desktop version! (I use Zotero Standalone + Chrome)
+- Intro: Christian Chiarcos, John McCrae, Philipp Cimiano, and Christiane
+  Fellbaum. [[http://www.lemon-model.net/papers/open-data-for-linguistics.pdf][Towards Open Data for Linguistics: Linguistic Linked Data]]. In New
+  Trends of Research in Ontologies and Lexical Resources. Theory and Applications
+  of Natural Language Processing. Springer Berlin Heidelberg, 2013.
+*** Zotero Collaboration
+- Install Zotero (FireFox plugin, or Zotero Standalone+Chrome), see below
 - Collaborative tags (must add for each resource):
   - The topics above; add new topics freely
   - HasRead: someone's read it, please add some Notes
   - MustRead: likely to be used in Multisensor
 - If possible, add abstract, URL, the article itself.
 [[./img/zotero-standalone.png]]
-* Linguistic Ontologies
-There's been a flurry of activity in the last 5 years for representing Linguistic data as RDF
-- Covers both Lexical resources (eg WordNet) and Corpora (eg MASC)
-- Working groups:
-  - [[http://wiki.okfn.org/Working_Groups/Linguistics][Open Knowledge Foundation's WG on Open Data in Linguistics]]
-  - [[http://www.w3.org/community/ontolex][W3C Ontology-Lexica Community Group]] (OntoLex)
-- Intro: Christian Chiarcos, John McCrae, Philipp Cimiano, and Christiane Fellbaum. [[http://www.lemon-model.net/papers/open-data-for-linguistics.pdf][Towards Open Data for Linguistics: Linguistic Linked Data]]. In New Trends of Research in Ontologies and Lexical Resources. Theory and Applications of Natural Language Processing. Springer Berlin Heidelberg, 2013.
-
-* Linguistic Linked Data
+** Linguistic LOD
+[[./img/llod-for-multisensor.png]]
+** NLP Example
+Detailed example of annotating one sentence
+- Integrates knowledge about many of the ontologies described here
+- http://vladimiralexiev.github.io/Multisensor/NIF-example.ttl
+Areas covered include:
+- Binding to text (NIF)
+- Lemma/stem (NIF)
+- POS tagging (Penn)
+- Dependency parsing (Stanford)
+- Semantic annotation classes (NERD, ITS2)
+- Semantic annotation individuals (DBpedia, WordNet, ITS2)
+- Multiple semantic annotations (FISE/Stanbol)
+- Opinion/sentiment (MARL)
+* Linguistic ontologies
+We describe briefly the following linguistic ontologies
+- NIF (NLP2RDF): bind nodes to text, basic NLP properties
+- OLIA: tagsets, morphological/syntactic/parsing representations
+- Some OLIA constituents: Penn, Stanford
+- ITS2: semantic annotation properties
+- NERD: Semantic annotation classes
+- FISE (Stanbol): multiple semantic annotations
+- MARL: Opinion/sentiment
+- LEMON, LIME (?TODO): lexicographic info (dictionaries)
+* NIF
+** NIF: Overall Idea
+[[./img/NIF-idea.png]]
+** NIF: Example (Merging Triples)
+[[./img/NIF-example-favourite-actress.png]]
+** NIF: Representation Profiles
+[[./img/NIF-profiles.png]]
+** NIF: Domain Model
+[[./img/NIF-schema.png]]
+** OLIA and Constituents
+*** Penn
+*** Stanford
+** ITS2
+** NERD
+** FISE (Stanbol)
+** MARL
+** LEMON
+* Linguistic thesauri
+** ISOcat
+** GOLD
+* Linguistic Linked Datasets
 In the following slides I describe large-scale Linguistic resources.\\
 Datasets already integrated in FactForge:
-- [[http://wordnet.princeton.edu/][WordNet]]: well-known and prototypical lexical resource
-  - 117k synsets, glosses, numerous synonyms (words/phrases). Hyponyms/hyperonyms, meronyms, antonyms
-  - FactForge includes the W3C RDF representation of WordNet 3.1
+- WordNet (includes the W3C RDF representation of WordNet 3.1)
 - Lingvoj, Lexvo: info about languages
-[[http://www.image-net.org][./img/imagenet.jpg]] includes sample images (5k per noun synset!). Enables automatic image annotation.
+** WordNet
+[[http://wordnet.princeton.edu/][WordNet]]: well-known and prototypical lexical resource
+- 117k synsets, glosses, numerous synonyms (words/phrases).
+- Hyponyms/hyperonyms, meronyms, antonyms
+- Uses its own properties
+- Ontology developed by W3C in 2005
+*** ImageNet
+[[http://www.image-net.org][./img/imagenet.jpg]] includes sample images for WordNet
+- 5k images per noun synset!
+- enables automatic image annotation
 - human-curated bounding boxes, eg "fox" and "airplane"
 [[./img/imagenet-bbox-fox.jpg]][[./img/imagenet-bbox-airplane.jpg]]
-* Linguistic LOD
-[[./img/llod-for-multisensor.png]]
-* Linguistic Linked Data in FactForge
-Datasets already integrated in FactForge:
-- [[http://wordnet.princeton.edu/][WordNet]]: well-known and prototypical lexical resource
-  - 117k synsets, glosses, numerous synonyms (words/phrases). Hyponyms/hyperonyms, meronyms, antonyms
-  - FactForge includes the W3C RDF representation of WordNet 3.1
-- Lingvoj, Lexvo: info about languages
-[[http://www.image-net.org][./img/imagenet.jpg]] includes sample images (5k per noun synset!). Enables automatic image annotation.
-- human-curated bounding boxes, eg "fox" and "airplane"
-[[./img/imagenet-bbox-fox.jpg]][[./img/imagenet-bbox-airplane.jpg]]
-* WordNet RDF
-* Wiktionary
-* BabelNet
+** WordNet RDF
+** Wiktionary
+** BabelNet
 - 50 languages covered
-- seamless integration of WordNet, Open Multilingual WordNet, Wikipedia, OmegaWiki, Wikidata (NEW!), Wiktionary (NEW!)
-- 9.3M Babel synsets
-- 67M Babel senses
+- Integrates WordNet, Open Multilingual WordNet, Wikipedia, OmegaWiki, Wikidata, Wiktionary
+- Useful for multilingual joint Word Sense Disambiguation
+- 9.3M synsets, 67M senses
 - 21.7M textual definitions
 - 262M semantic relations
 - 7.7M synset-associated images
-- 1.1 billion RDF triples!
-- Available for download together with Java APIs for programmatic access
-- Also available in RDF/Lemon format and via a public SPARQL endpoint
-* BabelNet
-Useful for Multilingual Joint Word Sense Disambiguation
-[[http://babelfy.org/index.jsp][Babelfy]] (just released)\\
+- 1.1 billion triples in RDF/Lemon, available for download, public SPARQL endpoint
+- Java APIs for programmatic access
+*** Babelfy
+[[http://babelfy.org/index.jsp][Babelfy]]: annotation API based on BabelNet (just released)
+- Evaluation on Energy news item (green: ok concepts, yellow: ok entities, orange: missed/irrelevant, red: wrong)
 [[./img/babelfy.png]]
-* UBY-Lemon
-[[http://lemon-model.net/lexica/uby/][./img/uby-lemon.png]]
+** UBY-Lemon
+[[http://lemon-model.net/lexica/uby/][./img/uby-lemon.png]]\\
 Integrates in LEMON format:
 - FrameNet
 - OmegaWiki (English, German)
 - VerbNet
 - Wiktionary (English, German)
 - Princeton WordNet 3.0
-* News Ontology
-rnews (newsML, IPTC)
+* TODO
+http://babelnet.org/2.0/data/banca_n_IT?output=ttl
+@prefix bn-lemon: <http://babelnet.org/model/babelnet#> .
+@prefix bn:    <http://babelnet.org/2.0/> .
+@prefix lemon-Omega: <http://lemon-model.net/lexica/uby/ow_eng/> .
+@prefix lemon-WordNet: <http://lemon-model.net/lexica/pwn/> .
+@prefix lemon: <http://www.lemon-model.net/lemon#> .
+@prefix lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#> .
