@@ -1,7 +1,7 @@
 #+TITLE:     Semantic Technologies for Cultural Heritage
 #+AUTHOR:    Vladimir Alexiev, Ontotext Corp
 #+EMAIL:     vladimir.alexiev@ontotext.com
-#+DATE:      2014-06-12
+#+DATE:      2014-07-28
 #+LANGUAGE:  en
 #+STARTUP:   noinlineimages content
 #+OPTIONS:   num:nil toc:1
@@ -22,8 +22,10 @@
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://orgmode.org'>org-mode</a> and 
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://www.gnu.org/s/emacs/'>emacs</a>.</p>
 
+
 ** SmartCulture Conference (thanks for inviting me!)
 [[./img/SmartCulture.png]]
+
 * Ontotext Corp
 - World Leading semantic technology developer
   - Established in 2000 as part of Sirma Group
@@ -38,12 +40,15 @@
   - Semantic search for multinational pharmaceuticals (Astra Zeneca)
 - Stable and Growing
   - Both staff and revenue growing for 12th year in a row
+
 ** Some Ontotext Clients
 [[./img/Ontotext-Clients.png]]
+
 ** Ontotext Research Projects (FP5-FP7)
 - Bulgaria's largest participant: over 30 projects
 #+ATTR_HTML: :style width:850px
 [[./img/Ontotext-FP-projects-timeline.png]]
+
 * Semantic Technologies
 - *Web 1.0*: hyperlinked documents (World Wide Web)
 - *Web 2.0*: interactive applications, the Social Web
@@ -53,26 +58,34 @@ Is this something new?
 - Standardized by W3C: both HTML and sem web standards (RDF, RDFS, OWL, SPARQL...)
 - Great flurry of sem tech activity in the last 15 years
 - Buzzwords: Big Data, Semantic Analytics, Concept Extraction, Sentiment Analysis...
+
 ** Linked Open Data Cloud
 - This is from Mar 2009, now has grown 10x!
 - Part at http://factforge.net, http://linkedlifedata.com
 #+ATTR_HTML: :style width:800px
 [[./img/lod-datasets-2009-03-27-FactForge-LLD.jpg]]
+
 ** Linguistic Linked Data
 #+ATTR_HTML: :style width:750px
 [[./img/llod-for-multisensor.png]]
+
 ** First Ontotext GLAM Project: UK National Archives
 [[./img/TNA-SKB.png]]
+
 * Cultural Heritage LOD Cloud
 #+ATTR_HTML: :style width:850px
 [[./img/Culture-datacloud-large.png]]
+
 ** Europeana Recognizes Importance of Semantic Technologies 
 [[./img/Europeana-semantic-whitepaper-press-release.png]]
+
 ** Europeana Sem Tech MindMap
 #+ATTR_HTML: :style width:900px
 [[./img/Europeana-semantic-activities-mindmap.png]]
+
 ** Europeana Sem Tech MindMap Detail
 [[./img/Europeana-semantic-activities-detail.png]]
+
 * ResearchSpace
 - A Virtual Research Environment for art research
 - Funded by the Andrew Mellon Foundation
@@ -80,49 +93,65 @@ Is this something new?
 - Software developed by Ontotext
 - Uses Ontotext's semantic database (OWLIM)
 - Provided all 2.5M objects of the British Museum as Linked Open Data (LOD)
+
 ** 2.5M British Museum Objects as LOD
 [[./img/RS-BM-HoaHakananai'a.png]]
+
 ** ResearchSpace Semantic Search 
 [[./img/RS-search-Rembrandt-drawing-mammal.png]]
 - Also works across collections, eg BM and Yale Center for British Art
+
 ** ResearchSpace: Semantic Data Annotation
 [[./img/RS-data-annotation-over-BM-data.png]]
+
 ** ResearchSpace: Semantic Image Annotation
 [[./img/RS-image-annotation-susanna-xRay.png]]
+
 * Bulgariana
 - A Bulgarian aggregator to Europeana
 #+ATTR_HTML: :style width:850px
 [[./img/bulgariana-collections.png]]
+
 ** Bulgariana Collection: Thracian Gold
 [[./img/rhyton-at-bulgariana.png]]
+
 ** Rhyton at Europeana
 - Now any European citizen can find it!
 [[./img/rhyton-at-europeana.png]]
+
 ** Rhyton at Europeana Open Culture
 - Others make beautiful apps with your data!
 #+ATTR_HTML: :style width:850px
 [[./img/rhyton-europeanaopenculture.png]]
+
 ** Bulgariana Collection Featured in Open Culture
 - And publicize it for you to an audience you couldn't reach!
 [[./img/rhyton-EuropeanaOpenCulture-news.png]]
+
 * Europeana Creative
 #+ATTR_HTML: :style width:800px
 [[./img/eCreative-poster_1.png]]
+
 ** Europeana Creative
 [[./img/eCreative-poster_2.png]]
+
 ** Enabling Creatives to Work with CH Data
 - Pilots by eCreative partners
 - Open challenges, growing to incubation support
 - Help with collection data, content reuse, Europeana APIs, creative workshop ideas...
 [[./img/eCreative-pipeline-workshop.png]]
+
 ** In 5 pilot areas: tourism, social networks, design, nature, history 
 [[./img/eCreative-plan-fragment.png]]
+
 ** Creative Open Challenges and Incubation Support
 #+ATTR_HTML: :style width:1000px
 [[./img/eCreative 2nd Challenges and Incubation Support.png]]
+
 ** Ontotext in Europeana
 Ontotext works on fundamental backend technologies important for KPIs 
 [[./img/OntotextContributesToEuropeana.png]]
+
 ** Europeana OAI and SPARQL
 Ontotext creates OAI PMH server for Europeana
   - So we or others can download objects in bulk
@@ -132,6 +161,7 @@ Ontotext hosts the Europeana semantic data (EDM) in OWLIM
 - http://europeana-test.ontotext.com/sparql\\
   working with Europeana to update it
 - Provides SPARQL querying
+
 ** SPARQL 1.1 Queries
 Eg Polish Periodicals by library and decade\\
 http://europeana-test.ontotext.com/sparql
@@ -151,11 +181,14 @@ select
   bind (if(?dataProvider='Bałtycka Biblioteka Cyfrowa',1,0) as ?n3)
 } group by ?date order by ?date
 #+END_SRC
+
 ** SPARQL Analytics
 Eg Polish Periodicals by library & decade (you can [[http://jsfiddle.net/valexiev/t4aX9/][jsfiddle]] with it)\\
 [[./img/EDM-sgvizler2.png]]
+
 ** EDM Object Graph
 [[./img/europeana-graph.png]] 
+
 * Getty Vocabularies
 Well-known and important cultural heritage thesauri:
 - Art and Architecture Thesaurus (AAT)
@@ -167,5 +200,7 @@ Ontotext is publishing them as Linked Open Data: http://vocab.getty.edu
 - First industrial use of the latest ISO standard on thesauri: ISO 25946
 - Contributed to ISO 25946 ontology
 - Special session at CIDOC Congress (Dresden, Sep 2014)
+
 ** Use of ISO 25946 in Getty LOD
 [[./img/Getty-isoThesaurusArray.png]]
+
