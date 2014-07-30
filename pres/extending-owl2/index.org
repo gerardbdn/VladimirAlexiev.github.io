@@ -1,0 +1,322 @@
+#+TITLE:     Extending OWL2 Property Constructs with OWLIM Rules
+#+AUTHOR:    Vladimir Alexiev, Ontotext Corp
+#+EMAIL:     vladimir.alexiev@ontotext.com
+#+DATE:      2014-07-30
+#+STARTUP: content
+#+OPTIONS: html-link-use-abs-url:nil html-postamble:auto html-preamble:t html-scripts:t
+#+OPTIONS: html-style:t html5-fancy:nil tex:nil
+#+CREATOR: <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.91.1 (<a href="http://orgmode.org">Org</a> mode 8.2.6)
+#+HTML_CONTAINER: div
+#+HTML_DOCTYPE: xhtml-strict
+#+HTML_HEAD:
+##+HTML_HEAD_EXTRA: <style>th, td {border: 1px; border-style: solid solid; border-spacing:0; padding:0px 2px}</style>
+#+HTML_LINK_HOME:
+#+HTML_LINK_UP:
+#+HTML_MATHJAX:
+#+INFOJS_OPT:
+#+LATEX_HEADER:
+
+* Intro
+While OWL2 has very powerful class constructs, its property constructs are quite weak.
+We propose several extensions that we found useful when making:
+- CIDOC CRM Fundamental Relations Search for the British Museum
+- Appropriate compositions of BTG, BTP, BTI relations for the Getty Vocabularies
+
+** Existing Property Constructs
+OWL2 Property Constructs include the following. Below we use pN for premises, q for conclusion. 
+*prop path* is a SPARQL 1.1 property path, := means "equivalent to" and <= means "implied by".
+We provide an illustration, where the conclusion is in red
+| *construct*                           | *prop path*   | *OWL2 Turtle expression*                          | *illustration*                    |
+| Symmetric (self-inverse)              | q := ^q       | q a owl:SymmetricProperty                         | file:./img/SymmetricProperty.png  |
+| Inverse                               | q := ^p       | q owl:inverseOf p                                 | file:./img/inverseOf.png          |
+| Disjunction, parallel composition     | q <= p1 \vert p2  | q rdfs:subPropertyOf p1; p2 rdfs:subPropertyOf p2 | file:./img/subPropertyOf.png      |
+| Property path, sequential composition | q <= p1/../pN | q owl:propertyChainAxiom (p1..pN)                 | file:./img/propertyChainAxiom.png |
+| Transitive closure                    | q <= p+       | q rdfs:subPropertyOf p; a owl:TransitiveProperty  | file:./img/TransitiveProperty.png |
+#+begin_src dot :results silent file :file ./img/SymmetricProperty.png
+$dot ranksep=0.7
+x -> y [label="q"]
+y -> x [label="q" color=red]
+}
+#+end_src
+#+begin_src dot :results silent file :file ./img/inverseOf.png
+$dot ranksep=0.7
+x -> y [label="p"]
+y -> x [label="q" color=red]
+}
+#+end_src
+#+begin_src dot :results silent file :file ./img/subPropertyOf.png
+$dot
+x -> y [label="p1|p2"]
+x -> y [label="q" color=red]
+}
+#+end_src
+#+begin_src dot :results silent file :file ./img/propertyChainAxiom.png
+$dot
+x -> y [label="p1"]
+y -> z [label="p2"]
+z -> t [label="pN"]
+x -> t [label="q" color=red]
+}
+#+end_src
+#+begin_src dot :results silent file :file ./img/TransitiveProperty.png
+$dot
+x -> y [label="p|q"]
+y -> z [label="p|q"]
+x -> z [label="q" color=red]
+}
+#+end_src
+
+* New Property Constructs
+Below we use pN for premises, r for restriction (which is just another type of premise), tN for types, q for conclusion.
+*prop path* uses the following additional constructs:
+- ~p & r~: property conjunction (restriction): holds between two nodes when both properties connect the same nodes
+- ~[t1] p [t2]~: type restriction: holds when the source node has type t1 and the target node has type t2 (shown inside the node)
+| *construct*              | *prop path*            | *illustration*                          |
+| transitiveOver           | q <= q / p             | file:./img/transitiveOver.png           |
+| transitiveLeft           | q <= p / q             | file:./img/transitiveLeft.png           |
+| PropChain                | q <= p1 / p2           | file:./img/PropChain.png                |
+| PropRestr                | q <= p & r             | file:./img/PropRestr.png                |
+| PropChainRestr           | q <= (p1 / p2) & r     | file:./img/PropChainRestr.png           |
+| TypeRestr                | q <= [t1] p [t2]       | file:./img/TypeRestr.png                |
+| Type1Restr               | q <= [t1] p            | file:./img/Type1Restr.png               |
+| PropChainRestrType2Restr | q <= (p1 / p2[t2]) & r | file:./img/PropChainRestrType2Restr.png |
+#+begin_src dot :results silent file :file ./img/transitiveOver.png
+$dot
+x -> y [label="q"]
+y -> z [label="p"]
+x -> z [label="q" color=red]
+}
+#+end_src
+#+begin_src dot :results silent file :file ./img/transitiveLeft.png
+$dot
+x -> y [label="p"]
+y -> z [label="q"]
+x -> z [label="q" color=red]
+}
+#+end_src
+#+begin_src dot :results silent file :file ./img/PropChain.png
+$dot
+x -> y [label="p1"]
+y -> z [label="p2"]
+x -> z [label="q" color=red]
+}
+#+end_src
+#+begin_src dot :results silent file :file ./img/PropRestr.png
+$dot ranksep=0.7
+x -> y [label="p"]
+x -> y [label="r"]
+x -> y [label="q" color=red]
+}
+#+end_src
+#+begin_src dot :results silent file :file ./img/PropChainRestr.png
+$dot 
+x -> y [label="p1"]
+y -> z [label="p2"]
+x -> z [label="r"]
+x -> z [label="q" color=red]
+}
+#+end_src
+#+begin_src dot :results silent file :file ./img/TypeRestr.png
+$dot ranksep=0.7
+x [label="t1"]
+y [label="t2"]
+x -> y [label="p"]
+x -> y [label="q" color=red]
+}
+#+end_src
+#+begin_src dot :results silent file :file ./img/Type1Restr.png
+$dot ranksep=0.7
+x [label="t1"]
+x -> y [label="p"]
+x -> y [label="q" color=red]
+}
+#+end_src
+#+begin_src dot :results silent file :file ./img/PropChainRestrType2Restr.png
+$dot
+x -> y [label="p1"]
+y -> z [label="p2"]
+x -> z [label="r"]
+x -> z [label="q" color=red]
+z [label="t2"]
+}
+#+end_src
+
+** Representation
+We represent the constructs as RDF axioms as follows (*Turtle expressions*):
+#+BEGIN_SRC 
+q psys:transitiveOver p.
+q psys:transitiveLeft p.
+x a psys:PropChain; psys:premise1 p1; psys:premise2 p2; psys:conclusion q.
+x a psys:PropRestr; psys:premise p; psys:restricton r; psys:conclusion q.
+x a psys:PropChainRestr; psys:premise1 p1; psys:premise2 p2; psys:restricton r; psys:conclusion q.
+x a psys:TypeRestr; psys:premise p; psys:type1 t1; psys:type2 t2; psys:conclusion q.
+x a psys:Type1Restr; psys:premise p; psys:type1 t1; psys:conclusion q.
+x a psys:PropChainRestrType2Restr; psys:premise1 p1; psys:premise2 p2; psys:restricton r; psys:type2 t2; psys:conclusion q.
+#+END_SRC
+- For the first two we use simple property relations, like owl:inverseOf.
+- For the rest we use specific structures,
+  distinguished by a particular type (eg psys:PropChain) and using specific slot names for the construct's constituents.
+  TODO: but the slot names are the same across constructs, which causes lower specificity and slower execution.
+This is in contrast to owl:propertyChainAxiom, which uses a general structure (rdf:List)
+- The benefit of our approach is that it is more efficient to implement:
+  owl:propertyChainAxiom needs to use intermediate inferred properties in order to unroll the rdf:List representing the chain
+- The disadvantage is that it allows only constructs of limited length.
+  But have you seen an owl:propertyChainAxiom with a chain longer than 2 in practice?
+
+** Implementation
+We implement these constructs using OWLIM Rules, 
+which has the benefit of *incremental retract*: when a premise is deleted, its unsupported conclusions are deleted, recursively.
+This is possible since the rules are simple enough (eg don't include arithmetics or comparisons), 
+so they can be executed "backwards" during retraction.
+We show the implementation only of the last (most complicated) rule.
+#+BEGIN_SRC
+Id: psys_PropChainRestrType2Restr
+  t <rdf:type> <psys:PropChainRestrType2Restr>
+  t <psys:premise1>    p1
+  t <psys:premise2>    p2
+  t <psys:restriction> r
+  t <psys:type2>       t2
+  t <psys:conclusion>  q
+  x p1 y
+  y p2 z
+  z <rdf:type> t2
+  x r z
+  ----------------
+  x q z
+#+END_SRC
+This could also be implemented with RIF or N3 Rules. 
+But SPIN cannot be used because the rules are recursive, 
+unless one is willing to iterate until no more conclusions are inferred.
+
+* Notes and Examples
+** transitiveOver
+It all started with psys:transitiveOver, which has been part of Ontotext's PROTON ontology since 2008(?).
+This is better than owl:TransitiveProperty for two reasons:
+- It's *more general*: if q is transitiveOver itself, then it's a TransitiveProperty:
+: q a owl:TransitiveProperty <=> q psys:transitiveOver q
+But you are not limited to use the same property with psys:transitiveOver.
+For example, the canonical inferencing of types along the class hierarchy can be expressed as:
+: rdf:type psys:transitiveOver rdfs:subClassOf
+- It allows *more efficient* implementation of transitive closures.
+Transitive properties are usually implemented as transitive closure over a basic "step" property.
+For example, skos:broaderTransitive is based on skos:broader and is usually implemented as
+: skos:broader rdfs:subPropertyOf skos:broaderTransitive.
+: skos:broaderTransitive a owl:TransitiveProperty.
+Consider a chain of skos:broader.
+The above considers every split of the chain in two and infers the same closure betwen the two nodes multiple times,
+leading to quadratic inference complexity.
+The following axioms are more efficient, since they seek to extend the chain only at its end.
+: skos:broader rdfs:subPropertyOf skos:broaderTransitive.
+: skos:broaderTransitive psys:transitiveOver skos:broader.
+
+** transitiveLeft
+transitiveLeft is just like transitiveOver, but extends the chain of q by using p on the left, not on the right.
+For example, the first three axioms below say that broaderPartitiveExtended is a chain of broaderPartitive,
+followed by any number of broaderPartitive|broaderGeneric on the right.
+The last axiom also allows any number of broaderGeneric on the left
+(so in effect broaderPartitiveExtended is any chain of broaderPartitive|broaderGeneric, including at least one broaderPartitive).
+#+BEGIN_SRC 
+gvp:broaderPartitive rdfs:subPropertyOf gvp:broaderPartitiveExtended.
+gvp:broaderPartitiveExtended psys:transitiveOver gvp:broaderGeneric.
+gvp:broaderPartitiveExtended psys:transitiveOver gvp:broaderPartitive.
+gvp:broaderPartitiveExtended psys:transitiveLeft gvp:broaderGeneric.
+#+END_SRC
+
+** PropChain
+PropChain is like owl:propertyChainAxiom but for chains of length 2
+(have you seen longer chains used in practice?)
+You don't need to rewrite your owl:propertyChainAxioms to use psys:PropChain, because it's easy to convert from one to the other using a rule like this:
+#+BEGIN_SRC
+Id: psys_PropChainByPropertyChainAxiom
+  // derive psys:PropChain from owl:propertyChainAxiom of 2 members
+  p  <owl:propertyChainAxiom> l1
+  l1 <rdf:first> p1
+  l1 <rdf:next>  l2
+  l2 <rdf:first> p2
+  l2 <rdf:next>  <rdf:nil>
+  ----------------
+  t <rdf:type> <psys:PropChain>
+  t <psys:premise1>   p1
+  t <psys:premise2>   p2
+  t <psys:conclusion> p
+#+END_SRC
+
+** PropRestr
+PropRestr is a simple conjunction of two properties.
+We call the first one /premise/ and the second one /restriction/
+only for stylistic reasons, to better match the next construct.
+OWL2 does not allow the expression of conjunctive properties,
+something that provided original motivation while working on CRM Fundamental Relations.
+
+For example, iso:broaderGeneric can be defined as a restriction of gvp:broaderGenericExtended to nodes that are directly connected by skos:broader (i.e. skos:Concepts)
+#+BEGIN_SRC
+[a psys:PropRestr;
+ psys:premise    skos:broader;
+ psys:restricton gvp:broaderGenericExtended;
+ psys:conclusion iso:broaderGeneric].
+#+END_SRC
+
+** PropChainRestr
+PropChainRestr is a combination of PropChain and PropRestr. For example, broaderPreferredExtended is the transitive closure of broaderPreferred, but restricted to broaderExtended. 
+#+BEGIN_SRC
+[a psys:PropChainRestr;
+ psys:premise1    gvp:broaderPreferredExtended;
+ psys:premise2    gvp:broaderPreferred;
+ psys:restriction gvp:broaderExtended;
+ psys:conclusion  gvp:broaderPreferredExtended].
+#+END_SRC
+
+** TypeRestr
+TypeRestr is a restriction of a property to connect nodes of specified types. 
+(Type1Restr is a very simple modification where we restrict only the source node.) 
+For example, skos:broader is a restriction of gvp:broader to only skos:Concepts; iso:subordinateArray is a restriction of gvp:narrower from skos:Concept to iso:ThesaurusArray.
+#+BEGIN_SRC
+[a psys:TypeRestr;
+ psys:premise    gvp:broader;
+ psys:type1      skos:Concept;
+ psys:type2      skos:Concept;
+ psys:conclusion skos:broader].
+[a psys:TypeRestr;
+ psys:premise    gvp:narrower;
+ psys:type1      skos:Concept;
+ psys:type2      iso:ThesaurusArray;
+ psys:conclusion iso:subordinateArray].
+#+END_SRC
+
+** PropChainRestrType2Restr
+You must be thinking "WHAT in the world would such a beast be useful for"?
+And you're right, there's nothing fundamentally important about this pattern.
+But we found it useful in order to infer skos:broader as a restriction of gvp:broaderExtended over directly connected pairs of skos:Concept 
+(no intervening skos:Concept).
+We use an auxiliary property gvp:broaderNonConcept, which connects skos:Concept to non-concepts 
+(it itself is implemented with PropChainRestrType2Restr).
+#+BEGIN_SRC 
+[a psys:PropChainRestrType2Restr;
+ psys:premise1    gvp:broaderNonConcept;
+ psys:premise2    gvp:broader;
+ psys:restriction gvp:broaderExtended;
+ psys:type2       skos:Concept;
+ psys:conclusion  skos:broader].
+#+END_SRC
+
+The power of our approach is that you can easily define more constructs for any rule patterns that are important in your situation.
+
+#+BEGIN_COMMENT
+Eval this manually:
+
+(setq-default va/org-dot-preamble "digraph g { 
+   rankdir=LR nodesep=0.2 ranksep=0.3 arrowsize=0.1 
+   node [fontname=courier fontsize=8 margin=\"0.02,0.01\" shape=circle width=0.25 height=0.25 label=\"\"] 
+   edge [fontname=courier fontsize=8 labelfontname=courier labelfontsize=8]")
+
+For some reason, neither of these below work:
+
+#+BIND: va/org-dot-preamble "digraph g {    rankdir=LR nodesep=0.2 ranksep=0.1 arrowsize=0.1  node [fontname=courier fontsize=8 margin='0.02,0.01' shape=circle width=0.1 height=0.1 label='']  edge [fontname=courier fontsize=8 labelfontname=courier labelfontsize=8]"
+
+Local Variables:
+va/org-dot-preamble: "digraph g { \
+  rankdir=LR nodesep=0.2 ranksep=0.1 arrowsize=0.1 \
+  node [fontname=courier fontsize=8 margin='0.02,0.01' shape=circle width=0.1 height=0.1 label=''] \
+  edge [fontname=courier fontsize=8 labelfontname=courier labelfontsize=8]"
+End:
+#+END_COMMENT
