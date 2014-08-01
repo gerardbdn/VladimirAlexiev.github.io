@@ -1,7 +1,7 @@
 #+TITLE:     Extending OWL2 Property Constructs with OWLIM Rules
 #+AUTHOR:    Vladimir Alexiev, Ontotext Corp
 #+EMAIL:     vladimir.alexiev@ontotext.com
-#+DATE:      2014-07-30
+#+DATE:      2014-08-01
 #+STARTUP: content
 #+OPTIONS: html-link-use-abs-url:nil html-postamble:auto html-preamble:t html-scripts:t
 #+OPTIONS: html-style:t html5-fancy:nil tex:nil
@@ -9,7 +9,7 @@
 #+HTML_CONTAINER: div
 #+HTML_DOCTYPE: xhtml-strict
 #+HTML_HEAD:
-##+HTML_HEAD_EXTRA: <style>th, td {border: 1px; border-style: solid solid; border-spacing:0; padding:0px 2px}</style>
+#+HTML_HEAD_EXTRA: <style>table, th, td {border-width: thin; border-style: solid solid; border-spacing:0 0; padding:0px 2px}</style>
 #+HTML_LINK_HOME:
 #+HTML_LINK_UP:
 #+HTML_MATHJAX:
@@ -23,15 +23,16 @@ We propose several extensions that we found useful when making:
 - Appropriate compositions of BTG, BTP, BTI relations for the Getty Vocabularies
 
 ** Existing Property Constructs
-OWL2 Property Constructs include the following. Below we use pN for premises, q for conclusion. 
+OWL2 Property Constructs include the following. Below we use pN for premises, q for conclusion.
 *prop path* is a SPARQL 1.1 property path, := means "equivalent to" and <= means "implied by".
 We provide an illustration, where the conclusion is in red
-| *construct*                           | *prop path*   | *OWL2 Turtle expression*                          | *illustration*                    |
-| Symmetric (self-inverse)              | q := ^q       | q a owl:SymmetricProperty                         | file:./img/SymmetricProperty.png  |
-| Inverse                               | q := ^p       | q owl:inverseOf p                                 | file:./img/inverseOf.png          |
-| Disjunction, parallel composition     | q <= p1 \vert p2  | q rdfs:subPropertyOf p1; p2 rdfs:subPropertyOf p2 | file:./img/subPropertyOf.png      |
-| Property path, sequential composition | q <= p1/../pN | q owl:propertyChainAxiom (p1..pN)                 | file:./img/propertyChainAxiom.png |
-| Transitive closure                    | q <= p+       | q rdfs:subPropertyOf p; a owl:TransitiveProperty  | file:./img/TransitiveProperty.png |
+| *construct*                        | *prop path*   | *illustration*                    |
+|                                    |               | <c>                               |
+| Symmetric (self-inverse)           | q := ^q       | file:./img/SymmetricProperty.png  |
+| Inverse                            | q := ^p       | file:./img/inverseOf.png          |
+| Disjunction (parallel composition) | q <= p1 \vert p2  | file:./img/subPropertyOf.png      |
+| Chain (sequential composition)     | q <= p1/../pN | file:./img/propertyChainAxiom.png |
+| Transitive closure                 | q <= p+       | file:./img/TransitiveProperty.png |
 #+begin_src dot :results silent file :file ./img/SymmetricProperty.png
 $dot ranksep=0.7
 x -> y [label="q"]
@@ -65,25 +66,46 @@ y -> z [label="p|q"]
 x -> z [label="q" color=red]
 }
 #+end_src
-
+The corresponding OWL2 axioms (in RDF Turtle) are:
+#+BEGIN_SRC 
+q a owl:SymmetricProperty.
+q owl:inverseOf p.
+q rdfs:subPropertyOf p1; p2 rdfs:subPropertyOf p2.
+q owl:propertyChainAxiom (p1..pN).
+q rdfs:subPropertyOf p; a owl:TransitiveProperty.
+#+END_SRC
 * New Property Constructs
-Below we use pN for premises, r for restriction (which is just another type of premise), tN for types, q for conclusion.
+Below we use pN for premises, r for restriction (which is just another premise), tN for types, q for conclusion.
 *prop path* uses the following additional constructs:
 - ~p & r~: property conjunction (restriction): holds between two nodes when both properties connect the same nodes
 - ~[t1] p [t2]~: type restriction: holds when the source node has type t1 and the target node has type t2 (shown inside the node)
-| *construct*              | *prop path*            | *illustration*                          |
-| transitiveOver           | q <= q / p             | file:./img/transitiveOver.png           |
-| transitiveLeft           | q <= p / q             | file:./img/transitiveLeft.png           |
-| PropChain                | q <= p1 / p2           | file:./img/PropChain.png                |
-| PropRestr                | q <= p & r             | file:./img/PropRestr.png                |
-| PropChainRestr           | q <= (p1 / p2) & r     | file:./img/PropChainRestr.png           |
-| TypeRestr                | q <= [t1] p [t2]       | file:./img/TypeRestr.png                |
-| Type1Restr               | q <= [t1] p            | file:./img/Type1Restr.png               |
-| PropChainRestrType2Restr | q <= (p1 / p2[t2]) & r | file:./img/PropChainRestrType2Restr.png |
+| *construct*                           | *name*                   | *prop path*            | *illustration*                          |
+|                                       |                          |                        | <c>                                     |
+| Extension on the right                | transitiveOver           | q <= q / p             | file:./img/transitiveOver.png           |
+| Extension by conjunction on the right | TransitiveOverRestr      | q <= q / (p & r)       | file:./img/TransitiveOverRestr.png      |
+| Extension on the left                 | transitiveLeft           | q <= p / q             | file:./img/transitiveLeft.png           |
+| Chain of fixed length 2               | PropChain                | q <= p1 / p2           | file:./img/PropChain.png                |
+| Conjunction (restriction by property) | PropRestr                | q <= p & r             | file:./img/PropRestr.png                |
+| Chain and restriction by property     | PropChainRestr           | q <= (p1 / p2) & r     | file:./img/PropChainRestr.png           |
+| Restriction by two typechecks         | TypeRestr                | q <= [t1] p [t2]       | file:./img/TypeRestr.png                |
+| Restriction by 1 typecheck            | Type1Restr               | q <= [t1] p            | file:./img/Type1Restr.png               |
+| Chain, typecheck and restriction      | PropChainRestrType2Restr | q <= (p1 / p2[t2]) & r | file:./img/PropChainRestrType2Restr.png |
+Note: PropRestr is a conjunction of two properties.
+We call the first one /premise/ and the second one /restriction/
+only for stylistic reasons, to better match PropChainRestr.
+
 #+begin_src dot :results silent file :file ./img/transitiveOver.png
 $dot
 x -> y [label="q"]
 y -> z [label="p"]
+x -> z [label="q" color=red]
+}
+#+end_src
+#+begin_src dot :results silent file :file ./img/TransitiveOverRestr.png
+$dot ranksep=0.7
+x -> y [label="q"]
+y -> z [label="p"]
+y -> z [label="r"]
 x -> z [label="q" color=red]
 }
 #+end_src
@@ -109,7 +131,7 @@ x -> y [label="q" color=red]
 }
 #+end_src
 #+begin_src dot :results silent file :file ./img/PropChainRestr.png
-$dot 
+$dot
 x -> y [label="p1"]
 y -> z [label="p2"]
 x -> z [label="r"]
@@ -142,9 +164,10 @@ z [label="t2"]
 #+end_src
 
 ** Representation
-We represent the constructs as RDF axioms as follows (*Turtle expressions*):
-#+BEGIN_SRC 
+We represent the constructs as axioms (in RDF Turtle):
+#+BEGIN_SRC
 q psys:transitiveOver p.
+x a psys:TransitiveOverRestr; psys:premise p; psys:restricton r; psys:conclusion q.
 q psys:transitiveLeft p.
 x a psys:PropChain; psys:premise1 p1; psys:premise2 p2; psys:conclusion q.
 x a psys:PropRestr; psys:premise p; psys:restricton r; psys:conclusion q.
@@ -153,20 +176,20 @@ x a psys:TypeRestr; psys:premise p; psys:type1 t1; psys:type2 t2; psys:conclusio
 x a psys:Type1Restr; psys:premise p; psys:type1 t1; psys:conclusion q.
 x a psys:PropChainRestrType2Restr; psys:premise1 p1; psys:premise2 p2; psys:restricton r; psys:type2 t2; psys:conclusion q.
 #+END_SRC
-- For the first two we use simple property relations, like owl:inverseOf.
-- For the rest we use specific structures,
+- The lowercase constructs are simple relations between properties, similar to owl:inverseOf.
+- For the uppercase constructs we use specific structures,
   distinguished by a particular type (eg psys:PropChain) and using specific slot names for the construct's constituents.
   TODO: but the slot names are the same across constructs, which causes lower specificity and slower execution.
-This is in contrast to owl:propertyChainAxiom, which uses a general structure (rdf:List)
-- The benefit of our approach is that it is more efficient to implement:
-  owl:propertyChainAxiom needs to use intermediate inferred properties in order to unroll the rdf:List representing the chain
+This is in contrast to owl:propertyChainAxiom, which uses a general structure (rdf:List):
+- The benefit of our approach is that it can be implemented more efficiently:
+  propertyChainAxiom needs to use intermediate nodes and edges in order to unroll the rdf:List representing the chain
 - The disadvantage is that it allows only constructs of limited length.
-  But have you seen an owl:propertyChainAxiom with a chain longer than 2 in practice?
+  But have you seen in practice an owl:propertyChainAxiom with a chain longer than 2?
 
 ** Implementation
-We implement these constructs using OWLIM Rules, 
+We implement these constructs using OWLIM Rules,
 which has the benefit of *incremental retract*: when a premise is deleted, its unsupported conclusions are deleted, recursively.
-This is possible since the rules are simple enough (eg don't include arithmetics or comparisons), 
+This is possible since the rules are simple enough (eg don't include arithmetics or comparisons),
 so they can be executed "backwards" during retraction.
 We show the implementation only of the last (most complicated) rule.
 #+BEGIN_SRC
@@ -184,28 +207,30 @@ Id: psys_PropChainRestrType2Restr
   ----------------
   x q z
 #+END_SRC
-This could also be implemented with RIF or N3 Rules. 
-But SPIN cannot be used because the rules are recursive, 
+This could also be implemented with RIF or N3 Rules.
+But SPIN cannot be used because the rules are recursive,
 unless one is willing to iterate until no more conclusions are inferred.
 
 * Notes and Examples
 ** transitiveOver
 It all started with psys:transitiveOver, which has been part of Ontotext's PROTON ontology since 2008(?).
 This is better than owl:TransitiveProperty for two reasons:
-- It's *more general*: if q is transitiveOver itself, then it's a TransitiveProperty:
+- It's *more general*: q is a TransitiveProperty /iff/ it's transitiveOver itself:
 : q a owl:TransitiveProperty <=> q psys:transitiveOver q
-But you are not limited to use the same property with psys:transitiveOver.
+psys:transitiveOver is more general because you could different properties with it.
 For example, the canonical inferencing of types along the class hierarchy can be expressed as:
 : rdf:type psys:transitiveOver rdfs:subClassOf
+Note: SymmetricProperty is a specialziation of inverseOf in an analogous way:
+: q a owl:SymmetricProperty <=> a owl:inverseOf a
 - It allows *more efficient* implementation of transitive closures.
-Transitive properties are usually implemented as transitive closure over a basic "step" property.
+Transitive properties are usually implemented as transitive closure over a basic *step* property.
 For example, skos:broaderTransitive is based on skos:broader and is usually implemented as
 : skos:broader rdfs:subPropertyOf skos:broaderTransitive.
 : skos:broaderTransitive a owl:TransitiveProperty.
-Consider a chain of skos:broader.
-The above considers every split of the chain in two and infers the same closure betwen the two nodes multiple times,
+Now consider a chain of skos:broader between two nodes.
+owl:TransitiveProperty has to consider every split of the chain, and infers the same closure between the two nodes multiple times,
 leading to quadratic inference complexity.
-The following axioms are more efficient, since they seek to extend the chain only at its end.
+The following axioms are more efficient, since they seek to extend the chain only at the right end:
 : skos:broader rdfs:subPropertyOf skos:broaderTransitive.
 : skos:broaderTransitive psys:transitiveOver skos:broader.
 
@@ -213,42 +238,85 @@ The following axioms are more efficient, since they seek to extend the chain onl
 transitiveLeft is just like transitiveOver, but extends the chain of q by using p on the left, not on the right.
 For example, the first three axioms below say that broaderPartitiveExtended is a chain of broaderPartitive,
 followed by any number of broaderPartitive|broaderGeneric on the right.
-The last axiom also allows any number of broaderGeneric on the left
-(so in effect broaderPartitiveExtended is any chain of broaderPartitive|broaderGeneric, including at least one broaderPartitive).
-#+BEGIN_SRC 
+The last axiom also allows any number of broaderGeneric on the left.
+#+BEGIN_SRC
 gvp:broaderPartitive rdfs:subPropertyOf gvp:broaderPartitiveExtended.
 gvp:broaderPartitiveExtended psys:transitiveOver gvp:broaderGeneric.
 gvp:broaderPartitiveExtended psys:transitiveOver gvp:broaderPartitive.
 gvp:broaderPartitiveExtended psys:transitiveLeft gvp:broaderGeneric.
 #+END_SRC
+So in effect broaderPartitiveExtended is any chain of broaderPartitive|broaderGeneric, including at least one broaderPartitive.
+You don't need to bother with transitiveLeft if you are extending a single property, but you may need it if you are mixing two.
+
+** TransitiveOverRestr
+To understand this example, you need to know a bit about the LOD representation of the Getty Vocabularies:
+- TGN places form a hierarchy using broaderPartitive
+- AAT concepts (including place types) form a hierarchy using broaderGeneric (mostly)
+- TGN place is connected to its AAT place type using broaderInstantial
+We first defined broaderInstantialExtended as a closure of broaderInstantial over broaderGeneric (only on the right):
+#+BEGIN_SRC
+gvp:broaderInstantial rdfs:subPropertyOf gvp:broaderInstantialExtended.
+gvp:broaderInstantialExtended psys:transitiveOver gvp:broaderGeneric.
+#+END_SRC
+
+But we faced a problem: some broaderGeneric are better suited for this purpose than others.
+AAT concepts (including place types) have a Preferred (primary) hierarchy, and often have secondary (Non-Preferred) hierarchies, eg:
+| place type       | Preferred Hierarchy                | Non-Preferred Hierarchy                                       |
+|------------------+------------------------------------+---------------------------------------------------------------|
+| continents       | Built Environment (Hierarchy Name) | Associated Concepts                                           |
+| (eg Europe)      | . Settlements and Landscapes       | . scientific concepts                                         |
+|                  | .. landscapes (environments)       | .. physical sciences concepts                                 |
+|                  | ... natural landscapes             | ... earth sciences concepts                                   |
+|                  | .... landforms (terrestrial)       | .... earth features                                           |
+|                  | ..... landmasses                   | ..... physical features                                       |
+|                  | ...... continents                  | ...... hypsographic features                                  |
+|                  |                                    | ....... terrestrial features (natural)                        |
+|                  |                                    | ........ landforms (terrestrial)                              |
+|                  |                                    | ......... continents                                          |
+|------------------+------------------------------------+---------------------------------------------------------------|
+| inhabited places | Objects Facet                      | Agents Facet                                                  |
+| (eg Sofia)       | . Settlements and Landscapes       | . organizations (groups)                                      |
+|                  | .. inhabited places                | .. administrative bodies                                      |
+|                  |                                    | ... political administrative bodies                           |
+|                  |                                    | .... <political administrative bodies by general designation> |
+|                  |                                    | ..... inhabited places                                        |
+While the Preferred hierarchy is useful, the secondary hierarchy is not so useful:
+few people would think of Europe as a "scientific concept" or Sofia city as an "organization".
+So we found it better to define broaderInstantialExtended as a closure over broaderGeneric *restricted by* broaderPreferred:
+#+BEGIN_SRC
+[a psys:TransitiveOverRestr;
+ psys:conclusion  gvp:broaderInstantialExtended;
+ psys:premise     gvp:broaderGeneric;
+ psys:restriction gvp:broaderPreferred].
+#+END_SRC
 
 ** PropChain
 PropChain is like owl:propertyChainAxiom but for chains of length 2
 (have you seen longer chains used in practice?)
-You don't need to rewrite your owl:propertyChainAxioms to use psys:PropChain, because it's easy to convert from one to the other using a rule like this:
+The advantage is more efficient implementation, 
+as propertyChainAxiom needs to use intermediate nodes and edges in order to unroll the rdf:List representing the chain.
+
+You don't need to rewrite your owl:propertyChainAxioms to use psys:PropChain: you can convert with a rule like this:
 #+BEGIN_SRC
 Id: psys_PropChainByPropertyChainAxiom
-  // derive psys:PropChain from owl:propertyChainAxiom of 2 members
   p  <owl:propertyChainAxiom> l1
   l1 <rdf:first> p1
-  l1 <rdf:next>  l2
+  l1 <rdf:rest>  l2
   l2 <rdf:first> p2
-  l2 <rdf:next>  <rdf:nil>
+  l2 <rdf:rest>  <rdf:nil>
   ----------------
   t <rdf:type> <psys:PropChain>
   t <psys:premise1>   p1
   t <psys:premise2>   p2
   t <psys:conclusion> p
 #+END_SRC
+But if your OWLIM ruleset has a general implementation of owl:propertyChainAxiom, it needs to be modified to apply to chains longer than 2 only.
 
 ** PropRestr
-PropRestr is a simple conjunction of two properties.
-We call the first one /premise/ and the second one /restriction/
-only for stylistic reasons, to better match the next construct.
 OWL2 does not allow the expression of conjunctive properties,
-something that provided original motivation while working on CRM Fundamental Relations.
+something that provided original motivation for these extensions, while working on CRM Fundamental Relations.
 
-For example, iso:broaderGeneric can be defined as a restriction of gvp:broaderGenericExtended to nodes that are directly connected by skos:broader (i.e. skos:Concepts)
+For example, iso:broaderGeneric can be defined as a restriction of gvp:broaderGenericExtended to skos:broader (i.e. directly connected skos:Concepts):
 #+BEGIN_SRC
 [a psys:PropRestr;
  psys:premise    skos:broader;
@@ -257,7 +325,7 @@ For example, iso:broaderGeneric can be defined as a restriction of gvp:broaderGe
 #+END_SRC
 
 ** PropChainRestr
-PropChainRestr is a combination of PropChain and PropRestr. For example, broaderPreferredExtended is the transitive closure of broaderPreferred, but restricted to broaderExtended. 
+PropChainRestr is a combination of PropChain and PropRestr. For example, broaderPreferredExtended is the transitive closure of broaderPreferred, but restricted to broaderExtended.
 #+BEGIN_SRC
 [a psys:PropChainRestr;
  psys:premise1    gvp:broaderPreferredExtended;
@@ -267,8 +335,8 @@ PropChainRestr is a combination of PropChain and PropRestr. For example, broader
 #+END_SRC
 
 ** TypeRestr
-TypeRestr is a restriction of a property to connect nodes of specified types. 
-(Type1Restr is a very simple modification where we restrict only the source node.) 
+TypeRestr is a restriction of a property to connect nodes of specified types.
+(Type1Restr is a very simple modification where we restrict only the source node.)
 For example, skos:broader is a restriction of gvp:broader to only skos:Concepts; iso:subordinateArray is a restriction of gvp:narrower from skos:Concept to iso:ThesaurusArray.
 #+BEGIN_SRC
 [a psys:TypeRestr;
@@ -284,13 +352,12 @@ For example, skos:broader is a restriction of gvp:broader to only skos:Concepts;
 #+END_SRC
 
 ** PropChainRestrType2Restr
-You must be thinking "WHAT in the world would such a beast be useful for"?
-And you're right, there's nothing fundamentally important about this pattern.
-But we found it useful in order to infer skos:broader as a restriction of gvp:broaderExtended over directly connected pairs of skos:Concept 
+There's nothing fundamentally important about this pattern.
+But we found it useful in order to infer skos:broader as a restriction of gvp:broaderExtended over directly connected pairs of skos:Concept
 (no intervening skos:Concept).
-We use an auxiliary property gvp:broaderNonConcept, which connects skos:Concept to non-concepts 
+We use an auxiliary property gvp:broaderNonConcept, which connects skos:Concept to non-concepts
 (it itself is implemented with PropChainRestrType2Restr).
-#+BEGIN_SRC 
+#+BEGIN_SRC
 [a psys:PropChainRestrType2Restr;
  psys:premise1    gvp:broaderNonConcept;
  psys:premise2    gvp:broader;
@@ -304,9 +371,9 @@ The power of our approach is that you can easily define more constructs for any 
 #+BEGIN_COMMENT
 Eval this manually:
 
-(setq-default va/org-dot-preamble "digraph g { 
-   rankdir=LR nodesep=0.2 ranksep=0.3 arrowsize=0.1 
-   node [fontname=courier fontsize=8 margin=\"0.02,0.01\" shape=circle width=0.25 height=0.25 label=\"\"] 
+(setq-default va/org-dot-preamble "digraph g {
+   rankdir=LR nodesep=0.2 ranksep=0.3 arrowsize=0.1
+   node [fontname=courier fontsize=8 margin=\"0.02,0.01\" shape=circle width=0.25 height=0.25 label=\"\"]
    edge [fontname=courier fontsize=8 labelfontname=courier labelfontsize=8]")
 
 For some reason, neither of these below work:
