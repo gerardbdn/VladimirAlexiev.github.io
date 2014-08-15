@@ -3,6 +3,7 @@
 @prefix dbr:      <http://dbpedia.org/resource/>.
 @prefix dbo:      <http://dbpedia.org/ontology/>.
 @prefix dc:       <http://purl.org/dc/elements/1.1/>.
+@prefix ex:       <http://example.org/>.
 @prefix fise:     <http://fise.iks-project.eu/ontology/>.
 @prefix itsrdf:   <http://www.w3.org/2005/11/its/rdf#>.
 @prefix marl:     <http://purl.org/marl/ns#>.
@@ -141,8 +142,8 @@
 
 # Example: attaching NLP features directly to words
 <#is-2> a olia:Verb;
-  olia:hasTense ms:VerySpecialPresentTense.
-ms:VerySpecialPresentTense a olia:Present; olia:Tense.
+  olia:hasTense ex:VerySpecialPresentTense.
+ex:VerySpecialPresentTense a olia:Present, olia:Tense.
 
 ############################## Stanford Dependency Parse
 # http://nlp.stanford.edu:8080/parser/index.jsp
