@@ -1,7 +1,7 @@
 #+TITLE:     GVP LOD: Ontologies and Semantic Representation
 #+AUTHOR:    Vladimir Alexiev, Data and Ontology Group, Ontotext Corp
 #+EMAIL:     vladimir.alexiev@ontotext.com
-#+DATE:      2014-09-05
+#+DATE:      2014-09-08
 #+LANGUAGE:  en
 #+STARTUP:   noinlineimages content
 #+OPTIONS:   num:nil toc:1
@@ -13,12 +13,11 @@
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>%a</p>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'><img src="./img/lod_getty_logo.png" style="width:400px"/></p>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>CIDOC Congress, Dresden, Germany
-#+REVEAL_TITLE_SLIDE_TEMPLATE: <br/>2014-09-05: International Terminology Working Group
-#+REVEAL_TITLE_SLIDE_TEMPLATE: <br/>2014-09-09: Getty special session</p>
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <br/>2014-09-05: International Terminology Working Group:
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/index.html' target='_blank'>full version (HTML)</a>
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <br/>2014-09-09: Getty special session:
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/GVP-LOD-CIDOC-short.pdf'>short version (PDF)</a></p>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>
-#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/index.html' target='_blank'>2D interactive version</a>,
-#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/GVP-LOD-CIDOC.pdf'>pdf</a>,
-#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://www.slideshare.net/valexiev1/TODO' target='_blank'>slideshare</a>.</p>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>Press <a href='javascript:Reveal.toggleOverview()'>O for overview</a>,
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='reveal-help.html' target='_blank'>H for help</a>.<br/>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: Proudly made in plain text with 

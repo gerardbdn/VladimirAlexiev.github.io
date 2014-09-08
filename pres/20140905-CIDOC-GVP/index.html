@@ -6,8 +6,8 @@
 <title>GVP LOD: Ontologies and Semantic Representation</title>
 <meta name="author" content="(Vladimir Alexiev, Data and Ontology Group, Ontotext Corp)"/>
 
-<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.6.2/css/reveal.min.css"/>
-<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.6.2/css/theme/default.css" id="theme"/>
+<link rel="stylesheet" href="file://c:/my/emacs/presentations/reveal.js/css/reveal.min.css"/>
+<link rel="stylesheet" href="file://c:/my/emacs/presentations/reveal.js/css/theme/default.css" id="theme"/>
 
 <!-- If the query includes 'print-pdf', include the PDF print sheet -->
 <script>
@@ -15,7 +15,7 @@
         var link = document.createElement( 'link' );
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.href = 'http://cdn.jsdelivr.net/reveal.js/2.6.2/css/print/pdf.css';
+        link.href = 'file://c:/my/emacs/presentations/reveal.js/css/print/pdf.css';
         document.getElementsByTagName( 'head' )[0].appendChild( link );
     }
 </script>
@@ -33,7 +33,7 @@ span.clouditem {padding-left: 0.15em; padding-right: 0.15em; line-height: 90%}
 <div class="reveal">
 <div class="slides">
 <section>
-<h2>GVP LOD: Ontologies and Semantic Representation</h2> <p class='center'>Vladimir Alexiev, Data and Ontology Group, Ontotext Corp</p> <p class='center'><img src="./img/lod_getty_logo.png" style="width:400px"/></p> <p class='center'>CIDOC Congress, Dresden, Germany <br/>2014-09-05: International Terminology Working Group <br/>2014-09-09: Getty special session</p> <p class='center'> <a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/index.html' target='_blank'>2D interactive version</a>, <a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/GVP-LOD-CIDOC.pdf'>pdf</a>, <a href='http://www.slideshare.net/valexiev1/TODO' target='_blank'>slideshare</a>.</p> <p class='center'>Press <a href='javascript:Reveal.toggleOverview()'>O for overview</a>, <a href='reveal-help.html' target='_blank'>H for help</a>.<br/> Proudly made in plain text with <a href='https://github.com/hakimel/reveal.js/'>reveal.js</a>, <a href='https://github.com/yjwen/org-reveal'>org-reveal</a>, <a href='http://orgmode.org'>org-mode</a> and <a href='http://www.gnu.org/s/emacs/'>emacs</a>.</p></section>
+<h2>GVP LOD: Ontologies and Semantic Representation</h2> <p class='center'>Vladimir Alexiev, Data and Ontology Group, Ontotext Corp</p> <p class='center'><img src="./img/lod_getty_logo.png" style="width:400px"/></p> <p class='center'>CIDOC Congress, Dresden, Germany <br/>2014-09-05: International Terminology Working Group: <a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/index.html' target='_blank'>full version (HTML)</a> <br/>2014-09-09: Getty special session: <a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/GVP-LOD-CIDOC-short.pdf'>short version (PDF)</a></p> <p class='center'> <p class='center'>Press <a href='javascript:Reveal.toggleOverview()'>O for overview</a>, <a href='reveal-help.html' target='_blank'>H for help</a>.<br/> Proudly made in plain text with <a href='https://github.com/hakimel/reveal.js/'>reveal.js</a>, <a href='https://github.com/yjwen/org-reveal'>org-reveal</a>, <a href='http://orgmode.org'>org-mode</a> and <a href='http://www.gnu.org/s/emacs/'>emacs</a>.</p></section>
 <section>
 <h2>Table of Contents</h2><ul>
 <li>
@@ -1224,8 +1224,8 @@ People started using AAT and TGN right after their release
 </div>
 </div>
 
-<script src="http://cdn.jsdelivr.net/reveal.js/2.6.2/lib/js/head.min.js"></script>
-<script src="http://cdn.jsdelivr.net/reveal.js/2.6.2/js/reveal.min.js"></script>
+<script src="file://c:/my/emacs/presentations/reveal.js/lib/js/head.min.js"></script>
+<script src="file://c:/my/emacs/presentations/reveal.js/js/reveal.min.js"></script>
 
 <script>
 // Full list of configuration options available here:
@@ -1241,7 +1241,7 @@ rollingLinks: false,
 keyboard: true,
 overview: true,
 width: 1200,
-height: 900,
+height: 925,
 
 theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
 transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
@@ -1250,12 +1250,12 @@ transitionSpeed: 'default',
 // Optional libraries used to extend on reveal.js
 dependencies: [
 {src: 'js/reveal-help.js', async: true, condition: function() {return !!document.body.classList}}, {src: 'js/reveal-tagcloud.js', async: true, condition: function() {return !!document.body.classList}},
- { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/lib/js/classList.js', condition: function() { return !document.body.classList; } },
- { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
- { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
- { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
- { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
- { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+ { src: 'file://c:/my/emacs/presentations/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'file://c:/my/emacs/presentations/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'file://c:/my/emacs/presentations/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'file://c:/my/emacs/presentations/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+ { src: 'file://c:/my/emacs/presentations/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'file://c:/my/emacs/presentations/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
 ]
 });
 </script>
