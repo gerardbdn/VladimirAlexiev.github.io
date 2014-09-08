@@ -1,0 +1,161 @@
+#+TITLE:     On Compositionality of ISO 25964 Hierarchical Relations (BTG, BTP, BTI)
+#+AUTHOR:    
+#+DATE:      2014-09-04
+#+LANGUAGE:  en
+#+STARTUP:   noinlineimages content
+#+OPTIONS:   num:nil toc:1
+#+EXCLUDE_TAGS: noexport
+#+NO_OPTIONS: H:1 \n:nil @:t ::t |:t ^:{} -:t f:t *:t <:t TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+REVEAL_HLEVEL: 1
+#+REVEAL_EXTRA_JS: {src: 'js/reveal-help.js', async: true, condition: function() {return !!document.body.classList}}, {src: 'js/reveal-tagcloud.js', async: true, condition: function() {return !!document.body.classList}}
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <h3>%t</h2>
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>Vladimir Alexiev, Ontotext Corp<br/> Jutta Lindenthal, Consultant to digiCULT-Verbund eG<br/> Antoine Isaac, Europeana and VU Amsterdam</p><br/>
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'><a href="https://at-web1.comp.glam.ac.uk/pages/research/hypermedia/nkos/nkos2014/programme.html">Networked Knowledge Organization Systems (NKOS 2014) Workshop</a></p>
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>DL2014 Conference, London, 12 Sep 2014</p><br/>
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://VladimirAlexiev.github.io/pres/20140912-NKOS-compositionality/index.html' target='_blank'>2D interactive version</a>,
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://VladimirAlexiev.github.io/pres/20140912-NKOS-compositionality/BTG,BTP,BTI-compositionality.pdf'>pdf</a>,
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://www.slideshare.net/valexiev1/TODO' target='_blank'>slideshare</a>.</p>
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>Press <a href='javascript:Reveal.toggleOverview()'>O for overview</a>,
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='reveal-help.html' target='_blank'>H for help</a>.</p>
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>Proudly made in plain text with 
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='https://github.com/hakimel/reveal.js/'>reveal.js</a>, 
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='https://github.com/yjwen/org-reveal'>org-reveal</a>, 
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://orgmode.org'>org-mode</a> and 
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://www.gnu.org/s/emacs/'>emacs</a>.</p>
+
+* BTG, BTP, BTI
+KOS have used different kinds of hierarchical relations for a long time:
+| *Relation*        | *Abbr* | *Name*                 | *Example*                                                 |
+| broaderGeneric    | BTG    | Genus/Species Relation | calcite is a kind of mineral (AAT)                        |
+| broaderPartitive  | BTP    | Part/Whole Relation    | Tuscany is a part of Italy (TGN)                          |
+| broaderInstantial | BTI    | Kind/Instance Relation | Rembrandt van Rijn is instance (example) of person (ULAN) |
+|                   |        |                        | [[http://d-nb.info/gnd/5055902-3][SG Dynamo Dresden]] BTI [[http://d-nb.info/gnd/4155742-6][football clubs]] (GND)
+Examples:
+- Deutsche Nationalbibliothek: [[http://d-nb.info/standards/elementset/gnd][Gemeinsame Normdatei Ontology]] 
+  uses eg gndo:broaderTermInstantial (see [[http://d-nb.info/050559028/about/rdf][Dynamo Dresden]] in [[http://www.dnb.de/EN/lds][Linked Data Service]]) 
+- Some vocabs hosted by digiCULT-Verbund eG, represented in the vocnet exchange format 
+- Vocabs using the [[http://www.ldf.fi/schema/skosext/][FinnONTO SKOS Extensions]]
+- [[https://wordnet.princeton.edu/wordnet/man/wn.1WN.html][WordNet]] has even more BTP distinctions: member vs part vs substance meronym/holonym
+- [[http://purl.org/iso25964/skos-thes][ISO 25964 Ontology]] officially formalized these (as direct "step" properties)
+- Most recently, [[http://vocab.getty.edu][Getty Vocabulary Program LOD]]
+  - First industrial apploication of ISO 25964.
+  - Many examples in this presentation are from GVP
+** Definitions in ISO 25964
+- BTG: amenable to a logical all-and-some test.
+  - The children should all be a type, kind, example or manifestation of the parent
+  - From the parent's point of view, it encompasses only some of any given child
+  - Comparable to the (fully transitive) subclass (isA) relationship in OWL.
+- BTP: part of an entity or system belongs uniquely to a particular possessing whole in any context
+  - The part may not belong to more than one whole, and BTP has to be universally valid
+  - The standard explicates 4 main classes of BTP concepts, but the ontology defines only 1 BTP
+  - [[http://www.getty.edu/research/tools/vocabularies/guidelines/aat_3_1_hierarchical_rels.html][AAT Guidelines]]: "Each child should be a part of the parent and all the other ancestors above it" (implicit transitivity)
+- BTI: individual instance to general class
+  - Instances often represented by a proper name (in Thesaural Relationships are also called "classes of one")
+  - Instances may not have further instances nor subordinated generic concepts, but they may be further subdivided. If such subdivision is needed, the ISO standard recommends to introduce customized relationhips, such as BTX/NTX
+** Hierarchical Relation Counts in GVP Vocabs
+#+ATTR_HTML: :style width:300px
+[[./img/hier-rel-per-type.png]]
+- AAT: most are BTG, but there is a variety of BTP:
+  - (C) BTP (C): calendars of relics BTP cabinets of relics
+  - (C) BTP (G): anvil components BTP <anvils and anvil accessories>
+  - (G) BTP (C): <jewelry and accessory components> BTP jewelry
+  - (G) BTP (G): <grinding and milling equipment components> BTP <grinding and milling equipment>
+  - (C) BTP (H): building divisions BTP Single Built Works
+- TGN: all are BTP
+  - gvp:placeType: in the current TGN LOD release (2.0) is a purely custom property
+  - May reconsider and make it subprop of BTI, see [[http://lists.w3.org/Archives/Public/public-esw-thes/2014Mar/att-0001/TGN-place-type.docx][TGN Place Type Relation]] (discussion document)
+- ULAN: most are BTI, e.g. a person BTI "Persons facet" (ULAN) or "People" Hierarchy (AAT)
+  - May consider more specific BTI, eg "Painters" (AAT)
+  - Some BTP, e.g. corporate body BTP another corporate body
+** Hierarchy Structure in GVP Vocabs
+- GVP Subjects include (C)oncepts, but also non-concepts: (F)acets, (H)ierarchies and (G)uide Terms (not used for indexing, only to structure the hierarchy)
+- SKOS and ISO define [[http://vocab.getty.edu/doc/#Standard_Hierarchical_Relations][Standard Hierarchical Relations]] (skos:broader, iso:broaderGeneric, etc) only between Concepts
+- So we define custom [[http://vocab.getty.edu/doc/#GVP_Hierarchical_Relations][GVP Hierarchical Relations]] (gvp:broader, gvp:broaderGeneric, etc) that connect the hierarchy uniformly
+- F,G,H are implemented as iso:ThesaurusArray. G and C can be intermixed: F>H>(G|C)
+#+ATTR_HTML: :style width:500px
+[[./img/007-subject-hierarchy.png]]
+** Problem Statement
+What are the appropriate combinations (compositions) of BTG, BTP, BTI?
+- This matters with respect to appropriate closure for information retrieval vocabularies
+- It's a prerequisite for sensible search expansion 
+- Has not been systematically analyzed to date
+ISO 25964 formalized BTG, BTP, BTI as sub-properties of skos:broader, which contributes unconditionally to skos:broaderTransitive
+  : (broaderGeneric|broaderPartitive|broaderInstantial) => broader => broaderTransitive
+- [[https://at-web1.comp.glam.ac.uk/pages/research/hypermedia/nkos/nkos2012/presentations/TPDL2012_NKOS_Ambiguities.pptx][Ambiguities in representing thesauri using extended SKOS - examples from real life]] (NKOS 2012) argues that broaderTransitive should be established only for BTG and BTP, but not for BTI, nor mixed paths of BTG+BTP.
+- Thus skos:broaderTransitive may include semantically inappropriate statements
+- There was a lively discussion about this at the SKOS mailing list from [[http://lists.w3.org/Archives/Public/public-esw-thes/2013Nov/%20][Nov 2013 to April 2014]]
+We *had* to resolve this issue for the AAT LOD representation:
+- When [[http://vocab.getty.edu/doc/#GVP_Hierarchical_Relations][GVP Hierarchical Relations]] spans non-concept(s), we have to infer an appropriate [[http://vocab.getty.edu/doc/#Standard_Hierarchical_Relations][Standard Hierarchical Relation]] 
+- We want to infer only appropriate compositions.
+- Instead of skos:broaderTransitive, we're talking about (see [[http://vocab.getty.edu/doc/#BTG_BTP_BTI_Inference][BTG, BTP, BTI Inference]]):
+  - BTGE, BTPE, BTIE (gvp:broaderGenericExtended, gvp:broaderPartitiveExtended, gvp:broaderInstantialExtended)
+  - Their disjunction gvp:broaderExtended
+- Unfortunately "ISO spoils the party", eg by inferring that a place inherits all the types of its parent places
+* BTG, BTP, BTI Compositionality
+* Beyond Chain Inferences
+** Induction of BTP
+#+begin_src plantuml :file ./img/statue-pedestal.png
+hide circles
+hide empty attributes
+hide empty methods
+
+class StatueOfLibertyPedestal
+StatueOfLibertyPedestal ->    StatueOfLiberty : BTP
+Pedestal                .>    Statue : BTP
+StatueOfLibertyPedestal -up-> Pedestal : BTI
+StatueOfLiberty         -up-> Statue : BTI
+#+end_src
+
+** Necessary BTP
+"keyboards" *necessary* BTP "keyboard instruments" & "organs (aerophones)" BTG "keyboard instruments" => "keyboards BTPE organs (aerophones)"
+[[./img/keyboard-instrument.png]]
+** Quality Checking
+[[http://vocab.getty.edu/aat/300252578][aat:300252578]] "swell boxes" has *wrong* BTG "Organs (aerophones)" (BTPE is right).
+[[./img/swell-boxes.png]]
+- "swell boxes" BTG "organ components" BTP "organs (aerophones)" => "swell boxes" BTPE "organs (aerophones)"
+- We can catch this if we declare BTGE & BTPE as owl:disjointProperty. But is this true in all cases?
+* Taxonomic Relations
+#+begin_src plantuml :file ./img/Secretariat1.png
+hide empty attributes
+hide empty methods
+
+"Equidae (family)"         <<(C,yellow)>>
+"Equus (genus)"            <<(C,yellow)>>
+"Equus caballus (species)" <<(C,yellow)>>
+"<horse by use>"           <<(G,grey)>>
+"race horse"               <<(C,yellow)>>
+"Secretariat"              <<(C,yellow)>>
+
+"Equidae (family)"         <-- "Equus (genus)"            : gvp:broaderGeneric
+"Equus (genus)"            <-- "Equus caballus (species)" : gvp:broaderGeneric
+"Equus caballus (species)" <-- "<horse by use>"           : gvp:broaderGenericExtended
+"<horse by use>"           <-- "race horse"               : gvp:broaderGeneric                   
+"race horse"               <-- "Secretariat"              : gvp:broaderInstantial
+"Equidae (family)"         <.. "Secretariat"              : gvp:broaderInstantialExtended
+"race horse"               <.. "Secretariat"              : iso:broaderInstantial
+"Equus caballus (species)" <.. "race horse"               : iso:broaderGeneric
+#+end_src
+** A simpler version of the above diagram                         :noexport:
+#+begin_src plantuml :file ./img/Secretariat2.png
+hide empty attributes
+hide empty methods
+
+"Equus caballus (species)"   <<(C,yellow)>>
+"<horse by use>"             <<(G,yellow)>>
+"race horse"                 <<(C,yellow)>>
+"Secretariat"                <<(C,yellow)>>
+"Equus caballus (species)"   <-- "<horse by use>" : gvp:broaderGenericExtended
+"<horse by use>"             <-- "race horse"     : gvp:broaderGeneric                   
+"race horse"                 <-- "Secretariat"    : gvp:broaderInstantial
+"Equus caballus (species)"   <.. "Secretariat"    : gvp:broaderInstantialExtended
+"race horse"                 <.. "Secretariat"    : iso:broaderInstantial
+"Equus caballus (species)"   <.. "race horse"     : iso:broaderGeneric
+#+end_src
+
+* Thanks for your time!
+- [[https://drive.google.com/file/d/0B7BFygWDV2_PNkQycHl0bWNLak0][Draft paper]] (some months old, these ideas are still evolving)
+- This research was conducted as part of the semantic publication of GVP vocabularies, http://vocab.getty.edu
+- The financial support of the J. Paul Getty Trust is gratefully acknowledged
+#+ATTR_HTML: :style width:400px
+[[./img/QuestionMark.jpg]]

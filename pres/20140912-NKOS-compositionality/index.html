@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>On Compositionality of ISO 25964 Hierarchical Relations (BTG, BTP, BTI)</title>
+
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.6.2/css/reveal.min.css"/>
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.6.2/css/theme/default.css" id="theme"/>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'http://cdn.jsdelivr.net/reveal.js/2.6.2/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<style>th, td {border-width: 1px; border-style: none solid; border-spacing:0; padding:0px 2px}</style>
+<style>
+.reveal .slides {text-align:left}
+h1,h2,h3,h4,h5,h6,.center {text-align:center}
+img {width:1200px; display: block; margin-left:auto !important; margin-right:auto !important}
+.reveal th, .reveal td {font-size:80%; border: 1px; border-style: solid solid; border-spacing:0; padding:0px 2px}
+span.clouditem {padding-left: 0.15em; padding-right: 0.15em; line-height: 90%}
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section>
+<h3>On Compositionality of ISO 25964 Hierarchical Relations (BTG, BTP, BTI)</h2> <p class='center'>Vladimir Alexiev, Ontotext Corp<br/> Jutta Lindenthal, Consultant to digiCULT-Verbund eG<br/> Antoine Isaac, Europeana and VU Amsterdam</p> <p class='center'><a href="https://at-web1.comp.glam.ac.uk/pages/research/hypermedia/nkos/nkos2014/programme.html">Networked Knowledge Organization Systems (NKOS 2014) Workshop</a></p> <p class='center'>DL2014 Conference, London, 12 Sep 2014</p><br/> <p class='center'> <a href='http://VladimirAlexiev.github.io/pres/20140912-NKOS-compositionality/index.html' target='_blank'>2D interactive version</a>, <a href='http://VladimirAlexiev.github.io/pres/20140912-NKOS-compositionality/BTG,BTP,BTI-compositionality.pdf'>pdf</a>, <a href='http://www.slideshare.net/valexiev1/TODO' target='_blank'>slideshare</a>.</p> <p class='center'>Press <a href='javascript:Reveal.toggleOverview()'>O for overview</a>, <a href='reveal-help.html' target='_blank'>H for help</a>.</p> <p class='center'>Proudly made in plain text with <a href='https://github.com/hakimel/reveal.js/'>reveal.js</a>, <a href='https://github.com/yjwen/org-reveal'>org-reveal</a>, <a href='http://orgmode.org'>org-mode</a> and <a href='http://www.gnu.org/s/emacs/'>emacs</a>.</p></section>
+<section>
+<h2>Table of Contents</h2><ul>
+<li>
+<a href="#sec-1">Beyond Chain Inferences</a>
+</li>
+<li>
+<a href="#sec-2">Taxonomic Relations</a>
+</li>
+</ul>
+</section>
+
+<section>
+<section id="sec-1" >
+
+<h2>Beyond Chain Inferences</h2>
+</section>
+<section id="sec-1-1" >
+
+<h3>Induction of BTP</h3>
+<img src="./img/statue-pedestal.png" alt="statue-pedestal.png" />
+
+</section>
+<section id="sec-1-2" >
+
+<h3>Necessary BTP</h3>
+<p>
+"keyboards" <b>necessary</b> BTP "keyboard instruments" &amp; "organs (aerophones)" BTG "keyboard instruments" =&gt; "keyboards BTPE organs (aerophones)"
+<img src="./img/keyboard-instrument.png" alt="keyboard-instrument.png" />
+</p>
+</section>
+<section id="sec-1-3" >
+
+<h3>Quality Checking</h3>
+<p>
+<a href="http://vocab.getty.edu/aat/300252578">aat:300252578</a> "swell boxes" has <b>wrong</b> BTG "Organs (aerophones)" (BTPE is right).
+<img src="./img/swell-boxes.png" alt="swell-boxes.png" />
+</p>
+<ul class="org-ul">
+<li>"swell boxes" BTG "organ components" BTP "organs (aerophones)" =&gt; "swell boxes" BTPE "organs (aerophones)"
+</li>
+<li>We can catch this if we declare BTGE &amp; BTPE as owl:disjointProperty. But is this true in all cases?
+</li>
+</ul>
+</section>
+</section>
+<section>
+<section id="sec-2" >
+
+<h2>Taxonomic Relations</h2>
+<img src="./img/Secretariat1.png" alt="Secretariat1.png" />
+</section>
+</section>
+</div>
+</div>
+
+<script src="http://cdn.jsdelivr.net/reveal.js/2.6.2/lib/js/head.min.js"></script>
+<script src="http://cdn.jsdelivr.net/reveal.js/2.6.2/js/reveal.min.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: true,
+rollingLinks: false,
+keyboard: true,
+overview: true,
+width: 1200,
+height: 900,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+{src: 'js/reveal-help.js', async: true, condition: function() {return !!document.body.classList}}, {src: 'js/reveal-tagcloud.js', async: true, condition: function() {return !!document.body.classList}},
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+]
+});
+</script>
+</body>
+</html>
