@@ -140,7 +140,7 @@ We *have* to resolve this issue for GVP LOD representation:
 ** BTG, BTP, BTI Compositionality (4)
 - BTIx/BTGx=>BTIE
   - If X is instance of Y and Y is kind of Z, then X is instance of Z (Z can play the role of Y)
-  - Eg: Mt Athos BTI orthodox religious center BTG Christian religious center => Mt Athos BTP Christian religious center
+  - Eg: Mt Athos BTI orthodox religious center BTG Christian religious center => Mt Athos BTIE Christian religious center
 - BTIx/BTPx=>no
   - Counter-example: Statue of Liberty pedestal BTI pedestals BTP statues. That particular pedestal is neither BTI nor BTP statues in general
   - But see "beyond paths" below
