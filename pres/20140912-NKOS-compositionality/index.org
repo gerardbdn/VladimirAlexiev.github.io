@@ -14,8 +14,8 @@
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>DL2014 Conference, London, 12 Sep 2014</p><br/>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://VladimirAlexiev.github.io/pres/20140912-NKOS-compositionality/index.html' target='_blank'>2D interactive version</a>,
-#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://VladimirAlexiev.github.io/pres/20140912-NKOS-compositionality/BTG,BTP,BTI-compositionality.pdf'>pdf</a>,
-#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://www.slideshare.net/valexiev1/TODO' target='_blank'>slideshare</a>.</p>
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://VladimirAlexiev.github.io/pres/20140912-NKOS-compositionality/BTG%2CBTP%2CBTI-compositionality.pdf'>pdf</a>,
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://www.slideshare.net/valexiev1/btgbtpbti-compositionality' target='_blank'>slideshare</a>.</p>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>Press <a href='javascript:Reveal.toggleOverview()'>O for overview</a>,
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='reveal-help.html' target='_blank'>H for help</a>.</p>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>Proudly made in plain text with 
