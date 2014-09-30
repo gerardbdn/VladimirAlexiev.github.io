@@ -6,8 +6,8 @@
 <title>GVP LOD: Ontologies and Semantic Representation</title>
 <meta name="author" content="(Vladimir Alexiev, Data and Ontology Group, Ontotext Corp)"/>
 
-<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.6.2/css/reveal.min.css"/>
-<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.6.2/css/theme/default.css" id="theme"/>
+<link rel="stylesheet" href="../reveal.js/css/reveal.min.css"/>
+<link rel="stylesheet" href="../reveal.js/css/theme/default.css" id="theme"/>
 
 <!-- If the query includes 'print-pdf', include the PDF print sheet -->
 <script>
@@ -15,7 +15,7 @@
         var link = document.createElement( 'link' );
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.href = 'http://cdn.jsdelivr.net/reveal.js/2.6.2/css/print/pdf.css';
+        link.href = '../reveal.js/css/print/pdf.css';
         document.getElementsByTagName( 'head' )[0].appendChild( link );
     }
 </script>
@@ -23,8 +23,8 @@
 <style>
 .reveal .slides {text-align:left}
 h1,h2,h3,h4,h5,h6,.center {text-align:center}
-td>img {width:250px;  display: block; margin-left:auto !important; margin-right:auto !important}
-   img {width:1200px; display: block; margin-left:auto !important; margin-right:auto !important}
+img,table {display: block; margin-left:auto!important; margin-right:auto!important}
+td>img {width:250px; display:block; margin-left:auto!important; margin-right:auto!important; margin-top:0px!important; margin-bottom:0px!important}
 .reveal th, .reveal td {font-size:80%; border: 1px; border-style: solid solid; border-spacing:0; padding:0px 2px}
 span.clouditem {padding-left: 0.15em; padding-right: 0.15em; line-height: 90%}
 </style>
@@ -33,7 +33,7 @@ span.clouditem {padding-left: 0.15em; padding-right: 0.15em; line-height: 90%}
 <div class="reveal">
 <div class="slides">
 <section>
-<h2>GVP LOD: Ontologies and Semantic Representation</h2> <p class='center'>Vladimir Alexiev, Data and Ontology Group, Ontotext Corp</p> <p class='center'><img src="./img/lod_getty_logo.png" style="width:400px"/></p> <p class='center'>CIDOC Congress, Dresden, Germany <br/>2014-09-05: International Terminology Working Group: <a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/index.html' target='_blank'>full version (HTML)</a> <br/>2014-09-09: Getty special session: <a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/GVP-LOD-CIDOC-short.pdf'>short version (PDF)</a>, <a href='http://www.slideshare.net/valexiev1/gvp-lodcidocshort'>slideshare</a>.</p> <p class='center'> <p class='center'>Press <a href='javascript:Reveal.toggleOverview()'>O for overview</a>, <a href='reveal-help.html' target='_blank'>H for help</a>.<br/> Proudly made in plain text with <a href='https://github.com/hakimel/reveal.js/'>reveal.js</a>, <a href='https://github.com/yjwen/org-reveal'>org-reveal</a>, <a href='http://orgmode.org'>org-mode</a> and <a href='http://www.gnu.org/s/emacs/'>emacs</a>.</p></section>
+<h2>GVP LOD: Ontologies and Semantic Representation</h2> <p class='center'>Vladimir Alexiev, Data and Ontology Group, Ontotext Corp</p> <p class='center'><img src="./img/lod_getty_logo.png" style="width:400px"/></p> <p class='center'>CIDOC Congress, Dresden, Germany <br/>2014-09-05: International Terminology Working Group: <br/> full version (<a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/index.html'>HTML</a>, <a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/GVP-LOD-CIDOC.pdf'>PDF</a>, <a href='http://www.slideshare.net/valexiev1/gvp-lodcidoc'>slideshare</a>) <br/>2014-09-09: Getty special session: <br/> short version (<a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/short.html'>HTML</a>, <a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/GVP-LOD-CIDOC-short.pdf'>PDF</a>, <a href='http://www.slideshare.net/valexiev1/gvp-lodcidocshort'>slideshare</a>)</p> <p class='center'> <p class='center'>Press <a href='javascript:Reveal.toggleOverview()'>O for overview</a>, <a href='reveal-help.html' target='_blank'>H for help</a>.<br/> Proudly made in plain text with <a href='https://github.com/hakimel/reveal.js/'>reveal.js</a>, <a href='https://github.com/yjwen/org-reveal'>org-reveal</a>, <a href='http://orgmode.org'>org-mode</a> and <a href='http://www.gnu.org/s/emacs/'>emacs</a>.</p></section>
 <section>
 <h2>Table of Contents</h2><ul>
 <li>
@@ -99,7 +99,7 @@ Museum and CONA are more complex, involves LIDO/CDWA-lite XML to CIDOC CRM (RDF)
 <p>
 Working at the center. (Shows thesauri only, not yet CONA/Museum data)
 </p>
-<img src="./img/Culture-datacloud-large.png" alt="Culture-datacloud-large.png" style="width:1000px" />
+<img src="./img/Culture-datacloud-large.png" alt="Culture-datacloud-large.png" class="stretch" style="width:850px" />
 </section>
 <section id="sec-1-2" >
 
@@ -139,7 +139,7 @@ Working at the center. (Shows thesauri only, not yet CONA/Museum data)
 <p>
 Quite straightforward
 </p>
-<img src="./img/GVP-architecture.png" alt="GVP-architecture.png" style="width:900px" />
+<img src="./img/GVP-architecture.png" alt="GVP-architecture.png" class="stretch" style="width:900px" />
 </section>
 <section id="sec-1-4" >
 
@@ -266,12 +266,12 @@ Richer than any other SKOS thesaurus I've seen
 <section id="sec-2-1" >
 
 <h3>AAT Relational Schema</h3>
-<img src="./img/AAT_erd2_20100914.png" alt="AAT_erd2_20100914.png" />
+<img src="./img/AAT_erd2_20100914.png" alt="AAT_erd2_20100914.png" class="stretch" style="width:1000px" />
 </section>
 <section id="sec-2-2" >
 
 <h3>AAT Conceptual Diagram</h3>
-<img src="./img/DataDict.png" alt="DataDict.png" />
+<img src="./img/DataDict.png" alt="DataDict.png" class="stretch" style="width:1000px" />
 </section>
 </section>
 <section>
@@ -461,7 +461,7 @@ Richer than any other SKOS thesaurus I've seen
 
 <tr>
 <td class="left">cc:</td>
-<td class="left">Creative Commons Rights Expression Language</td>
+<td class="left">Creative Commons Rights Expressions</td>
 <td class="left">License rights</td>
 </tr>
 
@@ -491,13 +491,13 @@ Richer than any other SKOS thesaurus I've seen
 
 <tr>
 <td class="left">vaem:</td>
-<td class="left">Vocabulary for Attaching Essential Metadata</td>
+<td class="left">Vocabulary Attaching Essential Metadata</td>
 <td class="left">Not used yet</td>
 </tr>
 
 <tr>
 <td class="left">vann:</td>
-<td class="left">Vocabulary for annotating vocabulary descriptions</td>
+<td class="left">Vocabulary for annotating vocabularies</td>
 <td class="left">Namespace and prefix</td>
 </tr>
 
@@ -509,14 +509,14 @@ Richer than any other SKOS thesaurus I've seen
 
 <tr>
 <td class="left">vdpp:</td>
-<td class="left">Vocabulary for Dataset Publication Projects</td>
+<td class="left">Vocabulary for Dataset Publ Projects</td>
 <td class="left">Not used yet</td>
 </tr>
 
 <tr>
 <td class="left">voaf:</td>
 <td class="left">Vocabulary of a Friend</td>
-<td class="left">Linked Open Vocabularies (LOV) registration</td>
+<td class="left">Linked Open Vocabularies (LOV)</td>
 </tr>
 
 <tr>
@@ -528,7 +528,7 @@ Richer than any other SKOS thesaurus I've seen
 <tr>
 <td class="left">void:</td>
 <td class="left">Vocabulary of Interlinked Datasets</td>
-<td class="left">Basis dataset descr, LOD registration</td>
+<td class="left">Basis descr, LOD registration</td>
 </tr>
 
 <tr>
@@ -550,12 +550,12 @@ Richer than any other SKOS thesaurus I've seen
 <section id="sec-4" >
 
 <h2>GVP Semantic Representation</h2>
-<img src="./img/semantic-overview-1.png" alt="semantic-overview-1.png" style="width:1000px" />
+<img src="./img/semantic-overview-1.png" alt="semantic-overview-1.png" class="stretch" style="width:900px" />
 </section>
 <section id="sec-4-1" >
 
 <h3>GVP Semantic Representation (2)</h3>
-<img src="./img/semantic-overview-2.png" alt="semantic-overview-2.png" style="width:950px" />
+<img src="./img/semantic-overview-2.png" alt="semantic-overview-2.png" class="stretch" style="width:750px" />
 </section>
 <section id="sec-4-2" >
 
@@ -575,8 +575,8 @@ We handle "impedance mismatch" with
 </ul>
 <p>
 S=Standard, G=GVP common, A=AAT, T=TGN
-<img src="./img/006-subject-classes.png" alt="006-subject-classes.png" />
 </p>
+<img src="./img/006-subject-classes.png" alt="006-subject-classes.png" class="stretch" style="width:1000px" />
 </section>
 <section id="sec-4-3" >
 
@@ -606,7 +606,7 @@ aat:300386746 a gvp:ObsoleteSubject; # Was merged to a dominant Subject
 <p>
 Use iso:ThesaurusArray to allow Guide Terms below Concepts. Infer cross-threading SKOS/ISO broader relations
 </p>
-<img src="./img/008-complex-hierarchy.png" alt="008-complex-hierarchy.png" style="width:800px" />
+<img src="./img/008-complex-hierarchy.png" alt="008-complex-hierarchy.png" class="stretch" style="width:650px" />
 </section>
 <section id="sec-4-5" >
 
@@ -614,8 +614,8 @@ Use iso:ThesaurusArray to allow Guide Terms below Concepts. Infer cross-threadin
 <p>
 Excel-driven Ontology Generation™ (getty-codes.xls to getty-codes.ttl)<br  />
 Key <b>val</b> can be mapped to Custom sub-class, Custom (sub-)prop, <a href="http://vocab.getty.edu/doc/#Ontology_Values">Ontology Value</a> (eg &lt;term/kind/Abbreviation&gt;)
-<img src="./img/getty-codes.png" alt="getty-codes.png" />
 </p>
+<img src="./img/getty-codes.png" alt="getty-codes.png" class="stretch" style="width:1000px" />
 </section>
 <section id="sec-4-6" >
 
@@ -626,36 +626,36 @@ More Excel-driven Ontology Generation™ (assoc-rels.xls to assoc-rels.ttl)
 <ul class="org-ul">
 <li>Relations come in owl:inverseOf pairs (or owl:SymmetricProperty self-inverse)
 </li>
-<li>Shoudl we make a subproperty hierarchy?
+<li>Should we make a subproperty hierarchy?
 </li>
 </ul>
-<img src="./img/assoc-rels.png" alt="assoc-rels.png" />
+<img src="./img/assoc-rels.png" alt="assoc-rels.png" class="stretch" style="width:1000px" />
 </section>
 <section id="sec-4-7" >
 
 <h3>GVP Ontology Documentation</h3>
 <p>
 <a href="http://vocab.getty.edu/ontology">http://vocab.getty.edu/ontology</a>, <a href="http://lov.okfn.org/dataset/lov/details/vocabulary_gvp.html">LOV Entry</a> (10 classes, 177 props)
-<img src="./img/GVP-ontology.png" alt="GVP-ontology.png" />
 </p>
+<img src="./img/GVP-ontology.png" alt="GVP-ontology.png" class="stretch" style="width:1000px" />
 </section>
 <section id="sec-4-8" >
 
 <h3>GVP Ontology: a Class</h3>
-<img src="./img/GVP-ontology-class.png" alt="GVP-ontology-class.png" />
+<img src="./img/GVP-ontology-class.png" alt="GVP-ontology-class.png" class="stretch" style="width:1000px" />
 </section>
 <section id="sec-4-9" >
 
 <h3>ISO 25946: Latest Standard on Thesauri</h3>
-<img src="./img/002-ISO_25964_Model.jpg" alt="002-ISO_25964_Model.jpg" />
+<img src="./img/002-ISO_25964_Model.jpg" alt="002-ISO_25964_Model.jpg" class="stretch" style="width:1000px" />
 </section>
 <section id="sec-4-10" >
 
 <h3>Use of iso:ThesaurusArray in GVP</h3>
 <p>
 Use for ordered children. Novelty: if parent is Concept, use anonymous array. Careful crafting of URLs to make rdf:List
-<img src="./img/GVP-isoThesaurusArray.png" alt="GVP-isoThesaurusArray.png" />
 </p>
+<img src="./img/GVP-isoThesaurusArray.png" alt="GVP-isoThesaurusArray.png" class="stretch" style="width:1000px" />
 </section>
 <section id="sec-4-11" >
 
@@ -911,12 +911,15 @@ tgn:7011179-placeType-300008347 a rdf:Statement;
 <section id="sec-4-18" >
 
 <h3>Provenance Ontology</h3>
-<p>
-<img src="./img/PROV-modified-created.png" alt="PROV-modified-created.png" />
-PROV considers that prov:Modify uses an unknown old entity "_:input" and generates an unknown new entity "_:output",
-both being specializations of the entity under consideration. 
-Need to use prov:Generation so we can use prov:atTime and reflect that the modification is a prov:InstantaneousEvent.
-</p>
+<ul class="org-ul">
+<li>PROV considers that prov:Modify uses an unknown old entity "_:input" and generates an
+unknown new entity "_:output", both being specializations of the entity under
+consideration.
+</li>
+<li>Need to use prov:Generation so we can use prov:atTime and reflect that the modification is a prov:InstantaneousEvent.
+</li>
+</ul>
+<img src="./img/PROV-modified-created.png" alt="PROV-modified-created.png" class="stretch" style="width:1000px" />
 </section>
 <section id="sec-4-19" >
 
@@ -952,8 +955,8 @@ aat_rev:12347 a prov:Activity, prov:Publish;
 <h2>TGN Specifics: Concept-Place Duality</h2>
 <p>
 Duality between Concept and its denotation  (ala VIAF, UK BL, FR BnF, SE KB&#x2026;)
-<img src="./img/013-concept-place-duality.png" alt="013-concept-place-duality.png" />
 </p>
+<img src="./img/013-concept-place-duality.png" alt="013-concept-place-duality.png" class="stretch" style="width:1000px" />
 </section>
 <section id="sec-5-1" >
 
@@ -961,7 +964,7 @@ Duality between Concept and its denotation  (ala VIAF, UK BL, FR BnF, SE KB&#x20
 <p>
 Adds place types (TGN-&gt;AAT), Concept-Place duality, coordinates
 </p>
-<img src="./img/012-TGN-overview.png" alt="012-TGN-overview.png" style="width:500px" />
+<img src="./img/012-TGN-overview.png" alt="012-TGN-overview.png" class="stretch" style="width:400px" />
 </section>
 </section>
 <section>
@@ -969,10 +972,10 @@ Adds place types (TGN-&gt;AAT), Concept-Place duality, coordinates
 
 <h2>Inference</h2>
 <p>
-Hierarchical Relations (GVP-&gt;Standard) inference:
-blue=standard, black=GVP, bold=closure, red=restriction
-<img src="./img/018-hierarchicalRelationsInference.png" alt="018-hierarchicalRelationsInference.png" />
+Hierarchical Relations inference (GVP-&gt;Standard):<br  />
+blue=standard, black=GVP, bold=closure, red=restriction. Numbers refer to doc sections
 </p>
+<img src="./img/018-hierarchicalRelationsInference.png" alt="018-hierarchicalRelationsInference.png" class="stretch" style="width:1000px" />
 </section>
 <section id="sec-6-1" >
 
@@ -1067,13 +1070,13 @@ blue=standard, black=GVP, bold=closure, red=restriction
 <p>
 Eliminate redundant props (World has 1.2M narrowerTransitive, 2.4M semanticRelation). Break inference at red ovals
 </p>
-<img src="./img/016-SKOS-properties.png" alt="016-SKOS-properties.png" style="width:950px" />
+<img src="./img/016-SKOS-properties.png" alt="016-SKOS-properties.png" class="stretch" style="width:950px" />
 </section>
 <section id="sec-6-4" >
 
 <h3>Construct Query: Get &amp; Cache All Data for Subject</h3>
-<img src="./img/028-construct-subject.png" alt="028-construct-subject.png" />
-<img src="./img/GVP-construct.png" alt="GVP-construct.png" style="width:600px" />
+<img src="./img/028-construct-subject.png" alt="028-construct-subject.png" style="width:1000px" />
+<img src="./img/GVP-construct.png" alt="GVP-construct.png" class="stretch" style="width:580px" />
 </section>
 <section id="sec-6-5" >
 
@@ -1098,7 +1101,7 @@ Eliminate redundant props (World has 1.2M narrowerTransitive, 2.4M semanticRelat
 <section id="sec-7" >
 
 <h2>Documentation</h2>
-<img src="./img/GVP-doc-TOC.png" alt="GVP-doc-TOC.png" style="width:1100px" />
+<img src="./img/GVP-doc-TOC.png" alt="GVP-doc-TOC.png" class="stretch" style="width:950px" />
 </section>
 <section id="sec-7-1" >
 
@@ -1106,8 +1109,9 @@ Eliminate redundant props (World has 1.2M narrowerTransitive, 2.4M semanticRelat
 <p>
 Edit in Word. Spellcheck, link check (below). Print as PDF. Save as Compact HTML, HtmlTidy, rewrite with original images.
 </p>
+<img src="./img/GVP-doc-CheckMyLinks.png" alt="GVP-doc-CheckMyLinks.png" class="stretch" style="width:900px" />
+
 <p>
-<img src="./img/GVP-doc-CheckMyLinks.png" alt="GVP-doc-CheckMyLinks.png" style="width:900px" />
 Benefit: printable PDF and <b>linkable</b> HTML
 </p>
 </section>
@@ -1116,8 +1120,8 @@ Benefit: printable PDF and <b>linkable</b> HTML
 <h3>Sample Queries</h3>
 <p>
 Lots of them! The (!) says "read the documentation first". As part of helpdesk support, we're tracking usage and adding samples.
-<img src="./img/GVP-sample-queries.png" alt="GVP-sample-queries.png" />
 </p>
+<img src="./img/GVP-sample-queries.png" alt="GVP-sample-queries.png" class="stretch" style="width:1000px" />
 </section>
 <section id="sec-7-3" >
 
@@ -1125,7 +1129,7 @@ Lots of them! The (!) says "read the documentation first". As part of helpdesk s
 <p>
 Number of members of the UN per year. <a href="http://vocab.getty.edu/doc/#Column_Chart_with_SPARQL">See doc</a> or <a href="http://jsfiddle.net/valexiev/TCr59/">jsfiddle</a> with it
 </p>
-<img src="./img/029-growth-of-UN.png" alt="029-growth-of-UN.png" style="width:900px" />
+<img src="./img/029-growth-of-UN.png" alt="029-growth-of-UN.png" class="stretch" style="width:800px" />
 </section>
 <section id="sec-7-4" >
 
@@ -1133,7 +1137,7 @@ Number of members of the UN per year. <a href="http://vocab.getty.edu/doc/#Colum
 <p>
 When each nation joined the UN.  <a href="http://vocab.getty.edu/doc/#Geo_Chart_with_SPARQL">See doc</a> or  <a href="http://jsfiddle.net/valexiev/NULCH/">jsfiddle</a> with it.
 </p>
-<img src="./img/029-year-joining-of-UN.png" alt="029-year-joining-of-UN.png" style="width:1000px" />
+<img src="./img/029-year-joining-of-UN.png" alt="029-year-joining-of-UN.png" class="stretch" style="width:900px" />
 </section>
 <section id="sec-7-5" >
 
@@ -1147,7 +1151,7 @@ select ?place ?name ?lat ?long {
     gvp:broaderPartitiveExtended [rdfs:label "The Netherlands"@en]
   filter (!(50.787185 &lt;= ?lat &amp;&amp; ?lat &lt;= 53.542265 &amp;&amp; 3.389722 &lt;= ?long &amp;&amp; ?long &lt;= 7.169019))}
 </pre>
-<img src="./img/GVP-sample-overseas-possessions.png" alt="GVP-sample-overseas-possessions.png" />
+<img src="./img/GVP-sample-overseas-possessions.png" alt="GVP-sample-overseas-possessions.png" class="stretch" style="width:1000px" />
 </section>
 </section>
 <section>
@@ -1167,7 +1171,8 @@ People started using AAT and TGN right after their release
 <li>Semantic enrichment: Europeana (Rijksmuseum, Museo Galileo, Erfgoedplus.be), Partage Plus (Art Nouveau to Europeana)
 </li>
 </ul>
-<table border="1" cellspacing="0" cellpadding="0" rules="all" frame="box" style="align:center">
+
+<table border="1" cellspacing="0" cellpadding="0" rules="all" frame="box">
 
 
 <colgroup>
@@ -1209,23 +1214,23 @@ People started using AAT and TGN right after their release
 <h3>Usage Stories</h3>
 <p>
 <a href="https://share.getty.edu/confluence/display/itslodv/usage+stories">Usage Stories</a> (internal confluence)
-<img src="./img/GVP-usage.png" alt="GVP-usage.png" />
 </p>
+<img src="./img/GVP-usage.png" alt="GVP-usage.png" class="stretch" style="width:1000px" />
 </section>
 <section id="sec-8-2" >
 
 <h3>Thanks for your time!</h3>
 <p>
-<a href="mailto:vladimir.alexiev@ontotext.com">mailto:vladimir.alexiev@ontotext.com</a>
+If you have any questions or suggestions for improvement, please don't hesitate to contact me: <a href="mailto:vladimir.alexiev@ontotext.com">vladimir.alexiev@ontotext.com</a>
 </p>
-<img src="./img/QuestionMark.jpg" alt="QuestionMark.jpg" style="width:400px" />
+<img src="./img/QuestionMark.jpg" alt="QuestionMark.jpg" class="stretch" style="width:400px" />
 </section>
 </section>
 </div>
 </div>
 
-<script src="http://cdn.jsdelivr.net/reveal.js/2.6.2/lib/js/head.min.js"></script>
-<script src="http://cdn.jsdelivr.net/reveal.js/2.6.2/js/reveal.min.js"></script>
+<script src="../reveal.js/lib/js/head.min.js"></script>
+<script src="../reveal.js/js/reveal.min.js"></script>
 
 <script>
 // Full list of configuration options available here:
@@ -1250,12 +1255,12 @@ transitionSpeed: 'default',
 // Optional libraries used to extend on reveal.js
 dependencies: [
 {src: 'js/reveal-help.js', async: true, condition: function() {return !!document.body.classList}}, {src: 'js/reveal-tagcloud.js', async: true, condition: function() {return !!document.body.classList}},
- { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/lib/js/classList.js', condition: function() { return !document.body.classList; } },
- { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
- { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
- { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
- { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
- { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+ { src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: '../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: '../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: '../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+ { src: '../reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: '../reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
 ]
 });
 </script>

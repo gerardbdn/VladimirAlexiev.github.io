@@ -1,7 +1,7 @@
 #+TITLE:     GVP LOD: Ontologies and Semantic Representation
 #+AUTHOR:    Vladimir Alexiev, Data and Ontology Group, Ontotext Corp
 #+EMAIL:     vladimir.alexiev@ontotext.com
-#+DATE:      2014-09-12
+#+DATE:      2014-09-30
 #+LANGUAGE:  en
 #+STARTUP:   noinlineimages content
 #+OPTIONS:   num:nil toc:1
@@ -13,11 +13,14 @@
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>%a</p>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'><img src="./img/lod_getty_logo.png" style="width:400px"/></p>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>CIDOC Congress, Dresden, Germany
-#+REVEAL_TITLE_SLIDE_TEMPLATE: <br/>2014-09-05: International Terminology Working Group:
-#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/index.html' target='_blank'>full version (HTML)</a>
-#+REVEAL_TITLE_SLIDE_TEMPLATE: <br/>2014-09-09: Getty special session:
-#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/GVP-LOD-CIDOC-short.pdf'>short version (PDF)</a>,
-#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://www.slideshare.net/valexiev1/gvp-lodcidocshort'>slideshare</a>.</p>
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <br/>2014-09-05: International Terminology Working Group: <br/> full version
+#+REVEAL_TITLE_SLIDE_TEMPLATE: (<a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/index.html'>HTML</a>,
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/GVP-LOD-CIDOC.pdf'>PDF</a>,
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://www.slideshare.net/valexiev1/gvp-lodcidoc'>slideshare</a>)
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <br/>2014-09-09: Getty special session: <br/> short version
+#+REVEAL_TITLE_SLIDE_TEMPLATE: (<a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/short.html'>HTML</a>,
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/GVP-LOD-CIDOC-short.pdf'>PDF</a>,
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://www.slideshare.net/valexiev1/gvp-lodcidocshort'>slideshare</a>)</p>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>Press <a href='javascript:Reveal.toggleOverview()'>O for overview</a>,
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='reveal-help.html' target='_blank'>H for help</a>.<br/>
@@ -39,7 +42,7 @@ Work continues with:
 Museum and CONA are more complex, involves LIDO/CDWA-lite XML to CIDOC CRM (RDF)
 ** Cultural Heritage LOD
 Working at the center. (Shows thesauri only, not yet CONA/Museum data)
-#+ATTR_HTML: :style width:1000px
+#+ATTR_HTML: :class stretch :style width:850px
 [[./img/Culture-datacloud-large.png]]
 ** Ontotext Scope of Work
 - Semantic/ontology development: http://vocab.getty.edu/ontology
@@ -57,7 +60,7 @@ Working at the center. (Shows thesauri only, not yet CONA/Museum data)
 - Presentations, scientific papers
 ** GVP LOD Architecture
 Quite straightforward
-#+ATTR_HTML: :style width:900px
+#+ATTR_HTML: :class stretch :style width:900px
 [[./img/GVP-architecture.png]]
 ** Semantic Resolution & Content Negotiation
 All GVP, AAT and TGN URLs resolve, returning human or machine readable content through content negotiation (303 redirect).
@@ -89,8 +92,10 @@ Scope includes:
 - Thesaurus-specific data (for now: TGN place types, coordinates
 Richer than any other SKOS thesaurus I've seen
 ** AAT Relational Schema
+#+ATTR_HTML: :class stretch :style width:1000px
 [[./img/AAT_erd2_20100914.png]]
 ** AAT Conceptual Diagram
+#+ATTR_HTML: :class stretch :style width:1000px
 [[./img/DataDict.png]]
 * External Ontologies
 | *Prefix* | *Ontology*                           | *Used for*                      |
@@ -116,27 +121,27 @@ Richer than any other SKOS thesaurus I've seen
 | rr:      | Relational to RDF Mapping Language | Conversion Oracle->RDF                     |
 | rrx:     | R2RML extension                    | rrx:languageColumn                         |
 ** Descriptive Info Ontologies
-| *Prefix* | *Ontology*                                        | *Used for*                                  |
-| adms:    | Asset Description Metadata Schema                 | Dataset description                         |
-| cc:      | Creative Commons Rights Expression Language       | License rights                              |
-| dcat:    | Data Catalog Vocabulary                           | Dataset description                         |
-| dctype:  | DCMI Type Vocabulary                              | Dataset class                               |
-| fmt:     | RDF formats used in datasets                      | Formats of data dumps                       |
-| sd:      | SPARQL Service Description                        | SPARQL endpoint capabilities (future)       |
-| vaem:    | Vocabulary for Attaching Essential Metadata       | Not used yet                                |
-| vann:    | Vocabulary for annotating vocabulary descriptions | Namespace and prefix                        |
-| vcard:   | vCard (contact info)                              | Contact info                                |
-| vdpp:    | Vocabulary for Dataset Publication Projects       | Not used yet                                |
-| voaf:    | Vocabulary of a Friend                            | Linked Open Vocabularies (LOV) registration |
-| voag:    | Vocabulary Of Attribution and Governance          | Frequency of publication                    |
-| void:    | Vocabulary of Interlinked Datasets                | Basis dataset descr, LOD registration |
-| wdrs:    | Protocol for Web Description Resources            | Described by from dataset to doc            |
-| wv:      | A vocabulary for waivers of rights                | License rights                              |
+| *Prefix* | *Ontology*                               | *Used for*                            |
+| adms:    | Asset Description Metadata Schema        | Dataset description                   |
+| cc:      | Creative Commons Rights Expressions      | License rights                        |
+| dcat:    | Data Catalog Vocabulary                  | Dataset description                   |
+| dctype:  | DCMI Type Vocabulary                     | Dataset class                         |
+| fmt:     | RDF formats used in datasets             | Formats of data dumps                 |
+| sd:      | SPARQL Service Description               | SPARQL endpoint capabilities (future) |
+| vaem:    | Vocabulary Attaching Essential Metadata  | Not used yet                          |
+| vann:    | Vocabulary for annotating vocabularies   | Namespace and prefix                  |
+| vcard:   | vCard (contact info)                     | Contact info                          |
+| vdpp:    | Vocabulary for Dataset Publ Projects     | Not used yet                          |
+| voaf:    | Vocabulary of a Friend                   | Linked Open Vocabularies (LOV)        |
+| voag:    | Vocabulary Of Attribution and Governance | Frequency of publication              |
+| void:    | Vocabulary of Interlinked Datasets       | Basis descr, LOD registration         |
+| wdrs:    | Protocol for Web Description Resources   | Described by from dataset to doc      |
+| wv:      | A vocabulary for waivers of rights       | License rights                        |
 * GVP Semantic Representation
-#+ATTR_HTML: :style width:1000px
+#+ATTR_HTML: :class stretch :style width:900px
 [[./img/semantic-overview-1.png]]
 ** GVP Semantic Representation (2)
-#+ATTR_HTML: :style width:950px
+#+ATTR_HTML: :class stretch :style width:750px
 [[./img/semantic-overview-2.png]]
 ** GVP Subject Classes
 - GVP Subjects include both Concepts and non-concepts (for organizing the hierarchy, not for indexing)
@@ -144,6 +149,7 @@ We handle "impedance mismatch" with
 - SKOS: restrict skos:related, infer skos:broader
 - ISO: infer iso:broaderGeneric/Partitive/Instantial
 S=Standard, G=GVP common, A=AAT, T=TGN
+#+ATTR_HTML: :class stretch :style width:1000px
 [[./img/006-subject-classes.png]]
 ** Obsolete Subjects
 - AAT obsolete subjects are 4.4% of valid subjects, which shows a good rate of editorial actions
@@ -162,26 +168,32 @@ aat:300386746 a gvp:ObsoleteSubject; # Was merged to a dominant Subject
 #+END_SRC
 ** Hierarchical Relations
 Use iso:ThesaurusArray to allow Guide Terms below Concepts. Infer cross-threading SKOS/ISO broader relations
-#+ATTR_HTML: :style width:800px
+#+ATTR_HTML: :class stretch :style width:650px
 [[./img/008-complex-hierarchy.png]]
 ** Key Values (Flags) Are Important
 Excel-driven Ontology Generation™ (getty-codes.xls to getty-codes.ttl)\\
 Key *val* can be mapped to Custom sub-class, Custom (sub-)prop, [[http://vocab.getty.edu/doc/#Ontology_Values][Ontology Value]] (eg <term/kind/Abbreviation>)
+#+ATTR_HTML: :class stretch :style width:1000px
 [[./img/getty-codes.png]]
 ** Associative Relations Are Valuable
 More Excel-driven Ontology Generation™ (assoc-rels.xls to assoc-rels.ttl)
 - Relations come in owl:inverseOf pairs (or owl:SymmetricProperty self-inverse)
-- Shoudl we make a subproperty hierarchy?
+- Should we make a subproperty hierarchy?
+#+ATTR_HTML: :class stretch :style width:1000px
 [[./img/assoc-rels.png]]
 ** GVP Ontology Documentation
 http://vocab.getty.edu/ontology, [[http://lov.okfn.org/dataset/lov/details/vocabulary_gvp.html][LOV Entry]] (10 classes, 177 props)
+#+ATTR_HTML: :class stretch :style width:1000px
 [[./img/GVP-ontology.png]]
 ** GVP Ontology: a Class
+#+ATTR_HTML: :class stretch :style width:1000px
 [[./img/GVP-ontology-class.png]]
 ** ISO 25946: Latest Standard on Thesauri
+#+ATTR_HTML: :class stretch :style width:1000px
 [[./img/002-ISO_25964_Model.jpg]]
 ** Use of iso:ThesaurusArray in GVP
 Use for ordered children. Novelty: if parent is Concept, use anonymous array. Careful crafting of URLs to make rdf:List
+#+ATTR_HTML: :class stretch :style width:1000px
 [[./img/GVP-isoThesaurusArray.png]]
 ** Contribution to ISO 25946
 - Contributed to [[http://purl.org/iso25964/skos-thes][ISO 25946 ontology]] ([[http://lov.okfn.org/dataset/lov/details/vocabulary_iso-thes.html][LOV entry]])
@@ -316,10 +328,12 @@ tgn:7011179-placeType-300008347 a rdf:Statement;
   gvp:displayOrder "1"^^xsd:positiveInteger.
 #+END_SRC
 ** Provenance Ontology
+- PROV considers that prov:Modify uses an unknown old entity "_:input" and generates an
+  unknown new entity "_:output", both being specializations of the entity under
+  consideration.
+- Need to use prov:Generation so we can use prov:atTime and reflect that the modification is a prov:InstantaneousEvent.
+#+ATTR_HTML: :class stretch :style width:1000px
 [[./img/PROV-modified-created.png]]
-PROV considers that prov:Modify uses an unknown old entity "_:input" and generates an unknown new entity "_:output",
-both being specializations of the entity under consideration. 
-Need to use prov:Generation so we can use prov:atTime and reflect that the modification is a prov:InstantaneousEvent.
 ** Revision History 
 PROV is too complex, so we simplify:
 #+BEGIN_SRC 
@@ -344,14 +358,16 @@ aat_rev:12347 a prov:Activity, prov:Publish;
 #+END_SRC
 * TGN Specifics: Concept-Place Duality
 Duality between Concept and its denotation  (ala VIAF, UK BL, FR BnF, SE KB...)
+#+ATTR_HTML: :class stretch :style width:1000px
 [[./img/013-concept-place-duality.png]]
 ** TGN Semantic Representation
 Adds place types (TGN->AAT), Concept-Place duality, coordinates
-#+ATTR_HTML: :style width:500px
+#+ATTR_HTML: :class stretch :style width:400px
 [[./img/012-TGN-overview.png]]
 * Inference
-Hierarchical Relations (GVP->Standard) inference:
-blue=standard, black=GVP, bold=closure, red=restriction
+Hierarchical Relations inference (GVP->Standard):\\
+blue=standard, black=GVP, bold=closure, red=restriction. Numbers refer to doc sections
+#+ATTR_HTML: :class stretch :style width:1000px
 [[./img/018-hierarchicalRelationsInference.png]]
 ** Extended Property Constructs
 - TGN is much bigger: AAT: 10M, TGN: 94M (explicit statements)
@@ -373,11 +389,12 @@ blue=standard, black=GVP, bold=closure, red=restriction
 | PropChainType2 | q <= p1 / p2[t2]   | Chain and typecheck                   | [[./img/PropChainType2.png]] |
 ** Reduced SKOS Inference
 Eliminate redundant props (World has 1.2M narrowerTransitive, 2.4M semanticRelation). Break inference at red ovals
-#+ATTR_HTML: :style width:950px
+#+ATTR_HTML: :class stretch :style width:950px
 [[./img/016-SKOS-properties.png]]
 ** Construct Query: Get & Cache All Data for Subject
+#+ATTR_HTML: :style width:1000px
 [[./img/028-construct-subject.png]]
-#+ATTR_HTML: :style width:600px
+#+ATTR_HTML: :class stretch :style width:580px
 [[./img/GVP-construct.png]]
 ** Semantic Resources, Dumps
 - *All* data for every independent resource (Subject, Source, Contributor) is extracted
@@ -387,23 +404,25 @@ Eliminate redundant props (World has 1.2M narrowerTransitive, 2.4M semanticRelat
 - explicit.zip: R2RML-generated statements, NTriples (*you* need to do the Inferencing)
 - full.zip: all statements, concatenated from entity files, NTriples
 * Documentation
-#+ATTR_HTML: :style width:1100px
+#+ATTR_HTML: :class stretch :style width:950px
 [[./img/GVP-doc-TOC.png]]
 ** Doc Production
 Edit in Word. Spellcheck, link check (below). Print as PDF. Save as Compact HTML, HtmlTidy, rewrite with original images.
-#+ATTR_HTML: :style width:900px
+#+ATTR_HTML: :class stretch :style width:900px
 [[./img/GVP-doc-CheckMyLinks.png]]
+
 Benefit: printable PDF and *linkable* HTML
 ** Sample Queries
 Lots of them! The (!) says "read the documentation first". As part of helpdesk support, we're tracking usage and adding samples.
+#+ATTR_HTML: :class stretch :style width:1000px
 [[./img/GVP-sample-queries.png]]
 ** Sample Query: Bar chart with SPARQL
 Number of members of the UN per year. [[http://vocab.getty.edu/doc/#Column_Chart_with_SPARQL][See doc]] or [[http://jsfiddle.net/valexiev/TCr59/][jsfiddle]] with it
-#+ATTR_HTML: :style width:900px
+#+ATTR_HTML: :class stretch :style width:800px
 [[./img/029-growth-of-UN.png]]
 ** Sample Query: Geo chart with SPARQL
 When each nation joined the UN.  [[http://vocab.getty.edu/doc/#Geo_Chart_with_SPARQL][See doc]] or  [[http://jsfiddle.net/valexiev/NULCH/][jsfiddle]] with it.
-#+ATTR_HTML: :style width:1000px
+#+ATTR_HTML: :class stretch :style width:900px
 [[./img/029-year-joining-of-UN.png]]
 ** Sample query: Overseas Possessions of the Netherlands
 #+BEGIN_SRC 
@@ -415,6 +434,7 @@ select ?place ?name ?lat ?long {
     gvp:broaderPartitiveExtended [rdfs:label "The Netherlands"@en]
   filter (!(50.787185 <= ?lat && ?lat <= 53.542265 && 3.389722 <= ?long && ?long <= 7.169019))}
 #+END_SRC
+#+ATTR_HTML: :class stretch :style width:1000px
 [[./img/GVP-sample-overseas-possessions.png]]
 * GVP LOD Usage
 People started using AAT and TGN right after their release
@@ -422,16 +442,17 @@ People started using AAT and TGN right after their release
 - TGN Place selection: same as above; Portable Antiquities (finds.org.uk), Nomisma, Kerameikos
 - Visualization: Hierarchies with d3js, LOD with lodlive.it
 - Semantic enrichment: Europeana (Rijksmuseum, Museo Galileo, Erfgoedplus.be), Partage Plus (Art Nouveau to Europeana)
-#+ATTR_HTML: :style align:center
+
 | *Vocab* | *Actual* | *Potential* |
 | AAT     |        9 |           6 |
 | TGN     |        3 |             |
 | ULAN    |          |           1 |
 ** Usage Stories
 [[https://share.getty.edu/confluence/display/itslodv/usage%2Bstories][Usage Stories]] (internal confluence)
+#+ATTR_HTML: :class stretch :style width:1000px
 [[./img/GVP-usage.png]]
 ** Thanks for your time!
-[[mailto:vladimir.alexiev@ontotext.com]]
-#+ATTR_HTML: :style width:400px
+If you have any questions or suggestions for improvement, please don't hesitate to contact me: [[mailto:vladimir.alexiev@ontotext.com][vladimir.alexiev@ontotext.com]]
+#+ATTR_HTML: :class stretch :style width:400px
 [[./img/QuestionMark.jpg]]
 
