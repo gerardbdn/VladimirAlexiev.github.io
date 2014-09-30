@@ -1,7 +1,7 @@
 #+TITLE:     Semantic Technologies for Cultural Heritage
 #+AUTHOR:    Vladimir Alexiev, Ontotext Corp
 #+EMAIL:     vladimir.alexiev@ontotext.com
-#+DATE:      2014-08-28
+#+DATE:      2014-09-17
 #+LANGUAGE:  en
 #+STARTUP:   noinlineimages content
 #+OPTIONS:   num:nil toc:1
@@ -12,7 +12,7 @@
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p/><p/><p class='center'>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://VladimirAlexiev.github.io/pres/20140821-Malmo/index.html' target='_blank'>2D interactive version</a>,
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://VladimirAlexiev.github.io/pres/20140821-Malmo/SemTechCH-Malmo.pdf'>pdf</a>,
-#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://www.slideshare.net/valexiev1/TODO' target='_blank'>slideshare</a>.</p>
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://www.slideshare.net/valexiev1/sem-techch-malmo' target='_blank'>slideshare</a>.</p>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>Press <a href='javascript:Reveal.toggleOverview()'>O for overview</a>,
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='reveal-help.html' target='_blank'>H for help</a>.</p>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>Proudly made in plain text with 
@@ -107,7 +107,7 @@ Is this something new?
 - Enterprise-grade
 - Used by important commercial clients (see slide above)
 - Found a great following in the CH domain (see later)
-** TODO GraphDB Features
+** GraphDB Features
 - High-performance reasoning: RDFS, OWL-Horst, OWL2 RL, QL
 - Custom rule-sets allow tuning for optimal performance and expressivity
 - Optimized owl:sameAs handling: dramatic improvements for data integrated from multiple sources
