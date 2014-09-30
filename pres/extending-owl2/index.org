@@ -1,7 +1,7 @@
 #+TITLE:     Extending OWL2 Property Constructs with OWLIM Rules
 #+AUTHOR:    Vladimir Alexiev, Ontotext Corp
 #+EMAIL:     vladimir.alexiev@ontotext.com
-#+DATE:      2014-08-07
+#+DATE:      2014-09-18
 #+STARTUP: content
 #+OPTIONS: html-link-use-abs-url:nil html-postamble:auto html-preamble:t html-scripts:t
 #+OPTIONS: html-style:t html5-fancy:nil tex:nil
@@ -62,12 +62,12 @@ The corresponding OWL2 axioms (in RDF Turtle) are:
 #+BEGIN_SRC
 q a owl:SymmetricProperty.
 q owl:inverseOf p.
-q rdfs:subPropertyOf p1; p2 rdfs:subPropertyOf p2.
+p1 rdfs:subPropertyOf q. p2 rdfs:subPropertyOf q.
 q owl:propertyChainAxiom (p1..pN).
-q rdfs:subPropertyOf p; a owl:TransitiveProperty.
+p rdfs:subPropertyOf q. q a owl:TransitiveProperty.
 #+END_SRC
 * New Property Constructs
-Below we use pN for premises, r for restriction (which is just another premise), tN for types, q for conclusion.
+Below we use ~pN~ for premises, ~r~ for restriction (which is just another premise), ~tN~ for types, ~q~ for conclusion.
 *prop path* uses the following additional constructs:
 - ~p & r~: property conjunction (restriction): holds between two nodes when both properties connect the same nodes
 - ~[t1] p [t2]~: type restriction: holds when the source node has type t1 and the target node has type t2 (shown inside the node)
@@ -191,9 +191,8 @@ Id: ptop_PropChainRestrType2Restr
   ----------------
   x q z
 #+END_SRC
-This could also be implemented with RIF or N3 Rules.
-But SPIN cannot be used because the rules are recursive,
-unless one is willing to iterate until no more conclusions are inferred.
+This could also be implemented with RIF, N3 Rules or SPIN. Please note that some of the
+rules are recursive, so one should iterate until no more conclusions are inferred.
 
 * Notes and Examples
 ** transitiveOver
@@ -201,11 +200,11 @@ It all started with ptop:transitiveOver, which has been part of Ontotext's PROTO
 This is better than owl:TransitiveProperty for two reasons:
 - It's *more general*: q is a TransitiveProperty /iff/ it's transitiveOver itself:
 : q a owl:TransitiveProperty <=> q ptop:transitiveOver q
-ptop:transitiveOver is more general because you could different properties with it.
+ptop:transitiveOver is more general because you could use different properties with it.
 For example, the canonical inferencing of types along the class hierarchy can be expressed as:
 : rdf:type ptop:transitiveOver rdfs:subClassOf
-Note: SymmetricProperty is a specialziation of inverseOf in an analogous way:
-: q a owl:SymmetricProperty <=> a owl:inverseOf a
+Note: SymmetricProperty is a specialization of inverseOf in an analogous way:
+: q a owl:SymmetricProperty <=> q owl:inverseOf q
 - It allows *more efficient* implementation of transitive closures.
 Transitive properties are usually implemented as transitive closure over a basic *step* property.
 For example, skos:broaderTransitive is based on skos:broader and is usually implemented as
@@ -281,7 +280,7 @@ The advantage is more efficient implementation,
 as propertyChainAxiom needs to use intermediate nodes and edges in order to unroll the rdf:List representing the chain.
 
 You don't need to rewrite your owl:propertyChainAxioms to use ptop:PropChain: you can convert with a rule like this:
-#+BEGIN_SRC
+#+BEGIN_SRC n3
 Id: ptop_PropChainByPropertyChainAxiom
   p  <owl:propertyChainAxiom> l1
   l1 <rdf:first> p1
