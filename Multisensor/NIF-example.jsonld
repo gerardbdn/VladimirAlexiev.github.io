@@ -1,0 +1,493 @@
+{
+  "@graph" : [ {
+    "@id" : "_:b2",
+    "unionOf" : {
+      "@list" : [ "olia:FiniteVerb", "olia:StrictAuxiliaryVerb" ]
+    }
+  }, {
+    "@id" : "_:b3",
+    "@type" : "owl:Restriction",
+    "allValuesFrom" : "olia:Present",
+    "onProperty" : "olia:hasTense"
+  }, {
+    "@id" : "_:b6",
+    "unionOf" : {
+      "@list" : [ "olia:Preposition", "olia:SubordinatingConjunction" ]
+    }
+  }, {
+    "@id" : "dbr:European_union",
+    "@type" : [ "dbo:Country", "dbo:Place", "dbo:PopulatedPlace", "yago:G20Nations", "yago:InternationalOrganizationsOfEurope" ]
+  }, {
+    "@id" : "dbr:Germany",
+    "@type" : [ "dbo:Country", "dbo:Place", "dbo:PopulatedPlace", "yago:FederalCountries", "yago:EuropeanUnionMemberEconomies" ]
+  }, {
+    "@id" : "http://example.com/blog/1/#European-8",
+    "@type" : [ "nif:Word", "stanford:AdjectivalModifier" ],
+    "anchorOf" : "European",
+    "lemma" : "Europe",
+    "oliaCategory" : [ "penn:ProperNoun", "olia:ProperNoun" ],
+    "oliaLink" : "penn:NNP"
+  }, {
+    "@id" : "http://example.com/blog/1/#European-Union",
+    "@type" : "nif:Phrase",
+    "anchorOf" : "European Union",
+    "taClassRef" : "nerd:Country",
+    "taIdentRef" : "dbr:European_union"
+  }, {
+    "@id" : "http://example.com/blog/1/#Germany-1",
+    "@type" : [ "stanford:NominalSubject", "nif:Word" ],
+    "anchorOf" : "Germany",
+    "lemma" : "Germany",
+    "oliaCategory" : [ "olia:ProperNoun", "penn:ProperNoun" ],
+    "oliaLink" : "penn:NNP",
+    "confidence" : "0.9",
+    "taAnnotatorsRef" : "NER-extraction|http://linguatec.com",
+    "taClassRef" : "nerd:Country",
+    "taIdentRef" : "dbr:Germany"
+  }, {
+    "@id" : "http://example.com/blog/1/#Germany-1-enrichment-1",
+    "@type" : "fise:EntityAnnotation",
+    "fise:confidence" : {
+      "@type" : "xsd:float",
+      "@value" : "0.9"
+    },
+    "entity-reference" : "dbr:Germany",
+    "entity-type" : "nerd:Country",
+    "extracted-from" : "http://example.com/blog/1/#Germany-1",
+    "creator" : "NER-extraction|http://linguatec.com"
+  }, {
+    "@id" : "http://example.com/blog/1/#ROOT-0",
+    "@type" : "nif:Sentence",
+    "dependency" : "http://example.com/blog/1/#horse-5"
+  }, {
+    "@id" : "http://example.com/blog/1/#Union-9",
+    "@type" : [ "nif:Word", "stanford:ObjectOfPreposition" ],
+    "anchorOf" : "Union",
+    "dependency" : [ "http://example.com/blog/1/#the-7", "http://example.com/blog/1/#European-8" ],
+    "oliaCategory" : [ "penn:ProperNoun", "olia:ProperNoun" ],
+    "oliaLink" : "penn:NNP"
+  }, {
+    "@id" : "http://example.com/blog/1/#amod(Union-9,European-8)",
+    "@type" : [ "olia:Relation", "stanford:AdjectivalModifier" ],
+    "hasSource" : "http://example.com/blog/1/#Union-9",
+    "hasTarget" : "http://example.com/blog/1/#European-8"
+  }, {
+    "@id" : "http://example.com/blog/1/#char=0,47",
+    "@type" : "nif:Context",
+    "isString" : "Germany is the work horse of the European Union",
+    "sourceUrl" : "http://example.com/blog/1/",
+    "sameAs" : "http://example.com/blog/1/#ROOT-0"
+  }, {
+    "@id" : "http://example.com/blog/1/#char=0,7",
+    "@type" : "nif:RFC5147String",
+    "beginIndex" : "0",
+    "endIndex" : "7",
+    "referenceContext" : "http://example.com/blog/1/#char=0,47",
+    "sameAs" : "http://example.com/blog/1/#Germany-1"
+  }, {
+    "@id" : "http://example.com/blog/1/#char=11,14",
+    "@type" : "nif:RFC5147String",
+    "beginIndex" : "11",
+    "endIndex" : "14",
+    "referenceContext" : "http://example.com/blog/1/#char=0,47",
+    "sameAs" : "http://example.com/blog/1/#the-3"
+  }, {
+    "@id" : "http://example.com/blog/1/#char=15,19",
+    "@type" : "nif:RFC5147String",
+    "beginIndex" : "15",
+    "endIndex" : "19",
+    "referenceContext" : "http://example.com/blog/1/#char=0,47",
+    "sameAs" : "http://example.com/blog/1/#work-4"
+  }, {
+    "@id" : "http://example.com/blog/1/#char=15,25",
+    "@type" : "nif:RFC5147String",
+    "beginIndex" : "15",
+    "endIndex" : "25",
+    "referenceContext" : "http://example.com/blog/1/#char=0,47",
+    "sameAs" : "http://example.com/blog/1/#work-horse"
+  }, {
+    "@id" : "http://example.com/blog/1/#char=20,25",
+    "@type" : "nif:RFC5147String",
+    "beginIndex" : "20",
+    "endIndex" : "25",
+    "referenceContext" : "http://example.com/blog/1/#char=0,47",
+    "sameAs" : "http://example.com/blog/1/#horse-5"
+  }, {
+    "@id" : "http://example.com/blog/1/#char=26,28",
+    "@type" : "nif:RFC5147String",
+    "beginIndex" : "26",
+    "endIndex" : "28",
+    "referenceContext" : "http://example.com/blog/1/#char=0,47",
+    "sameAs" : "http://example.com/blog/1/#of-6"
+  }, {
+    "@id" : "http://example.com/blog/1/#char=29,32",
+    "@type" : "nif:RFC5147String",
+    "beginIndex" : "29",
+    "endIndex" : "32",
+    "referenceContext" : "http://example.com/blog/1/#char=0,47",
+    "sameAs" : "http://example.com/blog/1/#the-7"
+  }, {
+    "@id" : "http://example.com/blog/1/#char=33,41",
+    "@type" : "nif:RFC5147String",
+    "beginIndex" : "33",
+    "endIndex" : "41",
+    "referenceContext" : "http://example.com/blog/1/#char=0,47",
+    "sameAs" : "http://example.com/blog/1/#European-8"
+  }, {
+    "@id" : "http://example.com/blog/1/#char=33,47",
+    "@type" : "nif:RFC5147String",
+    "beginIndex" : "33",
+    "endIndex" : "47",
+    "referenceContext" : "http://example.com/blog/1/#char=0,47",
+    "sameAs" : "http://example.com/blog/1/#European-Union"
+  }, {
+    "@id" : "http://example.com/blog/1/#char=42,47",
+    "@type" : "nif:RFC5147String",
+    "beginIndex" : "42",
+    "endIndex" : "47",
+    "referenceContext" : "http://example.com/blog/1/#char=0,47",
+    "sameAs" : "http://example.com/blog/1/#Union-9"
+  }, {
+    "@id" : "http://example.com/blog/1/#char=8,10",
+    "@type" : "nif:RFC5147String",
+    "beginIndex" : "8",
+    "endIndex" : "10",
+    "referenceContext" : "http://example.com/blog/1/#char=0,47",
+    "sameAs" : "http://example.com/blog/1/#is-2"
+  }, {
+    "@id" : "http://example.com/blog/1/#cop(horse-5,is-2)",
+    "@type" : [ "olia:Relation", "stanford:Copula" ],
+    "hasSource" : "http://example.com/blog/1/#horse-5",
+    "hasTarget" : "http://example.com/blog/1/#is-2"
+  }, {
+    "@id" : "http://example.com/blog/1/#det(Union-9,the-7)",
+    "@type" : [ "olia:Relation", "stanford:Determiner" ],
+    "hasSource" : "http://example.com/blog/1/#Union-9",
+    "hasTarget" : "http://example.com/blog/1/#the-7"
+  }, {
+    "@id" : "http://example.com/blog/1/#det(horse-5,the-3)",
+    "@type" : [ "olia:Relation", "stanford:Determiner" ],
+    "hasSource" : "http://example.com/blog/1/#horse-5",
+    "hasTarget" : "http://example.com/blog/1/#the-3"
+  }, {
+    "@id" : "http://example.com/blog/1/#favourite-10",
+    "lemma" : "favorite",
+    "stem" : "favourit"
+  }, {
+    "@id" : "http://example.com/blog/1/#horse-5",
+    "@type" : [ "stanford:Root", "nif:Word" ],
+    "anchorOf" : "horse",
+    "dependency" : [ "http://example.com/blog/1/#work-4", "http://example.com/blog/1/#the-3", "http://example.com/blog/1/#of-6", "http://example.com/blog/1/#Germany-1", "http://example.com/blog/1/#is-2" ],
+    "oliaCategory" : [ "penn:CommonNoun", "olia:CommonNoun" ],
+    "oliaLink" : "penn:NN"
+  }, {
+    "@id" : "http://example.com/blog/1/#is-2",
+    "@type" : [ "nif:Word", "olia:Verb", "stanford:Copula" ],
+    "anchorOf" : "is",
+    "oliaCategory" : [ "penn:BePresentTense", "_:b2", "_:b3" ],
+    "oliaLink" : "penn:VBZ",
+    "hasTense" : "ex:VerySpecialPresentTense"
+  }, {
+    "@id" : "http://example.com/blog/1/#nn(horse-5,work-4)",
+    "@type" : [ "olia:Relation", "stanford:NounCompoundModifier" ],
+    "hasSource" : "http://example.com/blog/1/#horse-5",
+    "hasTarget" : "http://example.com/blog/1/#work-4"
+  }, {
+    "@id" : "http://example.com/blog/1/#nsubj(horse-5,Germany-1)",
+    "@type" : [ "olia:Relation", "stanford:NominalSubject" ],
+    "hasSource" : "http://example.com/blog/1/#horse-5",
+    "hasTarget" : "http://example.com/blog/1/#Germany-1"
+  }, {
+    "@id" : "http://example.com/blog/1/#of-6",
+    "@type" : [ "nif:Word", "stanford:PrepositionalModifier" ],
+    "anchorOf" : "of",
+    "dependency" : "http://example.com/blog/1/#Union-9",
+    "oliaCategory" : [ "penn:PrepositionOrSubordinatingConjunction", "_:b6" ],
+    "oliaLink" : "penn:IN"
+  }, {
+    "@id" : "http://example.com/blog/1/#pobj(of-6,Union-9)",
+    "@type" : [ "olia:Relation", "stanford:ObjectOfPreposition" ],
+    "hasSource" : "http://example.com/blog/1/#of-6",
+    "hasTarget" : "http://example.com/blog/1/#Union-9"
+  }, {
+    "@id" : "http://example.com/blog/1/#prep(horse-5,of-6)",
+    "@type" : [ "olia:Relation", "stanford:PrepositionalModifier" ],
+    "hasSource" : "http://example.com/blog/1/#horse-5",
+    "hasTarget" : "http://example.com/blog/1/#of-6"
+  }, {
+    "@id" : "http://example.com/blog/1/#root(ROOT-0,horse-5)",
+    "@type" : [ "olia:Relation", "stanford:Root" ],
+    "hasSource" : "http://example.com/blog/1/#ROOT-0",
+    "hasTarget" : "http://example.com/blog/1/#horse-5"
+  }, {
+    "@id" : "http://example.com/blog/1/#the-3",
+    "@type" : [ "nif:Word", "stanford:Determiner" ],
+    "anchorOf" : "the",
+    "oliaCategory" : "penn:Determiner",
+    "oliaLink" : "penn:DT"
+  }, {
+    "@id" : "http://example.com/blog/1/#the-7",
+    "@type" : [ "nif:Word", "stanford:Determiner" ],
+    "anchorOf" : "the",
+    "oliaCategory" : "penn:Determiner",
+    "oliaLink" : "penn:DT"
+  }, {
+    "@id" : "http://example.com/blog/1/#work-4",
+    "@type" : [ "nif:Word", "stanford:NounCompoundModifier" ],
+    "anchorOf" : "work",
+    "oliaCategory" : [ "penn:CommonNoun", "olia:CommonNoun" ],
+    "oliaLink" : "penn:NN"
+  }, {
+    "@id" : "http://example.com/blog/1/#work-horse",
+    "@type" : "nif:Phrase",
+    "anchorOf" : "work horse",
+    "taIdentRef" : "http://wordnet-rdf.princeton.edu/wn31/104608649-n"
+  }, {
+    "@id" : "http://example.com/blog/1/comment/1",
+    "@type" : [ "sioc:Post", "nif:Context" ],
+    "isString" : "Yes, we Germans are the hardest-working people in the world",
+    "opinion" : "http://example.com/blog/1/opinion/1",
+    "sourceUrl" : "http://example.com/blog/1/comment/1",
+    "content" : "Yes, we Germans are the hardest-working people in the world",
+    "has_creator" : "http://example.com/users/Hans",
+    "reply_of" : "http://example.com/blog/1/"
+  }, {
+    "@id" : "http://example.com/blog/1/comment/1#char=0,",
+    "@type" : "nif:Context",
+    "isString" : "Yes, we Germans are the hardest-working people in the world",
+    "sourceUrl" : "http://example.com/blog/1/comment/1"
+  }, {
+    "@id" : "http://example.com/blog/1/comment/1#char=0,3",
+    "@type" : "nif:String",
+    "anchorOf" : "Yes",
+    "opinion" : "http://example.com/blog/1/opinion/1",
+    "referenceContext" : "http://example.com/blog/1/comment/1#char=0,"
+  }, {
+    "@id" : "http://example.com/blog/1/comment/2",
+    "@type" : [ "sioc:Post", "nif:Context" ],
+    "isString" : "Bullshit! We Greeks are harder-working",
+    "opinion" : "http://example.com/blog/1/opinion/2",
+    "sourceUrl" : "http://example.com/blog/1/comment/2",
+    "content" : "Bullshit! We Greeks are harder-working",
+    "has_creator" : "http://example.com/users/Dimitrios",
+    "reply_of" : "http://example.com/blog/1/"
+  }, {
+    "@id" : "http://example.com/blog/1/comment/2#char=0,",
+    "@type" : "nif:Context",
+    "isString" : "Bullshit! We Greeks are harder-working",
+    "sourceUrl" : "http://example.com/blog/1/comment/2"
+  }, {
+    "@id" : "http://example.com/blog/1/comment/2#char=0,9",
+    "@type" : "nif:String",
+    "anchorOf" : "Bullhshit!",
+    "opinion" : "http://example.com/blog/1/opinion/2",
+    "referenceContext" : "http://example.com/blog/1/comment/2#char=0,"
+  }, {
+    "@id" : "http://example.com/blog/1/opinion/1",
+    "@type" : "marl:Opinion",
+    "describesObject" : "http://example.com/blog/1/",
+    "extractedFrom" : "http://example.com/blog/1/comment/1",
+    "hasPolarity" : "marl:Positive",
+    "marl:maxPolarityValue" : 1,
+    "marl:minPolarityValue" : -1,
+    "opinionText" : "Yes",
+    "marl:polarityValue" : {
+      "@type" : "xsd:decimal",
+      "@value" : "0.9"
+    }
+  }, {
+    "@id" : "http://example.com/blog/1/opinion/2",
+    "@type" : "marl:Opinion",
+    "describesObject" : "http://example.com/blog/1/",
+    "extractedFrom" : "http://example.com/blog/1/comment/2",
+    "hasPolarity" : "marl:Negative",
+    "marl:maxPolarityValue" : 1,
+    "marl:minPolarityValue" : -1,
+    "opinionText" : "Bullshit!",
+    "marl:polarityValue" : -1
+  }, {
+    "@id" : "http://example.com/blog/1/opinions",
+    "@type" : "marl:AggregatedOpinion",
+    "aggregatesOpinion" : [ "http://example.com/blog/1/opinion/1", "http://example.com/blog/1/opinion/2" ],
+    "describesObject" : "http://example.com/blog/1/",
+    "hasPolarity" : "marl:Neutral",
+    "marl:maxPolarityValue" : 1,
+    "marl:minPolarityValue" : -1,
+    "marl:negativeOpinionCount" : 1,
+    "marl:opinionCount" : 2,
+    "marl:polarityValue" : {
+      "@type" : "xsd:decimal",
+      "@value" : "-0.05"
+    },
+    "marl:positiveOpinionsCount" : 1
+  }, {
+    "@id" : "ex:VerySpecialPresentTense",
+    "@type" : [ "olia:Present", "olia:Tense" ]
+  } ],
+  "@context" : {
+    "first" : {
+      "@id" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#first",
+      "@type" : "@id"
+    },
+    "rest" : {
+      "@id" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest",
+      "@type" : "@id"
+    },
+    "referenceContext" : {
+      "@id" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#referenceContext",
+      "@type" : "@id"
+    },
+    "beginIndex" : {
+      "@id" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#beginIndex",
+      "@type" : "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+    },
+    "endIndex" : {
+      "@id" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#endIndex",
+      "@type" : "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+    },
+    "sameAs" : {
+      "@id" : "http://www.w3.org/2002/07/owl#sameAs",
+      "@type" : "@id"
+    },
+    "anchorOf" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#anchorOf",
+    "oliaLink" : {
+      "@id" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#oliaLink",
+      "@type" : "@id"
+    },
+    "oliaCategory" : {
+      "@id" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#oliaCategory",
+      "@type" : "@id"
+    },
+    "hasTense" : {
+      "@id" : "http://purl.org/olia/olia.owl#hasTense",
+      "@type" : "@id"
+    },
+    "taIdentRef" : {
+      "@id" : "http://www.w3.org/2005/11/its/rdf#taIdentRef",
+      "@type" : "@id"
+    },
+    "taClassRef" : {
+      "@id" : "http://www.w3.org/2005/11/its/rdf#taClassRef",
+      "@type" : "@id"
+    },
+    "onProperty" : {
+      "@id" : "http://www.w3.org/2002/07/owl#onProperty",
+      "@type" : "@id"
+    },
+    "allValuesFrom" : {
+      "@id" : "http://www.w3.org/2002/07/owl#allValuesFrom",
+      "@type" : "@id"
+    },
+    "extractedFrom" : {
+      "@id" : "http://purl.org/marl/ns#extractedFrom",
+      "@type" : "@id"
+    },
+    "describesObject" : {
+      "@id" : "http://purl.org/marl/ns#describesObject",
+      "@type" : "@id"
+    },
+    "opinionText" : "http://purl.org/marl/ns#opinionText",
+    "polarityValue" : {
+      "@id" : "http://purl.org/marl/ns#polarityValue",
+      "@type" : "http://www.w3.org/2001/XMLSchema#integer"
+    },
+    "minPolarityValue" : {
+      "@id" : "http://purl.org/marl/ns#minPolarityValue",
+      "@type" : "http://www.w3.org/2001/XMLSchema#integer"
+    },
+    "maxPolarityValue" : {
+      "@id" : "http://purl.org/marl/ns#maxPolarityValue",
+      "@type" : "http://www.w3.org/2001/XMLSchema#integer"
+    },
+    "hasPolarity" : {
+      "@id" : "http://purl.org/marl/ns#hasPolarity",
+      "@type" : "@id"
+    },
+    "dependency" : {
+      "@id" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#dependency",
+      "@type" : "@id"
+    },
+    "hasSource" : {
+      "@id" : "http://purl.org/olia/olia.owl#hasSource",
+      "@type" : "@id"
+    },
+    "hasTarget" : {
+      "@id" : "http://purl.org/olia/olia.owl#hasTarget",
+      "@type" : "@id"
+    },
+    "positiveOpinionsCount" : {
+      "@id" : "http://purl.org/marl/ns#positiveOpinionsCount",
+      "@type" : "http://www.w3.org/2001/XMLSchema#integer"
+    },
+    "opinionCount" : {
+      "@id" : "http://purl.org/marl/ns#opinionCount",
+      "@type" : "http://www.w3.org/2001/XMLSchema#integer"
+    },
+    "aggregatesOpinion" : {
+      "@id" : "http://purl.org/marl/ns#aggregatesOpinion",
+      "@type" : "@id"
+    },
+    "negativeOpinionCount" : {
+      "@id" : "http://purl.org/marl/ns#negativeOpinionCount",
+      "@type" : "http://www.w3.org/2001/XMLSchema#integer"
+    },
+    "sourceUrl" : {
+      "@id" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#sourceUrl",
+      "@type" : "@id"
+    },
+    "isString" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#isString",
+    "unionOf" : {
+      "@id" : "http://www.w3.org/2002/07/owl#unionOf",
+      "@type" : "@id"
+    },
+    "opinion" : {
+      "@id" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#opinion",
+      "@type" : "@id"
+    },
+    "reply_of" : {
+      "@id" : "http://rdfs.org/sioc/ns#reply_of",
+      "@type" : "@id"
+    },
+    "has_creator" : {
+      "@id" : "http://rdfs.org/sioc/ns#has_creator",
+      "@type" : "@id"
+    },
+    "content" : "http://rdfs.org/sioc/ns#content",
+    "taAnnotatorsRef" : "http://www.w3.org/2005/11/its/rdf#taAnnotatorsRef",
+    "confidence" : {
+      "@id" : "http://www.w3.org/2005/11/its/rdf#confidence",
+      "@type" : "http://www.w3.org/2001/XMLSchema#decimal"
+    },
+    "lemma" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#lemma",
+    "extracted-from" : {
+      "@id" : "http://fise.iks-project.eu/ontology/extracted-from",
+      "@type" : "@id"
+    },
+    "entity-type" : {
+      "@id" : "http://fise.iks-project.eu/ontology/entity-type",
+      "@type" : "@id"
+    },
+    "entity-reference" : {
+      "@id" : "http://fise.iks-project.eu/ontology/entity-reference",
+      "@type" : "@id"
+    },
+    "creator" : "http://purl.org/dc/elements/1.1/creator",
+    "stem" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#stem",
+    "dc" : "http://purl.org/dc/elements/1.1/",
+    "penn" : "http://purl.org/olia/penn.owl#",
+    "ex" : "http://example.org/",
+    "nif" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#",
+    "itsrdf" : "http://www.w3.org/2005/11/its/rdf#",
+    "yago" : "http://yago-knowledge.org/resource/",
+    "marl" : "http://purl.org/marl/ns#",
+    "fise" : "http://fise.iks-project.eu/ontology/",
+    "stanford" : "http://purl.org/olia/stanford.owl#",
+    "sioc" : "http://rdfs.org/sioc/ns#",
+    "dbr" : "http://dbpedia.org/resource/",
+    "nerd" : "http://nerd.eurecom.fr/ontology#",
+    "olia" : "http://purl.org/olia/olia.owl#",
+    "dbo" : "http://dbpedia.org/ontology/",
+    "xsd" : "http://www.w3.org/2001/XMLSchema#",
+    "owl" : "http://www.w3.org/2002/07/owl#"
+  }
+}

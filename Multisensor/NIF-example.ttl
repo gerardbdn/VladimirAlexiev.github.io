@@ -107,32 +107,32 @@
 ############################## Part of Speech using the Penn tagset
 # http://nlp.stanford.edu:8080/parser/index.jsp
 # Germany/NNP is/VBZ the/DT work/NN horse/NN of/IN the/DT European/NNP Union/NNP
-# nif:oliaLink is an owl:Individual, nif:oliaClass is an owl:Class.
+# nif:oliaLink is an owl:Individual, nif:oliaCategory is an owl:Class.
 # Since in penn.owl the individuals are declared to have rdf:type the class, you only need one, the other is redundant.
-<#Germany-1>   nif:oliaLink penn:NNP; nif:oliaClass penn:ProperNoun.
-<#is-2>        nif:oliaLink penn:VBZ; nif:oliaClass penn:BePresentTense.
-<#the-3>       nif:oliaLink penn:DT;  nif:oliaClass penn:Determiner.
-<#work-4>      nif:oliaLink penn:NN;  nif:oliaClass penn:CommonNoun. # POS is NNP, but the syntactic role is Adjective
-<#horse-5>     nif:oliaLink penn:NN;  nif:oliaClass penn:CommonNoun.
-<#of-6>        nif:oliaLink penn:IN;  nif:oliaClass penn:PrepositionOrSubordinatingConjunction.
-<#the-7>       nif:oliaLink penn:DT;  nif:oliaClass penn:Determiner.
-<#European-8>  nif:oliaLink penn:NNP; nif:oliaClass penn:ProperNoun.
-<#Union-9>     nif:oliaLink penn:NNP; nif:oliaClass penn:ProperNoun.
+<#Germany-1>   nif:oliaLink penn:NNP; nif:oliaCategory penn:ProperNoun.
+<#is-2>        nif:oliaLink penn:VBZ; nif:oliaCategory penn:BePresentTense.
+<#the-3>       nif:oliaLink penn:DT;  nif:oliaCategory penn:Determiner.
+<#work-4>      nif:oliaLink penn:NN;  nif:oliaCategory penn:CommonNoun. # POS is NN, but the syntactic role is Adjective
+<#horse-5>     nif:oliaLink penn:NN;  nif:oliaCategory penn:CommonNoun.
+<#of-6>        nif:oliaLink penn:IN;  nif:oliaCategory penn:PrepositionOrSubordinatingConjunction.
+<#the-7>       nif:oliaLink penn:DT;  nif:oliaCategory penn:Determiner.
+<#European-8>  nif:oliaLink penn:NNP; nif:oliaCategory penn:ProperNoun.
+<#Union-9>     nif:oliaLink penn:NNP; nif:oliaCategory penn:ProperNoun.
 
 # One could consume this at a higher level (OLIA), since it abstracts the particular NLP tagset.
 # penn-link.owl defines Penn classes as subclasses of OLIA classes, so you could consume OLIA only.
 # If you are producing a reduced tagset yourself (eg only ProperNouns), use the olia class directly.
 # Please note that nif:oliaLink doesn't apply here.
-<#Germany-1>   nif:oliaClass olia:ProperNoun.
-<#is-2>        nif:oliaClass [owl:unionOf (olia:FiniteVerb olia:StrictAuxiliaryVerb)],
+<#Germany-1>   nif:oliaCategory olia:ProperNoun.
+<#is-2>        nif:oliaCategory [owl:unionOf (olia:FiniteVerb olia:StrictAuxiliaryVerb)],
                              [a owl:Restriction; owl:onProperty olia:hasTense; owl:allValuesFrom olia:Present].
-<#the-3>       nif:oliaClass penn:Determiner. # "Not clear whether this corresponds to OLiA/EAGLES determiners"
-<#work-4>      nif:oliaClass olia:CommonNoun.
-<#horse-5>     nif:oliaClass olia:CommonNoun.
-<#of-6>        nif:oliaClass [owl:unionOf (olia:Preposition olia:SubordinatingConjunction)].
-<#the-7>       nif:oliaClass penn:Determiner. # "Not clear whether this corresponds to OLiA/EAGLES determiners"
-<#European-8>  nif:oliaClass olia:ProperNoun.
-<#Union-9>     nif:oliaClass olia:ProperNoun.
+<#the-3>       nif:oliaCategory penn:Determiner. # "Not clear whether this corresponds to OLiA/EAGLES determiners"
+<#work-4>      nif:oliaCategory olia:CommonNoun.
+<#horse-5>     nif:oliaCategory olia:CommonNoun.
+<#of-6>        nif:oliaCategory [owl:unionOf (olia:Preposition olia:SubordinatingConjunction)].
+<#the-7>       nif:oliaCategory penn:Determiner. # "Not clear whether this corresponds to OLiA/EAGLES determiners"
+<#European-8>  nif:oliaCategory olia:ProperNoun.
+<#Union-9>     nif:oliaCategory olia:ProperNoun.
 # As you see above, the OLIA abstraction doesn't work perfectly in all cases:
 # - penn:Determiner doesn't have an OLIA mapping
 # - penn:PrepositionOrSubordinatingConjunction maps to a unionOf (disjunction), but you can't query by such class
