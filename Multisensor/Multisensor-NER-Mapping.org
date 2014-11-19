@@ -1,0 +1,72 @@
+#+TITLE:   Multisensor NER Mapping
+#+AUTHOR:  vladimir.alexiev@ontotext.com
+#+DATE:    2014-11-19
+#+OPTIONS: H:5 num:t toc:t \n:nil @:t ::t |:t ^:{} -:t f:t *:t <:t
+#+OPTIONS: TeX:nil LaTeX:nil skip:nil d:nil todo:t pri:nil tags:not-in-toc
+
+* Prefixes
+#+BEGIN_SRC 
+@prefix dbo:      <http://dbpedia.org/ontology/>.
+@prefix dc:       <http://purl.org/dc/elements/1.1/>.
+@prefix foaf:     <http://xmlns.com/foaf/0.1/>.
+@prefix gr:       <http://purl.org/goodrelations/v1#>.
+@prefix nerd:     <http://nerd.eurecom.fr/ontology#>.
+@prefix nif:      <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#>.
+@prefix rdau:     <http://rdaregistry.info/Elements/u/>.
+@prefix time:     <http://www.w3.org/2006/time#>.
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#>.
+#+END_SRC
+
+* Mapping
+| *Class* /Property | *Type/enum*         | *Mapping*                                              | *Notes*                                                     |
+|-------------------+---------------------+--------------------------------------------------------+-------------------------------------------------------------|
+| *all*             |                     | nif:Word or nif:Phrase                                 |                                                             |
+| text              | string              | n/a                                                    | nif:anchorOf omitted                                        |
+| onset             | number              | nif:beginIndex                                         | start                                                       |
+| offset            | number              | nif:endIndex                                           | end                                                         |
+| *Person*          |                     | dbo:Person, foaf:Person, nerd:Person                   |                                                             |
+| firstname         | string              | foaf:firstName                                         |                                                             |
+| lastname          | string              | foaf:lastName                                          |                                                             |
+| gender            | masculine, feminine | rdau:gender                                            |                                                             |
+| occupation        | string              | rdau:professionOrOccupation                            | not dbo:occupation, which is a node (dbo:PersonFunction)    |
+| *Location*        | type=other          | dbo:Location, nerd:Location                            |                                                             |
+| *Location*        | type=country        | dbo:Country, nerd:Country                              |                                                             |
+| *Location*        | type=region         | dbo:Region, nerd:AdministrativeRegion                  |                                                             |
+| *Location*        | type=city           | dbo:City, nerd:City                                    |                                                             |
+| *Location*        | type=street         | dbo:Street, nerd:Location                              |                                                             |
+| *Organisation*    | type=institution    | dbo:Organisation, foaf:Organization, nerd:Organization |                                                             |
+| *Organisation*    | type=company        | dbo:Company, foaf:Company, nerd:Company                |                                                             |
+| *Product*         |                     | nerd:Product                                           |                                                             |
+| type              | string              | not yet                                                | don't know yet what makes sense here                        |
+| *Time*            |                     | time:Instant, nerd:Time                                | TODO: can you parse to XSD datetime components?             |
+| year              | string              |                                                        |                                                             |
+| month             | string              |                                                        |                                                             |
+| day               | string              |                                                        |                                                             |
+| time              | string              |                                                        |                                                             |
+| weekday           | stirng              |                                                        |                                                             |
+| rel               | string              |                                                        | relative expression, eg "the last three days"               |
+| other             | string              |                                                        | any other time expression, eg "Valentine's day"             |
+| *Amount*          | type=price          | gr:UnitPriceSpecification, nerd:Amount                 |                                                             |
+| unit              | string              | gr:hasCurrency                                         | Assume that for price, that is a currency                   |
+| amount            | number              | gr:hasCurrencyValue                                    |                                                             |
+| *Amount*          | type=unit           | nerd:Amount, gr:QuantitativeValue                      | How about percentage??                                      |
+| unit              | string              | gr:hasUnitOfMeasurement                                | Strictly speaking, UN/CEFACT Common Code (eg GRM for grams) |
+| amount            | number              | gr:hasValue                                            |                                                             |
+| *Name*            |                     | nerd:Thing                                             |                                                             |
+| type              | string              | dc:type                                                | a type if anything can be identified, otherwise empty       |
+
+* Notes & Todo [0/4]
+- Classes are uppercase, Properties are lowercase
+- NERD classes are attached to the word using itsrdf:taClassRef
+- Other classes are attached to the NE node (itsrdf:taIdentRef) using rdf:type.
+** TODO gender
+- rdau:gender is literal with no predefined values, but male/female are more usual than masculine/feminine
+- Check possible values of dbo:gender, and use that if possible
+** TODO dc:type
+This is a literal. Can we attach it to the word, or need to make a NE node?
+** TODO schema.org
+- Schema incorporates GoodRelations whole.
+- Maybe redo all this using schema.org instead of DBO, FOAF, RDAu.
+** TODO GoodRelations
+- Can we distinguish between gr:QuantitativeValue(Float|Integer), respectively hasValue(Float|Integer)?
+- Update for GoodRelations v2

@@ -1,7 +1,7 @@
 #+TITLE:     Linguistic LOD & Ontologies
 #+AUTHOR:    Vladimir Alexiev, Ontotext Corp
 #+EMAIL:     vladimir.alexiev@ontotext.com
-#+DATE:      2014-11-19
+#+DATE:      2014-11-20
 #+LANGUAGE:  en
 #+STARTUP:   noinlineimages content
 #+OPTIONS:   num:nil toc:2
@@ -283,7 +283,7 @@ Stanbol is only as good as the underlying engines
 - see [[http://www.slideshare.net/valexiev1/comparing-ontotext-kim-and-apache-stanbol][Comparing Ontotext KIM and Apache Stanbol]]: Stanbol has very bad precision and recall
 - This is old (Sep 2011), hopefully Stanbol has moved forward
 - But so has Ontotext semantic text analytics
-** FISE-NIF Analogs
+*** FISE-NIF Analogs
 - Each annotation has its own node, so FISE allows multiple engines to make annotation:
   it's the middle [[nif-representation-profiles][NIF representation profile]]
 Analogs (but the properties are in diffent nodes!)
@@ -433,7 +433,7 @@ Crowdsourced dictionaries of >300 languages. Eg [[http://en.wiktionary.org/wiki/
 [[./img/wiktionary-ancora.png]]
 ** UBY-Lemon
 #+ATTR_HTML: :style width:100px
-[[http://lemon-model.net/lexica/uby/][./img/uby-lemon.png]] [[http://www.lemon-model.net/lexica/uby/][Dataset]] that integrates in LEMON format:
+[[./img/uby-lemon.png]] [[http://www.lemon-model.net/lexica/uby/][Dataset]] that integrates in LEMON format:
 - FrameNet
 - OmegaWiki (English, German)
 - VerbNet

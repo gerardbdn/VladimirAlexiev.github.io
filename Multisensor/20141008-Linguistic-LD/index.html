@@ -27,6 +27,7 @@ img,table {display: block; margin-left:auto!important; margin-right:auto!importa
 td>img {width:250px; display:block; margin-left:auto!important; margin-right:auto!important; margin-top:0px!important; margin-bottom:0px!important}
 .reveal th, .reveal td {font-size:80%; border: 1px; border-style: solid solid; border-spacing:0; padding:0px 2px}
 span.clouditem {padding-left: 0.15em; padding-right: 0.15em; line-height: 90%}
+#table-of-contents {font-size:80%}
 </style>
 </head>
 <body>
@@ -34,100 +35,97 @@ span.clouditem {padding-left: 0.15em; padding-right: 0.15em; line-height: 90%}
 <div class="slides">
 <section>
 <h2>Linguistic LOD &amp; Ontologies</h2> <p class='center'>Vladimir Alexiev, Ontotext Corp</p> <p class='center'><img src="./img/llod-201405.png" style="height:300px"/></p> <p class='center'>Multisensor meeting, 2014-10-08, Bonn, Germany <br/>(<a href='http://VladimirAlexiev.github.io/Multisensor/Linguistic-LD.html'>HTML</a>, <a href='http://VladimirAlexiev.github.io/pres/Multisensor/Linguistic-LD.pdf'>PDF</a>, <a href='http://www.slideshare.net/valexiev1/linguistic-ld'>slideshare</a>) <p class='center'>Press <a href='javascript:Reveal.toggleOverview()'>O for overview</a>, <a href='../../reveal.js/reveal-help.html' target='_blank'>H for help</a>.<br/> Proudly made in plain text with <a href='https://github.com/hakimel/reveal.js/'>reveal.js</a>, <a href='https://github.com/yjwen/org-reveal'>org-reveal</a>, <a href='http://orgmode.org'>org-mode</a> and <a href='http://www.gnu.org/s/emacs/'>emacs</a>.</p></section>
-<section>
+<section id="table-of-contents">
 <h2>Table of Contents</h2><ul>
 <li>
-<a href="#sec-1">Motivation</a>
+<a href="#/sec-1">Motivation</a>
 <ul>
 <li>
-<a href="#sec-1-1">Artifacts</a>
+<a href="#/sec-1-1">Artifacts</a>
 </li>
 <li>
-<a href="#sec-1-2">Tag Cloud</a>
+<a href="#/sec-1-2">Tag Cloud</a>
 </li>
 <li>
-<a href="#sec-1-3">Zotero Bibliography</a>
+<a href="#/sec-1-3">Zotero Bibliography</a>
 </li>
 <li>
-<a href="#sec-1-4">Linguistic LOD (Sep 2013)</a>
+<a href="#/sec-1-4">Linguistic LOD (Sep 2013)</a>
 </li>
 <li>
-<a href="#sec-1-5">NIF Example 1</a>
+<a href="#/sec-1-5">NIF Example 1</a>
 </li>
 <li>
-<a href="#sec-1-6">NIF Example 2</a>
+<a href="#/sec-1-6">NIF Example 2</a>
 </li>
 </ul>
 <li>
-<a href="#sec-2">Linguistic ontologies</a>
+<a href="#/sec-2">Linguistic ontologies</a>
 <ul>
 <li>
-<a href="#sec-2-1">NIF: Overall Idea</a>
+<a href="#/sec-2-1">NIF: Overall Idea</a>
 </li>
 <li>
-<a href="#sec-2-2">OLIA and Constituents</a>
+<a href="#/sec-2-2">OLIA and Constituents</a>
 </li>
 <li>
-<a href="#sec-2-3">ITS2</a>
+<a href="#/sec-2-3">ITS2</a>
 </li>
 <li>
-<a href="#sec-2-4">NERD</a>
+<a href="#/sec-2-4">NERD</a>
 </li>
 <li>
-<a href="#sec-2-5">FISE (Stanbol)</a>
+<a href="#/sec-2-5">FISE (Stanbol)</a>
 </li>
 <li>
-<a href="#sec-2-6">FISE-NIF Analogs</a>
+<a href="#/sec-2-6">MARL</a>
 </li>
 <li>
-<a href="#sec-2-7">MARL</a>
+<a href="#/sec-2-7">Schema.org Review/Rating</a>
 </li>
 <li>
-<a href="#sec-2-8">Schema.org Review/Rating</a>
-</li>
-<li>
-<a href="#sec-2-9">SIOC</a>
+<a href="#/sec-2-8">SIOC</a>
 </li>
 </ul>
 <li>
-<a href="#sec-3">Lexical Ontologies &amp; Thesauri</a>
+<a href="#/sec-3">Lexical Ontologies &amp; Thesauri</a>
 <ul>
 <li>
-<a href="#sec-3-1">LEMON</a>
+<a href="#/sec-3-1">LEMON</a>
 </li>
 <li>
-<a href="#sec-3-2">OntoLex</a>
+<a href="#/sec-3-2">OntoLex</a>
 </li>
 <li>
-<a href="#sec-3-3">ISOcat</a>
+<a href="#/sec-3-3">ISOcat</a>
 </li>
 <li>
-<a href="#sec-3-4">LexInfo</a>
+<a href="#/sec-3-4">LexInfo</a>
 </li>
 <li>
-<a href="#sec-3-5">GOLD</a>
+<a href="#/sec-3-5">GOLD</a>
 </li>
 <li>
-<a href="#sec-3-6">TDS</a>
+<a href="#/sec-3-6">TDS</a>
 </li>
 </ul>
 <li>
-<a href="#sec-4">Linguistic Linked Datasets</a>
+<a href="#/sec-4">Linguistic Linked Datasets</a>
 <ul>
 <li>
-<a href="#sec-4-1">WordNet</a>
+<a href="#/sec-4-1">WordNet</a>
 </li>
 <li>
-<a href="#sec-4-2">Wiktionary</a>
+<a href="#/sec-4-2">Wiktionary</a>
 </li>
 <li>
-<a href="#sec-4-3">UBY-Lemon</a>
+<a href="#/sec-4-3">UBY-Lemon</a>
 </li>
 <li>
-<a href="#sec-4-4">BabelNet</a>
+<a href="#/sec-4-4">BabelNet</a>
 </li>
 <li>
-<a href="#sec-4-5">DBpedia Spotlight</a>
+<a href="#/sec-4-5">DBpedia Spotlight</a>
 </li>
 </ul>
 </section>
@@ -665,9 +663,9 @@ Stanbol is only as good as the underlying engines
 </li>
 </ul>
 </section>
-<section id="sec-2-6" >
+<section id="sec-2-5-1" >
 
-<h3>FISE-NIF Analogs</h3>
+<h4>FISE-NIF Analogs</h4>
 <ul class="org-ul">
 <li>Each annotation has its own node, so FISE allows multiple engines to make annotation:
 it's the middle <a href="#nif-representation-profiles">NIF representation profile</a>
@@ -732,7 +730,7 @@ Analogs (but the properties are in diffent nodes!)
 </tbody>
 </table>
 </section>
-<section id="sec-2-7" >
+<section id="sec-2-6" >
 
 <h3>MARL</h3>
 <p>
@@ -740,7 +738,7 @@ Analogs (but the properties are in diffent nodes!)
 </p>
 <img src="./img/marl-model-medium.png" alt="marl-model-medium.png" class="stretch" style="width:1000px" />
 </section>
-<section id="sec-2-8" >
+<section id="sec-2-7" >
 
 <h3>Schema.org Review/Rating</h3>
 <p>
@@ -748,7 +746,7 @@ Compare to schema.org <a href="http://schema.org/Review">Review</a>, <a href="ht
 </p>
 <img src="./img/schema-rating-review.png" alt="schema-rating-review.png" />
 </section>
-<section id="sec-2-9" >
+<section id="sec-2-8" >
 
 <h3>SIOC</h3>
 <p>
