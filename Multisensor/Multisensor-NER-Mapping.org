@@ -71,12 +71,13 @@ Notes
 
 * Example
 [[NIF-example3.ttl]] ([[NIF-example3.ttl.html]]) and [[NIF-example3.jsonld]] include examples for each of the named entity kinds.
-- We use "local entity URIs" but of course it's better to use DBpedia URIs if they can be
-  found (as explained in [[NIF-example2.ttl]])
-- We use entity URIs made from the entity text, replacing punctuation with "_". But this
+- I changed the "local entity URIs" to use hash notation (eg <#person=Angela_Merkel>) instead of slash (eg <#person=Angela_Merkel>)
+- The local entity URIs are made from the entity text, replacing punctuation with "_". But this
   may be insufficient, since the same text could mean different entities (if the NER can
   detect such situations)
-- We make up some word/phrase occurrences. We use nif:anchorOf to illustrate the
+- Of course it's better to use global DBpedia URIs if they can be found (as explained in
+  [[NIF-example2.ttl]])
+- I made up some word/phrase occurrences. I use nif:anchorOf to illustrate the
   word/phrase, and omit nif:beginIndex and nif:endIndex. In actual use, you'll do exactly
   the opposite (nif:anchorOf should be omitted since it's redundant)
 - In a couple cases I've embedded rdfs:comment and rdfs:seeAlso to illustrate a point. Of

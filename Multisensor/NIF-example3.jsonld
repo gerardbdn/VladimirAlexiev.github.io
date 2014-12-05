@@ -1,4 +1,4 @@
-21:13:00 WARN  riot                 :: [line: 80, col: 22] Lexical form '2050-05-01' not valid for datatype http://www.w3.org/2001/XMLSchema#gYearMonth
+21:27:09 WARN  riot                 :: [line: 80, col: 22] Lexical form '2050-05-01' not valid for datatype http://www.w3.org/2001/XMLSchema#gYearMonth
 {
   "@graph" : [ {
     "@id" : "dbp:May",
@@ -21,12 +21,12 @@
       "@value" : "Zondag"
     } ]
   }, {
-    "@id" : "http://www.multisensor.eu/amount/123_40_EUR",
+    "@id" : "http://www.multisensor.eu/content/some-file#amount=123_40_EUR",
     "@type" : "schema:PriceSpecification",
     "price" : "123.40",
     "priceCurrency" : "EUR"
   }, {
-    "@id" : "http://www.multisensor.eu/amount/123_40_meters",
+    "@id" : "http://www.multisensor.eu/content/some-file#amount=123_40_meters",
     "@type" : "schema:QuantitativeValue",
     "unitCode" : "MTR",
     "value" : "123.40"
@@ -34,7 +34,7 @@
     "@id" : "http://www.multisensor.eu/content/some-file#char=1,2",
     "anchorOf" : "Angela Merkel",
     "taClassRef" : "nerd:Person",
-    "taIdentRef" : "http://www.multisensor.eu/person/AngelaMerkel"
+    "taIdentRef" : "http://www.multisensor.eu/content/some-file#person=AngelaMerkel"
   }, {
     "@id" : "http://www.multisensor.eu/content/some-file#char=11,12",
     "anchorOf" : "the dark side of the Moon",
@@ -43,12 +43,12 @@
     "@id" : "http://www.multisensor.eu/content/some-file#char=13,14",
     "anchorOf" : "The United Nations",
     "taClassRef" : "nerd:Organization",
-    "taIdentRef" : "http://www.multisensor.eu/organisation/The_United_Nations"
+    "taIdentRef" : "http://www.multisensor.eu/content/some-file#organisation=The_United_Nations"
   }, {
     "@id" : "http://www.multisensor.eu/content/some-file#char=15,16",
     "anchorOf" : "Ontotext Corp",
     "taClassRef" : "nerd:Company",
-    "taIdentRef" : "http://www.multisensor.eu/organisation/Ontotext_Corp"
+    "taIdentRef" : "http://www.multisensor.eu/content/some-file#organisation=Ontotext_Corp"
   }, {
     "@id" : "http://www.multisensor.eu/content/some-file#char=17,18",
     "anchorOf" : "AEG Smart-Freeze Refrigerator",
@@ -57,17 +57,17 @@
     "@id" : "http://www.multisensor.eu/content/some-file#char=19,20",
     "anchorOf" : "2050",
     "taClassRef" : "nerd:Time",
-    "taIdentRef" : "http://www.multisensor.eu/time/2050"
+    "taIdentRef" : "http://www.multisensor.eu/content/some-file#time=2050"
   }, {
     "@id" : "http://www.multisensor.eu/content/some-file#char=21,22",
     "anchorOf" : [ "May 2050", "Mei" ],
     "taClassRef" : "nerd:Time",
-    "taIdentRef" : [ "http://www.multisensor.eu/time/May_2050", "dbp:May" ]
+    "taIdentRef" : [ "http://www.multisensor.eu/content/some-file#time=May_2050", "dbp:May" ]
   }, {
     "@id" : "http://www.multisensor.eu/content/some-file#char=23,24",
     "anchorOf" : [ "15 May 2050", "1:34pm" ],
     "taClassRef" : "nerd:Time",
-    "taIdentRef" : [ "http://www.multisensor.eu/time/15_May_2050", "http://www.multisensor.eu/time/1_34pm" ]
+    "taIdentRef" : [ "http://www.multisensor.eu/content/some-file#time=15_May_2050", "http://www.multisensor.eu/content/some-file#time=1_34pm" ]
   }, {
     "@id" : "http://www.multisensor.eu/content/some-file#char=27,28",
     "anchorOf" : "Zondag",
@@ -81,7 +81,7 @@
     "@id" : "http://www.multisensor.eu/content/some-file#char=3,4",
     "anchorOf" : "Germany",
     "taClassRef" : "nerd:Country",
-    "taIdentRef" : "http://www.multisensor.eu/location/Germany"
+    "taIdentRef" : "http://www.multisensor.eu/content/some-file#location=Germany"
   }, {
     "@id" : "http://www.multisensor.eu/content/some-file#char=31,32",
     "anchorOf" : "Valentine's day",
@@ -90,12 +90,12 @@
     "@id" : "http://www.multisensor.eu/content/some-file#char=33,34",
     "anchorOf" : "123,40 EUR",
     "taClassRef" : "nerd:Amount",
-    "taIdentRef" : "http://www.multisensor.eu/amount/123_40_EUR"
+    "taIdentRef" : "http://www.multisensor.eu/content/some-file#amount=123_40_EUR"
   }, {
     "@id" : "http://www.multisensor.eu/content/some-file#char=35,36",
     "anchorOf" : "123,40 meters",
     "taClassRef" : "nerd:Amount",
-    "taIdentRef" : "http://www.multisensor.eu/amount/123_40_meters"
+    "taIdentRef" : "http://www.multisensor.eu/content/some-file#amount=123_40_meters"
   }, {
     "@id" : "http://www.multisensor.eu/content/some-file#char=37,38",
     "anchorOf" : "Dodo",
@@ -105,39 +105,39 @@
     "@id" : "http://www.multisensor.eu/content/some-file#char=5,6",
     "anchorOf" : "Hesse region",
     "taClassRef" : "nerd:AdministrativeRegion",
-    "taIdentRef" : "http://www.multisensor.eu/location/Hesse"
+    "taIdentRef" : "http://www.multisensor.eu/content/some-file#location=Hesse"
   }, {
     "@id" : "http://www.multisensor.eu/content/some-file#char=7,8",
     "anchorOf" : "Darmstadt",
     "taClassRef" : "nerd:City",
-    "taIdentRef" : "http://www.multisensor.eu/location/Darmstadt"
+    "taIdentRef" : "http://www.multisensor.eu/content/some-file#location=Darmstadt"
   }, {
     "@id" : "http://www.multisensor.eu/content/some-file#char=9,10",
     "anchorOf" : "135 Tsarigradsko Shosse Blvd.",
     "taClassRef" : "nerd:Location",
-    "taIdentRef" : "http://www.multisensor.eu/location/135_Tsarigradsko_Shosse_Blvd"
+    "taIdentRef" : "http://www.multisensor.eu/content/some-file#location=135_Tsarigradsko_Shosse_Blvd"
   }, {
-    "@id" : "http://www.multisensor.eu/location/135_Tsarigradsko_Shosse_Blvd",
+    "@id" : "http://www.multisensor.eu/content/some-file#location=135_Tsarigradsko_Shosse_Blvd",
     "@type" : "schema:PostalAddress",
     "streetAddress" : "135 Tsarigradsko Shosse Blvd."
   }, {
-    "@id" : "http://www.multisensor.eu/location/Germany",
+    "@id" : "http://www.multisensor.eu/content/some-file#location=Germany",
     "@type" : "dbo:Country",
     "name" : "Germany"
   }, {
-    "@id" : "http://www.multisensor.eu/location/Hesse",
+    "@id" : "http://www.multisensor.eu/content/some-file#location=Hesse",
     "@type" : [ "dbo:Region", "dbo:City" ],
     "name" : [ "Hesse", "Darmstadt" ]
   }, {
-    "@id" : "http://www.multisensor.eu/organisation/Ontotext_Corp",
+    "@id" : "http://www.multisensor.eu/content/some-file#organisation=Ontotext_Corp",
     "@type" : [ "dbo:Company", "foaf:Company" ],
     "name" : "Ontotext Corp"
   }, {
-    "@id" : "http://www.multisensor.eu/organisation/The_United_Nations",
+    "@id" : "http://www.multisensor.eu/content/some-file#organisation=The_United_Nations",
     "@type" : [ "dbo:Organisation", "foaf:Organization" ],
     "name" : "The United Nations"
   }, {
-    "@id" : "http://www.multisensor.eu/person/AngelaMerkel",
+    "@id" : "http://www.multisensor.eu/content/some-file#person=AngelaMerkel",
     "@type" : [ "dbo:Person", "foaf:Person" ],
     "gender" : "dbp:Female",
     "professionOrOccupation" : {
@@ -148,40 +148,35 @@
     "lastName" : "Merkel",
     "name" : "Angela Merkel"
   }, {
-    "@id" : "http://www.multisensor.eu/time/15_May_2050",
+    "@id" : "http://www.multisensor.eu/content/some-file#time=15_May_2050",
     "@type" : "time:Instant",
     "time:inXSDDateTime" : {
       "@type" : "xsd:date",
       "@value" : "2050-05-15"
     }
   }, {
-    "@id" : "http://www.multisensor.eu/time/1_34pm",
+    "@id" : "http://www.multisensor.eu/content/some-file#time=1_34pm",
     "@type" : "time:Instant",
     "comment" : "Convert to xsd:time, which means complete it to minutes",
-    "inXSDDateTime" : "13:34:00"
+    "time:inXSDDateTime" : {
+      "@type" : "xsd:time",
+      "@value" : "13:34:00"
+    }
   }, {
-    "@id" : "http://www.multisensor.eu/time/2050",
+    "@id" : "http://www.multisensor.eu/content/some-file#time=2050",
     "@type" : "time:Instant",
     "time:inXSDDateTime" : {
       "@type" : "xsd:gYear",
       "@value" : "2050"
     }
   }, {
-    "@id" : "http://www.multisensor.eu/time/May_2050",
+    "@id" : "http://www.multisensor.eu/content/some-file#time=May_2050",
     "@type" : "time:Instant",
     "comment" : "The correct value is 2050-05 but my JSONLD convertor throws exception",
     "seeAlso" : "https://github.com/jsonld-java/jsonld-java/issues/130",
-    "time:inXSDDateTime" : {
-      "@type" : "xsd:gYearMonth",
-      "@value" : "2050-05-01"
-    }
+    "inXSDDateTime" : "2050-05-01"
   } ],
   "@context" : {
-    "comment" : "http://www.w3.org/2000/01/rdf-schema#comment",
-    "inXSDDateTime" : {
-      "@id" : "http://www.w3.org/2006/time#inXSDDateTime",
-      "@type" : "http://www.w3.org/2001/XMLSchema#time"
-    },
     "anchorOf" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#anchorOf",
     "taClassRef" : {
       "@id" : "http://www.w3.org/2005/11/its/rdf#taClassRef",
@@ -191,22 +186,22 @@
       "@id" : "http://www.w3.org/2005/11/its/rdf#taIdentRef",
       "@type" : "@id"
     },
-    "name" : "http://xmlns.com/foaf/0.1/name",
+    "inXSDDateTime" : {
+      "@id" : "http://www.w3.org/2006/time#inXSDDateTime",
+      "@type" : "http://www.w3.org/2001/XMLSchema#gYearMonth"
+    },
+    "comment" : "http://www.w3.org/2000/01/rdf-schema#comment",
     "seeAlso" : {
       "@id" : "http://www.w3.org/2000/01/rdf-schema#seeAlso",
       "@type" : "@id"
     },
     "type" : "http://purl.org/dc/elements/1.1/type",
+    "streetAddress" : "http://schema.org/streetAddress",
+    "label" : "http://www.w3.org/2000/01/rdf-schema#label",
+    "name" : "http://xmlns.com/foaf/0.1/name",
     "priceCurrency" : "http://schema.org/priceCurrency",
     "price" : {
       "@id" : "http://schema.org/price",
-      "@type" : "http://www.w3.org/2001/XMLSchema#decimal"
-    },
-    "label" : "http://www.w3.org/2000/01/rdf-schema#label",
-    "streetAddress" : "http://schema.org/streetAddress",
-    "unitCode" : "http://schema.org/unitCode",
-    "value" : {
-      "@id" : "http://schema.org/value",
       "@type" : "http://www.w3.org/2001/XMLSchema#decimal"
     },
     "firstName" : "http://xmlns.com/foaf/0.1/firstName",
@@ -216,6 +211,11 @@
       "@type" : "@id"
     },
     "professionOrOccupation" : "http://rdaregistry.info/Elements/u/professionOrOccupation",
+    "unitCode" : "http://schema.org/unitCode",
+    "value" : {
+      "@id" : "http://schema.org/value",
+      "@type" : "http://www.w3.org/2001/XMLSchema#decimal"
+    },
     "schema" : "http://schema.org/",
     "dc" : "http://purl.org/dc/elements/1.1/",
     "nerd" : "http://nerd.eurecom.fr/ontology#",

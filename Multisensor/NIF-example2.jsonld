@@ -50,7 +50,7 @@
     "endIndex" : "659",
     "referenceContext" : "http://www.multisensor.eu/content/Guardian-built.txt#char=0,6603",
     "taClassRef" : "nerd:Time",
-    "taIdentRef" : "http://www.multisensor.eu/time/2050"
+    "taIdentRef" : "http://www.multisensor.eu/content/Guardian-built.txt#time=2050"
   }, {
     "@id" : "http://www.multisensor.eu/content/Guardian-built.txt#char=800,813",
     "@type" : "nif:Phrase",
@@ -60,16 +60,16 @@
     "confidence" : "1.0",
     "taAnnotatorsRef" : "NER-extraction|http://linguatec.com",
     "taClassRef" : "nerd:Person",
-    "taIdentRef" : "http://www.multisensor.eu/person/AngelaMerkel"
+    "taIdentRef" : "http://www.multisensor.eu/content/Guardian-built.txt#person=AngelaMerkel"
   }, {
-    "@id" : "http://www.multisensor.eu/person/AngelaMerkel",
+    "@id" : "http://www.multisensor.eu/content/Guardian-built.txt#person=AngelaMerkel",
     "@type" : [ "dbo:Person", "foaf:Person" ],
     "gender" : "dbp:Female",
     "firstName" : "Angela",
     "lastName" : "Merkel",
     "name" : "Angela Merkel"
   }, {
-    "@id" : "http://www.multisensor.eu/time/2050",
+    "@id" : "http://www.multisensor.eu/content/Guardian-built.txt#time=2050",
     "@type" : "time:Instant",
     "inXSDDateTime" : "2050"
   } ],
@@ -103,10 +103,6 @@
       "@id" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#word",
       "@type" : "@id"
     },
-    "inXSDDateTime" : {
-      "@id" : "http://www.w3.org/2006/time#inXSDDateTime",
-      "@type" : "http://www.w3.org/2001/XMLSchema#gYear"
-    },
     "language" : {
       "@id" : "http://purl.org/dc/terms/language",
       "@type" : "@id"
@@ -120,13 +116,6 @@
       "@id" : "http://www.w3.org/2005/11/its/rdf#confidence",
       "@type" : "http://www.w3.org/2001/XMLSchema#decimal"
     },
-    "name" : "http://xmlns.com/foaf/0.1/name",
-    "firstName" : "http://xmlns.com/foaf/0.1/firstName",
-    "lastName" : "http://xmlns.com/foaf/0.1/lastName",
-    "gender" : {
-      "@id" : "http://dbpedia.org/ontology/gender",
-      "@type" : "@id"
-    },
     "sentence" : {
       "@id" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#sentence",
       "@type" : "@id"
@@ -138,6 +127,17 @@
     "previousWord" : {
       "@id" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#previousWord",
       "@type" : "@id"
+    },
+    "name" : "http://xmlns.com/foaf/0.1/name",
+    "firstName" : "http://xmlns.com/foaf/0.1/firstName",
+    "lastName" : "http://xmlns.com/foaf/0.1/lastName",
+    "gender" : {
+      "@id" : "http://dbpedia.org/ontology/gender",
+      "@type" : "@id"
+    },
+    "inXSDDateTime" : {
+      "@id" : "http://www.w3.org/2006/time#inXSDDateTime",
+      "@type" : "http://www.w3.org/2001/XMLSchema#gYear"
     },
     "isString" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#isString",
     "sourceUrl" : {

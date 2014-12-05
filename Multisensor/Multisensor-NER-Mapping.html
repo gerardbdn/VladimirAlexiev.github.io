@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Multisensor NER Mapping</title>
-<!-- 2014-12-05 Fri 21:14 -->
+<!-- 2014-12-05 Fri 21:26 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="vladimir.alexiev@ontotext.com" />
@@ -473,14 +473,16 @@ Notes
 <i>NIF-example3.ttl</i> (<i>NIF-example3.ttl.html</i>) and <i>NIF-example3.jsonld</i> include examples for each of the named entity kinds.
 </p>
 <ul class="org-ul">
-<li>We use "local entity URIs" but of course it's better to use DBpedia URIs if they can be
-found (as explained in <i>NIF-example2.ttl</i>)
+<li>I changed the "local entity URIs" to use hash notation (eg &lt;#person=Angela_Merkel&gt;) instead of slash (eg &lt;#person=Angela_Merkel&gt;)
 </li>
-<li>We use entity URIs made from the entity text, replacing punctuation with "_". But this
+<li>The local entity URIs are made from the entity text, replacing punctuation with "_". But this
 may be insufficient, since the same text could mean different entities (if the NER can
 detect such situations)
 </li>
-<li>We make up some word/phrase occurrences. We use nif:anchorOf to illustrate the
+<li>Of course it's better to use global DBpedia URIs if they can be found (as explained in
+<i>NIF-example2.ttl</i>)
+</li>
+<li>I made up some word/phrase occurrences. I use nif:anchorOf to illustrate the
 word/phrase, and omit nif:beginIndex and nif:endIndex. In actual use, you'll do exactly
 the opposite (nif:anchorOf should be omitted since it's redundant)
 </li>
@@ -494,7 +496,7 @@ course, don't emit such in the actual JSONLD
 <div id="postamble" class="status">
 <p class="date">Date: 2014-12-05</p>
 <p class="author">Author: vladimir.alexiev@ontotext.com</p>
-<p class="date">Created: 2014-12-05 Fri 21:14</p>
+<p class="date">Created: 2014-12-05 Fri 21:26</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.91.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7c)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
