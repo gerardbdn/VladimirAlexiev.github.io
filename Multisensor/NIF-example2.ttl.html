@@ -54,6 +54,7 @@
 <span class="comment"># Get a lot of the used prefixes from:
 # http://prefix.cc/dbo,dc,dct,foaf,itsrdf,nerd,nif,olia,owl,time,xsd.ttl  # dbr,fise,penn,yago
 </span><span class="keyword">@prefix</span> <span class="type">dbo:</span><span class="constant"> </span>     <span class="function-name">&lt;http://dbpedia.org/ontology/&gt;</span>.
+<span class="keyword">@prefix</span> <span class="type">dbp:</span><span class="constant"> </span>     <span class="function-name">&lt;<a href="http://dbpedia.org/resource/">http://dbpedia.org/resource/</a>&gt;</span>.
 <span class="keyword">@prefix</span> <span class="type">dc:</span><span class="constant"> </span>      <span class="function-name">&lt;http://purl.org/dc/elements/1.1/&gt;</span>.
 <span class="keyword">@prefix</span> <span class="type">dct:</span><span class="constant"> </span>     <span class="function-name">&lt;http://purl.org/dc/terms/&gt;</span>.
 <span class="keyword">@prefix</span> <span class="type">foaf:</span><span class="constant"> </span>    <span class="function-name">&lt;http://xmlns.com/foaf/0.1/&gt;</span>.
@@ -119,17 +120,17 @@
 </span>
 <span class="comment">## Person
 </span>
-<span class="function-name">&lt;/person/AngelaMerkel&gt;</span> <span class="keyword">a</span> <span class="type">dbo:</span><span class="constant">Person,</span> <span class="type">foaf:</span><span class="constant">Person,</span> <span class="type">nerd:</span><span class="constant">Person</span>;
+<span class="function-name">&lt;/person/AngelaMerkel&gt;</span> <span class="keyword">a</span> <span class="type">dbo:</span><span class="constant">Person,</span> <span class="type">foaf:</span><span class="constant">Person</span>;
   <span class="comment"># the props below are from foaf:, or we could use pure dbo: !!! should decide
 </span>  <span class="type">foaf:</span><span class="constant">name</span> <span class="string">"Angela Merkel"</span>;
   <span class="type">foaf:</span><span class="constant">firstName</span> <span class="string">"Angela"</span>; <span class="type">foaf:</span><span class="constant">lastName</span> <span class="string">"Merkel"</span>;
-  <span class="type">foaf:</span><span class="constant">gender</span> <span class="string">"female"</span>.
+  <span class="type">dbo:</span><span class="constant">gender</span> <span class="type">dbp:</span><span class="constant">Female</span>.
   <span class="comment"># no "count" I'm afraid, but can be obtained with a query:
 </span>  <span class="comment"># select (count(?x) as ?c) {?c itsrdf:taIdentRef &lt;person/AngelaMerkel&gt;}
 </span>
 <span class="function-name">&lt;#char=800,813&gt;</span><span class="comment"> </span><span class="keyword">a</span><span class="comment"> </span><span class="type">nif:</span><span class="constant">Phrase</span><span class="comment">; </span><span class="type">nif:</span><span class="constant">referenceContext</span><span class="comment"> </span><span class="function-name">&lt;#char=0,6603&gt;</span><span class="comment">;
 </span>  <span class="type">nif:</span><span class="constant">beginIndex</span> <span class="string">"800"</span><span class="type">^^xsd:</span><span class="constant">nonNegativeInteger</span>;  <span class="type">nif:</span><span class="constant">endIndex</span> <span class="string">"813"</span><span class="type">^^xsd:</span><span class="constant">nonNegativeInteger</span>;
-  <span class="type">nif:</span><span class="constant">anchorOf</span> <span class="string">"Angela Merkel"</span>; <span class="comment"># The occurence text
+  <span class="comment"># nif:anchorOf "Angela Merkel"; # skip occurence text
 </span>  <span class="comment"># nif:sentence &lt;#char=796,879&gt;; # Is the enclosing sentence useful???
 </span>  <span class="type">itsrdf:</span><span class="constant">taClassRef</span> <span class="type">nerd:</span><span class="constant">Person</span>;
   <span class="type">itsrdf:</span><span class="constant">taIdentRef</span> <span class="function-name">&lt;/person/AngelaMerkel&gt;</span>;
@@ -139,22 +140,20 @@
 </span>
 <span class="comment">## Time
 </span>
-<span class="function-name">&lt;/time/2050&gt;</span> <span class="keyword">a</span> <span class="type">time:</span><span class="constant">Instant,</span> <span class="type">nerd:</span><span class="constant">Time</span>;
+<span class="function-name">&lt;/time/2050&gt;</span> <span class="keyword">a</span> <span class="type">time:</span><span class="constant">Instant</span>;
   <span class="type">time:</span><span class="constant">inXSDDateTime</span> <span class="string">"2050"</span><span class="type">^^xsd:</span><span class="constant">gYear</span>. <span class="comment"># or </span><span class="type">xsd:</span><span class="constant">gYearMonth</span><span class="comment"> or </span><span class="type">xsd:</span><span class="comment">date
 </span>
-<span class="function-name">&lt;#char=593,597&gt;</span><span class="comment"> </span><span class="keyword">a</span><span class="comment"> </span><span class="type">nif:</span><span class="constant">Word</span><span class="type">;nif:</span><span class="constant">referenceContext</span><span class="comment"> </span><span class="function-name">&lt;#char=0,6603&gt;</span><span class="comment">;
+<span class="function-name">&lt;#char=593,597&gt;</span><span class="comment"> </span><span class="keyword">a</span><span class="comment"> </span><span class="type">nif:</span><span class="constant">Word</span><span class="comment">; </span><span class="type">nif:</span><span class="constant">referenceContext</span><span class="comment"> </span><span class="function-name">&lt;#char=0,6603&gt;</span><span class="comment">;
 </span>  <span class="type">nif:</span><span class="constant">beginIndex</span> <span class="string">"593"</span><span class="type">^^xsd:</span><span class="constant">nonNegativeInteger</span>;  <span class="type">nif:</span><span class="constant">endIndex</span> <span class="string">"597"</span><span class="type">^^xsd:</span><span class="constant">nonNegativeInteger</span>;
   <span class="type">nif:</span><span class="constant">anchorOf</span> <span class="string">"2050"</span>;
   <span class="type">itsrdf:</span><span class="constant">taClassRef</span> <span class="type">nerd:</span><span class="constant">Time</span>;
   <span class="type">itsrdf:</span><span class="constant">taIdentRef</span> <span class="function-name">&lt;time/2050&gt;</span>.
 
-<span class="function-name">&lt;#char=655,659&gt;</span><span class="comment"> </span><span class="keyword">a</span><span class="comment"> </span><span class="type">nif:</span><span class="constant">Word</span><span class="type">;nif:</span><span class="constant">referenceContext</span><span class="comment"> </span><span class="function-name">&lt;#char=0,6603&gt;</span><span class="comment">;
+<span class="function-name">&lt;#char=655,659&gt;</span><span class="comment"> </span><span class="keyword">a</span><span class="comment"> </span><span class="type">nif:</span><span class="constant">Word</span><span class="comment">; </span><span class="type">nif:</span><span class="constant">referenceContext</span><span class="comment"> </span><span class="function-name">&lt;#char=0,6603&gt;</span><span class="comment">;
 </span>  <span class="type">nif:</span><span class="constant">beginIndex</span> <span class="string">"655"</span><span class="type">^^xsd:</span><span class="constant">nonNegativeInteger</span>;  <span class="type">nif:</span><span class="constant">endIndex</span> <span class="string">"659"</span><span class="type">^^xsd:</span><span class="constant">nonNegativeInteger</span>;
   <span class="type">nif:</span><span class="constant">anchorOf</span> <span class="string">"2050"</span>;
   <span class="type">itsrdf:</span><span class="constant">taClassRef</span> <span class="type">nerd:</span><span class="constant">Time</span>;
   <span class="type">itsrdf:</span><span class="constant">taIdentRef</span> <span class="function-name">&lt;/time/2050&gt;</span>.
-  
-<span class="comment">## The NERD and external ontology classes (DBpedia, FOAF..) should be selected carefully
-</span></pre>
+</pre>
   </body>
 </html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.47 in css mode. -->
+<html>
+  <head>
+    <title>NIF-example3.ttl</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #000000;
+        background-color: #f5f5dc;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #b22222;
+      }
+      .constant {
+        /* font-lock-constant-face */
+        color: #008b8b;
+      }
+      .function-name {
+        /* font-lock-function-name-face */
+        color: #0000ff;
+      }
+      .keyword {
+        /* font-lock-keyword-face */
+        color: #a020f0;
+      }
+      .string {
+        /* font-lock-string-face */
+        color: #8b2252;
+      }
+      .type {
+        /* font-lock-type-face */
+        color: #228b22;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># Various kinds of Named Entities as per Multisensor-NER-Mapping.html
+</span>
+<span class="keyword">@prefix</span> <span class="type">dbo:</span><span class="constant"> </span>     <span class="function-name">&lt;<a href="http://dbpedia.org/ontology/">http://dbpedia.org/ontology/</a>&gt;</span>.
+<span class="keyword">@prefix</span> <span class="type">dbp:</span><span class="constant"> </span>     <span class="function-name">&lt;<a href="http://dbpedia.org/resource/">http://dbpedia.org/resource/</a>&gt;</span>.
+<span class="keyword">@prefix</span> <span class="type">dc:</span><span class="constant"> </span>      <span class="function-name">&lt;<a href="http://purl.org/dc/elements/1.1/">http://purl.org/dc/elements/1.1/</a>&gt;</span>.
+<span class="keyword">@prefix</span> <span class="type">foaf:</span><span class="constant"> </span>    <span class="function-name">&lt;<a href="http://xmlns.com/foaf/0.1/">http://xmlns.com/foaf/0.1/</a>&gt;</span>.
+<span class="keyword">@prefix</span> <span class="type">itsrdf:</span><span class="constant"> </span>  <span class="function-name">&lt;http://www.w3.org/2005/11/its/rdf#&gt;</span><span class="comment">.
+</span><span class="keyword">@prefix</span> <span class="type">nerd:</span><span class="constant"> </span>    <span class="function-name">&lt;<a href="http://nerd.eurecom.fr/ontology">http://nerd.eurecom.fr/ontology</a>#&gt;</span><span class="comment">.
+</span><span class="keyword">@prefix</span> <span class="type">nif:</span><span class="constant"> </span>     <span class="function-name">&lt;<a href="http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core">http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core</a>#&gt;</span><span class="comment">.
+</span><span class="keyword">@prefix</span> <span class="type">rdau:</span><span class="constant"> </span>    <span class="function-name">&lt;<a href="http://rdaregistry.info/Elements/u/">http://rdaregistry.info/Elements/u/</a>&gt;</span>.
+<span class="keyword">@prefix</span> <span class="type">rdfs:</span><span class="constant"> </span>    <span class="function-name">&lt;http://www.w3.org/2000/01/rdf-schema#&gt;</span><span class="comment">.
+</span><span class="keyword">@prefix</span> <span class="type">schema:</span><span class="constant"> </span>  <span class="function-name">&lt;<a href="http://schema.org/">http://schema.org/</a>&gt;</span>.
+<span class="keyword">@prefix</span> <span class="type">time:</span><span class="constant"> </span>    <span class="function-name">&lt;<a href="http://www.w3.org/2006/time">http://www.w3.org/2006/time</a>#&gt;</span><span class="comment">.   # seeAlso </span><span class="type"><a href="http://www.w3.org/TR/owl-time">http:</a></span><span class="constant"><a href="http://www.w3.org/TR/owl-time">//www</a></span><span class="comment"><a href="http://www.w3.org/TR/owl-time">.w3.org/TR/owl-time</a>
+</span><span class="keyword">@prefix</span> <span class="type">xsd:</span><span class="constant"> </span>     <span class="function-name">&lt;<a href="http://www.w3.org/2001/XMLSchema">http://www.w3.org/2001/XMLSchema</a>#&gt;</span><span class="comment">.
+</span><span class="keyword">@prefix</span> <span class="type">yago:</span><span class="constant"> </span>    <span class="function-name">&lt;<a href="http://dbpedia.org/class/yago/">http://dbpedia.org/class/yago/</a>&gt;</span> .
+
+@base <span class="function-name">&lt;http://www.multisensor.eu/content/some-file&gt;</span>.
+
+<span class="function-name">&lt;#char=1,2&gt;</span><span class="comment"> </span><span class="type">nif:</span><span class="constant">anchorOf</span><span class="comment"> </span><span class="string">"Angela Merkel"</span><span class="comment">;
+</span>  <span class="type">itsrdf:</span><span class="constant">taClassRef</span> <span class="type">nerd:</span><span class="constant">Person</span>;
+  <span class="type">itsrdf:</span><span class="constant">taIdentRef</span> <span class="function-name">&lt;/person/AngelaMerkel&gt;</span>.
+<span class="function-name">&lt;/person/AngelaMerkel&gt;</span> <span class="keyword">a</span> <span class="type">dbo:</span><span class="constant">Person,</span> <span class="type">foaf:</span><span class="constant">Person</span>;
+  <span class="type">foaf:</span><span class="constant">name</span> <span class="string">"Angela Merkel"</span>;
+  <span class="type">foaf:</span><span class="constant">firstName</span> <span class="string">"Angela"</span>; <span class="type">foaf:</span><span class="constant">lastName</span> <span class="string">"Merkel"</span>;
+  <span class="type">dbo:</span><span class="constant">gender</span> <span class="type">dbp:</span><span class="constant">Female</span>;
+  <span class="type">rdau:</span><span class="constant">professionOrOccupation</span> <span class="string">"Bundeskanzlerin"</span>@de.
+
+<span class="function-name">&lt;#char=3,4&gt;</span><span class="comment"> </span><span class="type">nif:</span><span class="constant">anchorOf</span><span class="comment"> </span><span class="string">"Germany"</span><span class="comment">;
+</span>  <span class="type">itsrdf:</span><span class="constant">taClassRef</span> <span class="type">nerd:</span><span class="constant">Country</span>;
+  <span class="type">itsrdf:</span><span class="constant">taIdentRef</span> <span class="function-name">&lt;/location/Germany&gt;</span>.
+<span class="function-name">&lt;/location/Germany&gt;</span> <span class="keyword">a</span> <span class="type">dbo:</span><span class="constant">Country</span>;
+  <span class="type">foaf:</span><span class="constant">name</span> <span class="string">"Germany"</span>.
+
+<span class="function-name">&lt;#char=5,6&gt;</span><span class="comment"> </span><span class="type">nif:</span><span class="constant">anchorOf</span><span class="comment"> </span><span class="string">"Hesse region"</span><span class="comment">;
+</span>  <span class="type">itsrdf:</span><span class="constant">taClassRef</span> <span class="type">nerd:</span><span class="constant">AdministrativeRegion</span>;
+  <span class="type">itsrdf:</span><span class="constant">taIdentRef</span> <span class="function-name">&lt;/location/Hesse&gt;</span>.
+<span class="function-name">&lt;/location/Hesse&gt;</span> <span class="keyword">a</span> <span class="type">dbo:</span><span class="constant">Region</span>;
+  <span class="type">foaf:</span><span class="constant">name</span> <span class="string">"Hesse"</span>.
+
+<span class="function-name">&lt;#char=7,8&gt;</span><span class="comment"> </span><span class="type">nif:</span><span class="constant">anchorOf</span><span class="comment"> </span><span class="string">"Darmstadt"</span><span class="comment">;
+</span>  <span class="type">itsrdf:</span><span class="constant">taClassRef</span> <span class="type">nerd:</span><span class="constant">City</span>;
+  <span class="type">itsrdf:</span><span class="constant">taIdentRef</span> <span class="function-name">&lt;/location/Darmstadt&gt;</span>.
+<span class="function-name">&lt;/location/Hesse&gt;</span> <span class="keyword">a</span> <span class="type">dbo:</span><span class="constant">City</span>;
+  <span class="type">foaf:</span><span class="constant">name</span> <span class="string">"Darmstadt"</span>.
+
+<span class="function-name">&lt;#char=9,10&gt;</span><span class="comment"> </span><span class="type">nif:</span><span class="constant">anchorOf</span><span class="comment"> </span><span class="string">"135 Tsarigradsko Shosse Blvd."</span><span class="comment">;
+</span>  <span class="type">itsrdf:</span><span class="constant">taClassRef</span> <span class="type">nerd:</span><span class="constant">Location</span>;
+  <span class="type">itsrdf:</span><span class="constant">taIdentRef</span> <span class="function-name">&lt;/location/135_Tsarigradsko_Shosse_Blvd&gt;</span>.
+<span class="function-name">&lt;/location/135_Tsarigradsko_Shosse_Blvd&gt;</span> <span class="keyword">a</span> <span class="type">schema:</span><span class="constant">PostalAddress</span>;
+  <span class="type">schema:</span><span class="constant">streetAddress</span> <span class="string">"135 Tsarigradsko Shosse Blvd."</span>.
+
+<span class="function-name">&lt;#char=11,12&gt;</span><span class="comment"> </span><span class="type">nif:</span><span class="constant">anchorOf</span><span class="comment"> </span><span class="string">"the dark side of the Moon"</span><span class="comment">;
+</span>  <span class="type">itsrdf:</span><span class="constant">taClassRef</span> <span class="type">nerd:</span><span class="constant">Location</span>.
+
+<span class="function-name">&lt;#char=13,14&gt;</span><span class="comment"> </span><span class="type">nif:</span><span class="constant">anchorOf</span><span class="comment"> </span><span class="string">"The United Nations"</span><span class="comment">;
+</span>  <span class="type">itsrdf:</span><span class="constant">taClassRef</span> <span class="type">nerd:</span><span class="constant">Organization</span>;
+  <span class="type">itsrdf:</span><span class="constant">taIdentRef</span> <span class="function-name">&lt;/organisation/The_United_Nations&gt;</span>.
+<span class="function-name">&lt;/organisation/The_United_Nations&gt;</span> <span class="keyword">a</span> <span class="type">dbo:</span><span class="constant">Organisation,</span> <span class="type">foaf:</span><span class="constant">Organization</span>;
+  <span class="type">foaf:</span><span class="constant">name</span> <span class="string">"The United Nations"</span>.
+
+<span class="function-name">&lt;#char=15,16&gt;</span><span class="comment"> </span><span class="type">nif:</span><span class="constant">anchorOf</span><span class="comment"> </span><span class="string">"Ontotext Corp"</span><span class="comment">;
+</span>  <span class="type">itsrdf:</span><span class="constant">taClassRef</span> <span class="type">nerd:</span><span class="constant">Company</span>;
+  <span class="type">itsrdf:</span><span class="constant">taIdentRef</span> <span class="function-name">&lt;/organisation/Ontotext_Corp&gt;</span>.
+<span class="function-name">&lt;/organisation/Ontotext_Corp&gt;</span> <span class="keyword">a</span> <span class="type">dbo:</span><span class="constant">Company,</span> <span class="type">foaf:</span><span class="constant">Company</span>;
+  <span class="type">foaf:</span><span class="constant">name</span> <span class="string">"Ontotext Corp"</span>.
+
+<span class="function-name">&lt;#char=17,18&gt;</span><span class="comment"> </span><span class="type">nif:</span><span class="constant">anchorOf</span><span class="comment"> </span><span class="string">"AEG Smart-Freeze Refrigerator"</span><span class="comment">;
+</span>  <span class="type">itsrdf:</span><span class="constant">taClassRef</span> <span class="type">nerd:</span><span class="constant">Product</span>.
+
+<span class="function-name">&lt;#char=19,20&gt;</span><span class="comment"> </span><span class="type">nif:</span><span class="constant">anchorOf</span><span class="comment"> </span><span class="string">"2050"</span><span class="comment">;
+</span>  <span class="type">itsrdf:</span><span class="constant">taClassRef</span> <span class="type">nerd:</span><span class="constant">Time</span>;
+  <span class="type">itsrdf:</span><span class="constant">taIdentRef</span> <span class="function-name">&lt;/time/2050&gt;</span>.
+<span class="function-name">&lt;/time/2050&gt;</span> <span class="keyword">a</span> <span class="type">time:</span><span class="constant">Instant</span>;
+  <span class="type">time:</span><span class="constant">inXSDDateTime</span> <span class="string">"2050"</span><span class="type">^^xsd:</span><span class="constant">gYear</span>.
+
+<span class="function-name">&lt;#char=21,22&gt;</span><span class="comment"> </span><span class="type">nif:</span><span class="constant">anchorOf</span><span class="comment"> </span><span class="string">"May 2050"</span><span class="comment">;
+</span>  <span class="type">itsrdf:</span><span class="constant">taClassRef</span> <span class="type">nerd:</span><span class="constant">Time</span>;
+  <span class="type">itsrdf:</span><span class="constant">taIdentRef</span> <span class="function-name">&lt;/time/May_2050&gt;</span>.
+<span class="function-name">&lt;/time/May_2050&gt;</span> <span class="keyword">a</span> <span class="type">time:</span><span class="constant">Instant</span><span class="type">;
+</span>  <span class="type">time:</span><span class="constant">inXSDDateTime</span> <span class="string">"2050-05-01"</span><span class="type">^^xsd:</span><span class="constant">gYearMonth</span>;
+  <span class="type">rdfs:</span><span class="constant">comment</span> <span class="string">"The correct value is 2050-05 but my JSONLD convertor throws exception"</span>;
+  <span class="type">rdfs:</span><span class="constant">seeAlso</span> <span class="function-name">&lt;https://github.com/jsonld-java/jsonld-java/issues/130&gt;</span>.
+
+<span class="function-name">&lt;#char=21,22&gt;</span><span class="comment"> </span><span class="type">nif:</span><span class="constant">anchorOf</span><span class="comment"> </span><span class="string">"Mei"</span><span class="comment">;
+</span>  <span class="type">itsrdf:</span><span class="constant">taClassRef</span> <span class="type">nerd:</span><span class="constant">Time</span>;
+  <span class="type">itsrdf:</span><span class="constant">taIdentRef</span> <span class="type">dbp:</span><span class="constant">May</span><span class="type">.
+dbp:</span><span class="constant">May</span> <span class="keyword">a</span> <span class="type">yago:</span><span class="constant">Months</span>;
+  <span class="type">rdfs:</span><span class="constant">label</span> <span class="string">"May"</span>@en, <span class="string">"Mei"</span>@de.
+
+<span class="function-name">&lt;#char=23,24&gt;</span><span class="comment"> </span><span class="type">nif:</span><span class="constant">anchorOf</span><span class="comment"> </span><span class="string">"15 May 2050"</span><span class="comment">;
+</span>  <span class="type">itsrdf:</span><span class="constant">taClassRef</span> <span class="type">nerd:</span><span class="constant">Time</span>;
+  <span class="type">itsrdf:</span><span class="constant">taIdentRef</span> <span class="function-name">&lt;/time/15_May_2050&gt;</span>.
+<span class="function-name">&lt;/time/15_May_2050&gt;</span> <span class="keyword">a</span> <span class="type">time:</span><span class="constant">Instant</span>;
+  <span class="type">time:</span><span class="constant">inXSDDateTime</span> <span class="string">"2050-05-15"</span><span class="type">^^xsd:</span><span class="constant">date</span>.
+
+<span class="function-name">&lt;#char=23,24&gt;</span><span class="comment"> </span><span class="type">nif:</span><span class="constant">anchorOf</span><span class="comment"> </span><span class="string">"1:34pm"</span><span class="comment">;
+</span>  <span class="type">itsrdf:</span><span class="constant">taClassRef</span> <span class="type">nerd:</span><span class="constant">Time</span>;
+  <span class="type">itsrdf:</span><span class="constant">taIdentRef</span> <span class="function-name">&lt;/time/1_34pm&gt;</span>.
+<span class="function-name">&lt;/time/1_34pm&gt;</span> <span class="keyword">a</span> <span class="type">time:</span><span class="constant">Instant</span>;
+  <span class="type">rdfs:</span><span class="constant">comment</span> <span class="string">"Convert to xsd:time, which means complete it to minutes"</span>;
+  <span class="type">time:</span><span class="constant">inXSDDateTime</span> <span class="string">"13:34:00"</span><span class="constant">^^xsd:time</span>.
+
+<span class="function-name">&lt;#char=27,28&gt;</span><span class="comment"> </span><span class="type">nif:</span><span class="constant">anchorOf</span><span class="comment"> </span><span class="string">"Zondag"</span><span class="comment">;
+</span>  <span class="type">itsrdf:</span><span class="constant">taClassRef</span> <span class="type">nerd:</span><span class="constant">Time</span>;
+  <span class="type">itsrdf:</span><span class="constant">taIdentRef</span> <span class="type">dbp:</span><span class="constant">Sunday</span><span class="type">.
+dbp:</span><span class="constant">Sunday</span> <span class="keyword">a</span> <span class="type">yago:</span><span class="constant">DaysOfTheWeek</span>;
+  <span class="type">rdfs:</span><span class="constant">label</span> <span class="string">"Sunday"</span>@en, <span class="string">"Zondag"</span>@de.
+
+<span class="function-name">&lt;#char=29,30&gt;</span><span class="comment"> </span><span class="type">nif:</span><span class="constant">anchorOf</span><span class="comment"> </span><span class="string">"the last three days"</span><span class="comment">;
+</span>  <span class="type">itsrdf:</span><span class="constant">taClassRef</span> <span class="type">nerd:</span><span class="constant">Time</span>.
+
+<span class="function-name">&lt;#char=31,32&gt;</span><span class="comment"> </span><span class="type">nif:</span><span class="constant">anchorOf</span><span class="comment"> </span><span class="string">"Valentine's day"</span><span class="comment">;
+</span>  <span class="type">itsrdf:</span><span class="constant">taClassRef</span> <span class="type">nerd:</span><span class="constant">Time</span>.
+
+<span class="function-name">&lt;#char=33,34&gt;</span><span class="comment"> </span><span class="type">nif:</span><span class="constant">anchorOf</span><span class="comment"> </span><span class="string">"123,40 EUR"</span><span class="comment">;
+</span>  <span class="type">itsrdf:</span><span class="constant">taClassRef</span> <span class="type">nerd:</span><span class="constant">Amount</span>;
+  <span class="type">itsrdf:</span><span class="constant">taIdentRef</span> <span class="function-name">&lt;/amount/123_40_EUR&gt;</span>.
+<span class="function-name">&lt;/amount/123_40_EUR&gt;</span> <span class="keyword">a</span> <span class="type">schema:</span><span class="constant">PriceSpecification</span>;
+  <span class="type">schema:</span><span class="constant">priceCurrency</span> <span class="string">"EUR"</span>;
+  <span class="type">schema:</span><span class="constant">price</span> 123.40.
+
+<span class="function-name">&lt;#char=35,36&gt;</span><span class="comment"> </span><span class="type">nif:</span><span class="constant">anchorOf</span><span class="comment"> </span><span class="string">"123,40 meters"</span><span class="comment">;
+</span>  <span class="type">itsrdf:</span><span class="constant">taClassRef</span> <span class="type">nerd:</span><span class="constant">Amount</span>;
+  <span class="type">itsrdf:</span><span class="constant">taIdentRef</span> <span class="function-name">&lt;/amount/123_40_meters&gt;</span>.
+<span class="function-name">&lt;/amount/123_40_meters&gt;</span> <span class="keyword">a</span> <span class="type">schema:</span><span class="constant">QuantitativeValue</span>;
+  <span class="type">schema:</span><span class="constant">unitCode</span> <span class="string">"MTR"</span>;
+  <span class="type">schema:</span><span class="constant">value</span> 123.40.
+
+<span class="function-name">&lt;#char=37,38&gt;</span><span class="comment"> </span><span class="type">nif:</span><span class="constant">anchorOf</span><span class="comment"> </span><span class="string">"Dodo"</span><span class="comment">;
+</span>  <span class="type">itsrdf:</span><span class="constant">taClassRef</span> <span class="type">nerd:</span><span class="constant">Thing</span>;
+  <span class="type">dc:</span><span class="constant">type</span> <span class="string">"mythical creature"</span>.
+</pre>
+  </body>
+</html>

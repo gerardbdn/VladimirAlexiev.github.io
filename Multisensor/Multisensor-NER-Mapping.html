@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Multisensor NER Mapping</title>
-<!-- 2014-11-19 Wed 19:45 -->
+<!-- 2014-12-05 Fri 21:14 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="vladimir.alexiev@ontotext.com" />
@@ -88,6 +88,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
+
 <style>th, td {border-width: 1px; border-style: none solid; border-spacing:0; padding:0px 2px}</style>
 <script type="text/javascript">
 /*
@@ -145,14 +146,7 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#sec-1">1. Prefixes</a></li>
 <li><a href="#sec-2">2. Mapping</a></li>
-<li><a href="#sec-3">3. Notes &amp; Todo <code>[0/4]</code></a>
-<ul>
-<li><a href="#sec-3-1">3.1. <span class="todo TODO">TODO</span> gender</a></li>
-<li><a href="#sec-3-2">3.2. <span class="todo TODO">TODO</span> dc:type</a></li>
-<li><a href="#sec-3-3">3.3. <span class="todo TODO">TODO</span> schema.org</a></li>
-<li><a href="#sec-3-4">3.4. <span class="todo TODO">TODO</span> GoodRelations</a></li>
-</ul>
-</li>
+<li><a href="#sec-3">3. Example</a></li>
 </ul>
 </div>
 </div>
@@ -160,17 +154,22 @@ for the JavaScript code in this tag.
 <div id="outline-container-sec-1" class="outline-2">
 <h2 id="sec-1"><span class="section-number-2">1</span> Prefixes</h2>
 <div class="outline-text-2" id="text-1">
-<pre class="example">
-@prefix dbo:      &lt;http://dbpedia.org/ontology/&gt;.
+<div class="org-src-container">
+
+<pre class="src src-ttl">@prefix dbo:      &lt;http://dbpedia.org/ontology/&gt;.
+@prefix dbp:      &lt;http://dbpedia.org/resource/&gt;.
 @prefix dc:       &lt;http://purl.org/dc/elements/1.1/&gt;.
 @prefix foaf:     &lt;http://xmlns.com/foaf/0.1/&gt;.
-@prefix gr:       &lt;http://purl.org/goodrelations/v1#&gt;.
+@prefix itsrdf:   &lt;http://www.w3.org/2005/11/its/rdf#&gt;.
 @prefix nerd:     &lt;http://nerd.eurecom.fr/ontology#&gt;.
 @prefix nif:      &lt;http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#&gt;.
 @prefix rdau:     &lt;http://rdaregistry.info/Elements/u/&gt;.
-@prefix time:     &lt;http://www.w3.org/2006/time#&gt;.
+@prefix schema:   &lt;http://schema.org/&gt;.
+@prefix time:     &lt;http://www.w3.org/2006/time#&gt;.   # seeAlso http://www.w3.org/TR/owl-time
 @prefix xsd:      &lt;http://www.w3.org/2001/XMLSchema#&gt;.
+@prefix yago:     &lt;http://dbpedia.org/class/yago/&gt; .
 </pre>
+</div>
 </div>
 </div>
 
@@ -229,7 +228,14 @@ for the JavaScript code in this tag.
 <tr>
 <td class="left"><b>Person</b></td>
 <td class="left">&#xa0;</td>
-<td class="left">dbo:Person, foaf:Person, nerd:Person</td>
+<td class="left">dbo:Person, foaf:Person; nerd:Person</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">test</td>
+<td class="left">string</td>
+<td class="left">foaf:name</td>
 <td class="left">&#xa0;</td>
 </tr>
 
@@ -249,64 +255,64 @@ for the JavaScript code in this tag.
 
 <tr>
 <td class="left">gender</td>
-<td class="left">masculine, feminine</td>
-<td class="left">rdau:gender</td>
-<td class="left">&#xa0;</td>
+<td class="left">male, female</td>
+<td class="left">dbo:gender</td>
+<td class="left">dbp:Male, dbp:Female</td>
 </tr>
 
 <tr>
 <td class="left">occupation</td>
 <td class="left">string</td>
 <td class="left">rdau:professionOrOccupation</td>
-<td class="left">not dbo:occupation, which is a node (dbo:PersonFunction)</td>
+<td class="left">dbo:occupation and dbo:profession are object props</td>
 </tr>
 
 <tr>
 <td class="left"><b>Location</b></td>
 <td class="left">type=other</td>
-<td class="left">dbo:Location, nerd:Location</td>
-<td class="left">&#xa0;</td>
+<td class="left">nerd:Location</td>
+<td class="left">No need to use dbo:Location if you can't identify the type</td>
 </tr>
 
 <tr>
 <td class="left"><b>Location</b></td>
 <td class="left">type=country</td>
-<td class="left">dbo:Country, nerd:Country</td>
+<td class="left">dbo:Country; nerd:Country</td>
 <td class="left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="left"><b>Location</b></td>
 <td class="left">type=region</td>
-<td class="left">dbo:Region, nerd:AdministrativeRegion</td>
+<td class="left">dbo:Region; nerd:AdministrativeRegion</td>
 <td class="left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="left"><b>Location</b></td>
 <td class="left">type=city</td>
-<td class="left">dbo:City, nerd:City</td>
+<td class="left">dbo:City; nerd:City</td>
 <td class="left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="left"><b>Location</b></td>
 <td class="left">type=street</td>
-<td class="left">dbo:Street, nerd:Location</td>
-<td class="left">&#xa0;</td>
+<td class="left">schema:PostalAddress; nerd:Location</td>
+<td class="left">Put text in schema:streetAddress</td>
 </tr>
 
 <tr>
 <td class="left"><b>Organisation</b></td>
 <td class="left">type=institution</td>
-<td class="left">dbo:Organisation, foaf:Organization, nerd:Organization</td>
+<td class="left">dbo:Organisation, foaf:Organization; nerd:Organization</td>
 <td class="left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="left"><b>Organisation</b></td>
 <td class="left">type=company</td>
-<td class="left">dbo:Company, foaf:Company, nerd:Company</td>
+<td class="left">dbo:Company, foaf:Company; nerd:Company</td>
 <td class="left">&#xa0;</td>
 </tr>
 
@@ -327,98 +333,98 @@ for the JavaScript code in this tag.
 <tr>
 <td class="left"><b>Time</b></td>
 <td class="left">&#xa0;</td>
-<td class="left">time:Instant, nerd:Time</td>
+<td class="left">time:Instant; nerd:Time</td>
 <td class="left">TODO: can you parse to XSD datetime components?</td>
 </tr>
 
 <tr>
 <td class="left">year</td>
 <td class="left">string</td>
-<td class="left">&#xa0;</td>
+<td class="left">time:Instant; nerd:Time</td>
 <td class="left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="left">month</td>
 <td class="left">string</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
+<td class="left">time:Instant OR yago:Months; nerd:Time</td>
+<td class="left">if yago:Months then dbp:January&#x2026;</td>
 </tr>
 
 <tr>
 <td class="left">day</td>
 <td class="left">string</td>
-<td class="left">&#xa0;</td>
+<td class="left">time:Instant; nerd:Time</td>
 <td class="left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="left">time</td>
 <td class="left">string</td>
-<td class="left">&#xa0;</td>
+<td class="left">time:Instant; nerd:Time</td>
 <td class="left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="left">weekday</td>
-<td class="left">stirng</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
+<td class="left">string</td>
+<td class="left">yago:DaysOfTheWeek; nerd:Time</td>
+<td class="left">dbp:Sunday,&#x2026; Put text in rdfs:label</td>
 </tr>
 
 <tr>
 <td class="left">rel</td>
 <td class="left">string</td>
-<td class="left">&#xa0;</td>
+<td class="left">nerd:Time</td>
 <td class="left">relative expression, eg "the last three days"</td>
 </tr>
 
 <tr>
 <td class="left">other</td>
 <td class="left">string</td>
-<td class="left">&#xa0;</td>
+<td class="left">nerd:Time</td>
 <td class="left">any other time expression, eg "Valentine's day"</td>
 </tr>
 
 <tr>
 <td class="left"><b>Amount</b></td>
 <td class="left">type=price</td>
-<td class="left">gr:UnitPriceSpecification, nerd:Amount</td>
+<td class="left">schema:PriceSpecification; nerd:Amount</td>
 <td class="left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="left">unit</td>
 <td class="left">string</td>
-<td class="left">gr:hasCurrency</td>
-<td class="left">Assume that for price, that is a currency</td>
+<td class="left">schema:priceCurrency</td>
+<td class="left">3-letter ISO 4217 format</td>
 </tr>
 
 <tr>
 <td class="left">amount</td>
 <td class="left">number</td>
-<td class="left">gr:hasCurrencyValue</td>
-<td class="left">&#xa0;</td>
+<td class="left">schema:price</td>
+<td class="left">"." as decimal separator</td>
 </tr>
 
 <tr>
 <td class="left"><b>Amount</b></td>
 <td class="left">type=unit</td>
-<td class="left">nerd:Amount, gr:QuantitativeValue</td>
+<td class="left">schema:QuantitativeValue; nerd:Amount</td>
 <td class="left">How about percentage??</td>
 </tr>
 
 <tr>
 <td class="left">unit</td>
 <td class="left">string</td>
-<td class="left">gr:hasUnitOfMeasurement</td>
+<td class="left">schema:unitCode</td>
 <td class="left">Strictly speaking, UN/CEFACT Common Code (eg GRM for grams)</td>
 </tr>
 
 <tr>
 <td class="left">amount</td>
 <td class="left">number</td>
-<td class="left">gr:hasValue</td>
+<td class="left">schema:value</td>
 <td class="left">&#xa0;</td>
 </tr>
 
@@ -437,12 +443,10 @@ for the JavaScript code in this tag.
 </tr>
 </tbody>
 </table>
-</div>
-</div>
 
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> Notes &amp; Todo <code>[0/4]</code></h2>
-<div class="outline-text-2" id="text-3">
+<p>
+Notes
+</p>
 <ul class="org-ul">
 <li>Classes are uppercase, Properties are lowercase
 </li>
@@ -450,55 +454,47 @@ for the JavaScript code in this tag.
 </li>
 <li>Other classes are attached to the NE node (itsrdf:taIdentRef) using rdf:type.
 </li>
-</ul>
-</div>
-<div id="outline-container-sec-3-1" class="outline-3">
-<h3 id="sec-3-1"><span class="section-number-3">3.1</span> <span class="todo TODO">TODO</span> gender</h3>
-<div class="outline-text-3" id="text-3-1">
-<ul class="org-ul">
-<li>rdau:gender is literal with no predefined values, but male/female are more usual than masculine/feminine
+<li>the Amount mapping uses schema.org classes/properties, which were borrowed from GoodRelations
 </li>
-<li>Check possible values of dbo:gender, and use that if possible
+<li>dbo:gender is an object property, though it doesn't specify the values to use
+</li>
+<li>dc:type is a literal. We attach it to the word directly
+</li>
+<li>don't forget to include itsrdf:taAnnotatorsRef "NER-extraction|<a href="http://linguatec.com">http://linguatec.com</a>" for each
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-sec-3-2" class="outline-3">
-<h3 id="sec-3-2"><span class="section-number-3">3.2</span> <span class="todo TODO">TODO</span> dc:type</h3>
-<div class="outline-text-3" id="text-3-2">
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Example</h2>
+<div class="outline-text-2" id="text-3">
 <p>
-This is a literal. Can we attach it to the word, or need to make a NE node?
+<i>NIF-example3.ttl</i> (<i>NIF-example3.ttl.html</i>) and <i>NIF-example3.jsonld</i> include examples for each of the named entity kinds.
 </p>
-</div>
-</div>
-<div id="outline-container-sec-3-3" class="outline-3">
-<h3 id="sec-3-3"><span class="section-number-3">3.3</span> <span class="todo TODO">TODO</span> schema.org</h3>
-<div class="outline-text-3" id="text-3-3">
 <ul class="org-ul">
-<li>Schema incorporates GoodRelations whole.
+<li>We use "local entity URIs" but of course it's better to use DBpedia URIs if they can be
+found (as explained in <i>NIF-example2.ttl</i>)
 </li>
-<li>Maybe redo all this using schema.org instead of DBO, FOAF, RDAu.
+<li>We use entity URIs made from the entity text, replacing punctuation with "_". But this
+may be insufficient, since the same text could mean different entities (if the NER can
+detect such situations)
+</li>
+<li>We make up some word/phrase occurrences. We use nif:anchorOf to illustrate the
+word/phrase, and omit nif:beginIndex and nif:endIndex. In actual use, you'll do exactly
+the opposite (nif:anchorOf should be omitted since it's redundant)
+</li>
+<li>In a couple cases I've embedded rdfs:comment and rdfs:seeAlso to illustrate a point. Of
+course, don't emit such in the actual JSONLD
 </li>
 </ul>
-</div>
-</div>
-<div id="outline-container-sec-3-4" class="outline-3">
-<h3 id="sec-3-4"><span class="section-number-3">3.4</span> <span class="todo TODO">TODO</span> GoodRelations</h3>
-<div class="outline-text-3" id="text-3-4">
-<ul class="org-ul">
-<li>Can we distinguish between gr:QuantitativeValue(Float|Integer), respectively hasValue(Float|Integer)?
-</li>
-<li>Update for GoodRelations v2
-</li>
-</ul>
-</div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: 2014-11-19</p>
+<p class="date">Date: 2014-12-05</p>
 <p class="author">Author: vladimir.alexiev@ontotext.com</p>
-<p class="date">Created: 2014-11-19 Wed 19:45</p>
+<p class="date">Created: 2014-12-05 Fri 21:14</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.91.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7c)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

@@ -4,6 +4,7 @@
 # Get a lot of the used prefixes from:
 # http://prefix.cc/dbo,dc,dct,foaf,itsrdf,nerd,nif,olia,owl,time,xsd.ttl  # dbr,fise,penn,yago
 @prefix dbo:      <http://dbpedia.org/ontology/>.
+@prefix dbp:      <http://dbpedia.org/resource/>.
 @prefix dc:       <http://purl.org/dc/elements/1.1/>.
 @prefix dct:      <http://purl.org/dc/terms/>.
 @prefix foaf:     <http://xmlns.com/foaf/0.1/>.
@@ -69,17 +70,17 @@
 
 ## Person
 
-</person/AngelaMerkel> a dbo:Person, foaf:Person, nerd:Person;
+</person/AngelaMerkel> a dbo:Person, foaf:Person;
   # the props below are from foaf:, or we could use pure dbo: !!! should decide
   foaf:name "Angela Merkel";
   foaf:firstName "Angela"; foaf:lastName "Merkel";
-  foaf:gender "female".
+  dbo:gender dbp:Female.
   # no "count" I'm afraid, but can be obtained with a query:
   # select (count(?x) as ?c) {?c itsrdf:taIdentRef <person/AngelaMerkel>}
 
 <#char=800,813> a nif:Phrase; nif:referenceContext <#char=0,6603>;
   nif:beginIndex "800"^^xsd:nonNegativeInteger;  nif:endIndex "813"^^xsd:nonNegativeInteger;
-  nif:anchorOf "Angela Merkel"; # The occurence text
+  # nif:anchorOf "Angela Merkel"; # skip occurence text
   # nif:sentence <#char=796,879>; # Is the enclosing sentence useful???
   itsrdf:taClassRef nerd:Person;
   itsrdf:taIdentRef </person/AngelaMerkel>;
@@ -89,19 +90,17 @@
 
 ## Time
 
-</time/2050> a time:Instant, nerd:Time;
+</time/2050> a time:Instant;
   time:inXSDDateTime "2050"^^xsd:gYear. # or xsd:gYearMonth or xsd:date
 
-<#char=593,597> a nif:Word;nif:referenceContext <#char=0,6603>;
+<#char=593,597> a nif:Word; nif:referenceContext <#char=0,6603>;
   nif:beginIndex "593"^^xsd:nonNegativeInteger;  nif:endIndex "597"^^xsd:nonNegativeInteger;
   nif:anchorOf "2050";
   itsrdf:taClassRef nerd:Time;
   itsrdf:taIdentRef <time/2050>.
 
-<#char=655,659> a nif:Word;nif:referenceContext <#char=0,6603>;
+<#char=655,659> a nif:Word; nif:referenceContext <#char=0,6603>;
   nif:beginIndex "655"^^xsd:nonNegativeInteger;  nif:endIndex "659"^^xsd:nonNegativeInteger;
   nif:anchorOf "2050";
   itsrdf:taClassRef nerd:Time;
   itsrdf:taIdentRef </time/2050>.
-  
-## The NERD and external ontology classes (DBpedia, FOAF..) should be selected carefully
