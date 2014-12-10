@@ -1,4 +1,4 @@
-21:27:09 WARN  riot                 :: [line: 80, col: 22] Lexical form '2050-05-01' not valid for datatype http://www.w3.org/2001/XMLSchema#gYearMonth
+14:49:53 WARN  riot                 :: [line: 80, col: 22] Lexical form '2050-05-01' not valid for datatype http://www.w3.org/2001/XMLSchema#gYearMonth
 {
   "@graph" : [ {
     "@id" : "dbp:May",
@@ -34,7 +34,7 @@
     "@id" : "http://www.multisensor.eu/content/some-file#char=1,2",
     "anchorOf" : "Angela Merkel",
     "taClassRef" : "nerd:Person",
-    "taIdentRef" : "http://www.multisensor.eu/content/some-file#person=AngelaMerkel"
+    "taIdentRef" : "http://www.multisensor.eu/content/some-file#person=Angela_Merkel"
   }, {
     "@id" : "http://www.multisensor.eu/content/some-file#char=11,12",
     "anchorOf" : "the dark side of the Moon",
@@ -60,14 +60,19 @@
     "taIdentRef" : "http://www.multisensor.eu/content/some-file#time=2050"
   }, {
     "@id" : "http://www.multisensor.eu/content/some-file#char=21,22",
-    "anchorOf" : [ "May 2050", "Mei" ],
+    "anchorOf" : "May 2050",
     "taClassRef" : "nerd:Time",
-    "taIdentRef" : [ "http://www.multisensor.eu/content/some-file#time=May_2050", "dbp:May" ]
+    "taIdentRef" : "http://www.multisensor.eu/content/some-file#time=May_2050"
   }, {
     "@id" : "http://www.multisensor.eu/content/some-file#char=23,24",
-    "anchorOf" : [ "15 May 2050", "1:34pm" ],
+    "anchorOf" : "15 May 2050",
     "taClassRef" : "nerd:Time",
-    "taIdentRef" : [ "http://www.multisensor.eu/content/some-file#time=15_May_2050", "http://www.multisensor.eu/content/some-file#time=1_34pm" ]
+    "taIdentRef" : "http://www.multisensor.eu/content/some-file#time=15_May_2050"
+  }, {
+    "@id" : "http://www.multisensor.eu/content/some-file#char=25,26",
+    "anchorOf" : "1:34pm",
+    "taClassRef" : "nerd:Time",
+    "taIdentRef" : "http://www.multisensor.eu/content/some-file#time=1_34pm"
   }, {
     "@id" : "http://www.multisensor.eu/content/some-file#char=27,28",
     "anchorOf" : "Zondag",
@@ -102,6 +107,16 @@
     "type" : "mythical creature",
     "taClassRef" : "nerd:Thing"
   }, {
+    "@id" : "http://www.multisensor.eu/content/some-file#char=39,40",
+    "anchorOf" : "15 May 2050 1:34pm",
+    "taClassRef" : "nerd:Time",
+    "taIdentRef" : "http://www.multisensor.eu/content/some-file#time=15_May_2050_1_34pm"
+  }, {
+    "@id" : "http://www.multisensor.eu/content/some-file#char=41,42",
+    "anchorOf" : "Mei",
+    "taClassRef" : "nerd:Time",
+    "taIdentRef" : "dbp:May"
+  }, {
     "@id" : "http://www.multisensor.eu/content/some-file#char=5,6",
     "anchorOf" : "Hesse region",
     "taClassRef" : "nerd:AdministrativeRegion",
@@ -121,13 +136,17 @@
     "@type" : "schema:PostalAddress",
     "streetAddress" : "135 Tsarigradsko Shosse Blvd."
   }, {
+    "@id" : "http://www.multisensor.eu/content/some-file#location=Darmstadt",
+    "@type" : "dbo:City",
+    "name" : "Darmstadt"
+  }, {
     "@id" : "http://www.multisensor.eu/content/some-file#location=Germany",
     "@type" : "dbo:Country",
     "name" : "Germany"
   }, {
     "@id" : "http://www.multisensor.eu/content/some-file#location=Hesse",
-    "@type" : [ "dbo:Region", "dbo:City" ],
-    "name" : [ "Hesse", "Darmstadt" ]
+    "@type" : "dbo:Region",
+    "name" : "Hesse"
   }, {
     "@id" : "http://www.multisensor.eu/content/some-file#organisation=Ontotext_Corp",
     "@type" : [ "dbo:Company", "foaf:Company" ],
@@ -137,7 +156,7 @@
     "@type" : [ "dbo:Organisation", "foaf:Organization" ],
     "name" : "The United Nations"
   }, {
-    "@id" : "http://www.multisensor.eu/content/some-file#person=AngelaMerkel",
+    "@id" : "http://www.multisensor.eu/content/some-file#person=Angela_Merkel",
     "@type" : [ "dbo:Person", "foaf:Person" ],
     "gender" : "dbp:Female",
     "professionOrOccupation" : {
@@ -154,6 +173,10 @@
       "@type" : "xsd:date",
       "@value" : "2050-05-15"
     }
+  }, {
+    "@id" : "http://www.multisensor.eu/content/some-file#time=15_May_2050_1_34pm",
+    "@type" : "time:Instant",
+    "inXSDDateTime" : "2050-05-15T13:34:00"
   }, {
     "@id" : "http://www.multisensor.eu/content/some-file#time=1_34pm",
     "@type" : "time:Instant",
@@ -174,7 +197,10 @@
     "@type" : "time:Instant",
     "comment" : "The correct value is 2050-05 but my JSONLD convertor throws exception",
     "seeAlso" : "https://github.com/jsonld-java/jsonld-java/issues/130",
-    "inXSDDateTime" : "2050-05-01"
+    "time:inXSDDateTime" : {
+      "@type" : "xsd:gYearMonth",
+      "@value" : "2050-05-01"
+    }
   } ],
   "@context" : {
     "anchorOf" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#anchorOf",
@@ -188,7 +214,7 @@
     },
     "inXSDDateTime" : {
       "@id" : "http://www.w3.org/2006/time#inXSDDateTime",
-      "@type" : "http://www.w3.org/2001/XMLSchema#gYearMonth"
+      "@type" : "http://www.w3.org/2001/XMLSchema#datetime"
     },
     "comment" : "http://www.w3.org/2000/01/rdf-schema#comment",
     "seeAlso" : {
@@ -204,6 +230,11 @@
       "@id" : "http://schema.org/price",
       "@type" : "http://www.w3.org/2001/XMLSchema#decimal"
     },
+    "unitCode" : "http://schema.org/unitCode",
+    "value" : {
+      "@id" : "http://schema.org/value",
+      "@type" : "http://www.w3.org/2001/XMLSchema#decimal"
+    },
     "firstName" : "http://xmlns.com/foaf/0.1/firstName",
     "lastName" : "http://xmlns.com/foaf/0.1/lastName",
     "gender" : {
@@ -211,11 +242,6 @@
       "@type" : "@id"
     },
     "professionOrOccupation" : "http://rdaregistry.info/Elements/u/professionOrOccupation",
-    "unitCode" : "http://schema.org/unitCode",
-    "value" : {
-      "@id" : "http://schema.org/value",
-      "@type" : "http://www.w3.org/2001/XMLSchema#decimal"
-    },
     "schema" : "http://schema.org/",
     "dc" : "http://purl.org/dc/elements/1.1/",
     "nerd" : "http://nerd.eurecom.fr/ontology#",

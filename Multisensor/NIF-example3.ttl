@@ -18,8 +18,8 @@
 
 <#char=1,2> nif:anchorOf "Angela Merkel";
   itsrdf:taClassRef nerd:Person;
-  itsrdf:taIdentRef <#person=AngelaMerkel>.
-<#person=AngelaMerkel> a dbo:Person, foaf:Person;
+  itsrdf:taIdentRef <#person=Angela_Merkel>.
+<#person=Angela_Merkel> a dbo:Person, foaf:Person;
   foaf:name "Angela Merkel";
   foaf:firstName "Angela"; foaf:lastName "Merkel";
   dbo:gender dbp:Female;
@@ -40,7 +40,7 @@
 <#char=7,8> nif:anchorOf "Darmstadt";
   itsrdf:taClassRef nerd:City;
   itsrdf:taIdentRef <#location=Darmstadt>.
-<#location=Hesse> a dbo:City;
+<#location=Darmstadt> a dbo:City;
   foaf:name "Darmstadt".
 
 <#char=9,10> nif:anchorOf "135 Tsarigradsko Shosse Blvd.";
@@ -81,7 +81,7 @@
   rdfs:comment "The correct value is 2050-05 but my JSONLD convertor throws exception";
   rdfs:seeAlso <https://github.com/jsonld-java/jsonld-java/issues/130>.
 
-<#char=21,22> nif:anchorOf "Mei";
+<#char=41,42> nif:anchorOf "Mei";
   itsrdf:taClassRef nerd:Time;
   itsrdf:taIdentRef dbp:May.
 dbp:May a yago:Months;
@@ -93,13 +93,19 @@ dbp:May a yago:Months;
 <#time=15_May_2050> a time:Instant;
   time:inXSDDateTime "2050-05-15"^^xsd:date.
 
-<#char=23,24> nif:anchorOf "1:34pm";
+<#char=25,26> nif:anchorOf "1:34pm";
   itsrdf:taClassRef nerd:Time;
   itsrdf:taIdentRef <#time=1_34pm>.
 <#time=1_34pm> a time:Instant;
   rdfs:comment "Convert to xsd:time, which means complete it to minutes";
   time:inXSDDateTime "13:34:00"^^xsd:time.
 
+<#char=39,40> nif:anchorOf "15 May 2050 1:34pm";
+  itsrdf:taClassRef nerd:Time;
+  itsrdf:taIdentRef <#time=15_May_2050_1_34pm>.
+<#time=15_May_2050_1_34pm> a time:Instant;
+  time:inXSDDateTime "2050-05-15T13:34:00"^^xsd:datetime.
+  
 <#char=27,28> nif:anchorOf "Zondag";
   itsrdf:taClassRef nerd:Time;
   itsrdf:taIdentRef dbp:Sunday.
