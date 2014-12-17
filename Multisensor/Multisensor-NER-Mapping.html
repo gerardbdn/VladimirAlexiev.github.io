@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Multisensor NER Mapping</title>
-<!-- 2014-12-05 Fri 21:26 -->
+<!-- 2014-12-17 Wed 18:50 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="vladimir.alexiev@ontotext.com" />
@@ -146,7 +146,22 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#sec-1">1. Prefixes</a></li>
 <li><a href="#sec-2">2. Mapping</a></li>
-<li><a href="#sec-3">3. Example</a></li>
+<li><a href="#sec-3">3. Example</a>
+<ul>
+<li><a href="#sec-3-1">3.1. Named Entity URLs</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4. Validation</a>
+<ul>
+<li><a href="#sec-4-1">4.1. NIF Validator</a></li>
+<li><a href="#sec-4-2">4.2. RDFUnit Validation</a>
+<ul>
+<li><a href="#sec-4-2-1">4.2.1. Generated Tests per Ontology</a></li>
+<li><a href="#sec-4-2-2">4.2.2. RDFUnit test results</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -470,18 +485,9 @@ Notes
 <h2 id="sec-3"><span class="section-number-2">3</span> Example</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-<i>NIF-example3.ttl</i> (<i>NIF-example3.ttl.html</i>) and <i>NIF-example3.jsonld</i> include examples for each of the named entity kinds.
+<a href="./NIF-example3.ttl">./NIF-example3.ttl</a> (<a href="./NIF-example3.ttl.html">./NIF-example3.ttl.html</a>) and <a href="./NIF-example3.jsonld">./NIF-example3.jsonld</a> include examples for each of the named entity kinds.
 </p>
 <ul class="org-ul">
-<li>I changed the "local entity URIs" to use hash notation (eg &lt;#person=Angela_Merkel&gt;) instead of slash (eg &lt;#person=Angela_Merkel&gt;)
-</li>
-<li>The local entity URIs are made from the entity text, replacing punctuation with "_". But this
-may be insufficient, since the same text could mean different entities (if the NER can
-detect such situations)
-</li>
-<li>Of course it's better to use global DBpedia URIs if they can be found (as explained in
-<i>NIF-example2.ttl</i>)
-</li>
 <li>I made up some word/phrase occurrences. I use nif:anchorOf to illustrate the
 word/phrase, and omit nif:beginIndex and nif:endIndex. In actual use, you'll do exactly
 the opposite (nif:anchorOf should be omitted since it's redundant)
@@ -491,12 +497,215 @@ course, don't emit such in the actual JSONLD
 </li>
 </ul>
 </div>
+
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Named Entity URLs</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+We have the following options for Named Entity URLs:
+</p>
+<ol class="org-ol">
+<li>Global: it's best to use global DBpedia URLs if they can be identified, as explained in <a href="./NIF-example2.ttl">./NIF-example2.ttl</a>
+<pre class="example">
+http://dbpedia.org/resource/Angela_Merkel
+</pre>
+</li>
+<li>Project: we could use a project-global namespace for entities, eg
+<pre class="example">
+http://www.multisensor.eu/entity/Person/Angela_Merkel
+</pre>
+<p>
+(Eg the <a href="http://tag.ontotext.com">http://tag.ontotext.com</a> demo uses such URLs for entities it cannot identify in global datasets).
+However, this won't allow different NEs with the same name across documents
+</p>
+</li>
+<li>Document: <a href="./NIF-example3.ttl">./NIF-example3.ttl</a> uses per-document URLs, eg
+<pre class="example">
+http://www.multisensor.eu/content/some-file#Person=Angela_Merkel
+</pre>
+<p>
+(In this and the previous option, the entity URI is made from the entity text, replacing punctuation with "_"). 
+This still does not allow two different John_Smiths in one document, but the chance of this happening is smaller.
+</p>
+</li>
+</ol>
+<p>
+Slash vs Hash: everyting after a # is fetched with one HTTP request.
+</p>
+<ul class="org-ul">
+<li>So hash is used for "sub-nodes" that will be typically be served with one HTTP request
+</li>
+<li>In contrast, slash is used with large collections. If we have a million Named Entities, we can't use hash in the <b>Project</b> scheme/
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Validation</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Please validate generated NIF files.
+</p>
+</div>
+
+<div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> NIF Validator</h3>
+<div class="outline-text-3" id="text-4-1">
+<ul class="org-ul">
+<li>doc: <a href="http://persistence.uni-leipzig.org/nlp2rdf/specification/core.html#validator">http://persistence.uni-leipzig.org/nlp2rdf/specification/core.html#validator</a>
+</li>
+<li>software: <a href="http://persistence.uni-leipzig.org/nlp2rdf/specification/validate.jar">http://persistence.uni-leipzig.org/nlp2rdf/specification/validate.jar</a>
+</li>
+<li>tests: <a href="http://persistence.uni-leipzig.org/nlp2rdf/ontologies/testcase/lib/nif-2.0-suite.ttl">http://persistence.uni-leipzig.org/nlp2rdf/ontologies/testcase/lib/nif-2.0-suite.ttl</a>
+<ul class="org-ul">
+<li>You can understand them just by reading the error messages, e.g. 
+"nif:anchorOf must match the substring of nif:isString calculated with begin and end index"
+</li>
+</ul>
+</li>
+</ul>
+<p>
+It says "informat=json-ld not implemented yet", so we need to convert to ttl first (I use apache-jena-2.12.1)
+</p>
+<pre class="example">
+rdfcat -out ttl test-out.jsonld | java -jar validate.jar -i - -o text
+</pre>
+<p>
+Unfortunately there are only 11 tests, so it's a disappointment
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> RDFUnit Validation</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+A better validator is RDFUnit:
+</p>
+<ul class="org-ul">
+<li>home: <a href="http://aksw.org/Projects/RDFUnit.html">http://aksw.org/Projects/RDFUnit.html</a>
+</li>
+<li>demo: <a href="http://rdfunit.aksw.org/demo/">http://rdfunit.aksw.org/demo/</a>
+</li>
+<li>source: <a href="https://github.com/AKSW/RDFUnit/">https://github.com/AKSW/RDFUnit/</a>
+</li>
+<li>paper: "NLP data cleansing based on Linguistic Ontology constraints", <a href="http://jens-lehmann.org/files/2014/eswc_rdfunit_nlp.pdf">http://jens-lehmann.org/files/2014/eswc_rdfunit_nlp.pdf</a>
+</li>
+</ul>
+
+<p>
+I tried their demo site with <a href="./NIF-test1.jsonld">./NIF-test1.jsonld</a> and <a href="./NIF-example2.ttl">./NIF-example2.ttl</a>:
+</p>
+<pre class="example">
+1. Data Selection&gt; Direct Input&gt; JSON-LD&gt; Load
+Data loaded successfully! (162 statements)
+2. Constraints Selection&gt; Automatic&gt; Load
+Constraints loaded successfully: (foaf, nif, itsrdf, dcterms)
+3. Test Generation
+Completed! Generated 514 tests                 (WOW!! That's a lot)
+4. Testing&gt; Report Type&gt; Status (all)&gt; Run Tests
+Total test cases 514, Succeeded 507, Failed 7  (NOTE: those "Succeeded" also in many cases mean errors)
+</pre>
+</div>
+
+<div id="outline-container-sec-4-2-1" class="outline-4">
+<h4 id="sec-4-2-1"><span class="section-number-4">4.2.1</span> Generated Tests per Ontology</h4>
+<div class="outline-text-4" id="text-4-2-1">
+<table border="1" cellspacing="0" cellpadding="0" rules="all" frame="box">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="right" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">URI</th>
+<th scope="col" class="right">Automatic</th>
+<th scope="col" class="left">Manual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><a href="http://xmlns.com/foaf/0.1/">http://xmlns.com/foaf/0.1/</a></td>
+<td class="right">174</td>
+<td class="left">-</td>
+</tr>
+
+<tr>
+<td class="left"><a href="http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core">http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core</a>#</td>
+<td class="right">199</td>
+<td class="left">10</td>
+</tr>
+
+<tr>
+<td class="left"><a href="http://www.w3.org/2005/11/its/rdf">http://www.w3.org/2005/11/its/rdf</a>#</td>
+<td class="right">75</td>
+<td class="left">-</td>
+</tr>
+
+<tr>
+<td class="left"><a href="http://purl.org/dc/terms/">http://purl.org/dc/terms/</a></td>
+<td class="right">56</td>
+<td class="left">-</td>
+</tr>
+
+<tr>
+<td class="left"><a href="http://www.w3.org/2006/time">http://www.w3.org/2006/time</a>#</td>
+<td class="right">183</td>
+<td class="left">-</td>
+</tr>
+
+<tr>
+<td class="left"><a href="http://dbpedia.org/ontology/">http://dbpedia.org/ontology/</a></td>
+<td class="right">9281</td>
+<td class="left">14</td>
+</tr>
+</tbody>
+</table>
+<p>
+(Even though I canceled dbo generation a bit prematurely.) 
+</p>
+
+<p>
+This is too much for us, we don't want the DBO tests. In particular, the <b>Status
+(all)</b> report includes a lot of "violations" that come from ontologies not from our data.
+But it's definitely worth investigating
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-4-2-2" class="outline-4">
+<h4 id="sec-4-2-2"><span class="section-number-4">4.2.2</span> RDFUnit test results</h4>
+<div class="outline-text-4" id="text-4-2-2">
+<p>
+Here are the results. "Resources" is a simple tabular format (basically URL-error),
+"Annotated Resources" provides more detail (about the errors pertaining to each URL)
+</p>
+<ul class="org-ul">
+<li><a href="./NIF-test1-out.xls">./NIF-test1-out.xls</a>: Status (all) and Resources
+</li>
+<li><a href="./NIF-test1-annotated.ttl">./NIF-test1-annotated.ttl</a>: Annotated Resources
+</li>
+<li><a href="./NIF-example2-out.xls">./NIF-example2-out.xls</a>: Resources
+</li>
+<li><a href="./NIF-example2-annotated.ttl">./NIF-example2-annotated.ttl</a>: Annotated Resources
+</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: 2014-12-05</p>
+<p class="date">Date: 2014-12-17</p>
 <p class="author">Author: vladimir.alexiev@ontotext.com</p>
-<p class="date">Created: 2014-12-05 Fri 21:26</p>
+<p class="date">Created: 2014-12-17 Wed 18:50</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.91.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7c)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

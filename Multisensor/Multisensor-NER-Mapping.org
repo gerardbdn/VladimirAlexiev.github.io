@@ -1,7 +1,7 @@
 #+STARTUP: showeverything
 #+TITLE:   Multisensor NER Mapping
 #+AUTHOR:  vladimir.alexiev@ontotext.com
-#+DATE:    2014-12-05
+#+DATE:    2014-12-17
 #+OPTIONS: H:5 num:t toc:t \n:nil @:t ::t |:t ^:{} -:t f:t *:t <:t
 #+OPTIONS: TeX:nil LaTeX:nil skip:nil d:nil todo:t pri:nil tags:not-in-toc
 
@@ -70,15 +70,78 @@ Notes
 - don't forget to include itsrdf:taAnnotatorsRef "NER-extraction|http://linguatec.com" for each
 
 * Example
-[[NIF-example3.ttl]] ([[NIF-example3.ttl.html]]) and [[NIF-example3.jsonld]] include examples for each of the named entity kinds.
-- I changed the "local entity URIs" to use hash notation (eg <#person=Angela_Merkel>) instead of slash (eg <#person=Angela_Merkel>)
-- The local entity URIs are made from the entity text, replacing punctuation with "_". But this
-  may be insufficient, since the same text could mean different entities (if the NER can
-  detect such situations)
-- Of course it's better to use global DBpedia URIs if they can be found (as explained in
-  [[NIF-example2.ttl]])
+[[./NIF-example3.ttl]] ([[./NIF-example3.ttl.html]]) and [[./NIF-example3.jsonld]] include examples for each of the named entity kinds.
 - I made up some word/phrase occurrences. I use nif:anchorOf to illustrate the
   word/phrase, and omit nif:beginIndex and nif:endIndex. In actual use, you'll do exactly
   the opposite (nif:anchorOf should be omitted since it's redundant)
 - In a couple cases I've embedded rdfs:comment and rdfs:seeAlso to illustrate a point. Of
   course, don't emit such in the actual JSONLD
+
+** Named Entity URLs
+We have the following options for Named Entity URLs:
+1. Global: it's best to use global DBpedia URLs if they can be identified, as explained in [[./NIF-example2.ttl]]
+   : http://dbpedia.org/resource/Angela_Merkel
+2. Project: we could use a project-global namespace for entities, eg
+   : http://www.multisensor.eu/entity/Person/Angela_Merkel
+   (Eg the [[http://tag.ontotext.com]] demo uses such URLs for entities it cannot identify in global datasets).
+   However, this won't allow different NEs with the same name across documents
+3. Document: [[./NIF-example3.ttl]] uses per-document URLs, eg
+   : http://www.multisensor.eu/content/some-file#Person=Angela_Merkel
+   (In this and the previous option, the entity URI is made from the entity text, replacing punctuation with "_"). 
+   This still does not allow two different John_Smiths in one document, but the chance of this happening is smaller.
+Slash vs Hash: everyting after a # is fetched with one HTTP request.
+- So hash is used for "sub-nodes" that will be typically be served with one HTTP request
+- In contrast, slash is used with large collections. If we have a million Named Entities, we can't use hash in the *Project* scheme/
+
+* Validation
+Please validate generated NIF files.
+
+** NIF Validator
+- doc: http://persistence.uni-leipzig.org/nlp2rdf/specification/core.html#validator
+- software: http://persistence.uni-leipzig.org/nlp2rdf/specification/validate.jar
+- tests: http://persistence.uni-leipzig.org/nlp2rdf/ontologies/testcase/lib/nif-2.0-suite.ttl
+  - You can understand them just by reading the error messages, e.g. 
+    "nif:anchorOf must match the substring of nif:isString calculated with begin and end index"
+It says "informat=json-ld not implemented yet", so we need to convert to ttl first (I use apache-jena-2.12.1)
+: rdfcat -out ttl test-out.jsonld | java -jar validate.jar -i - -o text
+Unfortunately there are only 11 tests, so it's a disappointment
+
+** RDFUnit Validation
+A better validator is RDFUnit:
+- home: http://aksw.org/Projects/RDFUnit.html
+- demo: http://rdfunit.aksw.org/demo/
+- source: https://github.com/AKSW/RDFUnit/
+- paper: "NLP data cleansing based on Linguistic Ontology constraints", http://jens-lehmann.org/files/2014/eswc_rdfunit_nlp.pdf
+
+I tried their demo site with [[./NIF-test1.jsonld]] and [[./NIF-example2.ttl]]:
+: 1. Data Selection> Direct Input> JSON-LD> Load
+: Data loaded successfully! (162 statements)
+: 2. Constraints Selection> Automatic> Load
+: Constraints loaded successfully: (foaf, nif, itsrdf, dcterms)
+: 3. Test Generation
+: Completed! Generated 514 tests                 (WOW!! That's a lot)
+: 4. Testing> Report Type> Status (all)> Run Tests
+: Total test cases 514, Succeeded 507, Failed 7  (NOTE: those "Succeeded" also in many cases mean errors)
+
+*** Generated Tests per Ontology
+| URI                                                             | Automatic | Manual |
+|-----------------------------------------------------------------+-----------+--------|
+| http://xmlns.com/foaf/0.1/                                      |       174 | -      |
+| http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core# |       199 | 10     |
+| http://www.w3.org/2005/11/its/rdf#                              |        75 | -      |
+| http://purl.org/dc/terms/                                       |        56 | -      |
+| http://www.w3.org/2006/time#                                    |       183 | -      |
+| http://dbpedia.org/ontology/                                    |      9281 | 14     |
+(Even though I canceled dbo generation a bit prematurely.) 
+
+This is too much for us, we don't want the DBO tests. In particular, the *Status
+(all)* report includes a lot of "violations" that come from ontologies not from our data.
+But it's definitely worth investigating
+
+*** RDFUnit test results
+Here are the results. "Resources" is a simple tabular format (basically URL-error),
+"Annotated Resources" provides more detail (about the errors pertaining to each URL)
+- [[./NIF-test1-out.xls]]: Status (all) and Resources
+- [[./NIF-test1-annotated.ttl]]: Annotated Resources
+- [[./NIF-example2-out.xls]]: Resources
+- [[./NIF-example2-annotated.ttl]]: Annotated Resources
