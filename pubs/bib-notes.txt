@@ -1,0 +1,58 @@
+http://scholar.google.bg/citations?user=r4TvZdYAAAAJ&hl=en
+DOESNT WORK: http://louise.ist.psu.edu/tracking/sub/100366/
+
+--
+
+2/05:	V. Alexiev, “Information Integration with Relational Databases and XML”, chapter 2 of “Information Integration with Ontologies: Experiences from an Industrial Showcase”, John Wiley & Sons, ISBN 0-470-01048-7.
+9/04:	V. Alexiev, “Data integration survey”, deliverable of European project “Corporate Ontology Grid” (COG), http://www.cogproject.org/publications/integration-survey.zip 
+8/99:	V. Alexiev, "Non-Deterministic Interaction Nets", PhD Dissertation, University of Alberta.
+4/98:	V. Alexiev, "Representing the Finite pi-calculus in Multi-Interaction Nets", University of Alberta technical report.
+1/98:	V. Alexiev, "Distributed Synchronization in a pi-Calculus with Bidirectional Communication", University of Alberta technical report.
+12/96:	V. Alexiev, "Concurrent Object-Oriented Programming in Interaction Nets", University of Alberta.
+9/96:	V. Alexiev, "Targeted Communication in Linear Objects", In "Artificial Intelligence: Methodology, Systems, Applications" (AIMSA'96), IOI Press. Also University of Alberta technical report TR94-14.
+9/95:	V. Alexiev, "Event Calculus as a Linear Logic Program", University of Alberta technical report TR95-24.
+2/95:	V. Alexiev, "Object-Oriented Logic Programming based on Linear Logic", PhD Thesis proposal, University of Alberta.
+3/94:	V. Alexiev, "Applications of Linear Logic to Computation: An Overview", Bulletin of the IGPL, 2(1) p.77-107, ISSN 0945-9103. Also University of Alberta technical report TR93-18.
+9/94:	G. Marinov, V. Alexiev and Y. Djonev, "Boolean Constraint Propagation Networks", In "Artifical Intelligence: Methodology, Systems, and Applications" (AIMSA'94), P. Jorrand and V. Sgurev (editors), World Scientific Publishing, p.109-118
+9/93:	V. Alexiev, "Mutable Object State for Object-Oriented Logic Programming: A Survey", University of Alberta technical report TR93-15.
+3/93:	V. Alexiev, "An Annotated Bibliography on Integrating Object-Oriented and Logic Programming", University of Alberta.
+
+---
+
+G. Marinov, V. Alexiev and Y. Djonev, "Boolean Constraint Propagation Networks"
+In "Artifical Intelligence: Methodology, Systems, and Applications" (AIMSA'94),
+P. Jorrand and V. Sgurev (editors), Sofia, Bulgaria, September 1994,
+World Scientific Publishing, p.109-118
+
+V. Alexiev, "An Annotated Bibliography on Integrating Object-Oriented and Logic Programming",
+University of Alberta, March 1993.
+
+V. Alexiev, "Mutable Object State for Object-Oriented Logic Programming: A Survey",
+University of Alberta technical report TR93-15, August 1993.
+
+V. Alexiev, "Applications of Linear Logic to Computation: An Overview",
+Bulletin of the IGPL, 2(1) p.77-107, March 1994, ISSN 0945-9103,
+Also University of Alberta technical report TR93-18, December 1993.
+
+V. Alexiev, "Targeted Communication in Linear Objects",
+In "Artificial Intelligence: Methodology, Systems, Applications" (AIMSA'96),
+published by IOI Press, September 1996. Also University of Alberta technical report TR94-14.
+
+V. Alexiev, "The Event Calculus as a Linear Logic Program",
+University of Alberta technical report TR95-24, September 1995.
+
+V. Alexiev, "Object-Oriented Logic Programming based on Linear Logic",
+PhD Thesis proposal, University of Alberta, February 1995.
+
+V. Alexiev, "Concurrent Object-Oriented Programming in Interaction Nets",
+Unpublished manuscript, University of Alberta, December 1996.
+
+V. Alexiev, "Distributed Synchronization in a pi-Calculus with Bidirectional Communication",
+University of Alberta technical report, January 1998.
+
+V. Alexiev, "Representing the Finite pi-calculus in Multi-Interaction Nets",
+University of Alberta technical report, April 1998.
+
+V. Alexiev, "Non-Deterministic Interaction Nets",
+PhD Dissertation, University of Alberta, August 1999.
+
