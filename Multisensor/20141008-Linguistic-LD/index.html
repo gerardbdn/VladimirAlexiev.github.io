@@ -1,197 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
+<meta charset="utf-8"/>
 <title>Linguistic LOD &amp; Ontologies</title>
-<!-- 2014-12-25 Thu 14:49 -->
-<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Vladimir Alexiev, Ontotext Corp" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { color: green; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
-    padding: 3px;
-    border: 1px solid black;
-  }
-  pre.src:hover:before { display: inline;}
-  pre.src-sh:before    { content: 'sh'; }
-  pre.src-bash:before  { content: 'sh'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-R:before     { content: 'R'; }
-  pre.src-perl:before  { content: 'Perl'; }
-  pre.src-java:before  { content: 'Java'; }
-  pre.src-sql:before   { content: 'SQL'; }
+<meta name="author" content="(Vladimir Alexiev, Ontotext Corp)"/>
 
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.right  { text-align: center;  }
-  th.left   { text-align: center;   }
-  th.center { text-align: center; }
-  td.right  { text-align: right;  }
-  td.left   { text-align: left;   }
-  td.center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara:nth-child(2) { display: inline; }
-  .footpara { display: block; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  /*]]>*/-->
-</style>
+<link rel="stylesheet" href="../../reveal.js/css/reveal.min.css"/>
+<link rel="stylesheet" href="../../reveal.js/css/theme/default.css" id="theme"/>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = '../../reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
 
 <style>th, td {border-width: 1px; border-style: none solid; border-spacing:0; padding:0px 2px}</style>
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2013 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
+<style>
+.reveal .slides {text-align:left}
+h1,h2,h3,h4,h5,h6,.center {text-align:center}
+img,table {display: block; margin-left:auto!important; margin-right:auto!important}
+td>img {width:250px; display:block; margin-left:auto!important; margin-right:auto!important; margin-top:0px!important; margin-bottom:0px!important}
+.reveal th, .reveal td {font-size:80%; border: 1px; border-style: solid solid; border-spacing:0; padding:0px 2px}
+span.clouditem {padding-left: 0.15em; padding-right: 0.15em; line-height: 90%}
+#table-of-contents {font-size:70%}
+</style>
 </head>
 <body>
-<div id="content">
-<h1 class="title">Linguistic LOD &amp; Ontologies</h1>
-<div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div class="reveal">
+<div class="slides">
+<section>
+<h2>Linguistic LOD &amp; Ontologies</h2> <p class='center'>Vladimir Alexiev, Ontotext Corp</p> <p class='center'><img src="./img/llod-201405.png" style="height:300px"/></p> <p class='center'>Multisensor meeting, 2014-10-08, Bonn, Germany <br/>(<a href='http://VladimirAlexiev.github.io/Multisensor/Linguistic-LD.html'>HTML</a>, <a href='http://VladimirAlexiev.github.io/pres/Multisensor/Linguistic-LD.pdf'>PDF</a>, <a href='http://www.slideshare.net/valexiev1/linguistic-ld'>slideshare</a>) <p class='center'>Press <a href='javascript:Reveal.toggleOverview()'>O for overview</a>, <a href='../../reveal.js/reveal-help.html' target='_blank'>H for help</a>.<br/> Proudly made in plain text with <a href='https://github.com/hakimel/reveal.js/'>reveal.js</a>, <a href='https://github.com/yjwen/org-reveal'>org-reveal</a>, <a href='http://orgmode.org'>org-mode</a> and <a href='http://www.gnu.org/s/emacs/'>emacs</a>.</p></section>
+<section id="table-of-contents">
+<h2>Table of Contents</h2><ul>
+<li>
+<a href="#/sec-1">Motivation</a>
 <ul>
-<li><a href="#sec-1">Motivation</a>
-<ul>
-<li><a href="#sec-1-1">Artifacts</a></li>
-<li><a href="#sec-1-2">Tag Cloud</a></li>
-<li><a href="#sec-1-3">Zotero Bibliography</a></li>
-<li><a href="#sec-1-4">Linguistic LOD (Sep 2013)</a></li>
-<li><a href="#sec-1-5">NIF Example 1</a></li>
-<li><a href="#sec-1-6">NIF Example 2</a></li>
-</ul>
+<li>
+<a href="#/sec-1-1">Artifacts</a>
 </li>
-<li><a href="#sec-2">Linguistic ontologies</a>
-<ul>
-<li><a href="#sec-2-1">NIF: Overall Idea</a></li>
-<li><a href="#sec-2-2">OLIA and Constituents</a></li>
-<li><a href="#sec-2-3">ITS2</a></li>
-<li><a href="#sec-2-4">NERD</a></li>
-<li><a href="#sec-2-5">FISE (Stanbol)</a></li>
-<li><a href="#sec-2-6">MARL</a></li>
-<li><a href="#sec-2-7">Schema.org Review/Rating</a></li>
-<li><a href="#sec-2-8">SIOC</a></li>
-</ul>
+<li>
+<a href="#/sec-1-2">Tag Cloud</a>
 </li>
-<li><a href="#sec-3">Lexical Ontologies &amp; Thesauri</a>
-<ul>
-<li><a href="#sec-3-1">LEMON</a></li>
-<li><a href="#sec-3-2">OntoLex</a></li>
-<li><a href="#sec-3-3">ISOcat</a></li>
-<li><a href="#sec-3-4">LexInfo</a></li>
-<li><a href="#sec-3-5">GOLD</a></li>
-<li><a href="#sec-3-6">TDS</a></li>
-</ul>
+<li>
+<a href="#/sec-1-3">Zotero Bibliography</a>
 </li>
-<li><a href="#sec-4">Linguistic Linked Datasets</a>
-<ul>
-<li><a href="#sec-4-1">WordNet</a></li>
-<li><a href="#sec-4-2">Wiktionary</a></li>
-<li><a href="#sec-4-3">UBY-Lemon</a></li>
-<li><a href="#sec-4-4">BabelNet</a></li>
-<li><a href="#sec-4-5">DBpedia Spotlight</a></li>
-</ul>
+<li>
+<a href="#/sec-1-4">Linguistic LOD (Sep 2013)</a>
+</li>
+<li>
+<a href="#/sec-1-5">NIF Example 1</a>
+</li>
+<li>
+<a href="#/sec-1-6">NIF Example 2</a>
 </li>
 </ul>
-</div>
-</div>
+<li>
+<a href="#/sec-2">Linguistic ontologies</a>
+<ul>
+<li>
+<a href="#/sec-2-1">NIF: Overall Idea</a>
+</li>
+<li>
+<a href="#/sec-2-2">OLIA and Constituents</a>
+</li>
+<li>
+<a href="#/sec-2-3">ITS2</a>
+</li>
+<li>
+<a href="#/sec-2-4">NERD</a>
+</li>
+<li>
+<a href="#/sec-2-5">FISE (Stanbol)</a>
+</li>
+<li>
+<a href="#/sec-2-6">MARL</a>
+</li>
+<li>
+<a href="#/sec-2-7">Schema.org Review/Rating</a>
+</li>
+<li>
+<a href="#/sec-2-8">SIOC</a>
+</li>
+</ul>
+<li>
+<a href="#/sec-3">Lexical Ontologies &amp; Thesauri</a>
+<ul>
+<li>
+<a href="#/sec-3-1">LEMON</a>
+</li>
+<li>
+<a href="#/sec-3-2">OntoLex</a>
+</li>
+<li>
+<a href="#/sec-3-3">ISOcat</a>
+</li>
+<li>
+<a href="#/sec-3-4">LexInfo</a>
+</li>
+<li>
+<a href="#/sec-3-5">GOLD</a>
+</li>
+<li>
+<a href="#/sec-3-6">TDS</a>
+</li>
+</ul>
+<li>
+<a href="#/sec-4">Linguistic Linked Datasets</a>
+<ul>
+<li>
+<a href="#/sec-4-1">WordNet</a>
+</li>
+<li>
+<a href="#/sec-4-2">Wiktionary</a>
+</li>
+<li>
+<a href="#/sec-4-3">UBY-Lemon</a>
+</li>
+<li>
+<a href="#/sec-4-4">BabelNet</a>
+</li>
+<li>
+<a href="#/sec-4-5">DBpedia Spotlight</a>
+</li>
+</ul>
+</section>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">Motivation</h2>
-<div class="outline-text-2" id="text-1">
+<section>
+<section id="sec-1" >
+
+<h2>Motivation</h2>
 <p>
 There's been a flurry of activity in recent years to represent NLP data as RDF.
 </p>
@@ -216,10 +159,10 @@ NLP data is usually large, why represent it in RDF?
 <li>Large linguistic resources are available that may be used profitably
 </li>
 </ul>
-</div>
-<div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1">Artifacts</h3>
-<div class="outline-text-3" id="text-1-1">
+</section>
+<section id="sec-1-1" >
+
+<h3>Artifacts</h3>
 <ul class="org-ul">
 <li><b>XML schemas</b>: GRaF, ITS2, LAF, LMF (ISO standards), UBY
 </li>
@@ -240,11 +183,10 @@ Fellbaum. <a href="http://www.lemon-model.net/papers/open-data-for-linguistics.p
 Trends of Research in Ontologies and Lexical Resources. Theory and Applications
 of Natural Language Processing. Springer Berlin Heidelberg, 2013.
 </p>
-</div>
-</div>
-<div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2">Tag Cloud</h3>
-<div class="outline-text-3" id="text-1-2">
+</section>
+<section id="sec-1-2"  tagcloud>
+
+<h3>Tag Cloud</h3>
 Text Annotation
 Lexical Resources
 Corpora
@@ -294,11 +236,10 @@ WordNetRDF
 Corpora:
 Multitext
 MASC
-</div>
-</div>
-<div id="outline-container-sec-1-3" class="outline-3">
-<h3 id="sec-1-3">Zotero Bibliography</h3>
-<div class="outline-text-3" id="text-1-3">
+</section>
+<section id="sec-1-3" >
+
+<h3>Zotero Bibliography</h3>
 <p>
 Collaborative bibliography on Linguistic LOD: representing language
 resources and text annotations as RDF.
@@ -309,15 +250,11 @@ resources and text annotations as RDF.
 <li><a href="https://www.zotero.org/groups/linguistic_ld/items">Zotero Library</a>: accessible on the web
 </li>
 </ul>
+<img src="./img/zotero-web.png" alt="zotero-web.png" class="stretch" style="width:1000px" />
+</section>
+<section id="sec-1-3-1" >
 
-<div class="figure">
-<p><img src="./img/zotero-web.png" alt="zotero-web.png" class="stretch" style="width:1000px" />
-</p>
-</div>
-</div>
-<div id="outline-container-sec-1-3-1" class="outline-4">
-<h4 id="sec-1-3-1">Zotero Collaboration</h4>
-<div class="outline-text-4" id="text-1-3-1">
+<h4>Zotero Collaboration</h4>
 <ul class="org-ul">
 <li>Install Zotero (Firefox plugin, or Zotero Standalone+Chrome), see below
 </li>
@@ -334,37 +271,21 @@ resources and text annotations as RDF.
 <li>If possible, add abstract, URL, the article itself.
 </li>
 </ul>
+<img src="./img/zotero-standalone.png" alt="zotero-standalone.png" class="stretch" style="width:1000px" />
+</section>
+<section id="sec-1-4" >
 
-<div class="figure">
-<p><img src="./img/zotero-standalone.png" alt="zotero-standalone.png" class="stretch" style="width:1000px" />
-</p>
-</div>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-1-4" class="outline-3">
-<h3 id="sec-1-4">Linguistic LOD (Sep 2013)</h3>
-<div class="outline-text-3" id="text-1-4">
+<h3>Linguistic LOD (Sep 2013)</h3>
+<img src="./img/llod-for-multisensor.png" alt="llod-for-multisensor.png" class="stretch" style="width:1000px" />
+</section>
+<section id="sec-1-4-1" >
 
-<div class="figure">
-<p><img src="./img/llod-for-multisensor.png" alt="llod-for-multisensor.png" class="stretch" style="width:1000px" />
-</p>
-</div>
-</div>
-<div id="outline-container-sec-1-4-1" class="outline-4">
-<h4 id="sec-1-4-1">Linguistic LOD Growth (May 2014)</h4>
-<div class="outline-text-4" id="text-1-4-1">
+<h4>Linguistic LOD Growth (May 2014)</h4>
+<img src="./img/llod-201405.png" alt="llod-201405.png" class="stretch" style="width:1000px" />
+</section>
+<section id="sec-1-5" >
 
-<div class="figure">
-<p><img src="./img/llod-201405.png" alt="llod-201405.png" class="stretch" style="width:1000px" />
-</p>
-</div>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-1-5" class="outline-3">
-<h3 id="sec-1-5">NIF Example 1</h3>
-<div class="outline-text-3" id="text-1-5">
+<h3>NIF Example 1</h3>
 <p>
 Detailed example of annotating one sentence: <a href="../NIF-example.ttl">Turtle</a>, <a href="../NIF-example.ttl.html">highlighted</a>. 
 </p>
@@ -398,11 +319,10 @@ Areas covered include:
 <li>Opinion/sentiment (MARL)
 </li>
 </ul>
-</div>
-</div>
-<div id="outline-container-sec-1-6" class="outline-3">
-<h3 id="sec-1-6">NIF Example 2</h3>
-<div class="outline-text-3" id="text-1-6">
+</section>
+<section id="sec-1-6" >
+
+<h3>NIF Example 2</h3>
 <p>
 Example based on Guardian's article "Goodbye Nuclear Power" with LinguaTec NER: <a href="../NIF-example2.ttl">Turtle</a>, <a href="../NIF-example2.ttl.html">highlighted</a>. 
 </p>
@@ -419,12 +339,12 @@ Example based on Guardian's article "Goodbye Nuclear Power" with LinguaTec NER: 
 <p>
 Compare to <a href="../NIF-example2.jsonld">JSONLD</a> or <a href="../NIF-example2.long.jsonld">JSONLD without prefixes</a>
 </p>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2">Linguistic ontologies</h2>
-<div class="outline-text-2" id="text-2">
+</section>
+</section>
+<section>
+<section id="sec-2" >
+
+<h2>Linguistic ontologies</h2>
 <p>
 We describe briefly the following linguistic ontologies
 </p>
@@ -444,53 +364,38 @@ We describe briefly the following linguistic ontologies
 <li>MARL: Opinion/sentiment
 </li>
 </ul>
-</div>
-<div id="outline-container-sec-2-1" class="outline-3">
-<h3 id="sec-2-1">NIF: Overall Idea</h3>
-<div class="outline-text-3" id="text-2-1">
+</section>
+<section id="sec-2-1" >
 
-<div class="figure">
-<p><img src="./img/NIF-idea.png" alt="NIF-idea.png" class="stretch" style="width:1000px" />
+<h3>NIF: Overall Idea</h3>
+<img src="./img/NIF-idea.png" alt="NIF-idea.png" class="stretch" style="width:1000px" />
+<aside class="notes">
+<p>
+The overall idea is to allow integration of data coming from different NLP tools by representing it in a unified RDF format. Sample adaptors for various tools have been developed, and developers have been surveyed for how long it took, and which parts were hard.
 </p>
-</div>
-</div>
-<div id="outline-container-sec-2-1-1" class="outline-4">
-<h4 id="sec-2-1-1">NIF: Example (Merging Triples)</h4>
-<div class="outline-text-4" id="text-2-1-1">
+</aside>
+</section>
+<section id="sec-2-1-1" >
 
-<div class="figure">
-<p><img src="./img/NIF-example-favourite-actress.png" alt="NIF-example-favourite-actress.png" class="stretch" style="width:1000px" />
-</p>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-2-1-2" class="outline-4">
-<h4 id="sec-2-1-2">NIF: Domain Model</h4>
-<div class="outline-text-4" id="text-2-1-2">
+<h4>NIF: Example (Merging Triples)</h4>
+<img src="./img/NIF-example-favourite-actress.png" alt="NIF-example-favourite-actress.png" class="stretch" style="width:1000px" />
+</section>
+<section id="sec-2-1-2" >
 
-<div class="figure">
-<p><img src="./img/NIF-schema.png" alt="NIF-schema.png" class="stretch" style="width:1000px" />
-</p>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-2-1-3" class="outline-4">
-<h4 id="sec-2-1-3">NIF: Representation Profiles</h4>
-<div class="outline-text-4" id="text-2-1-3">
+<h4>NIF: Domain Model</h4>
+<img src="./img/NIF-schema.png" alt="NIF-schema.png" class="stretch" style="width:1000px" />
+</section>
+<section id="sec-2-1-3" >
+
+<h4>NIF: Representation Profiles</h4>
 <p>
 <a id="nif-representation-profiles" name="nif-representation-profiles"></a>
 </p>
+<img src="./img/NIF-profiles.png" alt="NIF-profiles.png" class="stretch" style="width:1000px" />
+</section>
+<section id="sec-2-2" >
 
-<div class="figure">
-<p><img src="./img/NIF-profiles.png" alt="NIF-profiles.png" class="stretch" style="width:1000px" />
-</p>
-</div>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-2-2" class="outline-3">
-<h3 id="sec-2-2">OLIA and Constituents</h3>
-<div class="outline-text-3" id="text-2-2">
+<h3>OLIA and Constituents</h3>
 <p>
 <a href="http://www.acoli.informatik.uni-frankfurt.de/resources/olia/">OLIA</a> includes 34 annotation models (tagsets) for 69 languages
 </p>
@@ -513,10 +418,10 @@ We describe briefly the following linguistic ontologies
 <li>One of them is redundant?
 </li>
 </ul>
-</div>
-<div id="outline-container-sec-2-2-1" class="outline-4">
-<h4 id="sec-2-2-1">OLIA Integration</h4>
-<div class="outline-text-4" id="text-2-2-1">
+</section>
+<section id="sec-2-2-1" >
+
+<h4>OLIA Integration</h4>
 <p>
 <code>X-link.owl</code> abstracts over <code>X.owl</code> by providing OLIA subclasses/subproperties, eg
 </p>
@@ -544,11 +449,10 @@ OLiA/EAGLES determiners"
 <li>But neither OLIA nor Penn define any values for that property!
 </li>
 </ul>
-</div>
-</div>
-<div id="outline-container-sec-2-2-2" class="outline-4">
-<h4 id="sec-2-2-2">OLIA Own Ontologies</h4>
-<div class="outline-text-4" id="text-2-2-2">
+</section>
+<section id="sec-2-2-2" >
+
+<h4>OLIA Own Ontologies</h4>
 <table border="1" cellspacing="0" cellpadding="0" rules="all" frame="box">
 
 
@@ -611,12 +515,11 @@ Class: penn:BePresentTense
      olia:hasTense only olia:Present,
      (olia:FiniteVerb or olia:StrictAuxiliaryVerb) 
 </pre>
-</div>
-</div>
-<div id="outline-container-sec-2-2-3" class="outline-4">
-<h4 id="sec-2-2-3">Penn POS Tagging</h4>
-<div class="outline-text-4" id="text-2-2-3">
-<pre class="example">
+</section>
+<section id="sec-2-2-3" >
+
+<h4>Penn POS Tagging</h4>
+<pre  class="example">
 &lt;#Germany-1&gt;   nif:oliaLink penn:NNP; nif:oliaClass penn:ProperNoun.
 &lt;#is-2&gt;        nif:oliaLink penn:VBZ; nif:oliaClass penn:BePresentTense.
 &lt;#the-3&gt;       nif:oliaLink penn:DT;  nif:oliaClass penn:Determiner.
@@ -627,20 +530,15 @@ Class: penn:BePresentTense
 &lt;#European-8&gt;  nif:oliaLink penn:NNP; nif:oliaClass penn:ProperNoun.
 &lt;#Union-9&gt;     nif:oliaLink penn:NNP; nif:oliaClass penn:ProperNoun.
 </pre>
+<img src="./img/Germany-constituent-parse.png" alt="Germany-constituent-parse.png" class="stretch" style="width:600px" />
+</section>
+<section id="sec-2-2-4" >
 
-<div class="figure">
-<p><img src="./img/Germany-constituent-parse.png" alt="Germany-constituent-parse.png" class="stretch" style="width:600px" />
-</p>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-2-2-4" class="outline-4">
-<h4 id="sec-2-2-4">Stanford Dependency Parsing</h4>
-<div class="outline-text-4" id="text-2-2-4">
+<h4>Stanford Dependency Parsing</h4>
 <p>
 Represent as nif:dependency. All are subclasses of <code>stanford:DependencyLabel</code>
 </p>
-<pre class="example">
+<pre  class="example">
 nsubj(horse-5,Germany-1): a NominalSubject&lt;Subject&lt;Argument&lt;Dependent
 cop(horse-5,is-2):        a Copula&lt;Auxiliary&lt;Dependent
 det(horse-5,the-3):       a Determiner&lt;Modifier&lt;Dependent
@@ -651,16 +549,11 @@ det(Union-9,the-7):       a Determiner&lt;Modifier&lt;Dependent
 amod(Union-9,European-8): a AdjectivalModifier&lt;Modifier&lt;Dependent
 pobj(of-6,Union-9):       a ObjectOfPreposition&lt;Object&lt;Complement&lt;Argument&lt;Dependent
 </pre>
+<img src="./img/Germany-dependency-parse.png" alt="Germany-dependency-parse.png" class="stretch" style="width:1000px" />
+</section>
+<section id="sec-2-2-5" >
 
-<div class="figure">
-<p><img src="./img/Germany-dependency-parse.png" alt="Germany-dependency-parse.png" class="stretch" style="width:1000px" />
-</p>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-2-2-5" class="outline-4">
-<h4 id="sec-2-2-5">Stanford Dependency Parsing (2)</h4>
-<div class="outline-text-4" id="text-2-2-5">
+<h4>Stanford Dependency Parsing (2)</h4>
 <ul class="org-ul">
 <li>In the prev slide we have: individual(gov,dep): a class&lt;superclass&lt;superclass, eg
 </li>
@@ -674,7 +567,7 @@ stanford:DependencyLabel olia_system:Feature.
 <li>If we don't need extra info in relation nodes, can just declare the words/phrases as Stanford classes:
 </li>
 </ul>
-<pre class="example">
+<pre  class="example">
 &lt;#horse-5&gt; nif:dependency &lt;#Germany-1&gt;.  &lt;#Germany-1&gt;  a stanford:NominalSubject.
 &lt;#horse-5&gt; nif:dependency &lt;#is-2&gt;.       &lt;#is-2&gt;       a stanford:Copula.
 &lt;#horse-5&gt; nif:dependency &lt;#the-3&gt;.      &lt;#the-3&gt;      a stanford:Determiner.
@@ -685,12 +578,10 @@ stanford:DependencyLabel olia_system:Feature.
 &lt;#Union-9&gt; nif:dependency &lt;#European-8&gt;. &lt;#European-8&gt; a stanford:AdjectivalModifier.
 &lt;#of-6&gt;    nif:dependency &lt;#Union-9&gt;.    &lt;#Union-9&gt;    a stanford:ObjectOfPreposition.
 </pre>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-2-3" class="outline-3">
-<h3 id="sec-2-3">ITS2</h3>
-<div class="outline-text-3" id="text-2-3">
+</section>
+<section id="sec-2-3" >
+
+<h3>ITS2</h3>
 <p>
 <a href="http://www.w3.org/TR/its20/">Internationalization Tag Set (ITS) Version 2.0</a> is a fairly big W3C spec
 </p>
@@ -721,11 +612,10 @@ We use only the <b>Text Analysis</b> itsrdf: props
 <li><code>taSource</code> (eg "Wordnet3.0"), <code>taIdent</code> (eg "301467919"): for entities that are not yet in RDF/resolvable
 </li>
 </ul>
-</div>
-</div>
-<div id="outline-container-sec-2-4" class="outline-3">
-<h3 id="sec-2-4">NERD</h3>
-<div class="outline-text-3" id="text-2-4">
+</section>
+<section id="sec-2-4" >
+
+<h3>NERD</h3>
 <p>
 <img src="./img/nerd.png" alt="nerd.png" style="width:200px" /> Common NER types across semantic annotators
 </p>
@@ -747,11 +637,10 @@ We use only the <b>Text Analysis</b> itsrdf: props
 <li>A few doubtful inferences, eg Website subClassOf Product
 </li>
 </ul>
-</div>
-</div>
-<div id="outline-container-sec-2-5" class="outline-3">
-<h3 id="sec-2-5">FISE (Stanbol)</h3>
-<div class="outline-text-3" id="text-2-5">
+</section>
+<section id="sec-2-5" >
+
+<h3>FISE (Stanbol)</h3>
 <p>
 <img src="./img/iks.jpg" alt="iks.jpg" style="width:200px" /> <a href="http://fise.iks-project.eu">IKS (FISE)</a> put the start of <a href="https://stanbol.apache.org/">Apache Stanbol</a>, a framework for semantic content annotation and management.
 </p>
@@ -774,10 +663,10 @@ Stanbol is only as good as the underlying engines
 <li>But so has Ontotext semantic text analytics
 </li>
 </ul>
-</div>
-<div id="outline-container-sec-2-5-1" class="outline-4">
-<h4 id="sec-2-5-1">FISE-NIF Analogs</h4>
-<div class="outline-text-4" id="text-2-5-1">
+</section>
+<section id="sec-2-5-1" >
+
+<h4>FISE-NIF Analogs</h4>
 <ul class="org-ul">
 <li>Each annotation has its own node, so FISE allows multiple engines to make annotation:
 it's the middle <a href="#nif-representation-profiles">NIF representation profile</a>
@@ -841,52 +730,36 @@ Analogs (but the properties are in diffent nodes!)
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-2-6" class="outline-3">
-<h3 id="sec-2-6">MARL</h3>
-<div class="outline-text-3" id="text-2-6">
+</section>
+<section id="sec-2-6" >
+
+<h3>MARL</h3>
 <p>
 <img src="./img/marl.png" alt="marl.png" style="width:120px" /> <a href="http://marl.gi2mo.org/?page_id=1">Sentiment/opinion</a>. Aggregates many opinions (with count), about thing/part/feature
 </p>
+<img src="./img/marl-model-medium.png" alt="marl-model-medium.png" class="stretch" style="width:1000px" />
+</section>
+<section id="sec-2-7" >
 
-<div class="figure">
-<p><img src="./img/marl-model-medium.png" alt="marl-model-medium.png" class="stretch" style="width:1000px" />
-</p>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-2-7" class="outline-3">
-<h3 id="sec-2-7">Schema.org Review/Rating</h3>
-<div class="outline-text-3" id="text-2-7">
+<h3>Schema.org Review/Rating</h3>
 <p>
 Compare to schema.org <a href="http://schema.org/Review">Review</a>, <a href="http://schema.org/Rating">Rating</a>, <a href="http://schema.org/AggregateRating">AggregateRating</a>
 </p>
+<img src="./img/schema-rating-review.png" alt="schema-rating-review.png" />
+</section>
+<section id="sec-2-8" >
 
-<div class="figure">
-<p><img src="./img/schema-rating-review.png" alt="schema-rating-review.png" />
-</p>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-2-8" class="outline-3">
-<h3 id="sec-2-8">SIOC</h3>
-<div class="outline-text-3" id="text-2-8">
+<h3>SIOC</h3>
 <p>
 <img src="./img/sioc-logo.png" alt="sioc-logo.png" style="width:120px" /> Representation of websites, folders, pages, forums, postings, users
 </p>
+<img src="./img/sioc.png" alt="sioc.png" />
+</section>
+</section>
+<section>
+<section id="sec-3" >
 
-<div class="figure">
-<p><img src="./img/sioc.png" alt="sioc.png" />
-</p>
-</div>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3">Lexical Ontologies &amp; Thesauri</h2>
-<div class="outline-text-2" id="text-3">
+<h2>Lexical Ontologies &amp; Thesauri</h2>
 <p>
 Ontologies
 </p>
@@ -902,11 +775,7 @@ Ontologies
 <li>OntoLex: draft under development
 </li>
 </ul>
-
-<div class="figure">
-<p><img src="./img/OntoLex-genealogy.png" alt="OntoLex-genealogy.png" />
-</p>
-</div>
+<img src="./img/OntoLex-genealogy.png" alt="OntoLex-genealogy.png" />
 
 <p>
 Thesauri (lists of NLP terms):
@@ -919,23 +788,19 @@ Thesauri (lists of NLP terms):
 <li>TDS
 </li>
 </ul>
-</div>
-<div id="outline-container-sec-3-1" class="outline-3">
-<h3 id="sec-3-1">LEMON</h3>
-<div class="outline-text-3" id="text-3-1">
+</section>
+<section id="sec-3-1" >
+
+<h3>LEMON</h3>
 <p>
 <img src="./img/lemon.png" alt="lemon.png" style="width:120px" />
 <a href="http://www.lemon-model.net/lemon">Lexicon Model for Ontologies</a>: for representing Wordnets, dictionaries, lexica. See <a href="//www.lemon-model.net/learn/5mins.html">Quick Guide</a>
 </p>
+<img src="./img/lemon-model-core.png" alt="lemon-model-core.png" />
+</section>
+<section id="sec-3-1-1" >
 
-<div class="figure">
-<p><img src="./img/lemon-model-core.png" alt="lemon-model-core.png" />
-</p>
-</div>
-</div>
-<div id="outline-container-sec-3-1-1" class="outline-4">
-<h4 id="sec-3-1-1">LEMON Modules</h4>
-<div class="outline-text-4" id="text-3-1-1">
+<h4>LEMON Modules</h4>
 <p>
 Extend LEMON with additional features. See <a href="http://www.lemon-model.net/learn/cookbook.html">Cookbook</a>
 </p>
@@ -949,26 +814,16 @@ Extend LEMON with additional features. See <a href="http://www.lemon-model.net/l
 <li>Morphology: Inflection, Agglutination 
 </li>
 </ul>
+<img src="./img/lemon-modules.png" alt="lemon-modules.png" />
+</section>
+<section id="sec-3-1-2" >
 
-<div class="figure">
-<p><img src="./img/lemon-modules.png" alt="lemon-modules.png" />
-</p>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-3-1-2" class="outline-4">
-<h4 id="sec-3-1-2">LEMON: Full Model</h4>
-<div class="outline-text-4" id="text-3-1-2">
+<h4>LEMON: Full Model</h4>
+<img src="./img/lemon-model.png" alt="lemon-model.png" />
+</section>
+<section id="sec-3-1-3" >
 
-<div class="figure">
-<p><img src="./img/lemon-model.png" alt="lemon-model.png" />
-</p>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-3-1-3" class="outline-4">
-<h4 id="sec-3-1-3">Aside: LemonGrass</h4>
-<div class="outline-text-4" id="text-3-1-3">
+<h4>Aside: LemonGrass</h4>
 <p>
 <a href="https://bitbucket.org/chru/lemongrass">LemonGrass</a> (formerly <a href="http://lemon-model.net/download/lemon2gf.php">lemon2gf</a>): convertor from Lemon lexicon+ontology
 </p>
@@ -976,17 +831,11 @@ Extend LEMON with additional features. See <a href="http://www.lemon-model.net/l
 <li>to <a href="http://www.grammaticalframework.org/">GrammaticalFramework</a>: great multilingual Controlled Natural Language framework inspired by Haskell
 </li>
 </ul>
+<img src="./img/lemon2gf.png" alt="lemon2gf.png" class="stretch" style="width:1000px" />
+</section>
+<section id="sec-3-2" >
 
-<div class="figure">
-<p><img src="./img/lemon2gf.png" alt="lemon2gf.png" class="stretch" style="width:1000px" />
-</p>
-</div>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-3-2" class="outline-3">
-<h3 id="sec-3-2">OntoLex</h3>
-<div class="outline-text-3" id="text-3-2">
+<h3>OntoLex</h3>
 <p>
 W3C community group. Spec draft (<a href="http://www.w3.org/community/ontolex/wiki/Final_Model_Specification">wiki</a>, <a href="https://github.com/cimiano/ontolex">github</a>, <a href="http://htmlpreview.github.io/?https://github.com/cimiano/ontolex/blob/master/specification.html">html preview</a>). 
 </p>
@@ -1017,11 +866,10 @@ Best practices:
 <li>relation between OntoLex and SKOS
 </li>
 </ul>
-</div>
-</div>
-<div id="outline-container-sec-3-3" class="outline-3">
-<h3 id="sec-3-3">ISOcat</h3>
-<div class="outline-text-3" id="text-3-3">
+</section>
+<section id="sec-3-3" >
+
+<h3>ISOcat</h3>
 <p>
 <img src="./img/isocat.png" alt="isocat.png" /> ISO TC37 Data Category Registry (DCR)
 </p>
@@ -1036,11 +884,10 @@ Best practices:
 <pre class="example">
 curl -L -Haccept:application/rdf+xml http://www.isocat.org/datcat/DC-65
 </pre>
-</div>
-</div>
-<div id="outline-container-sec-3-4" class="outline-3">
-<h3 id="sec-3-4">LexInfo</h3>
-<div class="outline-text-3" id="text-3-4">
+</section>
+<section id="sec-3-4" >
+
+<h3>LexInfo</h3>
 <p>
 <img src="./img/lexinfo.png" alt="lexinfo.png" style="width:200px" /> <a href="http://www.lexinfo.net/ontology/2.0/lexinfo">ontology</a>, extends LEMON
 </p>
@@ -1048,7 +895,7 @@ curl -L -Haccept:application/rdf+xml http://www.isocat.org/datcat/DC-65
 <li>Provides ontological structure for most of ISOcat. Eg 
 </li>
 </ul>
-<pre class="example">
+<pre  class="example">
 lexinfo:abbreviationFor a owl:ObjectProperty ;
 	dcr:datcat &lt;http://www.isocat.org/datcat/DC-65&gt; ;
 	rdfs:subPropertyOf lexinfo:contractionFor .
@@ -1068,11 +915,10 @@ Defines 592 entities:
 <li>2 AnnotationProperty, <code>languageSpecific</code>, <code>example</code>
 </li>
 </ul>
-</div>
-</div>
-<div id="outline-container-sec-3-5" class="outline-3">
-<h3 id="sec-3-5">GOLD</h3>
-<div class="outline-text-3" id="text-3-5">
+</section>
+<section id="sec-3-5" >
+
+<h3>GOLD</h3>
 <ul class="org-ul">
 <li>Another linguistic thesaurus
 </li>
@@ -1094,11 +940,10 @@ Defines
 <li>6 DatatypeProperty, eg <code>abbreviation</code>, <code>phoneticRep</code>, <code>hasExample</code>
 </li>
 </ul>
-</div>
-</div>
-<div id="outline-container-sec-3-6" class="outline-3">
-<h3 id="sec-3-6">TDS</h3>
-<div class="outline-text-3" id="text-3-6">
+</section>
+<section id="sec-3-6" >
+
+<h3>TDS</h3>
 <p>
 <img src="./img/TDS.png" alt="TDS.png" style="width:200px" /> <a href="http://languagelink.let.uu.nl/tds/index.html">Old UI</a>, new <a href="http://tds2.dans.knaw.nl/">UI at DANS</a> (supports Chrome)
 </p>
@@ -1106,17 +951,13 @@ Defines
 <li>1200 descriptive properties about 1000 languages (most properties are filled for a fraction of the languages)
 </li>
 </ul>
+<img src="./img/TDS-German.png" alt="TDS-German.png" class="stretch" style="width:1000px" />
+</section>
+</section>
+<section>
+<section id="sec-4" >
 
-<div class="figure">
-<p><img src="./img/TDS-German.png" alt="TDS-German.png" class="stretch" style="width:1000px" />
-</p>
-</div>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4">Linguistic Linked Datasets</h2>
-<div class="outline-text-2" id="text-4">
+<h2>Linguistic Linked Datasets</h2>
 <p>
 In the following slides we describe large-scale Linguistic resources.<br  />
 Datasets already integrated in FactForge (but old versions):
@@ -1127,10 +968,10 @@ Datasets already integrated in FactForge (but old versions):
 <li>Lingvoj, Lexvo: info about languages
 </li>
 </ul>
-</div>
-<div id="outline-container-sec-4-1" class="outline-3">
-<h3 id="sec-4-1">WordNet</h3>
-<div class="outline-text-3" id="text-4-1">
+</section>
+<section id="sec-4-1" >
+
+<h3>WordNet</h3>
 <p>
 <a href="http://wordnet.princeton.edu/">WordNet</a>: well-known and prototypical lexical resource
 </p>
@@ -1144,10 +985,10 @@ Datasets already integrated in FactForge (but old versions):
 <li>Ontology developed by W3C in 2005
 </li>
 </ul>
-</div>
-<div id="outline-container-sec-4-1-1" class="outline-4">
-<h4 id="sec-4-1-1">ImageNet</h4>
-<div class="outline-text-4" id="text-4-1-1">
+</section>
+<section id="sec-4-1-1" >
+
+<h4>ImageNet</h4>
 <p>
 <img src="./img/imagenet.png" alt="imagenet.png" style="width:200px" /> <a href="http://www.image-net.org">http://www.image-net.org</a>: sample images for WordNet
 </p>
@@ -1162,25 +1003,18 @@ Datasets already integrated in FactForge (but old versions):
 <p>
 <img src="./img/imagenet-bbox-fox.jpg" alt="imagenet-bbox-fox.jpg" /> <img src="./img/imagenet-bbox-airplane.jpg" alt="imagenet-bbox-airplane.jpg" />
 </p>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-4-2" class="outline-3">
-<h3 id="sec-4-2">Wiktionary</h3>
-<div class="outline-text-3" id="text-4-2">
+</section>
+<section id="sec-4-2" >
+
+<h3>Wiktionary</h3>
 <p>
 Crowdsourced dictionaries of &gt;300 languages. Eg <a href="http://en.wiktionary.org/wiki/ancora#Latin">ancora#Latin</a> at <a href="http://en.wiktionary.org">http://en.wiktionary.org</a>:
 </p>
+<img src="./img/wiktionary-ancora.png" alt="wiktionary-ancora.png" />
+</section>
+<section id="sec-4-3" >
 
-<div class="figure">
-<p><img src="./img/wiktionary-ancora.png" alt="wiktionary-ancora.png" />
-</p>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-4-3" class="outline-3">
-<h3 id="sec-4-3">UBY-Lemon</h3>
-<div class="outline-text-3" id="text-4-3">
+<h3>UBY-Lemon</h3>
 <p>
 <img src="./img/uby-lemon.png" alt="uby-lemon.png" style="width:100px" /> <a href="http://www.lemon-model.net/lexica/uby/">Dataset</a> that integrates in LEMON format:
 </p>
@@ -1196,11 +1030,10 @@ Crowdsourced dictionaries of &gt;300 languages. Eg <a href="http://en.wiktionary
 <li>Princeton WordNet 3.0
 </li>
 </ul>
-</div>
-</div>
-<div id="outline-container-sec-4-4" class="outline-3">
-<h3 id="sec-4-4">BabelNet</h3>
-<div class="outline-text-3" id="text-4-4">
+</section>
+<section id="sec-4-4" >
+
+<h3>BabelNet</h3>
 <p>
 <img src="./img/babelnet.png" alt="babelnet.png" style="width:100px" /> Integrates WordNet, Open Multilingual WordNet, Wikipedia, OmegaWiki, Wikidata, Wiktionary
 </p>
@@ -1228,14 +1061,14 @@ Crowdsourced dictionaries of &gt;300 languages. Eg <a href="http://en.wiktionary
 <li>Java APIs for programmatic access
 </li>
 </ul>
-</div>
-<div id="outline-container-sec-4-4-1" class="outline-4">
-<h4 id="sec-4-4-1">BabelNet 2.0 RDF</h4>
-<div class="outline-text-4" id="text-4-4-1">
+</section>
+<section id="sec-4-4-1" >
+
+<h4>BabelNet 2.0 RDF</h4>
 <p>
 <a href="http://babelnet.org/2.0/data/banca_n_IT">http://babelnet.org/2.0/data/banca_n_IT</a>
 </p>
-<pre class="example">
+<pre  class="example">
 bn:banca_n_IT a lemon:LexicalEntry ;
   rdfs:label            "banca"@it ;
   lemon:canonicalForm   bn:banca_n_IT/canonicalForm ;
@@ -1246,7 +1079,7 @@ bn:banca_n_IT a lemon:LexicalEntry ;
 <p>
 <a href="http://babelnet.org/2.0/data/banca_IT/s03802146n">http://babelnet.org/2.0/data/banca_IT/s03802146n</a>
 </p>
-<pre class="example">
+<pre  class="example">
 bn:Bank_%28topography%29_EN/s03802146n lexinfo:translation  bn:banca_IT/s03802146n .
 bn:Bank_%28sea_floor%29_EN/s03802146n  lexinfo:translation  bn:banca_IT/s03802146n .
 
@@ -1256,11 +1089,10 @@ bn:banca_IT/s03802146n a lemon:LexicalSense ;
   dcterms:license   &lt;http://creativecommons.org/licenses/by-sa/3.0/&gt; ;
   lemon:reference   bn:s03802146n .
 </pre>
-</div>
-</div>
-<div id="outline-container-sec-4-4-2" class="outline-4">
-<h4 id="sec-4-4-2">BabelNet 3.0 UI</h4>
-<div class="outline-text-4" id="text-4-4-2">
+</section>
+<section id="sec-4-4-2" >
+
+<h4>BabelNet 3.0 UI</h4>
 <p>
 Eg <a href="http://babelnet.org/search?word=ancora&lang=LA&details=1">ancora#lat</a> at <a href="http://babelnet.org">http://babelnet.org</a> (3.0 just came out)
 </p>
@@ -1268,16 +1100,11 @@ Eg <a href="http://babelnet.org/search?word=ancora&lang=LA&details=1">ancora#lat
 <li><a href="http://babelnet.org/2.0/">http://babelnet.org/2.0/</a> is still available
 </li>
 </ul>
+<img src="./img/babelnet-ancora.png" alt="babelnet-ancora.png" />
+</section>
+<section id="sec-4-4-3" >
 
-<div class="figure">
-<p><img src="./img/babelnet-ancora.png" alt="babelnet-ancora.png" />
-</p>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-4-4-3" class="outline-4">
-<h4 id="sec-4-4-3">Babelfy</h4>
-<div class="outline-text-4" id="text-4-4-3">
+<h4>Babelfy</h4>
 <p>
 <a href="http://babelfy.org/index.jsp">Babelfy</a>: annotation API based on BabelNet
 </p>
@@ -1285,35 +1112,54 @@ Eg <a href="http://babelnet.org/search?word=ancora&lang=LA&details=1">ancora#lat
 <li>Evaluation on Energy news item (green: ok concepts, yellow: ok entities, orange: missed/irrelevant, red: wrong)
 </li>
 </ul>
+<img src="./img/babelfy-performance.png" alt="babelfy-performance.png" class="stretch" style="width:1000px" />
+</section>
+<section id="sec-4-5" >
 
-<div class="figure">
-<p><img src="./img/babelfy-performance.png" alt="babelfy-performance.png" class="stretch" style="width:1000px" />
-</p>
-</div>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-4-5" class="outline-3">
-<h3 id="sec-4-5">DBpedia Spotlight</h3>
-<div class="outline-text-3" id="text-4-5">
+<h3>DBpedia Spotlight</h3>
 <p>
 Another NER/annotation service; based on DBpedia labels. Too eager, low precision:
 </p>
+<img src="./img/Spotlight-performance.png" alt="Spotlight-performance.png" />
+</section>
+</section>
+</div>
+</div>
 
-<div class="figure">
-<p><img src="./img/Spotlight-performance.png" alt="Spotlight-performance.png" />
-</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div id="postamble" class="status">
-<p class="date">Date: 2014-12-25</p>
-<p class="author">Author: Vladimir Alexiev, Ontotext Corp</p>
-<p class="date">Created: 2014-12-25 Thu 14:49</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.91.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7c)</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
-</div>
+<script src="../../reveal.js/lib/js/head.min.js"></script>
+<script src="../../reveal.js/js/reveal.min.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: true,
+rollingLinks: false,
+keyboard: true,
+overview: true,
+width: 1200,
+height: 925,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+{src: '../../reveal.js/js/reveal-help.js', async: true, condition: function() {return !!document.body.classList}}, {src: '../../reveal.js/js/reveal-tagcloud.js', async: true, condition: function() {return !!document.body.classList}},
+ { src: '../../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: '../../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: '../../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: '../../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+ { src: '../../reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: '../../reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+]
+});
+</script>
 </body>
 </html>
