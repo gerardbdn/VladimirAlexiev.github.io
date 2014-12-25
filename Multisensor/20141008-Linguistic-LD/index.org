@@ -1,7 +1,7 @@
 #+TITLE:     Linguistic LOD & Ontologies
 #+AUTHOR:    Vladimir Alexiev, Ontotext Corp
 #+EMAIL:     vladimir.alexiev@ontotext.com
-#+DATE:      2014-11-20
+#+DATE:      2014-12-25
 #+LANGUAGE:  en
 #+STARTUP:   noinlineimages content
 #+OPTIONS:   num:nil toc:2
@@ -360,7 +360,7 @@ Extend LEMON with additional features. See [[http://www.lemon-model.net/learn/co
 #+ATTR_HTML: :class stretch :style width:1000px
 [[./img/lemon2gf.png]]
 ** OntoLex
-W3C community group. Spec draft ([[http://www.w3.org/community/ontolex/wiki/Final_Model_Specification][wiki]], [[https://github.com/cimiano/ontolex][github]], [[htmlpreview.github.io/?https://github.com/cimiano/ontolex/blob/master/specification.html][html preview]]). 
+W3C community group. Spec draft ([[http://www.w3.org/community/ontolex/wiki/Final_Model_Specification][wiki]], [[https://github.com/cimiano/ontolex][github]], [[http://htmlpreview.github.io/?https://github.com/cimiano/ontolex/blob/master/specification.html][html preview]]). 
 
 Modules:
 - Ontology-lexicon interface (ontolex)
