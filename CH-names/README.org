@@ -13,7 +13,9 @@
 #+LANGUAGE: en
 #+EXCLUDE_TAGS: noexport
 
-(For Europeana Creative D2.4)
+(For Europeana Creative D2.4) 
+
+See http://vladimiralexiev.github.io/CH-names/README.html for better reading
 
 * Name Data Sources for Semantic Enrichment
 Semantic enrichment in Europeana is a very difficult task due to several factors:
@@ -26,7 +28,7 @@ Historic people are often referred to by many names. For successful semantic enr
 
 We also analyze the important topic of *coreferencing*, i.e. how connected the sources are to each other.
 
-Our investigation follows a hands-on approach, with detailed descriptions of access methods and tools that we used. A number of accompanying files are provided at https://github.com/VladimirAlexiev/CH-names (TODO: or http://vladimiralexiev.github.io/CH-names) and referenced below.
+Our investigation follows a hands-on approach, with detailed descriptions of access methods and tools that we used. A number of accompanying files are provided at http://vladimiralexiev.github.io/CH-names and referenced below.
 ** RDF-based Gazetteers and Data Integration
 Enrichment is most often based on large and efficient lookup structures called *gazetteers*. Ontotext's experience with commercial semantic enrichment is that the best way to make gazetteers is:
 - Acquire a number of data sources, converting to RDF if needed
@@ -707,7 +709,7 @@ The result is *[[./cranach-venn.html]]*.
 - The diagram is approximate, eg ULAN is wholly within VIAF: if you try to point out the little sliver ULAN\VIAF, you'll discover it has cardinality 0. But it's quite accurate!
 
 #+HTML_ATTR: :class stretch
-[[./cranach-venn.html][./img/Cranach-venn.png]]
+[[./img/Cranach-venn.png]]
 
 Notes:
 - A striking revelation is that the 3 "library-tradition" datasets (VIAF, ISNI, ULAN) and the 4 "LOD-tradition datasets" (Wikidata, DBpedia, Freebase, Yago) have almost nothing in common: only 5 names. Library datasets contribute many permutations and qualifiers (eg "der Altere" vs "d A"), while LOD datasets contribute many languages.
@@ -719,7 +721,7 @@ Notes:
 Coreferencing is the alignment of Authority databases, typically by aggregation of identifiers from one database to another. An example can be seen best on the Reasonator page for [[http://tools.wmflabs.org/reasonator/?&q=191748][Cranach]] (the right side). (We use this data in the next section.)
 Each coreference ID is also a link. Of course, whenever the target Authority has an RDF representation, the links are also machine-navigable.
 
-As we can surmise from the previous section, the two currently most-prominent Person Authorities (*hubs*) are VIAF and Wikidata, which is also confirmed by [[Authority]].
+As we can surmise from the previous section, the two currently most-prominent Person Authorities (*hubs*) are VIAF and Wikidata, which is also confirmed by [[[Authority]]].
 - The benefits of coreferencing are significant for Authority providers, as it allows cross-checking, adding missing information, and leveraging independent work done in other datasets
 - There are also benefits of coreferencing for consumers such as Europeana enrichment: significantly enlarged coverage (union of two datasets) while avoiding the danger of duplicate entities; increasing the number of names and extra characteristics for individual objects.
 
@@ -961,71 +963,3 @@ We can draw the following conclusions from this analysis:
 8. <<Mix1>>[[http://www.generalist.org.uk/blog/2014/wikidata-identifiers-and-the-odnb-where-next/][Wikidata identifiers and the ODNB – where next?]], blog, 26 November 2014
 9. <<Mix2>>[[http://www.generalist.org.uk/blog/2014/wikidata-and-identifiers-part-2-the-matching-process/][Wikidata and identifiers – part 2, the matching process]], blog, 27 November 2014
 
-* TODO                                                             :noexport:
-IDEA: treat each name in an Europeana collection using the name authority of the provider, if that can be established.
-** Oxford DNB
-http://www.oxforddnb.com/public/index.html: 59k people "who shaped the history of the British Isles and beyond".
-- No free access: available in most public libraries: http://global.oup.com/oxforddnb/info/.
-- Google search: http://global.oup.com/oxforddnb/info/index/
-eg "austin site:http://oxforddnb.com/index/"
-- Browse: http://www.oxforddnb.com/index/
-- The Search and Browse links at http://global.oup.com/oxforddnb/info/ give errors:
-http://global.oup.com/oxforddnb/info/quickguide/index/ and http://global.oup.com/oxforddnb/info/quickguide/index/browsing/
-** Entity disambiguation for Europeana Newspapers
-https://github.com/KBNLresearch/europeananp-dbpedia-disambiguation
-** Venn Diagrams
-Venn diagram generators
-- https://github.com/benfred/venn.js: any number of sets, interactive tooltips, excellent!
-- http://www.pangloss.com/seidel/Protocols/venn4.cgi: service. Rectangular, and I can't quite figure out the numbers
-- colorfulVennPlot http://cran.r-project.org/web/packages/colorfulVennPlot/index.html
-- eVenn http://cran.r-project.org/web/packages/eVenn/index.html
-- VennDiagram http://cran.r-project.org/web/packages/VennDiagram/VennDiagram.pdf
-  p19
-- VennDiagram http://www.biomedcentral.com/1471-2105/12/35
-- Venneuler http://cran.r-project.org/web/packages/venneuler/index.html
-- Vennerable
-  - http://r-forge.r-project.org/projects/vennerable/
-  - https://r-forge.r-project.org/scm/viewvc.php/*checkout*/pkg/Vennerable/inst/doc/Venn.pdf?revision=58&root=vennerable
-  - 3&4-way, weighted (proportional) & unweighted; Wenn, Chow-Ruskey, Euler; circle, rectangle, triangle... (p18)
-- https://developers.google.com/chart/image/docs/gallery/venn_charts: 3 only
-  https://metacpan.org/pod/Google::Chart::Type::Venn
-- https://metacpan.org/pod/Venn::Chart: 2 or 3
-** Subsets
-- https://metacpan.org/pod/Math::Subsets::List
-  #+BEGIN_SRC perl
-  use Math::Subsets::List;
-  subsets {say "@_"} qw(a b c);
-  #+END_SRC
-- https://metacpan.org/pod/Algorithm::ChooseSubsets
-  #+BEGIN_SRC perl :results output
-    use Algorithm::ChooseSubsets;
-    @set = qw(a b c d);
-    $i = new Algorithm::ChooseSubsets(\@set);
-    while ($x = $i->next) {
-      print '|',(join',',@$x)
-    };
-  #+END_SRC
-  #+RESULTS:
-  : ||a|b|c|d|a,b|a,c|a,d|b,c|b,d|c,d|a,b,c|a,b,d|a,c,d|b,c,d|a,b,c,d
-
-- https://metacpan.org/pod/Algorithm::Combinatorics#subsets-data-k
-  #+BEGIN_SRC perl :results output
-    use Algorithm::Combinatorics qw(subsets);
-    my @set = qw(a b c d);
-
-    # scalar context gives an iterator
-    $i = subsets(\@set);
-    while ($x = $i->next) {
-      print '|',(join',',@$x)
-    };
-
-    # list context slurps
-    my @all = subsets(\@set);
-  #+END_SRC
-
-  #+results:
-  : |a,b,c,d|b,c,d|a,c,d|c,d|a,b,d|b,d|a,d|d|a,b,c|b,c|a,c|c|a,b|b|a|
-
-  perl -pe 's{.*@}{}' cranach-wikidata-prefLabel.txt | sort | tee cranach-wikidata-lang.txt
-  uniq -d wikidata-cranach-lang.txt
-  perl -pe 's{-.*}{}' cranach-wikidata-lang.txt | uniq | wc -l
