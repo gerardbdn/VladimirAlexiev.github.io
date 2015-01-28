@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Name Data Sources for Semantic Enrichment</title>
-<!-- 2015-01-28 Wed 12:45 -->
+<!-- 2015-01-28 Wed 14:37 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Vladimir Alexiev, Data and Ontology Management group, Ontotext Corp" />
@@ -309,7 +309,7 @@ Semantic enrichment in Europeana is a very difficult task due to several factors
 <ul class="org-ul">
 <li>Varying metadata quality across different collections, sometimes including misallocation of metadata fields
 </li>
-<li>Varying metadata formatting practices across different collections, eg some collections indicate the role of a creator in brackets after the creator name
+<li>Varying metadata formatting practices across different collections, e.g. some collections indicate the role of a creator in brackets after the creator name
 </li>
 <li>Lack of accurate language information
 </li>
@@ -319,7 +319,7 @@ For these reasons, we decided to focus on Person &amp; Institution enrichment (p
 </p>
 
 <p>
-Historic people are often referred to by many names. For successful semantic enrichment it's important to integrate high-quality and high-coverage datasets that provide name info. There is a great number of Name Authority files maintained at libraries, museums and other heritage institutions world-wide, eg VIAF, ISNI, Getty ULAN, British Museum. Linked Open Data (LOD) datasets also have a plethora of names, eg in DBpedia, Wikidata and FreeBase. We analyze some of the available datasets in terms of person coverage, name coverage, language tags, extra features that can be useful for enrichment, quality.
+Historic people are often referred to by many names. For successful semantic enrichment it's important to integrate high-quality and high-coverage datasets that provide name info. There is a great number of Name Authority files maintained at libraries, museums and other heritage institutions world-wide, e.g. VIAF, ISNI, Getty ULAN, British Museum. Linked Open Data (LOD) datasets also have a plethora of names, e.g. in DBpedia, Wikidata and FreeBase. We analyze some of the available datasets in terms of person coverage, name coverage, language tags, extra features that can be useful for enrichment, quality.
 </p>
 
 <p>
@@ -385,11 +385,11 @@ We investigate the sources along several dimensions:
 In addition to the names, the following features can be very useful for disambiguation:
 </p>
 <ul class="org-ul">
-<li><b>Description</b> In addition to person names, most data sources have a person description. It can be useful for contextul disambiguation, eg to distinguish a painter from a sculpture. It can vary between:
+<li><b>Description</b> In addition to person names, most data sources have a person description. It can be useful for contextual disambiguation, e.g. to distinguish a painter from a sculpture. It can vary between:
 <ul class="org-ul">
-<li>Short standardized description as provided by ULAN, eg "German painter, draftsman, and printmaker, 1472-1553"
+<li>Short standardized description as provided by ULAN, e.g. "German painter, draftsman, and printmaker, 1472-1553"
 </li>
-<li>Short unstandardized description as provided by Wikidata, eg "German Renaissance painter and printmaker in woodcut and engraving"
+<li>Short unstandardized description as provided by Wikidata, e.g. "German Renaissance painter and printmaker in woodcut and engraving"
 </li>
 <li>Short or long abstract as provided by DBpedia. The long abstract is the beginning of the article until the first heading. The short abstract is the first couple of sentences.
 </li>
@@ -397,9 +397,9 @@ In addition to the names, the following features can be very useful for disambig
 </li>
 </ul>
 </li>
-<li><b>Life years</b> These are useful to filter out by date range. Eg a 20-century painter cannot be the author of a 16-century painting. But life years in CH are often subject to uncertainty, usually expressed with qualifiers like "circa" (c), "early/mid/late-century", "floruit" (fl). In such cases rule-of-thumb defaults may be employed, eg "a person cannot live for more than 100 years", "a person is not creatively active before 15 and after 90 years of age", etc
+<li><b>Life years</b> These are useful to filter out by date range. e.g. a 20-century painter cannot be the author of a 16-century painting. But life years in CH are often subject to uncertainty, usually expressed with qualifiers like "circa" (c), "early/mid/late-century", "floruit" (fl). In such cases rule-of-thumb defaults may be employed, e.g. "a person cannot live for more than 100 years", "a person is not creatively active before 15 and after 90 years of age", etc
 <ul class="org-ul">
-<li>Imprecision: the exact year is not known, eg "early 16th century". This can be translated to a range of years
+<li>Imprecision: the exact year is not known, e.g. "early 16th century". This can be translated to a range of years
 </li>
 <li>Ambiguity: different opinions about the year coming from different sources. In such cases, all opinions are recorded, together with source
 </li>
@@ -409,7 +409,7 @@ In addition to the names, the following features can be very useful for disambig
 </li>
 <li><b>Language tags</b> Whether the source has reliable language tags for the names. They can help restrict the candidate names, but only if the text to be enriched also has reliable language info. Unfortunately there is no such info in Europeana
 </li>
-<li><b>Popularity</b> Often the "popularity" of an entity has good correlation to the probability of its appearance in text, thus is a good way of ordering candidate matches. The question is how to compute "popularity". For cities, a good approximation is the population. For agents, we could use the connectedness and centrality of the agent in an RDF graph, eg:
+<li><b>Popularity</b> Often the "popularity" of an entity has good correlation to the probability of its appearance in text, thus is a good way of ordering candidate matches. The question is how to compute "popularity". For cities, a good approximation is the population. For agents, we could use the connectedness and centrality of the agent in an RDF graph, e.g.:
 <ul class="org-ul">
 <li>Number of paintings on Wikimedia Commons
 </li>
@@ -601,7 +601,7 @@ AutoList2 (<a href="http://tools.wmflabs.org/autolist/">http://tools.wmflabs.org
 </li>
 </ul>
 <p>
-Below is an example: we take all articles on bg.wikpedia in category "Български футболисти" (Bulgarian soccer players), look for ones with missing claim "sport=association football" and add such claim. (This includes non-professional soccer players, eg Bulgarian prime minister Boyko Borissov.) This tool allows even people without MediaWiki bot programming experience to do batch-updates.
+Below is an example: we take all articles on bg.wikpedia in category "Български футболисти" (Bulgarian soccer players), look for ones with missing claim "sport=association football" and add such claim. (This includes non-professional soccer players, e.g. Bulgarian prime minister Boyko Borissov.) This tool allows even people without MediaWiki bot programming experience to do batch-updates.
 </p>
 
 <div class="figure">
@@ -615,12 +615,12 @@ Below is an example: we take all articles on bg.wikpedia in category "Бълга
 <h5 id="sec-2-1-1-3"><span class="section-number-5">2.1.1.3</span> Wikidata Generic Tree</h5>
 <div class="outline-text-5" id="text-2-1-1-3">
 <p>
-Wikidata Tree (<a href="http://tools.wmflabs.org/wikidata-todo/tree.html">http://tools.wmflabs.org/wikidata-todo/tree.html</a>) allows you to view the class hierarchy (or any other property tree), eg:
+Wikidata Tree (<a href="http://tools.wmflabs.org/wikidata-todo/tree.html">http://tools.wmflabs.org/wikidata-todo/tree.html</a>) allows you to view the class hierarchy (or any other property tree), e.g.:
 </p>
 <ul class="org-ul">
 <li>Subclasses of Person (560): <a href="http://tools.wmflabs.org/wikidata-todo/tree.html?q=Q215627&rp=279">http://tools.wmflabs.org/wikidata-todo/tree.html?q=Q215627&rp=279</a>
 <ul class="org-ul">
-<li>Note: Wikidata uses "human" for people, and "person" for anything that can have a personality, eg deity, artificial agent, etc
+<li>Note: Wikidata uses "human" for people, and "person" for anything that can have a personality, e.g. deity, artificial agent, etc
 </li>
 </ul>
 </li>
@@ -789,7 +789,7 @@ Wikidata provides comprehensive RDF data dumps: <a href="http://tools.wmflabs.or
 <th scope="col" class="left">wikidata-?.nt.gz</th>
 <th scope="col" class="right">triples</th>
 <th scope="col" class="left">size</th>
-<th scope="col" class="left">desciption</th>
+<th scope="col" class="left">description</th>
 </tr>
 </thead>
 <tbody>
@@ -868,14 +868,14 @@ Ontotext has taken a recent <a href="https://www.wikidata.org/wiki/Wikidata:Proj
 <ul class="org-ul">
 <li>There are 12331093 "instance of" statements. Wikidata has 13M items, so about 93% of all items have types (if we assume that only a small percent of the items have multiple types)
 </li>
-<li>There are 17875 classes with at least one instance, of which 6510 classes (36%) with at least 5 instances. The rest (64%) are a very long tail of items that are inappropriately used as classes, eg Indian Rhinoceros, Trumbull's Declaration of Independence, stud, meatloaf&#x2026;
+<li>There are 17875 classes with at least one instance, of which 6510 classes (36%) with at least 5 instances. The rest (64%) are a very long tail of items that are inappropriately used as classes, e.g. Indian Rhinoceros, Trumbull's Declaration of Independence, stud, meatloaf&#x2026;
 </li>
 </ul>
 <p>
 Specific classes that are useful for Person/Organisation Recognition:
 </p>
 <ul class="org-ul">
-<li>There are 2.7M (2662626) <b>humans</b> (matches the number reported by WDQ <a href="#sec-2-1-1-1">2.1.1.1</a>). This is fairly well focused, in that it collects a large proportion of all humans. There are a few exceptions, eg "minister", "table tennis player", "chess composer": these should be used as "occupation" while "instance of" should be "human".
+<li>There are 2.7M (2662626) <b>humans</b> (matches the number reported by WDQ <a href="#sec-2-1-1-1">2.1.1.1</a>). This is fairly well focused, in that it collects a large proportion of all humans. There are a few exceptions, e.g. "minister", "table tennis player", "chess composer": these should be used as "occupation" while "instance of" should be "human".
 </li>
 <li>There are 5k <b>families</b>: 4569 noble family, 635 family, 465 Dutch noble family, 95 Belgian noble family, 35 clan
 </li>
@@ -904,7 +904,7 @@ In addition, the following types may be interesting:
 <ul class="org-ul">
 <li>There are 40k+20k <b>names</b>: 40038 family name, 10320 given name, 5569 male given name, 4828 female given name.
 <ul class="org-ul">
-<li>Due to the good efforts of the WikiProject "Wikidata names", these items provide valuable information on names themselves, eg variations, male/female correspondences, etc.
+<li>Due to the good efforts of the WikiProject "Wikidata names", these items provide valuable information on names themselves, e.g. variations, male/female correspondences, etc.
 </li>
 <li>This can probably be used for disambiguation or for generating language-specific name variants, but we have not investigated this topic
 </li>
@@ -970,7 +970,7 @@ Wikidata includes names in a variety of languages.
 </li>
 </ul>
 <p>
-There are 57 unique lang tags, representing 44 languages and 13 language variants (eg de=German vs de-ch=Swiss German):
+There are 57 unique lang tags, representing 44 languages and 13 language variants (e.g. de=German vs de-ch=Swiss German):
 </p>
 <ul class="org-ul">
 <li>af arz az be be-tarask bg br ca cs da de de-ch el en en-ca en-gb eo es eu fa fi fr ga hu hy it ja ka ko la lt lv mk nb nl nn pl pt pt-br ro ru sh sr sr-ec sr-el stq sv sw th uk zh zh-cn zh-hans zh-hant zh-hk zh-sg zh-tw
@@ -999,7 +999,7 @@ Observations on prefLabel and altLabel:
 </li>
 <li>If the lang tag is taken into account, prefLabels and altLabels are disjoint
 </li>
-<li>But if you discount the lang tag, many of the altLabels are redundant. Eg the German
+<li>But if you discount the lang tag, many of the altLabels are redundant. e.g. the German
 prefLabel "Lucas Cranach der Ältere"@de is repeated as altLabel for languages: lt lv nl
 pt stq sv.
 </li>
@@ -1024,7 +1024,7 @@ Ontotext started using Wikidata in commercial applications since mid-Dec 2014, s
 </li>
 <li>Direct types ("instance of") are accurate for most of the entities in <a href="#sec-2-1-4">2.1.4</a>
 </li>
-<li>The set of properties is good. There are established property proposal editorial practices, based on a detailed proposal template followed by discussion and "voting". Eg see properties for  <a href="https://www.wikidata.org/wiki/Wikidata:Property_proposal/Authority_control">Authority Control</a>). If after some time there are some supporters, but no or very few opponents, the property is created only by a property creator or an administrator. All discussion, decisions and their rationale are <a href="https://www.wikidata.org/wiki/Wikidata:Property_proposal/Archive">preserved</a>. Defined property metadata is collected, including guidelines for use (eg on what items it should be applied), to which register or authority file it corresponds (if any), examples, format validation, uniqueness constraints, lists of known exceptions, etc. Eg see <a href="https://www.wikidata.org/wiki/Property_talk:P227">GND identifier</a>.
+<li>The set of properties is good. There are established property proposal editorial practices, based on a detailed proposal template followed by discussion and "voting". e.g. see properties for  <a href="https://www.wikidata.org/wiki/Wikidata:Property_proposal/Authority_control">Authority Control</a>). If after some time there are some supporters, but no or very few opponents, the property is created only by a property creator or an administrator. All discussion, decisions and their rationale are <a href="https://www.wikidata.org/wiki/Wikidata:Property_proposal/Archive">preserved</a>. Defined property metadata is collected, including guidelines for use (e.g. on what items it should be applied), to which register or authority file it corresponds (if any), examples, format validation, uniqueness constraints, lists of known exceptions, etc. e.g. see <a href="https://www.wikidata.org/wiki/Property_talk:P227">GND identifier</a>.
 </li>
 </ul>
 
@@ -1033,9 +1033,9 @@ Ontotext started using Wikidata in commercial applications since mid-Dec 2014, s
 </p>
 </div>
 <ul class="org-ul">
-<li>These constraints are used to discover violations, which can drive coreferencing and merging/splitting investigations. Eg see violations for <a href="https://www.wikidata.org/wiki/Wikidata:Database_reports/Constraint_violations/P227">GND identifier</a>.
+<li>These constraints are used to discover violations, which can drive coreferencing and merging/splitting investigations. e.g. see violations for <a href="https://www.wikidata.org/wiki/Wikidata:Database_reports/Constraint_violations/P227">GND identifier</a>.
 </li>
-<li>Nevertheless, the overall property design is still in flux. Eg there is a <a href="https://www.wikidata.org/wiki/Wikidata:Properties_for_deletion#Properties_for_events_and_their_dates_and_locations">current proposal</a> to eliminate a number of properties such as place/date of birth/death/burial and replace them with a generic "significant event" where details are provided with qualifiers.
+<li>Nevertheless, the overall property design is still in flux. e.g. there is a <a href="https://www.wikidata.org/wiki/Wikidata:Properties_for_deletion#Properties_for_events_and_their_dates_and_locations">current proposal</a> to eliminate a number of properties such as place/date of birth/death/burial and replace them with a generic "significant event" where details are provided with qualifiers.
 </li>
 <li>The class hierarchy is not good at all. The reason is that there is no editorial control over "instance of" and "subclass", so anyone can "make" a class. 63% of all classes have fewer than 5 instances. Play with the Wikidata Generic Tree <a href="#sec-2-1-1-3">2.1.1.3</a> to see some very idiosyncratic classes, and a messed up hierarchy. Just a couple of examples:
 <dl class="org-dl">
@@ -1129,7 +1129,7 @@ DBpedia <a href="#DBpedia">1</a> is structured information extracted from Wikipe
 <div class="outline-text-4" id="text-2-3-1">
 <p>
 <a href="#DBpedia">1</a> presents very comprehensive statistics (p.12 table 2). The most recent version of these statistics is <a href="http://wiki.dbpedia.org/Datasets2014/DatasetStatistics">online</a>.
-EN DBpedia being the first and largest language editions is taken as Canonicalized Data ("CD") (namespace <a href="http://dbpedia.org/resource">http://dbpedia.org/resource</a>; there is no namespace <a href="http://en.dbpedia.org/resource">http://en.dbpedia.org/resource</a>). Other editions are called  Localized Data ("LD"). EN DBpedia provides the follwoing <a href="http://wiki.dbpedia.org/Datasets2014/DatasetStatistics#h20178-1">number of entities</a>:
+EN DBpedia being the first and largest language editions is taken as Canonicalized Data ("CD") (namespace <a href="http://dbpedia.org/resource">http://dbpedia.org/resource</a>; there is no namespace <a href="http://en.dbpedia.org/resource">http://en.dbpedia.org/resource</a>). Other editions are called  Localized Data ("LD"). EN DBpedia provides the following <a href="http://wiki.dbpedia.org/Datasets2014/DatasetStatistics#h20178-1">number of entities</a>:
 </p>
 <ul class="org-ul">
 <li>1,445k persons
@@ -1146,7 +1146,7 @@ EN DBpedia being the first and largest language editions is taken as Canonicaliz
 </li>
 </ul>
 <p>
-The total number across editions is harder to calculate since it depends on the degree of <a href="http://wiki.dbpedia.org/Datasets2014/CrossLanguageOverlapStatistics?v=hj1#h439-2">cross-language overlap</a> popular entities appear in many editions, while purely "local heros" may appear in a single edition. The numbers grow to:
+The total number across editions is harder to calculate since it depends on the degree of <a href="http://wiki.dbpedia.org/Datasets2014/CrossLanguageOverlapStatistics?v=hj1#h439-2">cross-language overlap</a> popular entities appear in many editions, while purely "local heroes" may appear in a single edition. The numbers grow to:
 </p>
 <ul class="org-ul">
 <li>1,471k persons
@@ -1173,7 +1173,7 @@ Please compare to Wikidata Counts <a href="#sec-2-1-4">2.1.4</a>. We estimate th
 To undertand the dynamics of DBpedia, one should understand raw properties vs mapped properties and classes, which is described really well in <a href="#DBpedia">1</a>. In brief, the process is as follows:
 </p>
 <ul class="org-ul">
-<li>Extracts all properties from all significant templates applied to the article. These properties are different for every language edition and are spelt in the national language, so they are called <b>raw</b>. Various heuristics are applied to recognize dates, numbers, links. No type information is applied here, which leads to some problems, eg:
+<li>Extracts all properties from all significant templates applied to the article. These properties are different for every language edition and are spelt in the national language, so they are called <b>raw</b>. Various heuristics are applied to recognize dates, numbers, links. No type information is applied here, which leads to some problems, e.g.:
 <ul class="org-ul">
 <li>The name of the asteroid <a href="http://dbpedia.org/resource/1111_Reinmuthia">1111 Reinmuthia</a> is extracted as dbpprop:name 1111 (xsd:integer) because of a heuristic "if the field starts with an integer, assume it's an integer"
 </li>
@@ -1188,23 +1188,23 @@ will extract resources of variegated types: person, country, notable month-day, 
 </li>
 </ul>
 </li>
-<li>Extracts a number of other characteristics, eg all used templates and categories, links, redirects, abstract (text before the first heading), geographic coordinates, etc
+<li>Extracts a number of other characteristics, e.g. all used templates and categories, links, redirects, abstract (text before the first heading), geographic coordinates, etc
 </li>
 <li>Reads crowd-sourced class and property definitions and mappings from <a href="http://mapping.dbpedia.org">http://mapping.dbpedia.org</a>
 </li>
 <li>Computes <b>mapped</b> properties from the raw properties and mappings. There is no editorial process in the mapping wiki, so there are significant defects, especially for languages other than English. This involves:
 <ul class="org-ul">
-<li>Classes, eg non-sensical class like VicePresident
+<li>Classes, e.g. non-sensical class like VicePresident
 </li>
-<li>Properties, eg DBpedia has no less than 86 <a href="http://mappings.dbpedia.org/index.php/What's_in_a_Name">"name" properties</a> of which about half should be eliminated
+<li>Properties, e.g. DBpedia has no less than 86 <a href="http://mappings.dbpedia.org/index.php/What's_in_a_Name">"name" properties</a> of which about half should be eliminated
 </li>
-<li>Mappings. The problems here are most extensive and vary from non-standard properties (eg sex="a" on bg.dbpedia to indicate Female) to mixing the predecessors/successors of a public official across several terms (pl.dbpedia)
+<li>Mappings. The problems here are most extensive and vary from non-standard properties (e.g. sex="a" on bg.dbpedia to indicate Female) to mixing the predecessors/successors of a public official across several terms (pl.dbpedia)
 </li>
 </ul>
 </li>
 </ul>
 <p>
-Because domains &amp; ranges are not used when extracting raw properties nor checked when mapping, this leads to data problems. Eg the <code>firstAscent</code> template property (see above) is mapped to two:
+Because domains &amp; ranges are not used when extracting raw properties nor checked when mapping, this leads to data problems. e.g. the <code>firstAscent</code> template property (see above) is mapped to two:
 </p>
 <ul class="org-ul">
 <li><code>firstAscentYear a owl:DatatypeProperty; rdfs:range xsd:gYear</code>
@@ -1240,7 +1240,7 @@ Mapping problems also lead to class errors. For example:
 </li>
 <li>So the mapping Infobox_Geopolitical_organization is disused, but the mapping wiki does not warn about it
 </li>
-<li>We need to merge the mapping Infobox_Geopolitical_organization into the mapping Infobox_Country, discriminating on some field (eg <code>org_type</code>) whether to emit class Organisatin, GeopoliticalOrganization or Country. See more details in <a href="http://mappings.dbpedia.org/index.php/Mapping_en_talk:Infobox_country">discussion</a>
+<li>We need to merge the mapping Infobox_Geopolitical_organization into the mapping Infobox_Country, discriminating on some field (e.g. <code>org_type</code>) whether to emit class Organisatin, GeopoliticalOrganization or Country. See more details in <a href="http://mappings.dbpedia.org/index.php/Mapping_en_talk:Infobox_country">discussion</a>
 </li>
 </ul>
 </li>
@@ -1290,7 +1290,7 @@ These problems have seen a lot of attention lately, see <a href="http://groups.g
 </li>
 <li>DBpedia Ontology and Extractor Problems
 </li>
-<li>DBpedia in Web Protege, by Alexandru Todo
+<li>DBpedia in Web Protege, by Alexandru Todor
 </li>
 <li>Discussion on the new ontology editing workflow and future directions of the DBpedia ontology
 </li>
@@ -1316,14 +1316,14 @@ Notes:
 <ul class="org-ul">
 <li>"simple" is a kind of English, used in the Simple English Wikipedia, where articles are written with a repertoire of a couple thousand words only
 </li>
-<li>"commons" is an extract from Wikimedia Commons, which incldues metadata for 15M freely reusable images, diagrams and multimedia
+<li>"commons" is an extract from Wikimedia Commons, which includes metadata for 15M freely reusable images, diagrams and multimedia
 </li>
 <li>"links" provides cross-references to various other datasets
 </li>
 </ul>
 
 <p>
-If you look at one of the editions eg <a href="http://data.dws.informatik.uni-mannheim.de/dbpedia/2014/en/">EN</a>, you'll see a daunting picture: 162 files of size 37.6Gb zipped. But they come in quadruples, eg
+If you look at one of the editions e.g. <a href="http://data.dws.informatik.uni-mannheim.de/dbpedia/2014/en/">EN</a>, you'll see a daunting picture: 162 files of size 37.6Gb zipped. But they come in quadruples, eg
 </p>
 <table border="1" cellspacing="0" cellpadding="0" rules="all" frame="box">
 
@@ -1453,17 +1453,17 @@ http://be_x_old.dbpedia.org/resource/Люкас_Кранах_Старэйшы
 http://bg.dbpedia.org/resource/Лукас_Кранах_Стари
 </pre>
 <p>
-See <b>dbpedia-sameas.txt</b> for the full set of owl:sameAs for Cranach.
+See <a href="./dbpedia-sameas.txt">./dbpedia-sameas.txt</a> for the full set of owl:sameAs for Cranach.
 </p>
 <ul class="org-ul">
-<li>The first few are links to Freebase [<a href="#sec-2-2">2.2</a>], Wikidata [<a href="#Wikidata">5</a>] (one correct URL and another "bastardized" by DBpedia), Yago Knowledge <a href="#sec-2-7">2.7</a> and Open Cyc
+<li>The first few are links to Freebase, Wikidata (one correct URL and another "bastardized" by DBpedia), Yago Knowledge <a href="#sec-2-7">2.7</a> and Open Cyc
 </li>
 <li>The rest are the interlanguage links.
 </li>
 </ul>
 
 <p>
-The sameAs do not return extra data on <a href="http://dbpedia.org">http://dbpedia.org</a>, eg:
+The sameAs do not return extra data on <a href="http://dbpedia.org">http://dbpedia.org</a>, e.g.:
 </p>
 <div class="org-src-container">
 
@@ -1481,7 +1481,7 @@ The labels and abstracts in the 11 additional languages are attached to the en U
 <h4 id="sec-2-3-8"><span class="section-number-4">2.3.8</span> Wikipedia Redirects</h4>
 <div class="outline-text-4" id="text-2-3-8">
 <p>
-Wikipedia redirect page goes to the target of the redirect. Eg <a href="http://en.wikipedia.org/wiki/Cranach,_Lucas_the_Elder">http://en.wikipedia.org/wiki/Cranach,_Lucas_the_Elder</a> goes to the page about Cranach. A redirect may point to another redirect, but the DBpedia extractor chases all redirects to their ultimate target.
+Wikipedia redirect page goes to the target of the redirect. e.g. <a href="http://en.wikipedia.org/wiki/Cranach,_Lucas_the_Elder">http://en.wikipedia.org/wiki/Cranach,_Lucas_the_Elder</a> goes to the page about Cranach. A redirect may point to another redirect, but the DBpedia extractor chases all redirects to their ultimate target.
 </p>
 <ul class="org-ul">
 <li>DBpedia implements a similar redirect: <a href="http://dbpedia.org/resource/Cranach,_Lucas_the_Elder">http://dbpedia.org/resource/Cranach,_Lucas_the_Elder</a> goes to the DBpedia resource/page about Cranach
@@ -1530,7 +1530,7 @@ It returns a number of statements, of which the most important are:
 </pre>
 </div>
 <p>
-Not all redirects provide alternative names for an entity (eg <a href="https://en.wikipedia.org/wiki/God_does_not_play_dice">https://en.wikipedia.org/wiki/God_does_not_play_dice</a> goes to the page Albert_Einstein, although this is something he said, not an alternative name for him). But most provide alternative names, so we can use them:
+Not all redirects provide alternative names for an entity (e.g. <a href="https://en.wikipedia.org/wiki/God_does_not_play_dice">https://en.wikipedia.org/wiki/God_does_not_play_dice</a> goes to the page Albert_Einstein, although this is something he said, not an alternative name for him). But most provide alternative names, so we can use them:
 </p>
 <div class="org-src-container">
 
@@ -1570,7 +1570,7 @@ select ?x ?p ?n {
 </pre>
 </div>
 <p>
-Note: unfortunately some DBpedia endpoints <a href="http://it.dbpedia.org/sparql">(eg Italy)</a> don't support SPARQL 1.1.
+Note: unfortunately some DBpedia endpoints <a href="http://it.dbpedia.org/sparql">(e.g. Italy)</a> don't support SPARQL 1.1.
 </p>
 
 <p>
@@ -1614,7 +1614,7 @@ select * {
 <ul class="org-ul">
 <li>The raw property grabs anything it finds in the template field. If you remove the condition <code>lang(?n)</code> you'll see all kinds of junk, from dates to families.
 </li>
-<li>language tags are fixed to en (by default), so are not reliable. Eg "Никола́й Ива́нович Буха́рин"@en is in Russian not English
+<li>language tags are fixed to en (by default), so are not reliable. e.g. "Никола́й Ива́нович Буха́рин"@en is in Russian not English
 </li>
 </ul>
 </div>
@@ -1633,7 +1633,7 @@ VIAF is a large-scale collaboration of national libraries and OCLC to produce a 
 <h4 id="sec-2-4-1"><span class="section-number-4">2.4.1</span> VIAF Algorithms</h4>
 <div class="outline-text-4" id="text-2-4-1">
 <p>
-VIAF uses sophisticated matching and clustering algorithms [<a href="#VIAFamb">3</a>] to match named entities across name authorities. These include people, organizations, conferences, places, works, expressions (eg a certain edition or translation of a work), subject headings, etc. VIAF is somewhat conservative in not making possible matches that are not warranted by sufficient information.
+VIAF uses sophisticated matching and clustering algorithms [<a href="#VIAFamb">3</a>] to match named entities across name authorities. These include people, organizations, conferences, places, works, expressions (e.g. a certain edition or translation of a work), subject headings, etc. VIAF is somewhat conservative in not making possible matches that are not warranted by sufficient information.
 </p>
 
 <p>
@@ -1708,7 +1708,7 @@ If you search for "Personal name: Lucas Cranach" you may find:
 <ul class="org-ul">
 <li>(top) a main cluster <a href="http://viaf.org/viaf/49268177">http://viaf.org/viaf/49268177</a> that carries a lot of info and is the result of matching many source records (including from DNB)
 </li>
-<li>(middle) 31 persons who are either related to Cranach (eg Maximilian I Holy Roman Emperor, painted by Cranach in 1509), or share a name
+<li>(middle) 31 persons who are either related to Cranach (e.g. Maximilian I Holy Roman Emperor, painted by Cranach in 1509), or share a name
 </li>
 <li>(bottom) two stand-alone (singleton) clusters (coming from DNB):
 <ul class="org-ul">
@@ -1763,7 +1763,7 @@ The RDF is at <a href="http://viaf.org/viaf/49268177/rdf.xml">http://viaf.org/vi
 <ul class="org-ul">
 <li>The central node is a schema:Person, having birth/death dates, names, anternate names, even given/family names (though "studio of" is hardly a given name)
 </li>
-<li>The Person is declared owl:sameAs all coresponding nodes in contributing organizations that have an appropriate type (eg foaf:Person for BNF, dbo:Person for DBPedia)
+<li>The Person is declared owl:sameAs all coresponding nodes in contributing organizations that have an appropriate type (e.g. foaf:Person for BNF, dbo:Person for DBPedia)
 </li>
 <li>There are two documents (the VIAF page and Wikipedia page) that point to the Person using foaf:primaryTopic.
 </li>
@@ -1882,7 +1882,7 @@ The Cranach record is at <a href="http://vocab.getty.edu/ulan/500115364">http://
 </li>
 <li>ULAN names are subsumed by VIAF since ULAN is a fully-fledged contributor to VIAF
 </li>
-<li>However, ULAN is carefully curated, every name/fact has a documented source, and it includes valuable person information such as roles (types), relations (eg influenced, student), life events. These can be useful for disambiguation
+<li>However, ULAN is carefully curated, every name/fact has a documented source, and it includes valuable person information such as roles (types), relations (e.g. influenced, student), life events. These can be useful for disambiguation
 </li>
 </ul>
 </div>
@@ -1937,7 +1937,7 @@ The Cranach record is at <a href="http://collection.britishmuseum.org/id/person-
 <h3 id="sec-2-9"><span class="section-number-3">2.9</span> LOD Cache</h3>
 <div class="outline-text-3" id="text-2-9">
 <p>
-The LOD Cache sparql endpoint <a href="http://lod.openlinksw.com/sparql">http://lod.openlinksw.com/sparql</a> by Open Link Software includes a lot of aggregated data from LOD datasets. It includes the following name sources considered above:
+The LOD Cache SPARQL endpoint <a href="http://lod.openlinksw.com/sparql">http://lod.openlinksw.com/sparql</a> by Open Link Software includes a lot of aggregated data from LOD datasets. It includes the following name sources considered above:
 </p>
 <ul class="org-ul">
 <li>Wikidata
@@ -1967,7 +1967,7 @@ Virtuoso 08C01 Error CL...: Cluster could not connect to host 2 oplbfc3:22202 er
 
 <p>
 We run a query which is a combination of <a href="#sec-2-3-7">2.3.7</a>, <a href="#sec-2-3-8">2.3.8</a> and <a href="#sec-2-3-9">2.3.9</a>.
-The result is a table <b>from-LOD-cache.tdv</b> with 216 rows. But let's check the unique labels only (there's 88) and compare to Wikipedia+VIAF
+The result is a table <a href="./from-LOD-cache.tdv">./from-LOD-cache.tdv</a> with 216 rows. But let's check the unique labels only (there's 88) and compare to Wikipedia+VIAF
 </p>
 <div class="org-src-container">
 
@@ -1977,9 +1977,9 @@ cat cranach-wikidata.txt cranach-VIAF.txt | sort | uniq &gt; Wikidata-VIAF-uniq.
 </div>
 
 <ul class="org-ul">
-<li>There are  146 names in <b>Wikidata-VIAF-uniq.txt</b> and 83 in <b>from-LOD-uniq.txt</b>
+<li>There are  146 names in <a href="./Wikidata-VIAF-uniq.txt">./Wikidata-VIAF-uniq.txt</a> and 83 in <a href="./from-LOD-uniq.txt">./from-LOD-uniq.txt</a>
 </li>
-<li>There are only 4 unique contributions in  <b>from-LOD-uniq.txt</b>:
+<li>There are only 4 unique contributions in <a href="./from-LOD-uniq.txt">./from-LOD-uniq.txt</a>:
 <pre class="example">
 Cranach the Elder
 Lucas Cranach "el Vell"
@@ -2005,7 +2005,7 @@ So we tabulate them to a common file, using common Unix tools (perl, join, uniq,
 <ul class="org-ul">
 <li>We concatenate all files from different sources, uniquify and sort, obtaining 155 names
 </li>
-<li>Hacky note: if working on Windows (eg using Cygwin), convert all files to Unix newlines: <code>conv -U *.txt</code>
+<li>Hacky note: if working on Windows (e.g. using Cygwin), convert all files to Unix newlines: <code>conv -U *.txt</code>
 </li>
 <li>Don't use Unicode BOM, since sort and join don't like it
 </li>
@@ -2070,9 +2070,9 @@ Using the <code>Algorithm::Combinatorics</code> perl module, we hacked a script 
 The result is <b><a href="./cranach-venn.html">./cranach-venn.html</a></b>.
 </p>
 <ul class="org-ul">
-<li>We <b>strongly recommend</b> that you play with the interactive version, since it highlights intersections and reveals their cardinalities, allowing better understanding of the arrangement.
+<li>We <b>strongly recommend</b> that you play with the interactive version <a href="./cranach-venn.html">./cranach-venn.html</a>, since it highlights intersections and reveals their cardinalities, allowing better understanding of the arrangement.
 </li>
-<li>The diagram is approximate, eg ULAN is wholly within VIAF: if you try to point out the little sliver ULAN\VIAF, you'll discover it has cardinality 0. But it's quite accurate!
+<li>The diagram is approximate, e.g. ULAN is wholly within VIAF: if you try to point out the little sliver ULAN\VIAF, you'll discover it has cardinality 0. But it's quite accurate!
 </li>
 </ul>
 
@@ -2086,7 +2086,7 @@ The result is <b><a href="./cranach-venn.html">./cranach-venn.html</a></b>.
 Notes:
 </p>
 <ul class="org-ul">
-<li>A striking revelation is that the 3 "library-tradition" datasets (VIAF, ISNI, ULAN) and the 4 "LOD-tradition datasets" (Wikidata, DBpedia, Freebase, Yago) have almost nothing in common: only 5 names. Library datasets contribute many permutations and qualifiers (eg "der Altere" vs "d A"), while LOD datasets contribute many languages.
+<li>A striking revelation is that the 3 "library-tradition" datasets (VIAF, ISNI, ULAN) and the 4 "LOD-tradition datasets" (Wikidata, DBpedia, Freebase, Yago) have almost nothing in common: only 5 names. Library datasets contribute many permutations and qualifiers (e.g. "der Altere" vs "d A"), while LOD datasets contribute many languages.
 </li>
 <li>The datasets in each "tradition" are very similar. The reason is obvious: ISNI and ULAN are fully-fledged contributors in VIAF, so VIAF subsumes them. As for the LOD datasets, each has copied from the others liberally. DBpedia appears a subset of Wikidata only because we have selected only en, de, fr names (See <a href="#sec-2-3-9">2.3.9</a>). Yago covers the en DBpedia, and Freebase doesn't contribute many unique names either.
 </li>
@@ -2397,7 +2397,7 @@ Now let's see some coreferencing action between the two hubs:
 <ul class="org-ul">
 <li>We already saw the Wikidata coreference id's on the Reasonator page for <a href="http://tools.wmflabs.org/reasonator/?&q=191748">Cranach</a>
 </li>
-<li>VIAF has an API "justlinks" to return only the coreferences, eg for Cranach: <a href="http://viaf.org/viaf/49268177/justlinks.json">http://viaf.org/viaf/49268177/justlinks.json</a>
+<li>VIAF has an API "justlinks" to return only the coreferences, e.g. for Cranach: <a href="http://viaf.org/viaf/49268177/justlinks.json">http://viaf.org/viaf/49268177/justlinks.json</a>
   (Note: 4 of the fields were URLs, we left just the ID for easier comparison)
 </li>
 </ul>
@@ -2623,7 +2623,7 @@ Now let's see some coreferencing action between the two hubs:
 As you can see, there are a number of "gaps" in each hub that could be filled out from the other hub.
 </p>
 <ul class="org-ul">
-<li>Eg RKDartists is an important Authority that does not yet participate in VIAF. There are already 21760 <a href="http://wdq.wmflabs.org/api?q=claim[650]&noitems=1">RKDartist id's on Wikidata</a>. These could be imported to VIAF for free!
+<li>e.g. RKDartists is an important Authority that does not yet participate in VIAF. There are already 21760 <a href="http://wdq.wmflabs.org/api?q=claim[650]&noitems=1">RKDartist id's on Wikidata</a>. These could be imported to VIAF for free!
 </li>
 <li>In this case each hub has the ID of the other hub. But this need not always be the case:
 <ul class="org-ul">
@@ -2635,7 +2635,7 @@ As you can see, there are a number of "gaps" in each hub that could be filled ou
 </li>
 </ul>
 </li>
-<li>We can fill out missing data (eg birth/death date/place) from one hub to the other
+<li>We can fill out missing data (e.g. birth/death date/place) from one hub to the other
 </li>
 </ul>
 <p>
@@ -2721,7 +2721,7 @@ The query parameters correspond to the result fields as follows: source-&gt;PREF
 <h3 id="sec-4-5"><span class="section-number-3">4.5</span> Wikidata Authority Identifiers</h3>
 <div class="outline-text-3" id="text-4-5">
 <p>
-A prerequisite for coreferencing is to register authority files as Wikidata items, and their IDs as Wikidata properties (carrying annotation "Wikidata property for authority control"). All kinds of international and national authority files are already registered (eg see a <a href="https://en.wikisource.org/wiki/Wikisource:Authority_control">big list</a> on Wikisource or a <a href="https://en.wikisource.org/wiki/Template:Authority_control#Parameters">sampling</a> on Wikisouce), and new ones are proposed daily. These identifiers are used in items and articles, and displayed as a visually striking <a href="https://www.wikidata.org/wiki/Template:Authority_control_properties">Authority Control box</a>
+A prerequisite for coreferencing is to register authority files as Wikidata items, and their IDs as Wikidata properties (carrying annotation "Wikidata property for authority control"). All kinds of international and national authority files are already registered (e.g. see a <a href="https://en.wikisource.org/wiki/Wikisource:Authority_control">big list</a> on Wikisource or a <a href="https://en.wikisource.org/wiki/Template:Authority_control#Parameters">sampling</a> on Wikisouce), and new ones are proposed daily. These identifiers are used in items and articles, and displayed as a visually striking <a href="https://www.wikidata.org/wiki/Template:Authority_control_properties">Authority Control box</a>
 </p>
 
 <div class="figure">
@@ -2865,7 +2865,7 @@ Note: <a href="http://dbpedia.org/sparql">http://dbpedia.org/sparql</a> returns 
 <h3 id="sec-4-8"><span class="section-number-3">4.8</span> Finding Errors in Authorities through Wikipedia/Wikidata</h3>
 <div class="outline-text-3" id="text-4-8">
 <p>
-The power of the crowd can help maintain authority control files by finding errors and researching cases where records should be merged or split. Eg <a href="https://en.wikipedia.org/wiki/Wikipedia:VIAF/errors">VIAF errors on Wikipedia</a> has lists in the following categories:
+The power of the crowd can help maintain authority control files by finding errors and researching cases where records should be merged or split. e.g. <a href="https://en.wikipedia.org/wiki/Wikipedia:VIAF/errors">VIAF errors on Wikipedia</a> has lists in the following categories:
 </p>
 <ul class="org-ul">
 <li>1.1 Wikipedia article is not the same as the VIAF identity
@@ -2884,7 +2884,7 @@ The power of the crowd can help maintain authority control files by finding erro
 </li>
 </ul>
 <p>
-Wikidata provides automatic integrity checking, eg no two items should have the same id, one item should have no more than one id, etc).
+Wikidata provides automatic integrity checking, e.g. no two items should have the same id, one item should have no more than one id, etc).
 </p>
 <ul class="org-ul">
 <li>The <a href="https://www.wikidata.org/wiki/Wikidata:Database_reports/Constraint_violations/P214">VIAF id constraint violations report</a> lists some 3500 items that should be investigated.
@@ -2921,13 +2921,13 @@ We can draw the following conclusions from this analysis:
 </li>
 <li>The best approach is loading them to a local repository in order to ensure levels of service
 </li>
-<li>Names and other attributes (eg years, descriptions) are extracted with agreed queries, producing dynamic gazetteers
+<li>Names and other attributes (e.g. years, descriptions) are extracted with agreed queries, producing dynamic gazetteers
 </li>
 <li>For <a href="#sec-2-1-3">Wikidata</a> we load the files <code>terms, simple-statements, properties, taxonomy, instances</code> and only enwiki <code>sitelinks</code> for a total of maximum 315M triples.
 <ul class="org-ul">
 <li>We skip redundant triples, see <a href="#sec-2-1-5">2.1.5</a>: rdfs:label, schema:name. We also don't load ontologies, to avoid the inference of rdfs:label from skos:prefLabel or skos:altLabel
 </li>
-<li>We should talk to the Wikidata developers to also emit one statement (the preferred or first in order) per item-property slot, even if the statemetn is qualified
+<li>We should talk to the Wikidata developers to also emit one statement (the preferred or first in order) per item-property slot, even if the statement is qualified
 </li>
 </ul>
 </li>
@@ -2935,7 +2935,7 @@ We can draw the following conclusions from this analysis:
 </li>
 <li>We align the two datasets by coreference IDs
 </li>
-<li>Participating in <a href="#sec-4">4</a> initiatives is benefitial for the Europeana community, and the wider CH and LOD communities. For example, a first initiative could be to cross-check VIAF Wikipedia links against Wikidata VIAF links
+<li>Participating in <a href="#sec-4">4</a> initiatives is beneficial for the Europeana community, and the wider CH and LOD communities. For example, a first initiative could be to cross-check VIAF Wikipedia links against Wikidata VIAF links
 </li>
 </ul>
 </div>
@@ -2970,7 +2970,7 @@ We can draw the following conclusions from this analysis:
 <div id="postamble" class="status">
 <p class="date">Date: 2015-01-28</p>
 <p class="author">Author: Vladimir Alexiev, Data and Ontology Management group, Ontotext Corp</p>
-<p class="date">Created: 2015-01-28 Wed 12:45</p>
+<p class="date">Created: 2015-01-28 Wed 14:37</p>
 <p class="creator">Emacs 24.3.91.1 (Org mode 8.2.7c)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

@@ -20,11 +20,11 @@ See http://vladimiralexiev.github.io/CH-names/README.html for better reading
 * Name Data Sources for Semantic Enrichment
 Semantic enrichment in Europeana is a very difficult task due to several factors:
 - Varying metadata quality across different collections, sometimes including misallocation of metadata fields
-- Varying metadata formatting practices across different collections, eg some collections indicate the role of a creator in brackets after the creator name
+- Varying metadata formatting practices across different collections, e.g. some collections indicate the role of a creator in brackets after the creator name
 - Lack of accurate language information
 For these reasons, we decided to focus on Person & Institution enrichment (person  Named Entity Recognition), which in itself is an ambitious task.
 
-Historic people are often referred to by many names. For successful semantic enrichment it's important to integrate high-quality and high-coverage datasets that provide name info. There is a great number of Name Authority files maintained at libraries, museums and other heritage institutions world-wide, eg VIAF, ISNI, Getty ULAN, British Museum. Linked Open Data (LOD) datasets also have a plethora of names, eg in DBpedia, Wikidata and FreeBase. We analyze some of the available datasets in terms of person coverage, name coverage, language tags, extra features that can be useful for enrichment, quality.
+Historic people are often referred to by many names. For successful semantic enrichment it's important to integrate high-quality and high-coverage datasets that provide name info. There is a great number of Name Authority files maintained at libraries, museums and other heritage institutions world-wide, e.g. VIAF, ISNI, Getty ULAN, British Museum. Linked Open Data (LOD) datasets also have a plethora of names, e.g. in DBpedia, Wikidata and FreeBase. We analyze some of the available datasets in terms of person coverage, name coverage, language tags, extra features that can be useful for enrichment, quality.
 
 We also analyze the important topic of *coreferencing*, i.e. how connected the sources are to each other.
 
@@ -49,17 +49,17 @@ We investigate the sources along several dimensions:
 
 ** Extra features
 In addition to the names, the following features can be very useful for disambiguation:
-- *Description* In addition to person names, most data sources have a person description. It can be useful for contextul disambiguation, eg to distinguish a painter from a sculpture. It can vary between:
-  - Short standardized description as provided by ULAN, eg "German painter, draftsman, and printmaker, 1472-1553"
-  - Short unstandardized description as provided by Wikidata, eg "German Renaissance painter and printmaker in woodcut and engraving"
+- *Description* In addition to person names, most data sources have a person description. It can be useful for contextual disambiguation, e.g. to distinguish a painter from a sculpture. It can vary between:
+  - Short standardized description as provided by ULAN, e.g. "German painter, draftsman, and printmaker, 1472-1553"
+  - Short unstandardized description as provided by Wikidata, e.g. "German Renaissance painter and printmaker in woodcut and engraving"
   - Short or long abstract as provided by DBpedia. The long abstract is the beginning of the article until the first heading. The short abstract is the first couple of sentences.
   - Quite long biographies as provided by the British Museum (only for well-known artists)
-- *Life years* These are useful to filter out by date range. Eg a 20-century painter cannot be the author of a 16-century painting. But life years in CH are often subject to uncertainty, usually expressed with qualifiers like "circa" (c), "early/mid/late-century", "floruit" (fl). In such cases rule-of-thumb defaults may be employed, eg "a person cannot live for more than 100 years", "a person is not creatively active before 15 and after 90 years of age", etc
-  - Imprecision: the exact year is not known, eg "early 16th century". This can be translated to a range of years
+- *Life years* These are useful to filter out by date range. e.g. a 20-century painter cannot be the author of a 16-century painting. But life years in CH are often subject to uncertainty, usually expressed with qualifiers like "circa" (c), "early/mid/late-century", "floruit" (fl). In such cases rule-of-thumb defaults may be employed, e.g. "a person cannot live for more than 100 years", "a person is not creatively active before 15 and after 90 years of age", etc
+  - Imprecision: the exact year is not known, e.g. "early 16th century". This can be translated to a range of years
   - Ambiguity: different opinions about the year coming from different sources. In such cases, all opinions are recorded, together with source
   - "Floruit": the birth and/or death date is not known, only a range when the person was active
 - *Language tags* Whether the source has reliable language tags for the names. They can help restrict the candidate names, but only if the text to be enriched also has reliable language info. Unfortunately there is no such info in Europeana
-- *Popularity* Often the "popularity" of an entity has good correlation to the probability of its appearance in text, thus is a good way of ordering candidate matches. The question is how to compute "popularity". For cities, a good approximation is the population. For agents, we could use the connectedness and centrality of the agent in an RDF graph, eg:
+- *Popularity* Often the "popularity" of an entity has good correlation to the probability of its appearance in text, thus is a good way of ordering candidate matches. The question is how to compute "popularity". For cities, a good approximation is the population. For agents, we could use the connectedness and centrality of the agent in an RDF graph, e.g.:
   - Number of paintings on Wikimedia Commons
   - Number of "influences" connections on DBpedia
   - Number of relations in ULAN
@@ -137,14 +137,14 @@ AutoList2 (http://tools.wmflabs.org/autolist/) is a powerful tool that allows yo
 - Combine these with boolean connectives
 - Bookmark or download the results
 - Apply any claims (statements) to the final result
-Below is an example: we take all articles on bg.wikpedia in category "Български футболисти" (Bulgarian soccer players), look for ones with missing claim "sport=association football" and add such claim. (This includes non-professional soccer players, eg Bulgarian prime minister Boyko Borissov.) This tool allows even people without MediaWiki bot programming experience to do batch-updates.
+Below is an example: we take all articles on bg.wikpedia in category "Български футболисти" (Bulgarian soccer players), look for ones with missing claim "sport=association football" and add such claim. (This includes non-professional soccer players, e.g. Bulgarian prime minister Boyko Borissov.) This tool allows even people without MediaWiki bot programming experience to do batch-updates.
 #+HTML_ATTR: :class stretch
 [[./img/wikidata-bulgarian-football-players.png]]
 
 **** Wikidata Generic Tree
-Wikidata Tree (http://tools.wmflabs.org/wikidata-todo/tree.html) allows you to view the class hierarchy (or any other property tree), eg:
+Wikidata Tree (http://tools.wmflabs.org/wikidata-todo/tree.html) allows you to view the class hierarchy (or any other property tree), e.g.:
 - Subclasses of Person (560): http://tools.wmflabs.org/wikidata-todo/tree.html?q=Q215627&rp=279
-  - Note: Wikidata uses "human" for people, and "person" for anything that can have a personality, eg deity, artificial agent, etc
+  - Note: Wikidata uses "human" for people, and "person" for anything that can have a personality, e.g. deity, artificial agent, etc
 - Subclasses of Location (3234): http://tools.wmflabs.org/wikidata-todo/tree.html?q=Q17334923&rp=279
   The class hierarchy is currently quite a mess. Luckily, the direct types used for Humans and Organizations are not too many, and are ok
 - Locations in Cambridgeshire as a d3 star tree: http://tools.wmflabs.org/wikidata-todo/tree.html?q=23112&rp=131&method=d3
@@ -181,7 +181,7 @@ Wikidata provides comprehensive RDF data dumps: http://tools.wmflabs.org/wikidat
 - The full dumps are made quite often (monthly or bimonthly)
 - Note: the interactive query tools described above work with a delay of 5-15 minutes compared to the live data
 
-| wikidata-?.nt.gz   |   triples | size   | desciption                                                                            |
+| wikidata-?.nt.gz   |   triples | size   | description                                                                           |
 |--------------------+-----------+--------+---------------------------------------------------------------------------------------|
 | terms              | 144702568 | 1.2G   | item labels, descriptions, aliases (in all languages)                                 |
 | sitelinks          | 140980119 | 1.0G   | links from Wikidata to Wikipedia and other MediaWiki project sites                    |
@@ -199,9 +199,9 @@ Wikidata statements (claims) may carry complex associated information in *qualif
 *** Wikidata Coverage and Type Count
 Ontotext has taken a recent [[https://www.wikidata.org/wiki/Wikidata:Project_chat#Class_Instance_Analysis][count]] of all direct type ("instance of") RDF statements as of Dec 2014. The count files are on [[https://gist.github.com/VladimirAlexiev/a866f76252a04b84d62b][Gist]]
 - There are 12331093 "instance of" statements. Wikidata has 13M items, so about 93% of all items have types (if we assume that only a small percent of the items have multiple types)
-- There are 17875 classes with at least one instance, of which 6510 classes (36%) with at least 5 instances. The rest (64%) are a very long tail of items that are inappropriately used as classes, eg Indian Rhinoceros, Trumbull's Declaration of Independence, stud, meatloaf...
+- There are 17875 classes with at least one instance, of which 6510 classes (36%) with at least 5 instances. The rest (64%) are a very long tail of items that are inappropriately used as classes, e.g. Indian Rhinoceros, Trumbull's Declaration of Independence, stud, meatloaf...
 Specific classes that are useful for Person/Organisation Recognition:
-- There are 2.7M (2662626) *humans* (matches the number reported by WDQ [[Wikidata Query]]). This is fairly well focused, in that it collects a large proportion of all humans. There are a few exceptions, eg "minister", "table tennis player", "chess composer": these should be used as "occupation" while "instance of" should be "human".
+- There are 2.7M (2662626) *humans* (matches the number reported by WDQ [[Wikidata Query]]). This is fairly well focused, in that it collects a large proportion of all humans. There are a few exceptions, e.g. "minister", "table tennis player", "chess composer": these should be used as "occupation" while "instance of" should be "human".
 - There are 5k *families*: 4569 noble family, 635 family, 465 Dutch noble family, 95 Belgian noble family, 35 clan
 - There are some 22k *literary characters*: 11993 fictional character, 6963 fictional human, 2589 mythical character, 357 group of fictional characters, 159 fictional organization
 - There are at some 215k *organisations* (not counting governments, city councils, etc). These are spread across a wide list of classes, so the totals below are not comprehensive and represent the possible minimum:
@@ -213,7 +213,7 @@ Specific classes that are useful for Person/Organisation Recognition:
   - 13k *GLAM orgs*: 438 art gallery, 83 art gallery;  882 library, 199 national library, 114 public library, 60 library, 28 Carnegie library, 27 academic library, 16 municipal library;  108 archive, 26 cantonal archives, 24 municipal archive; 6516 museum, 2176 art museum, 873 military museum, 569 museum ship, 513 historic house museum, 181 maritime museum, 151 musée de France, 119 aviation museum, 80 natural history museum, 68 science museum, 57 open-air museum, 48 railway museum, 37 local museum, 37 children's museum
 In addition, the following types may be interesting:
 - There are 40k+20k *names*: 40038 family name, 10320 given name, 5569 male given name, 4828 female given name.
-  - Due to the good efforts of the WikiProject "Wikidata names", these items provide valuable information on names themselves, eg variations, male/female correspondences, etc.
+  - Due to the good efforts of the WikiProject "Wikidata names", these items provide valuable information on names themselves, e.g. variations, male/female correspondences, etc.
   - This can probably be used for disambiguation or for generating language-specific name variants, but we have not investigated this topic
 - Some 500k *Creative Works*: 154125 album, 140820 film, 59242 single, 51765 book, 31623 painting, 23055 scientific journal, 20032 song, 26789 video game, 18338 television program, 14838 short film, 13461 television series, 13098 silent film, 11876 periodical literature, 11297 episode, 6739 literary work, 6627 television season, 3488 sculpture, 2374 manuscript
 - Some 110k *heritage sites and monuments*: 64806 Rijksmonument, 21076 Iranian National Heritage, 19696 scheduled monument, 1370 natural monument, 1150 World Heritage Site. This is expected to grow sharply for other countries as well.
@@ -235,7 +235,7 @@ So we removed the punctuation chars ,." and ended up with 70 Wikidata name forms
 *** Wikidata Languages
 Wikidata includes names in a variety of languages.
 - Lang tags are included for all languages, which is valuable
-There are 57 unique lang tags, representing 44 languages and 13 language variants (eg de=German vs de-ch=Swiss German):
+There are 57 unique lang tags, representing 44 languages and 13 language variants (e.g. de=German vs de-ch=Swiss German):
 - af arz az be be-tarask bg br ca cs da de de-ch el en en-ca en-gb eo es eu fa fi fr ga hu hy it ja ka ko la lt lv mk nb nl nn pl pt pt-br ro ru sh sr sr-ec sr-el stq sv sw th uk zh zh-cn zh-hans zh-hant zh-hk zh-sg zh-tw
 Only 3 of the language variants are truly distinct:
 - zh-hans (Chinese Han Simplified) vs zh-hant (Chinese Han Traditional); be (Belorussian) vs be-tarask (Belorussian Taraskevica); sr=sr-ec (Serbian Cyrillic) vs sr-el (Serbian Latin)
@@ -245,7 +245,7 @@ The other language variants carry the same name string, e.g.:
 Observations on prefLabel and altLabel:
 - There is a single prefLabel per language, following SKOS recommendations
 - If the lang tag is taken into account, prefLabels and altLabels are disjoint
-- But if you discount the lang tag, many of the altLabels are redundant. Eg the German
+- But if you discount the lang tag, many of the altLabels are redundant. e.g. the German
   prefLabel "Lucas Cranach der Ältere"@de is repeated as altLabel for languages: lt lv nl
   pt stq sv.
 - If you discount the lang tag, some of the prefLabels are also redundant
@@ -256,11 +256,11 @@ Ontotext started using Wikidata in commercial applications since mid-Dec 2014, s
 - Descriptions are sensible, though short, not authoritative, and often missing. Descriptions can be used only to disambiguate two items with the same name, but not to provide info about the item
 - Linkage to different Wikipedias, Wikimedia Commons and other Wikimedia sites is always good
 - Direct types ("instance of") are accurate for most of the entities in [[Wikidata Coverage and Type Count]]
-- The set of properties is good. There are established property proposal editorial practices, based on a detailed proposal template followed by discussion and "voting". Eg see properties for  [[https://www.wikidata.org/wiki/Wikidata:Property_proposal/Authority_control][Authority Control]]). If after some time there are some supporters, but no or very few opponents, the property is created only by a property creator or an administrator. All discussion, decisions and their rationale are [[https://www.wikidata.org/wiki/Wikidata:Property_proposal/Archive][preserved]]. Defined property metadata is collected, including guidelines for use (eg on what items it should be applied), to which register or authority file it corresponds (if any), examples, format validation, uniqueness constraints, lists of known exceptions, etc. Eg see [[https://www.wikidata.org/wiki/Property_talk:P227][GND identifier]].
+- The set of properties is good. There are established property proposal editorial practices, based on a detailed proposal template followed by discussion and "voting". e.g. see properties for  [[https://www.wikidata.org/wiki/Wikidata:Property_proposal/Authority_control][Authority Control]]). If after some time there are some supporters, but no or very few opponents, the property is created only by a property creator or an administrator. All discussion, decisions and their rationale are [[https://www.wikidata.org/wiki/Wikidata:Property_proposal/Archive][preserved]]. Defined property metadata is collected, including guidelines for use (e.g. on what items it should be applied), to which register or authority file it corresponds (if any), examples, format validation, uniqueness constraints, lists of known exceptions, etc. e.g. see [[https://www.wikidata.org/wiki/Property_talk:P227][GND identifier]].
 #+HTML_ATTR: :class stretch
 [[./img/wikidata-DNB-metadata.png]]
-- These constraints are used to discover violations, which can drive coreferencing and merging/splitting investigations. Eg see violations for [[https://www.wikidata.org/wiki/Wikidata:Database_reports/Constraint_violations/P227][GND identifier]].
-- Nevertheless, the overall property design is still in flux. Eg there is a [[https://www.wikidata.org/wiki/Wikidata:Properties_for_deletion#Properties_for_events_and_their_dates_and_locations][current proposal]] to eliminate a number of properties such as place/date of birth/death/burial and replace them with a generic "significant event" where details are provided with qualifiers.
+- These constraints are used to discover violations, which can drive coreferencing and merging/splitting investigations. e.g. see violations for [[https://www.wikidata.org/wiki/Wikidata:Database_reports/Constraint_violations/P227][GND identifier]].
+- Nevertheless, the overall property design is still in flux. e.g. there is a [[https://www.wikidata.org/wiki/Wikidata:Properties_for_deletion#Properties_for_events_and_their_dates_and_locations][current proposal]] to eliminate a number of properties such as place/date of birth/death/burial and replace them with a generic "significant event" where details are provided with qualifiers.
 - The class hierarchy is not good at all. The reason is that there is no editorial control over "instance of" and "subclass", so anyone can "make" a class. 63% of all classes have fewer than 5 instances. Play with the Wikidata Generic Tree [[Wikidata Generic Tree]] to see some very idiosyncratic classes, and a messed up hierarchy. Just a couple of examples:
   - location> geographic location> facility> laboratory> lab-on-a-chip ::
     But "lab-on-a-chip" is a "device that integrates one or several laboratory functions on a single chip of only millimeters to a few square centimeters in size", hardly a "geographic location"
@@ -298,14 +298,14 @@ DBpedia [[DBpedia]] is structured information extracted from Wikipedia and is th
 
 *** DBpedia Stats
 [[DBpedia]] presents very comprehensive statistics (p.12 table 2). The most recent version of these statistics is [[http://wiki.dbpedia.org/Datasets2014/DatasetStatistics][online]].
-EN DBpedia being the first and largest language editions is taken as Canonicalized Data ("CD") (namespace http://dbpedia.org/resource; there is no namespace http://en.dbpedia.org/resource). Other editions are called  Localized Data ("LD"). EN DBpedia provides the follwoing [[http://wiki.dbpedia.org/Datasets2014/DatasetStatistics#h20178-1][number of entities]]:
+EN DBpedia being the first and largest language editions is taken as Canonicalized Data ("CD") (namespace http://dbpedia.org/resource; there is no namespace http://en.dbpedia.org/resource). Other editions are called  Localized Data ("LD"). EN DBpedia provides the following [[http://wiki.dbpedia.org/Datasets2014/DatasetStatistics#h20178-1][number of entities]]:
 - 1,445k persons
 - 735k places
 - 241k organizations
 - 411k creative works: 123k music albums, 87k films, 19k video games...
 - 252k species; etc
 - 4,584k total
-The total number across editions is harder to calculate since it depends on the degree of [[http://wiki.dbpedia.org/Datasets2014/CrossLanguageOverlapStatistics?v=hj1#h439-2][cross-language overlap]] popular entities appear in many editions, while purely "local heros" may appear in a single edition. The numbers grow to:
+The total number across editions is harder to calculate since it depends on the degree of [[http://wiki.dbpedia.org/Datasets2014/CrossLanguageOverlapStatistics?v=hj1#h439-2][cross-language overlap]] popular entities appear in many editions, while purely "local heroes" may appear in a single edition. The numbers grow to:
 - 1,471k persons
 - 818k places
 - 266k organizations
@@ -315,19 +315,19 @@ Please compare to Wikidata Counts [[Wikidata Coverage and Type Count]]. We estim
 
 *** DBpedia Quality
 To undertand the dynamics of DBpedia, one should understand raw properties vs mapped properties and classes, which is described really well in [[DBpedia]]. In brief, the process is as follows:
-- Extracts all properties from all significant templates applied to the article. These properties are different for every language edition and are spelt in the national language, so they are called *raw*. Various heuristics are applied to recognize dates, numbers, links. No type information is applied here, which leads to some problems, eg:
+- Extracts all properties from all significant templates applied to the article. These properties are different for every language edition and are spelt in the national language, so they are called *raw*. Various heuristics are applied to recognize dates, numbers, links. No type information is applied here, which leads to some problems, e.g.:
   - The name of the asteroid [[http://dbpedia.org/resource/1111_Reinmuthia][1111 Reinmuthia]] is extracted as dbpprop:name 1111 (xsd:integer) because of a heuristic "if the field starts with an integer, assume it's an integer"
   - A template field like
     : firstAscent = [[John Smith]], [[England|English]] expedition [[1 May]] [[1941]
     : firstAscent = in [[Prehistory]]
     will extract resources of variegated types: person, country, notable month-day, notable year, and historic period.
-- Extracts a number of other characteristics, eg all used templates and categories, links, redirects, abstract (text before the first heading), geographic coordinates, etc
+- Extracts a number of other characteristics, e.g. all used templates and categories, links, redirects, abstract (text before the first heading), geographic coordinates, etc
 - Reads crowd-sourced class and property definitions and mappings from http://mapping.dbpedia.org
 - Computes *mapped* properties from the raw properties and mappings. There is no editorial process in the mapping wiki, so there are significant defects, especially for languages other than English. This involves:
-  - Classes, eg non-sensical class like VicePresident
-  - Properties, eg DBpedia has no less than 86 [[http://mappings.dbpedia.org/index.php/What%27s_in_a_Name]["name" properties]] of which about half should be eliminated
-  - Mappings. The problems here are most extensive and vary from non-standard properties (eg sex="a" on bg.dbpedia to indicate Female) to mixing the predecessors/successors of a public official across several terms (pl.dbpedia)
-Because domains & ranges are not used when extracting raw properties nor checked when mapping, this leads to data problems. Eg the ~firstAscent~ template property (see above) is mapped to two:
+  - Classes, e.g. non-sensical class like VicePresident
+  - Properties, e.g. DBpedia has no less than 86 [[http://mappings.dbpedia.org/index.php/What%27s_in_a_Name]["name" properties]] of which about half should be eliminated
+  - Mappings. The problems here are most extensive and vary from non-standard properties (e.g. sex="a" on bg.dbpedia to indicate Female) to mixing the predecessors/successors of a public official across several terms (pl.dbpedia)
+Because domains & ranges are not used when extracting raw properties nor checked when mapping, this leads to data problems. e.g. the ~firstAscent~ template property (see above) is mapped to two:
 - ~firstAscentYear a owl:DatatypeProperty; rdfs:range xsd:gYear~
   - Will get value ~0001~ since that's the first number that appears (instead of 1941)
 - ~firstAscentPerson a owl:ObjectProperty; rdfs:range Person~
@@ -340,7 +340,7 @@ Mapping problems also lead to class errors. For example:
   - The mapping [[http://mappings.dbpedia.org/index.php?title=Mapping_en:Infobox_Geopolitical_organization&action=edit][Infobox_Geopolitical_organization]] has mapToClass = Organisation
   - however the template Infobox_Geopolitical_organization on enwiki is [[http://en.wikipedia.org/w/index.php?title=Template:Infobox_Geopolitical_organization&redirect=no][redirected]] to Infobox_Country.
   - So the mapping Infobox_Geopolitical_organization is disused, but the mapping wiki does not warn about it
-  - We need to merge the mapping Infobox_Geopolitical_organization into the mapping Infobox_Country, discriminating on some field (eg ~org_type~) whether to emit class Organisatin, GeopoliticalOrganization or Country. See more details in [[http://mappings.dbpedia.org/index.php/Mapping_en_talk:Infobox_country][discussion]]
+  - We need to merge the mapping Infobox_Geopolitical_organization into the mapping Infobox_Country, discriminating on some field (e.g. ~org_type~) whether to emit class Organisatin, GeopoliticalOrganization or Country. See more details in [[http://mappings.dbpedia.org/index.php/Mapping_en_talk:Infobox_country][discussion]]
 - *bgdbr:Лили_Иванова*, the icon of Bulgarian pop music with 53 years on stage and still [[https://bg.wikipedia.org/wiki/Лили_Иванова][going]], until recently was mapped to Band (and thus Organisation) instead of MusicalArtist (and thus Person). The reason is that the mapping [[http://mappings.dbpedia.org/index.php?title=Mapping_bg:Музикален_изпълнител&oldid=18009][Музикален_изпълнител]] (Musical Artist) mapped all cases to Band. Now we distinguish between several [[http://mappings.dbpedia.org/index.php/Mapping_bg:Музикален_изпълнител][cases]] (translated here from BG to EN for easier understanding):
   - if "members", "former members", or "established" is set -> Band
   - if "background" is "quartet", "ensemble", "choir" -> Band
@@ -360,7 +360,7 @@ These problems have seen a lot of attention lately, see [[http://groups.google.c
 - This will be one of the important points for the upcoming [[http://wiki.dbpedia.org/meetings/Dublin2015][DBpedia meeting]] 9th February 2015, Dublin, Ireland; with topics like:
   - Break Out Session 3 The new DBpedia Ontology
   - DBpedia Ontology and Extractor Problems
-  - DBpedia in Web Protege, by Alexandru Todo
+  - DBpedia in Web Protege, by Alexandru Todor
   - Discussion on the new ontology editing workflow and future directions of the DBpedia ontology
 
 *** DBpedia Downloads
@@ -368,10 +368,10 @@ The latest download was extracted in [[http://data.dws.informatik.uni-mannheim.d
 - af als am an ar arz ast az ba bat_smg be be_x_old bg bn bpy br bs bug ca ce ceb ckb cs cv cy da de el en eo es et eu fa fi fr fy ga gd gl gu he hi hr ht hu hy ia id io is it ja jv ka kk kn ko ku ky la lb lmo lt lv map_bms mg mk ml mn mr ms my mzn nap nds ne new nl nn no oc pa pl pms pnb pt qu ro ru sa sah scn sco sh si simple sk sl sq sr su sv sw ta te tg th tl tr tt uk ur uz vec vi vo wa war yi yo zh zh_min_nan zh_yue
 Notes:
 - "simple" is a kind of English, used in the Simple English Wikipedia, where articles are written with a repertoire of a couple thousand words only
-- "commons" is an extract from Wikimedia Commons, which incldues metadata for 15M freely reusable images, diagrams and multimedia
+- "commons" is an extract from Wikimedia Commons, which includes metadata for 15M freely reusable images, diagrams and multimedia
 - "links" provides cross-references to various other datasets
 
-If you look at one of the editions eg [[http://data.dws.informatik.uni-mannheim.de/dbpedia/2014/en/][EN]], you'll see a daunting picture: 162 files of size 37.6Gb zipped. But they come in quadruples, eg
+If you look at one of the editions e.g. [[http://data.dws.informatik.uni-mannheim.de/dbpedia/2014/en/][EN]], you'll see a daunting picture: 162 files of size 37.6Gb zipped. But they come in quadruples, eg
 | labels_en.nq.bz2  | Encoded URIs. Quads: each statement has the wikipedia line that generated it       |
 | labels_en.nt.bz2  | Encoded URIs                                                                       |
 | labels_en.tql.bz2 | International IRIs. Quads: each statement has the wikipedia line that generated it |
@@ -425,11 +425,11 @@ http://be.dbpedia.org/resource/Лукас_Кранах_Старэйшы
 http://be_x_old.dbpedia.org/resource/Люкас_Кранах_Старэйшы
 http://bg.dbpedia.org/resource/Лукас_Кранах_Стари
 #+END_EXAMPLE
-See *dbpedia-sameas.txt* for the full set of owl:sameAs for Cranach.
-- The first few are links to Freebase [[[Freebase]]], Wikidata [[[Wikidata]]] (one correct URL and another "bastardized" by DBpedia), Yago Knowledge [[Yago Knowledge]] and Open Cyc
+See [[./dbpedia-sameas.txt]] for the full set of owl:sameAs for Cranach.
+- The first few are links to Freebase, Wikidata (one correct URL and another "bastardized" by DBpedia), Yago Knowledge [[Yago Knowledge]] and Open Cyc
 - The rest are the interlanguage links.
 
-The sameAs do not return extra data on http://dbpedia.org, eg:
+The sameAs do not return extra data on http://dbpedia.org, e.g.:
 #+BEGIN_SRC SPARQL
 select * {<http://de.dbpedia.org/resource/Lucas_Cranach_der_Ältere> ?p ?o}
 select * {<http://bg.dbpedia.org/resource/Лукас_Кранах_Стари> ?p ?o}
@@ -437,7 +437,7 @@ select * {<http://bg.dbpedia.org/resource/Лукас_Кранах_Стари> ?p
 The labels and abstracts in the 11 additional languages are attached to the en URLs.
 
 *** Wikipedia Redirects
-Wikipedia redirect page goes to the target of the redirect. Eg http://en.wikipedia.org/wiki/Cranach,_Lucas_the_Elder goes to the page about Cranach. A redirect may point to another redirect, but the DBpedia extractor chases all redirects to their ultimate target.
+Wikipedia redirect page goes to the target of the redirect. e.g. http://en.wikipedia.org/wiki/Cranach,_Lucas_the_Elder goes to the page about Cranach. A redirect may point to another redirect, but the DBpedia extractor chases all redirects to their ultimate target.
 - DBpedia implements a similar redirect: http://dbpedia.org/resource/Cranach,_Lucas_the_Elder goes to the DBpedia resource/page about Cranach
 However, DBpedia also includes statements that we can use:
 #+BEGIN_SRC SPARQL
@@ -467,7 +467,7 @@ It returns a number of statements, of which the most important are:
 <http://dbpedia.org/resource/Cranach,_Lucas_the_Elder> rdfs:label	"Cranach, Lucas the Elder"@en .
 <http://dbpedia.org/resource/Cranach,_Lucas_the_Elder> dbpedia-owl:wikiPageRedirects dbpedia:Lucas_Cranach_the_Elder ;
 #+END_SRC
-Not all redirects provide alternative names for an entity (eg https://en.wikipedia.org/wiki/God_does_not_play_dice goes to the page Albert_Einstein, although this is something he said, not an alternative name for him). But most provide alternative names, so we can use them:
+Not all redirects provide alternative names for an entity (e.g. https://en.wikipedia.org/wiki/God_does_not_play_dice goes to the page Albert_Einstein, although this is something he said, not an alternative name for him). But most provide alternative names, so we can use them:
 #+BEGIN_SRC SPARQL
 select ?x {[] dbpedia-owl:wikiPageRedirects <http://dbpedia.org/resource/Lucas_Cranach_the_Elder>;
   rdfs:label ?x}
@@ -493,7 +493,7 @@ select ?x ?p ?n {
     prop-fr:nom, prop-fr:commonsTitre, prop-fr:nomDeNaissance,
 ))}} order by ?x ?p ?n
 #+END_SRC
-Note: unfortunately some DBpedia endpoints [[http://it.dbpedia.org/sparql][(eg Italy)]] don't support SPARQL 1.1.
+Note: unfortunately some DBpedia endpoints [[http://it.dbpedia.org/sparql][(e.g. Italy)]] don't support SPARQL 1.1.
 
 Using this query across several national DBpedias (or a variant with sameAs on the LOD Cache [[LOD Cache]]), we collected 43 names for Cranach: *[[./cranach-dbpedia.txt]]*
 
@@ -518,13 +518,13 @@ select * {
     not exists {?x dbo:birthName ?n})}
 #+END_SRC
 - The raw property grabs anything it finds in the template field. If you remove the condition ~lang(?n)~ you'll see all kinds of junk, from dates to families.
-- language tags are fixed to en (by default), so are not reliable. Eg "Никола́й Ива́нович Буха́рин"@en is in Russian not English
+- language tags are fixed to en (by default), so are not reliable. e.g. "Никола́й Ива́нович Буха́рин"@en is in Russian not English
 
 ** VIAF
 VIAF is a large-scale collaboration of national libraries and OCLC to produce a Virtual International Authority File. As of Dec 2014, VIAF has 35 contributing institutions (9 through the LCC NACO) and 9 contributors in test (including ISNI, Wikipedia, Perseus).
 
 *** VIAF Algorithms
-VIAF uses sophisticated matching and clustering algorithms [[[VIAFamb]]] to match named entities across name authorities. These include people, organizations, conferences, places, works, expressions (eg a certain edition or translation of a work), subject headings, etc. VIAF is somewhat conservative in not making possible matches that are not warranted by sufficient information.
+VIAF uses sophisticated matching and clustering algorithms [[[VIAFamb]]] to match named entities across name authorities. These include people, organizations, conferences, places, works, expressions (e.g. a certain edition or translation of a work), subject headings, etc. VIAF is somewhat conservative in not making possible matches that are not warranted by sufficient information.
 
 VIAF cluster IDs are relatively stable, but when monthly updates are received from the contributing institutions, it is possible that an authority record is reassigned to another VIAF cluster, or two VIAF clusters are merged, or a VIAF ID is abandoned. Nevertheless VIAF makes everything possible to preserve IDs:
 - when a new cluster is formed, it first seeks to reuse an abandoned ID that was
@@ -554,7 +554,7 @@ VIAF has a basic search at http://viaf.org/, and an advanced (SRU-based) search 
 
 If you search for "Personal name: Lucas Cranach" you may find:
 - (top) a main cluster http://viaf.org/viaf/49268177 that carries a lot of info and is the result of matching many source records (including from DNB)
-- (middle) 31 persons who are either related to Cranach (eg Maximilian I Holy Roman Emperor, painted by Cranach in 1509), or share a name
+- (middle) 31 persons who are either related to Cranach (e.g. Maximilian I Holy Roman Emperor, painted by Cranach in 1509), or share a name
 - (bottom) two stand-alone (singleton) clusters (coming from DNB):
   - http://viaf.org/viaf/308208350 from DBN: "Cranach, Lucas d. Ä. oder d. J." (The Elder or The Younger), to be used for works with unclear attribution to the father or the son
   - http://viaf.org/viaf/238031633 from DNB: "Cranach, Lucas"‏ marked (undifferentiated) (sparse), for which there is too little info to warrant a match.
@@ -591,7 +591,7 @@ The RDF is at http://viaf.org/viaf/49268177/rdf.xml and is available here in Tur
   foaf:focus       <http://viaf.org/viaf/49268177> .
 #+END_SRC
 - The central node is a schema:Person, having birth/death dates, names, anternate names, even given/family names (though "studio of" is hardly a given name)
-- The Person is declared owl:sameAs all coresponding nodes in contributing organizations that have an appropriate type (eg foaf:Person for BNF, dbo:Person for DBPedia)
+- The Person is declared owl:sameAs all coresponding nodes in contributing organizations that have an appropriate type (e.g. foaf:Person for BNF, dbo:Person for DBPedia)
 - There are two documents (the VIAF page and Wikipedia page) that point to the Person using foaf:primaryTopic.
 - There is a skos:Concept for each of the contributor nodes (members of the cluster) that points to the Person using foaf:focus
 - These Concepts hold the prefLabel and altLabels as determined by the contributing institution
@@ -626,7 +626,7 @@ The Union List of Artist Names (ULAN) of the Getty Research Institute is a well-
 The Cranach record is at http://vocab.getty.edu/ulan/500115364 and has 25 names: *[[./cranach-ULAN.txt]]*.
 - ULAN is a relatively small authority (230k records)
 - ULAN names are subsumed by VIAF since ULAN is a fully-fledged contributor to VIAF
-- However, ULAN is carefully curated, every name/fact has a documented source, and it includes valuable person information such as roles (types), relations (eg influenced, student), life events. These can be useful for disambiguation
+- However, ULAN is carefully curated, every name/fact has a documented source, and it includes valuable person information such as roles (types), relations (e.g. influenced, student), life events. These can be useful for disambiguation
 
 ** Yago Knowledge
 Yago provides an important contribution to DBpedia in the form of additional instance types, and integration to Wordnet.
@@ -647,7 +647,7 @@ The British Museum LOD collection (http://collection.britishmuseum.org) uses a n
 The Cranach record is at http://collection.britishmuseum.org/id/person-institution/23953 and has only two names: Lucas Cranach the Elder and Cranach, Lucas. So it is not considered below
 
 ** LOD Cache
-The LOD Cache sparql endpoint http://lod.openlinksw.com/sparql by Open Link Software includes a lot of aggregated data from LOD datasets. It includes the following name sources considered above:
+The LOD Cache SPARQL endpoint http://lod.openlinksw.com/sparql by Open Link Software includes a lot of aggregated data from LOD datasets. It includes the following name sources considered above:
 - Wikidata
 - DBpedia: EN & FR (in full, not just labels and abstracts in foreign languages like dbpedia.org)
   - The following DBpedias are not included: IT, DE
@@ -659,14 +659,14 @@ Some caveats:
 - The update rate is unclear, so one should be careful to evaluate whether all data is present by consulting the original sources
 
 We run a query which is a combination of [[DBpedia sameAs]], [[Wikipedia Redirects]] and [[DBpedia Names]].
-The result is a table *from-LOD-cache.tdv* with 216 rows. But let's check the unique labels only (there's 88) and compare to Wikipedia+VIAF
+The result is a table [[./from-LOD-cache.tdv]] with 216 rows. But let's check the unique labels only (there's 88) and compare to Wikipedia+VIAF
 #+BEGIN_SRC sh
 perl -pe '$_=(split/\t/)[2]; s{"(.*)"@?[\w-]*}{$1}; s{[,.]}{}g' from-LOD-cache.tdv |sort|uniq > from-LOD-uniq.txt
 cat cranach-wikidata.txt cranach-VIAF.txt | sort | uniq > Wikidata-VIAF-uniq.txt
 #+END_SRC
 
-- There are  146 names in *Wikidata-VIAF-uniq.txt* and 83 in *from-LOD-uniq.txt*
-- There are only 4 unique contributions in  *from-LOD-uniq.txt*:
+- There are  146 names in [[./Wikidata-VIAF-uniq.txt]] and 83 in [[./from-LOD-uniq.txt]]
+- There are only 4 unique contributions in [[./from-LOD-uniq.txt]]:
   : Cranach the Elder
   : Lucas Cranach "el Vell"
   : Lucas Cranach "el Viejo"
@@ -677,7 +677,7 @@ Overall, for any production work it's recommended to load the desired datasets t
 After fetching the name forms from all sources, we want to analyze overlaps and unique contributions.
 So we tabulate them to a common file, using common Unix tools (perl, join, uniq, sort) and Excel
 - We concatenate all files from different sources, uniquify and sort, obtaining 155 names
-- Hacky note: if working on Windows (eg using Cygwin), convert all files to Unix newlines: ~conv -U *.txt~
+- Hacky note: if working on Windows (e.g. using Cygwin), convert all files to Unix newlines: ~conv -U *.txt~
 - Don't use Unicode BOM, since sort and join don't like it
 - We do the tabulation with a series of commands like this (in *[[./cranach-table.sh]]*)
   #+BEGIN_SRC sh
@@ -705,14 +705,14 @@ perl cranach-venn.pl cranach-table.txt > cranach-venn.jsonp
 #+END_SRC
 
 The result is *[[./cranach-venn.html]]*.
-- We *strongly recommend* that you play with the interactive version, since it highlights intersections and reveals their cardinalities, allowing better understanding of the arrangement.
-- The diagram is approximate, eg ULAN is wholly within VIAF: if you try to point out the little sliver ULAN\VIAF, you'll discover it has cardinality 0. But it's quite accurate!
+- We *strongly recommend* that you play with the interactive version [[./cranach-venn.html]], since it highlights intersections and reveals their cardinalities, allowing better understanding of the arrangement.
+- The diagram is approximate, e.g. ULAN is wholly within VIAF: if you try to point out the little sliver ULAN\VIAF, you'll discover it has cardinality 0. But it's quite accurate!
 
 #+HTML_ATTR: :class stretch
 [[./img/Cranach-venn.png]]
 
 Notes:
-- A striking revelation is that the 3 "library-tradition" datasets (VIAF, ISNI, ULAN) and the 4 "LOD-tradition datasets" (Wikidata, DBpedia, Freebase, Yago) have almost nothing in common: only 5 names. Library datasets contribute many permutations and qualifiers (eg "der Altere" vs "d A"), while LOD datasets contribute many languages.
+- A striking revelation is that the 3 "library-tradition" datasets (VIAF, ISNI, ULAN) and the 4 "LOD-tradition datasets" (Wikidata, DBpedia, Freebase, Yago) have almost nothing in common: only 5 names. Library datasets contribute many permutations and qualifiers (e.g. "der Altere" vs "d A"), while LOD datasets contribute many languages.
 - The datasets in each "tradition" are very similar. The reason is obvious: ISNI and ULAN are fully-fledged contributors in VIAF, so VIAF subsumes them. As for the LOD datasets, each has copied from the others liberally. DBpedia appears a subset of Wikidata only because we have selected only en, de, fr names (See [[DBpedia Names]]). Yago covers the en DBpedia, and Freebase doesn't contribute many unique names either.
 - The circles represent number of names for this single example, not dataset coverage. Remember that VIAF is some 12x bigger than Wikidata, see [[VIAF Counts]]
 - We should focus on Wikidata and VIAF. If we drop DBpedia, Freebase, Yago we'll lose only 4 names, and if we drop ISNI, ULAN we'll lose only 1 name.
@@ -775,7 +775,7 @@ We did a recent count of VIAF correlations using the [[http://viaf.org/viaf/data
 ** VIAF vs Wikidata Coreferencing
 Now let's see some coreferencing action between the two hubs:
 - We already saw the Wikidata coreference id's on the Reasonator page for [[http://tools.wmflabs.org/reasonator/?&q=191748][Cranach]]
-- VIAF has an API "justlinks" to return only the coreferences, eg for Cranach: http://viaf.org/viaf/49268177/justlinks.json
+- VIAF has an API "justlinks" to return only the coreferences, e.g. for Cranach: http://viaf.org/viaf/49268177/justlinks.json
   (Note: 4 of the fields were URLs, we left just the ID for easier comparison)
 | VIAF    | id in VIAF                    | Wikidata         | id in Wikidata           |
 |---------+-------------------------------+------------------+--------------------------|
@@ -808,12 +808,12 @@ Now let's see some coreferencing action between the two hubs:
 |         |                               | SIMBAD           | CRANACH, Lucas the Elder |
 |         |                               | Your Paintings   | lucas-​the-​elder-​cranach  |
 As you can see, there are a number of "gaps" in each hub that could be filled out from the other hub.
-- Eg RKDartists is an important Authority that does not yet participate in VIAF. There are already 21760 [[http://wdq.wmflabs.org/api?q=claim%5B650%5D&noitems=1][RKDartist id's on Wikidata]]. These could be imported to VIAF for free!
+- e.g. RKDartists is an important Authority that does not yet participate in VIAF. There are already 21760 [[http://wdq.wmflabs.org/api?q=claim%5B650%5D&noitems=1][RKDartist id's on Wikidata]]. These could be imported to VIAF for free!
 - In this case each hub has the ID of the other hub. But this need not always be the case:
   - Wikidata has 504736 items with [[http://wdq.wmflabs.org/api?q=claim%5B214%5D&noitems=1][VIAF id]]
   - Wikidata has 567240 items with [[http://wdq.wmflabs.org/api?q%3Dclaim%5B214,227%5D&noitems%3D1][VIAF or GND]]
   - Since all GND items are likely to be in VIAF, this shows that in Wikidata, 62504 items with GND id don't have a VIAF id. We can assign VIAF ids to these easily!
-- We can fill out missing data (eg birth/death date/place) from one hub to the other
+- We can fill out missing data (e.g. birth/death date/place) from one hub to the other
 A [[https://www.wikidata.org/wiki/Wikidata:WikiProject_Authority_Control][WikiProject Authority Control]]  was recently proposed to coordinate such developments
 
 ** Wikidata Coreferencing with Mix-n-Match
@@ -855,7 +855,7 @@ The query parameters correspond to the result fields as follows: source->PREFIX,
   100140|Q3383669|500126269
   #+END_EXAMPLE
 ** Wikidata Authority Identifiers
-A prerequisite for coreferencing is to register authority files as Wikidata items, and their IDs as Wikidata properties (carrying annotation "Wikidata property for authority control"). All kinds of international and national authority files are already registered (eg see a [[https://en.wikisource.org/wiki/Wikisource:Authority_control][big list]] on Wikisource or a [[https://en.wikisource.org/wiki/Template:Authority_control#Parameters][sampling]] on Wikisouce), and new ones are proposed daily. These identifiers are used in items and articles, and displayed as a visually striking [[https://www.wikidata.org/wiki/Template:Authority_control_properties][Authority Control box]]
+A prerequisite for coreferencing is to register authority files as Wikidata items, and their IDs as Wikidata properties (carrying annotation "Wikidata property for authority control"). All kinds of international and national authority files are already registered (e.g. see a [[https://en.wikisource.org/wiki/Wikisource:Authority_control][big list]] on Wikisource or a [[https://en.wikisource.org/wiki/Template:Authority_control#Parameters][sampling]] on Wikisouce), and new ones are proposed daily. These identifiers are used in items and articles, and displayed as a visually striking [[https://www.wikidata.org/wiki/Template:Authority_control_properties][Authority Control box]]
 #+HTML_ATTR: :class stretch
 [[./img/wikidata-DNB-metadata-AuthorityControlBox.png]]
 
@@ -923,7 +923,7 @@ http://live.dbpedia.org/sparql includes more up to date information. Let's count
 Note: http://dbpedia.org/sparql returns only 16k
 
 ** Finding Errors in Authorities through Wikipedia/Wikidata
-The power of the crowd can help maintain authority control files by finding errors and researching cases where records should be merged or split. Eg [[https://en.wikipedia.org/wiki/Wikipedia:VIAF/errors][VIAF errors on Wikipedia]] has lists in the following categories:
+The power of the crowd can help maintain authority control files by finding errors and researching cases where records should be merged or split. e.g. [[https://en.wikipedia.org/wiki/Wikipedia:VIAF/errors][VIAF errors on Wikipedia]] has lists in the following categories:
 - 1.1 Wikipedia article is not the same as the VIAF identity
 - 1.2 Two or more VIAF identities for the same article
 - 1.3 VIAF merges different identities (into one cluster)
@@ -931,7 +931,7 @@ The power of the crowd can help maintain authority control files by finding erro
 - 1.5 Wikipedia link inside VIAF is out of date
 - 1.6 Articles about multiple people assigned the VIAF identity for one of them
 - 1.7 Other errors
-Wikidata provides automatic integrity checking, eg no two items should have the same id, one item should have no more than one id, etc).
+Wikidata provides automatic integrity checking, e.g. no two items should have the same id, one item should have no more than one id, etc).
 - The [[https://www.wikidata.org/wiki/Wikidata:Database_reports/Constraint_violations/P214][VIAF id constraint violations report]] lists some 3500 items that should be investigated.
 - For example, Q192187 [[https://www.wikidata.org/w/index.php?title%3DQ192187&oldid%3D173914849#P214][Communist Party of the Russian Federation]] (Gennady Zyuganov) had 6 VIAF id's? A quick investigation in VIAF shows that only 146251554 is correct, whereas the rest represent subunits and conferences:
   - 233350017: a subunit: S︡entralʹnyĭ komitet. Otdel po informat︠s︡ionno-analiticheskoĭ rabote i provedenii︠a︡ vybornykh kompaniĭ‏
@@ -944,13 +944,13 @@ Wikidata provides automatic integrity checking, eg no two items should have the 
 We can draw the following conclusions from this analysis:
 - The best datasets to use for Person enrichment (NER) are VIAF and Wikidata
 - The best approach is loading them to a local repository in order to ensure levels of service
-- Names and other attributes (eg years, descriptions) are extracted with agreed queries, producing dynamic gazetteers
+- Names and other attributes (e.g. years, descriptions) are extracted with agreed queries, producing dynamic gazetteers
 - For [[Wikidata Download and RDF Counts][Wikidata]] we load the files ~terms, simple-statements, properties, taxonomy, instances~ and only enwiki ~sitelinks~ for a total of maximum 315M triples.
   - We skip redundant triples, see [[Wikidata Names]]: rdfs:label, schema:name. We also don't load ontologies, to avoid the inference of rdfs:label from skos:prefLabel or skos:altLabel
-  - We should talk to the Wikidata developers to also emit one statement (the preferred or first in order) per item-property slot, even if the statemetn is qualified
+  - We should talk to the Wikidata developers to also emit one statement (the preferred or first in order) per item-property slot, even if the statement is qualified
 - For [[VIAF Download][VIAF]] we load the file clusters-rdf.nt, about 300M triples
 - We align the two datasets by coreference IDs
-- Participating in [[Coreferencing]] initiatives is benefitial for the Europeana community, and the wider CH and LOD communities. For example, a first initiative could be to cross-check VIAF Wikipedia links against Wikidata VIAF links
+- Participating in [[Coreferencing]] initiatives is beneficial for the Europeana community, and the wider CH and LOD communities. For example, a first initiative could be to cross-check VIAF Wikipedia links against Wikidata VIAF links
 
 * References
 1. <<DBpedia>>Jens Lehmann, Robert Isele, Max Jakob, Anja Jentzsch, Dimitris Kontokostas, Pablo N. Mendes, Sebastian Hellmann, Mohamed Morsey, Patrick van Kleef, Sören Auer, Christian Bizer, [[http://www.semantic-web-journal.net/content/dbpedia-large-scale-multilingual-knowledge-base-extracted-wikipedia][DBpedia - A Large-scale, Multilingual Knowledge Base Extracted from Wikipedia]]. Semantic Web Journal, 2013.
