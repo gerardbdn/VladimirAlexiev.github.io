@@ -1,7 +1,7 @@
 #+COMMENT: -*- coding: utf-8; fill-column: 5000 -*-
 #+STARTUP: showeverything
 #+TITLE: Name Data Sources for Semantic Enrichment
-#+DATE: 2015-01-28
+#+DATE: 2015-02-05
 #+AUTHOR: Vladimir Alexiev, Data and Ontology Management group, Ontotext Corp
 #+EMAIL: vladimir.alexiev@ontotext.com
 #+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline author:t c:nil
@@ -13,11 +13,24 @@
 #+LANGUAGE: en
 #+EXCLUDE_TAGS: noexport
 
-(For Europeana Creative D2.4) 
+* Introduction
+This paper analyzes potential data sources for semantic enrichment of names (Person/Organization NER).
+- It is part of Europeana Creative deliverable D2.4
+- See list of associated files on https://github.com/VladimirAlexiev/VladimirAlexiev.github.io/tree/master/CH-names
+- You could read there, but use http://vladimiralexiev.github.io/CH-names/README.html for better reading (the files are linked from the text below)
 
-See http://vladimiralexiev.github.io/CH-names/README.html for better reading
+Highlights:
+- The best datasets to use for name enrichment are VIAF and Wikidata
+- There are few name forms in common between the "library-tradition" datasets (dominated by VIAF) and the "LOD-tradition datasets" (dominated by Wikidata), see [[Venn Diagram]] and this interactive Venn diagram:  [[./cranach-venn.html]]
+- VIAF has more name variations and permutations, Wikidata has more translations: [[Source Counts]]
+- VIAF is much bigger ([[VIAF Counts]]): 35M persons/orgs. Wikidata has 2.7M persons and maybe 1M orgs
+- Only 0.5M of Wikidata persons/orgs are coreferenced to VIAF, 
+  with maybe another 0.5M coreferenced to other datasets, either VIAF-constituent (eg GND) or non-constituent (eg RKDartists)
+- A lot can be gained by leveraging coreferencing across VIAF and Wikidata: [[VIAF vs Wikidata Coreferencing]]
+- Wikidata has great tools for crowd-sourced coreferencing: [[Wikidata Coreferencing with Mix-n-Match]] and following
+- The best approach is loading them to a local repository in order to ensure levels of service
 
-* Name Data Sources for Semantic Enrichment
+** Name Data Sources for Semantic Enrichment
 Semantic enrichment in Europeana is a very difficult task due to several factors:
 - Varying metadata quality across different collections, sometimes including misallocation of metadata fields
 - Varying metadata formatting practices across different collections, e.g. some collections indicate the role of a creator in brackets after the creator name
@@ -40,21 +53,21 @@ Enrichment is most often based on large and efficient lookup structures called *
 ** Data Source Dimensions
 We investigate the sources along several dimensions:
 - Dataset description: where it came from, past evolution, future outlook. All these non-technical aspects are important factors in deciding whether and how to use the source
-- Agent coverage: number of people/institutions. For some sources we use published reports and summaries, for others we use
+- Agent coverage: number of people/institutions. For some sources we use published reports and summaries, for others we use recent counts and analyses we performed
 - Name coverage: number of name forms for a well-known person (found in all sources), then analyze set intersections and unique contributions
-- Access: we describe how can the source can be accessed: web and API access for exploration, bulk download for RDF integration, update rate, etc
+- Access: we describe how the source can be accessed: web and API access for exploration, bulk download for RDF integration, update rate, etc
 - Language coverage: we provide overall info about the number of languages covered, but have not performed precise counts
 - Extra features that can be useful for enrichment (see next section)
 - Quality and accuracy of the various data elements
 
-** Extra features
-In addition to the names, the following features can be very useful for disambiguation:
-- *Description* In addition to person names, most data sources have a person description. It can be useful for contextual disambiguation, e.g. to distinguish a painter from a sculpture. It can vary between:
+** Extra Features
+In addition to person names, the following features can be very useful for disambiguation:
+- *Description* In addition to person names, most data sources have a person description. It can be useful for contextual disambiguation, e.g. to distinguish a painter from a sculptor by the type of object. It can vary between:
   - Short standardized description as provided by ULAN, e.g. "German painter, draftsman, and printmaker, 1472-1553"
   - Short unstandardized description as provided by Wikidata, e.g. "German Renaissance painter and printmaker in woodcut and engraving"
   - Short or long abstract as provided by DBpedia. The long abstract is the beginning of the article until the first heading. The short abstract is the first couple of sentences.
   - Quite long biographies as provided by the British Museum (only for well-known artists)
-- *Life years* These are useful to filter out by date range. e.g. a 20-century painter cannot be the author of a 16-century painting. But life years in CH are often subject to uncertainty, usually expressed with qualifiers like "circa" (c), "early/mid/late-century", "floruit" (fl). In such cases rule-of-thumb defaults may be employed, e.g. "a person cannot live for more than 100 years", "a person is not creatively active before 15 and after 90 years of age", etc
+- *Life years* These are useful to filter out by date range. e.g. a 20-century painter cannot be the author of a 16-century painting. But life years in CH are often subject to uncertainty, usually expressed with qualifiers like "circa" (c), "early/mid/late Nth century", "floruit" (fl). In such cases rule-of-thumb defaults may be employed, e.g. "a person cannot live for more than 100 years", "a person is not creatively active before 15 and after 90 years of age", etc
   - Imprecision: the exact year is not known, e.g. "early 16th century". This can be translated to a range of years
   - Ambiguity: different opinions about the year coming from different sources. In such cases, all opinions are recorded, together with source
   - "Floruit": the birth and/or death date is not known, only a range when the person was active
@@ -105,7 +118,7 @@ We can access the info about Cranach in various ways:
 Wikidata also provides a number of powerful tools that are described next
 
 **** Wikidata Query
-Wikidata Query (WDQ) is a very peculiar but very powerful query language. The implementation loads large amounts of key data, so query answering is very fast.
+Wikidata Query (WDQ) is a very peculiar but very powerful query language. The implementation caches large amounts of key data, so query answering is very fast.
 - WDQ API: http://wdq.wmflabs.org/
 - WDQ Documentation: http://wdq.wmflabs.org/api_documentation.html, with executable examples
 - WDQ editor UI: http://wdq.wmflabs.org/wdq/, with editable examples
@@ -140,6 +153,10 @@ AutoList2 (http://tools.wmflabs.org/autolist/) is a powerful tool that allows yo
 Below is an example: we take all articles on bg.wikpedia in category "Български футболисти" (Bulgarian soccer players), look for ones with missing claim "sport=association football" and add such claim. (This includes non-professional soccer players, e.g. Bulgarian prime minister Boyko Borissov.) This tool allows even people without MediaWiki bot programming experience to do batch-updates.
 #+HTML_ATTR: :class stretch
 [[./img/wikidata-bulgarian-football-players.png]]
+
+Another example:
+- List of [[https://tools.wmflabs.org/autolist/?language%3Den&project%3Dwikipedia&category%3D&depth%3D12&wdq%3Dclaim%255B31%253A3305213%255D&mode%3Dundefined&statementlist%3D&run%3DRun&label_contains%3D&label_contains_not%3D&chunk_size%3D100][all paintings]] (first 100). WDQ query ~claim[31:3305213]~. Total results: 34147
+- List of [[https://tools.wmflabs.org/autolist/?language%3Den&project%3Dwikipedia&category%3D&depth%3D12&wdq%3Dclaim%5B31:3305213%5D%2520and%2520claim%5B18%5D&mode%3Dundefined&statementlist%3D&run%3DRun&label_contains%3D&label_contains_not%3D&chunk_size%3D100][paintings with image (on Commons)]]" (first 100). WDQ query ~claim[31:3305213] and claim[18]~. Total results: 16139 
 
 **** Wikidata Generic Tree
 Wikidata Tree (http://tools.wmflabs.org/wikidata-todo/tree.html) allows you to view the class hierarchy (or any other property tree), e.g.:
@@ -294,10 +311,10 @@ We did some investigation of Freebase, but following this announcement have deci
 - Freebase provides 32 names for Cranach (*[[./cranach-freebase.txt]]*), all with language tags
 
 ** DBPedia
-DBpedia [[DBpedia]] is structured information extracted from Wikipedia and is the center of the Linked Open Data cloud. It was first released in Jan 2007 and has been continuously improved ever since.
+DBpedia is structured information extracted from Wikipedia and is the center of the Linked Open Data cloud. It was first released in Jan 2007 and has been continuously improved ever since.
 
 *** DBpedia Stats
-[[DBpedia]] presents very comprehensive statistics (p.12 table 2). The most recent version of these statistics is [[http://wiki.dbpedia.org/Datasets2014/DatasetStatistics][online]].
+[[[DBpedia]]] presents very comprehensive statistics (p.12 table 2). The most recent version of these statistics is [[http://wiki.dbpedia.org/Datasets2014/DatasetStatistics][online]].
 EN DBpedia being the first and largest language editions is taken as Canonicalized Data ("CD") (namespace http://dbpedia.org/resource; there is no namespace http://en.dbpedia.org/resource). Other editions are called  Localized Data ("LD"). EN DBpedia provides the following [[http://wiki.dbpedia.org/Datasets2014/DatasetStatistics#h20178-1][number of entities]]:
 - 1,445k persons
 - 735k places
@@ -314,7 +331,7 @@ The total number across editions is harder to calculate since it depends on the 
 Please compare to Wikidata Counts [[Wikidata Coverage and Type Count]]. We estimate that national editions add 15% more entities and perhaps 50% more labels (names)
 
 *** DBpedia Quality
-To undertand the dynamics of DBpedia, one should understand raw properties vs mapped properties and classes, which is described really well in [[DBpedia]]. In brief, the process is as follows:
+To understand the dynamics of DBpedia, one should understand raw properties vs mapped properties and classes, which is described really well in [[[DBpedia]]]. In brief, the process is as follows:
 - Extracts all properties from all significant templates applied to the article. These properties are different for every language edition and are spelt in the national language, so they are called *raw*. Various heuristics are applied to recognize dates, numbers, links. No type information is applied here, which leads to some problems, e.g.:
   - The name of the asteroid [[http://dbpedia.org/resource/1111_Reinmuthia][1111 Reinmuthia]] is extracted as dbpprop:name 1111 (xsd:integer) because of a heuristic "if the field starts with an integer, assume it's an integer"
   - A template field like
@@ -713,7 +730,7 @@ The result is *[[./cranach-venn.html]]*.
 
 Notes:
 - A striking revelation is that the 3 "library-tradition" datasets (VIAF, ISNI, ULAN) and the 4 "LOD-tradition datasets" (Wikidata, DBpedia, Freebase, Yago) have almost nothing in common: only 5 names. Library datasets contribute many permutations and qualifiers (e.g. "der Altere" vs "d A"), while LOD datasets contribute many languages.
-- The datasets in each "tradition" are very similar. The reason is obvious: ISNI and ULAN are fully-fledged contributors in VIAF, so VIAF subsumes them. As for the LOD datasets, each has copied from the others liberally. DBpedia appears a subset of Wikidata only because we have selected only en, de, fr names (See [[DBpedia Names]]). Yago covers the en DBpedia, and Freebase doesn't contribute many unique names either.
+- The datasets in each "tradition" are very similar. The reason is obvious: ISNI and ULAN are fully-fledged contributors in VIAF, so VIAF subsumes them. As for the LOD datasets, each has copied from the others liberally. DBpedia appears as a subset of Wikidata only because we have selected only en, de, fr names (See [[DBpedia Names]]). Yago covers the en DBpedia, and Freebase doesn't contribute many unique names either.
 - The circles represent number of names for this single example, not dataset coverage. Remember that VIAF is some 12x bigger than Wikidata, see [[VIAF Counts]]
 - We should focus on Wikidata and VIAF. If we drop DBpedia, Freebase, Yago we'll lose only 4 names, and if we drop ISNI, ULAN we'll lose only 1 name.
 

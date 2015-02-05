@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Name Data Sources for Semantic Enrichment</title>
-<!-- 2015-01-28 Wed 14:37 -->
+<!-- 2015-02-05 Thu 22:44 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Vladimir Alexiev, Data and Ontology Management group, Ontotext Corp" />
@@ -207,12 +207,13 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1. Name Data Sources for Semantic Enrichment</a>
+<li><a href="#sec-1">1. Introduction</a>
 <ul>
-<li><a href="#sec-1-1">1.1. RDF-based Gazetteers and Data Integration</a></li>
-<li><a href="#sec-1-2">1.2. Data Source Dimensions</a></li>
-<li><a href="#sec-1-3">1.3. Extra features</a></li>
-<li><a href="#sec-1-4">1.4. Running Example: Lucas Cranach</a></li>
+<li><a href="#sec-1-1">1.1. Name Data Sources for Semantic Enrichment</a></li>
+<li><a href="#sec-1-2">1.2. RDF-based Gazetteers and Data Integration</a></li>
+<li><a href="#sec-1-3">1.3. Data Source Dimensions</a></li>
+<li><a href="#sec-1-4">1.4. Extra Features</a></li>
+<li><a href="#sec-1-5">1.5. Running Example: Lucas Cranach</a></li>
 </ul>
 </li>
 <li><a href="#sec-2">2. Name Sources</a>
@@ -292,17 +293,49 @@ for the JavaScript code in this tag.
 </ul>
 </div>
 </div>
-<p>
-(For Europeana Creative D2.4) 
-</p>
-
-<p>
-See <a href="http://vladimiralexiev.github.io/CH-names/README.html">http://vladimiralexiev.github.io/CH-names/README.html</a> for better reading
-</p>
 
 <div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> Name Data Sources for Semantic Enrichment</h2>
+<h2 id="sec-1"><span class="section-number-2">1</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
+<p>
+This paper analyzes potential data sources for semantic enrichment of names (Person/Organization NER).
+</p>
+<ul class="org-ul">
+<li>It is part of Europeana Creative deliverable D2.4
+</li>
+<li>See list of associated files on <a href="https://github.com/VladimirAlexiev/VladimirAlexiev.github.io/tree/master/CH-names">https://github.com/VladimirAlexiev/VladimirAlexiev.github.io/tree/master/CH-names</a>
+</li>
+<li>You could read there, but use <a href="http://vladimiralexiev.github.io/CH-names/README.html">http://vladimiralexiev.github.io/CH-names/README.html</a> for better reading (the files are linked from the text below)
+</li>
+</ul>
+
+<p>
+Highlights:
+</p>
+<ul class="org-ul">
+<li>The best datasets to use for name enrichment are VIAF and Wikidata
+</li>
+<li>There are few name forms in common between the "library-tradition" datasets (dominated by VIAF) and the "LOD-tradition datasets" (dominated by Wikidata), see <a href="#sec-3-2">3.2</a> and this interactive Venn diagram:  <a href="./cranach-venn.html">./cranach-venn.html</a>
+</li>
+<li>VIAF has more name variations and permutations, Wikidata has more translations: <a href="#sec-3-1">3.1</a>
+</li>
+<li>VIAF is much bigger (<a href="#sec-2-4-2">2.4.2</a>): 35M persons/orgs. Wikidata has 2.7M persons and maybe 1M orgs
+</li>
+<li>Only 0.5M of Wikidata persons/orgs are coreferenced to VIAF, 
+with maybe another 0.5M coreferenced to other datasets, either VIAF-constituent (eg GND) or non-constituent (eg RKDartists)
+</li>
+<li>A lot can be gained by leveraging coreferencing across VIAF and Wikidata: <a href="#sec-4-2">4.2</a>
+</li>
+<li>Wikidata has great tools for crowd-sourced coreferencing: <a href="#sec-4-3">4.3</a> and following
+</li>
+<li>The best approach is loading them to a local repository in order to ensure levels of service
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Name Data Sources for Semantic Enrichment</h3>
+<div class="outline-text-3" id="text-1-1">
 <p>
 Semantic enrichment in Europeana is a very difficult task due to several factors:
 </p>
@@ -330,9 +363,10 @@ We also analyze the important topic of <b>coreferencing</b>, i.e. how connected 
 Our investigation follows a hands-on approach, with detailed descriptions of access methods and tools that we used. A number of accompanying files are provided at <a href="http://vladimiralexiev.github.io/CH-names">http://vladimiralexiev.github.io/CH-names</a> and referenced below.
 </p>
 </div>
-<div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1"><span class="section-number-3">1.1</span> RDF-based Gazetteers and Data Integration</h3>
-<div class="outline-text-3" id="text-1-1">
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> RDF-based Gazetteers and Data Integration</h3>
+<div class="outline-text-3" id="text-1-2">
 <p>
 Enrichment is most often based on large and efficient lookup structures called <b>gazetteers</b>. Ontotext's experience with commercial semantic enrichment is that the best way to make gazetteers is:
 </p>
@@ -353,20 +387,20 @@ Enrichment is most often based on large and efficient lookup structures called <
 </div>
 </div>
 
-<div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Data Source Dimensions</h3>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Data Source Dimensions</h3>
+<div class="outline-text-3" id="text-1-3">
 <p>
 We investigate the sources along several dimensions:
 </p>
 <ul class="org-ul">
 <li>Dataset description: where it came from, past evolution, future outlook. All these non-technical aspects are important factors in deciding whether and how to use the source
 </li>
-<li>Agent coverage: number of people/institutions. For some sources we use published reports and summaries, for others we use
+<li>Agent coverage: number of people/institutions. For some sources we use published reports and summaries, for others we use recent counts and analyses we performed
 </li>
 <li>Name coverage: number of name forms for a well-known person (found in all sources), then analyze set intersections and unique contributions
 </li>
-<li>Access: we describe how can the source can be accessed: web and API access for exploration, bulk download for RDF integration, update rate, etc
+<li>Access: we describe how the source can be accessed: web and API access for exploration, bulk download for RDF integration, update rate, etc
 </li>
 <li>Language coverage: we provide overall info about the number of languages covered, but have not performed precise counts
 </li>
@@ -378,14 +412,14 @@ We investigate the sources along several dimensions:
 </div>
 </div>
 
-<div id="outline-container-sec-1-3" class="outline-3">
-<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Extra features</h3>
-<div class="outline-text-3" id="text-1-3">
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Extra Features</h3>
+<div class="outline-text-3" id="text-1-4">
 <p>
-In addition to the names, the following features can be very useful for disambiguation:
+In addition to person names, the following features can be very useful for disambiguation:
 </p>
 <ul class="org-ul">
-<li><b>Description</b> In addition to person names, most data sources have a person description. It can be useful for contextual disambiguation, e.g. to distinguish a painter from a sculpture. It can vary between:
+<li><b>Description</b> In addition to person names, most data sources have a person description. It can be useful for contextual disambiguation, e.g. to distinguish a painter from a sculptor by the type of object. It can vary between:
 <ul class="org-ul">
 <li>Short standardized description as provided by ULAN, e.g. "German painter, draftsman, and printmaker, 1472-1553"
 </li>
@@ -397,7 +431,7 @@ In addition to the names, the following features can be very useful for disambig
 </li>
 </ul>
 </li>
-<li><b>Life years</b> These are useful to filter out by date range. e.g. a 20-century painter cannot be the author of a 16-century painting. But life years in CH are often subject to uncertainty, usually expressed with qualifiers like "circa" (c), "early/mid/late-century", "floruit" (fl). In such cases rule-of-thumb defaults may be employed, e.g. "a person cannot live for more than 100 years", "a person is not creatively active before 15 and after 90 years of age", etc
+<li><b>Life years</b> These are useful to filter out by date range. e.g. a 20-century painter cannot be the author of a 16-century painting. But life years in CH are often subject to uncertainty, usually expressed with qualifiers like "circa" (c), "early/mid/late Nth century", "floruit" (fl). In such cases rule-of-thumb defaults may be employed, e.g. "a person cannot live for more than 100 years", "a person is not creatively active before 15 and after 90 years of age", etc
 <ul class="org-ul">
 <li>Imprecision: the exact year is not known, e.g. "early 16th century". This can be translated to a range of years
 </li>
@@ -425,9 +459,9 @@ In addition to the names, the following features can be very useful for disambig
 </div>
 </div>
 
-<div id="outline-container-sec-1-4" class="outline-3">
-<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Running Example: Lucas Cranach</h3>
-<div class="outline-text-3" id="text-1-4">
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Running Example: Lucas Cranach</h3>
+<div class="outline-text-3" id="text-1-5">
 <p>
 We follow an example-driven approach, analyzing name coverage for Lucas Cranach the Elder.
 </p>
@@ -517,7 +551,7 @@ Wikidata also provides a number of powerful tools that are described next
 <h5 id="sec-2-1-1-1"><span class="section-number-5">2.1.1.1</span> Wikidata Query</h5>
 <div class="outline-text-5" id="text-2-1-1-1">
 <p>
-Wikidata Query (WDQ) is a very peculiar but very powerful query language. The implementation loads large amounts of key data, so query answering is very fast.
+Wikidata Query (WDQ) is a very peculiar but very powerful query language. The implementation caches large amounts of key data, so query answering is very fast.
 </p>
 <ul class="org-ul">
 <li>WDQ API: <a href="http://wdq.wmflabs.org/">http://wdq.wmflabs.org/</a>
@@ -608,6 +642,16 @@ Below is an example: we take all articles on bg.wikpedia in category "Бълга
 <p><img src="./img/wikidata-bulgarian-football-players.png" alt="wikidata-bulgarian-football-players.png" />
 </p>
 </div>
+
+<p>
+Another example:
+</p>
+<ul class="org-ul">
+<li>List of <a href="https://tools.wmflabs.org/autolist/?language=en&project=wikipedia&category=&depth=12&wdq=claim%255B31%253A3305213%255D&mode=undefined&statementlist=&run=Run&label_contains=&label_contains_not=&chunk_size=100">all paintings</a> (first 100). WDQ query <code>claim[31:3305213]</code>. Total results: 34147
+</li>
+<li>List of <a href="https://tools.wmflabs.org/autolist/?language=en&project=wikipedia&category=&depth=12&wdq=claim[31:3305213]%2520and%2520claim[18]&mode=undefined&statementlist=&run=Run&label_contains=&label_contains_not=&chunk_size=100">paintings with image (on Commons)</a>" (first 100). WDQ query <code>claim[31:3305213] and claim[18]</code>. Total results: 16139 
+</li>
+</ul>
 </div>
 </div>
 
@@ -1120,7 +1164,7 @@ We did some investigation of Freebase, but following this announcement have deci
 <h3 id="sec-2-3"><span class="section-number-3">2.3</span> DBPedia</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
-DBpedia <a href="#DBpedia">1</a> is structured information extracted from Wikipedia and is the center of the Linked Open Data cloud. It was first released in Jan 2007 and has been continuously improved ever since.
+DBpedia is structured information extracted from Wikipedia and is the center of the Linked Open Data cloud. It was first released in Jan 2007 and has been continuously improved ever since.
 </p>
 </div>
 
@@ -1128,7 +1172,7 @@ DBpedia <a href="#DBpedia">1</a> is structured information extracted from Wikipe
 <h4 id="sec-2-3-1"><span class="section-number-4">2.3.1</span> DBpedia Stats</h4>
 <div class="outline-text-4" id="text-2-3-1">
 <p>
-<a href="#DBpedia">1</a> presents very comprehensive statistics (p.12 table 2). The most recent version of these statistics is <a href="http://wiki.dbpedia.org/Datasets2014/DatasetStatistics">online</a>.
+[<a href="#DBpedia">1</a>] presents very comprehensive statistics (p.12 table 2). The most recent version of these statistics is <a href="http://wiki.dbpedia.org/Datasets2014/DatasetStatistics">online</a>.
 EN DBpedia being the first and largest language editions is taken as Canonicalized Data ("CD") (namespace <a href="http://dbpedia.org/resource">http://dbpedia.org/resource</a>; there is no namespace <a href="http://en.dbpedia.org/resource">http://en.dbpedia.org/resource</a>). Other editions are called  Localized Data ("LD"). EN DBpedia provides the following <a href="http://wiki.dbpedia.org/Datasets2014/DatasetStatistics#h20178-1">number of entities</a>:
 </p>
 <ul class="org-ul">
@@ -1170,7 +1214,7 @@ Please compare to Wikidata Counts <a href="#sec-2-1-4">2.1.4</a>. We estimate th
 <h4 id="sec-2-3-2"><span class="section-number-4">2.3.2</span> DBpedia Quality</h4>
 <div class="outline-text-4" id="text-2-3-2">
 <p>
-To undertand the dynamics of DBpedia, one should understand raw properties vs mapped properties and classes, which is described really well in <a href="#DBpedia">1</a>. In brief, the process is as follows:
+To understand the dynamics of DBpedia, one should understand raw properties vs mapped properties and classes, which is described really well in [<a href="#DBpedia">1</a>]. In brief, the process is as follows:
 </p>
 <ul class="org-ul">
 <li>Extracts all properties from all significant templates applied to the article. These properties are different for every language edition and are spelt in the national language, so they are called <b>raw</b>. Various heuristics are applied to recognize dates, numbers, links. No type information is applied here, which leads to some problems, e.g.:
@@ -2088,7 +2132,7 @@ Notes:
 <ul class="org-ul">
 <li>A striking revelation is that the 3 "library-tradition" datasets (VIAF, ISNI, ULAN) and the 4 "LOD-tradition datasets" (Wikidata, DBpedia, Freebase, Yago) have almost nothing in common: only 5 names. Library datasets contribute many permutations and qualifiers (e.g. "der Altere" vs "d A"), while LOD datasets contribute many languages.
 </li>
-<li>The datasets in each "tradition" are very similar. The reason is obvious: ISNI and ULAN are fully-fledged contributors in VIAF, so VIAF subsumes them. As for the LOD datasets, each has copied from the others liberally. DBpedia appears a subset of Wikidata only because we have selected only en, de, fr names (See <a href="#sec-2-3-9">2.3.9</a>). Yago covers the en DBpedia, and Freebase doesn't contribute many unique names either.
+<li>The datasets in each "tradition" are very similar. The reason is obvious: ISNI and ULAN are fully-fledged contributors in VIAF, so VIAF subsumes them. As for the LOD datasets, each has copied from the others liberally. DBpedia appears as a subset of Wikidata only because we have selected only en, de, fr names (See <a href="#sec-2-3-9">2.3.9</a>). Yago covers the en DBpedia, and Freebase doesn't contribute many unique names either.
 </li>
 <li>The circles represent number of names for this single example, not dataset coverage. Remember that VIAF is some 12x bigger than Wikidata, see <a href="#sec-2-4-2">2.4.2</a>
 </li>
@@ -2968,9 +3012,9 @@ We can draw the following conclusions from this analysis:
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: 2015-01-28</p>
+<p class="date">Date: 2015-02-05</p>
 <p class="author">Author: Vladimir Alexiev, Data and Ontology Management group, Ontotext Corp</p>
-<p class="date">Created: 2015-01-28 Wed 14:37</p>
+<p class="date">Created: 2015-02-05 Thu 22:44</p>
 <p class="creator">Emacs 24.3.91.1 (Org mode 8.2.7c)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
