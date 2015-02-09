@@ -1,0 +1,194 @@
+#+TITLE: bg.dbpedia.org started
+#+STARTUP: showeverything
+#+OPTIONS: reveal_center:t reveal_control:t reveal_height:925 reveal_width:1200
+#+OPTIONS: reveal_history:t reveal_keyboard:t reveal_mathjax:nil reveal_overview:t reveal_progress:t
+#+OPTIONS: reveal_rolling_links:nil reveal_slide_number:t 
+#+REVEAL_THEME: solarized
+#+REVEAL_TRANS: none
+
+* bg.dbpedia: Home Page
+#+HTML_ATTR: :class stretch :style width:1000px
+[[./img/bg-home-page.png]]
+** Search With Autocomplete
+#+HTML_ATTR: :class stretch :style width:1000px
+[[./img/bg-search.png]]
+** Resource Page (Vassil Levski)
+#+HTML_ATTR: :class stretch :style width:1000px
+[[./img/bg-resource-Levski.png]]
+* Sample Queries
+Брой факти
+#+BEGIN_SRC SPARQL
+select (count(*) as ?c) {?s ?p ?o}
+#+END_SRC
+Брой страници
+#+BEGIN_SRC SPARQL
+  select (count(*) as ?c) {?thing foaf:isPrimaryTopicOf ?page}
+#+END_SRC
+Брой хора
+#+BEGIN_SRC SPARQL
+select (count(*) as ?c) {?person a dbo:Person}
+#+END_SRC
+Брой организации
+#+BEGIN_SRC SPARQL
+select (count(*) as ?c) {?org a dbo:Organisation}
+#+END_SRC
+Брой места
+#+BEGIN_SRC SPARQL
+select (count(*) as ?c) {?place a dbo:Place}
+#+END_SRC
+Брой растения/животни
+#+BEGIN_SRC SPARQL
+select (count(*) as ?c) {?place a dbo:Species}
+#+END_SRC
+Брой произведения
+#+BEGIN_SRC SPARQL
+select (count(*) as ?c) {?place a dbo:Work}
+#+END_SRC
+* Pages without type
+Брой страници без тип
+#+BEGIN_SRC SPARQL
+select (count(*) as ?c) {
+  ?thing foaf:isPrimaryTopicOf ?page.
+  filter not exists{?thing a ?type.
+    filter (?type in (owl:Thing,dbo:Place,dbo:Species))}}
+#+END_SRC
+Страници без тип: с техните категории
+#+BEGIN_SRC SPARQL
+select ?thing (group_concat(?cat;separator="; ") as ?cats) {
+  ?thing foaf:isPrimaryTopicOf ?page.
+  filter not exists{?thing a ?type.
+    filter (?type in (owl:Thing,dbo:Place,dbo:Species))}
+  ?thing dct:subject ?category.
+  bind(strafter(str(?category),"http://bg.dbpedia.org/resource/Категория:") as ?cat)
+} group by ?thing
+#+END_SRC
+* Page Stats
+Най-големи страници
+#+BEGIN_SRC SPARQL
+select * {
+  ?x dbo:wikiPageLength ?len
+} order by desc(?len) limit 100
+#+END_SRC
+Страници с най-много линкове
+#+BEGIN_SRC SPARQL
+select ?x (count(*) as ?links) {
+  ?x dbo:wikiPageWikiLink ?l
+} group by ?x order by desc(?links) limit 100
+#+END_SRC
+* Settlements
+Най-големи нас.места:
+#+BEGIN_SRC SPARQL
+PREFIX bgdbp: <http://bg.dbpedia.org/property/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+select ?x ?area {
+  ?x bgdbp:wikiPageUsesTemplate <http://bg.dbpedia.org/resource/Шаблон:Селище_в_България>;
+     dbo:areaLand ?area
+} order by desc(?area) limit 100
+#+END_SRC
+** Wrong Data
+- Най-големите НМ са Мътеница, Дебелец, Дъбовик, Ръжево, Мало Крушево?!?
+  - https://bg.wikipedia.org/wiki/Мътеница_(село):
+    : Землище    33 035 km²
+  - [[https://bg.wikipedia.org/w/index.php?title=Мътеница_(село)&action=edit]]
+    : | площ = 33 035
+  - Това е 1/3 от площта на България ;-)
+  - Ние приемаме, че "," и "." са десетичен знак, ама чак пък интервал...
+  - На друго място съм виждал изписано така: ~1 nbsp;234~, което се извлича като "1" :-(
+- Ако изключим тези грешки, следващото НМ е София
+- После е Батак?
+  - https://bg.wikipedia.org/wiki/Батак: Землище 461.105 km²: не ми се вярва
+  - Спас Колев казва, че е вярно. Това е землището на града (не само градската територия), и Батак включва голяма планинска територия.
+  - Надм. височина 1036m? Но Екатте дава интервал Надм. височина, м: 700 - 999 вкл http://www.ekatte.com/област-пазарджик/община-батак/батак
+** Place Parents
+- Няма структурно поле, което да индицира Settlements само в Bulgaria.
+В момента информацията за административната структура на местата (и броят население) не може да се извлече
+- Причина: в bg.wikipedia, голяма част от информацията е заключена в lookup lists in sub-templates, като "ekatte" се ползва за ключ.
+- Напр за Мътеница [[https://bg.wikipedia.org/w/index.php?title=Мътеница_(село)&action=edit]]:
+  : {{Селище в България
+  : | екатте = 49624
+  : | надм-височина=441 ...
+- Извън шаблона (в свободен текст) се казва: "[[село]] в [[Южна България]]. То се намира в [[община Хисаря]], [[Област Пловдив]]".
+  Тези се извличат като линкове, но не в структурни полета.
+- The extraction framework cannot extract data from such lists. See issue [[https://github.com/dbpedia/extraction-framework/issues/305][#305]]: resolving lookup-list data out of sub-templates
+** Places With Biggest Population
+Населени места с най-голямо население
+#+BEGIN_SRC SPARQL
+PREFIX bgdbp: <http://bg.dbpedia.org/property/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+select * {
+  ?x bgdbp:wikiPageUsesTemplate <http://bg.dbpedia.org/resource/Шаблон:Селище_в_България>;
+     dbo:populationTotal ?pop
+} order by desc(?pop) limit 100
+#+END_SRC
+Ура! Тези май са верни :-)
+* Musical Artists
+Музикални изпълнители и групи
+#+BEGIN_SRC SPARQL
+PREFIX dbo: <http://dbpedia.org/ontology/>
+select * {
+  ?x a ?type
+  filter (?type in (dbo:MusicalArtist, dbo:Band))
+}
+#+END_SRC
+- 2559. Но само 111 са dbo:MusicalArtist?!? Напр. Лили Иванова и Горан Брегович излизат като dbo:Band (и оттам dbo:Organisation ;-))
+- Причината е, че мапингът [[http://mappings.dbpedia.org/index.php?title%3DMapping_bg:Музикален_изпълнител&action%3Dedit&oldid%3D18009][Музикален_изпълнител имаше следният проблем]]:  
+  #+BEGIN_EXAMPLE
+  {{ Condition
+    | templateProperty = фон
+    | operator = isSet
+    | mapping = {{ TemplateMapping | mapToClass = Band }}
+  }}
+  #+END_EXAMPLE
+- Т.е. ако има поле "фон", то приеми че е Група. Напр. Горан Брегович: фон = инструменталист
+** ConditionalMapping 
+Сега го оправихме [[http://mappings.dbpedia.org/index.php?title%3DMapping_bg:Музикален_изпълнител&action%3Dedit][да има следната сложна логика]]: 
+- Ако има поле "състав", "бивши_членове" или "създадена" -> Band
+  - (Ами "членове"? Не знам)
+- Ако "фон" съдържа "група", "квартет", "ансамбъл", "хор" -> Band
+- Ако "фон" съдържа "композитор" -> MusicComposer
+- Ако "фон" съдържа "диригент" -> MusicDirector
+- Ако "фон" съдържа "певица" -> MusicalArtist, gender=dbo:Female
+- Ако "фон" съдържа "певец" -> MusicalArtist, gender=dbo:Male
+- Ако "фон" съдържа "пианист" -> MusicalArtist, gender=dbo:Male
+- Ако има поле "наставка" -> MusicalArtist, gender=dbo:Female
+- Иначе -> MusicalArtist, gender=dbo:Male
+** Data Improvement
+- Вече Лили Иванова не е Band (и Organisation), а MusicalArtist, gender=dbo:Female. Ура!
+  - Макар че някои биха оспорили, че де-факто тя е *институция* в българската музика
+- По принцип шаблонът https://bg.wikipedia.org/wiki/Шаблон:Музикален_изпълнител казва, че "фон" трябва да е: певец, инструменталист, не_изпълнител, временно.
+  - Но има мноого изключения, напр. "фолк певица" (е може ли без нея)
+  - Нашият мапинг следва реалните данни
+- Тригонометрична_функция и България_на_Световното_първенство_по_футбол_1994?!?
+  - Преди ползваха шаблон "Музикален изпълнител"
+  - Но вече не, напр https://bg.wikipedia.org/w/index.php?title=Тригонометрична_функция&diff=6434190&oldid=5927191
+  - При следващото извличане ще се актуализират и ще отпаднат от този списък
+* Musical Genres
+Музикални изпълнители за които са посочени жанрове
+#+BEGIN_SRC SPARQL
+PREFIX dbo: <http://dbpedia.org/ontology/>
+select ?x (group_concat(?genre;separator="; ") as ?genres) {
+  ?x a ?type. filter (?type in (dbo:MusicalArtist, dbo:Band))
+  ?x dbo:genre ?g.
+   bind (strafter(str(?g),"http://bg.dbpedia.org/resource/") as ?genre)
+} group by ?x
+#+END_SRC
+** Popular Genres
+Музикални жанрове по популярност
+#+BEGIN_SRC SPARQL
+PREFIX dbo: <http://dbpedia.org/ontology/>
+select ?genre (count(*) as ?c) {
+  ?x a ?type. filter (?type in (dbo:MusicalArtist, dbo:Band))
+  ?x dbo:genre ?g.
+  bind (strafter(str(?g),"http://bg.dbpedia.org/resource/") as ?genre)
+} group by ?genre order by desc(?c) limit 20
+#+END_SRC
+- 520 жанра
+- Най-популярните са
+  : Поп_музика	356  (изненада!
+  : Хард_рок	313
+  : Хеви_метъл	238
+** Making Charts
+- Charts directly from SPARQL: [[http://goo.gl/l3lAeB][VISU]], [[http://jsfiddle.net/valexiev/1p9qs2zu/][sgvizler]] (jsfiddle)
+- Or Query> Save as> TSV and make it in Excel
+#+HTML_ATTR: :class stretch :style width:1000px
+[[./img/музикални-жанрове.png]]
