@@ -1,13 +1,13 @@
-#+TITLE:     On Compositionality of ISO 25964 Hierarchical Relations (BTG, BTP, BTI)
 #+AUTHOR:    
-#+DATE:      2014-09-12
+#+DATE:      2015-02-10
 #+LANGUAGE:  en
 #+STARTUP:   noinlineimages content
 #+OPTIONS:   num:nil toc:1
 #+EXCLUDE_TAGS: noexport
 #+NO_OPTIONS: H:1 \n:nil @:t ::t |:t ^:{} -:t f:t *:t <:t TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
 #+REVEAL_HLEVEL: 1
-#+REVEAL_EXTRA_JS: {src: 'js/reveal-help.js', async: true, condition: function() {return !!document.body.classList}}, {src: 'js/reveal-tagcloud.js', async: true, condition: function() {return !!document.body.classList}}
+#+REVEAL_EXTRA_JS: {src: '../../reveal.js/js/reveal-help.js', async: true, condition: function() {return !!document.body.classList}}, {src: '../../reveal.js/js/reveal-tagcloud.js', async: true, condition: function() {return !!document.body.classList}}
+#+REVEAL_THEME: default
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <h3>%t</h2>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>Vladimir Alexiev, Ontotext Corp<br/> Jutta Lindenthal, Consultant to digiCULT-Verbund eG<br/> Antoine Isaac, Europeana and VU Amsterdam</p><br/>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'><a href="https://at-web1.comp.glam.ac.uk/pages/research/hypermedia/nkos/nkos2014/programme.html">Networked Knowledge Organization Systems (NKOS 2014) Workshop</a></p>
@@ -17,7 +17,7 @@
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://VladimirAlexiev.github.io/pres/20140912-NKOS-compositionality/BTG-BTP-BTI-compositionality.pdf'>pdf</a>,
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://www.slideshare.net/valexiev1/btgbtpbti-compositionality' target='_blank'>slideshare</a>.</p>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>Press <a href='javascript:Reveal.toggleOverview()'>O for overview</a>,
-#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='reveal-help.html' target='_blank'>H for help</a>.</p>
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='../../reveal.js/reveal-help.html' target='_blank'>H for help</a>.</p>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>Proudly made in plain text with 
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='https://github.com/hakimel/reveal.js/'>reveal.js</a>, 
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='https://github.com/yjwen/org-reveal'>org-reveal</a>, 

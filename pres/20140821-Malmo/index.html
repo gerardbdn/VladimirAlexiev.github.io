@@ -6,8 +6,8 @@
 <title>Semantic Technologies for Cultural Heritage</title>
 <meta name="author" content="(Vladimir Alexiev, Ontotext Corp)"/>
 
-<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.6.2/css/reveal.min.css"/>
-<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.6.2/css/theme/default.css" id="theme"/>
+<link rel="stylesheet" href="../../reveal.js/css/reveal.min.css"/>
+<link rel="stylesheet" href="../../reveal.js/css/theme/default.css" id="theme"/>
 
 <!-- If the query includes 'print-pdf', include the PDF print sheet -->
 <script>
@@ -15,17 +15,42 @@
         var link = document.createElement( 'link' );
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.href = 'http://cdn.jsdelivr.net/reveal.js/2.6.2/css/print/pdf.css';
+        link.href = '../../reveal.js/css/print/pdf.css';
         document.getElementsByTagName( 'head' )[0].appendChild( link );
     }
 </script>
-<style>th, td {border-width: 1px; border-style: none solid; border-spacing:0; padding:0px 2px}</style>
+
+<style type="text/css">
+h1,h2,h3,h4,h5,h6,h7 {font-family: Arial}
+// don't want empty lines in auto-postamble
+.author, .date, .creator {-webkit-margin-before: 0em; -webkit-margin-after: 0em}
+// style for #+begin_abstract
+.abstract {margin: 1em; padding: 1em; border: 1px solid black}
+.abstract:before {content: "Abstract: "; font-weight: bold}
+// center the preamble (author name) and make it bigger
+#preamble p { font-size: 110%; margin-left: auto; margin-right: auto; text-align: center; }
+// table headers aligned same as table data
+th.left     {text-align:left}
+th.right    {text-align:right}
+// table horizontal&vertical borders. First value is top&bottom, second is left&right. http://www.w3schools.com/css/css_border.asp
+th, td {border-width: 1px; border-style: solid solid; border-spacing: 2px 2px; padding:4px 2px}
+// colored TODO keywords
+.CANCELED   {color: blue}
+.MAYBE      {color: blue}
+.POSTPONED  {color: blue}
+.INPROGRESS {color: orange}
+.NEXT       {color: orange}
+.IER        {color: orange}
+</style>
+
 <style>
 .reveal .slides {text-align:left}
 h1,h2,h3,h4,h5,h6,.center {text-align:center}
-img {width:1200px; display: block; margin-left:auto !important; margin-right:auto !important}
+img,table {display: block; margin-left:auto!important; margin-right:auto!important}
+td>img {width:250px; display:block; margin-left:auto!important; margin-right:auto!important; margin-top:0px!important; margin-bottom:0px!important}
 .reveal th, .reveal td {font-size:80%; border: 1px; border-style: solid solid; border-spacing:0; padding:0px 2px}
 span.clouditem {padding-left: 0.15em; padding-right: 0.15em; line-height: 90%}
+#table-of-contents {font-size:70%}
 </style>
 </head>
 <body>
@@ -33,40 +58,40 @@ span.clouditem {padding-left: 0.15em; padding-right: 0.15em; line-height: 90%}
 <div class="slides">
 <section>
 <h2>Semantic Technologies for Cultural Heritage</h2><h3><a href="mailto:vladimir.alexiev@ontotext.com">vladimir.alexiev@ontotext.com</a></h3><h3>2014-08-21, Malmo, Sweden</h3> <p/><p/><p class='center'> <a href='http://VladimirAlexiev.github.io/pres/20140821-Malmo/index.html' target='_blank'>2D interactive version</a>, <a href='http://VladimirAlexiev.github.io/pres/20140821-Malmo/SemTechCH-Malmo.pdf'>pdf</a>, <a href='http://www.slideshare.net/valexiev1/sem-techch-malmo' target='_blank'>slideshare</a>.</p> <p class='center'>Press <a href='javascript:Reveal.toggleOverview()'>O for overview</a>, <a href='reveal-help.html' target='_blank'>H for help</a>.</p> <p class='center'>Proudly made in plain text with <a href='https://github.com/hakimel/reveal.js/'>reveal.js</a>, <a href='https://github.com/yjwen/org-reveal'>org-reveal</a>, <a href='http://orgmode.org'>org-mode</a> and <a href='http://www.gnu.org/s/emacs/'>emacs</a>.</p></section>
-<section>
+<section id="table-of-contents">
 <h2>Table of Contents</h2><ul>
 <li>
-<a href="#sec-1">Semantic Technologies</a>
+<a href="#/sec-1">Semantic Technologies</a>
 </li>
 <li>
-<a href="#sec-2">Ontotext Corp</a>
+<a href="#/sec-2">Ontotext Corp</a>
 </li>
 <li>
-<a href="#sec-3">Some Ontotext Products</a>
+<a href="#/sec-3">Some Ontotext Products</a>
 </li>
 <li>
-<a href="#sec-4">Ontotext GLAM Projects</a>
+<a href="#/sec-4">Ontotext GLAM Projects</a>
 </li>
 <li>
-<a href="#sec-5">Europeana Creative</a>
+<a href="#/sec-5">Europeana Creative</a>
 </li>
 <li>
-<a href="#sec-6">Europeana Food and Drink</a>
+<a href="#/sec-6">Europeana Food and Drink</a>
 </li>
 <li>
-<a href="#sec-7">Bulgariana</a>
+<a href="#/sec-7">Bulgariana</a>
 </li>
 <li>
-<a href="#sec-8">Ontotext / GraphDB in CH</a>
+<a href="#/sec-8">Ontotext / GraphDB in CH</a>
 </li>
 <li>
-<a href="#sec-9">ResearchSpace</a>
+<a href="#/sec-9">ResearchSpace</a>
 </li>
 <li>
-<a href="#sec-10">Getty Vocabularies LOD</a>
+<a href="#/sec-10">Getty Vocabularies LOD</a>
 </li>
 <li>
-<a href="#sec-11">Possible Future Topics</a>
+<a href="#/sec-11">Possible Future Topics</a>
 </li>
 </ul>
 </section>
@@ -89,11 +114,11 @@ Is this something new?
 <ul class="org-ul">
 <li>It was all envisioned by Sir Tim Berners-Lee 25 years ago
 </li>
-<li>Standardized by W3C: both HTML and sem web standards (RDF, RDFS, OWL, SPARQL&#x2026;)
+<li>Standardized by W3C: both HTML and sem web standards (RDF, RDFS, OWL, SPARQL…)
 </li>
 <li>Great flurry of sem tech activity in the last 15 years
 </li>
-<li>Buzzwords: Big Data, Semantic Analytics, Concept Extraction, Sentiment Analysis&#x2026;
+<li>Buzzwords: Big Data, Semantic Analytics, Concept Extraction, Sentiment Analysis…
 </li>
 </ul>
 </section>
@@ -153,7 +178,7 @@ Is this something new?
 <ul class="org-ul">
 <li>Highest profile sem web applications
 </li>
-<li>BBC: World Cup 2010, London Olympics 2012, all of BBC sport&#x2026;
+<li>BBC: World Cup 2010, London Olympics 2012, all of BBC sport…
 </li>
 <li>Dynamic Semantic Publishing: Master Publishing platform
 </li>
@@ -313,9 +338,9 @@ Is this something new?
 </li>
 <li>Full-text search support, based on either Lucene or proprietary search techniques
 </li>
-<li>High-performance retraction of statements &amp; inferences
+<li>High-performance retraction of statements & inferences
 </li>
-<li>Expressive consistency &amp; integrity constraint checking mechanisms
+<li>Expressive consistency & integrity constraint checking mechanisms
 </li>
 <li>Notification mechanism, to allow clients to react to statements in the update stream
 </li>
@@ -337,7 +362,7 @@ Is this something new?
 </li>
 <li>Rule profiling
 </li>
-<li>Support for external plug-ins. Loaded from the classpath, handle custom functions &amp; predicates
+<li>Support for external plug-ins. Loaded from the classpath, handle custom functions & predicates
 </li>
 <li>Connectors that synchronize RDF data to provide extremely fast full-text and facet searches:
 <ul class="org-ul">
@@ -359,7 +384,7 @@ Is this something new?
 </li>
 <li>Ontotext is the largest commercial contributor to GATE
 </li>
-<li>Used by important commercial clients: BBC, UK Press Association, NDP, Oxford University Press, Financial Times, Euromoney&#x2026;
+<li>Used by important commercial clients: BBC, UK Press Association, NDP, Oxford University Press, Financial Times, Euromoney…
 </li>
 </ul>
 <p>
@@ -454,7 +479,7 @@ See <a href="https://confluence.ontotext.com/display/OntoMKTG/Ontotext+Marketing
 </li>
 <li>Open challenges, growing to incubation support
 </li>
-<li>Help with collection data, content reuse, Europeana APIs, creative workshop ideas&#x2026;
+<li>Help with collection data, content reuse, Europeana APIs, creative workshop ideas…
 </li>
 </ul>
 <img src="./img/eCreative-pipeline-workshop.png" alt="eCreative-pipeline-workshop.png" />
@@ -524,7 +549,7 @@ select
 
 <h3>SPARQL Analytics</h3>
 <p>
-Eg Polish Periodicals by library &amp; decade (you can <a href="http://jsfiddle.net/valexiev/t4aX9/">jsfiddle</a> with it)<br  />
+Eg Polish Periodicals by library & decade (you can <a href="http://jsfiddle.net/valexiev/t4aX9/">jsfiddle</a> with it)<br  />
 <img src="./img/EDM-sgvizler2.png" alt="EDM-sgvizler2.png" />
 </p>
 </section>
@@ -618,7 +643,7 @@ Ontotext helped create some of the significant CH LOD datasets, hosted on GraphD
 </li>
 <li>Europeana (EDM): <a href="http://europeana.ontotext.com">http://europeana.ontotext.com</a>
 </li>
-<li>Getty AAT &amp; TGN (SKOS, SKOS-XL&#x2026;): <a href="http://vocab.getty.edu">http://vocab.getty.edu</a>
+<li>Getty AAT & TGN (SKOS, SKOS-XL…): <a href="http://vocab.getty.edu">http://vocab.getty.edu</a>
 </li>
 <li>JP LOD.AC: Japanese LOD initiative: <a href="http://lod.ac">http://lod.ac</a>
 </li>
@@ -739,9 +764,9 @@ Millions: objects, explicit statements, ex.st per object, total statements; expa
 <tr>
 <td class="left">FF</td>
 <td class="left">DC, DBP</td>
-<td class="right">&#xa0;</td>
+<td class="right"> </td>
 <td class="right">1673</td>
-<td class="right">&#xa0;</td>
+<td class="right"> </td>
 <td class="right">3211</td>
 <td class="right">1.9</td>
 <td class="right">456</td>
@@ -751,10 +776,10 @@ Millions: objects, explicit statements, ex.st per object, total statements; expa
 
 <tr>
 <td class="left">LLD</td>
-<td class="left">&#xa0;</td>
-<td class="right">&#xa0;</td>
+<td class="left"> </td>
+<td class="right"> </td>
 <td class="right">6706</td>
-<td class="right">&#xa0;</td>
+<td class="right"> </td>
 <td class="right">10192</td>
 <td class="right">1.5</td>
 <td class="right">1554</td>
@@ -821,7 +846,7 @@ Papers:
 <ul class="org-ul">
 <li><a href="http://www.researchspace.org/">ResearchSpace</a> website
 </li>
-<li><a href="http://www.researchspace.org/project-updates">News</a> &amp; <a href="http://www.researchspace.org/file-cabinet">Files</a>, including presentations &amp; papers
+<li><a href="http://www.researchspace.org/project-updates">News</a> & <a href="http://www.researchspace.org/file-cabinet">Files</a>, including presentations & papers
 </li>
 <li>Videos by <a href="https://www.youtube.com/user/dodudeful">Dominic Oldman</a> (British Museum)
 </li>
@@ -832,7 +857,7 @@ Papers:
 For example:
 </p>
 <ul class="org-ul">
-<li><a href="http://www.researchspace.org/project-updates/slidesfromoxfordsummerschool/DH2014%2520BM.pdf">Oxford Summer School slides</a>, Jul 2014
+<li><a href="http://www.researchspace.org/project-updates/slidesfromoxfordsummerschool/DH2014%20BM.pdf">Oxford Summer School slides</a>, Jul 2014
 </li>
 <li><a href="http://www.slideshare.net/BarryNorton/glamorous-lod-and-researchspace-introduction">GLAMorous LOD and ResearchSpace introduction</a>, Rijksmuseum, May 2014
 </li>
@@ -953,30 +978,30 @@ How a Thing's <b>origin</b> can be related to Place (* = recursion)
 </section>
 <section id="sec-9-9" >
 
-<h3>Thing from Place: Definition (CRM Classes &amp; Properties)</h3>
+<h3>Thing from Place: Definition (CRM Classes & Properties)</h3>
 <pre  class="example">
-FC70_Thing --(P46i_forms_part_of* | P106i_forms_part_of* | P148i_is_component_of*)-&gt; FC70_Thing:
-  {FC70_Thing --(P53_has_former_or_current_location | P54_has_current_permanent_location)-&gt; E53_Place:
-    {E53_Place --P89_falls_within*-&gt; E53_Place}
-  OR FC70_Thing --P92i_was_brought_into_existence_by-&gt; E63_Beginning_of_Existence:
-    {E63_Beginning_of_Existence --P9i_forms_part_of*-&gt; E5_Event:
-      {E5_Event --P7_took_place_at-&gt; E53_Place:
-        {E53_Place --P89_falls_within*-&gt; E53_Place}
-      OR E7_Activity --P14_carried_out_by-&gt; E39_Actor:
-        {E39_Actor --P107i_is_current_or_former_member_of* -&gt; E39_Actor:
-          {E39_Actor --P74_has_current_or_former_residence  -&gt; E53_Place:
-            {E53_Place --P89_falls_within*-&gt; E53_Place}
-          OR E39_Actor --P92i_was_brought_into_existence_by-&gt; E63_Beginning_of_Existence:
-            {E63_Beginning_of_Existence --P9i_forms_part_of*-&gt; E5_Event:
-              {E5_Event --P7_took_place_at-&gt; E53_Place:
-                {E53_Place --P89_falls_within* -&gt; E53_Place}}}}}}}
-  OR E19_Physical_Thing  --P25i_moved_by-&gt; E9_Move:
-    {E9_Move --(P26_moved_to | P27_moved_from)-&gt; E53_Place:
-      {E53_Place  --P89_falls_within*-&gt; E53_Place}}
-  OR E19_Physical_Object --P24i_changed_ownership_through-&gt; E8_Acquisition:
-    {E8_Acquisition --P9i_forms_part_of*-&gt; E5_Event:
-      {E5_Event --P7_took_place_at-&gt; E53_Place:
-        {E53_Place --P89_falls_within*-&gt; E53_Place}}}}
+FC70_Thing --(P46i_forms_part_of* | P106i_forms_part_of* | P148i_is_component_of*)-> FC70_Thing:
+  {FC70_Thing --(P53_has_former_or_current_location | P54_has_current_permanent_location)-> E53_Place:
+    {E53_Place --P89_falls_within*-> E53_Place}
+  OR FC70_Thing --P92i_was_brought_into_existence_by-> E63_Beginning_of_Existence:
+    {E63_Beginning_of_Existence --P9i_forms_part_of*-> E5_Event:
+      {E5_Event --P7_took_place_at-> E53_Place:
+        {E53_Place --P89_falls_within*-> E53_Place}
+      OR E7_Activity --P14_carried_out_by-> E39_Actor:
+        {E39_Actor --P107i_is_current_or_former_member_of* -> E39_Actor:
+          {E39_Actor --P74_has_current_or_former_residence  -> E53_Place:
+            {E53_Place --P89_falls_within*-> E53_Place}
+          OR E39_Actor --P92i_was_brought_into_existence_by-> E63_Beginning_of_Existence:
+            {E63_Beginning_of_Existence --P9i_forms_part_of*-> E5_Event:
+              {E5_Event --P7_took_place_at-> E53_Place:
+                {E53_Place --P89_falls_within* -> E53_Place}}}}}}}
+  OR E19_Physical_Thing  --P25i_moved_by-> E9_Move:
+    {E9_Move --(P26_moved_to | P27_moved_from)-> E53_Place:
+      {E53_Place  --P89_falls_within*-> E53_Place}}
+  OR E19_Physical_Object --P24i_changed_ownership_through-> E8_Acquisition:
+    {E8_Acquisition --P9i_forms_part_of*-> E5_Event:
+      {E5_Event --P7_took_place_at-> E53_Place:
+        {E53_Place --P89_falls_within*-> E53_Place}}}}
 </pre>
 </section>
 <section id="sec-9-10" >
@@ -1141,9 +1166,9 @@ Ontotext helps Getty publish them as LOD: <a href="http://vocab.getty.edu">http:
 
 <h3>Getty Semantic Representation</h3>
 <ul class="org-ul">
-<li>Covers subjects (concepts, guide terms&#x2026;),
+<li>Covers subjects (concepts, guide terms…),
 hierarchical rels, associative rels, historic info,
-labels, sources, contributors, revision history, languages &#x2026;
+labels, sources, contributors, revision history, languages …
 </li>
 <li><a href="http://vocab.getty.edu/doc/">Doc</a> (100 pages!): below is <a href="http://vocab.getty.edu/doc/#Semantic_Overview">Semantic Overview</a>
 </li>
@@ -1228,8 +1253,8 @@ Number of members of the UN per year. <a href="http://vocab.getty.edu/doc/#Colum
 </div>
 </div>
 
-<script src="http://cdn.jsdelivr.net/reveal.js/2.6.2/lib/js/head.min.js"></script>
-<script src="http://cdn.jsdelivr.net/reveal.js/2.6.2/js/reveal.min.js"></script>
+<script src="../../reveal.js/lib/js/head.min.js"></script>
+<script src="../../reveal.js/js/reveal.min.js"></script>
 
 <script>
 // Full list of configuration options available here:
@@ -1245,7 +1270,7 @@ rollingLinks: false,
 keyboard: true,
 overview: true,
 width: 1200,
-height: 900,
+height: 925,
 
 theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
 transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
@@ -1253,13 +1278,13 @@ transitionSpeed: 'default',
 
 // Optional libraries used to extend on reveal.js
 dependencies: [
-{src: 'js/reveal-help.js', async: true, condition: function() {return !!document.body.classList}}, {src: 'js/reveal-tagcloud.js', async: true, condition: function() {return !!document.body.classList}},
- { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/lib/js/classList.js', condition: function() { return !document.body.classList; } },
- { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
- { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
- { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
- { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
- { src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+{src: '../../reveal.js/js/reveal-help.js', async: true, condition: function() {return !!document.body.classList}}, {src: 'js/reveal-tagcloud.js', async: true, condition: function() {return !!document.body.classList}},
+ { src: '../../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: '../../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: '../../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: '../../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+ { src: '../../reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: '../../reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
 ]
 });
 </script>

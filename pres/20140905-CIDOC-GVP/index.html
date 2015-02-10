@@ -6,8 +6,8 @@
 <title>GVP LOD: Ontologies and Semantic Representation</title>
 <meta name="author" content="(Vladimir Alexiev, Data and Ontology Group, Ontotext Corp)"/>
 
-<link rel="stylesheet" href="../reveal.js/css/reveal.min.css"/>
-<link rel="stylesheet" href="../reveal.js/css/theme/default.css" id="theme"/>
+<link rel="stylesheet" href="../../reveal.js/css/reveal.min.css"/>
+<link rel="stylesheet" href="../../reveal.js/css/theme/default.css" id="theme"/>
 
 <!-- If the query includes 'print-pdf', include the PDF print sheet -->
 <script>
@@ -15,11 +15,34 @@
         var link = document.createElement( 'link' );
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.href = '../reveal.js/css/print/pdf.css';
+        link.href = '../../reveal.js/css/print/pdf.css';
         document.getElementsByTagName( 'head' )[0].appendChild( link );
     }
 </script>
-<style>th, td {border-width: 1px; border-style: none solid; border-spacing:0; padding:0px 2px}</style>
+
+<style type="text/css">
+h1,h2,h3,h4,h5,h6,h7 {font-family: Arial}
+// don't want empty lines in auto-postamble
+.author, .date, .creator {-webkit-margin-before: 0em; -webkit-margin-after: 0em}
+// style for #+begin_abstract
+.abstract {margin: 1em; padding: 1em; border: 1px solid black}
+.abstract:before {content: "Abstract: "; font-weight: bold}
+// center the preamble (author name) and make it bigger
+#preamble p { font-size: 110%; margin-left: auto; margin-right: auto; text-align: center; }
+// table headers aligned same as table data
+th.left     {text-align:left}
+th.right    {text-align:right}
+// table horizontal&vertical borders. First value is top&bottom, second is left&right. http://www.w3schools.com/css/css_border.asp
+th, td {border-width: 1px; border-style: solid solid; border-spacing: 2px 2px; padding:4px 2px}
+// colored TODO keywords
+.CANCELED   {color: blue}
+.MAYBE      {color: blue}
+.POSTPONED  {color: blue}
+.INPROGRESS {color: orange}
+.NEXT       {color: orange}
+.IER        {color: orange}
+</style>
+
 <style>
 .reveal .slides {text-align:left}
 h1,h2,h3,h4,h5,h6,.center {text-align:center}
@@ -27,38 +50,39 @@ img,table {display: block; margin-left:auto!important; margin-right:auto!importa
 td>img {width:250px; display:block; margin-left:auto!important; margin-right:auto!important; margin-top:0px!important; margin-bottom:0px!important}
 .reveal th, .reveal td {font-size:80%; border: 1px; border-style: solid solid; border-spacing:0; padding:0px 2px}
 span.clouditem {padding-left: 0.15em; padding-right: 0.15em; line-height: 90%}
+#table-of-contents {font-size:70%}
 </style>
 </head>
 <body>
 <div class="reveal">
 <div class="slides">
 <section>
-<h2>GVP LOD: Ontologies and Semantic Representation</h2> <p class='center'>Vladimir Alexiev, Data and Ontology Group, Ontotext Corp</p> <p class='center'><img src="./img/lod_getty_logo.png" style="width:400px"/></p> <p class='center'>CIDOC Congress, Dresden, Germany <br/>2014-09-05: International Terminology Working Group: <br/> full version (<a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/index.html'>HTML</a>, <a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/GVP-LOD-CIDOC.pdf'>PDF</a>, <a href='http://www.slideshare.net/valexiev1/gvp-lodcidoc'>slideshare</a>) <br/>2014-09-09: Getty special session: <br/> short version (<a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/short.html'>HTML</a>, <a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/GVP-LOD-CIDOC-short.pdf'>PDF</a>, <a href='http://www.slideshare.net/valexiev1/gvp-lodcidocshort'>slideshare</a>)</p> <p class='center'> <p class='center'>Press <a href='javascript:Reveal.toggleOverview()'>O for overview</a>, <a href='reveal-help.html' target='_blank'>H for help</a>.<br/> Proudly made in plain text with <a href='https://github.com/hakimel/reveal.js/'>reveal.js</a>, <a href='https://github.com/yjwen/org-reveal'>org-reveal</a>, <a href='http://orgmode.org'>org-mode</a> and <a href='http://www.gnu.org/s/emacs/'>emacs</a>.</p></section>
-<section>
+<h2>GVP LOD: Ontologies and Semantic Representation</h2> <p class='center'>Vladimir Alexiev, Data and Ontology Group, Ontotext Corp</p> <p class='center'><img src="./img/lod_getty_logo.png" style="width:400px"/></p> <p class='center'>CIDOC Congress, Dresden, Germany <br/>2014-09-05: International Terminology Working Group: <br/> full version (<a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/index.html'>HTML</a>, <a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/GVP-LOD-CIDOC.pdf'>PDF</a>, <a href='http://www.slideshare.net/valexiev1/gvp-lodcidoc'>slideshare</a>) <br/>2014-09-09: Getty special session: <br/> short version (<a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/short.html'>HTML</a>, <a href='http://VladimirAlexiev.github.io/pres/20140905-CIDOC-GVP/GVP-LOD-CIDOC-short.pdf'>PDF</a>, <a href='http://www.slideshare.net/valexiev1/gvp-lodcidocshort'>slideshare</a>)</p> <p class='center'> <p class='center'>Press <a href='javascript:Reveal.toggleOverview()'>O for overview</a>, <a href='../../reveal.js/reveal-help.html' target='_blank'>H for help</a>.<br/> Proudly made in plain text with <a href='https://github.com/hakimel/reveal.js/'>reveal.js</a>, <a href='https://github.com/yjwen/org-reveal'>org-reveal</a>, <a href='http://orgmode.org'>org-mode</a> and <a href='http://www.gnu.org/s/emacs/'>emacs</a>.</p></section>
+<section id="table-of-contents">
 <h2>Table of Contents</h2><ul>
 <li>
-<a href="#sec-1">Getty Vocabularies LOD</a>
+<a href="#/sec-1">Getty Vocabularies LOD</a>
 </li>
 <li>
-<a href="#sec-2">GVP Vocabulary Data</a>
+<a href="#/sec-2">GVP Vocabulary Data</a>
 </li>
 <li>
-<a href="#sec-3">External Ontologies</a>
+<a href="#/sec-3">External Ontologies</a>
 </li>
 <li>
-<a href="#sec-4">GVP Semantic Representation</a>
+<a href="#/sec-4">GVP Semantic Representation</a>
 </li>
 <li>
-<a href="#sec-5">TGN Specifics: Concept-Place Duality</a>
+<a href="#/sec-5">TGN Specifics: Concept-Place Duality</a>
 </li>
 <li>
-<a href="#sec-6">Inference</a>
+<a href="#/sec-6">Inference</a>
 </li>
 <li>
-<a href="#sec-7">Documentation</a>
+<a href="#/sec-7">Documentation</a>
 </li>
 <li>
-<a href="#sec-8">GVP LOD Usage</a>
+<a href="#/sec-8">GVP LOD Usage</a>
 </li>
 </ul>
 </section>
@@ -143,7 +167,7 @@ Quite straightforward
 </section>
 <section id="sec-1-4" >
 
-<h3>Semantic Resolution &amp; Content Negotiation</h3>
+<h3>Semantic Resolution & Content Negotiation</h3>
 <p>
 All GVP, AAT and TGN URLs resolve, returning human or machine readable content through content negotiation (303 redirect).
 Eg about the ontology:
@@ -240,7 +264,7 @@ Scope includes:
 </li>
 <li>Terms as plain (SKOS) and rich (SKOS-XL) labels. Term characteristics
 </li>
-<li>Hierarchical relations: custom &amp; standard, distinguish BTG,BTP,BTI
+<li>Hierarchical relations: custom & standard, distinguish BTG,BTP,BTI
 </li>
 <li>Associative Relations
 </li>
@@ -404,13 +428,13 @@ Richer than any other SKOS thesaurus I've seen
 <tr>
 <td class="left">luc:</td>
 <td class="left">OWLIM's built-in Lucene</td>
-<td class="left">Full Text index &amp; queries</td>
+<td class="left">Full Text index & queries</td>
 </tr>
 
 <tr>
 <td class="left">ontogeo:</td>
 <td class="left">OWLIM geo-spatial extensions</td>
-<td class="left">Geo-spatial index &amp; queries</td>
+<td class="left">Geo-spatial index & queries</td>
 </tr>
 
 <tr>
@@ -422,7 +446,7 @@ Richer than any other SKOS thesaurus I've seen
 <tr>
 <td class="left">rr:</td>
 <td class="left">Relational to RDF Mapping Language</td>
-<td class="left">Conversion Oracle-&gt;RDF</td>
+<td class="left">Conversion Oracle->RDF</td>
 </tr>
 
 <tr>
@@ -613,7 +637,7 @@ Use iso:ThesaurusArray to allow Guide Terms below Concepts. Infer cross-threadin
 <h3>Key Values (Flags) Are Important</h3>
 <p>
 Excel-driven Ontology Generation™ (getty-codes.xls to getty-codes.ttl)<br  />
-Key <b>val</b> can be mapped to Custom sub-class, Custom (sub-)prop, <a href="http://vocab.getty.edu/doc/#Ontology_Values">Ontology Value</a> (eg &lt;term/kind/Abbreviation&gt;)
+Key <b>val</b> can be mapped to Custom sub-class, Custom (sub-)prop, <a href="http://vocab.getty.edu/doc/#Ontology_Values">Ontology Value</a> (eg <term/kind/Abbreviation>)
 </p>
 <img src="./img/getty-codes.png" alt="getty-codes.png" class="stretch" style="width:1000px" />
 </section>
@@ -686,7 +710,7 @@ On Compositionality of ISO 25964 Hierarchical Relations (BTG, BTP, BTI), V.Alexi
 </colgroup>
 <tbody>
 <tr>
-<td class="left">&#xa0;</td>
+<td class="left"> </td>
 <td class="left"><b>BTGx</b></td>
 <td class="left"><b>BTPx</b></td>
 <td class="left"><b>BTIx</b></td>
@@ -695,13 +719,13 @@ On Compositionality of ISO 25964 Hierarchical Relations (BTG, BTP, BTI), V.Alexi
 <tr>
 <td class="left"><b>BTGx</b></td>
 <td class="left">BTGE: numerous examples</td>
-<td class="left">BTPE: beak irons BTG anvil components BTP &lt;anvils and anvil accessories&gt;</td>
+<td class="left">BTPE: beak irons BTG anvil components BTP <anvils and anvil accessories></td>
 <td class="left">no</td>
 </tr>
 
 <tr>
 <td class="left"><b>BTPx</b></td>
-<td class="left">BTPE: anvil components BTP &lt;anvils and anvil accessories&gt; BTG &lt;forging and metal-shaping tools&gt;</td>
+<td class="left">BTPE: anvil components BTP <anvils and anvil accessories> BTG <forging and metal-shaping tools></td>
 <td class="left">BTPE: Sofia BTP Bulgaria BTP Europe</td>
 <td class="left">no: Sofia BTP Bulgaria BTI country, but Sofia is no country</td>
 </tr>
@@ -719,7 +743,7 @@ On Compositionality of ISO 25964 Hierarchical Relations (BTG, BTP, BTI), V.Alexi
 
 <h3>Terms</h3>
 <p>
-Support multilingual labels: both SKOS (plain)&#x2026;
+Support multilingual labels: both SKOS (plain)…
 </p>
 <pre  class="example">
 aat:300198841 a skos:Concept , gvp:Subject , gvp:Concept ;
@@ -729,7 +753,7 @@ aat:300198841 a skos:Concept , gvp:Subject , gvp:Concept ;
   skosxl:altLabel aat_term:1000198841-es , aat_term:1000297235-en ...
 </pre>
 <p>
-&#x2026; and rich info in SKOS-XL:
+… and rich info in SKOS-XL:
 </p>
 <pre  class="example">
 aat_term:1000198841-en a skosxl:Label ;
@@ -739,8 +763,8 @@ aat_term:1000198841-en a skosxl:Label ;
   skosxl:literalForm "rhyta"@en ;                #### with Qualifier if applicable
   gvp:term "rhyta"@en ;                          #### no qualifier
   gvp:displayOrder "1"^^xsd:positiveInteger ;
-  gvp:termType &lt;http://vocab.getty.edu/aat/term/type/Descriptor&gt; ; #### Descr/AltDescr/UseFor
-  gvp:termPOS &lt;http://vocab.getty.edu/aat/term/POS/PluralNoun&gt; ;   #### Part of Speech
+  gvp:termType <http://vocab.getty.edu/aat/term/type/Descriptor> ; #### Descr/AltDescr/UseFor
+  gvp:termPOS <http://vocab.getty.edu/aat/term/POS/PluralNoun> ;   #### Part of Speech
   gvp:contributorPreferred aat_contrib:10000000 , aat_contrib:10000088 ;
   gvp:contributorNonPreferred aat_contrib:10000131 ;
   gvp:sourcePreferred aat_source:2000024811 , aat_source:2000051089-term-1000198841...;
@@ -801,7 +825,7 @@ Despite the richness of IANA tags, we had to define new tags, using several exte
 </li>
 <li><b>qqq-142</b>: Asian language (not specified which)
 </li>
-<li><b>qqq-ET</b>: Ethiopian (not specified which: Boro/Borna, Karo, Male&#x2026;)
+<li><b>qqq-ET</b>: Ethiopian (not specified which: Boro/Borna, Karo, Male…)
 </li>
 </ul>
 </li>
@@ -819,7 +843,7 @@ Despite the richness of IANA tags, we had to define new tags, using several exte
 </li>
 </ul>
 <p>
-Future: publish lang tags (we now publish only ISO2 &amp; ISO3 codes)
+Future: publish lang tags (we now publish only ISO2 & ISO3 codes)
 </p>
 </section>
 <section id="sec-4-15" >
@@ -886,7 +910,7 @@ Includes dates of applicability, historicFlag, comment. Applied to terms; relati
 <pre  class="example">
 aat_term:1000002693-en a skosxl:Label;
   skosxl:literalForm "lambruscatura"@en ;
-  gvp:historicFlag &lt;http://vocab.getty.edu/historic/historic&gt; ;
+  gvp:historicFlag <http://vocab.getty.edu/historic/historic> ;
   schema:startDate "0900"^^xsd:gYear ;
   schema:endDate "1700"^^xsd:gYear ;
   rdfs:comment "Medieval term for wainscoting".
@@ -954,7 +978,7 @@ aat_rev:12347 a prov:Activity, prov:Publish;
 
 <h2>TGN Specifics: Concept-Place Duality</h2>
 <p>
-Duality between Concept and its denotation  (ala VIAF, UK BL, FR BnF, SE KB&#x2026;)
+Duality between Concept and its denotation  (ala VIAF, UK BL, FR BnF, SE KB…)
 </p>
 <img src="./img/013-concept-place-duality.png" alt="013-concept-place-duality.png" class="stretch" style="width:1000px" />
 </section>
@@ -962,7 +986,7 @@ Duality between Concept and its denotation  (ala VIAF, UK BL, FR BnF, SE KB&#x20
 
 <h3>TGN Semantic Representation</h3>
 <p>
-Adds place types (TGN-&gt;AAT), Concept-Place duality, coordinates
+Adds place types (TGN->AAT), Concept-Place duality, coordinates
 </p>
 <img src="./img/012-TGN-overview.png" alt="012-TGN-overview.png" class="stretch" style="width:400px" />
 </section>
@@ -972,7 +996,7 @@ Adds place types (TGN-&gt;AAT), Concept-Place duality, coordinates
 
 <h2>Inference</h2>
 <p>
-Hierarchical Relations inference (GVP-&gt;Standard):<br  />
+Hierarchical Relations inference (GVP->Standard):<br  />
 blue=standard, black=GVP, bold=closure, red=restriction. Numbers refer to doc sections
 </p>
 <img src="./img/018-hierarchicalRelationsInference.png" alt="018-hierarchicalRelationsInference.png" class="stretch" style="width:1000px" />
@@ -998,7 +1022,7 @@ blue=standard, black=GVP, bold=closure, red=restriction. Numbers refer to doc se
 <ul class="org-ul">
 <li><code>p1 / p2</code>: property chain (more efficient than owl:propertyChainAxiom and owl:TransitiveProperty)
 </li>
-<li><code>p &amp; r</code>: property conjunction (restriction): holds between two nodes when both properties connect the same nodes
+<li><code>p & r</code>: property conjunction (restriction): holds between two nodes when both properties connect the same nodes
 </li>
 <li><code>[t1] p [t2]</code>: type restriction: holds when source has type t1 and target has type t2 (shown inside the node)
 </li>
@@ -1029,35 +1053,35 @@ blue=standard, black=GVP, bold=closure, red=restriction. Numbers refer to doc se
 
 <tr>
 <td class="left">PropChain</td>
-<td class="left">q &lt;= p1 / p2</td>
+<td class="left">q <= p1 / p2</td>
 <td class="left">Chain of fixed length 2</td>
 <td class="center"><img src="./img/PropChain.png" alt="PropChain.png" /></td>
 </tr>
 
 <tr>
 <td class="left">PropRestr</td>
-<td class="left">q &lt;= p &amp; r</td>
+<td class="left">q <= p & r</td>
 <td class="left">Conjunction (restriction by property)</td>
 <td class="center"><img src="./img/PropRestr.png" alt="PropRestr.png" /></td>
 </tr>
 
 <tr>
 <td class="left">PropChainRestr</td>
-<td class="left">q &lt;= (p1 / p2) &amp; r</td>
+<td class="left">q <= (p1 / p2) & r</td>
 <td class="left">Chain and restriction by property</td>
 <td class="center"><img src="./img/PropChainRestr.png" alt="PropChainRestr.png" /></td>
 </tr>
 
 <tr>
 <td class="left">TypeRestr</td>
-<td class="left">q &lt;= [t1] p [t2]</td>
+<td class="left">q <= [t1] p [t2]</td>
 <td class="left">Restriction by two typechecks</td>
 <td class="center"><img src="./img/TypeRestr.png" alt="TypeRestr.png" /></td>
 </tr>
 
 <tr>
 <td class="left">PropChainType2</td>
-<td class="left">q &lt;= p1 / p2[t2]</td>
+<td class="left">q <= p1 / p2[t2]</td>
 <td class="left">Chain and typecheck</td>
 <td class="center"><img src="./img/PropChainType2.png" alt="PropChainType2.png" /></td>
 </tr>
@@ -1074,7 +1098,7 @@ Eliminate redundant props (World has 1.2M narrowerTransitive, 2.4M semanticRelat
 </section>
 <section id="sec-6-4" >
 
-<h3>Construct Query: Get &amp; Cache All Data for Subject</h3>
+<h3>Construct Query: Get & Cache All Data for Subject</h3>
 <img src="./img/028-construct-subject.png" alt="028-construct-subject.png" style="width:1000px" />
 <img src="./img/GVP-construct.png" alt="GVP-construct.png" class="stretch" style="width:580px" />
 </section>
@@ -1149,7 +1173,7 @@ select ?place ?name ?lat ?long {
     foaf:focus [wgs:lat ?lat; wgs:long ?long];
     gvp:prefLabelGVP [xl:literalForm ?name];
     gvp:broaderPartitiveExtended [rdfs:label "The Netherlands"@en]
-  filter (!(50.787185 &lt;= ?lat &amp;&amp; ?lat &lt;= 53.542265 &amp;&amp; 3.389722 &lt;= ?long &amp;&amp; ?long &lt;= 7.169019))}
+  filter (!(50.787185 <= ?lat && ?lat <= 53.542265 && 3.389722 <= ?long && ?long <= 7.169019))}
 </pre>
 <img src="./img/GVP-sample-overseas-possessions.png" alt="GVP-sample-overseas-possessions.png" class="stretch" style="width:1000px" />
 </section>
@@ -1198,12 +1222,12 @@ People started using AAT and TGN right after their release
 <tr>
 <td class="left">TGN</td>
 <td class="right">3</td>
-<td class="right">&#xa0;</td>
+<td class="right"> </td>
 </tr>
 
 <tr>
 <td class="left">ULAN</td>
-<td class="right">&#xa0;</td>
+<td class="right"> </td>
 <td class="right">1</td>
 </tr>
 </tbody>
@@ -1229,8 +1253,8 @@ If you have any questions or suggestions for improvement, please don't hesitate 
 </div>
 </div>
 
-<script src="../reveal.js/lib/js/head.min.js"></script>
-<script src="../reveal.js/js/reveal.min.js"></script>
+<script src="../../reveal.js/lib/js/head.min.js"></script>
+<script src="../../reveal.js/js/reveal.min.js"></script>
 
 <script>
 // Full list of configuration options available here:
@@ -1254,13 +1278,13 @@ transitionSpeed: 'default',
 
 // Optional libraries used to extend on reveal.js
 dependencies: [
-{src: 'js/reveal-help.js', async: true, condition: function() {return !!document.body.classList}}, {src: 'js/reveal-tagcloud.js', async: true, condition: function() {return !!document.body.classList}},
- { src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
- { src: '../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
- { src: '../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
- { src: '../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
- { src: '../reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
- { src: '../reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+{src: '../../reveal.js/js/reveal-help.js', async: true, condition: function() {return !!document.body.classList}}, {src: '../../reveal.js/js/reveal-tagcloud.js', async: true, condition: function() {return !!document.body.classList}},
+ { src: '../../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: '../../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: '../../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: '../../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+ { src: '../../reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: '../../reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
 ]
 });
 </script>

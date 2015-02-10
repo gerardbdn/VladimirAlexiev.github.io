@@ -1,13 +1,13 @@
 #+TITLE:     Semantic Technologies for Cultural Heritage
 #+AUTHOR:    Vladimir Alexiev, Ontotext Corp
 #+EMAIL:     vladimir.alexiev@ontotext.com
-#+DATE:      2014-09-17
+#+DATE:      2015-02-10
 #+LANGUAGE:  en
 #+STARTUP:   noinlineimages content
 #+OPTIONS:   num:nil toc:1
 #+NO_OPTIONS: H:1 \n:nil @:t ::t |:t ^:{} -:t f:t *:t <:t TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
 #+REVEAL_HLEVEL: 1
-#+REVEAL_EXTRA_JS: {src: 'js/reveal-help.js', async: true, condition: function() {return !!document.body.classList}}, {src: 'js/reveal-tagcloud.js', async: true, condition: function() {return !!document.body.classList}}
+#+REVEAL_EXTRA_JS: {src: '../../reveal.js/js/reveal-help.js', async: true, condition: function() {return !!document.body.classList}}, {src: 'js/reveal-tagcloud.js', async: true, condition: function() {return !!document.body.classList}}
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <h2>%t</h2><h3>%e</h3><h3>2014-08-21, Malmo, Sweden</h3>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p/><p/><p class='center'>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://VladimirAlexiev.github.io/pres/20140821-Malmo/index.html' target='_blank'>2D interactive version</a>,
@@ -20,6 +20,7 @@
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='https://github.com/yjwen/org-reveal'>org-reveal</a>, 
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://orgmode.org'>org-mode</a> and 
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://www.gnu.org/s/emacs/'>emacs</a>.</p>
+#+REVEAL_THEME: default
 
 * Semantic Technologies
 - *Web 1.0*: hyperlinked documents (World Wide Web)

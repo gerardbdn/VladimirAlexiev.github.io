@@ -5,8 +5,9 @@
 <meta charset="utf-8"/>
 <title>Semantic Technologies for Cultural Heritage</title>
 <meta name="author" content="(Vladimir Alexiev, Ontotext Corp)"/>
-<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.6.2/css/reveal.min.css"/>
-<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.6.2/css/theme/default.css" id="theme"/>
+
+<link rel="stylesheet" href="../../reveal.js/css/reveal.min.css"/>
+<link rel="stylesheet" href="../../reveal.js/css/theme/default.css" id="theme"/>
 
 <!-- If the query includes 'print-pdf', include the PDF print sheet -->
 <script>
@@ -14,46 +15,71 @@
         var link = document.createElement( 'link' );
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.href = 'http://cdn.jsdelivr.net/reveal.js/2.6.2/css/print/pdf.css';
+        link.href = '../../reveal.js/css/print/pdf.css';
         document.getElementsByTagName( 'head' )[0].appendChild( link );
     }
 </script>
-<style>th, td {border: 1px; border-style: none solid; border-spacing:0; padding:0px 2px}</style>
+
+<style type="text/css">
+h1,h2,h3,h4,h5,h6,h7 {font-family: Arial}
+// don't want empty lines in auto-postamble
+.author, .date, .creator {-webkit-margin-before: 0em; -webkit-margin-after: 0em}
+// style for #+begin_abstract
+.abstract {margin: 1em; padding: 1em; border: 1px solid black}
+.abstract:before {content: "Abstract: "; font-weight: bold}
+// center the preamble (author name) and make it bigger
+#preamble p { font-size: 110%; margin-left: auto; margin-right: auto; text-align: center; }
+// table headers aligned same as table data
+th.left     {text-align:left}
+th.right    {text-align:right}
+// table horizontal&vertical borders. First value is top&bottom, second is left&right. http://www.w3schools.com/css/css_border.asp
+th, td {border-width: 1px; border-style: solid solid; border-spacing: 2px 2px; padding:4px 2px}
+// colored TODO keywords
+.CANCELED   {color: blue}
+.MAYBE      {color: blue}
+.POSTPONED  {color: blue}
+.INPROGRESS {color: orange}
+.NEXT       {color: orange}
+.IER        {color: orange}
+</style>
+
 <style>
 .reveal .slides {text-align:left}
 h1,h2,h3,h4,h5,h6,.center {text-align:center}
-img {width:1200px; display: block; margin-left:auto !important; margin-right:auto !important}
-.reveal th, .reveal td {border-width: 1px; border-style: none solid; border-spacing:0; padding:0px 2px}
+img,table {display: block; margin-left:auto!important; margin-right:auto!important}
+td>img {width:250px; display:block; margin-left:auto!important; margin-right:auto!important; margin-top:0px!important; margin-bottom:0px!important}
+.reveal th, .reveal td {font-size:80%; border: 1px; border-style: solid solid; border-spacing:0; padding:0px 2px}
 span.clouditem {padding-left: 0.15em; padding-right: 0.15em; line-height: 90%}
+#table-of-contents {font-size:70%}
 </style>
 </head>
 <body>
 <div class="reveal">
 <div class="slides">
 <section>
-<h2>Semantic Technologies for Cultural Heritage</h2><h3><a href="mailto:vladimir.alexiev@ontotext.com">vladimir.alexiev@ontotext.com</a></h3><h3>SmartCulture Conference</h3><h3>2014-06-12, Brussels</h3> <p/><p/><p class='center'> <a href='http://VladimirAlexiev.github.io/pres/20140611-SmartCulture-sem-tech-CH/index.html' target='_blank'>2D interactive version</a>, <a href='http://VladimirAlexiev.github.io/pres/20140611-SmartCulture-sem-tech-CH/Semantic Technologies for Cultural Heritage.pdf'>pdf</a>, <a href='http://www.slideshare.net/valexiev1/semantic-technologies-for-cultural-heritage-35749530' target='_blank'>slideshare</a>. Press <a href='javascript:Reveal.toggleOverview()'>O for overview</a>, <a href='reveal-help.html' target='_blank'>H for help</a>.</p> <p class='center'> Proudly made in plain text with <a href='https://github.com/hakimel/reveal.js/'>reveal.js</a>, <a href='https://github.com/yjwen/org-reveal'>org-reveal</a>, <a href='http://orgmode.org'>org-mode</a> and <a href='http://www.gnu.org/s/emacs/'>emacs</a>.</p></section>
-<section>
+<h2>Semantic Technologies for Cultural Heritage</h2><h3><a href="mailto:vladimir.alexiev@ontotext.com">vladimir.alexiev@ontotext.com</a></h3><h3>SmartCulture Conference</h3><h3>2015-02-10, Brussels</h3> <p/><p/><p class='center'> <a href='http://VladimirAlexiev.github.io/pres/20140611-SmartCulture-sem-tech-CH/index.html' target='_blank'>2D interactive version</a>, <a href='http://VladimirAlexiev.github.io/pres/20140611-SmartCulture-sem-tech-CH/Semantic Technologies for Cultural Heritage.pdf'>pdf</a>, <a href='http://www.slideshare.net/valexiev1/semantic-technologies-for-cultural-heritage-35749530' target='_blank'>slideshare</a>. Press <a href='javascript:Reveal.toggleOverview()'>O for overview</a>, <a href='../../reveal-js/reveal-help.html' target='_blank'>H for help</a>.</p> <p class='center'> Proudly made in plain text with <a href='https://github.com/hakimel/reveal.js/'>reveal.js</a>, <a href='https://github.com/yjwen/org-reveal'>org-reveal</a>, <a href='http://orgmode.org'>org-mode</a> and <a href='http://www.gnu.org/s/emacs/'>emacs</a>.</p></section>
+<section id="table-of-contents">
 <h2>Table of Contents</h2><ul>
 <li>
-<a href="#sec-1">Ontotext Corp</a>
+<a href="#/sec-1">Ontotext Corp</a>
 </li>
 <li>
-<a href="#sec-2">Semantic Technologies</a>
+<a href="#/sec-2">Semantic Technologies</a>
 </li>
 <li>
-<a href="#sec-3">Cultural Heritage LOD Cloud</a>
+<a href="#/sec-3">Cultural Heritage LOD Cloud</a>
 </li>
 <li>
-<a href="#sec-4">ResearchSpace</a>
+<a href="#/sec-4">ResearchSpace</a>
 </li>
 <li>
-<a href="#sec-5">Bulgariana</a>
+<a href="#/sec-5">Bulgariana</a>
 </li>
 <li>
-<a href="#sec-6">Europeana Creative</a>
+<a href="#/sec-6">Europeana Creative</a>
 </li>
 <li>
-<a href="#sec-7">Getty Vocabularies</a>
+<a href="#/sec-7">Getty Vocabularies</a>
 </li>
 </ul>
 </section>
@@ -63,6 +89,7 @@ span.clouditem {padding-left: 0.15em; padding-right: 0.15em; line-height: 90%}
 
 <h3>SmartCulture Conference (thanks for inviting me!)</h3>
 <img src="./img/SmartCulture.png" alt="SmartCulture.png" />
+
 </section>
 <section>
 <section id="sec-1" >
@@ -102,11 +129,13 @@ span.clouditem {padding-left: 0.15em; padding-right: 0.15em; line-height: 90%}
 </ul>
 </li>
 </ul>
+
 </section>
 <section id="sec-1-1" >
 
 <h3>Some Ontotext Clients</h3>
 <img src="./img/Ontotext-Clients.png" alt="Ontotext-Clients.png" />
+
 </section>
 <section id="sec-1-2" >
 
@@ -117,6 +146,7 @@ span.clouditem {padding-left: 0.15em; padding-right: 0.15em; line-height: 90%}
 </ul>
 <img src="./img/Ontotext-FP-projects-timeline.png" alt="Ontotext-FP-projects-timeline.png" style="width:850px" />
 </section>
+
 </section>
 <section>
 <section id="sec-2" >
@@ -136,13 +166,14 @@ Is this something new?
 <ul class="org-ul">
 <li>It was all envisioned by Sir Tim Berners-Lee 25 years ago
 </li>
-<li>Standardized by W3C: both HTML and sem web standards (RDF, RDFS, OWL, SPARQL&#x2026;)
+<li>Standardized by W3C: both HTML and sem web standards (RDF, RDFS, OWL, SPARQL…)
 </li>
 <li>Great flurry of sem tech activity in the last 15 years
 </li>
-<li>Buzzwords: Big Data, Semantic Analytics, Concept Extraction, Sentiment Analysis&#x2026;
+<li>Buzzwords: Big Data, Semantic Analytics, Concept Extraction, Sentiment Analysis…
 </li>
 </ul>
+
 </section>
 <section id="sec-2-1" >
 
@@ -154,39 +185,46 @@ Is this something new?
 </li>
 </ul>
 <img src="./img/lod-datasets-2009-03-27-FactForge-LLD.jpg" alt="lod-datasets-2009-03-27-FactForge-LLD.jpg" style="width:800px" />
+
 </section>
 <section id="sec-2-2" >
 
 <h3>Linguistic Linked Data</h3>
 <img src="./img/llod-for-multisensor.png" alt="llod-for-multisensor.png" style="width:750px" />
+
 </section>
 <section id="sec-2-3" >
 
 <h3>First Ontotext GLAM Project: UK National Archives</h3>
 <img src="./img/TNA-SKB.png" alt="TNA-SKB.png" />
 </section>
+
 </section>
 <section>
 <section id="sec-3" >
 
 <h2>Cultural Heritage LOD Cloud</h2>
 <img src="./img/Culture-datacloud-large.png" alt="Culture-datacloud-large.png" style="width:850px" />
+
 </section>
 <section id="sec-3-1" >
 
 <h3>Europeana Recognizes Importance of Semantic Technologies</h3>
 <img src="./img/Europeana-semantic-whitepaper-press-release.png" alt="Europeana-semantic-whitepaper-press-release.png" />
+
 </section>
 <section id="sec-3-2" >
 
 <h3>Europeana Sem Tech MindMap</h3>
 <img src="./img/Europeana-semantic-activities-mindmap.png" alt="Europeana-semantic-activities-mindmap.png" style="width:900px" />
+
 </section>
 <section id="sec-3-3" >
 
 <h3>Europeana Sem Tech MindMap Detail</h3>
 <img src="./img/Europeana-semantic-activities-detail.png" alt="Europeana-semantic-activities-detail.png" />
 </section>
+
 </section>
 <section>
 <section id="sec-4" >
@@ -206,11 +244,13 @@ Is this something new?
 <li>Provided all 2.5M objects of the British Museum as Linked Open Data (LOD)
 </li>
 </ul>
+
 </section>
 <section id="sec-4-1" >
 
 <h3>2.5M British Museum Objects as LOD</h3>
 <img src="./img/RS-BM-HoaHakananai'a.png" alt="RS-BM-HoaHakananai'a.png" />
+
 </section>
 <section id="sec-4-2" >
 
@@ -220,17 +260,20 @@ Is this something new?
 <li>Also works across collections, eg BM and Yale Center for British Art
 </li>
 </ul>
+
 </section>
 <section id="sec-4-3" >
 
 <h3>ResearchSpace: Semantic Data Annotation</h3>
 <img src="./img/RS-data-annotation-over-BM-data.png" alt="RS-data-annotation-over-BM-data.png" />
+
 </section>
 <section id="sec-4-4" >
 
 <h3>ResearchSpace: Semantic Image Annotation</h3>
 <img src="./img/RS-image-annotation-susanna-xRay.png" alt="RS-image-annotation-susanna-xRay.png" />
 </section>
+
 </section>
 <section>
 <section id="sec-5" >
@@ -241,11 +284,13 @@ Is this something new?
 </li>
 </ul>
 <img src="./img/bulgariana-collections.png" alt="bulgariana-collections.png" style="width:850px" />
+
 </section>
 <section id="sec-5-1" >
 
 <h3>Bulgariana Collection: Thracian Gold</h3>
 <img src="./img/rhyton-at-bulgariana.png" alt="rhyton-at-bulgariana.png" />
+
 </section>
 <section id="sec-5-2" >
 
@@ -255,6 +300,7 @@ Is this something new?
 </li>
 </ul>
 <img src="./img/rhyton-at-europeana.png" alt="rhyton-at-europeana.png" />
+
 </section>
 <section id="sec-5-3" >
 
@@ -264,6 +310,7 @@ Is this something new?
 </li>
 </ul>
 <img src="./img/rhyton-europeanaopenculture.png" alt="rhyton-europeanaopenculture.png" style="width:850px" />
+
 </section>
 <section id="sec-5-4" >
 
@@ -274,17 +321,20 @@ Is this something new?
 </ul>
 <img src="./img/rhyton-EuropeanaOpenCulture-news.png" alt="rhyton-EuropeanaOpenCulture-news.png" />
 </section>
+
 </section>
 <section>
 <section id="sec-6" >
 
 <h2>Europeana Creative</h2>
 <img src="./img/eCreative-poster_1.png" alt="eCreative-poster_1.png" style="width:800px" />
+
 </section>
 <section id="sec-6-1" >
 
 <h3>Europeana Creative</h3>
 <img src="./img/eCreative-poster_2.png" alt="eCreative-poster_2.png" />
+
 </section>
 <section id="sec-6-2" >
 
@@ -294,20 +344,23 @@ Is this something new?
 </li>
 <li>Open challenges, growing to incubation support
 </li>
-<li>Help with collection data, content reuse, Europeana APIs, creative workshop ideas&#x2026;
+<li>Help with collection data, content reuse, Europeana APIs, creative workshop ideas…
 </li>
 </ul>
 <img src="./img/eCreative-pipeline-workshop.png" alt="eCreative-pipeline-workshop.png" />
+
 </section>
 <section id="sec-6-3" >
 
 <h3>In 5 pilot areas: tourism, social networks, design, nature, history</h3>
 <img src="./img/eCreative-plan-fragment.png" alt="eCreative-plan-fragment.png" />
+
 </section>
 <section id="sec-6-4" >
 
 <h3>Creative Open Challenges and Incubation Support</h3>
 <img src="./img/eCreative 2nd Challenges and Incubation Support.png" alt="eCreative 2nd Challenges and Incubation Support.png" style="width:1000px" />
+
 </section>
 <section id="sec-6-5" >
 
@@ -316,6 +369,7 @@ Is this something new?
 Ontotext works on fundamental backend technologies important for KPIs 
 <img src="./img/OntotextContributesToEuropeana.png" alt="OntotextContributesToEuropeana.png" />
 </p>
+
 </section>
 <section id="sec-6-6" >
 
@@ -340,6 +394,7 @@ Ontotext hosts the Europeana semantic data (EDM) in OWLIM
 <li>Provides SPARQL querying
 </li>
 </ul>
+
 </section>
 <section id="sec-6-7" >
 
@@ -364,20 +419,23 @@ select
   bind (if(?dataProvider='Bałtycka Biblioteka Cyfrowa',1,0) as ?n3)
 } group by ?date order by ?date
 </pre>
+
 </section>
 <section id="sec-6-8" >
 
 <h3>SPARQL Analytics</h3>
 <p>
-Eg Polish Periodicals by library &amp; decade (you can <a href="http://jsfiddle.net/valexiev/t4aX9/">jsfiddle</a> with it)<br  />
+Eg Polish Periodicals by library & decade (you can <a href="http://jsfiddle.net/valexiev/t4aX9/">jsfiddle</a> with it)<br  />
 <img src="./img/EDM-sgvizler2.png" alt="EDM-sgvizler2.png" />
 </p>
+
 </section>
 <section id="sec-6-9" >
 
 <h3>EDM Object Graph</h3>
 <img src="./img/europeana-graph.png" alt="europeana-graph.png" /> 
 </section>
+
 </section>
 <section>
 <section id="sec-7" >
@@ -409,6 +467,7 @@ Ontotext is publishing them as Linked Open Data: <a href="http://vocab.getty.edu
 <li>Special session at CIDOC Congress (Dresden, Sep 2014)
 </li>
 </ul>
+
 </section>
 <section id="sec-7-1" >
 
@@ -418,45 +477,41 @@ Ontotext is publishing them as Linked Open Data: <a href="http://vocab.getty.edu
 </section>
 </div>
 </div>
-<script src="http://cdn.jsdelivr.net/reveal.js/2.6.2/lib/js/head.min.js"></script>
-<script src="http://cdn.jsdelivr.net/reveal.js/2.6.2/js/reveal.min.js"></script>
+
+<script src="../../reveal.js/lib/js/head.min.js"></script>
+<script src="../../reveal.js/js/reveal.min.js"></script>
+
 <script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
 
-        		// Full list of configuration options available here:
-        		// https://github.com/hakimel/reveal.js#configuration
-        		Reveal.initialize({
-        			controls: true,
-        			progress: true,
-        			history: false,
-        			center: true,
-                                slideNumber: true,
-        			rollingLinks: false,
-        			keyboard: true,
-        			overview: true,
-        			width: 1200, // slide width
-        			height: 900, // slide height
-        			 // slide margin
-        			 // slide minimum scaling factor
-        			 // slide maximum scaling factor
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: true,
+rollingLinks: false,
+keyboard: true,
+overview: true,
+width: 1200,
+height: 925,
 
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
 
-        			theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-        			transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
-        			transitionSpeed: 'default',
-
-        			// Optional libraries used to extend on reveal.js
-        			dependencies: [
-        				{ src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/lib/js/classList.js', condition: function() { return !document.body.classList; } }
-        				//,{ src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } }
-        				//,{ src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } }
-        				,{ src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-        				,{ src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } }
-        				,{ src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-        				//,{ src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
-        				//,{ src: 'http://cdn.jsdelivr.net/reveal.js/2.6.2/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
-         				,{src: 'js/reveal-help.js', async: true, condition: function() {return !!document.body.classList}}, {src: 'js/reveal-tagcloud.js', async: true, condition: function() {return !!document.body.classList}}
-        			]
-        		});
+// Optional libraries used to extend on reveal.js
+dependencies: [
+{src: '../../reveal.js/js/reveal-help.js', async: true, condition: function() {return !!document.body.classList}}, {src: '../../reveal.js/js/reveal-tagcloud.js', async: true, condition: function() {return !!document.body.classList}},
+ { src: '../../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: '../../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: '../../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: '../../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+ { src: '../../reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: '../../reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+]
+});
 </script>
 </body>
 </html>
