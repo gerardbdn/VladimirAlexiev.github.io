@@ -1,10 +1,21 @@
 #+TITLE: bg.dbpedia.org started
+#+AUTHOR: Vladimir Alexiev & Boyan Simeonov
+#+DATE: 2015-02-10
 #+STARTUP: showeverything
-#+OPTIONS: reveal_center:t reveal_control:t reveal_height:925 reveal_width:1200
-#+OPTIONS: reveal_history:t reveal_keyboard:t reveal_mathjax:nil reveal_overview:t reveal_progress:t
-#+OPTIONS: reveal_rolling_links:nil reveal_slide_number:t 
 #+REVEAL_THEME: solarized
 #+REVEAL_TRANS: none
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <h2>%t</h2><h3>%a</h3><h3>Ontotext Corp</h3>
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <img src="img/dbpedia_logo_bg.png"/><img src="img/ontotext-200x42.png"/><h4>2015-02-08 Sofia, 2015-02-09 Dublin</h4>
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>
+#+REVEAL_TITLE_SLIDE_TEMPLATE: This is a 2D interactive presentation. 
+#+REVEAL_TITLE_SLIDE_TEMPLATE: Press <a href='javascript:Reveal.toggleOverview()'>O for overview</a>, 
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='../../reveal.js/js/reveal-help.html' target='_blank'>H for help</a>.</p>
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>
+#+REVEAL_TITLE_SLIDE_TEMPLATE: Proudly made in plain text with 
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='https://github.com/hakimel/reveal.js/'>reveal.js</a>, 
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='https://github.com/yjwen/org-reveal'>org-reveal</a>, 
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://orgmode.org'>org-mode</a> and 
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <a href='http://www.gnu.org/s/emacs/'>emacs</a>.</p>
 
 * bg.dbpedia: Home Page
 #+HTML_ATTR: :class stretch :style width:1000px
@@ -184,9 +195,11 @@ select ?genre (count(*) as ?c) {
 #+END_SRC
 - 520 жанра
 - Най-популярните са
-  : Поп_музика	356  (изненада!
-  : Хард_рок	313
-  : Хеви_метъл	238
+  #+BEGIN_EXAMPLE
+  Поп_музика  356 (изненада!)
+  Хард_рок    313
+  Хеви_метъл  238
+  #+END_EXAMPLE
 ** Making Charts
 - Charts directly from SPARQL: [[http://goo.gl/l3lAeB][VISU]], [[http://jsfiddle.net/valexiev/1p9qs2zu/][sgvizler]] (jsfiddle)
 - Or Query> Save as> TSV and make it in Excel

@@ -1,5 +1,5 @@
 #+TITLE: Adding a DBpedia Mapping
-#+DATE: <2015-02-09>
+#+DATE: <2015-02-10>
 #+AUTHOR: Vladimir Alexiev
 #+EMAIL: vladimir.alexiev@ontotext.com
 #+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline author:t c:nil
@@ -10,7 +10,7 @@
 #+EXCLUDE_TAGS: noexport
 #+LANGUAGE: en
 #+SELECT_TAGS: export
-#+REVEAL_EXTRA_JS: {src: '../../reveal.js/js/reveal-help.js', async: true, condition: function() {return !!document.body.classList}}, {src: 'js/reveal-tagcloud.js', async: true, condition: function() {return !!document.body.classList}}
+#+REVEAL_EXTRA_JS: {src: '../../reveal.js/js/reveal-help.js', async: true, condition: function() {return !!document.body.classList}}, {src: '../../reveal.js/js/reveal-tagcloud.js', async: true, condition: function() {return !!document.body.classList}}
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <h2>%t</h2><h4>%a</h4><h5>%e</h5>
 #+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>%d</p>
 #+REVEAL_THEME: solarized
@@ -120,7 +120,7 @@ Looking for "shoe size", we find two duplicate properties. showSize is the prope
 * Add Another Property
 The "vital stats" for a Model include height, weight, eyeColor, hairColor, skinColor, shoeSize, zodiacSign, bustSize (but of course!), waistSize, hipSize
 - enwiki and jawiki have fields bustSize, waistSize, hipSize
-  - (An app to sort models by these measures would surely be a commercial success :-)
+  - An app to sort models by these measures would surely be a commercial success :-)
 - bgwiki uses a composite field bust-waist-hip size (мерки: бюст-талия-ханш)
 - So I made a new composite property, describing in detail its usage vs the 3 separate properties (rdfs:comment):
   #+BEGIN_EXAMPLE
@@ -158,7 +158,7 @@ Move any unmapped props to the end, in a comment ~!-- ... --~
 --
 #+END_EXAMPLE
 * Test the Mapping
-- At the [[%20http://mappings.dbpedia.org/index.php/Mapping_bg:Манекен_инфо][mapping page]] you'll find some useful links
+- At the [[http://mappings.dbpedia.org/index.php/Mapping_bg:Манекен_инфо][mapping page]] you'll find some useful links
 - Link to [[http://mappings.dbpedia.org/server/mappings/bg/extractionSamples/Mapping_bg:Манекен_инфо][return triples]] from the mapping: unfortunately works only for ASCII names ([[https://github.com/dbpedia/extraction-framework/issues/289][#289]])
 - So [[http://bg.wikipedia.org/wiki/Special:WhatLinksHere/Template:Манекен_инфо?limit%3D500&namespace%3D0][find some usages]] and pick up some names
   : Летисия Каста     

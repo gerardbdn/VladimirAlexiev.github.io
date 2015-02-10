@@ -1,6 +1,6 @@
 #+TITLE: DBpedia Ontology and Mapping Problems
-#+DATE: <2015-02-09>
-#+AUTHOR: Vladimir Alexiev, Ontotext Corp
+#+DATE: 2015-02-10
+#+AUTHOR: Vladimir Alexiev
 #+EMAIL: vladimir.alexiev@ontotext.com
 #+STARTUP: showeverything
 #+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:{} arch:headline author:t c:nil
@@ -15,9 +15,9 @@
 #+REVEAL_THEME: solarized
 #+REVEAL_TRANS: none
 #+REVEAL_HLEVEL: 1
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <h2>%t</h2><h3>or Crowdsourcing the Wisdom of Fools</h3>
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <h4>%a</h4><h4>Ontotext Corp</h3><img src="img/ontotext-200x42.png"/><h4>2015-02-09 Dublin</h4>
 #+REVEAL_EXTRA_JS: {src: '../../reveal.js/js/reveal-help.js', async: true, condition: function() {return !!document.body.classList}}, {src: 'js/reveal-tagcloud.js', async: true, condition: function() {return !!document.body.classList}}
-#+REVEAL_TITLE_SLIDE_TEMPLATE: <h2>%t</h2><h3>or Crowdsourcing the Wisdom of Fools</h3><h4>%a</h4><h5>%e</h5>
-#+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'>%d</p>
 #+EPRESENT_FRAME_LEVEL: 10
 
 * Intro
