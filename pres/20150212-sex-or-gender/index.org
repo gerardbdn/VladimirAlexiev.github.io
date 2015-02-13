@@ -99,13 +99,13 @@ I [[https://www.wikidata.org/wiki/Property_talk:P21#Hermaphrodite_and_Transgende
 One can use the following coreferencing statements for male/female
 #+BEGIN_SRC Turtle
 @prefix aat: <http://vocab.getty.edu/aat/>.
-aat:300189559 skos:exactMatch <http://www.wikidata.org/entity/Q6581097>, <http://rdvocab.info/termList/gender/1002>. # male
-aat:300189557 skos:exactMatch <http://www.wikidata.org/entity/Q6581072>, <http://rdvocab.info/termList/gender/1001>. # female
+aat:300189559 skos:exactMatch <http://www.wikidata.org/entity/Q6581097>, <http://rdaregistry.info/termList/gender/1002>. # male
+aat:300189557 skos:exactMatch <http://www.wikidata.org/entity/Q6581072>, <http://rdaregistry.info/termList/gender/1001>. # female
 #+END_SRC
 
 NOTE: ox-html currently doesn't escape properly so please copy this below from the page *source*:
 #+BEGIN_EXAMPLE
 @prefix aat: <http://vocab.getty.edu/aat/>.
-aat:300189559 skos:exactMatch <http://www.wikidata.org/entity/Q6581097>, <http://rdvocab.info/termList/gender/1002>. # male
-aat:300189557 skos:exactMatch <http://www.wikidata.org/entity/Q6581072>, <http://rdvocab.info/termList/gender/1001>. # female
+aat:300189559 skos:exactMatch <http://www.wikidata.org/entity/Q6581097>, <http://rdaregistry.info/termList/gender/1002>. # male
+aat:300189557 skos:exactMatch <http://www.wikidata.org/entity/Q6581072>, <http://rdaregistry.info/termList/gender/1001>. # female
 #+END_EXAMPLE
