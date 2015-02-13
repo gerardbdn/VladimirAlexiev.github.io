@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Sex or Gender?</title>
-<!-- 2015-02-12 Thu 16:43 -->
+<!-- 2015-02-13 Fri 11:15 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Vladimir Alexiev" />
@@ -271,18 +271,24 @@ The ULAN database field "sex" has these values:
 </li>
 <li>Female.
 </li>
-<li>Transgender: a big enough group, and they are public about it often, so they want their own designation
-</li>
-<li>Other: hermaphrodites and others who are not male, female, or transgender
-</li>
-<li>Unknown: the default for loads, when gender is not indicated by the contributor or otherwise we do not know it
-</li>
-<li>N/A: for corporate bodies
+<li>Other: neither male nor female (eg hermaphrodite)
 </li>
 </ul>
 <p>
 ULAN includes a few <named animals> under ulan:500353455, for which also male/female is used.
 </p>
+
+<p>
+The following values won't be used
+</p>
+<ul class="org-ul">
+<li>Transgender: will be replaced with Other
+</li>
+<li>Unknown: the default for loads, when gender is not indicated by the contributor or otherwise we do not know it. Will be skipped
+</li>
+<li>N/A: for corporate bodies. Will be skipped
+</li>
+</ul>
 </div>
 </div>
 
@@ -291,16 +297,22 @@ ULAN includes a few <named animals> under ulan:500353455, for which also male/fe
 <div class="outline-text-3" id="text-2-2">
 <p>
 ULAN refers to AAT for all sorts of concepts (person type, life event type, sex).
-The <a href="http://www.getty.edu/vow/AATHierarchy?find=300189557&logic=AND&note=&subjectid=300055146">AAT concept Sex</a> has narrower concepts:
+The following concepts will be used (first two are under <a href="http://www.getty.edu/vow/AATHierarchy?find=300189557&logic=AND&note=&subjectid=300055146">AAT concept Sex</a>):
 </p>
 <ul class="org-ul">
 <li>aat:300189559 male
 </li>
 <li>aat:300189557 female
 </li>
-<li>aat:300389935 hermaphroditic "combining male and female characteristics".
+<li>aat:300400513 other
 </li>
-<li>AAT doesn't have "transgender", but hopefully it will be added. We refer to it as aat:XXXXXXX below.
+</ul>
+
+<p>
+AAT also has a concept that won't be used
+</p>
+<ul class="org-ul">
+<li>aat:300389935 hermaphroditic "combining male and female characteristics".
 </li>
 </ul>
 </div>
@@ -373,37 +385,31 @@ I <a href="https://www.wikidata.org/wiki/Property_talk:P21#Hermaphrodite_and_Tra
 <h2 id="sec-3"><span class="section-number-2">3</span> Coreferencing</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-One can use the following coreferencing statements:
+One can use the following coreferencing statements for male/female
 </p>
 <div class="org-src-container">
 
-<pre class="src src-Turtle"><span style="color: #a020f0;">@prefix</span> <span style="color: #228b22;">wd:</span><span style="color: #008b8b;"> </span><span style="color: #0000ff;"><http://www.wikidata.org/entity/></span>.
-<span style="color: #a020f0;">@prefix</span> <span style="color: #228b22;">aat:</span><span style="color: #008b8b;"> </span><span style="color: #0000ff;"><http://vocab.getty.edu/aat/></span><span style="color: #228b22;">.</span>
-<span style="color: #228b22;">aat:</span><span style="color: #008b8b;">300189559</span> <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">exactMatch</span> <span style="color: #228b22;">wd:</span><span style="color: #008b8b;">Q6581097,</span> <span style="color: #0000ff;"><http://rdvocab.info/termList/gender/1002></span>. <span style="color: #b22222;"># </span><span style="color: #228b22;">male</span>
-<span style="color: #228b22;">aat:</span><span style="color: #008b8b;">300189557</span> <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">exactMatch</span> <span style="color: #228b22;">wd:</span><span style="color: #008b8b;">Q6581072,</span> <span style="color: #0000ff;"><http://rdvocab.info/termList/gender/1001></span>. <span style="color: #b22222;"># </span><span style="color: #228b22;">female</span>
-<span style="color: #228b22;">aat:</span><span style="color: #008b8b;">XXXXXXXXX</span> <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">exactMatch</span> <span style="color: #228b22;">wd:</span><span style="color: #008b8b;">Q189125</span>. <span style="color: #b22222;"># </span><span style="color: #228b22;">transgender</span>
-<span style="color: #228b22;">aat:</span><span style="color: #008b8b;">300389935</span> <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">exactMatch</span> <span style="color: #228b22;">wd:</span><span style="color: #008b8b;">Q303479</span>. <span style="color: #b22222;"># hermaphroditic</span>
+<pre class="src src-Turtle"><span style="color: #a020f0;">@prefix</span> <span style="color: #228b22;">aat:</span><span style="color: #008b8b;"> </span><span style="color: #0000ff;"><http://vocab.getty.edu/aat/></span><span style="color: #228b22;">.</span>
+<span style="color: #228b22;">aat:</span><span style="color: #008b8b;">300189559</span> <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">exactMatch</span> <span style="color: #0000ff;"><http://www.wikidata.org/entity/Q6581097></span>, <span style="color: #0000ff;"><http://rdvocab.info/termList/gender/1002></span>. <span style="color: #b22222;"># </span><span style="color: #228b22;">male</span>
+<span style="color: #228b22;">aat:</span><span style="color: #008b8b;">300189557</span> <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">exactMatch</span> <span style="color: #0000ff;"><http://www.wikidata.org/entity/Q6581072></span>, <span style="color: #0000ff;"><http://rdvocab.info/termList/gender/1001></span>. <span style="color: #b22222;"># female</span>
 </pre>
 </div>
 
 <p>
-NOTE: org-version "8.2.10" currently doesn't escape properly so please copy this below from the page <b>source</b>:
+NOTE: ox-html currently doesn't escape properly so please copy this below from the page <b>source</b>:
 </p>
 <pre class="example">
-@prefix wd: <http://www.wikidata.org/entity/>.
 @prefix aat: <http://vocab.getty.edu/aat/>.
-aat:300189559 skos:exactMatch wd:Q6581097, <http://rdvocab.info/termList/gender/1002>. # male
-aat:300189557 skos:exactMatch wd:Q6581072, <http://rdvocab.info/termList/gender/1001>. # female
-aat:XXXXXXXXX skos:exactMatch wd:Q189125. # transgender
-aat:300389935 skos:exactMatch wd:Q303479. # hermaphroditic
+aat:300189559 skos:exactMatch <http://www.wikidata.org/entity/Q6581097>, <http://rdvocab.info/termList/gender/1002>. # male
+aat:300189557 skos:exactMatch <http://www.wikidata.org/entity/Q6581072>, <http://rdvocab.info/termList/gender/1001>. # female
 </pre>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: 2015-02-12</p>
+<p class="date">Date: 2015-02-13</p>
 <p class="author">Author: Vladimir Alexiev</p>
-<p class="date">Created: 2015-02-12 Thu 16:43</p>
+<p class="date">Created: 2015-02-13 Fri 11:15</p>
 <p class="creator">Emacs 25.0.50.1 (Org mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
