@@ -17,7 +17,7 @@
         // To see the data that this visualization uses, browse to
         // http://spreadsheets.google.com/ccc?key=0ArBFygWDV2_PdF9BOUx2N3hyZldRVG1KT0tBcm9Dbmc
         var query = new google.visualization.Query(
-          'http://spreadsheets.google.com/tq?key=0ArBFygWDV2_PdF9BOUx2N3hyZldRVG1KT0tBcm9Dbmc&range=B1:N35');
+          'http://spreadsheets.google.com/tq?key=0ArBFygWDV2_PdF9BOUx2N3hyZldRVG1KT0tBcm9Dbmc&range=B1:N37');
         // Send the query with a callback function.
         query.send(handleQueryResponse);
       }
@@ -45,7 +45,7 @@
           width: 650, height: 500,
           theme: 'maximized', bar: {groupWidth: "80%"},
           legend: {position: 'none'},
-          hAxis: {viewWindow: {min: 1998, max: 2018}, viewWindowMode: 'explicit', gridlines: {count: 10}, format: '####'},
+          hAxis: {viewWindow: {min: 1998, max: 2019}, viewWindowMode: 'explicit', gridlines: {count: 12}, format: '####'},
           vAxis: {textStyle: {bold: true}},
           colors: ['white','red'], // START bar rendered with the background color
           focusTarget: 'category',
