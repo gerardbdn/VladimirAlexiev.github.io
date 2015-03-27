@@ -1,0 +1,65 @@
+
+* Starting a bg.dbpedia.org chapter
+Ontotext has long used DBpedia and other LOD datasets for NLP and semantic extraction tasks.
+Until recently, there was little interest and market for Bulgarian NLP applications, and few language resources.
+Recent developments in two domains have raised the interest:
+- Cultural heritage: Bulgaria joined CLARIN and DARIAH (in Bulgaria it's a single programme CLADA), the Bulgariana.eu foundation was formed, and the upstarting Bulgarian Operating Program "Science and Education" includes cultural heritage Research Infrastructures.
+- The European projects Europeana Food and Drink and Multisensor include Bulgarian language processing and Bulgarian contributions
+Ontotext is in the middle of many of these developments, and we see the Bulgarian Wikipedia and DBpedia as crucial national resources to focus the efforts of the Bulgarian cultural heritage community.
+- We started improving BG DBpedia mappings, reporting problems in the extraction & ontology, etc
+- We're trying to initiate a corresponding project in BG Wikipedia. See https://bg.wikipedia.org/wiki/Уикипедия:BG_DBpedia for some background and practical examples.
+- Ontotext has offered to host http://bg.dbpedia.org, which should be ready for review end of January 2015.
+- Ontotext will attend the next international DBpedia meeting (9 Feb 2015, Dublin): http://wiki.dbpedia.org/meetings/Dublin2015. We'll talk/discuss on 2 topics:
+  - Improving the DBpedia ontology and mappings
+  - Starting a BG DBpedia chapter. We need a lot of advice on organizational matters.
+
+** bg.dbpedia.org launch
+Ontotext started hosting http://bg.dbpedia.org on [2015-02-05 Thu]
+- e.g. search for "левски"
+- sample queries are upcoming (see [[./sample-queries.org]])
+- Your feedback is welcome! Contact mailto:vladimir.alexiev@ontotext.com
+- If you have lots of feedback, we'll establish some tracker, like we did with DBpedia: http://github.com/dbpedia/mappings-tracker/issues
+- Ontotext staff: please add any bugs you find as subtasks of https://jira.ontotext.com/browse/FF-300, or add a comment to https://jira.ontotext.com/browse/FF-312 if it's something minor
+
+* BG Wikipedia
+There is an active BG Wikipedia community:
+- Established December 2003 (on 15 Jan, the official 10-year anniversary of BG Wikipedia was celebrated in the press)
+- As of Dec 2014, there are 185K articles on BG Wikipedia
+- The Wikimedians of Bulgaria User Group was approved in late 2014
+- The registration of a Wikimedia NGO is pending
+- The BG Wikipedia community presented at the Wikimedia CEE conference 2014 (Kiev)
+- See https://bg.wikipedia.org/wiki/Уикипедия:Уикисреща/Семинари/2015-01/бележки for more discussions, news and presentations
+
+** GLAM and BG Wikipedia & DBpedia
+For a year now, an idea has been bandied around to focus BG cultural heritage documentation efforts around Wikipedia/DBpedia/Wikidata.
+These free information resources, the center of the Linked Open Data cloud, can enable cultural heritage workers to collaborate on describing the common elements of our Cultural Heritage. It's not right that foreign Wikipedias have more information about our kings, artists, politicians and events; and the data extracted in BG DBpedia is half missing and half wrong.
+
+The BG Wikipedia community has done two GLAM projects, see https://commons.wikimedia.org/wiki/File:Wikimedia-CEE-2014-Kiev--GLAM--Vassia.pdf
+- A project with Sofia Zoo: nice information plates
+- Digitization project with DA Arhivi
+  - https://commons.wikimedia.org/wiki/Commons:Bulgarian_Archives_State_Agency
+  - https://bg.wikipedia.org/wiki/Уикипедия:Сътрудничество/Държавна_агенция_„Архиви“
+  - Gallery: https://commons.wikimedia.org/wiki/Category:Images_from_the_Bulgarian_Archives_State_Agency
+
+*** BASA-image mapped to DBpedia
+https://bg.wikipedia.org/wiki/Уикипедия:Сътрудничество/Държавна_агенция_„Архиви“#Mapped_to_DBpedia
+- [16 Jan 2015]: Created the mapping http://mappings.dbpedia.org/index.php/Mapping_commons_talk:BASA-image.
+- Now it extracts metadata, eg see http://mappings.dbpedia.org/server/extraction/commons/extract?revid=&format=turtle-triples&extractors=custom&title=File:Hristogdanov.jpg
+- Or see http://mappings.dbpedia.org/server/mappings/commons/extractionSamples/Mapping_commons:BASA-image?namespace=File
+- But there are still some things to fix: http://mappings.dbpedia.org/index.php/Mapping_commons_talk:BASA-image
+
+* BG Wikipedia meeting 2015-02
+[2015-02-08 Sun] BG Wikipedia Chapter meeting on Sun 8 Feb 2015
+- https://bg.wikipedia.org/wiki/Уикипедия:Уикисреща/Семинари/2015-02
+- Discussed DBpedia, Wikidata and the value of data
+- bgwiki already uses wikidata props, for Commons Category of geographic places
+- Ontotext presented bg.dbpedia.org (still working on it!)
+- A lot of interest for collaboration
+- Upcoming meeting with Daniel Mietchen (coordinator of Wikidata 4 Research proposal in the H2020 VRE call)
+
+* Blogs/Tweets
+Please retweet, post to facebook & linkedin
+- Bulgariana blog: publicizing Wikipedia/DBpedia with GLAMs: 
+  https://confluence.ontotext.com/display/Bulgariana/20140116+BG+DBpedia+and+Wikipedia-GLAM 
+- https://twitter.com/valexiev1/status/556093880681398272: bg.dbpedia project
+- https://twitter.com/valexiev1/status/563651292040822785: bg.dbpedia launch

@@ -1,5 +1,5 @@
 #+TITLE: Adding a DBpedia Mapping
-#+DATE: <2015-02-10>
+#+DATE: <2015-02-16>
 #+AUTHOR: Vladimir Alexiev
 #+EMAIL: vladimir.alexiev@ontotext.com
 #+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline author:t c:nil
@@ -169,3 +169,33 @@ Move any unmapped props to the end, in a comment ~!-- ... --~
 - This is *especially* important if you fix a mapping
 - It's [[http://mappings.dbpedia.org/index.php/Main_Page#Testing_Best_Practices][proposed editorial policy]]
 
+* Special: IntermediateNodeMapping
+The template [[http://mappings.dbpedia.org/index.php?title%3DMapping_en:Listen&action%3Dedit][en:Listen]] ([[http://mappings.dbpedia.org/index.php/Mapping_el:Ακούστε][el:Ακούστε]], [[http://mappings.dbpedia.org/index.php?title%3DMapping_bg:Слушайте&action%3Dedit][bg:Слушайте]]) adds soundRecording's that are somehow related to the subject.
+We map it to additional nodes like this ([[https://github.com/dbpedia/mappings-tracker/issues/19][#19]]):
+#+BEGIN_SRC Turtle
+<Neil_Armstrong> soundRecording <Neil_Armstrong__1>.
+<Neil_Armstrong__1> a Sound;
+   dc:type "speech";
+   filename "one-small-step.ogv"; 
+   title "One small step for man...";
+   description "Neal Armstrong's famous words".
+#+END_SRC
+- An outer ~TemplateMapping~ with ~mapToClass owl:Thing~: 
+  ~Listen~ can be embedded in various pages, and the only common class for all of them is the top-level ~owl:Thing~
+- Inside we make a number of ~IntermediateNodeMapping~ for the separate ~soundRecording~. They share ~type~ and each has 3 own fields:
+#+BEGIN_EXAMPLE
+{{TemplateMapping | mapToClass = owl:Thing
+| mappings =
+  {{IntermediateNodeMapping | nodeClass = Sound | correspondingProperty = soundRecording | mappings =
+    {{ PropertyMapping | templateProperty = type          | ontologyProperty = dc:type }}
+    {{ PropertyMapping | templateProperty = filename      | ontologyProperty = filename }}
+    {{ PropertyMapping | templateProperty = title         | ontologyProperty = title }}
+    {{ PropertyMapping | templateProperty = description   | ontologyProperty = description }}
+  }}
+  {{IntermediateNodeMapping | nodeClass = Sound | correspondingProperty = soundRecording | mappings =
+    {{ PropertyMapping | templateProperty = type          | ontologyProperty = dc:type }}
+    {{ PropertyMapping | templateProperty = filename1     | ontologyProperty = filename }}
+    {{ PropertyMapping | templateProperty = title1        | ontologyProperty = title }}
+    {{ PropertyMapping | templateProperty = description1  | ontologyProperty = description }}
+  }}
+#+END_EXAMPLE

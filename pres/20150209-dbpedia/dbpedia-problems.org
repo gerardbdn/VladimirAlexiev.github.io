@@ -1,5 +1,5 @@
 #+TITLE: DBpedia Ontology and Mapping Problems
-#+DATE: 2015-02-10
+#+DATE: 2015-02-16
 #+AUTHOR: Vladimir Alexiev
 #+EMAIL: vladimir.alexiev@ontotext.com
 #+STARTUP: showeverything
@@ -183,7 +183,7 @@ Some templates harvest *the same* template field -> ObjectProp & DataProp
 - Eg firstAscent -> firstAscentPerson (object), firstAscentYear (literal)
 - Others exemplified by "field" (object) vs "fieldName" (literal)
 - But this is not used systematically (eg there's no "childName" to complement "child")
-- Hard to know when to use it: [[Mapping Server Deficiencies]], Field Sampling
+- Hard to know when to use it: [[https://github.com/dbpedia/extraction-framework/issues/327][#327]] Field Sampling
 Do you think this should be fixed?
 
 ** Mapping Framework is not Modular Enough
@@ -195,7 +195,7 @@ Do you think this should be fixed?
 
 * Mapping Server Deficiencies
 The mapping server has good Stats and Testing features, but more is needed
-- TODO: Field Sampling: 
+- [[https://github.com/dbpedia/extraction-framework/issues/327][#327]] Field Sampling: 
   - On template stats, for every field, add a hyperlink to show some occurrences
   - Extremely useful to understand the meaning of some fields
   - And whether they're links, text, or both ([[Object/DataProp Dichotomy]])
