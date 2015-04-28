@@ -1,0 +1,48 @@
+{
+  "@graph" : [ {
+    "@id" : "http://data.multisensor.eu/content/guid#char=100,200",
+    "opinion" : "http://data.multisensor.eu/content/guid#char=100,200-sentiment"
+  }, {
+    "@id" : "http://data.multisensor.eu/content/guid#char=100,200-sentiment",
+    "@type" : "marl:Opinion",
+    "negativePolarityValue" : "-3.5",
+    "positivePolarityValue" : "2.0",
+    "sentimentalityValue" : "5.5",
+    "maxPolarityValue" : "5.0",
+    "minPolarityValue" : "-5.0",
+    "polarityValue" : "-1.5"
+  } ],
+  "@context" : {
+    "opinion" : {
+      "@id" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#opinion",
+      "@type" : "@id"
+    },
+    "minPolarityValue" : {
+      "@id" : "http://purl.org/marl/ns#minPolarityValue",
+      "@type" : "http://www.w3.org/2001/XMLSchema#decimal"
+    },
+    "maxPolarityValue" : {
+      "@id" : "http://purl.org/marl/ns#maxPolarityValue",
+      "@type" : "http://www.w3.org/2001/XMLSchema#decimal"
+    },
+    "negativePolarityValue" : {
+      "@id" : "http://data.multisensor.eu/ontology#negativePolarityValue",
+      "@type" : "http://www.w3.org/2001/XMLSchema#decimal"
+    },
+    "positivePolarityValue" : {
+      "@id" : "http://data.multisensor.eu/ontology#positivePolarityValue",
+      "@type" : "http://www.w3.org/2001/XMLSchema#decimal"
+    },
+    "polarityValue" : {
+      "@id" : "http://purl.org/marl/ns#polarityValue",
+      "@type" : "http://www.w3.org/2001/XMLSchema#decimal"
+    },
+    "sentimentalityValue" : {
+      "@id" : "http://data.multisensor.eu/ontology#sentimentalityValue",
+      "@type" : "http://www.w3.org/2001/XMLSchema#decimal"
+    },
+    "ms" : "http://data.multisensor.eu/ontology#",
+    "nif" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#",
+    "marl" : "http://purl.org/marl/ns#"
+  }
+}

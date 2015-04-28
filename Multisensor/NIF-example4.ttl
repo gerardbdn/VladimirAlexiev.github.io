@@ -29,8 +29,8 @@ ms:sentimentalityValue a owl:DatatypeProperty;
 
 # Sentiment
 <http://data.multisensor.eu/content/guid#char=100,200>
-  nif:opinion <http://data.multisensor.eu/content/guid#char=100,200#sentiment>.
-<http://data.multisensor.eu/content/guid#char=100,200#sentiment>
+  nif:opinion <http://data.multisensor.eu/content/guid#char=100,200-sentiment>.
+<http://data.multisensor.eu/content/guid#char=100,200-sentiment>
   a marl:Opinion;
   marl:minPolarityValue    -5.0;
   marl:maxPolarityValue     5.0;
