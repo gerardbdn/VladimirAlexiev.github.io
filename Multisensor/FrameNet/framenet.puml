@@ -3,51 +3,81 @@ hide empty attributes
 hide empty methods
 hide circle
 
-"Header"             - Corpus               : hasCorpus\nisCorpusOf
-"Header"             - Frame                : hasFrame
-"Header"             - FullText             : hasHeader\nisHeaderOf
-"Header"             - LexicalUnit          : hasHeader\nisHeaderOf
-AnnotationSet        - AnnotationStatus     : hasAnnotationStatus\nisAnnotationStatusOf
-AnnotationSet        - Frame                : hasFrame
-AnnotationSet        - Governor             : hasAnnotationSet\nisAnnotationSetOf
-AnnotationSet        - Layer                : hasLayer\nisLayerOf
-Corpus               - Document             : hasDocument\nisDocumentOf
-Corpus               - Sentence             : hasCorpus\nisCorpusOf
-Document             - Sentence             : hasDocument\nisDocumentOf
-FEGroupRealization   - FrameElement         : hasFrameElement\nisFrameElementOf
-FERealization        - FrameElement         : hasFrameElement\nisFrameElementOf
-Frame                - Frame                : hasFrameRelation\nseeAlso\nhasSubframe/subframeOf\ninheritsFrom/isInheritedBy\nisCausativeOf\nisInchoativeOf\nisInheritedBy/inheritsFrom\nisPerspectivizedIn/perspectiveOn\nisPrecededBy/precedes\nisUsedBy/uses\nperspectiveOn/isPerspectivizedIn\nprecedes/isPrecededBy\nsubframeOf/hasSubframe\nuses/isUsedBy
-Frame                - FrameElement         : hasFrameElement\nisFrameElementOf
-Frame                - FrameElementCoreSet  : hasFrameElementCoreSet\nisFrameElementCoreSetOf
-Frame                - LexicalUnit          : hasLexicalUnit\nisLexicalUnitOf\nisFrameOf\nhasFrame
-Frame                - SemType              : hasSemType\nisSemanticTypeOf
-Frame                - SemTypeSet           : hasSemTypeSet\nisSemTypeSetOf
-FrameElement         - Coreness             : isCorenessOf\nhasCoreness
-FrameElement         - FrameElement         : hasFrameElementRelation\nexclusesFE\nrequiresFE
-FrameElementCoreSet  - FrameElement         : hasMember >=2
-FullText             - Sentence             : hasSentence\nisSentenceOf
-Governor             - Valences             : isGovernorOf\nhasGovernor
-Label                - FrameElement         : hasFrameElement\nisFrameElementOf
-Layer                - Label                : hasLabel\nisLabelOf
-Lexeme               - PartOfSpeech         : hasPartOfSpeech\nisPartOfSpeechOf
-LexicalUnit          - FrameElement         : isIncorporatedFrameElementOf\nhasIncorporatedFrameElement
-LexicalUnit          - Lexeme               : hasLexeme\nisLexemeOf
-LexicalUnit          - PartOfSpeech         : hasPartOfSpeech\nisPartOfSpeechOf
-LexicalUnit          - SemType              : hasSemType\nisSemanticTypeOf
-LexicalUnit          - SemTypeSet           : hasSemTypeSet\nisSemTypeSetOf
-SubCorpus            - LexicalUnit          : hasSubCorpus\nisSubCorpusOf
-Valences             - LexicalUnit          : hasValences\nisValencesOf
-SemType              - SemType              : hasSuperType
-SemTypeSet           - SemType              : hasMember\nisMemberOf
-Sentence             - AnnotationSet        : hasAnnotationSet\nisAnnotationSetOf
-Sentence             - SubCorpus            : isSentenceOf\nhasSentence
-ValencePattern       - AnnotationSet        : hasAnnotationSet\nisAnnotationSetOf
-ValencePattern       - FEGroupRealization   : hasValencePattern\nIsValencePatternOf
-ValencePattern       - FERealization        : hasValencePattern\nIsValencePatternOf
-ValencePattern       - ValenceUnit          : hasValenceUnit\nisValenceUnitOf
-Valences             - FEGroupRealization   : isFrameElementGroypRealizationOf\nhasFrameElementGroupRealization
-Valences             - FERealization        : hasFrameElementRealization\nisFrameElementRealizationOf
-ValenceUnit          - FrameElement         : hasFrameElement\nisFrameElementOf
+package "Frame instances & text" {
+  class "Header"
+  class AnnotationSet
+  class AnnotationStatus
+  class Corpus
+  class Document
+  class FullText
+  class Label
+  class Layer
+  class Sentence
+  class SubCorpus
+}
+package "Frame definitions" {
+  class Coreness
+  class Governor
+  class FEGroupRealization
+  class FERealization
+  class Frame
+  class FrameElement
+  class FrameElementCoreSet
+  class Lexeme
+  class LexicalUnit
+  class PartOfSpeech
+  class SemType
+  class SemTypeSet
+  class ValencePattern
+  class Valences
+  class ValenceUnit
+}
+
+"Header"             -down- Corpus               : hasCorpus\nisCorpusOf
+"Header"             -down- Frame                : hasFrame
+"Header"             -down- FullText             : hasHeader\nisHeaderOf
+"Header"             -down- LexicalUnit          : hasHeader\nisHeaderOf
+AnnotationSet        -down- AnnotationStatus     : hasAnnotationStatus\nisAnnotationStatusOf
+AnnotationSet        -down- Frame                : hasFrame
+AnnotationSet        -down- Governor             : hasAnnotationSet\nisAnnotationSetOf
+AnnotationSet        -down- Layer                : hasLayer\nisLayerOf
+Corpus               -down- Document             : hasDocument\nisDocumentOf
+Corpus               -down- Sentence             : hasCorpus\nisCorpusOf
+Document             -down- Sentence             : hasDocument\nisDocumentOf
+FEGroupRealization   -down- FrameElement         : hasFrameElement\nisFrameElementOf
+FERealization        -down- FrameElement         : hasFrameElement\nisFrameElementOf
+Frame                -down- Frame                : hasFrameRelation\nseeAlso\nhasSubframe/subframeOf\ninheritsFrom/isInheritedBy\nisCausativeOf\nisInchoativeOf\nisInheritedBy/inheritsFrom\nisPerspectivizedIn/perspectiveOn\nisPrecededBy/precedes\nisUsedBy/uses\nperspectiveOn/isPerspectivizedIn\nprecedes/isPrecededBy\nsubframeOf/hasSubframe\nuses/isUsedBy
+Frame                -down- FrameElement         : hasFrameElement\nisFrameElementOf
+Frame                -down- FrameElementCoreSet  : hasFrameElementCoreSet\nisFrameElementCoreSetOf
+Frame                -left- LexicalUnit          : hasLexicalUnit\nisLexicalUnitOf\nisFrameOf\nhasFrame
+Frame                -down- SemType              : hasSemType\nisSemanticTypeOf
+Frame                -down- SemTypeSet           : hasSemTypeSet\nisSemTypeSetOf
+FrameElement         -down- Coreness             : isCorenessOf\nhasCoreness
+FrameElement         -down- FrameElement         : hasFrameElementRelation\nexclusesFE\nrequiresFE
+FrameElementCoreSet  -down- FrameElement         : hasMember >=2
+FullText             -down- Sentence             : hasSentence\nisSentenceOf
+Governor             -down- Valences             : isGovernorOf\nhasGovernor
+Label                -down- FrameElement         : hasFrameElement\nisFrameElementOf
+Layer                -down- Label                : hasLabel\nisLabelOf
+Lexeme               -down- PartOfSpeech         : hasPartOfSpeech\nisPartOfSpeechOf
+LexicalUnit          -down- FrameElement         : isIncorporatedFrameElementOf\nhasIncorporatedFrameElement
+LexicalUnit          -down- Lexeme               : hasLexeme\nisLexemeOf
+LexicalUnit          -down- PartOfSpeech         : hasPartOfSpeech\nisPartOfSpeechOf
+LexicalUnit          -down- SemType              : hasSemType\nisSemanticTypeOf
+LexicalUnit          -down- SemTypeSet           : hasSemTypeSet\nisSemTypeSetOf
+SubCorpus            -down- LexicalUnit          : hasSubCorpus\nisSubCorpusOf
+Valences             -up-   LexicalUnit          : hasValences\nisValencesOf
+SemType              -down- SemType              : hasSuperType
+SemTypeSet           -down- SemType              : hasMember\nisMemberOf
+Sentence             -down- AnnotationSet        : hasAnnotationSet\nisAnnotationSetOf
+Sentence             -down- SubCorpus            : isSentenceOf\nhasSentence
+ValencePattern       -down- AnnotationSet        : hasAnnotationSet\nisAnnotationSetOf
+ValencePattern       -up-   FEGroupRealization   : hasValencePattern\nIsValencePatternOf
+ValencePattern       -up-   FERealization        : hasValencePattern\nIsValencePatternOf
+ValencePattern       -down- ValenceUnit          : hasValenceUnit\nisValenceUnitOf
+Valences             -down- FEGroupRealization   : isFrameElementGroypRealizationOf\nhasFrameElementGroupRealization
+Valences             -down- FERealization        : hasFrameElementRealization\nisFrameElementRealizationOf
+ValenceUnit          -down- FrameElement         : hasFrameElement\nisFrameElementOf
 
 AnnotationSet       : creationDate dateTime
 AnnotationStatus    : owl:hasValue\l {Manual, Unannotated}
@@ -86,7 +116,6 @@ SemType             : name
 Sentence            : aPos integer
 Sentence            : paragNo integer
 Sentence            : sentNo integer
-Sentence            : text
 Sentence            : text
 SubCorpus           : name
 ValencePattern      : total

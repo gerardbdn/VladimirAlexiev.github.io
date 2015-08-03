@@ -142,9 +142,12 @@ Then are frame definition classes:
 ** framenet ontology
 [[http://ontologydesignpatterns.org/cp/owl/fn/framenet.owl][framenet]] is an alternative version of fntbox.
 It is significantly more complex: 33 Classes, 71 ObjectProperties, 23 DataProperties, and 18 Individuals.
-I also converted it to Manchester notation ([[./framenet.omn]]) and made a diagram (source file [[/framenet.puml]]), which however is a lot less clear.
-#+HTML_ATTR: :width 900px
-[[./img/framenet.png]]
+I converted it to Manchester notation ([[./framenet.omn]]). 
+
+I also made a diagram (source file [[./framenet-nolabel.puml]]), which elides the edge labels to avoid clutter:\\
+[[./img/framenet-nolabel.png]]
+
+The diagram with edge labels is also available but is nearly unreadable: [[./img/framenet-nolabel.png][./img/framenet.png]] (source file [[./img/framenet.puml]])
 
 This ontology perhaps corresponds better to the FN Book.
 But since it is not used in the two files described below, I do not give it further consideration.
@@ -214,7 +217,7 @@ Since our goal is to integrate FN to NIF, we'll start with a comparison between 
 See [[[NIF]]] for a description of NIF, and [[[LLD-intro]]] for a brief overview of NIF and related ontologies. 
 An extensive bibliography is available [[https://www.zotero.org/groups/linguistic_ld/items][on Zotero]].
 
-The basic NIF class and property diagram is:\\
+The basic NIF class and property diagram is below. Compare it to sec [[*fntbox ontology]]\\
 [[./img/NIF-schema.png]]
 
 ** Text Framing
@@ -222,7 +225,7 @@ Document is the basic level at which there is correspondence between FN and NIF:
 The text is stored in ~fn:text~, respectively ~nif:isString~.
 
 Higher than document, FN has ~fn:CorpDoc~ or ~fn:FullTextAnnotation~ (two kinds of corpora). 
-NIF uses ~nif:Context~ for this as well, using ~nif:broaderContext~ to point to higher-levle contexts. However, I am not aware of NIF data actually using this property.
+NIF uses ~nif:Context~ for this as well, using ~nif:broaderContext~ to point to higher-level contexts. However, I am not aware of NIF data actually using this property.
 
 Below document, ~fn:Sentence~ is the basic FN level to which frames are attached. Then follow ~fn:AnnotationSet, fn:Layer, fn:Label~. Char offsets are attached to ~fn:Label: fn:label_start, fn:label_end~.
 NIF uses a generic class ~nif:Structure~ with subclasses ~Paragraph, Sentence, Phrase, Word~, etc. Char offsets are specified at each level (~nif:beginIndex, nif:endIndex~). One can also provide the text at this level (~nif:anchorOf~), though this is redundant because ~referenceContext/isString~ is mandatory and contains the full text.
