@@ -278,7 +278,7 @@ The proposed representation to integrate FN in NIF is as follows.
 Let ~<phrase>~ have head-word ~<head>~ that corresponds to some ~<lexUnit>~, which invokes ~<frame>~. 
 That frame has elements ~<frameElement1..N>~, corresponding to ~<word1..N>~ (these can be words or phrases, but for simplicity I assume words).
 Just for illustration, assume the frame has a lexically omitted FE  ~<frameElementN+1>~ of type "CNI".\\
-[[./img/fe-nif.png]]
+[[./img/fn-nif.png]]
 
 Notes:
 - The easiest way to understand the representation is to think of ~fn:AnnotationSet~ as *frame instance* and think of ~fn:Label~ as *FE instance*.
