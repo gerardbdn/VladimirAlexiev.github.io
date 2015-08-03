@@ -278,25 +278,25 @@ As we have seen in the previous section, the FN and NIF models for representing 
 Therefore I propose to represent the minimum possible FN nodes, and point to them from ~nif:String~ using ~nif:oliaLink~.
 
 The proposed representation to integrate FN in NIF is as follows. 
-Let ~<phrase>~ have head-word ~<head>~ that corresponds to some ~<lexUnit>~, which invokes ~<frame>~. 
-That frame has elements ~<frameElement1..N>~, corresponding to ~<word1..N>~ (these can be words or phrases, but for simplicity I assume words).
-Just for illustration, assume the frame has a lexically omitted FE  ~<frameElementN+1>~ of type "CNI".\\
+Let /phrase/ have head-word /head/ that corresponds to some /lexUnit/, which invokes /frame/. 
+That frame has elements /frameElement1..N/, corresponding to /word1..N/ (these can be words or phrases, but for simplicity I assume words).
+Just for illustration, assume the frame has a lexically omitted FE  /frameElementN+1/ of type "CNI".\\
 [[./img/fn-nif.png]]
 
 Notes:
 - The easiest way to understand the representation is to think of ~fn:AnnotationSet~ as *frame instance* and think of ~fn:Label~ as *FE instance*.
-- There are links between ~<frame>~, ~<lexUnit>~, and ~<frameElementN>~ that I don't show for simplicity. They are part of the frame definition, not frame instance
+- There are links between /frame/, /lexUnit/, and /frameElementN/ that I don't show for simplicity. They are part of the frame definition, not frame instance
 - I don't use ~fe:label_start~ and ~fe:label_end~ because those would duplicate ~nif:beginIndex~ and ~nif:endIndex~ unnecessarily
 - The same word could participate in several frames (as LU or FE), in which case it will have several ~nif:oliaLink~
 - The lexically omitted FE (of type "CNI") has no corresponding NIF node. Nevertheless, it is a full participant in the frame
-- ~<word1..N>~ are of course connected to ~<phrase>~.
+- /word1..N/ are of course connected to /phrase/.
   I could show this with ~nif:superString~ but that is not often used:
   ~nif:dependency~ or specific dependency parsing properties are used.
   Eg in MS, UPF generates deep dependency parsing properties ~upf-deep:deepDependency~ (TODO ref)
 
-Unfortunately the connection from ~<head>~ to the corresponding ~<lexUnit>~ is very indirect and goes through 3 intermediate nodes.
-The nodes ~<labelLU>~ and ~<layerLU>~ carry no information except the fixed string "Target". 
-But to be faithful to FE RDF (the fntbox ontology), we have to represent it this way.
+Unfortunately the connection from /head/ to the corresponding /lexUnit/ is very indirect and goes through 3 intermediate nodes.
+The nodes /labelLU/ and /layerLU/ carry no information except the fixed string "Target". 
+But to be faithful to the fntbox ontology (sec [[*fntbox ontology]]), we have to represent it this way.
 
 ** A note on inverses
 As shown in sec [[*fntbox ontology]], fntbox has an inverse for each property.

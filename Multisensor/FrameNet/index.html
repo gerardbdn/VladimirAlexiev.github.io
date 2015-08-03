@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Integrating FrameNet in NIF</title>
-<!-- 2015-08-03 Mon 20:05 -->
+<!-- 2015-08-03 Mon 20:15 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Vladimir Alexiev, Data and Ontology Management group, Ontotext Corp" />
@@ -762,9 +762,9 @@ Therefore I propose to represent the minimum possible FN nodes, and point to the
 
 <p>
 The proposed representation to integrate FN in NIF is as follows. 
-Let <code><phrase></code> have head-word <code><head></code> that corresponds to some <code><lexUnit></code>, which invokes <code><frame></code>. 
-That frame has elements <code><frameElement1..N></code>, corresponding to <code><word1..N></code> (these can be words or phrases, but for simplicity I assume words).
-Just for illustration, assume the frame has a lexically omitted FE  <code><frameElementN+1></code> of type "CNI".<br  />
+Let <i>phrase</i> have head-word <i>head</i> that corresponds to some <i>lexUnit</i>, which invokes <i>frame</i>. 
+That frame has elements <i>frameElement1..N</i>, corresponding to <i>word1..N</i> (these can be words or phrases, but for simplicity I assume words).
+Just for illustration, assume the frame has a lexically omitted FE  <i>frameElementN+1</i> of type "CNI".<br  />
 <img src="./img/fn-nif.png" alt="fn-nif.png" />
 </p>
 
@@ -774,7 +774,7 @@ Notes:
 <ul class="org-ul">
 <li>The easiest way to understand the representation is to think of <code>fn:AnnotationSet</code> as <b>frame instance</b> and think of <code>fn:Label</code> as <b>FE instance</b>.
 </li>
-<li>There are links between <code><frame></code>, <code><lexUnit></code>, and <code><frameElementN></code> that I don't show for simplicity. They are part of the frame definition, not frame instance
+<li>There are links between <i>frame</i>, <i>lexUnit</i>, and <i>frameElementN</i> that I don't show for simplicity. They are part of the frame definition, not frame instance
 </li>
 <li>I don't use <code>fe:label_start</code> and <code>fe:label_end</code> because those would duplicate <code>nif:beginIndex</code> and <code>nif:endIndex</code> unnecessarily
 </li>
@@ -782,7 +782,7 @@ Notes:
 </li>
 <li>The lexically omitted FE (of type "CNI") has no corresponding NIF node. Nevertheless, it is a full participant in the frame
 </li>
-<li><code><word1..N></code> are of course connected to <code><phrase></code>.
+<li><i>word1..N</i> are of course connected to <i>phrase</i>.
 I could show this with <code>nif:superString</code> but that is not often used:
 <code>nif:dependency</code> or specific dependency parsing properties are used.
 Eg in MS, UPF generates deep dependency parsing properties <code>upf-deep:deepDependency</code> (TODO ref)
@@ -790,9 +790,9 @@ Eg in MS, UPF generates deep dependency parsing properties <code>upf-deep:deepDe
 </ul>
 
 <p>
-Unfortunately the connection from <code><head></code> to the corresponding <code><lexUnit></code> is very indirect and goes through 3 intermediate nodes.
-The nodes <code><labelLU></code> and <code><layerLU></code> carry no information except the fixed string "Target". 
-But to be faithful to FE RDF (the fntbox ontology), we have to represent it this way.
+Unfortunately the connection from <i>head</i> to the corresponding <i>lexUnit</i> is very indirect and goes through 3 intermediate nodes.
+The nodes <i>labelLU</i> and <i>layerLU</i> carry no information except the fixed string "Target". 
+But to be faithful to the fntbox ontology (sec <a href="#sec-2-2">2.2</a>), we have to represent it this way.
 </p>
 </div>
 
@@ -908,7 +908,7 @@ Class diagrams are made with <a href="http://plantuml.sourceforge.net">PlantUML<
 <div id="postamble" class="status">
 <p class="date">Date: 2015-08-03</p>
 <p class="author">Author: Vladimir Alexiev, Data and Ontology Management group, Ontotext Corp</p>
-<p class="date">Created: 2015-08-03 Mon 20:05</p>
+<p class="date">Created: 2015-08-03 Mon 20:15</p>
 <p class="creator">Emacs 24.3.91.1 (Org mode 8.2.7c)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
