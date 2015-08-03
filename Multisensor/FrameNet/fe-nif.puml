@@ -1,0 +1,37 @@
+@startuml
+hide circles
+hide empty methods
+
+"<annoSet>"     : a fn:AnnotationSet
+"<annoSet>"     : fn:annotationSetFrame <frame>
+"<annoSet>"     : fn:annotationSetLU <lexUnit>
+"<head>"        : a nif:Word
+"<label1>"      : a fn:Label
+"<label1>"      : fn:label_FE <frameElement1>
+"<labelN+1>"    : a fn:Label
+"<labelN+1>"    : fn:label_FE <frameElementN+1>
+"<labelN+1>"    : label_itype "CNI"
+"<labelN>"      : a fn:Label
+"<labelN>"      : fn:label_FE <frameElementN>
+"<labelLU>"     : a fn:Label
+"<labelLU>"     : label_name "Target"
+"<layerLU>"     : a fn:Layer
+"<layerLU>"     : layer_name "Target"
+"<layerFE>"     : a fn:Layer
+"<layerFE>"     : layer_name "FE"
+"<phrase>"      : a nif:Phrase
+"<word1>"       : a nif:Word
+"<wordN>"       : a nif:Word
+
+"<annoSet>" -down->  "<layerLU>"    : fn:hasLayer
+"<annoSet>" -down->  "<layerFE>"    : fn:hasLayer
+"<phrase>"  -up->    "<annoSet>"    : nif:oliaLink
+"<phrase>"  -right-> "<head>"       : nif:head
+"<head>"    -up->    "<labelLU>"    : nif:oliaLink
+"<word1>"   -up->    "<label1>"     : nif:oliaLink
+"<wordN>"   -up->    "<labelN>"     : nif:oliaLink
+"<layerLU>" -down->  "<labelLU>"    : fn:hasLabel
+"<layerFE>" -down->  "<label1>"     : fn:hasLabel
+"<layerFE>" -down->  "<labelN>"     : fn:hasLabel
+"<layerFE>" -down->  "<labelN+1>"   : fn:hasLabel
+@enduml

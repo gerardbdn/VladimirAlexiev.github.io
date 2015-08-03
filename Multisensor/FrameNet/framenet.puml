@@ -1,0 +1,96 @@
+@startuml
+hide empty attributes
+hide empty methods
+hide circle
+
+"Header"             - Corpus               : hasCorpus\nisCorpusOf
+"Header"             - Frame                : hasFrame
+"Header"             - FullText             : hasHeader\nisHeaderOf
+"Header"             - LexicalUnit          : hasHeader\nisHeaderOf
+AnnotationSet        - AnnotationStatus     : hasAnnotationStatus\nisAnnotationStatusOf
+AnnotationSet        - Frame                : hasFrame
+AnnotationSet        - Governor             : hasAnnotationSet\nisAnnotationSetOf
+AnnotationSet        - Layer                : hasLayer\nisLayerOf
+Corpus               - Document             : hasDocument\nisDocumentOf
+Corpus               - Sentence             : hasCorpus\nisCorpusOf
+Document             - Sentence             : hasDocument\nisDocumentOf
+FEGroupRealization   - FrameElement         : hasFrameElement\nisFrameElementOf
+FERealization        - FrameElement         : hasFrameElement\nisFrameElementOf
+Frame                - Frame                : hasFrameRelation\nseeAlso\nhasSubframe/subframeOf\ninheritsFrom/isInheritedBy\nisCausativeOf\nisInchoativeOf\nisInheritedBy/inheritsFrom\nisPerspectivizedIn/perspectiveOn\nisPrecededBy/precedes\nisUsedBy/uses\nperspectiveOn/isPerspectivizedIn\nprecedes/isPrecededBy\nsubframeOf/hasSubframe\nuses/isUsedBy
+Frame                - FrameElement         : hasFrameElement\nisFrameElementOf
+Frame                - FrameElementCoreSet  : hasFrameElementCoreSet\nisFrameElementCoreSetOf
+Frame                - LexicalUnit          : hasLexicalUnit\nisLexicalUnitOf\nisFrameOf\nhasFrame
+Frame                - SemType              : hasSemType\nisSemanticTypeOf
+Frame                - SemTypeSet           : hasSemTypeSet\nisSemTypeSetOf
+FrameElement         - Coreness             : isCorenessOf\nhasCoreness
+FrameElement         - FrameElement         : hasFrameElementRelation\nexclusesFE\nrequiresFE
+FrameElementCoreSet  - FrameElement         : hasMember >=2
+FullText             - Sentence             : hasSentence\nisSentenceOf
+Governor             - Valences             : isGovernorOf\nhasGovernor
+Label                - FrameElement         : hasFrameElement\nisFrameElementOf
+Layer                - Label                : hasLabel\nisLabelOf
+Lexeme               - PartOfSpeech         : hasPartOfSpeech\nisPartOfSpeechOf
+LexicalUnit          - FrameElement         : isIncorporatedFrameElementOf\nhasIncorporatedFrameElement
+LexicalUnit          - Lexeme               : hasLexeme\nisLexemeOf
+LexicalUnit          - PartOfSpeech         : hasPartOfSpeech\nisPartOfSpeechOf
+LexicalUnit          - SemType              : hasSemType\nisSemanticTypeOf
+LexicalUnit          - SemTypeSet           : hasSemTypeSet\nisSemTypeSetOf
+SubCorpus            - LexicalUnit          : hasSubCorpus\nisSubCorpusOf
+Valences             - LexicalUnit          : hasValences\nisValencesOf
+SemType              - SemType              : hasSuperType
+SemTypeSet           - SemType              : hasMember\nisMemberOf
+Sentence             - AnnotationSet        : hasAnnotationSet\nisAnnotationSetOf
+Sentence             - SubCorpus            : isSentenceOf\nhasSentence
+ValencePattern       - AnnotationSet        : hasAnnotationSet\nisAnnotationSetOf
+ValencePattern       - FEGroupRealization   : hasValencePattern\nIsValencePatternOf
+ValencePattern       - FERealization        : hasValencePattern\nIsValencePatternOf
+ValencePattern       - ValenceUnit          : hasValenceUnit\nisValenceUnitOf
+Valences             - FEGroupRealization   : isFrameElementGroypRealizationOf\nhasFrameElementGroupRealization
+Valences             - FERealization        : hasFrameElementRealization\nisFrameElementRealizationOf
+ValenceUnit          - FrameElement         : hasFrameElement\nisFrameElementOf
+
+AnnotationSet       : creationDate dateTime
+AnnotationStatus    : owl:hasValue\l {Manual, Unannotated}
+Coreness            : owl:hasValue\l {Core, Core-Unexpressed,\l  Extra-thematic, Peripheral}
+Corpus              : name
+Document            : name
+FEGroupRealization  : total
+FERealization       : total
+Frame               : abbrev
+Frame               : createdBy integer
+Frame               : creationDate dateTime
+Frame               : definition
+Frame               : name
+FrameElement        : abbrev
+FrameElement        : createdBy integer
+FrameElement        : creationDate dateTime
+Governor            : lemma
+Governor            : type
+Label               : bgColor
+Label               : createdBy integer
+Label               : end
+Label               : fgColor
+Label               : name
+Label               : start
+Layer               : name
+Layer               : rank
+Lexeme              : breakBefore
+Lexeme              : headword
+Lexeme              : name
+Lexeme              : order
+LexicalUnit         : name
+LexicalUnit         : status
+PartOfSpeech        : owl:hasValue\l {Adjective, Adverb, Article,\l  C, ComplexConjunction, Interjections,\l  Noun, Numeral, Preposition, Pronoun,\l  SimpleConjunction, Verb}
+SemType             : abbrev
+SemType             : name
+Sentence            : aPos integer
+Sentence            : paragNo integer
+Sentence            : sentNo integer
+Sentence            : text
+Sentence            : text
+SubCorpus           : name
+ValencePattern      : total
+ValenceUnit         : grammaticalFunction
+ValenceUnit         : phraseType
+
+@enduml

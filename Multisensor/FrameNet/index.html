@@ -1,0 +1,912 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Integrating FrameNet in NIF</title>
+<!-- 2015-08-03 Mon 09:18 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Vladimir Alexiev, Data and Ontology Management group, Ontotext Corp" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+
+<style type="text/css">
+h1,h2,h3,h4,h5,h6,h7 {font-family: Arial}
+// don't want empty lines in auto-postamble
+.author, .date, .creator {-webkit-margin-before: 0em; -webkit-margin-after: 0em}
+// style for #+begin_abstract
+.abstract {margin: 1em; padding: 1em; border: 1px solid black}
+.abstract:before {content: "Abstract: "; font-weight: bold}
+// center the preamble (author name) and make it bigger
+#preamble p { font-size: 110%%; margin-left: auto; margin-right: auto; text-align: center; }
+// table headers aligned same as table data
+th.left     {text-align:left}
+th.right    {text-align:right}
+// table horizontal&vertical borders. First value is top&bottom, second is left&right. http://www.w3schools.com/css/css_border.asp
+th, td {border-width: 1px; border-style: solid solid; border-spacing: 2px 2px; padding:4px 2px}
+// colored TODO keywords
+.CANCELED   {color: blue}
+.MAYBE      {color: blue}
+.POSTPONED  {color: blue}
+.INPROGRESS {color: orange}
+.NEXT       {color: orange}
+.IER        {color: orange}
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Integrating FrameNet in NIF</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Introduction</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Sample Sentence</a></li>
+<li><a href="#sec-1-2">1.2. FrameNet</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2. FN Ontologies</a>
+<ul>
+<li><a href="#sec-2-1">2.1. Prefixes</a></li>
+<li><a href="#sec-2-2">2.2. fntbox ontology</a></li>
+<li><a href="#sec-2-3">2.3. framenet ontology</a></li>
+<li><a href="#sec-2-4">2.4. fnabox ontology</a></li>
+<li><a href="#sec-2-5">2.5. fndata</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. Comparing FN to NIF</a>
+<ul>
+<li><a href="#sec-3-1">3.1. Text Framing</a></li>
+<li><a href="#sec-3-2">3.2. Text Links</a></li>
+<li><a href="#sec-3-3">3.3. Text Nodes</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4. Integrating FN in NIF</a>
+<ul>
+<li><a href="#sec-4-1">4.1. A note on inverses</a></li>
+<li><a href="#sec-4-2">4.2. Querying FN NIF</a></li>
+<li><a href="#sec-4-3">4.3. Representing the Sample Sentence in FN NIF</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5. Acknowledgements</a></li>
+<li><a href="#sec-6">6. References</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+FrameNet (FN) [<a href="#FN-book">6</a>] is a large-scale linguistic resource <a href="https://framenet.icsi.berkeley.edu/fndrupal/">developed at Berkeley</a>. 
+It describes word senses and the situations they can play in ("valences") in terms of
+frames, frame elements and the links between them. 
+<b>Frames</b> represent real-world situations (eg <code>frame:Statement</code> means to make a statement),
+the <b>lexical units</b> (LU) that invoke them (eg <code>lu:announce.v, lu:declare.v</code>), 
+and the <b>frame elements</b> FE, i.e. things and entities that play a role in them (eg <code>fe:Speaker.statement, fe:Message.statement, fe:Time.statement</code>).
+</p>
+
+<p>
+FN has been converted to Linked Open Data (LOD) by ISTC-CNR [<a href="#FN-LOD">4</a>], together with a large corpus of text annotated with FN.
+</p>
+
+<p>
+The Manually Annotated Sub-Corpus (MASC) [<a href="#MASC">5</a>] also includes FN and [<a href="#FN-MASC">3</a>] describes plans to interlink it with LOD.
+However, the <a href="http://www.anc.org/data/masc/downloads/data-download/">MASC download page</a> does not include LOD (RDF) formats.
+</p>
+
+<p>
+The <a href="http://www.multisensorproject.eu/">MultiSensor project</a> (MS) applies semantic technologies to analysis of media including news articles.
+MS has standardized on using the NLP Interchange Format (NIF) for data exchange, in order to faciliate interoperation and extensibility.
+</p>
+
+<p>
+NIF [<a href="#NIF">2</a>] is an RDF based format for exchanging Linguistic Linked Data (NLP and related). 
+It involves a number of ontologies, including NIF for binding to text and packaging, ITS for Named Entity Recognition (NER), OLIA for NLP information, MARL for sentiment/opinion, etc. 
+</p>
+
+<p>
+This paper reviews the FN-LOD representation and describes a possible way to integrate FN in NIF, proposed to be used in MultiSensor.
+</p>
+</div>
+
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Sample Sentence</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+In this paper we'll consider the sample sentence "Electrolux announced today the theme for its design competition".
+3 softwares are available for <a href="https://framenet.icsi.berkeley.edu/fndrupal/asrl">automatic FN annotation</a>: Shalmaneser, LTH and SEMAFOR.
+We'll use <a href="http://www.ark.cs.cmu.edu/SEMAFOR/">SEMAFOR</a> to perform automatic FN annotation <a href="http://demo.ark.cs.cmu.edu/parse?sentence=Electrolux+announced+today+the+theme+for+its+design+competition">of the sentence</a>. 
+SEMAFOR uses a dependency parse (shown on top) to generate candidate frames for the sentence (shown on the bottom). 
+Here we have highlighted the <code>Statement</code> frame, invoked by <code>lu:announce.v</code> and having FEs <code>Speaker</code>, <code>Time</code> and <code>Message</code>.
+The other candidate frames are dimmed out.<br  />
+<img src="./img/SEMAFOR-horizontal.png" alt="SEMAFOR-horizontal.png" />
+</p>
+
+<p>
+It may be easier to see the candidate frames in SEMAFOR's vertical layout. Here each column represents a frame:<br  />
+<img src="./img/SEMAFOR-vertical.png" alt="SEMAFOR-vertical.png" />
+</p>
+
+<p>
+SEMAFOR also offers a JSON format (<a href="./SEMAFOR.json">./SEMAFOR.json</a>) where one can see the candidate frames and their targets (LUs) and FEs.
+It also includes a <code>score</code> for each frame, which can help to pick the best frames
+</p>
+<table border="1" cellspacing="0" cellpadding="0" rules="all" frame="box">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="left"><b>frame</b></td>
+<td class="right">Statement</td>
+<td class="right">Calendric_unit</td>
+<td class="right">Topic</td>
+<td class="right">Coming_up_with</td>
+<td class="right">Competition</td>
+</tr>
+
+<tr>
+<td class="left"><b>score</b></td>
+<td class="right">113.2</td>
+<td class="right">30.4</td>
+<td class="right">25.4</td>
+<td class="right">50.7</td>
+<td class="right">54.6</td>
+</tr>
+</tbody>
+</table>
+<p>
+Indeed in this case the two top-scoring candidates (<code>Statement</code> and <code>Competition</code>) are the best frames.
+<code>Calendric_unit</code> is too small (equal to <code>lu:Time.statement</code>), <code>Coming_up_with</code> is wrong, and <code>Topic</code> is also part of the bigger frame.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> FrameNet</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Frames are developed from real-world linguistic attestations. 
+Eg the <a href="https://framenet2.icsi.berkeley.edu/fnReports/data/lu/lu683.xml?mode=annotation">annotations of <code>lu:announce.v</code></a> include about 80 sentences of varying phrase forms. 
+Colors show the different FE's.
+<img src="./img/FN-annotation-colored.png" alt="FN-annotation-colored.png" /><br  />
+</p>
+
+<p>
+Frames are extensively documented. Eg the <a href="https://framenet2.icsi.berkeley.edu/fnReports/data/frame/Statement.xml">documentation for Statement</a> includes:
+</p>
+<ul class="org-ul">
+<li>Definitions for each FE (classified as Core, Non-Core and Extra-Thematic)
+</li>
+<li>"Coreness sets", i.e. which FE alternatives are required to realize the frame. 
+In this case there are two core sets: <code>{Message, Topic}</code> and <code>{Medium, Speaker}</code>.
+This means that either <code>Message</code> or <code>Topic</code> is required; and either <code>Medium</code> or <code>Speaker</code> is required.
+</li>
+<li>Frame relations, which include inheritance, using, subframe, causative/inchoative, etc. These are similar to Use Case relations but richer.
+</li>
+</ul>
+
+<p>
+Frame relations can be visualized with <a href="https://framenet.icsi.berkeley.edu/fndrupal/FrameGrapher">FrameGrapher</a>.
+<img src="./img/FN-grapher.gif" alt="FN-grapher.gif" /><br  />
+</p>
+
+<p>
+Eg this figure for <code>Statement</code> shows that:
+</p>
+<ul class="org-ul">
+<li><code>Statement</code> is inherited by: <code>Complaining, Predicting, Reading_aloud, Recording, Reveal_secret, Telling</code>
+</li>
+<li><code>Statement</code> uses: <code>Communication</code> (green arrows)
+</li>
+<li><code>Statement</code> is used by: <code>Adducing, Attributed_information, Chatting, Judgment_communication, Renunciation, Unattributed_information</code> (green arrows)
+</li>
+<li>The FE relations between <code>Statement</code> and <code>Telling</code> are also shown, together with their Core (c) or Non-Core (nc) status. 
+Eg <code>fe:Addressee.statement</code> is Non-Core (you can make a statement without addressing anyone in particular), 
+but <code>fe:Addressee.telling</code> is Core because you have to tell <i>someone</i>. 
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> FN Ontologies</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+The OWL ontology representation of FN is described in [<a href="#FN-LOD">4</a>], but a lot of technical details are missing, so one has to read the FN Book [<a href="#FN-book">6</a>] to understand the ontologies.
+</p>
+<ul class="org-ul">
+<li>There is a partial ontology diagram, but it doesn't show all classes and relations
+</li>
+<li>Some elements are comments extensively using texts from the FN Book, but I have found I understand them better by reading the book, since these comments don't capture the context.
+</li>
+<li>Many elements are not documented, eg class <code>fn:Header</code>, data property <code>fn:frame_cBy</code> (xsd:string). One can only surmise that it's the ID of the person who created the frame.
+</li>
+</ul>
+
+<p>
+In this section I describe the available FN ontologies and RDF data files, provide diagrams to facilitate understanding, and derived files that are easier to consume.
+</p>
+</div>
+
+<div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Prefixes</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+FN uses the following prefixes. I have started registering them in <a href="http://prefix.cc">http://prefix.cc</a> (one can submit only one prefix per day). All prefixes used by MS are available in <a href="./prefixes.ttl">./prefixes.ttl</a>.
+</p>
+<table border="1" cellspacing="0" cellpadding="0" rules="all" frame="box">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">prefix</th>
+<th scope="col" class="left">URL</th>
+<th scope="col" class="left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">fn:</td>
+<td class="left"><a href="http://www.ontologydesignpatterns.org/ont/framenet/tbox/">http://www.ontologydesignpatterns.org/ont/framenet/tbox/</a></td>
+<td class="left">FN metamodel (tbox)</td>
+</tr>
+
+<tr>
+<td class="left">frame:</td>
+<td class="left"><a href="http://www.ontologydesignpatterns.org/ont/framenet/abox/frame/">http://www.ontologydesignpatterns.org/ont/framenet/abox/frame/</a></td>
+<td class="left">frame</td>
+</tr>
+
+<tr>
+<td class="left">fe:</td>
+<td class="left"><a href="http://www.ontologydesignpatterns.org/ont/framenet/abox/fe/">http://www.ontologydesignpatterns.org/ont/framenet/abox/fe/</a></td>
+<td class="left">frame element</td>
+</tr>
+
+<tr>
+<td class="left">lu:</td>
+<td class="left"><a href="http://www.ontologydesignpatterns.org/ont/framenet/abox/lu/">http://www.ontologydesignpatterns.org/ont/framenet/abox/lu/</a></td>
+<td class="left">lexical unit</td>
+</tr>
+
+<tr>
+<td class="left">st:</td>
+<td class="left"><a href="http://www.ontologydesignpatterns.org/ont/framenet/abox/semType/">http://www.ontologydesignpatterns.org/ont/framenet/abox/semType/</a></td>
+<td class="left">semantic type</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> fntbox ontology</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Th FN "terminology box" <a href="http://www.ontologydesignpatterns.org/ont/framenet/tbox/schema.owl">fntbox</a> is the FN metamodel.
+It's an OWL ontology that uses Restrictions extensively, and is easiest to understand in Manchester notation: <a href="./fntbox.omn">./fntbox.omn</a>.
+It has 16 Classes, 67 ObjectProperties, 49 DataProperties.
+<a href="http://www.ontologydesignpatterns.org/ont/framenet/html/">Online documentation</a> made with OWLDoc is available.
+</p>
+
+<p>
+Most relations have inverses, which actually hinders the understanding of the "hierarchy" of data.
+I made a diagram showing all classes (source file <a href="./fntbox.puml">./fntbox.puml</a>), their relations (object properties) and fields (data properties).
+For some properties I figured out the range from Restrictions; properties having a Union as domain are shown several times on the diagram.
+<img src="./img/fntbox.png" alt="fntbox.png" /><br  />
+</p>
+
+<p>
+Some notes about the most important classes (mostly coming from the FN Book). 
+We navigate top-down and split the classes in two groups.
+First are classes that represent texts and their annotation with frame instances and other linguistic info:
+</p>
+<ul class="org-ul">
+<li><code>Header</code> holds together all <code>FullTextAnnotation</code> and <code>CorpDoc</code> about the same frame
+</li>
+<li><code>FullTextAnnotation</code> represents a mode of annotation where sentences are "preselected" by a given text
+</li>
+<li><code>CorpDoc</code> is a corpus comprising of documents and sentences that are carefully chosen by lexicographers to illustrate the possible valences of LUs, i.e. make various frames for each sense of each LU
+</li>
+<li><code>Sentence</code> holds the <code>text</code> being annotated and some identifying information
+</li>
+<li><code>AnnotationSet</code> is a set of annotations about one frame. One sentence may have several frames and they may even overlap
+</li>
+<li><code>Layer</code> is a subset of annotations with a single purpose, indicated in <code>fn:layer_name</code>. Often used ones:
+<ul class="org-ul">
+<li><b>Target</b>: LU that is target of the frame. Such layer has a single label
+</li>
+<li><b>FE</b>: frame elements
+</li>
+<li><b>PENN</b>: part of speech (eg VBD, VVN, dt, nn)
+</li>
+<li><b>PT</b>: phrase type (eg NP, AJP, PP, PPing)
+</li>
+<li><b>GF</b>: grammatical function (eg Ext, Obj, Dep, Comp)
+</li>
+<li><b>NER</b>: named entity recognition (eg person, location)
+</li>
+</ul>
+</li>
+<li><code>Label</code> is a word or phrase in an annotated <code>Sentence</code> (indicated by index <code>label_start, label_end</code>) that:
+<ul class="org-ul">
+<li>Plays the role of LU instance. This is indicated by <code>fn:label_name</code> being "Target", and it's the single <code>Label</code> in a layer having the same <code>fn:layer_name</code>
+</li>
+<li>Or plays the role of FE instance. In this case <code>fn:label_FE</code> points to the FE definition (eg <code>fe:Speaker.statement</code>) and <code>fn:label_name</code> corresponds (eg "Speaker")
+</li>
+<li>Or carries a grammatical or POS tag in <code>label_name</code>
+</li>
+<li>Or indicates a lexically omitted FE (see [<i>FN-Book</i>] sec 3.2.3 Null instantiation) using <code>fn:label_itype</code> (eg "CNI", "DNI", etc), in which case <code>label_start, label_end</code> are omitted
+</li>
+</ul>
+</li>
+</ul>
+
+<p>
+Then are frame definition classes:
+</p>
+<ul class="org-ul">
+<li><code>Frame</code> is a structure that abstracts over real-world situations, obtained through linguistic attestation
+</li>
+<li><code>LexUnit</code> is the head-word of a sentence or sub-sentence that invokes the frame.
+An important goal of the FN project is to capture the meaning of words through annotated examples, that's why the LU can point to an <code>AnnotationSet</code> that supports it.
+It can also carry simple statistics (<code>SentenceCount</code>) used for managing the work of annotators
+</li>
+<li><code>Lexeme</code> is the linguistic representation of a LU. One LU can  have several lexemes
+</li>
+<li><code>FrameElement</code> are entities (things, actors, times, messages, etc) that participate in a frame. They are classified with <code>FE_coreType</code> into Core, Core-Unexpressed, Extra-Thematic, Peripheral
+</li>
+<li><code>FECoreSet</code> describes a set of alternative FEs, one of which must be present in the frame. A frame can have several core sets
+</li>
+<li><code>SemType</code> classifies frames, FEs and LUs by type. Eg often used sem types are
+<ul class="org-ul">
+<li>Frame: Non-perspectivalized_frame, Non-Lexical_Frame
+</li>
+<li>FE: Sentient (an agent), Artifact, Message, State_of_affairs
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> framenet ontology</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+<a href="http://ontologydesignpatterns.org/cp/owl/fn/framenet.owl">framenet</a> is an alternative version of fntbox.
+It is significantly more complex: 33 Classes, 71 ObjectProperties, 23 DataProperties, and 18 Individuals.
+I also converted it to Manchester notation (<a href="./framenet.omn">./framenet.omn</a>) and made a diagram (source file <a href="file://c:/framenet.puml">file://c:/framenet.puml</a>), which however is a lot less clear.
+</p>
+
+<div class="figure">
+<p><img src="./img/framenet.png" alt="framenet.png" />
+</p>
+</div>
+
+<p>
+This ontology perhaps corresponds better to the FN Book.
+But since it is not used in the two files described below, I do not give it further consideration.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> fnabox ontology</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+The FN "assertion box" <a href="http://www.ontologydesignpatterns.org/ont/framenet/abox/cfn.rdf">fnabox</a> is an RDF representation of all frame definitions.
+It includes only individuals, not classes nor property definitions.
+It used some illegal URI chars (spaces and parentheses) that I converted to underscores (eg <code>lu:swing__into_.v</code> instead of <code>lu:swing_(into).v</code>).
+Then I converted it to readable turtle where all individuals are sorted by name and all statements about an individual are together.
+</p>
+
+<p>
+Eg the statements about <code>frame:Statement</code> are:
+</p>
+<pre class="example">
+frame:Statement
+  fn:hasFrameElement fe:Time.statement, fe:Iteration.statement, fe:Medium.statement, fe:Manner.statement, fe:Event_description.statement,
+    fe:Means.statement, fe:Message.statement, fe:Speaker.statement, fe:Topic.statement, fe:Epistemic_stance.statement, fe:Place.statement,
+    fe:Degree.statement, fe:Addressee.statement, fe:Depictive.statement, fe:Internal_cause.statement, fe:Containing_event.statement,
+    fe:Group.statement, fe:Occasion.statement, fe:Particular_iteration.statement, fe:Frequency.statement ;
+  fn:hasLexUnit lu:gloat.v, lu:explain.v, lu:declaration.n, lu:talk.v, lu:admission.n, lu:state.v, lu:recount.v, lu:exclamation.n,
+    lu:contention.n, lu:statement.n, lu:proposition.n, lu:preach.v, lu:pronouncement.n, lu:announce.v, lu:declare.v, lu:explanation.n,
+    lu:speak.v, lu:propose.v, lu:proclamation.n, lu:allegation.n, lu:exclaim.v, lu:conjecture.v, lu:comment.v, lu:caution.v, lu:concede.v,
+    lu:confirm.v, lu:add.v, lu:proclaim.v, lu:insist.v, lu:address.v, lu:report.n, lu:attest.v, lu:aver.v, lu:announcement.n, lu:avow.v,
+    lu:contend.v, lu:assert.v, lu:claim.n, lu:maintain.v, lu:denial.n, lu:conjecture.n, lu:insistence.n, lu:remark.n, lu:relate.v,
+    lu:mention.n, lu:claim.v, lu:report.v, lu:hazard.v, lu:affirm.v, lu:assertion.n, lu:allege.v, lu:smirk.v, lu:pout.v, lu:remark.v,
+    lu:profess.v, lu:admit.v, lu:deny.v, lu:mention.v, lu:affirmation.n, lu:concession.n, lu:reaffirm.v, lu:write.v, lu:venture.v, lu:say.v,
+    lu:suggest.v, lu:reiterate.v, lu:proposal.n, lu:comment.n ;
+  fn:isInheritedBy  frame:Telling, frame:Reveal_secret, frame:Recording, frame:Complaining ;
+  fn:isUsedBy  frame:Unattributed_information, frame:Adducing, frame:Judgment_communication, frame:Attributed_information, frame:Renunciation,
+    frame:Chatting ;
+  fn:uses frame:Communication .
+</pre>
+
+<p>
+Statements about a couple of the core FEs in that frame:
+</p>
+<pre class="example">
+fe:Speaker.statement a fn:FrameElement ;
+  fn:hasSemType  st:Sentient ;
+  fn:hasSuperFE  fe:Speaker.speak_on_topic , fe:Speaker.encoding , fe:Communicator.communication , fe:Cognizer.categorization , fe:Agent.body_movement .
+fe:Message.statement a fn:FrameElement ;
+  fn:hasSemType  st:Message ;
+  fn:hasSuperFE  fe:Message.encoding , fe:Message.communication , fe:Message.body_movement , fe:Item.categorization , fe:Category.categorization .
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-2-5" class="outline-3">
+<h3 id="sec-2-5"><span class="section-number-3">2.5</span> fndata</h3>
+<div class="outline-text-3" id="text-2-5">
+<p>
+<a href="http://www.ontologydesignpatterns.org/ont/framenet/fndata_v5.rdf.zip">fndata_v5</a> is a corpus or FN annotations provided in RDF by ISTC-CNR.
+It's 540Mb RDF or 292Mb Turtle or 1.03Gb NTriples, and comprises 3.8M triples.
+It includes 5946 sentences and 20361 frame instances (<code>annotationSetFrame</code>), i.e. 3.4 frames per sentence.
+The info about each sentence takes 640 triples on average; about a quarter of these are pure frame instance info (45 triples per frame).
+</p>
+
+<p>
+I extracted all triples about <code>iran_missile_fullTextAnnotation_sentence_52</code> into file <a href="./iran_missile_sentence_52.ttl">./iran_missile_sentence_52.ttl</a>.
+This is sentence 3 of paragraph 10 of a fullTextAnnotation corpus named "iran_missile" and says:
+</p>
+
+<p>
+<i>This project was focused on the development of a longer ranged ( 150 - 200 km ) and more heavily armed version of the Israeli Gabriel anti - ship missile ( not as sometimes reported with the development of a ballistic missile based upon Israeli Jericho surface - to - surface missile technology ) .</i>
+</p>
+
+<p>
+Extracting the triples was easy to do since the URLs of nodes in these triples share the same base:<br  />
+<code>http://www.ontologydesignpatterns.org/ont/framenet/abox/nti__iran_missile_fullTextAnnotation_sentence_52_</code>.
+</p>
+
+<p>
+This file played a crucial role in allowing understanding the structure of FN RDF data and the meaning of most fields
+(see the <b>fntbox</b> diagram and field descriptions above).
+</p>
+<ul class="org-ul">
+<li>This subset includes 6 manually annotated frames: <i>Gizmo</i>, Bearing_arms, Cause_to_make_progress, Cause_to_make_progress, Project, Type
+</li>
+<li>SEMAFOR <a href="http://demo.ark.cs.cmu.edu/parse?sentence=This%20project%20was%20focused%20on%20the%20development%20of%20a%20longer%20ranged%20(%20150%20-%20200%20km%20)%20and%20more%20heavily%20armed%20version%20of%20the%20Israeli%20Gabriel%20anti%20-%20ship%20missile%20(%20not%20as%20sometimes%20reported%20with%20the%20development%20of%20a%20ballistic%20missile%20based%20upon%20Israeli%20Jericho%20surface%20-%20to%20-%20surface%20missile%20technology%20)%20">reports these frames</a> (except <i>Gizmo</i>), and a number of smaller frames (often consisting of a single word): 
+Artifact Cardinal_numbers Degree Duration_attribute Frequency Increment Part_inner_outer
+Part_inner_outer Place_weight_on Range Statement Vehicle Weapon Weapon Weapon
+</li>
+</ul>
+
+<p>
+"Gizmo" is invoked by this phrase: "<i>surface - to - surface missile <b>technology</b></i>". It is not recognized by SEMAFOR probably because it may have an older set of frame definitions.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Comparing FN to NIF</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Since our goal is to integrate FN to NIF, we'll start with a comparison between the two. We presuppose the reader knows NIF.
+See [<a href="#NIF">2</a>] for a description of NIF, and [<a href="#LLD-intro">1</a>] for a brief overview of NIF and related ontologies. 
+An extensive bibliography is available <a href="https://www.zotero.org/groups/linguistic_ld/items">on Zotero</a>.
+</p>
+
+<p>
+The basic NIF class and property diagram is:<br  />
+<img src="./img/NIF-schema.png" alt="NIF-schema.png" />
+</p>
+</div>
+
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Text Framing</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Document is the basic level at which there is correspondence between FN and NIF: <code>fn:Document</code> and <code>nif:Context</code>. 
+The text is stored in <code>fn:text</code>, respectively <code>nif:isString</code>.
+</p>
+
+<p>
+Higher than document, FN has <code>fn:CorpDoc</code> or <code>fn:FullTextAnnotation</code> (two kinds of corpora). 
+NIF uses <code>nif:Context</code> for this as well, using <code>nif:broaderContext</code> to point to higher-levle contexts. However, I am not aware of NIF data actually using this property.
+</p>
+
+<p>
+Below document, <code>fn:Sentence</code> is the basic FN level to which frames are attached. Then follow <code>fn:AnnotationSet, fn:Layer, fn:Label</code>. Char offsets are attached to <code>fn:Label: fn:label_start, fn:label_end</code>.
+NIF uses a generic class <code>nif:Structure</code> with subclasses <code>Paragraph, Sentence, Phrase, Word</code>, etc. Char offsets are specified at each level (<code>nif:beginIndex, nif:endIndex</code>). One can also provide the text at this level (<code>nif:anchorOf</code>), though this is redundant because <code>referenceContext/isString</code> is mandatory and contains the full text.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Text Links</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+Every NIF string (<code>Paragraph, Sentence, Phrase, Word</code> etc) must point to the enclosing context (<code>nif:referenceContext</code>).
+NIF has property <code>nif:subString</code> (and inverse <code>nif:superString</code>) that can be used to point uniformly from higher level texts to lower level texts
+(eg from Paragraph to Sentence to Phrase to Word). However it is not often used.
+There is also a specialized property <code>nif:word</code> (inverse <code>nif:sentence</code>) that points from a sentence down to its words; but it is not declared as specialization of <code>nif:subString</code>.
+One can also make chains of sentences (<code>nif:previousSentence, nif:nextSentence</code>) and words (<code>nif:previousWord, nif:nextWord</code>), and point to the first/last word of a sentence.
+</p>
+
+<p>
+In contrast, FN has non-uniform treatment of links: to navigate from <code>Sentence</code> to its strings (<code>Label</code>), one has to follow the property path <code>entenceInDocument/annoForSentence/hasLayer/hasLabel</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Text Nodes</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+FN doesn't recommend any convention for the URLs of text nodes, but you can see a pattern in sec <a href="#sec-2-5">2.5</a>. 
+Eg <code>iran_missile_fullTextAnnotation_sentence_52_:annotationSet_6_layer_2_label_0</code> is the URL of label 0 in layer 2 in set 6 of sentence_52 
+(which is actually sentence 3 of paragraph 10 of the fullTextAnnotation corpus. 
+Note: labels, layers and sets use only even numbers in this representation). 
+This label represents the phrase <i>surface - to - surface missile</i> (from offset 282 to 253) representing <code>fe:Use.gizmo</code> of <code>frame:Gizmo</code>.
+This convention makes labels <b>relative</b> to annotation sets (frame instances), and indeed this is borne out by the fntbox class diagram (sec <a href="#sec-2-2">2.2</a>).
+</p>
+
+<p>
+In contrast, NIF strongly recommends to adopt a URL scheme that is based on character offsets and is thus <b>global</b> within the document (<code>nif:Context</code>). 
+The class <code>nif:RFC5147String</code> provides such a scheme. If the base is set to the Context URL, the above phrase would be addressed like this, where <code><></code> is the context.
+</p>
+<pre class="example">
+<#char=282,253> a nif:Phrase; nif:referenceContext <>.
+</pre>
+<p>
+The reason is to ensure interoperability between different NLP tools that all output NIF format over the same text.
+Using a uniform node addressing scheme ensures that the triples produced by the different tools will "mesh" together.
+</p>
+
+<p>
+This is perhaps the most significant difference between FN and NIF:
+</p>
+<ul class="org-ul">
+<li>FN defines Labels "as needed" by linguistic annotation, and locally.
+Several Label nodes can point to the same piece of text (offsets in the document). 
+Labels are not shared between different annotations (NLP features).
+</li>
+<li>NIF typically defines Strings for every word and sentence of the document, globally.
+Each piece of text is represented by one node (but of course, Words overlap their containing Phrases and Phrases overlap their containing Sentences).
+Several NLP features can be attached to this node:
+<ul class="org-ul">
+<li><code>nif:oliaLink</code> for syntactic individual
+</li>
+<li><code>nif:oliaCategory</code> for syntactic class
+</li>
+<li><code>its:taIdentRef</code> for Named Entity individual
+</li>
+<li><code>its:taClassRef</code> for Named Entity class (typically NERD is used for this purpose, eg nerd:Organization); etc
+</li>
+</ul>
+</li>
+</ul>
+
+<p>
+One could use the "NIF Stanbol" profile to associate several annotations with the same String. But:
+</p>
+<ul class="org-ul">
+<li>This complicates the representation
+</li>
+<li>It uses completely different properties, eg <code>fise:entity-reference</code> instead of <code>its:taIdentRef</code> and <code>fise:entity-type</code> instead of <code>its:taClassRef</code> (I have <a href="https://github.com/NLP2RDF/specification/issues/2">raised an issue</a> against the NIF ontology about this)
+</li>
+<li>The MS project has standardized on using the <b>NIF Simple</b> profile
+</li>
+</ul>
+<p>
+So it is preferable to continue to use the <b>NIF Simple</b> profile, and associate several annotations with a single word/phrase by using several <code>nif:oliaLink</code> properties.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Integrating FN in NIF</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+As we have seen in the previous section, the FN and NIF models for representing annotated text are totally different. 
+Therefore I propose to represent the minimum possible FN nodes, and point to them from <code>nif:String</code> using <code>nif:oliaLink</code>.
+</p>
+
+<p>
+The proposed representation to integrate FN in NIF is as follows. 
+Let <code><phrase></code> have head-word <code><head></code> that corresponds to some <code><lexUnit></code>, which invokes <code><frame></code>. 
+That frame has elements <code><frameElement1..N></code>, corresponding to <code><word1..N></code> (these can be words or phrases, but for simplicity I assume words).
+Just for illustration, assume the frame has a lexically omitted FE  <code><frameElementN+1></code> of type "CNI".<br  />
+<img src="./img/fe-nif.png" alt="fe-nif.png" />
+</p>
+
+<p>
+Notes:
+</p>
+<ul class="org-ul">
+<li>The easiest way to understand the representation is to think of <code>fn:AnnotationSet</code> as <b>frame instance</b> and think of <code>fn:Label</code> as <b>FE instance</b>.
+</li>
+<li>There are links between <code><frame></code>, <code><lexUnit></code>, and <code><frameElementN></code> that I don't show for simplicity. They are part of the frame definition, not frame instance
+</li>
+<li>I don't use <code>fe:label_start</code> and <code>fe:label_end</code> because those would duplicate <code>nif:beginIndex</code> and <code>nif:endIndex</code> unnecessarily
+</li>
+<li>The same word could participate in several frames (as LU or FE), in which case it will have several <code>nif:oliaLink</code>
+</li>
+<li>The lexically omitted FE (of type "CNI") has no corresponding NIF node. Nevertheless, it is a full participant in the frame
+</li>
+<li><code><word1..N></code> are of course connected to <code><phrase></code>.
+I could show this with <code>nif:superString</code> but that is not often used:
+<code>nif:dependency</code> or specific dependency parsing properties are used.
+Eg in MS, UPF generates deep dependency parsing properties <code>upf-deep:deepDependency</code> (TODO ref)
+</li>
+</ul>
+
+<p>
+Unfortunately the connection from <code><head></code> to the corresponding <code><lexUnit></code> is very indirect and goes through 3 intermediate nodes.
+The nodes <code><labelLU></code> and <code><layerLU></code> carry no information except the fixed string "Target". 
+But to be faithful to FE RDF (the fntbox ontology), we have to represent it this way.
+</p>
+</div>
+
+<div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> A note on inverses</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+As shown in sec <a href="#sec-2-2">2.2</a>, fntbox has an inverse for each property.
+However, the designers of the <a href="http://www.w3.org/TR/prov-o/#inverse-names">PROV ontology</a> have concluded that inverses actually harm interoperability by exerting a higher cost to achieve it:
+</p>
+<blockquote>
+<p>
+When all inverses are defined for all properties, modelers may choose from two logically equivalent properties when making each assertion. 
+Although the two options may be logically equivalent, developers consuming the assertions may need to exert extra effort to handle both
+(e.g., by either adding an OWL reasoner or writing code and queries to handle both cases). 
+This extra effort can be reduced by preferring one inverse over another.
+</p>
+</blockquote>
+<p>
+I agree with them and therefore recommend to use exactly the FN properties shown above, and <b>not</b> their inverses.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Querying FN NIF</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+FN in NIF represents a fairly complex graph structure. 
+In this section I show a few queries to extract data from that graph.
+I use SPARQL property paths (including inverses) liberally and indicate the input parameter of a query with <code>$</code>.
+I don't bother to check the types of intermediate nodes, relying that the specific FN properties will occur only on appropriate nodes.
+</p>
+
+<p>
+Find all frames of a document (nif:Context) together with the corresponding <code>fn:AnnotationSet</code>
+</p>
+<pre class="example">
+select * {
+  $context ^nif:referenceContext/nif:oliaLink ?annoSet.
+  ?annoSet fn:annotationSetFrame ?frame}
+</pre>
+
+<p>
+Find the LU corresponding to a head-word (if indeed it is the head-word of a frame-annotated phrase)
+</p>
+<pre class="example">
+select * {
+  $head nif:oliaLink [fn:label_name "Target"; ^fn:hasLabel/^fn:hasLayer/fn:annotationSetLU ?lu]}
+</pre>
+
+<p>
+Find all frames of a sentence together with the corresponding <code>fn:AnnotationSet</code>.
+As mentioned above, <code>nif:subString</code> is not often used to point out the phrases of a sentence. 
+More often, <code>nif:word</code> is used to point out the words of a sentence (that is the practice in MS anyway).
+So we cannot find the <code>fn:AnnotationSet</code> of a phrase directly: we have to go a through one of the words.
+Here we use <code>filter exists</code> over all words, another option would be to look only for the head-word (<code>fn:label_name</code> "Target").
+</p>
+<pre class="example">
+select * {
+  filter exists {$sentence nif:word/nif:oliaLink/^fn:hasLabel/^fn:hasLayer ?annoSet}
+  ?annoSet fn:annotationSetFrame ?frame}
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> Representing the Sample Sentence in FN NIF</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+In this section I represent the sample sentence from sec <a href="#sec-1-1">1.1</a> as NIF, adding FN annotations.
+<a href="./fe-nif.ttl">./fe-nif.ttl</a> represents all SEMAFOR candidate frames, and below I reproduce only the biggest frame <code>Statement</code>.
+This example is largely due to Gerard Casamayor (UPF)
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Acknowledgements</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+This work is part of the MultiSensor project that has received funding from the European Union under grant agreement FP7 610411.
+Gerard Casamayor (UPF) has driven the FN annotation in MS, provided the motivation for this paper, and discussed alternative representations using custom properties.
+</p>
+
+<p>
+Class diagrams are made with <a href="http://plantuml.sourceforge.net">PlantUML</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> References</h2>
+<div class="outline-text-2" id="text-6">
+<ol class="org-ol">
+<li><a id="LLD-intro" name="LLD-intro"></a>Alexiev V. <a href="http://vladimiralexiev.github.io/Multisensor/20141008-Linguistic-LD">Linguistic Linked Data presentation</a>, Multisensor Project Meeting, Bonn, Germany, October 2014. 
+</li>
+<li><a id="NIF" name="NIF"></a>Hellmann S., Lehmann J., Auer S., and Brümmer M. Integrating NLP using Linked Data. In <i>International Semantic Web Conference</i> (ISWC) 2013.
+</li>
+<li><a id="FN-MASC" name="FN-MASC"></a>Ide N., FrameNet and Linked Data. In <i>Frame Semantics in NLP: A Workshop in Honor of Chuck Fillmore (1929–2014)</i>, pages 18–21. Baltimore, Maryland USA, 27 June 2014.
+</li>
+<li><a id="FN-LOD" name="FN-LOD"></a>Nuzzolese A.G., Gangemi A., and Presutti V. Gathering lexical linked data and knowledge patterns from FrameNet. In <i>Knowledge Capture</i> (K-CAP'11), pages 41–48. June 26-29, 2011, Banff, Alberta, Canada
+</li>
+<li><a id="MASC" name="MASC"></a>Passonneau R., Baker C., Fellbaum C., and Ide N. The MASC Word Sense Sentence Corpus. In <i>Language Resources and Evaluation Conference</i> (LREC-12), Istanbul, Turkey.
+</li>
+<li><a id="FN-book" name="FN-book"></a>Ruppenhofer J., Ellsworth M., Petruck M.R.L, Johnson C.R., Scheffczyk J. <i>FrameNet II: Extended Theory and Practice</i>, Sep 2010
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2015-08-03</p>
+<p class="author">Author: Vladimir Alexiev, Data and Ontology Management group, Ontotext Corp</p>
+<p class="date">Created: 2015-08-03 Mon 09:18</p>
+<p class="creator">Emacs 24.3.91.1 (Org mode 8.2.7c)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
