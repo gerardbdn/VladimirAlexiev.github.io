@@ -1,5 +1,5 @@
 #+TITLE: Sex or Gender?
-#+DATE: 2015-02-13
+#+DATE: 2015-08-04
 #+AUTHOR: Vladimir Alexiev
 #+EMAIL: vladimir.alexiev@ontotext.com
 #+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline author:t c:nil
@@ -14,13 +14,13 @@
 
 * Intro
 #+BEGIN_VERSE
-Sex or Gender? --Question on a form
-Sex! --Answer provided
+Sex --Question on a form
+Lots! --Answer provided
 #+END_VERSE
 
-While working on ULAN LOD, I wondered how should we map the ULAN sex field.
+While working on ULAN LOD, I wondered how should we map the ULAN field "sex".
 
-So I did a small review of available LOD properties and values. 
+So I did a small review of available LOD properties and values.
 
 Everyone agrees on male/female but there are other values as well.
 Read the discussion on Wikidata prop [[https://www.wikidata.org/wiki/Property_talk:P21#Transgender_.2F_Cisgender_changes][sex or gender (P21)]] to learn more than you ever wanted on the topic, including the difference between sex and gender.
@@ -58,7 +58,7 @@ The ULAN database field "sex" has these values:
 - Other: neither male nor female (eg hermaphrodite)
 ULAN includes a few <named animals> under ulan:500353455, for which also male/female is used.
 
-The following values won't be used
+The following database values won't be used
 - Transgender: will be replaced with Other
 - Unknown: the default for loads, when gender is not indicated by the contributor or otherwise we do not know it. Will be skipped
 - N/A: for corporate bodies. Will be skipped
@@ -77,17 +77,17 @@ AAT also has a concept that won't be used
 - [[http://xmlns.com/foaf/spec/#term_gender][foaf:gender]] is literal, with recommended values "male", "female" and "other values may be used, but are not enumerated here"
 - [[http://schema.org/gender][schema:gender]] is literal, with no recommended values
 
-** RDA 
-The RDA [[http://rdvocab.info/termList/gender][termList/gender]] is not yet online but is [[https://github.com/vocabhub/RDVocab/blob/master/termList/gender.rdf][available on github]]. It has these limited values:
+** RDA
+The RDA [[http://www.rdaregistry.info/termList/gender/][termList/gender]] is now online at http://www.rdaregistry.info. It has these limited values:
 - 1002 male
 - 1001 female
 - 1003 not known
 
-I wonder what RDA would say for the aforementioned S. Bear Bergman ([[https://www.wikidata.org/wiki/Q185735][wd:Q185735]], [[https://viaf.org/viaf/26494357/][viaf:26494357]]).
+I wonder what RDA would have to say about the aforementioned S. Bear Bergman ([[https://www.wikidata.org/wiki/Q185735][wd:Q185735]], [[https://viaf.org/viaf/26494357/][viaf:26494357]]).
 
 ** Wikidata
-Wikidata prop [[https://www.wikidata.org/wiki/Property_talk:P21][sex or gender (P21)]] has the most recommended values:
-- for persons: male (Q6581097), female (Q6581072), intersex (Q1097630), hermaphrodite (Q303479), transgender (Q189125), transgender female (Q1052281), transgender male (Q2449503), genderqueer (Q48270), fa'afafine (Q1399232), māhū (Q3277905), kathoey (Q746411), fakaleiti (Q350374), hijra (Q660882) ; 
+Wikidata prop [[https://www.wikidata.org/wiki/Property_talk:P21][sex or gender (P21)]] has the most values:
+- for persons: male (Q6581097), female (Q6581072), intersex (Q1097630), hermaphrodite (Q303479), transgender (Q189125), transgender female (Q1052281), transgender male (Q2449503), genderqueer (Q48270), fa'afafine (Q1399232), māhū (Q3277905), kathoey (Q746411), fakaleiti (Q350374), hijra (Q660882) ;
 - for animals: male animal (Q44148) or female animal (Q43445)
 
 I [[https://www.wikidata.org/wiki/Property_talk:P21#Hermaphrodite_and_Transgender][added two values]]: Hermaphrodite and Transgender:
@@ -98,14 +98,9 @@ I [[https://www.wikidata.org/wiki/Property_talk:P21#Hermaphrodite_and_Transgende
 * Coreferencing
 One can use the following coreferencing statements for male/female
 #+BEGIN_SRC Turtle
-@prefix aat: <http://vocab.getty.edu/aat/>.
-aat:300189559 skos:exactMatch <http://www.wikidata.org/entity/Q6581097>, <http://rdaregistry.info/termList/gender/1002>. # male
-aat:300189557 skos:exactMatch <http://www.wikidata.org/entity/Q6581072>, <http://rdaregistry.info/termList/gender/1001>. # female
+@prefix aat:   <http://vocab.getty.edu/aat/>.
+@prefix wd:    <http://www.wikidata.org/entity/>.
+@prefix rdagn: <http://rdaregistry.info/termList/gender/>.
+aat:300189559 skos:exactMatch wd:Q6581097, rdaGender:1002. # male
+aat:300189557 skos:exactMatch wd:Q6581072, rdaGender:1001. # female
 #+END_SRC
-
-NOTE: ox-html currently doesn't escape properly so please copy this below from the page *source*:
-#+BEGIN_EXAMPLE
-@prefix aat: <http://vocab.getty.edu/aat/>.
-aat:300189559 skos:exactMatch <http://www.wikidata.org/entity/Q6581097>, <http://rdaregistry.info/termList/gender/1002>. # male
-aat:300189557 skos:exactMatch <http://www.wikidata.org/entity/Q6581072>, <http://rdaregistry.info/termList/gender/1001>. # female
-#+END_EXAMPLE

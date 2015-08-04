@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Sex or Gender?</title>
-<!-- 2015-02-13 Fri 12:23 -->
+<!-- 2015-08-04 Tue 16:03 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Vladimir Alexiev" />
@@ -93,7 +93,7 @@
 h1,h2,h3,h4,h5,h6,h7 {font-family: Arial}
 // don't want empty lines in auto-postamble
 .author, .date, .creator {-webkit-margin-before: 0em; -webkit-margin-after: 0em}
-// style for #+begin_abstract
+// style for #+BEGIN_ABSTRACT
 .abstract {margin: 1em; padding: 1em; border: 1px solid black}
 .abstract:before {content: "Abstract: "; font-weight: bold}
 // center the preamble (author name) and make it bigger
@@ -101,7 +101,7 @@ h1,h2,h3,h4,h5,h6,h7 {font-family: Arial}
 // table headers aligned same as table data
 th.left     {text-align:left}
 th.right    {text-align:right}
-// table horizontal&vertical borders. First value is top&bottom, second is left&right. http://www.w3schools.com/css/css_border.asp
+// table horizontal & vertical borders. First value is top & bottom, second is left & right. http://www.w3schools.com/css/css_border.asp
 th, td {border-width: 1px; border-style: solid solid; border-spacing: 2px 2px; padding:4px 2px}
 // colored TODO keywords
 .CANCELED   {color: blue}
@@ -159,6 +159,10 @@ for the JavaScript code in this tag.
 </script>
 </head>
 <body>
+<div id="preamble" class="status">
+<p class="author">Author: Vladimir Alexiev (<a href="mailto:vladimir.alexiev@ontotext.com">vladimir.alexiev@ontotext.com</a>)</p>
+<p class="date">Date: 2015-08-04</p>
+</div>
 <div id="content">
 <h1 class="title">Sex or Gender?</h1>
 <div id="table-of-contents">
@@ -188,16 +192,16 @@ for the JavaScript code in this tag.
 <h2 id="sec-1"><span class="section-number-2">1</span> Intro</h2>
 <div class="outline-text-2" id="text-1">
 <p class="verse">
-Sex or Gender? –Question on a form<br  />
-Sex! –Answer provided<br  />
+Sex &#x2013;Question on a form<br  />
+Lots! &#x2013;Answer provided<br  />
 </p>
 
 <p>
-While working on ULAN LOD, I wondered how should we map the ULAN sex field.
+While working on ULAN LOD, I wondered how should we map the ULAN field "sex".
 </p>
 
 <p>
-So I did a small review of available LOD properties and values. 
+So I did a small review of available LOD properties and values.
 </p>
 
 <p>
@@ -245,7 +249,7 @@ Now let's find out how many humans have a gender (excluding unknown,  male anima
 Since there's a lot, we use the <a href="http://wdq.wmflabs.org/api_documentation.html">WDQ API</a> to just count, returning "noitems":
 </p>
 <pre class="example">
-http://wdq.wmflabs.org/api?q=CLAIM[21] AND NOCLAIM[21:4294967294] AND NOCLAIM[21:44148] AND NOCLAIM[21:43445]&noitems=1
+http://wdq.wmflabs.org/api?q=CLAIM[21] AND NOCLAIM[21:4294967294] AND NOCLAIM[21:44148] AND NOCLAIM[21:43445]&amp;noitems=1
 </pre>
 
 <p>
@@ -275,11 +279,11 @@ The ULAN database field "sex" has these values:
 </li>
 </ul>
 <p>
-ULAN includes a few <named animals> under ulan:500353455, for which also male/female is used.
+ULAN includes a few &lt;named animals&gt; under ulan:500353455, for which also male/female is used.
 </p>
 
 <p>
-The following values won't be used
+The following database values won't be used
 </p>
 <ul class="org-ul">
 <li>Transgender: will be replaced with Other
@@ -334,7 +338,7 @@ AAT also has a concept that won't be used
 <h3 id="sec-2-4"><span class="section-number-3">2.4</span> RDA</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
-The RDA <a href="http://rdvocab.info/termList/gender">termList/gender</a> is not yet online but is <a href="https://github.com/vocabhub/RDVocab/blob/master/termList/gender.rdf">available on github</a>. It has these limited values:
+The RDA <a href="http://www.rdaregistry.info/termList/gender/">termList/gender</a> is now online at <a href="http://www.rdaregistry.info">http://www.rdaregistry.info</a>. It has these limited values:
 </p>
 <ul class="org-ul">
 <li>1002 male
@@ -346,7 +350,7 @@ The RDA <a href="http://rdvocab.info/termList/gender">termList/gender</a> is not
 </ul>
 
 <p>
-I wonder what RDA would say for the aforementioned S. Bear Bergman (<a href="https://www.wikidata.org/wiki/Q185735">wd:Q185735</a>, <a href="https://viaf.org/viaf/26494357/">viaf:26494357</a>).
+I wonder what RDA would have to say about the aforementioned S. Bear Bergman (<a href="https://www.wikidata.org/wiki/Q185735">wd:Q185735</a>, <a href="https://viaf.org/viaf/26494357/">viaf:26494357</a>).
 </p>
 </div>
 </div>
@@ -355,10 +359,10 @@ I wonder what RDA would say for the aforementioned S. Bear Bergman (<a href="htt
 <h3 id="sec-2-5"><span class="section-number-3">2.5</span> Wikidata</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
-Wikidata prop <a href="https://www.wikidata.org/wiki/Property_talk:P21">sex or gender (P21)</a> has the most recommended values:
+Wikidata prop <a href="https://www.wikidata.org/wiki/Property_talk:P21">sex or gender (P21)</a> has the most values:
 </p>
 <ul class="org-ul">
-<li>for persons: male (Q6581097), female (Q6581072), intersex (Q1097630), hermaphrodite (Q303479), transgender (Q189125), transgender female (Q1052281), transgender male (Q2449503), genderqueer (Q48270), fa'afafine (Q1399232), māhū (Q3277905), kathoey (Q746411), fakaleiti (Q350374), hijra (Q660882) ; 
+<li>for persons: male (Q6581097), female (Q6581072), intersex (Q1097630), hermaphrodite (Q303479), transgender (Q189125), transgender female (Q1052281), transgender male (Q2449503), genderqueer (Q48270), fa'afafine (Q1399232), māhū (Q3277905), kathoey (Q746411), fakaleiti (Q350374), hijra (Q660882) ;
 </li>
 <li>for animals: male animal (Q44148) or female animal (Q43445)
 </li>
@@ -389,27 +393,20 @@ One can use the following coreferencing statements for male/female
 </p>
 <div class="org-src-container">
 
-<pre class="src src-Turtle"><span style="color: #a020f0;">@prefix</span> <span style="color: #228b22;">aat:</span><span style="color: #008b8b;"> </span><span style="color: #0000ff;"><http://vocab.getty.edu/aat/></span><span style="color: #228b22;">.</span>
-<span style="color: #228b22;">aat:</span><span style="color: #008b8b;">300189559</span> <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">exactMatch</span> <span style="color: #0000ff;"><http://www.wikidata.org/entity/Q6581097></span>, <span style="color: #0000ff;"><http://rdaregistry.info/termList/gender/1002></span>. <span style="color: #b22222;"># </span><span style="color: #228b22;">male</span>
-<span style="color: #228b22;">aat:</span><span style="color: #008b8b;">300189557</span> <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">exactMatch</span> <span style="color: #0000ff;"><http://www.wikidata.org/entity/Q6581072></span>, <span style="color: #0000ff;"><http://rdaregistry.info/termList/gender/1001></span>. <span style="color: #b22222;"># female</span>
+<pre class="src src-Turtle"><span style="color: #a020f0;">@prefix</span> <span style="color: #228b22;">aat:</span><span style="color: #008b8b;"> </span>  <span style="color: #0000ff;">&lt;http://vocab.getty.edu/aat/&gt;</span>.
+<span style="color: #a020f0;">@prefix</span> <span style="color: #228b22;">wd:</span><span style="color: #008b8b;"> </span>   <span style="color: #0000ff;">&lt;http://www.wikidata.org/entity/&gt;</span>.
+<span style="color: #a020f0;">@prefix</span> <span style="color: #228b22;">rdagn:</span><span style="color: #008b8b;"> </span><span style="color: #0000ff;">&lt;http://rdaregistry.info/termList/gender/&gt;</span><span style="color: #228b22;">.</span>
+<span style="color: #228b22;">aat:</span><span style="color: #008b8b;">300189559</span> <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">exactMatch</span> <span style="color: #228b22;">wd:</span><span style="color: #008b8b;">Q6581097,</span> <span style="color: #228b22;">rdaGender:</span><span style="color: #008b8b;">1002</span>. <span style="color: #b22222;"># </span><span style="color: #228b22;">male</span>
+<span style="color: #228b22;">aat:</span><span style="color: #008b8b;">300189557</span> <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">exactMatch</span> <span style="color: #228b22;">wd:</span><span style="color: #008b8b;">Q6581072,</span> <span style="color: #228b22;">rdaGender:</span><span style="color: #008b8b;">1001</span>. <span style="color: #b22222;"># female</span>
 </pre>
 </div>
-
-<p>
-NOTE: ox-html currently doesn't escape properly so please copy this below from the page <b>source</b>:
-</p>
-<pre class="example">
-@prefix aat: <http://vocab.getty.edu/aat/>.
-aat:300189559 skos:exactMatch <http://www.wikidata.org/entity/Q6581097>, <http://rdaregistry.info/termList/gender/1002>. # male
-aat:300189557 skos:exactMatch <http://www.wikidata.org/entity/Q6581072>, <http://rdaregistry.info/termList/gender/1001>. # female
-</pre>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: 2015-02-13</p>
+<p class="date">Date: 2015-08-04</p>
 <p class="author">Author: Vladimir Alexiev</p>
-<p class="date">Created: 2015-02-13 Fri 12:23</p>
+<p class="date">Created: 2015-08-04 Tue 16:03</p>
 <p class="creator">Emacs 25.0.50.1 (Org mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
