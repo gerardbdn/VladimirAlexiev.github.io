@@ -1,7 +1,7 @@
 #+COMMENT: -*- fill-column: 100 -*-
 #+STARTUP: showeverything
 #+TITLE: Integrating FrameNet in NIF
-#+DATE: 2015-08-03
+#+DATE: 2015-08-10
 #+AUTHOR: Vladimir Alexiev, Data and Ontology Management group, Ontotext Corp
 #+EMAIL: vladimir.alexiev@ontotext.com
 #+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline author:t c:nil
@@ -12,6 +12,8 @@
 #+KEYWORDS:
 #+LANGUAGE: en
 #+EXCLUDE_TAGS: noexport
+
+# TODO: emit all frames together with their score. nif:oliaConf...
 
 * Introduction
 FrameNet (FN) [[[FN-book]]] is a large-scale linguistic resource [[https://framenet.icsi.berkeley.edu/fndrupal/][developed at Berkeley]]. 
@@ -48,16 +50,17 @@ It may be easier to see the candidate frames in SEMAFOR's vertical layout. Here 
 
 SEMAFOR also offers a JSON format ([[./SEMAFOR.json]]) where one can see the candidate frames and their targets (LUs) and FEs.
 It also includes a ~score~ for each frame, which can help to pick the best frames
+| <c>     | <c>       | <c>            | <c>   | <c>            | <c>         |
 | *frame* | Statement | Calendric_unit | Topic | Coming_up_with | Competition |
-| *score* |     113.2 |           30.4 |  25.4 |           50.7 |        54.6 |
+| *score* | 113.2     | 30.4           | 25.4  | 50.7           | 54.6        |
 Indeed in this case the two top-scoring candidates (~Statement~ and ~Competition~) are the best frames.
 ~Calendric_unit~ is too small (equal to ~lu:Time.statement~), ~Coming_up_with~ is wrong, and ~Topic~ is also part of the bigger frame.
 
 ** FrameNet
 Frames are developed from real-world linguistic attestations. 
 Eg the [[https://framenet2.icsi.berkeley.edu/fnReports/data/lu/lu683.xml?mode=annotation][annotations of ~lu:announce.v~]] include about 80 sentences of varying phrase forms. 
-Colors show the different FE's.
-[[./img/FN-annotation-colored.png]]\\
+Colors show the different FE's.\\
+[[./img/FN-annotation-colored.png]]
 
 Frames are extensively documented. Eg the [[https://framenet2.icsi.berkeley.edu/fnReports/data/frame/Statement.xml][documentation for Statement]] includes:
 - Definitions for each FE (classified as Core, Non-Core and Extra-Thematic)
@@ -66,11 +69,11 @@ Frames are extensively documented. Eg the [[https://framenet2.icsi.berkeley.edu/
   This means that either ~Message~ or ~Topic~ is required; and either ~Medium~ or ~Speaker~ is required.
 - Frame relations, which include inheritance, using, subframe, causative/inchoative, etc. These are similar to Use Case relations but richer.
 
-Frame relations can be visualized with [[https://framenet.icsi.berkeley.edu/fndrupal/FrameGrapher][FrameGrapher]].
-[[./img/FN-grapher.gif]]\\
+Frame relations can be visualized with [[https://framenet.icsi.berkeley.edu/fndrupal/FrameGrapher][FrameGrapher]]:\\
+[[./img/FN-grapher.gif]]
 
 Eg this figure for ~Statement~ shows that:
-- ~Statement~ is inherited by: ~Complaining, Predicting, Reading_aloud, Recording, Reveal_secret, Telling~
+- The frame ~Statement~ is inherited by: ~Complaining, Predicting, Reading_aloud, Recording, Reveal_secret, Telling~ (red arrows)
 - ~Statement~ uses: ~Communication~ (green arrows)
 - ~Statement~ is used by: ~Adducing, Attributed_information, Chatting, Judgment_communication, Renunciation, Unattributed_information~ (green arrows)
 - The FE relations between ~Statement~ and ~Telling~ are also shown, together with their Core (c) or Non-Core (nc) status. 
@@ -78,10 +81,10 @@ Eg this figure for ~Statement~ shows that:
   but ~fe:Addressee.telling~ is Core because you have to tell /someone/. 
 
 * FN Ontologies
-The OWL ontology representation of FN is described in [[[FN-LOD]]], but a lot of technical details are missing, so one has to read the FN Book [[[FN-book]]] to understand the ontologies.
-- There is a partial ontology diagram, but it doesn't show all classes and relations
+The OWL ontology representation of FN is described in the paper [[[FN-LOD]]], but a lot of technical details are missing, so one has to read the FN Book [[[FN-book]]] to understand the ontologies.
+- There is a partial ontology diagram in the paper, but it doesn't show all classes and relations
 - Some elements are comments extensively using texts from the FN Book, but I have found I understand them better by reading the book, since these comments don't capture the context.
-- Many elements are not documented, eg class ~fn:Header~, data property ~fn:frame_cBy~ (xsd:string). One can only surmise that it's the ID of the person who created the frame.
+- Many elements are not documented, eg class ~fn:Header~, data property ~fn:frame_cBy~ (xsd:string), etc. One can only surmise that it's the ID of the person who created the frame.
 
 In this section I describe the available FN ontologies and RDF data files, provide diagrams to facilitate understanding, and derived files that are easier to consume.
 
@@ -99,7 +102,7 @@ FN uses the following prefixes. I have started registering them in http://prefix
 Th FN "terminology box" [[http://www.ontologydesignpatterns.org/ont/framenet/tbox/schema.owl][fntbox]] is the FN metamodel.
 It's an OWL ontology that uses Restrictions extensively, and is easiest to understand in Manchester notation: [[./fntbox.omn]].
 It has 16 Classes, 67 ObjectProperties, 49 DataProperties.
-[[http://www.ontologydesignpatterns.org/ont/framenet/html/][Online documentation]] made with OWLDoc is available.
+[[http://www.ontologydesignpatterns.org/ont/framenet/html/][Online documentation]] (made with OWLDoc) is available.
 
 Most relations have inverses, which actually hinders the understanding of the "hierarchy" of data.
 I made a diagram showing all classes (source file [[./fntbox.puml]]), their relations (object properties) and fields (data properties).
@@ -125,7 +128,7 @@ First are classes that represent texts and their annotation with frame instances
   - Plays the role of LU instance. This is indicated by ~fn:label_name~ being "Target", and it's the single ~Label~ in a layer having the same ~fn:layer_name~
   - Or plays the role of FE instance. In this case ~fn:label_FE~ points to the FE definition (eg ~fe:Speaker.statement~) and ~fn:label_name~ corresponds (eg "Speaker")
   - Or carries a grammatical or POS tag in ~label_name~
-  - Or indicates a lexically omitted FE (see [[[FN-Book]]] sec 3.2.3 Null instantiation) using ~fn:label_itype~ (eg "CNI", "DNI", etc), in which case ~label_start, label_end~ are omitted
+  - Or indicates a lexically omitted FE (see [[[FN-book]]] sec 3.2.3 Null instantiation) using ~fn:label_itype~ (eg "CNI", "DNI", etc), in which case ~label_start, label_end~ are omitted
 
 Then are frame definition classes:
 - ~Frame~ is a structure that abstracts over real-world situations, obtained through linguistic attestation
@@ -135,9 +138,9 @@ Then are frame definition classes:
 - ~Lexeme~ is the linguistic representation of a LU. One LU can  have several lexemes
 - ~FrameElement~ are entities (things, actors, times, messages, etc) that participate in a frame. They are classified with ~FE_coreType~ into Core, Core-Unexpressed, Extra-Thematic, Peripheral
 - ~FECoreSet~ describes a set of alternative FEs, one of which must be present in the frame. A frame can have several core sets
-- ~SemType~ classifies frames, FEs and LUs by type. Eg often used sem types are
-  - Frame: Non-perspectivalized_frame, Non-Lexical_Frame
-  - FE: Sentient (an agent), Artifact, Message, State_of_affairs
+- ~SemType~ classifies frames, FEs and LUs by type. Eg some sem types are:
+  - for Frame: Non-perspectivalized_frame, Non-Lexical_Frame
+  - for FE: Sentient (an agent), Artifact, Message, State_of_affairs
 
 ** framenet ontology
 [[http://ontologydesignpatterns.org/cp/owl/fn/framenet.owl][framenet]] is an alternative version of fntbox.
@@ -302,10 +305,7 @@ But to be faithful to the fntbox ontology (sec [[*fntbox ontology]]), we have to
 As shown in sec [[*fntbox ontology]], fntbox has an inverse for each property.
 However, the designers of the [[http://www.w3.org/TR/prov-o/#inverse-names][PROV ontology]] have concluded that inverses actually harm interoperability by exerting a higher cost to achieve it:
 #+BEGIN_QUOTE
-When all inverses are defined for all properties, modelers may choose from two logically equivalent properties when making each assertion. 
-Although the two options may be logically equivalent, developers consuming the assertions may need to exert extra effort to handle both
-(e.g., by either adding an OWL reasoner or writing code and queries to handle both cases). 
-This extra effort can be reduced by preferring one inverse over another.
+/When all inverses are defined for all properties, modelers may choose from two logically equivalent properties when making each assertion. Although the two options may be logically equivalent, developers consuming the assertions may need to exert extra effort to handle both (e.g., by either adding an OWL reasoner or writing code and queries to handle both cases). This extra effort can be reduced by preferring one inverse over another./
 #+END_QUOTE
 I agree with them and therefore recommend to use exactly the FN properties shown above, and *not* their inverses.
 
