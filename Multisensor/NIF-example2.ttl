@@ -1,5 +1,5 @@
 # Representation of Guardian-built.txt by LinguaTec
-@base <http://www.multisensor.eu/content/Guardian-built.txt>.
+@base <http://www.multisensorproject.eu/content/Guardian-built>.
 
 # Get a lot of the used prefixes from:
 # http://prefix.cc/dbo,dc,dct,foaf,itsrdf,nerd,nif,olia,owl,time,xsd.ttl  # dbr,fise,penn,yago

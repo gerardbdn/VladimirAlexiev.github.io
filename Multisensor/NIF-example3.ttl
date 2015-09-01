@@ -14,7 +14,7 @@
 @prefix xsd:      <http://www.w3.org/2001/XMLSchema#>.
 @prefix yago:     <http://dbpedia.org/class/yago/> .
 
-@base <http://www.multisensor.eu/content/some-file>.
+@base <http://data.multisensorproject.eu/content/12486u3968u39>.
 
 <#char=1,2> nif:anchorOf "Angela Merkel";
   itsrdf:taClassRef nerd:Person;

@@ -1,25 +1,12 @@
 #+STARTUP: showeverything
 #+TITLE:   Multisensor NER Mapping
 #+AUTHOR:  vladimir.alexiev@ontotext.com
-#+DATE:    2014-12-17
+#+DATE:    2015-09-01
 #+OPTIONS: H:5 num:t toc:t \n:nil @:t ::t |:t ^:{} -:t f:t *:t <:t
 #+OPTIONS: TeX:nil LaTeX:nil skip:nil d:nil todo:t pri:nil tags:not-in-toc
 
 * Prefixes
-#+BEGIN_SRC ttl :name prefixes
-@prefix dbo:      <http://dbpedia.org/ontology/>.
-@prefix dbp:      <http://dbpedia.org/resource/>.
-@prefix dc:       <http://purl.org/dc/elements/1.1/>.
-@prefix foaf:     <http://xmlns.com/foaf/0.1/>.
-@prefix itsrdf:   <http://www.w3.org/2005/11/its/rdf#>.
-@prefix nerd:     <http://nerd.eurecom.fr/ontology#>.
-@prefix nif:      <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#>.
-@prefix rdau:     <http://rdaregistry.info/Elements/u/>.
-@prefix schema:   <http://schema.org/>.
-@prefix time:     <http://www.w3.org/2006/time#>.   # seeAlso http://www.w3.org/TR/owl-time
-@prefix xsd:      <http://www.w3.org/2001/XMLSchema#>.
-@prefix yago:     <http://dbpedia.org/class/yago/> .
-#+END_SRC
+[[../prefixes.ttl]]
 
 * Mapping
 | *Class* /Property | *Type/enum*      | *Mapping*                                              | *Notes*                                                     |
@@ -82,11 +69,11 @@ We have the following options for Named Entity URLs:
 1. Global: it's best to use global DBpedia URLs if they can be identified, as explained in [[./NIF-example2.ttl]]
    : http://dbpedia.org/resource/Angela_Merkel
 2. Project: we could use a project-global namespace for entities, eg
-   : http://www.multisensor.eu/entity/Person/Angela_Merkel
+   : http://www.multisensorproject.eu/entity/Person/Angela_Merkel
    (Eg the [[http://tag.ontotext.com]] demo uses such URLs for entities it cannot identify in global datasets).
    However, this won't allow different NEs with the same name across documents
 3. Document: [[./NIF-example3.ttl]] uses per-document URLs, eg
-   : http://www.multisensor.eu/content/some-file#Person=Angela_Merkel
+   : http://www.multisensorproject.eu/content/12542546#Person=Angela_Merkel
    (In this and the previous option, the entity URI is made from the entity text, replacing punctuation with "_"). 
    This still does not allow two different John_Smiths in one document, but the chance of this happening is smaller.
 Slash vs Hash: everyting after a # is fetched with one HTTP request.

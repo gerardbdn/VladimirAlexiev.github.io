@@ -2,7 +2,7 @@
 @prefix nif:      <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#>.
 
 # NOTE1: namespace for our own properties
-@prefix ms:       <http://data.multisensor.eu/ontology#>.
+@prefix ms:       <http://data.multisensorproject.eu/ontology#>.
 
 # NOTE2: Multisensor ontology. This will be stated only once, NOT with every sentence
 
@@ -10,30 +10,30 @@ ms:negativePolarityValue a owl:DatatypeProperty;
   rdfs:domain marl:Opinion;
   rdfs:label "Negative polarity value"@en;
   rdfs:comment "A sentence may include both negative and positive polarity words"@en;
-  rdfs:isDefinedBy <http://data.multisensor.eu/ontology>.
+  rdfs:isDefinedBy <http://data.multisensorproject.eu/ontology>.
 
 ms:positivePolarityValue a owl:DatatypeProperty;
   rdfs:domain marl:Opinion;
   rdfs:label "Positive polarity value"@en;
   rdfs:comment "A sentence may include both negative and positive polarity words"@en;
-  rdfs:isDefinedBy <http://data.multisensor.eu/ontology>.
+  rdfs:isDefinedBy <http://data.multisensorproject.eu/ontology>.
 
 ms:sentimentalityValue a owl:DatatypeProperty;
   rdfs:domain marl:Opinion;
   rdfs:label "Sentimentality value"@en;
   rdfs:comment "Difference between the positive and negative polarity of an opinion (eg a sentence)"@en;
-  rdfs:isDefinedBy <http://data.multisensor.eu/ontology>.
+  rdfs:isDefinedBy <http://data.multisensorproject.eu/ontology>.
 
 # NOTE3: Sentences and the context are already demarkated by another MS partner
-<http://data.multisensor.eu/content/guid#char=0,2000> a nif:Context;
+<http://data.multisensorproject.eu/content/guid#char=0,2000> a nif:Context;
   nif:isString "This is the whole text of the SIMMO. It should continue for 2000 chars but I'll stop here"@en.
-<http://data.multisensor.eu/content/guid#char=100,200> a nif:Sentence;
-  nif:referenceContext <http://data.multisensor.eu/content/guid#char=0,2000>.
+<http://data.multisensorproject.eu/content/guid#char=100,200> a nif:Sentence;
+  nif:referenceContext <http://data.multisensorproject.eu/content/guid#char=0,2000>.
 
 # Sentiment of the whole news item (SIMMO)
-<http://data.multisensor.eu/content/guid#char=0,2000>
-  nif:opinion <http://data.multisensor.eu/content/guid#char=0,2000-sentiment>.
-<http://data.multisensor.eu/content/guid#char=100,200-sentiment>
+<http://data.multisensorproject.eu/content/guid#char=0,2000>
+  nif:opinion <http://data.multisensorproject.eu/content/guid#char=0,2000-sentiment>.
+<http://data.multisensorproject.eu/content/guid#char=100,200-sentiment>
   a marl:Opinion;
   marl:minPolarityValue    -5.0; # sentiment range: minimum
   marl:maxPolarityValue     5.0; # sentiment range: maximum
@@ -43,9 +43,9 @@ ms:sentimentalityValue a owl:DatatypeProperty;
   ms:sentimentalityValue    5.5. # difference of the two polar opinions (how strong is the sentiment)
 
 # Sentiment of a sentence. Structured exactly as above
-<http://data.multisensor.eu/content/guid#char=100,200>
-  nif:opinion <http://data.multisensor.eu/content/guid#char=100,200-sentiment>.
-<http://data.multisensor.eu/content/guid#char=100,200-sentiment>
+<http://data.multisensorproject.eu/content/guid#char=100,200>
+  nif:opinion <http://data.multisensorproject.eu/content/guid#char=100,200-sentiment>.
+<http://data.multisensorproject.eu/content/guid#char=100,200-sentiment>
   a marl:Opinion;
   marl:minPolarityValue    -5.0;
   marl:maxPolarityValue     5.0;
@@ -54,4 +54,4 @@ ms:sentimentalityValue a owl:DatatypeProperty;
   marl:polarityValue       -1.5;
   ms:sentimentalityValue    5.5.
 
-# NOTE4: Maybe marl:polarityValue should be the AVERAGE of pos and neg not the SUM?
+# NOTE4: marl:polarityValue is the AVERAGE of pos and neg not the SUM?

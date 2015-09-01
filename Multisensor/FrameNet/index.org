@@ -1,7 +1,7 @@
 #+COMMENT: -*- fill-column: 100 -*-
 #+STARTUP: showeverything
 #+TITLE: Integrating FrameNet in NIF
-#+DATE: 2015-08-13
+#+DATE: 2015-09-01
 #+AUTHOR: Vladimir Alexiev (Ontotext Corp), Gerard Casamayor (UPF)
 #+EMAIL: vladimir.alexiev@ontotext.com, gerard.casamayor@upf.edu
 #+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline author:t c:nil
@@ -103,7 +103,7 @@ The OWL ontology representation of FN is described in the paper [[[FN-LOD]]], bu
 In this section we describe the available FN ontologies and RDF data files, provide diagrams to facilitate understanding, and derived files that are easier to consume.
 
 ** Prefixes
-FN uses the following prefixes. We have started registering them in http://prefix.cc (one can submit only one prefix per day). All prefixes used by MS are available in [[./prefixes.ttl]].
+FN uses the following prefixes. We have started registering them in http://prefix.cc (one can submit only one prefix per day). All prefixes used by MS are available in [[../prefixes.ttl]].
 | prefix | URL                                                              | description         |
 |--------+------------------------------------------------------------------+---------------------|
 | fn:    | http://www.ontologydesignpatterns.org/ont/framenet/tbox/         | FN metamodel (tbox) |
@@ -314,8 +314,11 @@ Notes:
 - The same word could participate in several frames (as LU or FE), in which case it will have several ~nif:oliaLink~
 - The lexically omitted FE (of type "CNI") has no corresponding NIF node. Nevertheless, it is a full participant in the frame
 - /word1..N/ are of course connected to /phrase/.
-- The nodes /labelLU/ and /layerLU/ are redundant and carry no information (except the fixed string "Target"), so they could be omitted.
-  We have included them to be faithful to the fntbox ontology (sec [[*fntbox ontology]]).
+- The nodes /labelLU/ and /layerLU/ are redundant and carry no information (except the fixed string "Target").
+  There’s a direct link /nif:oliaLink/ from /head/ to /annoSet/, which itself points to /frame/ and /lexUnit/, 
+  so there's little reason to use the indirect path /fn:hasLayer/fn:hasLabel/.
+  We have included these nodes in the figure to be faithful to the fntbox ontology (sec [[*fntbox ontology]]).
+  But they can safely be omitted, which we have done in sec [[[* Representing the Sample Sentence in FN NIF]]]
 
 ** A note on inverses
 As shown in sec [[*fntbox ontology]], fntbox has an inverse for each property.

@@ -1,10 +1,10 @@
-@base <http://data.multisensor.eu/content/GUID> .
+@base <http://data.multisensorproject.eu/content/12486u3968u39>> .
 @prefix fe:       <http://www.ontologydesignpatterns.org/ont/framenet/abox/fe/> .
 @prefix fn:       <http://www.ontologydesignpatterns.org/ont/framenet/tbox/> .
 @prefix frame:    <http://www.ontologydesignpatterns.org/ont/framenet/abox/frame/> .
 @prefix its:      <http://www.w3.org/2005/11/its/rdf#> .
 @prefix lu:       <http://www.ontologydesignpatterns.org/ont/framenet/abox/lu/> .
-@prefix ms:       <http://data.multisensor.eu/ontology@> .
+@prefix ms:       <http://data.multisensorproject.eu/ontology#> .
 @prefix nerd:     <http://nerd.eurecom.fr/ontology#> .
 @prefix nif:      <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
 @prefix penn-dep: <http://taln.upf.edu/olia-penn-dep-syntax#> .
