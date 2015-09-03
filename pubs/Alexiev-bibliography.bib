@@ -397,6 +397,18 @@ However, these means are far from complete, and in some cases there is little gu
   abstract     = {The GVP Ontology defines classes, properties and values (skos:Concepts) used in GVP LOD. As of version 3.0, it is complete regarding AAT, TGN and ULAN, and will be extended in time with more elements needed for other GVP vocabularies (CONA). It uses the SKOS, SKOS-XL, ISO 25964; DC, DCT, BIBO, FOAF, BIO, Schema, PROV, WGS84 ontologies. Description at http://lov.okfn.org/dataset/lov/details/vocabulary_gvp.html},
 }
 
+@TechReport{Alexiev-ExtendingOWL2,
+  author       = {Vladimir Alexiev},
+  title        = {{Extending OWL2 Property Constructs with OWLIM Rules}},
+  institution  = {Ontotext Corp},
+  year         = 2014,
+  number       = {unpublished draft},
+  month        = sep,
+  url          = {http://vladimiralexiev.github.io/pres/extending-owl2},
+  keywords     = {OWL2, Property Chain Axiom, sub-property, property inferencing},
+  abstract     = {While OWL2 has very powerful class constructs, its property constructs are quite weak. We propose several extensions that we found useful, and implement them using OWLIM rules},
+}
+
 @InProceedings{Alexiev2014-GVP-LOD,
   author       = {Vladimir Alexiev},
   title        = {{Getty Vocabulary Program LOD: Ontologies and Semantic Representation}},
@@ -420,12 +432,17 @@ However, these means are far from complete, and in some cases there is little gu
 
 @Article{Alexiev2015-IJDL,
   author       = {Vladimir Alexiev and Jutta Lindenthal and Antoine Isaac},
-  title        = {{On Compositionality of ISO 25964 Hierarchical Relations (BTG, BTP, BTI)}},
+  title        = {{On the composition of ISO 25964 hierarchical relations (BTG, BTP, BTI)}},
   journal      = {International Journal on Digital Libraries},
   year         = 2015,
-  volume       = {(accepted)},
-  month        = may,
-  url          = {https://drive.google.com/file/d/0B7BFygWDV2_PNkQycHl0bWNLak0},
+  pages        = {1-10},
+  month        = aug,
+  url          = {http://dx.doi.org/10.1007/s00799-015-0162-2},
+  keywords     = {Thesauri; ISO 25964; BTG; BTP; BTI; Broader generic; Broader partitive; Broader instantial; AAT},
+  issn         = {1432-5012},
+  publisher    = {Springer Berlin Heidelberg},
+  language     = {English},
+  doi          = {10.1007/s00799-015-0162-2},
 }
 
 @InProceedings{Alexiev2015-dbpedia-problems,
@@ -618,7 +635,7 @@ However, these means are far from complete, and in some cases there is little gu
   abstract     = {Poster. As part of the Europeana Creative project, Ontotext added 2 additional channels to Europeana Labs: OAI & SPARQL, complementing the API. OAI is used for bulk donwload (e.g. to update the semantic repository). SPARQL can answer queries that the API cannot, e.g. linking objects, exploring contextual entities (e.g. parent places or author life dates), analytics/charts},
 }
 
-@InProceedings{TagarevTolosiAlexiev-domain,
+@InProceedings{TagarevTolosiAlexiev-FD,
   author       = {Andrey Tagarev and Laura Tolosi and Vladimir Alexiev},
   title        = {{Domain-specific modeling: Towards a Food and Drink Gazetteer}},
   booktitle    = {First International Keystone Conference},
@@ -630,3 +647,14 @@ However, these means are far from complete, and in some cases there is little gu
   abstract     = {Our goal is to build a Food and Drink (FD) gazetteer that can serve for classification of general, FD-related concepts, efficient faceted search or automated semantic enrichment. Fully supervised design of a domain-specific models "ex novo" is not scalable. Integration of several ready knowledge bases is tedious and does not ensure coverage. Completely data-driven approaches require a large amount of training data, which is not always available. In cases when the domain is not very specific (as the FD domain), re-using encyclopedic knowledge bases like Wikipedia may be a good idea. We propose here a semi-supervised approach, that uses a restricted Wikipedia as a base for the modeling, achieved by selecting a domain-relevant Wikipedia category as root for the model and all its subcategories, combined with expert and data-driven pruning of irrelevant categories.},
 }
 
+@TechReport{AlexievCasamayor-FN-NIF,
+  author       = {Vladimir Alexiev and Gerard Casamayor},
+  title        = {{Integrating FrameNet in NIF}},
+  institution  = {Ontotext Corp and UPF},
+  year         = 2015,
+  number       = {draft},
+  month        = {oct},
+  url          = {http://vladimiralexiev.github.io/Multisensor/FrameNet/},
+  keywords     = {FrameNet, NIF, NLP2RDF, RDF},
+  abstract     = {FrameNet (FN) is a large-scale linguistic resource developed at Berkeley. It describes word senses and the situations they can play in ("valences") in terms of frames, frame elements and the links between them. FN has been converted to Linked Open Data (LOD) by ISTC-CNR, together with a large corpus of text annotated with FN. The NLP Interchange Format (NIF) represents linguistic data as RDF, faciliating interoperation of NLP tools and extensible data exchange. We review the FN-LOD representation and describe a possible way to integrate FN in NIF, proposed to be used in the MultiSensor project.},
+}

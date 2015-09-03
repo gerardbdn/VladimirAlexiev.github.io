@@ -1,7 +1,7 @@
 #+COMMENT: -*- coding: utf-8; fill-column: 5000 -*-
 #+STARTUP: showeverything
 #+TITLE: Name Data Sources for Semantic Enrichment
-#+DATE: 2015-02-05
+#+DATE: 2015-05-04
 #+AUTHOR: Vladimir Alexiev, Data and Ontology Management group, Ontotext Corp
 #+EMAIL: vladimir.alexiev@ontotext.com
 #+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline author:t c:nil
@@ -214,7 +214,7 @@ Wikidata statements (claims) may carry complex associated information in *qualif
 - The files marked "+" are derived from "statements". They are quite simpler to work with, and also smaller.
 
 *** Wikidata Coverage and Type Count
-Ontotext has taken a recent [[https://www.wikidata.org/wiki/Wikidata:Project_chat#Class_Instance_Analysis][count]] of all direct type ("instance of") RDF statements as of Dec 2014. The count files are on [[https://gist.github.com/VladimirAlexiev/a866f76252a04b84d62b][Gist]]
+Ontotext has taken a recent [[https://www.wikidata.org/wiki/Wikidata:Project_chat/Archive/2015/01#Class_Instance_Analysis][count]] of all direct type ("instance of") RDF statements as of Dec 2014. The count files are on [[https://gist.github.com/VladimirAlexiev/a866f76252a04b84d62b][Gist]]
 - There are 12331093 "instance of" statements. Wikidata has 13M items, so about 93% of all items have types (if we assume that only a small percent of the items have multiple types)
 - There are 17875 classes with at least one instance, of which 6510 classes (36%) with at least 5 instances. The rest (64%) are a very long tail of items that are inappropriately used as classes, e.g. Indian Rhinoceros, Trumbull's Declaration of Independence, stud, meatloaf...
 Specific classes that are useful for Person/Organisation Recognition:
@@ -658,7 +658,7 @@ The Yago record for Cranach is at http://yago-knowledge.org/resource/Lucas_Crana
 
 ** British Museum
 The British Museum LOD collection (http://collection.britishmuseum.org) uses a number of thesauri (about 40).
-- You can see many of them in CSV format at [[ https://github.com/findsorguk/bmThesauri][Github]]
+- You can see many of them in CSV format at https://github.com/findsorguk/bmThesauri
 - The person-institution thesaurus has 176,461 entries, which you can download in a richer form [[https://github.com/VladimirAlexiev/bmThesauri/blob/master/bmPerson-institution-better.tsv.gz][here]]
 
 The Cranach record is at http://collection.britishmuseum.org/id/person-institution/23953 and has only two names: Lucas Cranach the Elder and Cranach, Lucas. So it is not considered below
@@ -675,7 +675,7 @@ Some caveats:
   : Virtuoso 08C01 Error CL...: Cluster could not connect to host 2 oplbfc3:22202 error 111
 - The update rate is unclear, so one should be careful to evaluate whether all data is present by consulting the original sources
 
-We run a query which is a combination of [[DBpedia sameAs]], [[Wikipedia Redirects]] and [[DBpedia Names]].
+We ran a query which is a combination of [[DBpedia sameAs]], [[Wikipedia Redirects]] and [[DBpedia Names]].
 The result is a table [[./from-LOD-cache.tdv]] with 216 rows. But let's check the unique labels only (there's 88) and compare to Wikipedia+VIAF
 #+BEGIN_SRC sh
 perl -pe '$_=(split/\t/)[2]; s{"(.*)"@?[\w-]*}{$1}; s{[,.]}{}g' from-LOD-cache.tdv |sort|uniq > from-LOD-uniq.txt
@@ -694,8 +694,8 @@ Overall, for any production work it's recommended to load the desired datasets t
 After fetching the name forms from all sources, we want to analyze overlaps and unique contributions.
 So we tabulate them to a common file, using common Unix tools (perl, join, uniq, sort) and Excel
 - We concatenate all files from different sources, uniquify and sort, obtaining 155 names
-- Hacky note: if working on Windows (e.g. using Cygwin), convert all files to Unix newlines: ~conv -U *.txt~
-- Don't use Unicode BOM, since sort and join don't like it
+- Note: if working on Windows (e.g. using Cygwin), convert all files to Unix newlines: ~conv -U *.txt~
+- Don't use Unicode BOM, since sort and join do not work with it
 - We do the tabulation with a series of commands like this (in *[[./cranach-table.sh]]*)
   #+BEGIN_SRC sh
   perl -pe 's{(.+)}{$1|1}' Cranach-VIAF.txt \
@@ -730,7 +730,7 @@ The result is *[[./cranach-venn.html]]*.
 
 Notes:
 - A striking revelation is that the 3 "library-tradition" datasets (VIAF, ISNI, ULAN) and the 4 "LOD-tradition datasets" (Wikidata, DBpedia, Freebase, Yago) have almost nothing in common: only 5 names. Library datasets contribute many permutations and qualifiers (e.g. "der Altere" vs "d A"), while LOD datasets contribute many languages.
-- The datasets in each "tradition" are very similar. The reason is obvious: ISNI and ULAN are fully-fledged contributors in VIAF, so VIAF subsumes them. As for the LOD datasets, each has copied from the others liberally. DBpedia appears as a subset of Wikidata only because we have selected only en, de, fr names (See [[DBpedia Names]]). Yago covers the en DBpedia, and Freebase doesn't contribute many unique names either.
+- The datasets in each "tradition" are very similar. The reason is obvious: ISNI and ULAN are fully-fledged contributors in VIAF, so VIAF subsumes them. As for the LOD datasets, each has copied from the others liberally. DBpedia appears as a subset of Wikidata only because we have selected only en, de, fr names (see [[DBpedia Names]]). Yago covers the en DBpedia, and Freebase doesn't contribute many unique names either.
 - The circles represent number of names for this single example, not dataset coverage. Remember that VIAF is some 12x bigger than Wikidata, see [[VIAF Counts]]
 - We should focus on Wikidata and VIAF. If we drop DBpedia, Freebase, Yago we'll lose only 4 names, and if we drop ISNI, ULAN we'll lose only 1 name.
 
