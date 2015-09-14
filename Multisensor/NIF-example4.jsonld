@@ -1,4 +1,3 @@
-{ 
   "@graph" : [ {
     "@id" : "http://data.multisensorproject.eu/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c304#char=0,2000",
     "@type" : "nif:Context",
