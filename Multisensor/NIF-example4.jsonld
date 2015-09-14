@@ -1,0 +1,129 @@
+{
+  "@graph" : [ {
+    "@id" : "http://data.multisensorproject.eu/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c304#char=0,2000",
+    "@type" : "nif:Context",
+    "isString" : {
+      "@language" : "en",
+      "@value" : "This is the whole text of the SIMMO. It should continue for 2000 chars but I'll stop here"
+    },
+    "opinion" : "http://data.multisensorproject.eu/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c304#char=0,2000-sentiment"
+  }, {
+    "@id" : "http://data.multisensorproject.eu/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c304#char=100,200",
+    "@type" : "nif:Sentence",
+    "opinion" : "http://data.multisensorproject.eu/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c304#char=100,200-sentiment",
+    "referenceContext" : "http://data.multisensorproject.eu/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c304#char=0,2000"
+  }, {
+    "@id" : "http://data.multisensorproject.eu/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c304#char=100,200-sentiment",
+    "@type" : "marl:Opinion",
+    "negativePolarityValue" : "-3.5",
+    "positivePolarityValue" : "2.0",
+    "sentimentalityValue" : "5.5",
+    "maxPolarityValue" : "5.0",
+    "minPolarityValue" : "-5.0",
+    "polarityValue" : "-1.5"
+  }, {
+    "@id" : "http://data.multisensorproject.eu/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c304#char=200,300",
+    "@type" : "http://data.multisensorproject.eu/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c304#char=200,300-sentiment"
+  }, {
+    "@id" : "http://data.multisensorproject.eu/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c304#char=200,300-sentiment",
+    "@type" : "marl:Opinion",
+    "sentimentalityValue" : "0.0",
+    "maxPolarityValue" : "5.0",
+    "minPolarityValue" : "-5.0"
+  }, {
+    "@id" : "ms:negativePolarityValue",
+    "@type" : "owl:DatatypeProperty",
+    "comment" : {
+      "@language" : "en",
+      "@value" : "A sentence may include both negative and positive polarity words: this records the most negative polarity"
+    },
+    "domain" : "marl:Opinion",
+    "isDefinedBy" : "http://data.multisensorproject.eu/ontology",
+    "label" : {
+      "@language" : "en",
+      "@value" : "Most negative polarity value"
+    }
+  }, {
+    "@id" : "ms:positivePolarityValue",
+    "@type" : "owl:DatatypeProperty",
+    "comment" : {
+      "@language" : "en",
+      "@value" : "A sentence may include both negative and positive polarity words: this records the most positive polarity"
+    },
+    "domain" : "marl:Opinion",
+    "isDefinedBy" : "http://data.multisensorproject.eu/ontology",
+    "label" : {
+      "@language" : "en",
+      "@value" : "Most positive polarity value"
+    }
+  }, {
+    "@id" : "ms:sentimentalityValue",
+    "@type" : "owl:DatatypeProperty",
+    "comment" : {
+      "@language" : "en",
+      "@value" : "Difference between the most positive and most negative polarity of an opinion (eg a sentence)"
+    },
+    "domain" : "marl:Opinion",
+    "isDefinedBy" : "http://data.multisensorproject.eu/ontology",
+    "label" : {
+      "@language" : "en",
+      "@value" : "Sentimentality value"
+    }
+  }, {
+    "@id" : "marl:polarityValue",
+    "comment" : {
+      "@language" : "en",
+      "@value" : "This is the AVERAGE of ALL pos and neg opinions, not the SUM of ONLY the extremal opinions"
+    }
+  } ],
+  "@context" : {
+    "opinion" : {
+      "@id" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#opinion",
+      "@type" : "@id"
+    },
+    "isString" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#isString",
+    "isDefinedBy" : {
+      "@id" : "http://www.w3.org/2000/01/rdf-schema#isDefinedBy",
+      "@type" : "@id"
+    },
+    "comment" : "http://www.w3.org/2000/01/rdf-schema#comment",
+    "label" : "http://www.w3.org/2000/01/rdf-schema#label",
+    "domain" : {
+      "@id" : "http://www.w3.org/2000/01/rdf-schema#domain",
+      "@type" : "@id"
+    },
+    "sentimentalityValue" : {
+      "@id" : "http://data.multisensorproject.eu/ontology#sentimentalityValue",
+      "@type" : "http://www.w3.org/2001/XMLSchema#decimal"
+    },
+    "polarityValue" : {
+      "@id" : "http://purl.org/marl/ns#polarityValue",
+      "@type" : "http://www.w3.org/2001/XMLSchema#decimal"
+    },
+    "positivePolarityValue" : {
+      "@id" : "http://data.multisensorproject.eu/ontology#positivePolarityValue",
+      "@type" : "http://www.w3.org/2001/XMLSchema#decimal"
+    },
+    "negativePolarityValue" : {
+      "@id" : "http://data.multisensorproject.eu/ontology#negativePolarityValue",
+      "@type" : "http://www.w3.org/2001/XMLSchema#decimal"
+    },
+    "maxPolarityValue" : {
+      "@id" : "http://purl.org/marl/ns#maxPolarityValue",
+      "@type" : "http://www.w3.org/2001/XMLSchema#decimal"
+    },
+    "minPolarityValue" : {
+      "@id" : "http://purl.org/marl/ns#minPolarityValue",
+      "@type" : "http://www.w3.org/2001/XMLSchema#decimal"
+    },
+    "referenceContext" : {
+      "@id" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#referenceContext",
+      "@type" : "@id"
+    },
+    "owl" : "http://www.w3.org/2002/07/owl#",
+    "ms" : "http://data.multisensorproject.eu/ontology#",
+    "nif" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#",
+    "rdfs" : "http://www.w3.org/2000/01/rdf-schema#",
+    "marl" : "http://purl.org/marl/ns#"
+  }
+}
