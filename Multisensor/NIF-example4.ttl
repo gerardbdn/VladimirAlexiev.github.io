@@ -1,6 +1,8 @@
 @base <http://data.multisensorproject.eu/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c304>.
 @prefix marl:     <http://purl.org/marl/ns#>.
 @prefix nif:      <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#>.
+@prefix owl:         <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
 
 # NOTE1: namespace for our own properties
 @prefix ms:       <http://data.multisensorproject.eu/ontology#>.
