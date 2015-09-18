@@ -1,0 +1,66 @@
+#+TITLE: Materials related to FP7 Multisensor
+#+DATE: <2015-09-18>
+#+AUTHOR: Vladimir Alexiev
+#+EMAIL: vladimir.alexiev@ontotext.com
+#+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline author:t c:nil
+#+OPTIONS: creator:comment d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
+#+OPTIONS: p:nil pri:nil stat:t tags:t tasks:t tex:t timestamp:t toc:3 todo:t |:t
+#+CREATOR: Emacs 25.0.50.1 (Org mode 8.2.10)
+#+DESCRIPTION:
+#+EXCLUDE_TAGS: noexport
+#+KEYWORDS:
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+
+* Linguistic Linked Data
+There's been a huge drive in recent years to represent NLP data as RDF. NLP data is usually large, so does it make sense to represent it as RDF? What's the benefit?
+
+Ontologies, schemas and groups include: GRaF ITS2 FISE LAF LD4LT LEMON LIME LMF MARL NERD NIF NLP2RDF OLIA OntoLex OntoLing OntoTag Penn Stanford... my oh my!
+
+There are a lot of linguistic resources available that can be used profitably: BabelNet FrameNet GOLD ISOcat LemonUBY Multitext OmegaNet UBY VerbNet Wiktionary WordNet.
+
+The benefit is that RDF offers a lot of flexibility for combining data on many different topics in one graph.
+- [[20141008-Linguistic-LD][Linguistic Linked Data]]:  presentation, 2014-10-08, Bonn, Germany
+- [[https://www.zotero.org/groups/linguistic_ld/items][Zotero Linguistic LD bibliography]]
+- [[Multisensor-NER-Mapping.html][Multisensor NER Mapping (html)]], [[Multisensor-NER-Mapping.org][(org)]]: representing Named Entity Recognition in NIF and NIF Validation
+- [[./FrameNet][Integrating FrameNet in NIF]]
+
+Exmaples (a few more are explained in Multisensor-NER-Mapping):
+- [[NIF-example.ttl]]: NLP data in RDF (Turtle). Covers NIF (text binding), OLIA (linguistic properties), Penn (POS tagging), Stanford (dependency parsing), ITS20 (semantic annotation), NERD (entity extraction classes), Stanbol/FISE (multiple NLP tools/annotations per word/phrase), MARL (opinion/sentiment); and use of entities from DBpedia, WordNet, YAGO.
+  - [[NIF-example.ttl.html]]: syntax-highlighted with Emacs 
+  - [[NIF-example.jsonld]]: same in JSONLD, shows that Turtle should be used for examples/discussion/QA and JSONLD for machine communication only
+- [[NIF-example2.ttl]]: example of NER as produced by LT (doesn't yet include all fields from the NER Mapping above).
+  - [[NIF-example2.ttl.html]]: syntax-highlighted with Emacs 
+  - [[NIF-example2.json]]: same in JSON-LD
+- [[NIF-example3.ttl]]: Various kinds of Named Entities as per Multisensor-NER-Mapping
+  - [[NIF-example3.ttl.html]]: syntax-highlighted with Emacs 
+- [[NIF-example4.ttl]]: sentiment with MARL
+  - [[NIF-example4.jsonld]]: same in JSONLD
+
+Issues I've found in NIF: 
+- [[https://github.com/NLP2RDF/specification/issues/1][Issue 1]]: nif:opinion vs marl:extractedFrom. Example: [NIF-issue-1.ttl)[NIF-issue-1.ttl]
+- [[https://github.com/NLP2RDF/specification/issues/2][Issue 2]]: itsrdf vs fise properties. Example: [NIF-issue-2.ttl)[NIF-issue-2.ttl]
+
+* Social Linked Data
+SMAP is a MS module that does network analysis over social networks.
+It gets some tweets based on a keyword and then determines the importance of various posters:
+- ms:has_page_rank
+- ms:has_reachability
+- ms:has_global_influence: a comnbination of the two
+
+The scenario:
+- We crawled two sets of tweets based on two keywords: "cars" and "RDF"
+- The first guy (~valexiev1~) has posted on both topics. He knows a bit about "cars" but a lot about "RDF"
+- The second guy (~johnSmith~) has posted only on the "cars" topic. He knows a lot about "cars".
+(These names are completely random ;-).
+
+Representation:
+- We use a namespace ~mssoc:~ where we put MS Social network data.
+- We make a graph representation following the [[http://rdfs.org/sioc/spec/][SIOC]] ontology, complemented with MS properties where needed.
+- The graph allows a journalist to compare the importance of the same poster across keywords
+
+[[SMAP-example.ttl]] ([[SMAP-example.ttl.html]] is syntax highlighted):\\
+[[./img/SMAP-example.png]]
+
+* Misc
+- [[20140519-Multisensor-LD/Multisensor-LD.html][Multisensor Linked Data]]: web presentation 2014-05-19, Barcelona

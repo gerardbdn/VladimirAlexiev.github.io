@@ -13,15 +13,19 @@
 @prefix marl:        <http://purl.org/marl/ns#> .
 @prefix ms-BAD:      <http://data.multisensor.eu/ontology#> . # we don't own that domain
 @prefix ms:          <http://data.multisensorproject.eu/ontology#> .
+@prefix mssoc:       <http://data.multisensorproject.eu/social/> .
 @prefix nerd:        <http://nerd.eurecom.fr/ontology#> .
 @prefix nif:         <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
 @prefix olia:        <http://purl.org/olia/olia.owl#> .
 @prefix owl:         <http://www.w3.org/2002/07/owl#> .
 @prefix penn:        <http://purl.org/olia/penn.owl#> .
+@prefix puml:        <http://plantuml.com/ontology#>.
 @prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema:      <http://schema.org/> .
+@prefix sioc:        <http://rdfs.org/sioc/ns#>.
 @prefix st:          <http://www.ontologydesignpatterns.org/ont/framenet/abox/semType/> .
+@prefix twitter:     <https://twitter.com/>.
 @prefix upf-deep:    <http://taln.upf.edu/upf-deep#> .
 @prefix upf-dep-spa: <http://taln.upf.edu/upf-dep-spa#> .
 @prefix upf-dep-syn: <http://taln.upf.edu/olia/penn-dep-syntax#> .

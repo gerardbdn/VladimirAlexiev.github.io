@@ -1,12 +1,12 @@
 #+STARTUP: showeverything
 #+TITLE:   Multisensor NER Mapping
 #+AUTHOR:  vladimir.alexiev@ontotext.com
-#+DATE:    2015-09-01
+#+DATE:    2015-09-18
 #+OPTIONS: H:5 num:t toc:t \n:nil @:t ::t |:t ^:{} -:t f:t *:t <:t
 #+OPTIONS: TeX:nil LaTeX:nil skip:nil d:nil todo:t pri:nil tags:not-in-toc
 
 * Prefixes
-[[../prefixes.ttl]]
+[[./prefixes.ttl]]
 
 * Mapping
 | *Class* /Property | *Type/enum*      | *Mapping*                                              | *Notes*                                                     |
@@ -94,11 +94,13 @@ It says "informat=json-ld not implemented yet", so we need to convert to ttl fir
 Unfortunately there are only 11 tests, so it's a disappointment
 
 ** RDFUnit Validation
+This is implemented in the MS [[http://mklab2.iti.gr/multisensor/index.php/RDF_Validation_Service][RDF_Validation_Service]]. We'd be glad to help you read its results.
+
 A better validator is RDFUnit:
 - home: http://aksw.org/Projects/RDFUnit.html
 - demo: http://rdfunit.aksw.org/demo/
 - source: https://github.com/AKSW/RDFUnit/
-- paper: "NLP data cleansing based on Linguistic Ontology constraints", http://jens-lehmann.org/files/2014/eswc_rdfunit_nlp.pdf
+- paper: "[[http://jens-lehmann.org/files/2014/eswc_rdfunit_nlp.pdf][NLP data cleansing based on Linguistic Ontology constraints]]
 
 I tried their demo site with [[./NIF-test1.jsonld]] and [[./NIF-example2.ttl]]:
 : 1. Data Selection> Direct Input> JSON-LD> Load
@@ -132,3 +134,68 @@ Here are the results. "Resources" is a simple tabular format (basically URL-erro
 - [[./NIF-test1-annotated.ttl]]: Annotated Resources
 - [[./NIF-example2-out.xls]]: Resources
 - [[./NIF-example2-annotated.ttl]]: Annotated Resources
+
+** Manual Validation
+(Was at [[http://mklab2.iti.gr/multisensor/index.php/RDF_Validation][RDF_Validation]], but will maintain it here).
+
+I've been checking SIMMOs for NIF conformance for a while, maybe done it 100 times already.
+Please post only Turtle files, not JSON files since they are impossible to check by eyeballing.
+- Get Jena (eg [[http://apache.cbox.biz/jena/binaries/apache-jena-3.0.0.tar.gz][apache-jena-3.0.0.tar.gz]]), unzip it somewhere and add the bin directory to your path. We'll use RIOT (RDF I/O Tool).
+- Get Turtle: You can get a Turtle representation of the SIMMO in one of two ways
+
+*** Get Turtle from Store
+- Store the SIMMO using the [[http://mklab2.iti.gr/multisensor/index.php/RDF_Storing_Service][RDF Storing Service]]
+- Get the SIMMO out using a query like this (saved as "a SIMMO graph"), and then save the result as ~file-noprefix.ttl~ (Turtle).
+#+BEGIN_SRC sparql
+<pre>construct {?s ?p ?o} 
+where {graph <http://data.multisensor.org/content/8006dcd60b292feaaef24abc9ec09e2230aab83e> 
+  {?s ?p ?o}}
+#+END_SRC
+- There's also a REST call to get the SIMMO out that's easier to use from the command line
+
+*** Get Turtle from SIMMO JSON
+- get the content of the "rdf" key out of the SIMMO JSON. Unescape quotes. Save as ~file.jsonld~
+  So instead of this:
+  #+BEGIN_SRC javascript
+  "rdf":["[{\"@id\":\"http://data.multisensor...[{\"@value\":\"Germany\"}]}]"],"category":""}</pre>
+  #+END_SRC
+  You need this:
+  #+BEGIN_SRC javascript
+  [{"@id":"http://data.multisensor...[{"@value":"Germany"}]}]
+  #+END_SRC
+- You can do this manually, or with RIOT that can convert the stringified RDF field into more readable JSONLD format:
+  : riot --output=jsonld rdf_output_string.jsonld > new_readable_file.jsonld
+  Instead of a single string, the results will be displayed as:
+  #+BEGIN_SRC javascript
+  "@graph" : [ {
+    "@id" : "http://data.multisensorproject.eu/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c304#Amount=10000_Euro",
+    "@type" : [ "http://schema.org/QuantitativeValue", "http://nerd.eurecom.fr/ontology#Amount" ],
+    "name" : "10000 Euro"
+  }, {
+    "@id" : "http://data.multisensorproject.eu/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c304#Amount=2000_Euro",
+    "@type" : [ "http://schema.org/QuantitativeValue", "http://nerd.eurecom.fr/ontology#Amount" ],
+    "name" : "2000 Euro"
+  }, {...  
+  #+END_SRC
+
+No matter which of the two methods you used, the rest is the same
+- Validate it with RIOT: this is optional but recommended
+  : riot --validate file.jsonld
+- Convert to Turtle. Omit "WARN riot" lines which would make the Turtle invalid
+ : riot --output turtle file.jsonld | grep -v "WARN  riot" > file-noprefix.ttl
+
+**** Prettify Turtle
+Unfortunately this file doesn't use prefixes, so the URLs are long and ugly (Boyan will fix this for the Store [[https://quark.everis.com/jira/browse/MULTISENSO-137][MULTISENSO-137]])
+- Save [[./prefixes.ttl]] (I update this file about once a month)
+- Concat the two:
+  : cat prefixes.ttl file-noprefix.ttl > file-withprefix.ttl
+- Prettify the Turtle to make use of the prefixes and to group all statements of the same subject together:
+  : riot --formatted=turtle file-withprefix.ttl > file.ttl
+
+Optional manual edits:
+- Add on top a base, using the actual SIMMO base, eg
+  : @base <http://data.multisensorproject.eu/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c304>.
+- Replace "http://data.multisensorproject.eu/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c304" with "" (I don't know why RIOT doesn't use the base, even if I specify the --base option)
+- Sort paragraphs (i.e. statement clusters)
+
+Post in Jira that last prettified file.ttl. Thanks!
