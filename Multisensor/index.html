@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Materials related to FP7 Multisensor</title>
-<!-- 2015-09-18 Fri 11:04 -->
+<!-- 2015-09-18 Fri 14:11 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Vladimir Alexiev" />
@@ -166,11 +166,19 @@ for the JavaScript code in this tag.
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#sec-1">1. Linguistic Linked Data</a></li>
-<li><a href="#sec-2">2. Social Linked Data</a></li>
+<li><a href="#sec-2">2. Social Linked Data</a>
+<ul>
+<li><a href="#sec-2-1">2.1. Example 1</a></li>
+<li><a href="#sec-2-2">2.2. Example 2</a></li>
+</ul>
+</li>
 <li><a href="#sec-3">3. Misc</a></li>
 </ul>
 </div>
 </div>
+<p>
+<a href="./20140519-Multisensor-LD/Multisensor-LD.html">Multisensor Linked Data</a>: web presentation 2014-05-19, Barcelona
+</p>
 
 <div id="outline-container-sec-1" class="outline-2">
 <h2 id="sec-1"><span class="section-number-2">1</span> Linguistic Linked Data</h2>
@@ -178,58 +186,55 @@ for the JavaScript code in this tag.
 <p>
 There's been a huge drive in recent years to represent NLP data as RDF. NLP data is usually large, so does it make sense to represent it as RDF? What's the benefit?
 </p>
-
-<p>
-Ontologies, schemas and groups include: GRaF ITS2 FISE LAF LD4LT LEMON LIME LMF MARL NERD NIF NLP2RDF OLIA OntoLex OntoLing OntoTag Penn Stanford&#x2026; my oh my!
-</p>
-
-<p>
-There are a lot of linguistic resources available that can be used profitably: BabelNet FrameNet GOLD ISOcat LemonUBY Multitext OmegaNet UBY VerbNet Wiktionary WordNet.
-</p>
-
+<ul class="org-ul">
+<li>Ontologies, schemas and groups include: GRaF ITS2 FISE LAF LD4LT LEMON LIME LMF MARL NERD NIF NLP2RDF OLIA OntoLex OntoLing OntoTag Penn Stanford&#x2026; my oh my!
+</li>
+<li>There are a lot of linguistic resources available that can be used profitably: BabelNet FrameNet GOLD ISOcat LemonUBY Multitext OmegaNet UBY VerbNet Wiktionary WordNet.
+</li>
+</ul>
 <p>
 The benefit is that RDF offers a lot of flexibility for combining data on many different topics in one graph.
 </p>
 <ul class="org-ul">
-<li><i>Linguistic Linked Data</i>:  presentation, 2014-10-08, Bonn, Germany
+<li><a href="./20141008-Linguistic-LD/">Linguistic Linked Data</a>:  presentation, 2014-10-08, Bonn, Germany
 </li>
 <li><a href="https://www.zotero.org/groups/linguistic_ld/items">Zotero Linguistic LD bibliography</a>
 </li>
-<li><i>Multisensor NER Mapping (html)</i>, <i>(org)</i>: representing Named Entity Recognition in NIF and NIF Validation
+<li>Multisensor NER Mapping <a href="./Multisensor-NER-Mapping.html">(html)</a>, <i>(org)</i>: representing Named Entity Recognition in NIF and NIF Validation
 </li>
 <li><a href="./FrameNet">Integrating FrameNet in NIF</a>
 </li>
 </ul>
 
 <p>
-Exmaples (a few more are explained in Multisensor-NER-Mapping):
+Examples (a few more are explained in Multisensor-NER-Mapping):
 </p>
 <ul class="org-ul">
-<li><i>NIF-example.ttl</i>: NLP data in RDF (Turtle). Covers NIF (text binding), OLIA (linguistic properties), Penn (POS tagging), Stanford (dependency parsing), ITS20 (semantic annotation), NERD (entity extraction classes), Stanbol/FISE (multiple NLP tools/annotations per word/phrase), MARL (opinion/sentiment); and use of entities from DBpedia, WordNet, YAGO.
+<li><a href="./NIF-example.ttl">./NIF-example.ttl</a>: NLP data in RDF (Turtle). Covers NIF (text binding), OLIA (linguistic properties), Penn (POS tagging), Stanford (dependency parsing), ITS20 (semantic annotation), NERD (entity extraction classes), Stanbol/FISE (multiple NLP tools/annotations per word/phrase), MARL (opinion/sentiment); and use of entities from DBpedia, WordNet, YAGO.
 <ul class="org-ul">
-<li><i>NIF-example.ttl.html</i>: syntax-highlighted with Emacs 
+<li><a href="./NIF-example.ttl.html">./NIF-example.ttl.html</a>: syntax-highlighted with Emacs 
 </li>
-<li><i>NIF-example.jsonld</i>: same in JSONLD, shows that Turtle should be used for examples/discussion/QA and JSONLD for machine communication only
+<li><a href="./NIF-example.jsonld">./NIF-example.jsonld</a>: same in JSONLD, shows that Turtle should be used for examples/discussion/QA and JSONLD for machine communication only
 </li>
 </ul>
 </li>
-<li><i>NIF-example2.ttl</i>: example of NER as produced by LT (doesn't yet include all fields from the NER Mapping above).
+<li><a href="./NIF-example2.ttl">./NIF-example2.ttl</a>: example of NER as produced by LT (doesn't yet include all fields from the NER Mapping above).
 <ul class="org-ul">
-<li><i>NIF-example2.ttl.html</i>: syntax-highlighted with Emacs 
+<li><a href="./NIF-example2.ttl.html">./NIF-example2.ttl.html</a>: syntax-highlighted with Emacs 
 </li>
-<li><i>NIF-example2.json</i>: same in JSON-LD
+<li><a href="./NIF-example2.json">./NIF-example2.json</a>: same in JSON-LD
 </li>
 </ul>
 </li>
-<li><i>NIF-example3.ttl</i>: Various kinds of Named Entities as per Multisensor-NER-Mapping
+<li><a href="./NIF-example3.ttl">./NIF-example3.ttl</a>: Various kinds of Named Entities as per Multisensor-NER-Mapping
 <ul class="org-ul">
-<li><i>NIF-example3.ttl.html</i>: syntax-highlighted with Emacs 
+<li><a href="./NIF-example3.ttl.html">./NIF-example3.ttl.html</a>: syntax-highlighted with Emacs 
 </li>
 </ul>
 </li>
-<li><i>NIF-example4.ttl</i>: sentiment with MARL
+<li><a href="./NIF-example4.ttl">./NIF-example4.ttl</a>: sentiment with MARL
 <ul class="org-ul">
-<li><i>NIF-example4.jsonld</i>: same in JSONLD
+<li><a href="./NIF-example4.jsonld">./NIF-example4.jsonld</a>: same in JSONLD
 </li>
 </ul>
 </li>
@@ -239,9 +244,9 @@ Exmaples (a few more are explained in Multisensor-NER-Mapping):
 Issues I've found in NIF: 
 </p>
 <ul class="org-ul">
-<li><a href="https://github.com/NLP2RDF/specification/issues/1">Issue 1</a>: nif:opinion vs marl:extractedFrom. Example: [NIF-issue-1.ttl)[NIF-issue-1.ttl]
+<li><a href="https://github.com/NLP2RDF/specification/issues/1">Issue 1</a>: nif:opinion vs marl:extractedFrom. Example: <a href="./NIF-issue-1.ttl">./NIF-issue-1.ttl</a>
 </li>
-<li><a href="https://github.com/NLP2RDF/specification/issues/2">Issue 2</a>: itsrdf vs fise properties. Example: [NIF-issue-2.ttl)[NIF-issue-2.ttl]
+<li><a href="https://github.com/NLP2RDF/specification/issues/2">Issue 2</a>: itsrdf vs fise properties. Example: <a href="./NIF-issue-2.ttl">./NIF-issue-2.ttl</a>
 </li>
 </ul>
 </div>
@@ -252,7 +257,7 @@ Issues I've found in NIF:
 <div class="outline-text-2" id="text-2">
 <p>
 SMAP is a MS module that does network analysis over social networks.
-It gets some tweets based on a keyword and then determines the importance of various posters:
+It gets some tweets based on keywords or hashtags, and then determines the importance of various posters:
 </p>
 <ul class="org-ul">
 <li>ms:has_page_rank
@@ -262,10 +267,11 @@ It gets some tweets based on a keyword and then determines the importance of var
 <li>ms:has_global_influence: a comnbination of the two
 </li>
 </ul>
+</div>
 
-<p>
-The scenario:
-</p>
+<div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Example 1</h3>
+<div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>We crawled two sets of tweets based on two keywords: "cars" and "RDF"
 </li>
@@ -291,26 +297,42 @@ Representation:
 </ul>
 
 <p>
-<i>SMAP-example.ttl</i> (<i>SMAP-example.ttl.html</i> is syntax highlighted):<br  />
+<a href="./SMAP-example.ttl">./SMAP-example.ttl</a> (<a href="./SMAP-example.ttl.html">./SMAP-example.ttl.html</a> is syntax highlighted):<br  />
 <img src="./img/SMAP-example.png" alt="SMAP-example.png" />
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> Misc</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Example 2</h3>
+<div class="outline-text-3" id="text-2-2">
 <ul class="org-ul">
-<li><i>Multisensor Linked Data</i>: web presentation 2014-05-19, Barcelona
+<li>We crawled one set of tweets based on several hashtags.
+</li>
+<li>We make the topic URLs by concatenating the sorted tags (a bit too long but works).
+</li>
+<li>We don't have the user names, only user IDs.
+</li>
+<li>We put the hashtags in separate dct:subject props. This would allow someone to analyze topic  intersection.
 </li>
 </ul>
+
+<p>
+<a href="./SMAP-example2.ttl">./SMAP-example2.ttl</a> (<a href="./SMAP-example2.ttl.html">./SMAP-example2.ttl.html</a> is syntax highlighted):<br  />
+<img src="./img/SMAP-example2.png" alt="SMAP-example2.png" />
+</p>
 </div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Misc</h2>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-09-18&gt;</span></span></p>
 <p class="author">Author: Vladimir Alexiev</p>
-<p class="date">Created: 2015-09-18 Fri 11:04</p>
+<p class="date">Created: 2015-09-18 Fri 14:11</p>
 <p class="creator">Emacs 25.0.50.1 (Org mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

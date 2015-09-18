@@ -3,10 +3,13 @@ hide empty methods
 hide empty attributes
 hide circle
 skinparam classAttributeIconSize 0
-class twitter_johnSmith as "twitter:johnSmith"
-twitter_johnSmith : a sioc:UserAccount
-class mssoc_cars_johnSmith as "mssoc:cars_johnSmith"
-twitter_johnSmith --> mssoc_cars_johnSmith : sioc:has_function
+class mssoc_cars_valexiev1 as "mssoc:cars_valexiev1"
+mssoc_cars_valexiev1 : a sioc:Role
+class mssoc_cars as "mssoc:cars"
+mssoc_cars_valexiev1 --> mssoc_cars : sioc:has_scope
+mssoc_cars_valexiev1 : ms:has_page_rank 0.75
+mssoc_cars_valexiev1 : ms:has_reachability 0.70
+mssoc_cars_valexiev1 : ms:has_global_influence 0.72
 class mssoc_RDF_valexiev1 as "mssoc:RDF_valexiev1"
 mssoc_RDF_valexiev1 : a sioc:Role
 class mssoc_RDF as "mssoc:RDF"
@@ -14,27 +17,24 @@ mssoc_RDF_valexiev1 --> mssoc_RDF : sioc:has_scope
 mssoc_RDF_valexiev1 : ms:has_page_rank 7500.0
 mssoc_RDF_valexiev1 : ms:has_reachability 7000.0
 mssoc_RDF_valexiev1 : ms:has_global_influence 7200.0
-class twitter_valexiev1 as "twitter:valexiev1"
-twitter_valexiev1 : a sioc:UserAccount
-twitter_valexiev1 --> mssoc_RDF_valexiev1 : sioc:has_function
-class mssoc_cars_valexiev1 as "mssoc:cars_valexiev1"
-twitter_valexiev1 --> mssoc_cars_valexiev1 : sioc:has_function
-mssoc_cars_valexiev1 : a sioc:Role
-class mssoc_cars as "mssoc:cars"
-mssoc_cars_valexiev1 --> mssoc_cars : sioc:has_scope
-mssoc_cars_valexiev1 : ms:has_page_rank 0.75
-mssoc_cars_valexiev1 : ms:has_reachability 0.70
-mssoc_cars_valexiev1 : ms:has_global_influence 0.72
-mssoc_RDF : a sioc:Forum
-class twitter_ as "twitter:"
-mssoc_RDF --> twitter_ : sioc:has_host
-mssoc_RDF : ms:has_keyword "RDF"
+class mssoc_cars_johnSmith as "mssoc:cars_johnSmith"
 mssoc_cars_johnSmith : a sioc:Role
 mssoc_cars_johnSmith --> mssoc_cars : sioc:has_scope
 mssoc_cars_johnSmith : ms:has_page_rank 8.5
 mssoc_cars_johnSmith : ms:has_reachability 8.0
 mssoc_cars_johnSmith : ms:has_global_influence 8.2
+class twitter_johnSmith as "twitter:johnSmith"
+twitter_johnSmith : a sioc:UserAccount
+twitter_johnSmith --> mssoc_cars_johnSmith : sioc:has_function
+mssoc_RDF : a sioc:Forum
+class twitter_ as "twitter:"
+mssoc_RDF --> twitter_ : sioc:has_host
+mssoc_RDF : dc:subject "RDF"
+class twitter_valexiev1 as "twitter:valexiev1"
+twitter_valexiev1 : a sioc:UserAccount
+twitter_valexiev1 --> mssoc_cars_valexiev1 : sioc:has_function
+twitter_valexiev1 --> mssoc_RDF_valexiev1 : sioc:has_function
 mssoc_cars : a sioc:Forum
 mssoc_cars --> twitter_ : sioc:has_host
-mssoc_cars : ms:has_keyword "cars"
+mssoc_cars : dc:subject "cars"
 @enduml

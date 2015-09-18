@@ -25,7 +25,9 @@
 @prefix schema:      <http://schema.org/> .
 @prefix sioc:        <http://rdfs.org/sioc/ns#>.
 @prefix st:          <http://www.ontologydesignpatterns.org/ont/framenet/abox/semType/> .
-@prefix twitter:     <https://twitter.com/>.
+@prefix twitter:      <http://twitter.com/>.
+@prefix twitter_user: <http://twitter.com/intent/user?user_id=> .
+@prefix twitter_tag:  <http://twitter.com/hashtag/>.
 @prefix upf-deep:    <http://taln.upf.edu/upf-deep#> .
 @prefix upf-dep-spa: <http://taln.upf.edu/upf-dep-spa#> .
 @prefix upf-dep-syn: <http://taln.upf.edu/olia/penn-dep-syntax#> .
