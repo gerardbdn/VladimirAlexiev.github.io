@@ -1,0 +1,68 @@
+#+TITLE: VladimirAlexiev.github.io
+#+DATE: <2015-09-18>
+#+AUTHOR: Vladimir Alexiev
+#+EMAIL: vladimir.alexiev@ontotext.com
+#+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline author:t c:nil
+#+OPTIONS: creator:comment d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
+#+OPTIONS: p:nil pri:nil stat:t tags:t tasks:t tex:t timestamp:t toc:3 todo:t |:t
+#+CREATOR: Emacs 25.0.50.1 (Org mode 8.2.10)
+#+DESCRIPTION:
+#+EXCLUDE_TAGS: noexport
+#+KEYWORDS:
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+
+[[http://VladimirAlexiev.github.io][HTML rendered version]]
+
+* Publications and Tech
+- [[./pubs/index.html][Publications]] (with links to papers), [[./pubs/Alexiev-bibliography.bib][Alexiev-bibliography.bib]] (includes abstracts and more links to *presentations*)
+- [[./pres/extending-owl2/index.html][Extending OWL2 Property Constructs with OWLIM Rules]]
+- [[http://VladimirAlexiev.github.io/CH-names/README.html][Name Data Sources for Semantic Enrichment]]
+- [[./pres/20150212-sex-or-gender/][Sex or Gender?]] considerations about sex/gender enumeration values in LOD
+- [[./Multisensor/][FP7 Multisensor materials]]
+- [[https://github.com/VladimirAlexiev/rnc][RelaxNG Compact (RNC) of Cultural Heritage (GLAM) Schemas]]
+
+** Drafts
+- [[./Multisensor/FrameNet/index.html][Integrating FrameNet in NIF]]
+- [[https://github.com/VladimirAlexiev/VladimirAlexiev.github.io/tree/master/cultures][Cultures, Ethnic Groups, Periods, Styles, Movements: Creating a Master List]] (incomplete work in progress)
+
+* Presentations
+- Information School, University of Washington, 2014-05-21: INFX 598 - Introducing Linked Data: concepts, methods and tools. [[https://voicethread.com/myvoice/#u4454954.b5705597.i29176937][Guest lecture (Module 9)]]: *Doing Business with Semantic Technologies*: [[https://voicethread.com/myvoice/#thread/5784646/29625471/31274564][video]], [[http://www.slideshare.net/valexiev1/20140521-semtechbizguestlecture][slideshare]]. Introduction to Ontotext and some of its products, clients and projects.
+- SmartCulture Conference, 2014-06-11, Brussels, Belgium: *Semtech for CH*: [[./pres/20140611-SmartCulture-sem-tech-CH/index.html][HTML presentation]], [[./pres/20140611-SmartCulture-sem-tech-CH/Semantic Technologies for Cultural Heritage.pdf][PDF]], [[http://www.slideshare.net/valexiev1/semantic-technologies-for-cultural-heritage-35749530][slideshare]]
+- Malmo Linked Data [[http://www.meetup.com/Linked-Data-in-Business/events/198356552/][Meetup]], 2014-08-21, Malmo, Sweden: *Semtech for Cultural Heritage*: [[./pres/20140821-Malmo/index.html][HTML presentation]], [[./pres/20140821-Malmo/SemTechCH-Malmo.pdf][PDF]], [[http://youtu.be/n8oGmOu9JEw][video]]
+- [[https://at-web1.comp.glam.ac.uk/pages/research/hypermedia/nkos/nkos2014/programme.html][NKOS 2014 Workshop]], London, UK, 12 Sep 2014: *On Compositionality of ISO 25964 Hierarchical Relations (BTG, BTP, BTI)*: [[./pres/20140912-NKOS-compositionality/index.html][presentation HTML]], [[./pres/20140912-NKOS-compositionality/BTG-BTP-BTI-compositionality.pdf][PDF]]
+  - Resulting paper [[http://dx.doi.org/10.1007/s00799-015-0162-2][published in International Journal on Digital Libraries]]
+- Keystone Industrial Panel, ISWC 2014, Riva del Garda, 18 Oct 2014: *Semantic Technology in Publishing & Finance*: [[http://www.slideshare.net/valexiev1/semantic-technology-in-publishing-finance][slideshare]]. Triplestores and inference, applications in Finance, text-mining. Projects and solutions for financial media and publishers. Thanks to Atanas Kiryakov for this presentation, I just cut it to size.
+- DBpedia Meeting, Dublin, 9 Feb 2015:
+  - *DBpedia Ontology and Mapping Problems*: [[./pres/20150209-dbpedia/dbpedia-problems.html][presentation HTML]], [[./pres/20150209-dbpedia/dbpedia-problems-long.html][single HTML]], [[./pres/20150209-dbpedia/dbpedia-problems.pdf][PDF]]
+  - *Adding a DBpedia Mapping*: [[./pres/20150209-dbpedia/add-mapping.html][presentation HTML]], [[./pres/20150209-dbpedia/add-mapping-long.html][single HTML]], [[./pres/20150209-dbpedia/add-mapping.pdf][PDF]]
+  - *bg.dbpedia.org launched*: [[./pres/20150209-dbpedia/bg-dbpedia-launched.html][presentation HTML]], [[./pres/20150209-dbpedia/bg-dbpedia-launched.pdf][PDF]]
+
+* Getty Vocabulary Program LOD
+- http://vocab.getty.edu/doc: documentation (HTML for linking)
+  - http://vocab.getty.edu/doc/gvp-lod.pdf: documentation (PDF for printing)
+- http://vocab.getty.edu/doc/queries: 90 sample queries
+  - http://vocab.getty.edu/queries: sample query UI
+- http://vocab.getty.edu/ontology: ontology namespace document
+- CIDOC Congress, Dresden, Germany. *Getty Vocabulary Program LOD: Ontologies and Semantic Representation*:
+  * 2014-09-05: International Terminology Working Group (full version): [[./pres/20140905-CIDOC-GVP/index.html][presentation HTML]], [[./pres/20140905-CIDOC-GVP/GVP-LOD-CIDOC.pdf][PDF]]
+  * 2014-09-09: Getty special session (short version): [[./pres/20140905-CIDOC-GVP/short.html][presentation HTML]], [[./pres/20140905-CIDOC-GVP/GVP-LOD-CIDOC-short.pdf][PDF]]
+  * [[http://www.getty.edu/research/tools/vocabularies/training.html][All presentations from these meetings]]
+
+* Ontotext FP & H2020 Research Projects
+[[./Ontotext-FP-projects-timeline.html][Frame that displays the project timeline]] at http://www.old.ontotext.com/EC_ResearchProjects. 
+It uses a Google Sheet to hold the data, and Google Charts to visualize it
+
+* SPARQL Syntax Diagrams
+Syntax (rail-road) diagrams of SPARQL 1.1 Query Language. I use this quite often while writing SPARQL
+- [[./SPARQL/sparql11-grammar.xhtml][sparql11-grammar.xhtml]]: Cross-linked diagrams, one per production (173 total). 
+  A bit hard to understand: use this for reference, but not for learning SPARQL.
+  Here's a [[http://ontologicalengineering.blogspot.com/2008/12/sparql-railroad-diagram-from-hell.html][chunked diagram]], which however is partial: [[http://stackoverflow.com/questions/15758282/bigger-granularity-railroad-diagram-generator][Discussion]] whether there's a chunked generator
+- [[./SPARQL/sparql11-grammar.ebnf][sparql11-grammar.ebnf]]: EBNF rules extracted from the spec
+- [[./SPARQL/sparql11-grammar.txt][sparql11-grammar.txt]]: same thing but with production numbers
+
+Notes:
+- extracted from: http://www.w3.org/TR/sparql11-query/
+- version: http://www.w3.org/TR/2013/REC-sparql11-query-20130321/
+- created on: Tue Apr 2, 2013, 08:59 (UTC+03)
+- created with: http://bottlecaps.de/rr/ui. This tool is quite good: it can scrape EBNF grammars from W3C specs, generates either a single XHTML with embedded SVG, or a zip with many PNGs, cross-links the definitions and usages.
