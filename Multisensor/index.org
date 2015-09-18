@@ -12,7 +12,9 @@
 #+LANGUAGE: en
 #+SELECT_TAGS: export
 
-[[./20140519-Multisensor-LD/Multisensor-LD.html][Multisensor Linked Data]]: web presentation 2014-05-19, Barcelona
+[[http://VladimirAlexiev.github.io/Multisensor/index.html][HTML Rendered version]]
+
+- [[./20140519-Multisensor-LD/Multisensor-LD.html][Multisensor Linked Data]]: web presentation 2014-05-19, Barcelona
 
 * Linguistic Linked Data
 There's been a huge drive in recent years to represent NLP data as RDF. NLP data is usually large, so does it make sense to represent it as RDF? What's the benefit?
@@ -70,4 +72,3 @@ Representation:
 [[./SMAP-example2.ttl]] ([[./SMAP-example2.ttl.html]] is syntax highlighted):\\
 [[./img/SMAP-example2.png]]
 
-* Misc

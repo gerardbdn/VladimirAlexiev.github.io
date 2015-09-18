@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Multisensor NER Mapping</title>
-<!-- 2015-09-01 Tue 16:58 -->
+<!-- 2015-09-18 Fri 14:46 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="vladimir.alexiev@ontotext.com" />
@@ -181,17 +181,30 @@ for the JavaScript code in this tag.
 <li><a href="#sec-4-2-2">4.2.2. RDFUnit test results</a></li>
 </ul>
 </li>
+<li><a href="#sec-4-3">4.3. Manual Validation</a>
+<ul>
+<li><a href="#sec-4-3-1">4.3.1. Get Turtle from Store</a></li>
+<li><a href="#sec-4-3-2">4.3.2. Get Turtle from SIMMO JSON</a>
+<ul>
+<li><a href="#sec-4-3-2-1">4.3.2.1. Prettify Turtle</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
+<p>
+<a href="http://VladimirAlexiev.github.io/Multisensor/Multisensor-NER-Mapping.html">HTML Rendered version</a>
+</p>
 
 <div id="outline-container-sec-1" class="outline-2">
 <h2 id="sec-1"><span class="section-number-2">1</span> Prefixes</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-<a href="../prefixes.ttl">../prefixes.ttl</a>
+<a href="./prefixes.ttl">./prefixes.ttl</a>
 </p>
 </div>
 </div>
@@ -590,6 +603,10 @@ Unfortunately there are only 11 tests, so it's a disappointment
 <h3 id="sec-4-2"><span class="section-number-3">4.2</span> RDFUnit Validation</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
+This is implemented in the MS <a href="http://mklab2.iti.gr/multisensor/index.php/RDF_Validation_Service">RDF_Validation_Service</a>. We'd be glad to help you read its results.
+</p>
+
+<p>
 A better validator is RDFUnit:
 </p>
 <ul class="org-ul">
@@ -599,7 +616,7 @@ A better validator is RDFUnit:
 </li>
 <li>source: <a href="https://github.com/AKSW/RDFUnit/">https://github.com/AKSW/RDFUnit/</a>
 </li>
-<li>paper: "NLP data cleansing based on Linguistic Ontology constraints", <a href="http://jens-lehmann.org/files/2014/eswc_rdfunit_nlp.pdf">http://jens-lehmann.org/files/2014/eswc_rdfunit_nlp.pdf</a>
+<li>paper: "<a href="http://jens-lehmann.org/files/2014/eswc_rdfunit_nlp.pdf">NLP data cleansing based on Linguistic Ontology constraints</a>
 </li>
 </ul>
 
@@ -708,12 +725,158 @@ Here are the results. "Resources" is a simple tabular format (basically URL-erro
 </div>
 </div>
 </div>
+
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> Manual Validation</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+(Was at <a href="http://mklab2.iti.gr/multisensor/index.php/RDF_Validation">RDF_Validation</a>, but will maintain it here).
+</p>
+
+<p>
+I've been checking SIMMOs for NIF conformance for a while, maybe done it 100 times already.
+Please post only Turtle files, not JSON files since they are impossible to check by eyeballing.
+</p>
+<ul class="org-ul">
+<li>Get Jena (eg <a href="http://apache.cbox.biz/jena/binaries/apache-jena-3.0.0.tar.gz">apache-jena-3.0.0.tar.gz</a>), unzip it somewhere and add the bin directory to your path. We'll use RIOT (RDF I/O Tool).
+</li>
+<li>Get Turtle: You can get a Turtle representation of the SIMMO in one of two ways
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-4-3-1" class="outline-4">
+<h4 id="sec-4-3-1"><span class="section-number-4">4.3.1</span> Get Turtle from Store</h4>
+<div class="outline-text-4" id="text-4-3-1">
+<ul class="org-ul">
+<li>Store the SIMMO using the <a href="http://mklab2.iti.gr/multisensor/index.php/RDF_Storing_Service">RDF Storing Service</a>
+</li>
+<li>Get the SIMMO out using a query like this (saved as "a SIMMO graph"), and then save the result as <code>file-noprefix.ttl</code> (Turtle).
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-sparql"><span style="color: #008b8b;">&lt;pre&gt;</span><span style="color: #a020f0;">construct</span> {<span style="color: #a0522d;">?s</span> <span style="color: #a0522d;">?p</span> <span style="color: #a0522d;">?o</span>} 
+<span style="color: #a020f0;">where</span> {<span style="color: #a020f0;">graph</span> <span style="color: #008b8b;">&lt;http://data.multisensor.org/content/8006dcd60b292feaaef24abc9ec09e2230aab83e&gt;</span> 
+  {<span style="color: #a0522d;">?s</span> <span style="color: #a0522d;">?p</span> <span style="color: #a0522d;">?o</span>}}
+</pre>
+</div>
+<ul class="org-ul">
+<li>There's also a REST call to get the SIMMO out that's easier to use from the command line
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3-2" class="outline-4">
+<h4 id="sec-4-3-2"><span class="section-number-4">4.3.2</span> Get Turtle from SIMMO JSON</h4>
+<div class="outline-text-4" id="text-4-3-2">
+<ul class="org-ul">
+<li>get the content of the "rdf" key out of the SIMMO JSON. Unescape quotes. Save as <code>file.jsonld</code>
+  So instead of this:
+<div class="org-src-container">
+
+<pre class="src src-javascript"><span style="color: #8b2252;">"rdf"</span>:[<span style="color: #8b2252;">"[{\"@id\":\"http://data.multisensor...[{\"@value\":\"Germany\"}]}]"</span>],<span style="color: #8b2252;">"category"</span>:<span style="color: #8b2252;">""</span>}&lt;/pre&gt;
+</pre>
+</div>
+<p>
+You need this:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-javascript">[{<span style="color: #8b2252;">"@id"</span>:<span style="color: #8b2252;">"http://data.multisensor...[{"</span>@value<span style="color: #8b2252;">":"</span>Germany<span style="color: #8b2252;">"}]}]</span>
+</pre>
+</div>
+</li>
+<li>You can do this manually, or with RIOT that can convert the stringified RDF field into more readable JSONLD format:
+<pre class="example">
+riot --output=jsonld rdf_output_string.jsonld &gt; new_readable_file.jsonld
+</pre>
+<p>
+Instead of a single string, the results will be displayed as:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-javascript"><span style="color: #8b2252;">"@graph"</span> : [ {
+  <span style="color: #8b2252;">"@id"</span> : <span style="color: #8b2252;">"http://data.multisensorproject.eu/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c304#Amount=10000_Euro"</span>,
+  <span style="color: #8b2252;">"@type"</span> : [ <span style="color: #8b2252;">"http://schema.org/QuantitativeValue"</span>, <span style="color: #8b2252;">"http://nerd.eurecom.fr/ontology#Amount"</span> ],
+  <span style="color: #8b2252;">"name"</span> : <span style="color: #8b2252;">"10000 Euro"</span>
+}, {
+  <span style="color: #8b2252;">"@id"</span> : <span style="color: #8b2252;">"http://data.multisensorproject.eu/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c304#Amount=2000_Euro"</span>,
+  <span style="color: #8b2252;">"@type"</span> : [ <span style="color: #8b2252;">"http://schema.org/QuantitativeValue"</span>, <span style="color: #8b2252;">"http://nerd.eurecom.fr/ontology#Amount"</span> ],
+  <span style="color: #8b2252;">"name"</span> : <span style="color: #8b2252;">"2000 Euro"</span>
+}, {...
+</pre>
+</div>
+</li>
+</ul>
+
+<p>
+No matter which of the two methods you used, the rest is the same
+</p>
+<ul class="org-ul">
+<li>Validate it with RIOT: this is optional but recommended
+<pre class="example">
+riot --validate file.jsonld
+</pre>
+</li>
+<li>Convert to Turtle. Omit "WARN riot" lines which would make the Turtle invalid
+<pre class="example">
+riot --output turtle file.jsonld | grep -v "WARN  riot" &gt; file-noprefix.ttl
+</pre>
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-4-3-2-1" class="outline-5">
+<h5 id="sec-4-3-2-1"><span class="section-number-5">4.3.2.1</span> Prettify Turtle</h5>
+<div class="outline-text-5" id="text-4-3-2-1">
+<p>
+Unfortunately this file doesn't use prefixes, so the URLs are long and ugly (Boyan will fix this for the Store <a href="https://quark.everis.com/jira/browse/MULTISENSO-137">MULTISENSO-137</a>)
+</p>
+<ul class="org-ul">
+<li>Save <a href="./prefixes.ttl">./prefixes.ttl</a> (I update this file about once a month)
+</li>
+<li>Concat the two:
+<pre class="example">
+cat prefixes.ttl file-noprefix.ttl &gt; file-withprefix.ttl
+</pre>
+</li>
+<li>Prettify the Turtle to make use of the prefixes and to group all statements of the same subject together:
+<pre class="example">
+riot --formatted=turtle file-withprefix.ttl &gt; file.ttl
+</pre>
+</li>
+</ul>
+
+<p>
+Optional manual edits:
+</p>
+<ul class="org-ul">
+<li>Add on top a base, using the actual SIMMO base, eg
+<pre class="example">
+@base &lt;http://data.multisensorproject.eu/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c304&gt;.
+</pre>
+</li>
+<li>Replace "<a href="http://data.multisensorproject.eu/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c304">http://data.multisensorproject.eu/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c304</a>" with "" (I don't know why RIOT doesn't use the base, even if I specify the &#x2013;base option)
+</li>
+<li>Sort paragraphs (i.e. statement clusters)
+</li>
+</ul>
+
+<p>
+Post in Jira that last prettified file.ttl. Thanks!
+</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: 2015-09-01</p>
+<p class="date">Date: 2015-09-18</p>
 <p class="author">Author: vladimir.alexiev@ontotext.com</p>
-<p class="date">Created: 2015-09-01 Tue 16:58</p>
+<p class="date">Created: 2015-09-18 Fri 14:46</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.0.50.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
