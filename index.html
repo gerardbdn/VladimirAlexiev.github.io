@@ -1,197 +1,331 @@
-<!DOCTYPE html>
-<html>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>VladimirAlexiev.github.io</title>
+<!-- 2015-09-18 Fri 15:12 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Vladimir Alexiev" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
 
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="vladimiralexiev.github.io : An eclectic collection of presentations and drafts">
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+<style type="text/css">
+h1,h2,h3,h4,h5,h6,h7 {font-family: Arial}
+// don't want empty lines in auto-postamble
+.author, .date, .creator {-webkit-margin-before: 0em; -webkit-margin-after: 0em}
+// style for #+BEGIN_ABSTRACT
+.abstract {margin: 1em; padding: 1em; border: 1px solid black}
+.abstract:before {content: "Abstract: "; font-weight: bold}
+// center the preamble (author name) and make it bigger
+#preamble p { font-size: 110%%; margin-left: auto; margin-right: auto; text-align: center; }
+// table headers aligned same as table data
+th.left     {text-align:left}
+th.right    {text-align:right}
+// table horizontal & vertical borders. First value is top & bottom, second is left & right. http://www.w3schools.com/css/css_border.asp
+th, td {border-width: 1px; border-style: solid solid; border-spacing: 2px 2px; padding:4px 2px}
+// colored TODO keywords
+.CANCELED   {color: blue}
+.MAYBE      {color: blue}
+.POSTPONED  {color: blue}
+.INPROGRESS {color: orange}
+.NEXT       {color: orange}
+.IER        {color: orange}
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
 
-    <title>vladimiralexiev.github.io</title>
-  </head>
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
 
-  <body>
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/VladimirAlexiev">View on GitHub</a>
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
 
-          <h1 id="project_title">vladimiralexiev.github.io</h1>
-          <h2 id="project_tagline">An eclectic collection of presentations and drafts</h2>
 
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>
-<a id="publications-and-drafts" class="anchor" href="#publications-and-drafts" aria-hidden="true"><span class="octicon octicon-link"></span></a>Publications and Drafts</h1>
-
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">VladimirAlexiev.github.io</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
 <ul>
-<li>
-<a href="pubs/index.html">Publications</a> (with links to papers), <a href="pubs/Alexiev-bibliography.bib">bib</a> (includes <strong>abstracts *<em>and more links to *</em>presentations</strong>)</li>
-<li><a href="pres/extending-owl2/index.html">Extending OWL2 Property Constructs with OWLIM Rules</a></li>
+<li><a href="#sec-1">1. Publications and Tech</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Drafts</a></li>
 </ul>
+</li>
+<li><a href="#sec-2">2. Presentations</a></li>
+<li><a href="#sec-3">3. Getty Vocabulary Program LOD</a></li>
+<li><a href="#sec-4">4. Ontotext FP &amp; H2020 Research Projects</a></li>
+<li><a href="#sec-5">5. SPARQL Syntax Diagrams</a></li>
+</ul>
+</div>
+</div>
+<p>
+<a href="http://VladimirAlexiev.github.io">HTML rendered version</a>
+</p>
 
-<h1>
-<a id="presentations" class="anchor" href="#presentations" aria-hidden="true"><span class="octicon octicon-link"></span></a>Presentations</h1>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Publications and Tech</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li><a href="./pubs/index.html">Publications</a> (with links to papers), <a href="./pubs/Alexiev-bibliography.bib">Alexiev-bibliography.bib</a> (includes abstracts and more links to <b>presentations</b>)
+</li>
+<li><a href="./pres/extending-owl2/index.html">Extending OWL2 Property Constructs with OWLIM Rules</a>
+</li>
+<li><a href="http://VladimirAlexiev.github.io/CH-names/README.html">Name Data Sources for Semantic Enrichment</a>
+</li>
+<li><a href="./20150212-sex-or-gender/">Sex or Gender?</a> considerations about sex/gender enumeration values in LOD
+</li>
+<li><a href="./Multisensor/">FP7 Multisensor materials</a>
+</li>
+<li><a href="https://github.com/VladimirAlexiev/rnc">RelaxNG Compact (RNC) of Cultural Heritage (GLAM) Schemas</a>
+</li>
+</ul>
+</div>
 
-<ul>
-<li>Information School, University of Washington, 2014-05-21: INFX 598 - Introducing Linked Data: concepts, methods and tools. <a href="https://voicethread.com/myvoice/#u4454954.b5705597.i29176937">Guest lecture (Module 9)</a>: <strong>Doing Business with Semantic Technologies</strong>: <a href="https://voicethread.com/myvoice/#thread/5784646/29625471/31274564">video</a>, <a href="http://www.slideshare.net/valexiev1/20140521-semtechbizguestlecture">slideshare</a>. Introduction to Ontotext and some of its products, clients and projects.</li>
-<li>SmartCulture Conference, 2014-06-11, Brussels, Belgium: <strong>Semtech for CH</strong>: <a href="pres/20140611-SmartCulture-sem-tech-CH/index.html">HTML presentation</a>, <a href="pres/20140611-SmartCulture-sem-tech-CH/Semantic%20Technologies%20for%20Cultural%20Heritage.pdf">PDF</a>, <a href="http://www.slideshare.net/valexiev1/semantic-technologies-for-cultural-heritage-35749530">slideshare</a>
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Drafts</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li><a href="./Multisensor/FrameNet/index.html">Integrating FrameNet in NIF</a>
 </li>
-<li>Malmo Linked Data <a href="http://www.meetup.com/Linked-Data-in-Business/events/198356552/">Meetup</a>, 2014-08-21, Malmo, Sweden: <strong>Semtech for Cultural Heritage</strong>: <a href="pres/20140821-Malmo/index.html">HTML presentation</a>, <a href="pres/20140821-Malmo/SemTechCH-Malmo.pdf">PDF</a>, <a href="http://youtu.be/n8oGmOu9JEw">video</a>
+<li><a href="https://github.com/VladimirAlexiev/VladimirAlexiev.github.io/tree/master/cultures">Cultures, Ethnic Groups, Periods, Styles, Movements: Creating a Master List</a> (incomplete work in progress)
 </li>
-<li>CIDOC Congress, Dresden, Germany. <strong>Getty Vocabulary Program LOD: Ontologies and Semantic Representation</strong>:
+</ul>
+</div>
+</div>
+</div>
 
-<ul>
-<li>2014-09-05: International Terminology Working Group (full version): <a href="pres/20140905-CIDOC-GVP/index.html">presentation HTML</a>, <a href="pres/20140905-CIDOC-GVP/GVP-LOD-CIDOC.pdf">PDF</a>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Presentations</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>Information School, University of Washington, 2014-05-21: INFX 598 - Introducing Linked Data: concepts, methods and tools. <a href="https://voicethread.com/myvoice/#u4454954.b5705597.i29176937">Guest lecture (Module 9)</a>: <b>Doing Business with Semantic Technologies</b>: <a href="https://voicethread.com/myvoice/#thread/5784646/29625471/31274564">video</a>, <a href="http://www.slideshare.net/valexiev1/20140521-semtechbizguestlecture">slideshare</a>. Introduction to Ontotext and some of its products, clients and projects.
 </li>
-<li>2014-09-09: Getty special session (short version): <a href="pres/20140905-CIDOC-GVP/short.html">presentation HTML</a>, <a href="pres/20140905-CIDOC-GVP/GVP-LOD-CIDOC-short.pdf">PDF</a>
+<li>SmartCulture Conference, 2014-06-11, Brussels, Belgium: <b>Semtech for CH</b>: <a href="./pres/20140611-SmartCulture-sem-tech-CH/index.html">HTML presentation</a>, <a href="./pres/20140611-SmartCulture-sem-tech-CH/Semantic Technologies for Cultural Heritage.pdf">PDF</a>, <a href="http://www.slideshare.net/valexiev1/semantic-technologies-for-cultural-heritage-35749530">slideshare</a>
 </li>
-<li>See all presentations from these meetings at <a href="http://www.getty.edu/research/tools/vocabularies/training.html">http://www.getty.edu/research/tools/vocabularies/training.html</a>
+<li>Malmo Linked Data <a href="http://www.meetup.com/Linked-Data-in-Business/events/198356552/">Meetup</a>, 2014-08-21, Malmo, Sweden: <b>Semtech for Cultural Heritage</b>: <a href="./pres/20140821-Malmo/index.html">HTML presentation</a>, <a href="./pres/20140821-Malmo/SemTechCH-Malmo.pdf">PDF</a>, <a href="http://youtu.be/n8oGmOu9JEw">video</a>
+</li>
+<li><a href="https://at-web1.comp.glam.ac.uk/pages/research/hypermedia/nkos/nkos2014/programme.html">NKOS 2014 Workshop</a>, London, UK, 12 Sep 2014: <b>On Compositionality of ISO 25964 Hierarchical Relations (BTG, BTP, BTI)</b>: <a href="./pres/20140912-NKOS-compositionality/index.html">presentation HTML</a>, <a href="./pres/20140912-NKOS-compositionality/BTG-BTP-BTI-compositionality.pdf">PDF</a>
+<ul class="org-ul">
+<li>Resulting paper <a href="http://dx.doi.org/10.1007/s00799-015-0162-2">published in International Journal on Digital Libraries</a>
 </li>
 </ul>
 </li>
-<li>
-<a href="https://at-web1.comp.glam.ac.uk/pages/research/hypermedia/nkos/nkos2014/programme.html">NKOS 2014 Workshop</a>, London, UK, 12 Sep 2014: <strong>On Compositionality of ISO 25964 Hierarchical Relations (BTG, BTP, BTI)</strong>: <a href="pres/20140912-NKOS-compositionality/index.html">presentation HTML</a>, <a href="pres/20140912-NKOS-compositionality/BTG-BTP-BTI-compositionality.pdf">PDF</a>
+<li>Keystone Industrial Panel, ISWC 2014, Riva del Garda, 18 Oct 2014: <b>Semantic Technology in Publishing &amp; Finance</b>: <a href="http://www.slideshare.net/valexiev1/semantic-technology-in-publishing-finance">slideshare</a>. Triplestores and inference, applications in Finance, text-mining. Projects and solutions for financial media and publishers. Thanks to Atanas Kiryakov for this presentation, I just cut it to size.
 </li>
-<li>Keystone Industrial Panel, ISWC 2014, Riva del Garda, 18 Oct 2014: <strong>Semantic Technology in Publishing &amp; Finance</strong>: <a href="http://www.slideshare.net/valexiev1/semantic-technology-in-publishing-finance">slideshare</a>. Triplestores and inference, applications in Finance, text-mining. Projects and solutions for financial media and publishers. 
-Thanks to Atanas Kiryakov for this presentation, I just cut it to size.</li>
 <li>DBpedia Meeting, Dublin, 9 Feb 2015:
-
-<ul>
-<li>
-<strong>DBpedia Ontology and Mapping Problems</strong>: <a href="pres/20150209-dbpedia/dbpedia-problems.html">presentation HTML</a>, <a href="pres/20150209-dbpedia/dbpedia-problems-long.html">single HTML</a>, <a href="pres/20150209-dbpedia/dbpedia-problems.pdf">PDF</a>
+<ul class="org-ul">
+<li><b>DBpedia Ontology and Mapping Problems</b>: <a href="./pres/20150209-dbpedia/dbpedia-problems.html">presentation HTML</a>, <a href="./pres/20150209-dbpedia/dbpedia-problems-long.html">single HTML</a>, <a href="./pres/20150209-dbpedia/dbpedia-problems.pdf">PDF</a>
 </li>
-<li>
-<strong>Adding a DBpedia Mapping</strong>: <a href="pres/20150209-dbpedia/add-mapping.html">presentation HTML</a>, <a href="pres/20150209-dbpedia/add-mapping-long.html">single HTML</a>, <a href="pres/20150209-dbpedia/add-mapping.pdf">PDF</a>
+<li><b>Adding a DBpedia Mapping</b>: <a href="./pres/20150209-dbpedia/add-mapping.html">presentation HTML</a>, <a href="./pres/20150209-dbpedia/add-mapping-long.html">single HTML</a>, <a href="./pres/20150209-dbpedia/add-mapping.pdf">PDF</a>
 </li>
-<li>
-<strong>bg.dbpedia.org launched</strong>: <a href="pres/20150209-dbpedia/bg-dbpedia-launched.html">presentation HTML</a>, <a href="pres/20150209-dbpedia/bg-dbpedia-launched.pdf">PDF</a>
+<li><b>bg.dbpedia.org launched</b>: <a href="./pres/20150209-dbpedia/bg-dbpedia-launched.html">presentation HTML</a>, <a href="./pres/20150209-dbpedia/bg-dbpedia-launched.pdf">PDF</a>
 </li>
 </ul>
 </li>
 </ul>
+</div>
+</div>
 
-<h1>
-<a id="multisensor" class="anchor" href="#multisensor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Multisensor</h1>
-
-<ul>
-<li>
-<a href="Multisensor/Multisensor-LD.html">Multisensor Linked Data</a>: web presentation 2014-05-19, Barcelona</li>
-</ul>
-
-<h2>
-<a id="linguistic-linked-data" class="anchor" href="#linguistic-linked-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Linguistic Linked Data</h2>
-
-<p>There's been a huge drive in recent years to represent NLP data as RDF. NLP data is usually large, so does it make sense to represent it as RDF? What's the benefit?</p>
-
-<p>Ontologies, schemas and groups include: GRaF ITS2 FISE LAF LD4LT LEMON LIME LMF MARL NERD NIF NLP2RDF OLIA OntoLex OntoLing OntoTag Penn Stanford... my oh my!</p>
-
-<p>There are a lot of linguistic resources available that can be used profitably: BabelNet FrameNet GOLD ISOcat LemonUBY Multitext OmegaNet UBY VerbNet Wiktionary WordNet.</p>
-
-<ul>
-<li>Zotero Linguistic LD bibliography: <a href="https://www.zotero.org/groups/linguistic_ld/items">https://www.zotero.org/groups/linguistic_ld/items</a>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Getty Vocabulary Program LOD</h2>
+<div class="outline-text-2" id="text-3">
+<ul class="org-ul">
+<li><a href="http://vocab.getty.edu/doc">http://vocab.getty.edu/doc</a>: documentation (HTML for linking)
+<ul class="org-ul">
+<li><a href="http://vocab.getty.edu/doc/gvp-lod.pdf">http://vocab.getty.edu/doc/gvp-lod.pdf</a>: documentation (PDF for printing)
 </li>
-<li><a href="Multisensor/20141008-Linguistic-LD/index.html">Linguistic Linked Data presentation</a></li>
-<li><a href="Multisensor/Multisensor-NER-Mapping.html">Multisensor NER Mapping</a></li>
-<li>
-<a href="Multisensor/NIF-example.ttl">NIF-example.ttl</a>: example of NLP data in RDF (Turtle). Covers NIF (text binding), OLIA (linguistic properties), Penn (POS tagging), Stanford (dependency parsing), ITS20 (semantic annotation), NERD (entity extraction classes), Stanbol/FISE (multiple NLP tools/annotations per word/phrase), MARL (opinion/sentiment); and use of entities from DBpedia, WordNet, YAGO.
-
-<ul>
-<li>
-<a href="Multisensor/NIF-example.ttl.html">NIF-example.ttl.html</a>: syntax-highlighted with Emacs </li>
-<li>
-<a href="Multisensor/NIF-example.json">NIF-example.json</a>: same in JSON-LD, shows that Turtle should be used for examples/discussion/QA and JSON-LD for machine communication only</li>
 </ul>
 </li>
-<li>
-<a href="Multisensor/NIF-example2.ttl">NIF-example2.ttl</a>: example of NER as produced by LT (doesn't yet include all fields from the NER Mapping above).
-
-<ul>
-<li>
-<a href="Multisensor/NIF-example2.ttl.html">NIF-example2.ttl.html</a>: syntax-highlighted with Emacs </li>
-<li>
-<a href="Multisensor/NIF-example2.json">NIF-example2.json</a>: same in JSON-LD</li>
+<li><a href="http://vocab.getty.edu/doc/queries">http://vocab.getty.edu/doc/queries</a>: 90 sample queries
+<ul class="org-ul">
+<li><a href="http://vocab.getty.edu/queries">http://vocab.getty.edu/queries</a>: sample query UI
+</li>
 </ul>
 </li>
-<li>Issues I've found in NIF: 
-
-<ul>
-<li>
-<a href="https://github.com/NLP2RDF/specification/issues/1">Issue 1</a>: nif:opinion vs marl:extractedFrom. Example: <a href="Multisensor/NIF-issue-1.ttl">NIF-issue-1.ttl</a>
+<li><a href="http://vocab.getty.edu/ontology">http://vocab.getty.edu/ontology</a>: ontology namespace document
 </li>
-<li>
-<a href="https://github.com/NLP2RDF/specification/issues/2">Issue 2</a>: itsrdf vs fise properties. Example: <a href="Multisensor/NIF-issue-2.ttl">NIF-issue-2.ttl</a>
+<li>CIDOC Congress, Dresden, Germany. <b>Getty Vocabulary Program LOD: Ontologies and Semantic Representation</b>:
+<ul class="org-ul">
+<li>2014-09-05: International Terminology Working Group (full version): <a href="./pres/20140905-CIDOC-GVP/index.html">presentation HTML</a>, <a href="./pres/20140905-CIDOC-GVP/GVP-LOD-CIDOC.pdf">PDF</a>
+</li>
+<li>2014-09-09: Getty special session (short version): <a href="./pres/20140905-CIDOC-GVP/short.html">presentation HTML</a>, <a href="./pres/20140905-CIDOC-GVP/GVP-LOD-CIDOC-short.pdf">PDF</a>
+</li>
+<li><a href="http://www.getty.edu/research/tools/vocabularies/training.html">All presentations from these meetings</a>
 </li>
 </ul>
 </li>
 </ul>
+</div>
+</div>
 
-<h1>
-<a id="getty-vocabulary-program-lod" class="anchor" href="#getty-vocabulary-program-lod" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getty Vocabulary Program LOD</h1>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Ontotext FP &amp; H2020 Research Projects</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+<a href="./Ontotext-FP-projects-timeline.html">Frame that displays the project timeline</a> at <a href="http://www.ontotext.com/EC_ResearchProjects">http://www.ontotext.com/EC_ResearchProjects</a>. 
+It uses a Google Sheet to hold the data, and Google Charts to visualize it
+</p>
+</div>
+</div>
 
-<ul>
-<li>
-<a href="http://vocab-beta.getty.edu/doc">http://vocab-beta.getty.edu/doc</a>: documentation (HTML for linking)</li>
-<li>
-<a href="http://vocab-beta.getty.edu/doc/gvp-lod.pdf">http://vocab-beta.getty.edu/doc/gvp-lod.pdf</a>: documentation (PDF for printing)</li>
-<li>
-<a href="http://vocab-beta.getty.edu/doc/queries">http://vocab-beta.getty.edu/doc/queries</a>: 90 sample queries</li>
-<li>
-<a href="http://vocab-beta.getty.edu/ontology">http://vocab-beta.getty.edu/ontology</a>: ontology namespace document</li>
-</ul>
-
-<h1>
-<a id="ontotext-research-projects" class="anchor" href="#ontotext-research-projects" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ontotext Research Projects</h1>
-
-<p><a href="Ontotext-FP-projects-timeline.html">Frame that displays the project timeline</a> at <a href="http://www.ontotext.com/EC_ResearchProjects">http://www.ontotext.com/EC_ResearchProjects</a>. 
-It uses a Google Sheet and Google Charts</p>
-
-<h1>
-<a id="sparql-syntax-diagrams" class="anchor" href="#sparql-syntax-diagrams" aria-hidden="true"><span class="octicon octicon-link"></span></a>SPARQL Syntax Diagrams</h1>
-
-<p>Syntax (rail-road) diagrams of SPARQL 1.1 Query Language. I use this quite often while writing SPARQL</p>
-
-<ul>
-<li>
-<a href="SPARQL/sparql11-grammar.xhtml">sparql11-grammar.xhtml</a>: Cross-linked diagrams, one per production (173 total). 
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> SPARQL Syntax Diagrams</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Syntax (rail-road) diagrams of SPARQL 1.1 Query Language. I use this quite often while writing SPARQL
+</p>
+<ul class="org-ul">
+<li><a href="./SPARQL/sparql11-grammar.xhtml">sparql11-grammar.xhtml</a>: Cross-linked diagrams, one per production (173 total). 
 A bit hard to understand: use this for reference, but not for learning SPARQL.
-Here's a <a href="http://ontologicalengineering.blogspot.com/2008/12/sparql-railroad-diagram-from-hell.html">chunked diagram</a>, which however is partial: <a href="http://stackoverflow.com/questions/15758282/bigger-granularity-railroad-diagram-generator">Discussion</a> whether there's a chunked generator</li>
-<li>
-<a href="SPARQL/sparql11-grammar.ebnf">sparql11-grammar.ebnf</a>: EBNF rules extracted from the spec</li>
-<li>
-<a href="SPARQL/sparql11-grammar.txt">sparql11-grammar.txt</a>: same thing but with production numbers</li>
+Here's a <a href="http://ontologicalengineering.blogspot.com/2008/12/sparql-railroad-diagram-from-hell.html">chunked diagram</a>, which however is partial: <a href="http://stackoverflow.com/questions/15758282/bigger-granularity-railroad-diagram-generator">Discussion</a> whether there's a chunked generator
+</li>
+<li><a href="./SPARQL/sparql11-grammar.ebnf">sparql11-grammar.ebnf</a>: EBNF rules extracted from the spec
+</li>
+<li><a href="./SPARQL/sparql11-grammar.txt">sparql11-grammar.txt</a>: same thing but with production numbers
+</li>
 </ul>
 
-<p>Notes:</p>
-
-<ul>
+<p>
+Notes:
+</p>
+<ul class="org-ul">
 <li>extracted from: <a href="http://www.w3.org/TR/sparql11-query/">http://www.w3.org/TR/sparql11-query/</a>
 </li>
 <li>version: <a href="http://www.w3.org/TR/2013/REC-sparql11-query-20130321/">http://www.w3.org/TR/2013/REC-sparql11-query-20130321/</a>
 </li>
-<li>created on: Tue Apr 2, 2013, 08:59 (UTC+03)</li>
-<li>created by: vladimir.alexiev at ontotext dot com</li>
-<li>created with: <a href="http://bottlecaps.de/rr/ui">http://bottlecaps.de/rr/ui</a> </li>
+<li>created on: Tue Apr 2, 2013, 08:59 (UTC+03)
+</li>
+<li>created with: <a href="http://bottlecaps.de/rr/ui">http://bottlecaps.de/rr/ui</a>. This tool is quite good: it can scrape EBNF grammars from W3C specs, generates either a single XHTML with embedded SVG, or a zip with many PNGs, cross-links the definitions and usages.
+</li>
 </ul>
-
-<p>This tool is quite good: it can scrape EBNF grammars from W3C specs, generates either a single XHTML with embedded SVG, or a zip with many PNGs, cross-links the definitions and usages.</p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
-  </body>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-09-18&gt;</span></span></p>
+<p class="author">Author: Vladimir Alexiev</p>
+<p class="date">Created: 2015-09-18 Fri 15:12</p>
+<p class="creator">Emacs 25.0.50.1 (Org mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
 </html>
