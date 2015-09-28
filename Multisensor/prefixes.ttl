@@ -1,5 +1,6 @@
 @prefix bn:          <http://babelnet.org/rdf/> .
 @prefix dbo:         <http://dbpedia.org/ontology/> .
+@prefix dbp:         <http://dbpedia.org/property/> .
 @prefix dbr:         <http://dbpedia.org/resource/> .
 @prefix dc:          <http://purl.org/dc/elements/1.1/> .
 @prefix dct:         <http://purl.org/dc/terms/> .
