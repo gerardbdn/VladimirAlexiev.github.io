@@ -24,10 +24,11 @@ ms:positivePolarityValue a owl:DatatypeProperty;
 ms:sentimentalityValue a owl:DatatypeProperty;
   rdfs:domain marl:Opinion;
   rdfs:label "Sentimentality value"@en;
-  rdfs:comment "Difference between the most positive and most negative polarity of an opinion (eg a sentence)"@en;
+  rdfs:comment "Sum of the absolute values of the most positive and most negative polarity of an opinion (i.e. the difference between them)"@en;
   rdfs:isDefinedBy <http://data.multisensorproject.eu/ontology>.
 
-marl:polarityValue  rdfs:comment "This is the AVERAGE of ALL pos and neg opinions, not the SUM of ONLY the extremal opinions"@en.
+# marl:polarityValue rdfs:comment "Average of all positive and negative opinions"@en.
+# But SentiStrentgh seems to retain only the extremal opinions. Later we may implement averaging.
 
 # NOTE3: Sentences and the context are already demarkated by another MS partner
 <#char=0,2000> a nif:Context;
