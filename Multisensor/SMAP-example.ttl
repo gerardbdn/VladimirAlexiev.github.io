@@ -1,6 +1,6 @@
 @prefix dc:       <http://purl.org/dc/elements/1.1/> .
 @prefix ms:       <http://data.multisensorproject.eu/ontology#> .
-@prefix mssoc:    <http://data.multisensorproject.eu/social/> . # a namespace where to put MS Social network data
+@prefix ms-soc:    <http://data.multisensorproject.eu/social/> . # a namespace where to put MS Social network data
 @prefix puml:     <http://plantuml.com/ontology#>. # used only by rdfpuml, my RDF->PlantUML generator
 @prefix sioc:     <http://rdfs.org/sioc/ns#>.
 @prefix twitter:  <http://twitter.com/>.
@@ -8,27 +8,27 @@
 # We crawled two sets of tweets based on two keywords: "cars" and "RDF"
 # We form URLs from the keywords. If the keywords include spaces or other bad chars, replace with "_"
 
-mssoc:cars a sioc:Forum;
+ms-soc:cars a sioc:Forum;
   sioc:has_host twitter: ;
   dc:subject "cars".
 
-mssoc:RDF a sioc:Forum;
+ms-soc:RDF a sioc:Forum;
   sioc:has_host twitter: ;
   dc:subject "RDF".
 
 # The first guy has posted on both topics. He knows a bit about "cars" but a lot about "RDF"
 
 twitter:valexiev1 a sioc:UserAccount;
-  sioc:has_function mssoc:cars_valexiev1, mssoc:RDF_valexiev1.
+  sioc:has_function ms-soc:cars_valexiev1, ms-soc:RDF_valexiev1.
 
-mssoc:cars_valexiev1 a sioc:Role;
-  sioc:has_scope mssoc:cars;
+ms-soc:cars_valexiev1 a sioc:Role;
+  sioc:has_scope ms-soc:cars;
   ms:has_page_rank 0.75;
   ms:has_reachability 0.70;
   ms:has_global_influence 0.72.
 
-mssoc:RDF_valexiev1 a sioc:Role;
-  sioc:has_scope mssoc:RDF;
+ms-soc:RDF_valexiev1 a sioc:Role;
+  sioc:has_scope ms-soc:RDF;
   ms:has_page_rank 7500.0;
   ms:has_reachability 7000.0;
   ms:has_global_influence 7200.0.
@@ -36,10 +36,10 @@ mssoc:RDF_valexiev1 a sioc:Role;
 # The second guy has posted only on the "cars" topic. He knows a lot about "cars"
 
 twitter:johnSmith a sioc:UserAccount;
-  sioc:has_function mssoc:cars_johnSmith.
+  sioc:has_function ms-soc:cars_johnSmith.
 
-mssoc:cars_johnSmith a sioc:Role;
-  sioc:has_scope mssoc:cars;
+ms-soc:cars_johnSmith a sioc:Role;
+  sioc:has_scope ms-soc:cars;
   ms:has_page_rank 8.5;
   ms:has_reachability 8.0;
   ms:has_global_influence 8.2.

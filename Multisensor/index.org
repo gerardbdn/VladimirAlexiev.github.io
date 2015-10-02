@@ -1,5 +1,5 @@
 #+TITLE: Materials related to FP7 Multisensor
-#+DATE: <2015-09-18>
+#+DATE: <2015-10-02>
 #+AUTHOR: Vladimir Alexiev
 #+EMAIL: vladimir.alexiev@ontotext.com
 #+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline author:t c:nil
@@ -41,6 +41,99 @@ Examples (a few more are explained in Multisensor-NER-Mapping):
 Issues I've found in NIF: 
 - [[https://github.com/NLP2RDF/specification/issues/1][Issue 1]]: nif:opinion vs marl:extractedFrom. Example: [[./NIF-issue-1.ttl]]
 - [[https://github.com/NLP2RDF/specification/issues/2][Issue 2]]: itsrdf vs fise properties. Example: [[./NIF-issue-2.ttl]]
+- [[https://github.com/NLP2RDF/ontologies/issues/12][Issue 12]]: location of NIF3.0 and issue tracker
+
+
+* Image Annotation
+Look at this image: http://images.zeit.de/hamburg/stadtleben/2015-08/drage-vermisste/drage-vermisste-540x304.jpg\\
+[[http://images.zeit.de/hamburg/stadtleben/2015-08/drage-vermisste/drage-vermisste-540x304.jpg][http://images.zeit.de/hamburg/stadtleben/2015-08/drage-vermisste/drage-vermisste-540x304.jpg]]
+
+*NOTE:* It's recommended to copy the images to an internal server, to ensure that they
+will be available in the future. If the above image disappears, any statements about its
+URL become sort of useless.
+
+CERTH has software that can annotate it with heuristic tags and confidence, eg like this
+(many more tags are produced for this image):
+
+#+BEGIN_SRC 
+Concepts3_Or_More_People # 0.731893
+Amateur_Video            # 0.884379
+Armed_Person             # 0.35975 
+#+END_SRC
+
+We can represent this in RDF using various alternatives.
+
+** Open Annotation
+The [[http://www.w3.org/TR/annotation-model/][Web Annotation Data Model]] (also known as Open Annotation, OA) is widely used for all
+kinds of associating two or several resources: bookmarking, tagging, commenting,
+annotating, transcription (associating the image of eg handwritten text with the
+deciphered textual resources), compositing pieces of a manuscript (SharedCanvas), etc.
+
+The OA ontology has gone through a huge number of revisions at various sites. To avoid confusion:
+- The latest ontology is dated 2015-08-20 and is published at
+  http://w3c.github.io/web-annotation/vocabulary/wd/. It's still a draft (some editorial
+  text is missing), but the ontology is usable
+- The master file is at https://raw.githubusercontent.com/w3c/web-annotation/gh-pages/vocabulary/oa.ttl
+- The namespace URL http://www.w3.org/ns/oa serves an *obsolete* version
+
+We represent image annotations as [[http://www.w3.org/TR/annotation-model/#semantic-tags][oa:SemanticTag]]:
+- The image is the *target*, tags are (linked to)*bodies*
+- The tags are expressed as ~oa:SemanticTag~. The construct of using ~skos:related~ is
+  doubtful and [[https://lists.w3.org/Archives/Public/public-annotation/2015Sep/0184.html][will likely be removed]], but for now we'll use it
+- OA asks us to describe the nature of the relation as a specific [[http://www.w3.org/TR/annotation-model/#motivations][oa:motivatedBy]]. In this
+  case I picked *oa:tagging*.
+- We state the nature of the resource as rdf:type dctype:Image, and its mime type as
+  dc:format.
+- We record basic creation (provenance) information.
+[[./annot-image-oa.ttl]]\\
+[[./img/annot-image-oa.png]]
+
+Unfortunately OA has no standard way to express confidence, which is essential for this
+use case. I have raised this as https://github.com/restful-open-annotation/spec/issues/3.
+Above we use a custom property *ms:confidence*, and in further subsections I show other
+options.
+
+** Representing Confidence with Stanbol FISE
+Apache Stanbol defines an "enhancement structure" using the FISE ontology, which amongst
+other things defines ~fise:confidence~. We want to use [[http://stanbol.apache.org/docs/trunk/components/enhancer/enhancementstructure.html#fisetopicannotation][fise:TopicAnnotation]] that goes like
+this:\\
+http://stanbol.apache.org/docs/trunk/components/enhancer/es_topicannotation.png
+
+As you see, it points to ~fise:TextAnnotation~ using ~dc:relation~; if [[http://stanbol.apache.org/docs/trunk/components/enhancer/enhancementstructure.html#overview-on-the-stanbol-enhancement-structure][you scroll to the
+top]], you'll see that points further to the (textual) annotated resource
+(~ContentItem~): we don't want that since we have image not text. But there are
+also ~fise:extracted-from~ (dashed arrows) pointing directly to the resource. The
+*NIF+Stanbol* profile shows the same idea of using ~fise:extracted-from~ directly:\\
+#+ATTR_HTML: :style width:800px; text-align:left
+[[./20141008-Linguistic-LD/img/NIF-profiles.png]]
+
+We bastardize the ontology a bit:
+- skip ~dc:relation~, as we don't have ~fise:TextAnnotation~
+- skip ~fise:entity-label~, as it just repeats skos:prefLabel of the concept
+- skip ~fise:entity-type~, as it just repeats the rdf:type of the concept
+- make a direct link ~fise:extracted-from~ to the content. TODO: this is redundant since
+  ~oa:hasTarget~ already points there. So we can skip it
+The result is: [[./annot-image-fise.ttl]]\\
+[[./img/annot-image-fise.png]]
+
+** Representing Confidence with FAM
+The FusePoolP3 Annotation Model (FAM) has invesigated merging of OA, NIF and Stanbol FISE, and defines ~fam:confidence~ that we can use. Some links:
+- https://github.com/fusepoolP3/overall-architecture/blob/master/wp3/fp-anno-model/fp-anno-model.md
+- http://events.linuxfoundation.org/sites/events/files/slides/ApacheCon-Stanbol-FAM.pdf
+- http://www.slideshare.net/linkedtv/linking-media-and-data-using-apache-marmotta-lime-workshop-keynote 
+- https://github.com/wikier/apache-marmotta-tutorial-iswc2014
+
+We would use fam:TopicAnnotation: see a mapping from [[https://github.com/fusepoolP3/overall-architecture/blob/master/wp3/fp-anno-model/fp-anno-model.md#famTopicClassification_transformation][fise:TopicAnnotation to fam:TopicAnnotation]]. But because this results in an isomorphic graph structure, we don't show it here.
+
+** Representing Confidence with Reification
+*(IMPORTANT: Ignore this section, it's not needed now.)*
+
+A tried and true (although criticized by some) way of adding statements to relations is
+[[http://patterns.dataincubator.org/book/reified-statement.html][RDF Reification]] that uses ~rdf:Statement, rdf:subject, rdf:predicate, rdf:object~ (a lot
+more details in [[https://www.safaribooksonline.com/library/view/practical-rdf/0596002637/ch04s03.html][Practical RDF # Reification: The RDF Big Ugly]] at O'Reilly Safari. For
+brevity we represent only one of the tags. It looks like this, but the diagram hides some
+of the complexity so please see the turtle: [[./annot-image-reif.ttl]]\\
+[[./img/annot-image-reif.png]]
 
 * Social Linked Data
 SMAP is a MS module that does network analysis over social networks.
@@ -49,26 +142,51 @@ It gets some tweets based on keywords or hashtags, and then determines the impor
 - ms:has_reachability
 - ms:has_global_influence: a comnbination of the two
 
-** Example 1
-- We crawled two sets of tweets based on two keywords: "cars" and "RDF"
+** Example: single keywords
+- We crawled two sets of tweets based on two *keywords*: "cars" and "RDF"
 - The first guy (~valexiev1~) has posted on both topics. He knows a bit about "cars" but a lot about "RDF"
 - The second guy (~johnSmith~) has posted only on the "cars" topic. He knows a lot about "cars".
 (These names are completely random ;-).
 
 Representation:
 - We use a namespace ~mssoc:~ where we put MS Social network data.
-- We make a graph representation following the [[http://rdfs.org/sioc/spec/][SIOC]] ontology, complemented with MS properties where needed.
+- The RDF representation follows the [[http://rdfs.org/sioc/spec/][SIOC]] ontology, complemented with MS properties where needed.
+- Keywords are strings, so we use dc:subject to express them.
 - The graph allows a journalist to compare the importance of the same poster across keywords
-
 [[./SMAP-example.ttl]] ([[./SMAP-example.ttl.html]] is syntax highlighted):\\
 [[./img/SMAP-example.png]]
 
-** Example 2
-- We crawled one set of tweets based on several hashtags.
+** Example: multiple hashtags
+- We crawled one set of tweets based on multiple *hashtags*.
 - We make the topic URLs by concatenating the sorted tags (a bit too long but works).
 - We don't have the user names, only user IDs.
-- We put the hashtags in separate dct:subject props. This would allow someone to analyze topic  intersection.
-
+- Hashtags are resources (separately addressable), so we use dct:subject to express them
+- We put each hashtag in a separate dct:subject. This would allow someone to analyze topic  intersection.
 [[./SMAP-example2.ttl]] ([[./SMAP-example2.ttl.html]] is syntax highlighted):\\
 [[./img/SMAP-example2.png]]
 
+TODO:
+- Decide whether to split into more coherent hashtag groups, and do separate analyses. Eg:
+  - energy_crisis.energy_policy.renewable vs
+  - dishwasher.homeappliances
+- Decide whether and what named graphs to use. For now we'll use just one, with URL ~mssoc:~
+
+** Tweets Related to Article   
+Assume we can collect tweets related to a crawled article (SIMMO).
+- Assume that "energiewende" is a major topic of SIMMO http://data.multisensorproject.eu/content/1983754939468 (this URL is made up and doesn't resolve)
+- The tweet http://twitter.com/MSR_Future/status/605786079153627136 talks about #energiewende
+We can express the tweet as sioc:Post. We'll express just basic data:
+- sioc:content: "@UNFCCC @EnergiewendeGER That's great, just a shame it does not translate into lower CO2. #Energiewende"
+- sioc:has_creator: http://twitter.com/MSR_Future (or if we don't have access to the user name, we can use the user id just like above).
+- dct:date: posted on 2 Jun 2015 at 8:20 PM
+TODO: it would be nice to extract the hashtags and mentions
+
+[[./SMAP-tweet.ttl]]:\\
+[[./img/SMAP-tweet.png]]
+
+Possible extensions:
+- If we start sourcing ~Posts~ from other places (eg Facebook), we should link the ~Post~
+  and ~UserAccount~ to *twitter:* as a ~sioc:Forum~ or ~sioc:Site~.
+- If we want to express more diverse relations than a general ~sioc:about~, we can use OA
+  (see [[*Open Annotation]]) and oa:motivatedBy. The SIMMO will be the *target* of annotation,
+  and the tweet is the *body*.

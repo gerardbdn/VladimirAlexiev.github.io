@@ -1,6 +1,6 @@
 @prefix dct:      <http://purl.org/dc/terms/> .
 @prefix ms:       <http://data.multisensorproject.eu/ontology#>.
-@prefix mssoc:    <http://data.multisensorproject.eu/social/>.
+@prefix ms-soc:    <http://data.multisensorproject.eu/social/>.
 @prefix puml:     <http://plantuml.com/ontology#>.
 @prefix sioc:     <http://rdfs.org/sioc/ns#>.
 @prefix twitter:      <http://twitter.com/>.
@@ -8,26 +8,26 @@
 @prefix twitter_tag:  <http://twitter.com/hashtag/>.
 
 # Make topic URL from sorted concatenated tags
-mssoc:civilengineering.dishwasher.energy_crisis.energy_policy.renewable.foodmanufacturing.homeappliances a sioc:Forum;
+ms-soc:civilengineering.dishwasher.energy_crisis.energy_policy.renewable.foodmanufacturing.homeappliances a sioc:Forum;
   sioc:has_host twitter: ;
   dct:subject twitter_tag:civilengineering, twitter_tag:dishwasher, twitter_tag:energy_crisis, twitter_tag:policy_energy, twitter_tag:renewable, twitter_tag:foodmanufacturing, twitter_tag:homeappliances.
 
 # this user id corresponds to UNFCCC, but we don't bother to fetch that from https://twitter.com/intent/user?user_id=17463923
 twitter_user:17463923 a sioc:UserAccount;
-  sioc:has_function mssoc:civilengineering.dishwasher.energy_crisis.energy_policy.renewable.foodmanufacturing.homeappliances_17463923.
+  sioc:has_function ms-soc:civilengineering.dishwasher.energy_crisis.energy_policy.renewable.foodmanufacturing.homeappliances_17463923.
 
 # Make URL from topic concatenated with user id
-mssoc:civilengineering.dishwasher.energy_crisis.energy_policy.renewable.foodmanufacturing.homeappliances_17463923 a sioc:Role;
-  sioc:has_scope mssoc:civilengineering.dishwasher.energy_crisis.energy_policy.renewable.foodmanufacturing.homeappliances;
+ms-soc:civilengineering.dishwasher.energy_crisis.energy_policy.renewable.foodmanufacturing.homeappliances_17463923 a sioc:Role;
+  sioc:has_scope ms-soc:civilengineering.dishwasher.energy_crisis.energy_policy.renewable.foodmanufacturing.homeappliances;
   ms:has_pagerank 0.0206942;
   ms:has_reachability 386.05;
   ms:has_overall_influence 0.143948.
 
 twitter_user:243236419 a sioc:UserAccount;
-  sioc:has_function mssoc:civilengineering.dishwasher.energy_crisis.energy_policy.renewable.foodmanufacturing.homeappliances_243236419.
+  sioc:has_function ms-soc:civilengineering.dishwasher.energy_crisis.energy_policy.renewable.foodmanufacturing.homeappliances_243236419.
 
-mssoc:civilengineering.dishwasher.energy_crisis.energy_policy.renewable.foodmanufacturing.homeappliances_243236419 a sioc:Role;
-  sioc:has_scope mssoc:civilengineering.dishwasher.energy_crisis.energy_policy.renewable.foodmanufacturing.homeappliances;
+ms-soc:civilengineering.dishwasher.energy_crisis.energy_policy.renewable.foodmanufacturing.homeappliances_243236419 a sioc:Role;
+  sioc:has_scope ms-soc:civilengineering.dishwasher.energy_crisis.energy_policy.renewable.foodmanufacturing.homeappliances;
   ms:has_pagerank 0.020222;
   ms:has_reachability 434.15;
   ms:has_overall_influence 0.143038.

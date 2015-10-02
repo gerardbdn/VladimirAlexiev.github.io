@@ -1,0 +1,65 @@
+@prefix dc:           <http://purl.org/dc/elements/1.1/> .
+@prefix dct:          <http://purl.org/dc/terms/> .
+@prefix dctype:       <http://purl.org/dc/dcmitype/>.
+@prefix fam:          <http://vocab.fusepool.info/fam#>.
+@prefix foaf:         <http://xmlns.com/foaf/0.1/> .
+@prefix ms:           <http://data.multisensorproject.eu/ontology#>.
+@prefix ms-annot:     <http://data.multisensorproject.eu/annot/>.
+@prefix ms-concept:   <http://data.multisensorproject.eu/concept/>.
+@prefix oa:           <http://www.w3.org/ns/oa#>.
+@prefix prov:         <http://www.w3.org/ns/prov#>.
+@prefix puml:         <http://plantuml.com/ontology#>.
+@prefix skos:         <http://www.w3.org/2004/02/skos/core#>.
+@prefix xsd:          <http://www.w3.org/2001/XMLSchema#> .
+
+<http://data.multisensorproject.eu/annot/1234153426>
+  a oa:Annotation;
+  oa:hasTarget <http://images.zeit.de/...-540x304.jpg>;
+  oa:hasBody
+    <http://data.multisensorproject.eu/annot/1234153426-Concepts3_Or_More_People>,
+    <http://data.multisensorproject.eu/annot/1234153426-Amateur_Video>,
+    <http://data.multisensorproject.eu/annot/1234153426-Armed_Person>;
+  oa:motivatedBy oa:tagging;
+  oa:annotatedBy <http://data.multisensorproject.eu/agent/imageAnnotator>;
+  oa:annotatedAt "2015-10-01T12:34:56"^^xsd:dateTime.
+
+<http://images.zeit.de/...-540x304.jpg>
+  a dctype:Image;
+  dc:format "image/jpeg".
+
+<http://data.multisensorproject.eu/agent/imageAnnotator>
+  a prov:SoftwareAgent;
+  foaf:name "CERTH Image Annotator v1.0".
+
+<http://data.multisensorproject.eu/annot/1234153426-Concepts3_Or_More_People>
+  a oa:SemanticTag;
+  skos:related ms-concept:Concepts3_Or_More_People;
+  ms:confidence 0.731893.
+<http://data.multisensorproject.eu/annot/1234153426-Amateur_Video>
+  a oa:SemanticTag;
+  skos:related ms-concept:Amateur_Video;
+  ms:confidence 0.884379.
+<http://data.multisensorproject.eu/annot/1234153426-Armed_Person>
+  a oa:SemanticTag;
+  skos:related ms-concept:Armed_Person;
+  ms:confidence 0.35975.
+
+ms-concept:Concepts3_Or_More_People
+  a skos:Concept;
+  skos:inScheme ms-concept: ;
+  skos:prefLabel "Concepts: 3 or More People".
+ms-concept:Amateur_Video
+  a skos:Concept, oa:SemanticTag;
+  skos:inScheme ms-concept: ;
+  skos:prefLabel "Amateur Video".
+ms-concept:Armed_Person
+  a skos:Concept, oa:SemanticTag;
+  skos:inScheme ms-concept: ;
+  skos:prefLabel "Armed Person".
+
+####################
+
+oa:tagging a puml:Inline.
+
+<http://data.multisensorproject.eu/annot/1234153426> puml:right <http://data.multisensorproject.eu/agent/imageAnnotator>.
+<http://data.multisensorproject.eu/annot/1234153426> puml:left <http://images.zeit.de/...-540x304.jpg>.

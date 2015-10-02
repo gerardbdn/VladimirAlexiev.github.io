@@ -1,0 +1,33 @@
+<http://data.multisensorproject.eu/annot/1234153426>
+  a oa:Annotation;
+  oa:hasTarget <http://images.zeit.de/...-540x304.jpg>;
+  oa:hasBody ms-concept:Concepts3_Or_More_People;
+  oa:motivatedBy oa:tagging;
+  oa:annotatedBy <http://data.multisensorproject.eu/agent/imageAnnotator>;
+  oa:annotatedAt "2015-10-01T12:34:56"^^xsd:dateTime.
+
+<http://data.multisensorproject.eu/annot/1234153426-Concepts3_Or_More_People> a rdf:Statement;
+  rdf:subject <http://data.multisensorproject.eu/annot/1234153426>;
+  rdf:predicate oa:hasBody;
+  rdf:object ms-concept:Concepts3_Or_More_People;
+  ms:confidence 0.731893.
+
+<http://images.zeit.de/...-540x304.jpg>
+  a dctype:Image;
+  dc:format "image/jpeg".
+
+<http://data.multisensorproject.eu/agent/imageAnnotator>
+  a prov:SoftwareAgent;
+  foaf:name "CERTH Image Annotator v1.0".
+
+ms-concept:Concepts3_Or_More_People
+  a skos:Concept, oa:SemanticTag;
+  skos:inScheme ms-concept: ;
+  skos:prefLabel "Concepts: 3 or More People".
+
+####################
+
+oa:tagging a puml:Inline.
+
+<http://data.multisensorproject.eu/annot/1234153426> puml:right <http://data.multisensorproject.eu/agent/imageAnnotator>.
+<http://data.multisensorproject.eu/annot/1234153426> puml:left <http://images.zeit.de/...-540x304.jpg>.
