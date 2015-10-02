@@ -45,7 +45,7 @@ Issues I've found in NIF:
 
 
 * Image Annotation
-Look at this image: http://images.zeit.de/hamburg/stadtleben/2015-08/drage-vermisste/drage-vermisste-540x304.jpg\\
+Look at this image:
 [[http://images.zeit.de/hamburg/stadtleben/2015-08/drage-vermisste/drage-vermisste-540x304.jpg][http://images.zeit.de/hamburg/stadtleben/2015-08/drage-vermisste/drage-vermisste-540x304.jpg]]
 
 *NOTE:* It's recommended to copy the images to an internal server, to ensure that they
@@ -110,7 +110,7 @@ also ~fise:extracted-from~ (dashed arrows) pointing directly to the resource. Th
 We bastardize the ontology a bit:
 - skip ~dc:relation~, as we don't have ~fise:TextAnnotation~
 - skip ~fise:entity-label~, as it just repeats skos:prefLabel of the concept
-- skip ~fise:entity-type~, as it just repeats the rdf:type of the concept
+- skip ~fise:entity-type~, as it just repeats rdf:type of the concept
 - make a direct link ~fise:extracted-from~ to the content. TODO: this is redundant since
   ~oa:hasTarget~ already points there. So we can skip it
 The result is: [[./annot-image-fise.ttl]]\\
