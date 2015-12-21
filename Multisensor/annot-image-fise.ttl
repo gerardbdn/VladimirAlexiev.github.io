@@ -47,6 +47,7 @@ ms-concept:Armed_Person
   skos:prefLabel "Armed Person".
 
 ####################
+## skip all puml: triples in actual generation. They are used only to make the PlantUML diagrams
 
 oa:tagging a puml:Inline.
 

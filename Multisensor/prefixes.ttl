@@ -1,46 +1,91 @@
-@prefix bn:           <http://babelnet.org/rdf/> .
-@prefix dbo:          <http://dbpedia.org/ontology/> .
-@prefix dbp:          <http://dbpedia.org/property/> .
-@prefix dbr:          <http://dbpedia.org/resource/> .
-@prefix dc:           <http://purl.org/dc/elements/1.1/> .
-@prefix dct:          <http://purl.org/dc/terms/> .
-@prefix dctype:       <http://purl.org/dc/dcmitype/>.
-@prefix fam:          <http://vocab.fusepool.info/fam#>.
-@prefix fe:           <http://www.ontologydesignpatterns.org/ont/framenet/abox/fe/> .
-@prefix fise:         <http://fise.iks-project.eu/ontology/>.
-@prefix fn:           <http://www.ontologydesignpatterns.org/ont/framenet/tbox/> .
-@prefix foaf:         <http://xmlns.com/foaf/0.1/> .
-@prefix frame:        <http://www.ontologydesignpatterns.org/ont/framenet/abox/frame/> .
-@prefix its:          <http://www.w3.org/2005/11/its/rdf#> .
-@prefix lu:           <http://www.ontologydesignpatterns.org/ont/framenet/abox/lu/> .
-@prefix marl:         <http://purl.org/marl/ns#> .
-@prefix ms:           <http://data.multisensorproject.eu/ontology#> .
-@prefix ms-annot:     <http://data.multisensorproject.eu/annot/>.
-@prefix ms-content:   <http://data.multisensorproject.eu/content/>.
-@prefix ms-concept:   <http://data.multisensorproject.eu/concept/>.
-@prefix ms-soc:       <http://data.multisensorproject.eu/social/> .
-@prefix nerd:         <http://nerd.eurecom.fr/ontology#> .
-@prefix nif:          <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
-@prefix oa:           <http://www.w3.org/ns/oa#>.
-@prefix olia:         <http://purl.org/olia/olia.owl#> .
-@prefix owl:          <http://www.w3.org/2002/07/owl#> .
-@prefix penn:         <http://purl.org/olia/penn.owl#> .
-@prefix puml:         <http://plantuml.com/ontology#>.
-@prefix prov:         <http://www.w3.org/ns/prov#>.
-@prefix rdf:          <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs:         <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix schema:       <http://schema.org/> .
-@prefix sioc:         <http://rdfs.org/sioc/ns#>.
-@prefix skos:         <http://www.w3.org/2004/02/skos/core#>.
-@prefix st:           <http://www.ontologydesignpatterns.org/ont/framenet/abox/semType/> .
-@prefix twitter:      <http://twitter.com/>.
-@prefix twitter_user: <http://twitter.com/intent/user?user_id=> .
-@prefix twitter_tag:  <http://twitter.com/hashtag/>.
-@prefix upf-deep:     <http://taln.upf.edu/upf-deep#> .
-@prefix upf-dep-spa:  <http://taln.upf.edu/upf-dep-spa#> .
-@prefix upf-dep-syn:  <http://taln.upf.edu/olia/penn-dep-syntax#> .
-@prefix xsd:          <http://www.w3.org/2001/XMLSchema#> .
+# Multisensor ontologies
+@prefix ms:             <http://data.multisensorproject.eu/ontology#> .
+@prefix upf-deep:       <http://taln.upf.edu/upf-deep#> .
+@prefix upf-dep-spa:    <http://taln.upf.edu/upf-dep-spa#> .
+@prefix upf-dep-syn:    <http://taln.upf.edu/olia/penn-dep-syntax#> .
 
-# BAD prefixes used only temporarily
-@prefix ms-BAD:       <http://data.multisensor.eu/ontology#> . # we don't own that domain
-@prefix fn-BAD:       <http://data.multisensorproject.eu/tbox/>. # UPF will use only standard FN props
+# Multisensor datasets
+@prefix ms-annot:       <http://data.multisensorproject.eu/annot/>.
+@prefix ms-content:     <http://data.multisensorproject.eu/content/>.
+@prefix ms-concept:     <http://data.multisensorproject.eu/concept/>.
+@prefix ms-soc:         <http://data.multisensorproject.eu/social/> .
+
+# External datasets
+@prefix bn:             <http://babelnet.org/rdf/> .
+@prefix dbr:            <http://dbpedia.org/resource/> .
+@prefix twitter:        <http://twitter.com/>.
+@prefix twitter_tag:    <http://twitter.com/hashtag/>.
+@prefix twitter_user:   <http://twitter.com/intent/user?user_id=> .
+
+# Commonly used ontologies
+@prefix dbo:            <http://dbpedia.org/ontology/> .
+@prefix dbp:            <http://dbpedia.org/property/> .
+@prefix dc:             <http://purl.org/dc/elements/1.1/> .
+@prefix dct:            <http://purl.org/dc/terms/> .
+@prefix dctype:         <http://purl.org/dc/dcmitype/>.
+@prefix foaf:           <http://xmlns.com/foaf/0.1/> .
+@prefix schema:         <http://schema.org/> .
+@prefix sioc:           <http://rdfs.org/sioc/ns#>.
+@prefix skos:           <http://www.w3.org/2004/02/skos/core#>.
+
+# Linguistic and Annotation ontologies
+@prefix fam:            <http://vocab.fusepool.info/fam#>.
+@prefix fise:           <http://fise.iks-project.eu/ontology/>.
+@prefix its:            <http://www.w3.org/2005/11/its/rdf#> .
+@prefix marl:           <http://purl.org/marl/ns#> .
+@prefix nerd:           <http://nerd.eurecom.fr/ontology#> .
+@prefix nif:            <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+@prefix oa:             <http://www.w3.org/ns/oa#>.
+@prefix olia:           <http://purl.org/olia/olia.owl#> .
+@prefix penn:           <http://purl.org/olia/penn.owl#> .
+
+# FrameNet ontologies
+@prefix fn:             <http://www.ontologydesignpatterns.org/ont/framenet/tbox/> .
+@prefix frame:          <http://www.ontologydesignpatterns.org/ont/framenet/abox/frame/> .
+@prefix fe:             <http://www.ontologydesignpatterns.org/ont/framenet/abox/fe/> .
+@prefix lu:             <http://www.ontologydesignpatterns.org/ont/framenet/abox/lu/> .
+@prefix st:             <http://www.ontologydesignpatterns.org/ont/framenet/abox/semType/> .
+
+# System ontologies
+@prefix rdf:            <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:           <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:            <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:            <http://www.w3.org/2001/XMLSchema#> .
+
+# common statistical ontologies (CUBE, SDMX)
+@prefix qb:             <http://purl.org/linked-data/cube#> .
+@prefix sdmx-code:      <http://purl.org/linked-data/sdmx/2009/code#> .
+@prefix sdmx-attribute: <http://purl.org/linked-data/sdmx/2009/attribute#> .
+@prefix sdmx-dimension: <http://purl.org/linked-data/sdmx/2009/dimension#> .
+@prefix sdmx-measure:   <http://purl.org/linked-data/sdmx/2009/measure#> .
+
+# Eurostat statistics
+@prefix eu:             <http://eurostat.linked-statistics.org/dic/>.
+@prefix eu_age:         <http://eurostat.linked-statistics.org/dic/age#>.
+@prefix eu_adj:         <http://eurostat.linked-statistics.org/dic/s_adj#>.
+@prefix eu_flow:        <http://eurostat.linked-statistics.org/dic/stk_flow#>.
+@prefix eu_partner:     <http://eurostat.linked-statistics.org/dic/partner#>.
+@prefix eudata:         <http://eurostat.linked-statistics.org/data/> .
+@prefix eugeo:          <http://eurostat.linked-statistics.org/dic/geo#>.
+@prefix indic:          <http://eurostat.linked-statistics.org/dic/indic#>.
+@prefix indic_bp:       <http://eurostat.linked-statistics.org/dic/indic_bp#>.
+@prefix indic_et:       <http://eurostat.linked-statistics.org/dic/indic_et#>.
+@prefix indic_is:       <http://eurostat.linked-statistics.org/dic/indic_is#>.
+@prefix indic_na:       <http://eurostat.linked-statistics.org/dic/indic_na#>.
+@prefix prop:           <http://eurostat.linked-statistics.org/property#> .
+@prefix unit:           <http://eurostat.linked-statistics.org/dic/unit#> .
+
+# WorldBank statistics
+@prefix country:        <http://worldbank.270a.info/classification/country/> .
+@prefix indicator:      <http://worldbank.270a.info/classification/indicator/> .
+@prefix property:       <http://worldbank.270a.info/property/> .
+
+# Auxiliary
+@prefix puml:           <http://plantuml.com/ontology#>.
+@prefix prov:           <http://www.w3.org/ns/prov#>.
+
+# BAD prefixes, not used only anymore
+#@prefix ms-BAD:       <http://data.multisensor.eu/ontology#> .   # we don't own that domain
+#@prefix fn-BAD:       <http://data.multisensorproject.eu/tbox/>. # UPF will use only standard FN props
+
+

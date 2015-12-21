@@ -1,5 +1,5 @@
 #+TITLE: Materials related to FP7 Multisensor
-#+DATE: <2015-10-02>
+#+DATE: <2015-12-21>
 #+AUTHOR: Vladimir Alexiev
 #+EMAIL: vladimir.alexiev@ontotext.com
 #+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline author:t c:nil
@@ -26,6 +26,12 @@ The benefit is that RDF offers a lot of flexibility for combining data on many d
 - Multisensor NER Mapping [[./Multisensor-NER-Mapping.html][(html)]], [[Multisensor-NER-Mapping.org][(org)]]: representing Named Entity Recognition in NIF and NIF Validation
 - [[./FrameNet][Integrating FrameNet in NIF]]
 
+Issues I've found in NIF: 
+- [[https://github.com/NLP2RDF/specification/issues/1][Issue 1]]: nif:opinion vs marl:extractedFrom. Example: [[./NIF-issue-1.ttl]]
+- [[https://github.com/NLP2RDF/specification/issues/2][Issue 2]]: itsrdf vs fise properties. Example: [[./NIF-issue-2.ttl]]
+- [[https://github.com/NLP2RDF/ontologies/issues/12][Issue 12]]: location of NIF3.0 and issue tracker
+
+* MultiSensor NIF Representation
 Examples (a few more are explained in Multisensor-NER-Mapping):
 - [[./NIF-example.ttl]]: NLP data in RDF (Turtle). Covers NIF (text binding), OLIA (linguistic properties), Penn (POS tagging), Stanford (dependency parsing), ITS20 (semantic annotation), NERD (entity extraction classes), Stanbol/FISE (multiple NLP tools/annotations per word/phrase), MARL (opinion/sentiment); and use of entities from DBpedia, WordNet, YAGO.
   - [[./NIF-example.ttl.html]]: syntax-highlighted with Emacs 
@@ -33,19 +39,123 @@ Examples (a few more are explained in Multisensor-NER-Mapping):
 - [[./NIF-example2.ttl]]: example of NER as produced by LT (doesn't yet include all fields from the NER Mapping above).
   - [[./NIF-example2.ttl.html]]: syntax-highlighted with Emacs 
   - [[./NIF-example2.json]]: same in JSON-LD
-- [[./NIF-example3.ttl]]: Various kinds of Named Entities as per Multisensor-NER-Mapping
+- [[./NIF-example3.ttl]]: Various kinds of Named Entities as per [[./Multisensor-NER-Mapping.html]]
   - [[./NIF-example3.ttl.html]]: syntax-highlighted with Emacs 
 - [[./NIF-example4.ttl]]: sentiment with MARL
   - [[./NIF-example4.jsonld]]: same in JSONLD
 
-Issues I've found in NIF: 
-- [[https://github.com/NLP2RDF/specification/issues/1][Issue 1]]: nif:opinion vs marl:extractedFrom. Example: [[./NIF-issue-1.ttl]]
-- [[https://github.com/NLP2RDF/specification/issues/2][Issue 2]]: itsrdf vs fise properties. Example: [[./NIF-issue-2.ttl]]
-- [[https://github.com/NLP2RDF/ontologies/issues/12][Issue 12]]: location of NIF3.0 and issue tracker
+For FrameNet (relation extraction) representation see [[./FrameNet/]]. 
+The remaining sections describe specific representation issues (speech recognition, translation, multimedia)
 
+** Graph Normalization
+The [[http://mklab2.iti.gr/multisensor/index.php/RDF_Storing_Service][RDF_Storing_Service]] saves all data about a SIMMO in a named graph having the same URL as the SIMMO base URL.
+This makes it easy to get all data about the SIMMO. 
+But it also leads to duplication of common triples. Eg consider this:
+#+BEGIN_SRC Turtle
+<http://multisensor.org/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c30488#char=100,107> its:taIdentRef dbr:Germany.
 
-* Image Annotation
-Look at this image:
+# Common triples
+dbr:Germany a nerd:Location;
+  foaf:name "Germany"
+#+END_SRC
+If ~dbr:Germany~ appears 1000 times in SIMMOs, these common triples will be duplicated 1000 times.
+This leads to extreme slowness of ElasticSearch indexing: 
+when adding the 1000th occurrence of ~dbr:Germany~ it indexes (the same) foaf:name "Germany" 1000 times, 
+i.e. storing time grows potentially quadratically with the number of SIMMOs.
+
+The proposed fix is *graph normalization*: the storing service examines every triple ~<s,p,o>~. 
+- If ~s~ has the SIMMO base URL as prefix, the triple is stored in the SIMMO graph.
+- Otherwise, the triple is stored in the default graph.
+This still saves common triples 1000 times, but there is no duplication since a triple can exist only once in a given graph.
+
+*** Query Changes
+The tradeoff is that you won't be able to get all SIMMO data by simply asking for a graph. 
+Eg query [[https://docs.google.com/document/d/1FfkiiTYvrLzHJ5P5j34NRVGPbXml0ndpNtiNbH2osRw/edit#heading%3Dh.ngkjkg5b5zze][2.3 Retrieve NEs (Select)]] is a bit sloppy, since it asks for certain types (and ~foaf:name~) by graph, without looking for any relation:
+#+BEGIN_SRC sparql
+SELECT DISTINCT ?ne ?type ?name {
+  GRAPH <http://data.multisensor.org/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c30488> {
+    ?ne a ?type; foaf:name ?name   
+    FILTER (?type IN (dbo:Person, dbo:Organization, nerd:Amount, nerd:Location, nerd:Time))}}
+#+END_SRC
+
+If graph normalization is applied, we'd have to find the NEs by relation ~its:taIdentRef~, 
+and get their common triples from outside the SIMMO graph:
+#+BEGIN_SRC sparql
+SELECT distinct ?ne ?type ?name {
+  GRAPH <http://multisensor.org/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c30488> 
+    {[] its:taIdentRef ?ne}
+  ?ne a ?type; foaf:name ?name   
+  FILTER (?type IN (dbo:Person, dbo:Organization, nerd:Amount, nerd:Location, nerd:Time))
+} 
+#+END_SRC
+(Actually this query also works before graph normalization since the part outside ~GRAPH {..}~ looks in all graphs, both SIMMO and default).
+
+*** Normalization Problems
+Moving common triples outside of the SIMMO graph raises two problems:
+- If you examine the results of the query above, you'll see that some entities (eg ~dbr:Facebook~) have several labels, eg
+  : "Facebook, Inc."@en
+  : "Facebook"^^xsd:string
+  The reason is probably that different SIMMOs have different versions of the label, and different versions of the pipeline emit different literals ("en" language vs xsd:string).
+  Both of these labels will be indexed in ElasticSearch for all occurrences of this NE.
+  But the pipeline has emitted the labels globally (as ~foaf:name~ of ~dbr:Facebook~) rather than locally (eg as ~nif:anchorOf~),
+  in effect asserting that both are globally valid labels of Facebook. 
+  So that's a correct consequence of the data as emitted.
+- If the last SIMMO referring to a global NE is deleted, that NE will remain as "garbage" in the common graph.
+  But I don't think that is a significant problem, since the amount of such "garbage" won't be large, and since it is harmless.
+
+*Are the partners willing to make this change to the data model, and change their queries correspondingly?*
+
+** TODO Speech Recognition
+
+** TODO Translation
+Use case: we have original text in DE that is machine-translated to EN, then annotated with NER and other NIF annotations
+
+[[http://www.slideshare.net/m1ci/nif-tutorial][FREME NIF Tutorial]]:
+- slide 16 uses itsrdf:target to point to target (translated) text of a nif:String, but you make furtter statements about the translated text
+- slide 18 shows an idea how to represent translated text as an independent document, but uses a made-up property itsrdf:translatedAs
+
+[[http://www.w3.org/community/ontolex/wiki/Final_Model_Specification#Translation][The OntoLex vartrans]] module suggests 5 ways to represent translation. But all of them put us firmly in OntoLex land:
+- the senses in source and target language share a reference to a shared concept
+- class vartrans:Translation with properties vartrans:source and vartrans:target pointing the source and target sense
+- property vartrans:translation that points from source to target sense
+- property vartrans:translatableAs that points from source to target lexical entry
+- class vartrans:TranslationSet that points to a number of vartrans:member vartrans:Translation instances
+
+Another option is to use PROV:
+- [[http://www.w3.org/TR/prov-o/#hadPrimarySource][prov:hadPrimarySource]] is the only property that mentions "translation"
+- nif:wasConvertedFrom is a subprop of prov:wasDerivedFrom
+
+** TODO Multimedia Annotation
+We have 2 services to integrate in this way:
+1. ASR which provide a raw text extracted from the video (speech recognition) 
+2. And the Concept and Event detection which provides the list of the concepts with the degree of confidence. 
+
+So for these services, we have to extend the ontology of the SIMMO.
+Now we have something like the following one:
+
+SIMMO 
+|- referenceContext
+|---- sentence []
+|------------word []
+
+And we have to extend it for the multimedia content with something like this: 
+|- multimedia
+|----- image [] = list of the images present in the article 
+|------------concepts and events + score [] = list of the concepts detected per image
+|----- video [] = of the videos present in the article
+|------------ frame [] = list of the images extracted by the C&Ed
+|-------------------- concepts and events + score [] = list of the concepts detected per frame (should we store all the concepts detected per frame?)
+|------------ text = text extracted by the Speech recognition (probably this text should be processed through the NER and the Concept detection services)
+|-------------------- concepts [] = list of the concepts detected by the Concept detection
+|-------------------- entities [] = list of the entities detected by the NER service
+|------------ concepts and events + score [] = list of the 3 or 5 concepts more confident for this article (we probably do not need to store all the concepts detected per frame by the C&E, but just the most recurrent ones)
+
+The idea is to process this information not simultaneously to the textual content. So to ensure the RDF graph of the multimedia content will be correctly linked to the existing SIMMO generated previously for the textual content, the right SIMMO reference should be provided.
+And we have to think that this information should be useful for the multimedia search. Then, we should be able to search for concepts that were detected in the images, in the videos, and/or in the video’s speeches. 
+Please, could you confirm this is the approach to follow?  And if yes, could you propose an RDF formalisation to represent and store the multimedia content in GraphDB?
+
+** Image Annotation
+Look at this image:\\
 [[http://images.zeit.de/hamburg/stadtleben/2015-08/drage-vermisste/drage-vermisste-540x304.jpg][http://images.zeit.de/hamburg/stadtleben/2015-08/drage-vermisste/drage-vermisste-540x304.jpg]]
 
 *NOTE:* It's recommended to copy the images to an internal server, to ensure that they
@@ -63,7 +173,7 @@ Armed_Person             # 0.35975
 
 We can represent this in RDF using various alternatives.
 
-** Open Annotation
+*** Open Annotation
 The [[http://www.w3.org/TR/annotation-model/][Web Annotation Data Model]] (also known as Open Annotation, OA) is widely used for all
 kinds of associating two or several resources: bookmarking, tagging, commenting,
 annotating, transcription (associating the image of eg handwritten text with the
@@ -93,17 +203,17 @@ use case. I have raised this as https://github.com/restful-open-annotation/spec/
 Above we use a custom property *ms:confidence*, and in further subsections I show other
 options.
 
-** Representing Confidence with Stanbol FISE
-Apache Stanbol defines an "enhancement structure" using the FISE ontology, which amongst
-other things defines ~fise:confidence~. We want to use [[http://stanbol.apache.org/docs/trunk/components/enhancer/enhancementstructure.html#fisetopicannotation][fise:TopicAnnotation]] that goes like
-this:\\
+*** Representing Confidence with Stanbol FISE
+Apache Stanbol defines an "enhancement structure" using the FISE ontology, 
+which amongst other things defines ~fise:confidence~. 
+We want to use [[http://stanbol.apache.org/docs/trunk/components/enhancer/enhancementstructure.html#fisetopicannotation][fise:TopicAnnotation]] that goes like this:\\
 http://stanbol.apache.org/docs/trunk/components/enhancer/es_topicannotation.png
 
-As you see, it points to ~fise:TextAnnotation~ using ~dc:relation~; if [[http://stanbol.apache.org/docs/trunk/components/enhancer/enhancementstructure.html#overview-on-the-stanbol-enhancement-structure][you scroll to the
-top]], you'll see that points further to the (textual) annotated resource
-(~ContentItem~): we don't want that since we have image not text. But there are
-also ~fise:extracted-from~ (dashed arrows) pointing directly to the resource. The
-*NIF+Stanbol* profile shows the same idea of using ~fise:extracted-from~ directly:\\
+As you see, it points to ~fise:TextAnnotation~ using ~dc:relation~; 
+if [[http://stanbol.apache.org/docs/trunk/components/enhancer/enhancementstructure.html#overview-on-the-stanbol-enhancement-structure][you scroll to the top]], you'll see that points further to the (textual) annotated resource (~ContentItem~): 
+we don't want that since we have image not text. But there are
+also ~fise:extracted-from~ (dashed arrows) pointing directly to the resource. 
+The *NIF+Stanbol* profile shows the same idea of using ~fise:extracted-from~ directly:\\
 #+ATTR_HTML: :style width:800px; text-align:left
 [[./20141008-Linguistic-LD/img/NIF-profiles.png]]
 
@@ -116,16 +226,17 @@ We bastardize the ontology a bit:
 The result is: [[./annot-image-fise.ttl]]\\
 [[./img/annot-image-fise.png]]
 
-** Representing Confidence with FAM
+*** Representing Confidence with FAM
 The FusePoolP3 Annotation Model (FAM) has invesigated merging of OA, NIF and Stanbol FISE, and defines ~fam:confidence~ that we can use. Some links:
 - https://github.com/fusepoolP3/overall-architecture/blob/master/wp3/fp-anno-model/fp-anno-model.md
 - http://events.linuxfoundation.org/sites/events/files/slides/ApacheCon-Stanbol-FAM.pdf
 - http://www.slideshare.net/linkedtv/linking-media-and-data-using-apache-marmotta-lime-workshop-keynote 
 - https://github.com/wikier/apache-marmotta-tutorial-iswc2014
 
-We would use fam:TopicAnnotation: see a mapping from [[https://github.com/fusepoolP3/overall-architecture/blob/master/wp3/fp-anno-model/fp-anno-model.md#famTopicClassification_transformation][fise:TopicAnnotation to fam:TopicAnnotation]]. But because this results in an isomorphic graph structure, we don't show it here.
+We would use fam:TopicAnnotation: see a mapping from [[https://github.com/fusepoolP3/overall-architecture/blob/master/wp3/fp-anno-model/fp-anno-model.md#famTopicClassification_transformation][fise:TopicAnnotation to fam:TopicAnnotation]]. 
+But because this results in an isomorphic graph structure, we don't show it here.
 
-** Representing Confidence with Reification
+*** Representing Confidence with Reification
 *(IMPORTANT: Ignore this section, it's not needed now.)*
 
 A tried and true (although criticized by some) way of adding statements to relations is
@@ -135,14 +246,14 @@ brevity we represent only one of the tags. It looks like this, but the diagram h
 of the complexity so please see the turtle: [[./annot-image-reif.ttl]]\\
 [[./img/annot-image-reif.png]]
 
-* Social Linked Data
+** Social Linked Data
 SMAP is a MS module that does network analysis over social networks.
 It gets some tweets based on keywords or hashtags, and then determines the importance of various posters:
 - ms:has_page_rank
 - ms:has_reachability
 - ms:has_global_influence: a comnbination of the two
 
-** Example: single keywords
+*** Example: single keywords
 - We crawled two sets of tweets based on two *keywords*: "cars" and "RDF"
 - The first guy (~valexiev1~) has posted on both topics. He knows a bit about "cars" but a lot about "RDF"
 - The second guy (~johnSmith~) has posted only on the "cars" topic. He knows a lot about "cars".
@@ -156,7 +267,7 @@ Representation:
 [[./SMAP-example.ttl]] ([[./SMAP-example.ttl.html]] is syntax highlighted):\\
 [[./img/SMAP-example.png]]
 
-** Example: multiple hashtags
+*** Example: multiple hashtags
 - We crawled one set of tweets based on multiple *hashtags*.
 - We make the topic URLs by concatenating the sorted tags (a bit too long but works).
 - We don't have the user names, only user IDs.
@@ -171,7 +282,7 @@ TODO:
   - dishwasher.homeappliances
 - Decide whether and what named graphs to use. For now we'll use just one, with URL ~mssoc:~
 
-** Tweets Related to Article   
+*** Tweets Related to Article   
 Assume we can collect tweets related to a crawled article (SIMMO).
 - Assume that "energiewende" is a major topic of SIMMO http://data.multisensorproject.eu/content/1983754939468 (this URL is made up and doesn't resolve)
 - The tweet http://twitter.com/MSR_Future/status/605786079153627136 talks about #energiewende

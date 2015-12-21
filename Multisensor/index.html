@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Materials related to FP7 Multisensor</title>
-<!-- 2015-10-02 Fri 12:59 -->
+<!-- 2015-12-21 Mon 14:17 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Vladimir Alexiev" />
@@ -166,19 +166,32 @@ for the JavaScript code in this tag.
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#sec-1">1. Linguistic Linked Data</a></li>
-<li><a href="#sec-2">2. Image Annotation</a>
+<li><a href="#sec-2">2. MultiSensor NIF Representation</a>
 <ul>
-<li><a href="#sec-2-1">2.1. Open Annotation</a></li>
-<li><a href="#sec-2-2">2.2. Representing Confidence with Stanbol FISE</a></li>
-<li><a href="#sec-2-3">2.3. Representing Confidence with FAM</a></li>
-<li><a href="#sec-2-4">2.4. Representing Confidence with Reification</a></li>
+<li><a href="#sec-2-1">2.1. Graph Normalization</a>
+<ul>
+<li><a href="#sec-2-1-1">2.1.1. Query Changes</a></li>
+<li><a href="#sec-2-1-2">2.1.2. Normalization Problems</a></li>
 </ul>
 </li>
-<li><a href="#sec-3">3. Social Linked Data</a>
+<li><a href="#sec-2-2">2.2. <span class="todo TODO">TODO</span> Speech Recognition</a></li>
+<li><a href="#sec-2-3">2.3. <span class="todo TODO">TODO</span> Translation</a></li>
+<li><a href="#sec-2-4">2.4. <span class="todo TODO">TODO</span> Multimedia Annotation</a></li>
+<li><a href="#sec-2-5">2.5. Image Annotation</a>
 <ul>
-<li><a href="#sec-3-1">3.1. Example: single keywords</a></li>
-<li><a href="#sec-3-2">3.2. Example: multiple hashtags</a></li>
-<li><a href="#sec-3-3">3.3. Tweets Related to Article</a></li>
+<li><a href="#sec-2-5-1">2.5.1. Open Annotation</a></li>
+<li><a href="#sec-2-5-2">2.5.2. Representing Confidence with Stanbol FISE</a></li>
+<li><a href="#sec-2-5-3">2.5.3. Representing Confidence with FAM</a></li>
+<li><a href="#sec-2-5-4">2.5.4. Representing Confidence with Reification</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-6">2.6. Social Linked Data</a>
+<ul>
+<li><a href="#sec-2-6-1">2.6.1. Example: single keywords</a></li>
+<li><a href="#sec-2-6-2">2.6.2. Example: multiple hashtags</a></li>
+<li><a href="#sec-2-6-3">2.6.3. Tweets Related to Article</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -220,6 +233,23 @@ The benefit is that RDF offers a lot of flexibility for combining data on many d
 </ul>
 
 <p>
+Issues I've found in NIF: 
+</p>
+<ul class="org-ul">
+<li><a href="https://github.com/NLP2RDF/specification/issues/1">Issue 1</a>: nif:opinion vs marl:extractedFrom. Example: <a href="./NIF-issue-1.ttl">./NIF-issue-1.ttl</a>
+</li>
+<li><a href="https://github.com/NLP2RDF/specification/issues/2">Issue 2</a>: itsrdf vs fise properties. Example: <a href="./NIF-issue-2.ttl">./NIF-issue-2.ttl</a>
+</li>
+<li><a href="https://github.com/NLP2RDF/ontologies/issues/12">Issue 12</a>: location of NIF3.0 and issue tracker
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> MultiSensor NIF Representation</h2>
+<div class="outline-text-2" id="text-2">
+<p>
 Examples (a few more are explained in Multisensor-NER-Mapping):
 </p>
 <ul class="org-ul">
@@ -239,7 +269,7 @@ Examples (a few more are explained in Multisensor-NER-Mapping):
 </li>
 </ul>
 </li>
-<li><a href="./NIF-example3.ttl">./NIF-example3.ttl</a>: Various kinds of Named Entities as per Multisensor-NER-Mapping
+<li><a href="./NIF-example3.ttl">./NIF-example3.ttl</a>: Various kinds of Named Entities as per <a href="./Multisensor-NER-Mapping.html">./Multisensor-NER-Mapping.html</a>
 <ul class="org-ul">
 <li><a href="./NIF-example3.ttl.html">./NIF-example3.ttl.html</a>: syntax-highlighted with Emacs 
 </li>
@@ -254,25 +284,213 @@ Examples (a few more are explained in Multisensor-NER-Mapping):
 </ul>
 
 <p>
-Issues I've found in NIF: 
+For FrameNet (relation extraction) representation see <a href="./FrameNet/">./FrameNet/</a>. 
+The remaining sections describe specific representation issues (speech recognition, translation, multimedia)
+</p>
+</div>
+
+<div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Graph Normalization</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+The <a href="http://mklab2.iti.gr/multisensor/index.php/RDF_Storing_Service">RDF_Storing_Service</a> saves all data about a SIMMO in a named graph having the same URL as the SIMMO base URL.
+This makes it easy to get all data about the SIMMO. 
+But it also leads to duplication of common triples. Eg consider this:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-Turtle"><span style="color: #0000ff;">&lt;http://multisensor.org/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c30488#char=100,107&gt;</span><span style="color: #b22222;"> </span><span style="color: #228b22;">its:</span><span style="color: #008b8b;">taIdentRef</span><span style="color: #b22222;"> </span><span style="color: #228b22;">dbr:</span><span style="color: #008b8b;">Germany</span><span style="color: #b22222;">.</span>
+
+<span style="color: #b22222;"># Common triples</span>
+<span style="color: #228b22;">dbr:</span><span style="color: #008b8b;">Germany</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">nerd:</span><span style="color: #008b8b;">Location</span>;
+  <span style="color: #228b22;">foaf:</span><span style="color: #008b8b;">name</span> <span style="color: #8b2252;">"Germany"</span>
+</pre>
+</div>
+<p>
+If <code>dbr:Germany</code> appears 1000 times in SIMMOs, these common triples will be duplicated 1000 times.
+This leads to extreme slowness of ElasticSearch indexing: 
+when adding the 1000th occurrence of <code>dbr:Germany</code> it indexes (the same) foaf:name "Germany" 1000 times, 
+i.e. storing time grows potentially quadratically with the number of SIMMOs.
+</p>
+
+<p>
+The proposed fix is <b>graph normalization</b>: the storing service examines every triple <code>&lt;s,p,o&gt;</code>. 
 </p>
 <ul class="org-ul">
-<li><a href="https://github.com/NLP2RDF/specification/issues/1">Issue 1</a>: nif:opinion vs marl:extractedFrom. Example: <a href="./NIF-issue-1.ttl">./NIF-issue-1.ttl</a>
+<li>If <code>s</code> has the SIMMO base URL as prefix, the triple is stored in the SIMMO graph.
 </li>
-<li><a href="https://github.com/NLP2RDF/specification/issues/2">Issue 2</a>: itsrdf vs fise properties. Example: <a href="./NIF-issue-2.ttl">./NIF-issue-2.ttl</a>
+<li>Otherwise, the triple is stored in the default graph.
 </li>
-<li><a href="https://github.com/NLP2RDF/ontologies/issues/12">Issue 12</a>: location of NIF3.0 and issue tracker
+</ul>
+<p>
+This still saves common triples 1000 times, but there is no duplication since a triple can exist only once in a given graph.
+</p>
+</div>
+
+<div id="outline-container-sec-2-1-1" class="outline-4">
+<h4 id="sec-2-1-1"><span class="section-number-4">2.1.1</span> Query Changes</h4>
+<div class="outline-text-4" id="text-2-1-1">
+<p>
+The tradeoff is that you won't be able to get all SIMMO data by simply asking for a graph. 
+Eg query <a href="https://docs.google.com/document/d/1FfkiiTYvrLzHJ5P5j34NRVGPbXml0ndpNtiNbH2osRw/edit#heading=h.ngkjkg5b5zze">2.3 Retrieve NEs (Select)</a> is a bit sloppy, since it asks for certain types (and <code>foaf:name</code>) by graph, without looking for any relation:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sparql"><span style="color: #a020f0;">SELECT</span> <span style="color: #a020f0;">DISTINCT</span> <span style="color: #a0522d;">?ne</span> <span style="color: #a0522d;">?type</span> <span style="color: #a0522d;">?name</span> {
+  <span style="color: #a020f0;">GRAPH</span> <span style="color: #008b8b;">&lt;http://data.multisensor.org/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c30488&gt;</span> {
+    <span style="color: #a0522d;">?ne</span> a <span style="color: #a0522d;">?type</span>; foaf:name <span style="color: #a0522d;">?name</span>   
+    <span style="color: #a020f0;">FILTER</span> (<span style="color: #a0522d;">?type</span> <span style="color: #a020f0;">IN</span> (dbo:Person, dbo:Organization, nerd:Amount, nerd:Location, nerd:Time))}}
+</pre>
+</div>
+
+<p>
+If graph normalization is applied, we'd have to find the NEs by relation <code>its:taIdentRef</code>, 
+and get their common triples from outside the SIMMO graph:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sparql"><span style="color: #a020f0;">SELECT</span> <span style="color: #a020f0;">distinct</span> <span style="color: #a0522d;">?ne</span> <span style="color: #a0522d;">?type</span> <span style="color: #a0522d;">?name</span> {
+  <span style="color: #a020f0;">GRAPH</span> <span style="color: #008b8b;">&lt;http://multisensor.org/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c30488&gt;</span> 
+    {[] its:taIdentRef <span style="color: #a0522d;">?ne</span>}
+  <span style="color: #a0522d;">?ne</span> a <span style="color: #a0522d;">?type</span>; foaf:name <span style="color: #a0522d;">?name</span>   
+  <span style="color: #a020f0;">FILTER</span> (<span style="color: #a0522d;">?type</span> <span style="color: #a020f0;">IN</span> (dbo:Person, dbo:Organization, nerd:Amount, nerd:Location, nerd:Time))
+}
+</pre>
+</div>
+<p>
+(Actually this query also works before graph normalization since the part outside <code>GRAPH {..}</code> looks in all graphs, both SIMMO and default).
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-1-2" class="outline-4">
+<h4 id="sec-2-1-2"><span class="section-number-4">2.1.2</span> Normalization Problems</h4>
+<div class="outline-text-4" id="text-2-1-2">
+<p>
+Moving common triples outside of the SIMMO graph raises two problems:
+</p>
+<ul class="org-ul">
+<li>If you examine the results of the query above, you'll see that some entities (eg <code>dbr:Facebook</code>) have several labels, eg
+<pre class="example">
+"Facebook, Inc."@en
+"Facebook"^^xsd:string
+</pre>
+<p>
+The reason is probably that different SIMMOs have different versions of the label, and different versions of the pipeline emit different literals ("en" language vs xsd:string).
+Both of these labels will be indexed in ElasticSearch for all occurrences of this NE.
+But the pipeline has emitted the labels globally (as <code>foaf:name</code> of <code>dbr:Facebook</code>) rather than locally (eg as <code>nif:anchorOf</code>),
+in effect asserting that both are globally valid labels of Facebook. 
+So that's a correct consequence of the data as emitted.
+</p>
+</li>
+<li>If the last SIMMO referring to a global NE is deleted, that NE will remain as "garbage" in the common graph.
+But I don't think that is a significant problem, since the amount of such "garbage" won't be large, and since it is harmless.
+</li>
+</ul>
+
+<p>
+<b>Are the partners willing to make this change to the data model, and change their queries correspondingly?</b>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> <span class="todo TODO">TODO</span> Speech Recognition</h3>
+</div>
+
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> <span class="todo TODO">TODO</span> Translation</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+Use case: we have original text in DE that is machine-translated to EN, then annotated with NER and other NIF annotations
+</p>
+
+<p>
+<a href="http://www.slideshare.net/m1ci/nif-tutorial">FREME NIF Tutorial</a>:
+</p>
+<ul class="org-ul">
+<li>slide 16 uses itsrdf:target to point to target (translated) text of a nif:String, but you make furtter statements about the translated text
+</li>
+<li>slide 18 shows an idea how to represent translated text as an independent document, but uses a made-up property itsrdf:translatedAs
+</li>
+</ul>
+
+<p>
+<a href="http://www.w3.org/community/ontolex/wiki/Final_Model_Specification#Translation">The OntoLex vartrans</a> module suggests 5 ways to represent translation. But all of them put us firmly in OntoLex land:
+</p>
+<ul class="org-ul">
+<li>the senses in source and target language share a reference to a shared concept
+</li>
+<li>class vartrans:Translation with properties vartrans:source and vartrans:target pointing the source and target sense
+</li>
+<li>property vartrans:translation that points from source to target sense
+</li>
+<li>property vartrans:translatableAs that points from source to target lexical entry
+</li>
+<li>class vartrans:TranslationSet that points to a number of vartrans:member vartrans:Translation instances
+</li>
+</ul>
+
+<p>
+Another option is to use PROV:
+</p>
+<ul class="org-ul">
+<li><a href="http://www.w3.org/TR/prov-o/#hadPrimarySource">prov:hadPrimarySource</a> is the only property that mentions "translation"
+</li>
+<li>nif:wasConvertedFrom is a subprop of prov:wasDerivedFrom
 </li>
 </ul>
 </div>
 </div>
 
-
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> Image Annotation</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> <span class="todo TODO">TODO</span> Multimedia Annotation</h3>
+<div class="outline-text-3" id="text-2-4">
 <p>
-Look at this image:
+We have 2 services to integrate in this way:
+</p>
+<ol class="org-ol">
+<li>ASR which provide a raw text extracted from the video (speech recognition) 
+</li>
+<li>And the Concept and Event detection which provides the list of the concepts with the degree of confidence. 
+</li>
+</ol>
+
+<p>
+So for these services, we have to extend the ontology of the SIMMO.
+Now we have something like the following one:
+</p>
+
+<p>
+SIMMO 
+</p>
+<table border="1" cellspacing="0" cellpadding="2" rules="all" frame="box">
+
+
+</table>
+
+<p>
+And we have to extend it for the multimedia content with something like this: 
+</p>
+<table border="1" cellspacing="0" cellpadding="2" rules="all" frame="box">
+
+
+</table>
+
+<p>
+The idea is to process this information not simultaneously to the textual content. So to ensure the RDF graph of the multimedia content will be correctly linked to the existing SIMMO generated previously for the textual content, the right SIMMO reference should be provided.
+And we have to think that this information should be useful for the multimedia search. Then, we should be able to search for concepts that were detected in the images, in the videos, and/or in the video’s speeches. 
+Please, could you confirm this is the approach to follow?  And if yes, could you propose an RDF formalisation to represent and store the multimedia content in GraphDB?
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-5" class="outline-3">
+<h3 id="sec-2-5"><span class="section-number-3">2.5</span> Image Annotation</h3>
+<div class="outline-text-3" id="text-2-5">
+<p>
+Look at this image:<br  />
 <a href="http://images.zeit.de/hamburg/stadtleben/2015-08/drage-vermisste/drage-vermisste-540x304.jpg"><img src="http://images.zeit.de/hamburg/stadtleben/2015-08/drage-vermisste/drage-vermisste-540x304.jpg" alt="drage-vermisste-540x304.jpg" /></a>
 </p>
 
@@ -298,9 +516,9 @@ We can represent this in RDF using various alternatives.
 </p>
 </div>
 
-<div id="outline-container-sec-2-1" class="outline-3">
-<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Open Annotation</h3>
-<div class="outline-text-3" id="text-2-1">
+<div id="outline-container-sec-2-5-1" class="outline-4">
+<h4 id="sec-2-5-1"><span class="section-number-4">2.5.1</span> Open Annotation</h4>
+<div class="outline-text-4" id="text-2-5-1">
 <p>
 The <a href="http://www.w3.org/TR/annotation-model/">Web Annotation Data Model</a> (also known as Open Annotation, OA) is widely used for all
 kinds of associating two or several resources: bookmarking, tagging, commenting,
@@ -354,22 +572,22 @@ options.
 </div>
 </div>
 
-<div id="outline-container-sec-2-2" class="outline-3">
-<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Representing Confidence with Stanbol FISE</h3>
-<div class="outline-text-3" id="text-2-2">
+<div id="outline-container-sec-2-5-2" class="outline-4">
+<h4 id="sec-2-5-2"><span class="section-number-4">2.5.2</span> Representing Confidence with Stanbol FISE</h4>
+<div class="outline-text-4" id="text-2-5-2">
 <p>
-Apache Stanbol defines an "enhancement structure" using the FISE ontology, which amongst
-other things defines <code>fise:confidence</code>. We want to use <a href="http://stanbol.apache.org/docs/trunk/components/enhancer/enhancementstructure.html#fisetopicannotation">fise:TopicAnnotation</a> that goes like
-this:<br  />
+Apache Stanbol defines an "enhancement structure" using the FISE ontology, 
+which amongst other things defines <code>fise:confidence</code>. 
+We want to use <a href="http://stanbol.apache.org/docs/trunk/components/enhancer/enhancementstructure.html#fisetopicannotation">fise:TopicAnnotation</a> that goes like this:<br  />
 <img src="http://stanbol.apache.org/docs/trunk/components/enhancer/es_topicannotation.png" alt="es_topicannotation.png" />
 </p>
 
 <p>
-As you see, it points to <code>fise:TextAnnotation</code> using <code>dc:relation</code>; if <a href="http://stanbol.apache.org/docs/trunk/components/enhancer/enhancementstructure.html#overview-on-the-stanbol-enhancement-structure">you scroll to the
-top</a>, you'll see that points further to the (textual) annotated resource
-(<code>ContentItem</code>): we don't want that since we have image not text. But there are
-also <code>fise:extracted-from</code> (dashed arrows) pointing directly to the resource. The
-<b>NIF+Stanbol</b> profile shows the same idea of using <code>fise:extracted-from</code> directly:<br  />
+As you see, it points to <code>fise:TextAnnotation</code> using <code>dc:relation</code>; 
+if <a href="http://stanbol.apache.org/docs/trunk/components/enhancer/enhancementstructure.html#overview-on-the-stanbol-enhancement-structure">you scroll to the top</a>, you'll see that points further to the (textual) annotated resource (<code>ContentItem</code>): 
+we don't want that since we have image not text. But there are
+also <code>fise:extracted-from</code> (dashed arrows) pointing directly to the resource. 
+The <b>NIF+Stanbol</b> profile shows the same idea of using <code>fise:extracted-from</code> directly:<br  />
 </p>
 
 <div class="figure">
@@ -398,9 +616,9 @@ The result is: <a href="./annot-image-fise.ttl">./annot-image-fise.ttl</a><br  /
 </div>
 </div>
 
-<div id="outline-container-sec-2-3" class="outline-3">
-<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Representing Confidence with FAM</h3>
-<div class="outline-text-3" id="text-2-3">
+<div id="outline-container-sec-2-5-3" class="outline-4">
+<h4 id="sec-2-5-3"><span class="section-number-4">2.5.3</span> Representing Confidence with FAM</h4>
+<div class="outline-text-4" id="text-2-5-3">
 <p>
 The FusePoolP3 Annotation Model (FAM) has invesigated merging of OA, NIF and Stanbol FISE, and defines <code>fam:confidence</code> that we can use. Some links:
 </p>
@@ -416,14 +634,15 @@ The FusePoolP3 Annotation Model (FAM) has invesigated merging of OA, NIF and Sta
 </ul>
 
 <p>
-We would use fam:TopicAnnotation: see a mapping from <a href="https://github.com/fusepoolP3/overall-architecture/blob/master/wp3/fp-anno-model/fp-anno-model.md#famTopicClassification_transformation">fise:TopicAnnotation to fam:TopicAnnotation</a>. But because this results in an isomorphic graph structure, we don't show it here.
+We would use fam:TopicAnnotation: see a mapping from <a href="https://github.com/fusepoolP3/overall-architecture/blob/master/wp3/fp-anno-model/fp-anno-model.md#famTopicClassification_transformation">fise:TopicAnnotation to fam:TopicAnnotation</a>. 
+But because this results in an isomorphic graph structure, we don't show it here.
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-2-4" class="outline-3">
-<h3 id="sec-2-4"><span class="section-number-3">2.4</span> Representing Confidence with Reification</h3>
-<div class="outline-text-3" id="text-2-4">
+<div id="outline-container-sec-2-5-4" class="outline-4">
+<h4 id="sec-2-5-4"><span class="section-number-4">2.5.4</span> Representing Confidence with Reification</h4>
+<div class="outline-text-4" id="text-2-5-4">
 <p>
 <b>(IMPORTANT: Ignore this section, it's not needed now.)</b>
 </p>
@@ -440,9 +659,9 @@ of the complexity so please see the turtle: <a href="./annot-image-reif.ttl">./a
 </div>
 </div>
 
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> Social Linked Data</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-sec-2-6" class="outline-3">
+<h3 id="sec-2-6"><span class="section-number-3">2.6</span> Social Linked Data</h3>
+<div class="outline-text-3" id="text-2-6">
 <p>
 SMAP is a MS module that does network analysis over social networks.
 It gets some tweets based on keywords or hashtags, and then determines the importance of various posters:
@@ -457,9 +676,9 @@ It gets some tweets based on keywords or hashtags, and then determines the impor
 </ul>
 </div>
 
-<div id="outline-container-sec-3-1" class="outline-3">
-<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Example: single keywords</h3>
-<div class="outline-text-3" id="text-3-1">
+<div id="outline-container-sec-2-6-1" class="outline-4">
+<h4 id="sec-2-6-1"><span class="section-number-4">2.6.1</span> Example: single keywords</h4>
+<div class="outline-text-4" id="text-2-6-1">
 <ul class="org-ul">
 <li>We crawled two sets of tweets based on two <b>keywords</b>: "cars" and "RDF"
 </li>
@@ -492,9 +711,9 @@ Representation:
 </div>
 </div>
 
-<div id="outline-container-sec-3-2" class="outline-3">
-<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Example: multiple hashtags</h3>
-<div class="outline-text-3" id="text-3-2">
+<div id="outline-container-sec-2-6-2" class="outline-4">
+<h4 id="sec-2-6-2"><span class="section-number-4">2.6.2</span> Example: multiple hashtags</h4>
+<div class="outline-text-4" id="text-2-6-2">
 <ul class="org-ul">
 <li>We crawled one set of tweets based on multiple <b>hashtags</b>.
 </li>
@@ -530,9 +749,9 @@ TODO:
 </div>
 </div>
 
-<div id="outline-container-sec-3-3" class="outline-3">
-<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Tweets Related to Article</h3>
-<div class="outline-text-3" id="text-3-3">
+<div id="outline-container-sec-2-6-3" class="outline-4">
+<h4 id="sec-2-6-3"><span class="section-number-4">2.6.3</span> Tweets Related to Article</h4>
+<div class="outline-text-4" id="text-2-6-3">
 <p>
 Assume we can collect tweets related to a crawled article (SIMMO).
 </p>
@@ -570,7 +789,7 @@ Possible extensions:
   and <code>UserAccount</code> to <b>twitter:</b> as a <code>sioc:Forum</code> or <code>sioc:Site</code>.
 </li>
 <li>If we want to express more diverse relations than a general <code>sioc:about</code>, we can use OA
-(see <a href="#sec-2-1">2.1</a>) and oa:motivatedBy. The SIMMO will be the <b>target</b> of annotation,
+(see <a href="#sec-2-5-1">2.5.1</a>) and oa:motivatedBy. The SIMMO will be the <b>target</b> of annotation,
 and the tweet is the <b>body</b>.
 </li>
 </ul>
@@ -578,10 +797,11 @@ and the tweet is the <b>body</b>.
 </div>
 </div>
 </div>
+</div>
 <div id="postamble" class="status">
-<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-10-02&gt;</span></span></p>
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-12-21&gt;</span></span></p>
 <p class="author">Author: Vladimir Alexiev</p>
-<p class="date">Created: 2015-10-02 Fri 12:59</p>
+<p class="date">Created: 2015-12-21 Mon 14:17</p>
 <p class="creator">Emacs 25.0.50.1 (Org mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
