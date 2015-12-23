@@ -1,5 +1,5 @@
 #+TITLE: Materials related to FP7 Multisensor
-#+DATE: <2015-12-21>
+#+DATE: <2015-12-23>
 #+AUTHOR: Vladimir Alexiev
 #+EMAIL: vladimir.alexiev@ontotext.com
 #+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline author:t c:nil
@@ -64,9 +64,14 @@ when adding the 1000th occurrence of ~dbr:Germany~ it indexes (the same) foaf:na
 i.e. storing time grows potentially quadratically with the number of SIMMOs.
 
 The proposed fix is *graph normalization*: the storing service examines every triple ~<s,p,o>~. 
-- If ~s~ has the SIMMO base URL as prefix, the triple is stored in the SIMMO graph.
-- Otherwise, the triple is stored in the default graph.
-This still saves common triples 1000 times, but there is no duplication since a triple can exist only once in a given graph.
+- If ~s~ starts with one of these prefixes the triple is stored in the default graph:
+  : http://dbpedia.org
+- Otherwise the triple is stored in the SIMMO graph.
+This still writes common triples 1000 times, 
+but there is no duplication since a triple can exist only once in a given graph.
+- Note: some SIMMOs contain subjects that don't have the SIMMO base URL as prefix,
+  namely embedded videos and images.
+  It's not correct to move them to the default graph, so we work with an explicit list of common prefixes.
 
 *** Query Changes
 The tradeoff is that you won't be able to get all SIMMO data by simply asking for a graph. 
@@ -105,10 +110,59 @@ Moving common triples outside of the SIMMO graph raises two problems:
 
 *Are the partners willing to make this change to the data model, and change their queries correspondingly?*
 
-** TODO Speech Recognition
+** Speech Recognition
+The audio track of videos embedded in articles (SIMMOs) is passed through Automatic Speech Recognition (ASR).
+This results in two products:
+- Plain text *Transcript* that is passed through text analysis (NER and other NIF annotations).
+  The transcript is analyzed same as the main article text. So it has similar structure to the SIMMO, with the following differences
+  - The transcript doesn't have sentence boundaries thus no NIF sentence structure.
+  - The transcript doesn't have context properties such as author, publication date, etc
+  - The transcript is subsidiary to the article, following this nesting structure:
+    - *Article* -dct:hasPart-> *Video* -ms:hasCaption-> *Caption* <-nif:sourceUrl- *Transcript*
+    - Note: I considered inserting Video - *Audio* - Caption
+      but decided against it since we don't have any statements about the Audio
+- Structured *Captions* in [[https://w3c.github.io/webvtt/][WebVTT: The Web Video Text Tracks]] format (MIME type "text/vtt").
+  The Caption file is not stored in RDF, only a link to it is in RDF
+
+Example: [[./NIF-ASR.ttl]] (remember that all puml triples are just for the diagram and should not be emitted)\\
+[[./img/NIF-ASR.png]] 
+
+Notes:
+- Assume that http://blog.hgtv.com/design/2014/09/08/video is he 0th video in http://blog.hgtv.com/design/2014/09/08/article
+- Both the article and video mention "Germany" which is recognized as a named entity.
+  This is just for the sake of illustration and comparison, and we don't show any other NIF statements
+- I assume the video is accessed from the source URL and not copied to an MS server (that assumption is probably wrong).
+  We make statements against the video URL, rather than making a MS URL (same as for Images).
+  If copied to an MS server, it's better to make statements against that URL
+- I assume the Caption is stored on a MS server in the indicated directory. 
+  If different, change the URL accordingly, but think about permanence
+- The Transcript (bottom  nif:Context) uses the Caption as nif:sourceUrl.
+- The Transcript's URL is subsidiary to (has as prefix) the SIMMO URL. Since we can't use two ~#~ in a URL, we use ~-~ before the ~transcript~ part and ~#~ after it. The number 0 is the sequential count (0th video)
+
+*** Aside: ISOcat & GOLD
+I was hoping that I can find a property to express "ASR transcript of an audio" in the ISOcat register or GOLD.
+There's nothing appropriate in GOLD but I found an entry in http://www.isocat.org/rest/profile/19:
+- PID: http://www.isocat.org/datcat/DC-4064
+- Identifier: audioTranscription
+- Definition: The conversion of the spoken word to a text format in the same language.
+- Source: http://www.forensic-audio.net/spanish-transcription-vs-audio-translation.php (the source site doesn't exist anymore)
+This is also available as RDF at http://www.isocat.org/datcat/DC-4064.rdf (which redirects to http://www.isocat.org/rest/dc/4064.rdf), but the info is minimal:
+#+BEGIN_SRC Turtle
+<http://www.isocat.org/datcat/DC-4064>
+  rdfs:comment  "The conversion of the spoken word to a text format in the same language."@en ;
+  rdfs:label    "audio transcription"@en .
+#+END_SRC
+The datahub entry for ISOcat https://datahub.io/dataset/isocat claims that 
+full profiles are available as RDF at https://catalog.clarin.eu/isocat/rest/profile/19.rdf, but this link is broken.
+I found an (unofficial?) RDF dump of profile 5 at http://www.sfs.uni-tuebingen.de/nalida/images/isocat/profile-5-full.rdf 
+but not of profile 19.
+
+What is worse, there is no property name defined (eg ~isocat:audioTranscription~), no domain and range.
+We'll certainly won't use something like ~isocat:DC-4064~ to name our properties.
+A disappointment.
 
 ** TODO Translation
-Use case: we have original text in DE that is machine-translated to EN, then annotated with NER and other NIF annotations
+Use case: we have original text in DE that is machine-translated to EN, then annotated with NER and other NIF annotations.
 
 [[http://www.slideshare.net/m1ci/nif-tutorial][FREME NIF Tutorial]]:
 - slide 16 uses itsrdf:target to point to target (translated) text of a nif:String, but you make furtter statements about the translated text

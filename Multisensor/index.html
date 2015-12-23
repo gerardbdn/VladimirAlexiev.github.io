@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Materials related to FP7 Multisensor</title>
-<!-- 2015-12-21 Mon 14:17 -->
+<!-- 2015-12-23 Wed 17:13 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Vladimir Alexiev" />
@@ -174,7 +174,11 @@ for the JavaScript code in this tag.
 <li><a href="#sec-2-1-2">2.1.2. Normalization Problems</a></li>
 </ul>
 </li>
-<li><a href="#sec-2-2">2.2. <span class="todo TODO">TODO</span> Speech Recognition</a></li>
+<li><a href="#sec-2-2">2.2. Speech Recognition</a>
+<ul>
+<li><a href="#sec-2-2-1">2.2.1. Aside: ISOcat &amp; GOLD</a></li>
+</ul>
+</li>
 <li><a href="#sec-2-3">2.3. <span class="todo TODO">TODO</span> Translation</a></li>
 <li><a href="#sec-2-4">2.4. <span class="todo TODO">TODO</span> Multimedia Annotation</a></li>
 <li><a href="#sec-2-5">2.5. Image Annotation</a>
@@ -317,14 +321,24 @@ i.e. storing time grows potentially quadratically with the number of SIMMOs.
 The proposed fix is <b>graph normalization</b>: the storing service examines every triple <code>&lt;s,p,o&gt;</code>. 
 </p>
 <ul class="org-ul">
-<li>If <code>s</code> has the SIMMO base URL as prefix, the triple is stored in the SIMMO graph.
+<li>If <code>s</code> starts with one of these prefixes the triple is stored in the default graph:
+<pre class="example">
+http://dbpedia.org
+</pre>
 </li>
-<li>Otherwise, the triple is stored in the default graph.
+<li>Otherwise the triple is stored in the SIMMO graph.
 </li>
 </ul>
 <p>
-This still saves common triples 1000 times, but there is no duplication since a triple can exist only once in a given graph.
+This still writes common triples 1000 times, 
+but there is no duplication since a triple can exist only once in a given graph.
 </p>
+<ul class="org-ul">
+<li>Note: some SIMMOs contain subjects that don't have the SIMMO base URL as prefix,
+namely embedded videos and images.
+It's not correct to move them to the default graph, so we work with an explicit list of common prefixes.
+</li>
+</ul>
 </div>
 
 <div id="outline-container-sec-2-1-1" class="outline-4">
@@ -396,14 +410,112 @@ But I don't think that is a significant problem, since the amount of such "garba
 </div>
 
 <div id="outline-container-sec-2-2" class="outline-3">
-<h3 id="sec-2-2"><span class="section-number-3">2.2</span> <span class="todo TODO">TODO</span> Speech Recognition</h3>
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Speech Recognition</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+The audio track of videos embedded in articles (SIMMOs) is passed through Automatic Speech Recognition (ASR).
+This results in two products:
+</p>
+<ul class="org-ul">
+<li>Plain text <b>Transcript</b> that is passed through text analysis (NER and other NIF annotations).
+The transcript is analyzed same as the main article text. So it has similar structure to the SIMMO, with the following differences
+<ul class="org-ul">
+<li>The transcript doesn't have sentence boundaries thus no NIF sentence structure.
+</li>
+<li>The transcript doesn't have context properties such as author, publication date, etc
+</li>
+<li>The transcript is subsidiary to the article, following this nesting structure:
+<ul class="org-ul">
+<li><b>Article</b> -dct:hasPart-&gt; <b>Video</b> -ms:hasCaption-&gt; <b>Caption</b> &lt;-nif:sourceUrl- <b>Transcript</b>
+</li>
+<li>Note: I considered inserting Video - <b>Audio</b> - Caption
+but decided against it since we don't have any statements about the Audio
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Structured <b>Captions</b> in <a href="https://w3c.github.io/webvtt/">WebVTT: The Web Video Text Tracks</a> format (MIME type "text/vtt").
+The Caption file is not stored in RDF, only a link to it is in RDF
+</li>
+</ul>
+
+<p>
+Example: <a href="./NIF-ASR.ttl">./NIF-ASR.ttl</a> (remember that all puml triples are just for the diagram and should not be emitted)<br  />
+<img src="./img/NIF-ASR.png" alt="NIF-ASR.png" /> 
+</p>
+
+<p>
+Notes:
+</p>
+<ul class="org-ul">
+<li>Assume that <a href="http://blog.hgtv.com/design/2014/09/08/video">http://blog.hgtv.com/design/2014/09/08/video</a> is he 0th video in <a href="http://blog.hgtv.com/design/2014/09/08/article">http://blog.hgtv.com/design/2014/09/08/article</a>
+</li>
+<li>Both the article and video mention "Germany" which is recognized as a named entity.
+This is just for the sake of illustration and comparison, and we don't show any other NIF statements
+</li>
+<li>I assume the video is accessed from the source URL and not copied to an MS server (that assumption is probably wrong).
+We make statements against the video URL, rather than making a MS URL (same as for Images).
+If copied to an MS server, it's better to make statements against that URL
+</li>
+<li>I assume the Caption is stored on a MS server in the indicated directory. 
+If different, change the URL accordingly, but think about permanence
+</li>
+<li>The Transcript (bottom  nif:Context) uses the Caption as nif:sourceUrl.
+</li>
+<li>The Transcript's URL is subsidiary to (has as prefix) the SIMMO URL. Since we can't use two <code>#</code> in a URL, we use <code>-</code> before the <code>transcript</code> part and <code>#</code> after it. The number 0 is the sequential count (0th video)
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-2-2-1" class="outline-4">
+<h4 id="sec-2-2-1"><span class="section-number-4">2.2.1</span> Aside: ISOcat &amp; GOLD</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<p>
+I was hoping that I can find a property to express "ASR transcript of an audio" in the ISOcat register or GOLD.
+There's nothing appropriate in GOLD but I found an entry in <a href="http://www.isocat.org/rest/profile/19">http://www.isocat.org/rest/profile/19</a>:
+</p>
+<ul class="org-ul">
+<li>PID: <a href="http://www.isocat.org/datcat/DC-4064">http://www.isocat.org/datcat/DC-4064</a>
+</li>
+<li>Identifier: audioTranscription
+</li>
+<li>Definition: The conversion of the spoken word to a text format in the same language.
+</li>
+<li>Source: <a href="http://www.forensic-audio.net/spanish-transcription-vs-audio-translation.php">http://www.forensic-audio.net/spanish-transcription-vs-audio-translation.php</a> (the source site doesn't exist anymore)
+</li>
+</ul>
+<p>
+This is also available as RDF at <a href="http://www.isocat.org/datcat/DC-4064.rdf">http://www.isocat.org/datcat/DC-4064.rdf</a> (which redirects to <a href="http://www.isocat.org/rest/dc/4064.rdf">http://www.isocat.org/rest/dc/4064.rdf</a>), but the info is minimal:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-Turtle"><span style="color: #0000ff;">&lt;http://www.isocat.org/datcat/DC-4064&gt;</span>
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">comment</span>  <span style="color: #8b2252;">"The conversion of the spoken word to a text format in the same language."</span>@en ;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">label</span>    <span style="color: #8b2252;">"audio transcription"</span>@en .
+</pre>
+</div>
+<p>
+The datahub entry for ISOcat <a href="https://datahub.io/dataset/isocat">https://datahub.io/dataset/isocat</a> claims that 
+full profiles are available as RDF at <a href="https://catalog.clarin.eu/isocat/rest/profile/19.rdf">https://catalog.clarin.eu/isocat/rest/profile/19.rdf</a>, but this link is broken.
+I found an (unofficial?) RDF dump of profile 5 at <a href="http://www.sfs.uni-tuebingen.de/nalida/images/isocat/profile-5-full.rdf">http://www.sfs.uni-tuebingen.de/nalida/images/isocat/profile-5-full.rdf</a> 
+but not of profile 19.
+</p>
+
+<p>
+What is worse, there is no property name defined (eg <code>isocat:audioTranscription</code>), no domain and range.
+We'll certainly won't use something like <code>isocat:DC-4064</code> to name our properties.
+A disappointment.
+</p>
+</div>
+</div>
 </div>
 
 <div id="outline-container-sec-2-3" class="outline-3">
 <h3 id="sec-2-3"><span class="section-number-3">2.3</span> <span class="todo TODO">TODO</span> Translation</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
-Use case: we have original text in DE that is machine-translated to EN, then annotated with NER and other NIF annotations
+Use case: we have original text in DE that is machine-translated to EN, then annotated with NER and other NIF annotations.
 </p>
 
 <p>
@@ -799,9 +911,9 @@ and the tweet is the <b>body</b>.
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-12-21&gt;</span></span></p>
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-12-23&gt;</span></span></p>
 <p class="author">Author: Vladimir Alexiev</p>
-<p class="date">Created: 2015-12-21 Mon 14:17</p>
+<p class="date">Created: 2015-12-23 Wed 17:13</p>
 <p class="creator">Emacs 25.0.50.1 (Org mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
