@@ -11,6 +11,8 @@
 
 <http://data.multisensorproject.eu/content/fb086c#char=17,24> a nif:Word;
   nif:referenceContext <http://data.multisensorproject.eu/content/fb086c#char=0,24>;
+  nif:beginIndex "17"^^xsd:nonNegativeInteger ;
+  nif:endIndex "24"^^xsd:nonNegativeInteger ;
   nif:anchorOf "Germany";
   its:taIdentRef dbr:Germany.
 
@@ -31,6 +33,8 @@
 
 <http://data.multisensorproject.eu/content/fb086c-transcript0#char=20,27> a nif:Word;
   nif:referenceContext <http://data.multisensorproject.eu/content/fb086c-transcript0#char=0,27>;
+  nif:beginIndex "20"^^xsd:nonNegativeInteger ;
+  nif:endIndex "27"^^xsd:nonNegativeInteger ;
   nif:anchorOf "Germany";
   its:taIdentRef dbr:Germany.
 
