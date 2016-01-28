@@ -16,18 +16,9 @@
 #+LATEX_HEADER_EXTRA: \renewcommand\maketitle\maketitleabstract
 #+LATEX_HEADER_EXTRA: \renewcommand\author\name
 #+LATEX_HEADER_EXTRA: \abstract{
-#+LATEX_HEADER_EXTRA: FrameNet (FN) is a large-scale linguistic resource developed at ICSI Berkeley.
-#+LATEX_HEADER_EXTRA: It describes word senses and the situations they can be involved in ("valences") in terms of
-#+LATEX_HEADER_EXTRA: frames, frame elements and the links between them. 
-#+LATEX_HEADER_EXTRA: 
-#+LATEX_HEADER_EXTRA: FN has been converted to Linked Open Data (LOD) by ISTC-CNR, together with a large corpus of text annotated with FN.
-#+LATEX_HEADER_EXTRA: 
-#+LATEX_HEADER_EXTRA: NIF is an RDF based format for exchanging Linguistic Linked Data (NLP and related). 
-#+LATEX_HEADER_EXTRA: This paper reviews the FN-LOD representation, compares it to NIF, and describes a possible way to integrate FN in NIF.
-#+LATEX_HEADER_EXTRA: 
-#+LATEX_HEADER_EXTRA: This FN-NIF integration is used in the Multisensor project (MS). 
-#+LATEX_HEADER_EXTRA: MS applies semantic technologies to the analysis of multimedia including news articles and social media,
-#+LATEX_HEADER_EXTRA: and has standardized on using the NLP Interchange Format (NIF) for data exchange, in order to faciliate interoperation and extensibility.
+#+LATEX_HEADER_EXTRA: FrameNet is a large-scale lexical database for English developed at ICSI Berkeley which describes word senses in terms of frame-semantics. FrameNet has been converted to RDF by ISTC-CNR. 
+#+LATEX_HEADER_EXTRA: NIF is an RDF/OWL model for exchanging text annotations between NLP tools as Linked Data. 
+#+LATEX_HEADER_EXTRA: This paper reviews the FN-LOD representation, compares it to NIF, and describes a simple way to integrating FN in NIF. which does not require the addition of new vocabulary items.
 #+LATEX_HEADER_EXTRA: \\\newline
 #+LATEX_HEADER_EXTRA: \Keywords{FrameNet, NIF, Linguistic LOD}}
 #+KEYWORDS: FrameNet, NIF, Linguistic LOD
@@ -36,33 +27,33 @@
 #+EXCLUDE_TAGS: noexport
 
 * Introduction
-[[https://framenet.icsi.berkeley.edu/fndrupal/][FrameNet]] (FN) [[FN-book]] is a large-scale linguistic resource developed at ICSI UC Berkeley.
-It describes word senses and the situations they can be involved in ("valences") in terms of
-frames, frame elements and the links between them. 
+[[https://framenet.icsi.berkeley.edu/fndrupal/][FrameNet]] (FN) [[FN-book]] is a large-scale linguistic resource for English developed at ICSI UC Berkeley. It documents the syntactic and semantic combinations (valences) of predicative word senses in terms of frames, lexical units and frame elements: 
 
-*Frames* represent real-world situations (eg ~frame:Statement~ means to make a statement)
+*Frames* are descriptions of types of conceptual situations along with their participants (eg ~frame:Statement~ correspond to events in which a statement is made)
 
-*Lexical Units* (LU) invoke frames (eg ~lu:announce.v, lu:declare.v~ both invoke ~frame:Statement~)
+*Lexical Units* (LU) are pairings of a word and a frame evoked by the word (eg ~lu:announce.v, lu:declare.v~ both evoke ~frame:Statement~)
 
-*Frame Elements* (FE) are things and entities that play a role in a frame (eg ~fe:Speaker.statement, fe:Message.statement~)
+*Frame Elements* (FE) are roles taken by participants in a frame  (eg ~fe:Speaker.statement, fe:Message.statement~)
 
-FN has been converted to Linked Open Data (LOD) by ISTC-CNR [[FN-LOD]], together with a large corpus of text annotated with FN.
-(The Manually Annotated Sub-Corpus (MASC) [[MASC]] also includes FN and [[FN-MASC]] describes plans to interlink it with LOD.
-However, the [[http://www.anc.org/data/masc/downloads/data-download/][MASC download]] page does not include LOD (RDF) formats.)
+The FrameNet lexical database also comprises a corpus of annotated sentences which exemplify all the above. FN has been converted to RDF Linked Open Data (LOD) by ISTC-CNR [[FN-LOD]][fn:1]. Henceforth, we will refer to this conversion as FN-RDF.
 
-NIF [[NIF]] is an RDF based format for exchanging Linguistic Linked Data (NLP and related). 
-It involves a number of ontologies, including NIF for binding to text and packaging, ITS for Named Entity Recognition (NER), OLIA for NLP information, MARL for sentiment/opinion, etc. 
+The NLP Interchange Format (NIF) [[NIF]] is a set of ontologies, specifications and software to enable the exchange of linguistic annotations as RDF Linked Data between Natural Language Processing (NLP) tools. The NIF RDF/OWL model includes a core ontology that models textual annotatios as Linked Data, and resuses NLP vocabularies such as ITS and NERD used for Named Entity Recognition (NER) and disambiguation (NED), OLIA to model tagsets produced by various types of NLP tools, MARL for sentiment/opinion, etc. For the rest of this document We will use NIF to refer to the core ontology of the NIF project.
 
-This paper reviews the FN-LOD representation, compares it to NIF, and describes a possible way to integrate FN in NIF.
-This FN-NIF integration is used in the Multisensor project (MS) [[MS]]. 
-MS applies semantic technologies to the analysis of multimedia including news articles and social media,
-and has standardized on using the NLP Interchange Format (NIF) for data exchange, in order to faciliate interoperation and extensibility.
+This paper reviews the FN-RDF representation[fn:3], compares it to NIF, and describes a simple way to integrate FN-RDF in NIF so that FrameNet-based annotations can be produced and consumed by NIF-compliant services. Crucially, this integration is achieved without resorting to any additional vocabulary (i.e. new types or properties). Instead, items in the NIF core cntology and FN-RDF are related in a way  reusing existing  
 
-*[[https://github.com/VladimirAlexiev/VladimirAlexiev.github.io/tree/master/Multisensor/FrameNet][Accompanying materials]]* are available for download, including Orgmode source ~org~ 
+We will use the following example sentence to illustrate the review of both models and the proposed integration: 
+#+BEGIN_QUOTE
+Electrolux announced today the theme for its design competition.
+#+END_QUOTE
+
+[fn:1] The Manually Annotated Sub-Corpus (MASC) [[MASC]] also includes FrameNet [[FN-MASC]] and  describes plans to interlink it with LOD. However, the [[http://www.anc.org/data/masc/downloads/data-download/][MASC download]] page does not include LOD (RDF) formats. 
+
+[fn:2]This FN-RDF/NIF integration is used in the Multisensor project (MS) [[MS]]. MS applies semantic technologies to the analysis of multimedia including news articles and social media, and has standardized on using the NLP Interchange Format (NIF) for data exchange, in order to faciliate interoperation and extensibility.
+
+[fn:3][[https://github.com/VladimirAlexiev/VladimirAlexiev.github.io/tree/master/Multisensor/FrameNet][Accompanying materials]]* are available for download, including Orgmode source ~org~ 
 and all local files referenced in the paper: Turtle RDF ~ttl~, Manchester Notation ontologies ~omn~, figures in PlantUML ~puml~ and ~png~.
 
-** Sample Sentence
-In this paper we'll consider the sample sentence "Electrolux announced today the theme for its design competition".
+* Semafor
 [[https://framenet.icsi.berkeley.edu/fndrupal/asrl][Some softwares]] are available for automatic FN annotation:
 we used SEMAFOR [[SEMAFOR]] to [[http://demo.ark.cs.cmu.edu/parse?sentence=Electrolux+announced+today+the+theme+for+its+design+competition][annotate the sample sentence]].
 
