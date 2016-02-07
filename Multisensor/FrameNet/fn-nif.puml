@@ -21,6 +21,8 @@ package "Frame instance" {
   "<i>layerLU</i>"         : fn:layer_name "Target"
   "<i>layerFE</i>"         : a fn:Layer
   "<i>layerFE</i>"         : fn:layer_name "FE"
+  class "<i>labelLU</i>" <<redundant>>
+  class "<i>layerLU</i>" <<redundant>>
 }
 package "NIF" {
   "<i>head</i>"            : a nif:Word
