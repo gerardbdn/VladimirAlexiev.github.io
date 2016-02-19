@@ -352,6 +352,7 @@ The original paper on IN (Lafont, 1990) states that INs were designed to be simp
   title        = {{Name Data Sources for Semantic Enrichment}},
   institution  = {Europeana Creative project},
   year         = 2015,
+  type         = {Deliverable},
   number       = {Part of Deliverable D2.4},
   month        = feb,
   url          = {http://vladimiralexiev.github.io/CH-names/README.html},
@@ -528,12 +529,11 @@ The original paper on IN (Lafont, 1990) states that INs were designed to be simp
   abstract     = {Disparate information, spread over various sources, in various formats, and with inconsistent semantics is a major obstacle for enterprises to use this information at its full potential. Information Grids should allow for the effective access, extraction and linking of dispersed information. Currently Europe's coporations spend over 10 Billion EUR to deal with these problems. This book will demonstrate the applicability of grid technologies to industry. To this end, it gives a detailed insight on how on tology technology can be used to manage dispersed information assets more efficiently. The book is based on experiences from the COG (Corporate Ontology Grid) project, carried out jointly by three leading industrial players and the Digital Enterprise Research Institute Austria. Through comparisons of this project with alternative technologies and projects, it provides hands-on experience and best practice examples to act as a reference guide for their development. Information Integration with Ontologies: Ontology based Information Integration in an Industrial Setting is ideal for technical experts and computer researchers in the IT-area looking to achieve integration of heterogeneous information and apply ontology technologies and techniques in practice. It will also be of great benefit to technical decision makers seeking infor mation about ontology technologies and the scientific audience, interested in achievements towards the application of ontologies in an industrial setting.},
 }
 
-@TechReport{AlexievCasamayor-FN-NIF,
+@InProceedings{AlexievCasamayor-FN-NIF,
   author       = {Vladimir Alexiev and Gerard Casamayor},
   title        = {{FN goes NIF: Integrating FrameNet in the NLP Interchange Format}},
-  institution  = {Ontotext Corp and Universitat Pompeu Fabra},
+  booktitle    = {(submitted)},
   year         = 2016,
-  number       = {(submitted)},
   month        = feb,
   url          = {http://vladimiralexiev.github.io/Multisensor/FrameNet/paper.pdf},
   keywords     = {linguistic linked data, FrameNet, NIF, NLP2RDF, RDF, application profile},
@@ -629,7 +629,8 @@ keywords={Europeana, task force, EDM, FRBR, FRBRoo, CIDOC CRM, ontology}
   url_Other    = {http://lov.okfn.org/dataset/lov/details/vocabulary_gvp.html},
   keywords     = {Getty, vocabularies, thesauri, AAT, TGN, ULAN, semantic representation, LOD, ontology, SKOS, SKOS-XL, ISO 25964, DC, DCT, BIBO, FOAF, BIO, Schema, PROV, WGS84},
   institution  = {Getty Research Institute},
-  note         = {Ontology definition},
+  type         = {Ontology},
+  note         = {Ontology},
   abstract     = {The GVP Ontology defines classes, properties and values (skos:Concepts) used in GVP LOD. As of version 3.0, it is complete regarding AAT, TGN and ULAN, and will be extended in time with more elements needed for other GVP vocabularies (CONA). It uses the SKOS, SKOS-XL, ISO 25964; DC, DCT, BIBO, FOAF, BIO, Schema, PROV, WGS84 ontologies.},
 }
 
@@ -647,24 +648,24 @@ keywords={Europeana, task force, EDM, FRBR, FRBRoo, CIDOC CRM, ontology}
   abstract     = {For Europeana, the platform for Europe’s digital cultural heritage from libraries, museums and archives, getting richer (semantic and multilingual) metadata is a priority. It improves access to the 40 million cultural heritage objects, notably enabling the multilingual retrieval of documents and creates relations between objects. To enhance data and enable retrieval across languages, Europeana performs automatic enrichment by selecting source metadata field(s) in the Europeana data and creating links to a selected target vocabulary or dataset representing contextual resources such as places, concepts, agents and time periods. Wikidata is since a while on Europeana’s radar as a potential new target for enrichment but how can it be integrated with cultural heritage data?},
 }
 
-@Misc{HCLS-paper,
+@Article{HCLS-paper,
   author       = {Michel Dumontier and Alasdair J. G. Gray and M. Scott Marshall and Vladimir Alexiev and others},
   title        = {{The Health Care and Life Sciences Community Profile for Dataset Descriptions}},
-  howpublished = {(submitted)},
-  month        = nov,
+  journal      = {(submitted)},
   year         = 2015,
+  month        = nov,
   keywords     = {HCLS, dataset, VOID, ontology},
   abstract     = {Access to consistent, high-quality metadata is critical to finding, understanding, and reusing scientific data. However, while there are many relevant vocabularies for the annotation of a dataset, none sufficiently captures all the necessary metadata. This prevents uniform indexing and querying of dataset repositories. Towards providing a practical guide for producing a high quality description of biomedical datasets, the W3C Semantic Web for Health Care and the Life Sciences Interest Group (HCLSIG) identified RDF vocabularies that could be used to specify common metadata elements and their value sets. The resulting guideline covers elements of description, identification, attribution, versioning, provenance, and content summarization. This guideline reuses existing vocabularies, and is intended to meet key functional requirements including indexing, discovery, exchange, query, and retrieval of datasets. The resulting metadata profile is generic and could be used by other domains with an interest in providing machine readable descriptions of versioned datasets.},
 }
 
-@TechReport{HCLS-profile,
-  author       = {Alasdair J. G. Gray and Joachim Baran abd M. Scott Marshall and Michel Dumontier and Vladimir Alexiev and others},
+@Manual{HCLS-profile,
   title        = {{Dataset Descriptions: HCLS Community Profile}},
-  institution  = {Semantic Web in Health Care and Life Sciences Interest Group (HCLSIG)},
-  year         = 2015,
+  author       = {Alasdair J. G. Gray and Joachim Baran abd M. Scott Marshall and Michel Dumontier and Vladimir Alexiev and others},
   month        = may,
+  year         = 2015,
   url          = {http://www.w3.org/TR/hcls-dataset/},
   keywords     = {HCLS, dataset, VOID, ontology},
+  institution  = {Semantic Web in Health Care and Life Sciences Interest Group (HCLSIG)},
   abstract     = {Access to consistent, high-quality metadata is critical to finding, understanding, and reusing scientific data. This document describes a consensus among participating stakeholders in the Health Care and the Life Sciences domain on the description of datasets using the Resource Description Framework (RDF). This specification meets key functional requirements, reuses existing vocabularies to the extent that it is possible, and addresses elements of data description, versioning, provenance, discovery, exchange, query, and retrieval.},
 }
 
@@ -675,7 +676,8 @@ keywords={Europeana, task force, EDM, FRBR, FRBRoo, CIDOC CRM, ontology}
   year         = 2013,
   url          = {http://purl.org/iso25964/skos-thes},
   url_Other    = {http://lov.okfn.org/dataset/lov/details/vocabulary_iso-thes.html},
-  note         = {Ontology definition},
+  type         = {Ontology},
+  note         = {Ontology},
   abstract     = {OWL ontology representing the newest ISO standard on thesauri},
 }
 
@@ -697,6 +699,7 @@ keywords={Europeana, task force, EDM, FRBR, FRBRoo, CIDOC CRM, ontology}
   title        = {{Benchmark Design for Reasoning}},
   institution  = {Linked Data Benchmarking Council project},
   year         = 2014,
+  type         = {Deliverable},
   number       = {D4.4.2},
   month        = sep,
   url          = {http://ldbcouncil.org/sites/default/files/LDBC_D4.4.2.pdf},
@@ -822,4 +825,18 @@ keywords={Europeana, task force, EDM, FRBR, FRBRoo, CIDOC CRM, ontology}
   url_Other    = {http://vladimiralexiev.github.io/pubs/MarciaZeng-LODKOSInnovativeUse.pdf},
   keywords     = {vocabularies, thesauri, SKOS, NKOS, ontology},
 }
+
+@InProceedings{Alexiev,
+  author       = {Vladimir Alexiev},
+  title        = {Using DBPedia in Europeana Food and Drink},
+  booktitle    = {DBpedia Meeting},
+  year         = 2016,
+  month        = feb,
+  address      = {The Hague, Netherlands},
+  url_Slides   = {http://vladimiralexiev.github.io/pres/20160212-Using-DBPedia-in-Europeana-Food-and-Drink.pdf},
+  url_Slides   = {https://drive.google.com/file/d/0B7je1jgVmCgIZzNiWmdqTGpDa28/view},
+  keywords     = {Europeana, cultural heritage, food and drink, DBpedia, Geonames, semantic application, faceted search, semantic search},
+  abstract     = {The Europeana Food and Drink project collects cultural heritage objects for and develops applications related to Food and Drink heritage. As part of the project, Ontotext developed a FD Classification based on Wikipedia/DBpedia Categories, a semantic enrichment service that annotates each CHO with FD Topics and Places, and a semantic application (http://efd.ontotext.com/app) that implements hierarchical semantic facets and semantic search for these facets. We'll also be packaging the enrichment as a service for others to use in a crowdsourced annotation application. We will explain how we used Categories to build a domain-specific gazetteer, used external datasets (eg UMBEL domains and DBTax types), correlated DBpedia places to Geonames to use the place hierarchy, and the workings of the semantic application},
+}
+
 
