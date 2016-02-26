@@ -3,6 +3,8 @@
 @prefix upf-deep:       <http://taln.upf.edu/upf-deep#> .
 @prefix upf-dep-spa:    <http://taln.upf.edu/upf-dep-spa#> .
 @prefix upf-dep-syn:    <http://taln.upf.edu/olia/penn-dep-syntax#> .
+@prefix fe-upf:         <http://taln.upf.edu/frame-element#> . 
+@prefix frame-upf:      <http://taln.upf.edu/frame#> .
 
 # Multisensor datasets
 @prefix ms-annot:       <http://data.multisensorproject.eu/annot/>.
