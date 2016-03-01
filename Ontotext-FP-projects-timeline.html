@@ -57,7 +57,7 @@
           var selection = visualization.getSelection()[0];
           // websites: 9 ontotext, 12 project, 11 cordis
           var url = data.getValue(selection.row,9) || data.getValue(selection.row,12) || data.getValue(selection.row,11);
-          if (url) {window.open(url,'_top')}
+          if (url) {window.open(url,'_new')}
         }
 
         visualization = new google.visualization.BarChart(document.getElementById('visualization'));
