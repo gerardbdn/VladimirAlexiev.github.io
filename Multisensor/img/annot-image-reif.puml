@@ -6,26 +6,26 @@ skinparam classAttributeIconSize 0
 class _http___data_multisensorproject_eu_agent_imageAnnotator_ as "<http://data.multisensorproject.eu/agent/imageAnnotator>"
 _http___data_multisensorproject_eu_agent_imageAnnotator_ : a prov:SoftwareAgent
 _http___data_multisensorproject_eu_agent_imageAnnotator_ : foaf:name "CERTH Image Annotator v1.0"
+class ms_annot_1234153426 as "ms-annot:1234153426"
+ms_annot_1234153426 : a oa:Annotation
+class _http___images_zeit_de_____540x304_jpg_ as "<http://images.zeit.de/...-540x304.jpg>"
+ms_annot_1234153426 -left-> _http___images_zeit_de_____540x304_jpg_ : oa:hasTarget
 class ms_concept_Concepts3_Or_More_People as "ms-concept:Concepts3_Or_More_People"
+ms_annot_1234153426 --> ms_concept_Concepts3_Or_More_People : oa:hasBody
+ms_annot_1234153426 -right-> _http___data_multisensorproject_eu_agent_imageAnnotator_ : oa:annotatedBy
+ms_annot_1234153426 : oa:annotatedAt "2015-10-01T12:34:56"^^xsd:dateTime
+ms_annot_1234153426 : oa:motivatedBy oa:tagging
+class ms_annot_1234153426_Concepts3_Or_More_People as "ms-annot:1234153426-Concepts3_Or_More_People"
+ms_annot_1234153426_Concepts3_Or_More_People : a rdf:Statement
+ms_annot_1234153426_Concepts3_Or_More_People : ms:confidence 0.731893
+_http___images_zeit_de_____540x304_jpg_ : a dctype:Image
+_http___images_zeit_de_____540x304_jpg_ : dc:format "image/jpeg"
 ms_concept_Concepts3_Or_More_People : a skos:Concept, oa:SemanticTag
 class ms_concept_ as "ms-concept:"
 ms_concept_Concepts3_Or_More_People --> ms_concept_ : skos:inScheme
 ms_concept_Concepts3_Or_More_People : skos:prefLabel "Concepts: 3 or More People"
-class _http___data_multisensorproject_eu_annot_1234153426_Concepts3_Or_More_People_ as "<http://data.multisensorproject.eu/annot/1234153426-Concepts3_Or_More_People>"
-_http___data_multisensorproject_eu_annot_1234153426_Concepts3_Or_More_People_ : a rdf:Statement
-_http___data_multisensorproject_eu_annot_1234153426_Concepts3_Or_More_People_ : ms:confidence 0.731893
-class _http___images_zeit_de_____540x304_jpg_ as "<http://images.zeit.de/...-540x304.jpg>"
-_http___images_zeit_de_____540x304_jpg_ : a dctype:Image
-_http___images_zeit_de_____540x304_jpg_ : dc:format "image/jpeg"
-class _http___data_multisensorproject_eu_annot_1234153426_ as "<http://data.multisensorproject.eu/annot/1234153426>"
-_http___data_multisensorproject_eu_annot_1234153426_ : a oa:Annotation
-_http___data_multisensorproject_eu_annot_1234153426_ --> ms_concept_Concepts3_Or_More_People : oa:hasBody
-_http___data_multisensorproject_eu_annot_1234153426_ -right-> _http___data_multisensorproject_eu_agent_imageAnnotator_ : oa:annotatedBy
-_http___data_multisensorproject_eu_annot_1234153426_ -left-> _http___images_zeit_de_____540x304_jpg_ : oa:hasTarget
-_http___data_multisensorproject_eu_annot_1234153426_ : oa:annotatedAt "2015-10-01T12:34:56"^^xsd:dateTime
-_http___data_multisensorproject_eu_annot_1234153426_ : oa:motivatedBy oa:tagging
-(_http___data_multisensorproject_eu_annot_1234153426_, ms_concept_Concepts3_Or_More_People) . _http___data_multisensorproject_eu_annot_1234153426_Concepts3_Or_More_People_
-_http___data_multisensorproject_eu_annot_1234153426_Concepts3_Or_More_People_ : ↑ rdf:subject <http://data.multisensorproject.eu/annot/1234153426>
-_http___data_multisensorproject_eu_annot_1234153426_Concepts3_Or_More_People_ : .. rdf:predicate oa:hasBody
-_http___data_multisensorproject_eu_annot_1234153426_Concepts3_Or_More_People_ : ↓ rdf:object ms-concept:Concepts3_Or_More_People
+(ms_annot_1234153426, ms_concept_Concepts3_Or_More_People) . ms_annot_1234153426_Concepts3_Or_More_People
+ms_annot_1234153426_Concepts3_Or_More_People : ↑ rdf:subject ms-annot:1234153426
+ms_annot_1234153426_Concepts3_Or_More_People : .. rdf:predicate oa:hasBody
+ms_annot_1234153426_Concepts3_Or_More_People : ↓ rdf:object ms-concept:Concepts3_Or_More_People
 @enduml

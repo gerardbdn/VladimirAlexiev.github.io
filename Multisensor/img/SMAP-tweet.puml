@@ -5,9 +5,9 @@ hide circle
 skinparam classAttributeIconSize 0
 class twitter_MSR_Future_status_605786079153627136 as "twitter:MSR_Future/status/605786079153627136"
 twitter_MSR_Future_status_605786079153627136 : a sioc:Post
-class _http___data_multisensorproject_eu_content_1983754939468_ as "<http://data.multisensorproject.eu/content/1983754939468>"
-twitter_MSR_Future_status_605786079153627136 --> _http___data_multisensorproject_eu_content_1983754939468_ : sioc:about
-twitter_MSR_Future_status_605786079153627136 : sioc:content "@UNFCCC @EnergiewendeGER\n   That's great, just a shame it does not\n   translate into lower CO2. #Energiewende"
+class ms_content_1983754939468 as "ms-content:1983754939468"
+twitter_MSR_Future_status_605786079153627136 --> ms_content_1983754939468 : sioc:about
 twitter_MSR_Future_status_605786079153627136 : dct:date "2015-06-02T20:20:00"^^xsd:dateTime
+twitter_MSR_Future_status_605786079153627136 : sioc:content "@UNFCCC @EnergiewendeGER\n   That's great, just a shame it does not\n   translate into lower CO2. #Energiewende"
 twitter_MSR_Future_status_605786079153627136 : sioc:has_creator twitter:MSR_Future
 @enduml

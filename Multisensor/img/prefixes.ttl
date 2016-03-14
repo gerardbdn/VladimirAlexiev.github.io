@@ -86,8 +86,3 @@
 @prefix puml:           <http://plantuml.com/ontology#>.
 @prefix prov:           <http://www.w3.org/ns/prov#>.
 
-# BAD prefixes, not used only anymore
-#@prefix ms-BAD:       <http://data.multisensor.eu/ontology#> .   # we don't own that domain
-#@prefix fn-BAD:       <http://data.multisensorproject.eu/tbox/>. # UPF will use only standard FN props
-
-
