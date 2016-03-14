@@ -216,10 +216,10 @@ dbr:Germany        a dbo:Country, dbo:Place, dbo:PopulatedPlace, yago:FederalCou
 # But other NERD classes may be useful, eg Phone, Email: for those you can't refer to DBpedia and must use itsrdf:taClassRef
 
 ############### NER provenance (tool & confidence)
-# Simple case: only one annotation, from one NER tool
+# Simple case: only one annotation from one NER tool
 <#Germany-1>
-  itsrdf:taAnnotatorsRef "NER-extraction|http://linguatec.com";
-  itsrdf:confidence 0.9.
+  itsrdf:taAnnotatorsRef "text-analysis|http://linguatec.com";
+  itsrdf:taConfidence 0.9.
 # 0.9 means the same as "0.9"^^xsd:double
 
 # Complex case: several annotations or NER tools. Need to use the NIF Stanbol profile (FISE) instead of ITSRDF
@@ -228,7 +228,7 @@ dbr:Germany        a dbo:Country, dbo:Place, dbo:PopulatedPlace, yago:FederalCou
   fise:extracted-from <#Germany-1>;
   fise:entity-type nerd:Country;
   fise:entity-reference dbr:Germany; # if you can recognize only the entity type, skip this
-  dc:creator "NER-extraction|http://linguatec.com"; # or better use dct:creator with a URL
+  dct:creator <http://linguatec.com>;
   fise:confidence "0.9"^^xsd:float.
 
 # I think it's a very bad practice to use two completely different property sets for these two situations.

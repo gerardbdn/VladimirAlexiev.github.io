@@ -112,6 +112,130 @@ Moving common triples outside of the SIMMO graph raises two problems:
 
 *Are the partners willing to make this change to the data model, and change their queries correspondingly?*
 
+* Confidence and Provenance
+Until recently the Multisensor pipeline used only one NER annotation tool (from Linguatec).
+Consider the phrase "Phillips Imaging Systems". Linguatec correctly guesses a NER (Organization) and makes a local entity ~#Organization=Systems~ (but doesn't pick the whole phrase).
+So we could capture the confidence and provenance of the annotation as follows:
+#+BEGIN_SRC Turtle
+<#char=1116,1123> a nif:Word;
+  nif:anchorOf "Systems";
+  itsrdf:taClassRef nerd:Organization;
+  itsrdf:taIdentRef <#Organization=Systems>;
+  itsrdf:taConfidence 0.9; # means the same as "0.9"^^xsd:decimal
+  itsrdf:taAnnotatorsRef "text-analysis|http://linguatec.com".
+#+END_SRC
+
+** Multiple Annotations with FISE
+Recenly we started adding annotations from a second tool (Babelfy).
+So now potentially the same word or phrase can carry two annotations.
+The same word "System" is recognized by Babelfy as http://babelnet.org/rdf/s00075759n, which is the general concept "Instrumentality that combines interrelated interacting artifacts".
+
+The NIF+Stanbol profile (FISE) defines a model for this:\\
+http://vladimiralexiev.github.io/Multisensor/20141008-Linguistic-LD/img/NIF-profiles.png
+
+#+BEGIN_SRC Turtle
+<#char=1116,1123> a nif:Word;
+  nif:anchorOf "Systems".
+
+<#char=1116,1123-annot-Linguatec> a fise:EntityAnnotation;
+  fise:extracted-from <#char=1116,1123>;
+  fise:entity-type nerd:Organization;
+  fise:entity-reference <#Organization=Systems>;
+  fise:confidence "0.9"^^xsd:float;
+  dct:creator <http://linguatec.com>.
+
+<#char=1116,1123-annot-Babelnet> a fise:EntityAnnotation;
+  fise:extracted-from <#char=1116,1123>;
+  fise:entity-reference <http://babelnet.org/rdf/s00075759n>;
+  fise:confidence "0.95"^^xsd:float;
+  dct:creator <http://babelfy.org>.
+#+END_SRC
+
+It's not nice that NIF+Stanbol uses completely different properties from the simple case, as we reported in [[https://github.com/NLP2RDF/specification/issues/2][NLP2RDF/specification#2]].
+
+** Multiple Annotations with NIF 2.1 RC
+Recently a new proposal "Provenance and Confidence for NIF annotations" was published, motivated by the FREME project.
+It is part of a developing NIF 2.1 specification (currently at Release Candidate stage):
+- published: http://nif.readthedocs.org/en/2.1-rc/prov-and-conf.html
+- source: https://github.com/NLP2RDF/documentation/tree/2.1-RC/docs (last edit mid-Jan 2016, 3 months ago)
+It is somewhat better than FISE, but we still don't know whether it's stable and can be relied upon (asked in [[https://github.com/NLP2RDF/documentation/issues/1][NLP2RDF/documentation#1]]).
+
+The same annotations as in the previous section could be represented as follows:
+#+BEGIN_SRC Turtle
+<#char=1116,1123> a nif:Word;
+  nif:anchorOf "Systems";
+  nif:annotationUnit <#char=1116,1123-annot-Linguatec>, <#char=1116,1123-annot-Babelnet>.
+
+<#char=1116,1123-annot-Linguatec> a nif:AnnotationUnit;
+  itsrdf:taClassRef nerd:Organization
+  itsrdf:taIdentRef <#Organization=Systems>; # local generated entity
+  nif:confidence 0.9;
+  nif:provenance <http://linguatec.com>.
+
+<#char=1116,1123-annot-Babelnet> a nif:AnnotationUnit;
+  itsrdf:taIdentRef <http://babelnet.org/rdf/s00075759n>; # general concept "System"
+  nif:confidence 0.95;
+  nif:provenance <http://babelfy.org>.
+#+END_SRC
+
+Note: the above is in accordance with section [[http://nif.readthedocs.org/en/2.1-rc/prov-and-conf.html#using-only-generic-provenance-and-confidence-properties][Using only Generic Provenance and Confidence Properties]].
+The first section [[http://nif.readthedocs.org/en/2.1-rc/prov-and-conf.html#provenance-and-confidence-using-companion-properties][Using Companion Properties]] describes using different properties in pairs:
+- nif:taClassConf & nif:taClassProv for itsrdf:taClassRef
+- nif:taIdentConf & nif:taIdentProv for itsrdf:taIdentRef
+However, the Linguatec annotation always emits both Class and Ident, so it's more appropriate to use the single (generic) properties.
+
+** Singling Out an Annotation
+Both NIF+Stanbol and NIF 2.1 RC allow one annotation to be singled out and represented "inline" (in a direct way).
+This is important, since the direct way is more economical, and this matters when we are considering millions of annotations.
+NIF 2.1 RC specifically describes such case, relegating "alternative, less probable entity linking results" to an indirect representation.
+
+Assume that in the above example, we single out the Linguatec annotation. 
+We can represent this as follows in NIF+Stanbol:
+#+BEGIN_SRC Turtle
+<#char=1116,1123> a nif:Word;
+  nif:anchorOf "Systems";
+  # direct annotation
+  itsrdf:taClassRef nerd:Organization;
+  itsrdf:taIdentRef <#Organization=Systems>;
+  itsrdf:taConfidence 0.9;
+  itsrdf:taAnnotatorsRef "text-analysis|http://linguatec.com".
+
+<#char=1116,1123-annot-Babelnet> a fise:EntityAnnotation;
+  # indirect annotation
+  fise:extracted-from <#char=1116,1123>;
+  fise:entity-reference <http://babelnet.org/rdf/s00075759n>;
+  fise:confidence "0.95"^^xsd:float;
+  dct:creator <http://babelfy.org>.
+#+END_SRC
+
+We can also represent it in NIF 2.1 RC as follows:
+#+BEGIN_SRC Turtle
+<#char=1116,1123> a nif:Word;
+  nif:anchorOf "Systems";
+  # direct annotation
+  itsrdf:taClassRef nerd:Organization
+  itsrdf:taIdentRef <#Organization=Systems>; # local generated entity
+  nif:confidence 0.9;
+  nif:provenance <http://linguatec.com>;
+  # indirect annotation
+  nif:annotationUnit <#char=1116,1123-annot-Babelnet>.
+
+<#char=1116,1123-annot-Babelnet> a nif:AnnotationUnit;
+  itsrdf:taIdentRef <http://babelnet.org/rdf/s00075759n>; # general concept "System"
+  nif:confidence 0.95;
+  nif:provenance <http://babelfy.org>.
+#+END_SRC
+
+NIF 2.1 RC has the advantage that it uses the same properties in both the direct and indirect annotation.
+In contrast, the NIF+Stanbol approach uses different properties and also:
+- ~itsrdf:taAnnotatorsRef~ is not a URL but a specially formatted string (coming from the XML heritage of ITS, see [[https://www.w3.org/TR/its20/#annotators-ref-usage-scenarios][5.7 ITS Tools Annotation]])
+- ~fise:confidence~ is specified as a xsd:float while itsrdf:taConfidence is xsd:decimal
+
+*Remaining question*
+- How to single out one annotation as "primary"
+- How to inform the pipeline so the other annotations are made as indirect (~nif:AnnotationUnit~)
+If we cannot do this dynamically, then we should emit the less numerous annotations using the indirect way.
+
 * Multimedia Annotation
 Multisensor includes 2 multimedia services that need to be integrated in RDF:
 1. Automatic Speech Recognition (ASR) that provides raw text extracted from the video; followed by concept extraction.
@@ -253,7 +377,6 @@ if [[http://stanbol.apache.org/docs/trunk/components/enhancer/enhancementstructu
 we don't want that since we have image not text. But there are
 also ~fise:extracted-from~ (dashed arrows) pointing directly to the resource.
 The *NIF+Stanbol* profile shows the same idea of using ~fise:extracted-from~ directly:\\
-#+ATTR_HTML: :style width:800px; text-align:left
 [[./20141008-Linguistic-LD/img/NIF-profiles.png]]
 
 We bastardize the ontology a bit:

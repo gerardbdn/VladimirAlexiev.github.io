@@ -61,4 +61,6 @@ nif:sourceUrl puml:arrow puml:up.
 oa:hasTarget puml:arrow puml:up.
 oa:hasSource puml:arrow puml:up.
 
+<http://data.multisensorproject.eu/annot/1234153426> puml:up <http://data.multisensorproject.eu/agent/imageAnnotator>.
+
 <http://blog.hgtv.com/terror/2014/09/08/video.mp4> puml:dashed <http://blog.hgtv.com/terror/2014/09/08/video.mp4#t=30,31>.
