@@ -1,0 +1,23 @@
+@startuml
+hide empty methods
+hide empty attributes
+hide circle
+skinparam classAttributeIconSize 0
+class aat_300020224_array as "aat:300020224-array"
+class aat_300020224_array <<<<(A,red)ThesaurusArray, OrderedCollection>>>>
+show aat_300020224_array circle
+class aat_300106927 as "aat:300106927"
+class aat_300106927 <<<<(G,green)ThesaurusArray, OrderedCollection>>>>
+show aat_300106927 circle
+class aat_300020224 as "aat:300020224"
+class aat_300020224 <<<<(C,lightblue)Concept>>>>
+show aat_300020224 circle
+aat_300020224 : a gvp:Concept
+aat_300020224 :  "Minoan"
+aat_300106927 : a gvp:GuideTerm
+aat_300106927 --> aat_300020224 : skos:member
+aat_300106927 :  "<Aegean Bronze Age periods>"
+aat_300020224_array : a iso:ThesaurusArray
+aat_300020224_array -up-> aat_300020224 : iso:superOrdinate
+aat_300020224_array :  "[anonymous]"
+@enduml
