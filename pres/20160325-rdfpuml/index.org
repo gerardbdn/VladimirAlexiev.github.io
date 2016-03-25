@@ -1,5 +1,5 @@
 #+TITLE: Making True RDF Diagrams with rdfpuml
-#+DATE: 2016-03-23
+#+DATE: 2016-03-25
 #+AUTHOR: Vladimir Alexiev
 #+EMAIL: vladimir.alexiev@ontotext.com
 #+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline author:t c:nil
@@ -181,6 +181,7 @@ gvp:Concept        puml:stereotype "<<(C,lightblue)Concept>>".
 - EHRI: Holocaust Research into Jewish social networks
 - Multisensor: NLP2RDF/NIF, FrameNet
 - Duraspace: Portland Common Data Model for metadata in institutional repositories
+- Video Annotation: LinkedTV NISV Use Case
 
 ** Getty CONA: Contributors and Sources
 Aggressive URL shortening, collecting multiple values, value comments
@@ -249,11 +250,20 @@ Split on 2 pages... part2
 #+ATTR_HTML: :class stretch :style width:1000px
 [[./img/PCDM_Multi_Page_Text-circles.png]]
 
+** Video Annotation: LinkedTV NISV Use Case
+#+ATTR_HTML: :class stretch :style width:1400px
+[[./img/LinkedTV-Fig22-NISV-scenario.png]]
+
+** Video Annotation: Generated Diagram
+#+ATTR_HTML: :class stretch :style width:1400px
+[[./img/linkedtv-nisv.png]]
+ 
 * Next Steps
 Perl hackers wanted:
 - Publish on Github
 - Modularize better
 - Package and publish on CPAN
+- Intgrate in Emacs org-mode: write turtle, see diagram
 
 Farther future:
 - Extend to visualize RDF Shapes (SHACL and SHEX)
