@@ -78,6 +78,7 @@ i.e. storing time grows potentially quadratically with the number of SIMMOs.
 The proposed fix is *graph normalization*: the storing service examines every triple ~<s,p,o>~.
 - If ~s~ starts with one of these prefixes the triple is stored in the default graph:
   : http://dbpedia.org
+  : http://babelnet.org
 - Otherwise the triple is stored in the SIMMO graph.
 This still writes common triples 1000 times,
 but there is no duplication since a triple can exist only once in a given graph.
