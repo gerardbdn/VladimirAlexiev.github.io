@@ -1,5 +1,5 @@
 #+TITLE: Materials related to FP7 Multisensor
-#+DATE: <2016-03-17>
+#+DATE: <2016-04-25>
 #+AUTHOR: Vladimir Alexiev
 #+EMAIL: vladimir.alexiev@ontotext.com
 #+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline author:t c:nil
@@ -49,7 +49,17 @@ Examples (a few more are explained in Multisensor-NER-Mapping):
 For FrameNet (relation extraction) representation see [[./FrameNet/]].
 The remaining sections describe specific representation issues (speech recognition, translation, multimedia)
 
-* Graph Normalization
+* Graph Handling
+** TODO Storing Service PUT vs POST
+Please note that the ASR is written in the same graph as the SIMMO. 
+PUT rewrites the graph: https://www.w3.org/TR/sparql11-http-rdf-update/#http-put.
+So you should use a sequence like this:
+- PUT SIMMO
+- POST ASR0
+- POST ASR1
+- POST image annotation
+
+** Graph Normalization
 The [[http://mklab2.iti.gr/multisensor/index.php/RDF_Storing_Service][RDF_Storing_Service]] saves all data about a SIMMO in a named graph having the same URL as the SIMMO base URL.
 This makes it easy to get all data about the SIMMO.
 But it also leads to duplication of common triples. Eg consider this:
@@ -75,7 +85,7 @@ but there is no duplication since a triple can exist only once in a given graph.
   namely embedded videos and images.
   It's not correct to move them to the default graph, so we work with an explicit list of common prefixes.
 
-** Query Changes
+*** Query Changes
 The tradeoff is that you won't be able to get all SIMMO data by simply asking for a graph.
 Eg query [[https://docs.google.com/document/d/1FfkiiTYvrLzHJ5P5j34NRVGPbXml0ndpNtiNbH2osRw/edit#heading%3Dh.ngkjkg5b5zze][2.3 Retrieve NEs (Select)]] is a bit sloppy, since it asks for certain types (and ~foaf:name~) by graph, without looking for any relation:
 #+BEGIN_SRC sparql
@@ -97,7 +107,7 @@ SELECT distinct ?ne ?type ?name {
 #+END_SRC
 (Actually this query also works before graph normalization since the part outside ~GRAPH {..}~ looks in all graphs, both SIMMO and default).
 
-** Normalization Problems
+*** Normalization Problems
 Moving common triples outside of the SIMMO graph raises two problems:
 - If you examine the results of the query above, you'll see that some entities (eg ~dbr:Facebook~) have several labels, eg
   : "Facebook, Inc."@en
@@ -146,7 +156,7 @@ http://vladimiralexiev.github.io/Multisensor/20141008-Linguistic-LD/img/NIF-prof
 
 <#char=1116,1123-annot-Babelnet> a fise:EntityAnnotation;
   fise:extracted-from <#char=1116,1123>;
-  fise:entity-reference <http://babelnet.org/rdf/s00075759n>;
+  fise:entity-reference bn:s00075759n;
   fise:confidence "0.95"^^xsd:float;
   dct:creator <http://babelfy.org>.
 #+END_SRC
@@ -174,7 +184,7 @@ The same annotations as in the previous section could be represented as follows:
   nif:provenance <http://linguatec.com>.
 
 <#char=1116,1123-annot-Babelnet> a nif:AnnotationUnit;
-  itsrdf:taIdentRef <http://babelnet.org/rdf/s00075759n>; # general concept "System"
+  itsrdf:taIdentRef bn:s00075759n; # general concept "System"
   nif:confidence 0.95;
   nif:provenance <http://babelfy.org>.
 #+END_SRC
@@ -216,7 +226,7 @@ We can represent this as follows in NIF+Stanbol:
 <#char=1116,1123-annot-Babelnet> a fise:EntityAnnotation;
   # indirect annotation
   fise:extracted-from <#char=1116,1123>;
-  fise:entity-reference <http://babelnet.org/rdf/s00075759n>;
+  fise:entity-reference bn:s00075759n;
   fise:confidence "0.95"^^xsd:float;
   dct:creator <http://babelfy.org>.
 #+END_SRC
@@ -234,7 +244,7 @@ We can also represent it in NIF 2.1 RC as follows:
   nif:annotationUnit <#char=1116,1123-annot-Babelnet>.
 
 <#char=1116,1123-annot-Babelnet> a nif:AnnotationUnit;
-  itsrdf:taIdentRef <http://babelnet.org/rdf/s00075759n>; # general concept "System"
+  itsrdf:taIdentRef bn:s00075759n; # general concept "System"
   nif:confidence 0.95;
   nif:provenance <http://babelfy.org>.
 #+END_SRC
@@ -248,6 +258,65 @@ In contrast, the NIF+Stanbol approach uses different properties and also:
 - How to single out one annotation as "primary"
 - How to inform the pipeline so the other annotations are made as indirect (~nif:AnnotationUnit~)
 If we cannot do this dynamically, then we should emit the less numerous annotations using the indirect way.
+
+* Generic vs Specific Babelnet Concepts
+The Concept Extraction Service makes a distinction between Generic vs Specific Babelnet concepts,
+which is used by the Summarization service.
+- Generic concepts
+- Specific concepts are specific to the Multisensor domain,
+  which are recognized by statistical analysis over the Multisensor SIMMO corpus.
+Consider the following example: "Wind turbines are complex engineering systems":
+- bn:s00081274n "wind turbine" is a specific concept, which we represent as ~nif:taClassRef ms:SpecificConcept~
+- bn:s00075759n "system" is a generic concept, which we represent as ~nif:taClassRef ms:GenericConcept~
+Comparing sec [[*Multiple Annotations with FISE]] where we used separate nodes for each annotation, 
+here we use a single node per annotation:
+#+BEGIN_SRC Turtle
+<#char=0,45> a nif:Context;
+  nif:isString "Wind turbines are complex engineering systems".
+
+<#char=0,13> a nif:Phrase;
+  nif:referenceContext <#char=0,45>;
+  nif:beginIndex 0;
+  nif:endIndex 13;
+  nif:anchorOf "Wind turbines";
+  nif:taIdentRef bn:s00081274n;
+  nif:taClassRef ms:SpecificConcept.
+
+<#char=38,45> a nif:Phrase;
+  nif:referenceContext <#char=0,45>;
+  nif:beginIndex 38;
+  nif:endIndex 45;
+  nif:anchorOf "system";
+  nif:taIdentRef bn:s00075759n;
+  nif:taClassRef ms:GenericConcept.
+#+END_SRC
+
+The Concept Extraction Service will also emit the labels of the recognized Babelnet concepts.
+These will be put in the default graph, not in per-SIMMO graphs, see sec [[*Graph Normalization]].
+Babelnet uses ~lemon:isReferenceOf~ and ~lemon:LexicalSense~ to express the labels, but we use a simpler representation with ~skos:prefLabel~:
+#+BEGIN_SRC Turtle
+bn:s00081274n a skos:Concept; skos:prefLabel "wind turbine"@en, "aerogenerador"@es.
+bn:s00075759n a skos:Concept; skos:prefLabel "system"@en, "sistema"@es.
+#+END_SRC
+
+The two new classes that we use are defined in the MS ontology:
+#+BEGIN_SRC Turtle
+ms: a owl:Ontology;
+  rdfs:label "Multisensor ontology";
+  owl:versionInfo "1.0".
+
+ms:GenericConcept a rdfs:Class;
+  rdfs:subClassOf skos:Concept;
+  rdfs:label "GenericConcept";
+  rdfs:comment "Concept that doesn't belong to a specific domain";
+  rdfs:isDefinedBy ms: .
+
+ms:SpecificConcept a rdfs:Class;
+  rdfs:subClassOf skos:Concept;
+  rdfs:label "SpecificConcept";
+  rdfs:comment "Concept from the specific Multisensor domain (determined by statistical analysis over the Multisensor corpus)";
+  rdfs:isDefinedBy ms: .
+#+END_SRC
 
 * Multimedia Annotation
 Multisensor includes 2 multimedia services that need to be integrated in RDF:
@@ -530,3 +599,4 @@ Possible extensions:
 - If we want to express more diverse relations than a general ~sioc:about~, we can use OA
   (see sec [[*Open Annotation]]) and oa:motivatedBy. The SIMMO will be the *target* of annotation,
   and the tweet is the *body*.
+
