@@ -1,7 +1,7 @@
 #+COMMENT: -*- fill-column: 100 -*-
 #+STARTUP: showeverything
 #+TITLE: FN goes NIF: Integrating FrameNet in the NLP Interchange Format
-#+DATE: 2016-03-23
+#+DATE: 2016-03-28
 #+AUTHOR: Vladimir Alexiev, Gerard Casamayor
 #+LATEX_HEADER_EXTRA: \address{Ontotext Corp, Universitat Pompeu Fabra\\
 #+LATEX_HEADER_EXTRA:   vladimir.alexiev@ontotext.com, gerard.casamayor@upf.edu}
@@ -455,11 +455,11 @@ It would be useful to emit this score, allowing clients to select the most proba
 - We could use the [[http://persistence.uni-leipzig.org/nlp2rdf/specification/stanbol.html][NIF Stanbol]] profile to associate several annotations with the same String and emit confidence for each one. 
   But compared to NIF Simple, it uses completely different properties, e.g. ~fise:entity-reference~ vs ~its:taIdentRef~ and ~fise:entity-type~ vs ~its:taClassRef~.
   And there are stability problems: [[http://persistence.uni-leipzig.org/nlp2rdf/specification/stanbol.html][NIF Stanbol]] shows different classes and properties compared to [[[NIF]]] fig.3 and [[http://stanbol.apache.org/docs/trunk/components/enhancer/enhancementstructure.html#fiseentityannotation][Stanbol EntityAnnotation Structure]], e.g.
-| NIF Stanbol          | NIF and Stanbol       
-|----------------------+-----------------------
-| nif:EntityAnnotation | fise:EntityAnnotation 
-| nifs:extractedFrom   | fise:extracted-from   
-| nif:oliaConf         | fise:confidence       
+| NIF Stanbol          | NIF and Stanbol       |
+|----------------------+-----------------------|
+| nif:EntityAnnotation | fise:EntityAnnotation |
+| nifs:extractedFrom   | fise:extracted-from   |
+| nif:oliaConf         | fise:confidence       |
 - Recently a new proposal [[http://nif.readthedocs.org/en/2.1-rc/prov-and-conf.html][Provenance and Confidence for NIF annotations]] was made, motivated by the FREME project.
   It is part of a developing NIF 2.1 specification currently at Release Candidate stage (NIF 2.1 RC), see [[https://github.com/NLP2RDF/documentation/tree/2.1-RC/docs][source]].
   It offers two options: [[http://nif.readthedocs.org/en/2.1-rc/prov-and-conf.html#using-only-generic-provenance-and-confidence-properties][Using only Generic Provenance and Confidence Properties]], or [[http://nif.readthedocs.org/en/2.1-rc/prov-and-conf.html#provenance-and-confidence-using-companion-properties][Using Companion Properties]] (see last 2 columns below).
