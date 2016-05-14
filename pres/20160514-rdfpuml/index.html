@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <title>Making True RDF Diagrams with rdfpuml</title>
 <meta name="author" content="(Vladimir Alexiev)"/>
-<meta name="description" content="RDF is a graph data model, thus often the best way to understand RDF data schemas (ontologies, application profiles, RDF shapes) is with a diagram. We describe a tool (rdfpuml) that makes true diagrams from Turtle examples using PlantUML and GraphViz. Diagram readability is of prime concern, and rdfpuml introduces a few diagram control mechanisms using triples in the puml: namespace. We give examples from Getty CONA (Mappings of museum data to CIDOC CRM), Multisensor (NLP2RDF/NIF, FrameNet), EHRI (Holocaust Research into Jewish social networks), Duraspace (Portland Common Data Model for holding metadata in institutional repositories)"/>
+<meta name="description" content="RDF is a graph data model, thus often the best way to understand RDF data schemas (ontologies, application profiles, RDF shapes) is with a diagram. We describe a tool (rdfpuml) that makes true diagrams from Turtle examples using PlantUML and GraphViz. Diagram readability is of prime concern, and rdfpuml introduces a few diagram control mechanisms using triples in the puml: namespace. We give examples from Getty CONA (Mappings of museum data to CIDOC CRM), Multisensor (NLP2RDF/NIF, FrameNet), EHRI (Holocaust Research into Jewish social networks), Duraspace (Portland Common Data Model for holding metadata in institutional repositories), Offshore Leaks"/>
 
 <link rel="stylesheet" href="../../reveal.js/css/reveal.css"/>
 <link rel="stylesheet" href="../../reveal.js/css/theme/solarized.css" id="theme"/>
@@ -20,13 +20,13 @@
         document.getElementsByTagName( 'head' )[0].appendChild( link );
     }
 </script>
-<style type='text/css'> h1,h2,h3,h4,h5,h6,h7 {font-family: Arial} .author, .date, .creator {-webkit-margin-before: 0em; -webkit-margin-after: 0em} .abstract {margin: 1em; padding: 1em; border: 1px solid black} .abstract:before {content: 'Abstract: '; font-weight: bold} #preamble p {font-size: 110%; margin-left: auto; margin-right: auto; text-align: center} th.left {text-align:left} th.right {text-align:right} th, td {line-height: 1em; border-width: 1px; border-style: solid solid; border-spacing: 2px 2px; padding: 2px 1px} .CANCELED {color: blue} .MAYBE {color: blue} .POSTPONED {color: blue} .INPROGRESS {color: orange} .NEXT {color: orange} .IER {color: orange}</style><style>.reveal .slides {text-align:left} h1,h2,h3,h4,h5,h6,.center {text-align:center} img,table {display: block; margin-left:auto!important; margin-right:auto!important} td>img {width:250px; display:block; margin-left:auto!important; margin-right:auto!important; margin-top:0px!important; margin-bottom:0px!important} .reveal section img {border:none} .reveal th, .reveal td {font-size:80%; border: 1px; border-style: solid solid; border-spacing:0; padding:0px 2px} .print-pdf .stretch {max-width:100%}  span.clouditem {padding-left: 0.15em; padding-right: 0.15em; line-height: 90%} </style>
+<style type='text/css'> h1,h2,h3,h4,h5,h6,h7 {font-family: Arial} .author, .date, .creator {-webkit-margin-before: 0em; -webkit-margin-after: 0em} .abstract {margin: 1em; padding: 1em; border: 1px solid black} .abstract:before {content: 'Abstract: '; font-weight: bold} #preamble p {font-size: 110%; margin-left: auto; margin-right: auto; text-align: center} th.left {text-align:left} th.right {text-align:right} th, td {line-height: 1em; border-width: 1px; border-style: solid solid; border-spacing: 2px 2px; padding: 2px 1px} .CANCELED {color: blue} .MAYBE {color: blue} .POSTPONED {color: blue} .INPROGRESS {color: orange} .NEXT {color: orange} .IER {color: orange}.underline {text-decoration:underline} </style><style>.reveal .slides {text-align:left} h1,h2,h3,h4,h5,h6,.center {text-align:center} img,table {display: block; margin-left:auto!important; margin-right:auto!important} td>img {width:250px; display:block; margin-left:auto!important; margin-right:auto!important; margin-top:0px!important; margin-bottom:0px!important} .reveal section img {border:none} .reveal th, .reveal td {font-size:80%; border: 1px; border-style: solid solid; border-spacing:0; padding:0px 2px} .print-pdf .stretch {max-width:100%}  span.clouditem {padding-left: 0.15em; padding-right: 0.15em; line-height: 90%} </style>
 </head>
 <body>
 <div class="reveal">
 <div class="slides">
 <section id="sec-title-slide">
-<p class='center'><img src='../ontotext.png' style='width:506px'/></p><p/><p/><h2>Making True RDF Diagrams with rdfpuml</h2><h3>Vladimir Alexiev</h3><h4>2016-03-25</h4><p class='center'>2D interactive presentation: press <a href='javascript:Reveal.toggleOverview()'>O for overview</a>, <a href='../../reveal.js/js/reveal-help.html' target='_blank'>H for help</a>.</p><p class='center'>Proudly made in plain text with <a href='https://github.com/hakimel/reveal.js/'>reveal.js</a>, <a href='https://github.com/yjwen/org-reveal'>org-reveal</a>, <a href='http://orgmode.org'>org-mode</a> and <a href='http://www.gnu.org/s/emacs/'>emacs</a>.</p><p class='center'>Or use <a href='index-full.html'>normal continuous HTML</a></p> 
+<p class='center'><img src='../ontotext.png' style='width:506px'/></p><p/><p/><h2>Making True RDF Diagrams with rdfpuml</h2><h3>Vladimir Alexiev</h3><h4><a href="mailto:vladimir.alexiev@ontotext.com">vladimir.alexiev@ontotext.com</a></h4><h4>2016-05-14 (originally 2016-03-25)</h4><p class='center'>2D presentation: <a href='javascript:Reveal.toggleOverview()'>O for overview</a>, <a href='../../reveal.js/js/reveal-help.html' target='_blank'>H for help</a>.</p><p class='center'>Proudly made in plain text with <a href='https://github.com/hakimel/reveal.js/'>reveal.js</a>, <a href='https://github.com/yjwen/org-reveal'>org-reveal</a>, <a href='http://orgmode.org'>org-mode</a> and <a href='http://www.gnu.org/s/emacs/'>emacs</a>.</p><p class='center'>Or use <a href='index-full.html'>normal continuous HTML</a></p><p class='center'><b>UPDATE: added Offshore Leaks data model</b></p>
 </section>
 <section id="table-of-contents">
 <div id="table-of-contents">
@@ -60,6 +60,9 @@
 <li><a href="#/slide-sec-3-6">3.6. Duraspace PCDM Metadata</a></li>
 <li><a href="#/slide-sec-3-7">3.7. Video Annotation: LinkedTV NISV Use Case</a></li>
 <li><a href="#/slide-sec-3-8">3.8. Video Annotation: Generated Diagram</a></li>
+<li><a href="#/slide-sec-3-9">3.9. Offshore Leaks</a></li>
+<li><a href="#/slide-sec-3-10">3.10. Offshore Leaks (2)</a></li>
+<li><a href="#/slide-sec-3-11">3.11. Offshore Leaks Evolution</a></li>
 </ul>
 </li>
 <li><a href="#/slide-sec-4">4. Next Steps</a></li>
@@ -605,6 +608,39 @@ Split on 2 pages&#x2026; part2
 
 <div class="figure">
 <p><img src="./img/linkedtv-nisv.png" alt="linkedtv-nisv.png" class="stretch" style="width:1400px" />
+</p>
+</div>
+
+</section>
+<section id="slide-sec-3-9">
+<h3 id="sec-3-9"><span class="section-number-3">3.9</span> Offshore Leaks</h3>
+<p>
+Ontotext <a href="https://github.com/Ontotext-AD/leaks/">published as RDF</a> the ICIJ <a href="https://offshoreleaks.icij.org/">Offshore Leaks</a> database according to this model:<br  />
+</p>
+
+<div class="figure">
+<p><img src="./img/leaks-model1.png" alt="leaks-model1.png" class="stretch" style="width:900px" />
+</p>
+</div>
+
+</section>
+<section id="slide-sec-3-10">
+<h3 id="sec-3-10"><span class="section-number-3">3.10</span> Offshore Leaks (2)</h3>
+
+<div class="figure">
+<p><img src="./img/leaks-model2.png" alt="leaks-model2.png" class="stretch" style="width:900px" />
+</p>
+</div>
+
+</section>
+<section id="slide-sec-3-11">
+<h3 id="sec-3-11"><span class="section-number-3">3.11</span> Offshore Leaks Evolution</h3>
+<p>
+The <a href="https://github.com/Ontotext-AD/leaks/commit/3ef04ff99751247dfc876295cce54264259085e8#diff-76e7f343443a2e76fcadc0fcba335d2d">model will be evolving</a> as we unravel more of the data
+</p>
+
+<div class="figure">
+<p><img src="./img/leaks-model-evolution.png" alt="leaks-model-evolution.png" class="stretch" style="width:1000px" />
 </p>
 </div>
 

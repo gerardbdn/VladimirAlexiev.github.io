@@ -1,17 +1,20 @@
 #+TITLE: Making True RDF Diagrams with rdfpuml
-#+DATE: 2016-03-25
+#+DATE: 2016-05-14 (originally 2016-03-25)
 #+AUTHOR: Vladimir Alexiev
 #+EMAIL: vladimir.alexiev@ontotext.com
 #+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline author:t c:nil
 #+OPTIONS: creator:comment d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
 #+OPTIONS: p:nil pri:nil stat:t tags:t tasks:t tex:t timestamp:t toc:2 todo:t |:t
 #+CREATOR: Emacs 25.0.50.1 (Org mode 8.2.10)
-#+DESCRIPTION: RDF is a graph data model, thus often the best way to understand RDF data schemas (ontologies, application profiles, RDF shapes) is with a diagram. We describe a tool (rdfpuml) that makes true diagrams from Turtle examples using PlantUML and GraphViz. Diagram readability is of prime concern, and rdfpuml introduces a few diagram control mechanisms using triples in the puml: namespace. We give examples from Getty CONA (Mappings of museum data to CIDOC CRM), Multisensor (NLP2RDF/NIF, FrameNet), EHRI (Holocaust Research into Jewish social networks), Duraspace (Portland Common Data Model for holding metadata in institutional repositories)
+#+DESCRIPTION: RDF is a graph data model, thus often the best way to understand RDF data schemas (ontologies, application profiles, RDF shapes) is with a diagram. We describe a tool (rdfpuml) that makes true diagrams from Turtle examples using PlantUML and GraphViz. Diagram readability is of prime concern, and rdfpuml introduces a few diagram control mechanisms using triples in the puml: namespace. We give examples from Getty CONA (Mappings of museum data to CIDOC CRM), Multisensor (NLP2RDF/NIF, FrameNet), EHRI (Holocaust Research into Jewish social networks), Duraspace (Portland Common Data Model for holding metadata in institutional repositories), Offshore Leaks
 #+EXCLUDE_TAGS: noexport
 #+LANGUAGE: en
 #+SELECT_TAGS: export
 
-* Motivation 
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <p class='center'><img src='../ontotext.png' style='width:506px'/></p><p/><p/><h2>%t</h2><h3>%a</h3><h4>%e</h4><h4>%d</h4><p class='center'>2D presentation: <a href='javascript:Reveal.toggleOverview()'>O for overview</a>, <a href='../../reveal.js/js/reveal-help.html' target='_blank'>H for help</a>.</p><p class='center'>Proudly made in plain text with <a href='https://github.com/hakimel/reveal.js/'>reveal.js</a>, <a href='https://github.com/yjwen/org-reveal'>org-reveal</a>, <a href='http://orgmode.org'>org-mode</a> and <a href='http://www.gnu.org/s/emacs/'>emacs</a>.</p><p class='center'>Or use <a href='index-full.html'>normal continuous HTML</a></p><p class='center'><b>UPDATE: added Offshore Leaks data model</b></p>
+
+* Motivation
+ 
 RDF is a graph data model, so:
 - Often the best way to understand RDF data schemas (ontologies, application profiles, RDF shapes) is with a diagram
 - Many visualizations exist but they focus on big graphs and are hard to understand
@@ -257,7 +260,21 @@ Split on 2 pages... part2
 ** Video Annotation: Generated Diagram
 #+ATTR_HTML: :class stretch :style width:1400px
 [[./img/linkedtv-nisv.png]]
- 
+
+** Offshore Leaks
+Ontotext [[https://github.com/Ontotext-AD/leaks/][published as RDF]] the ICIJ [[https://offshoreleaks.icij.org/][Offshore Leaks]] database according to this model:\\
+#+ATTR_HTML: :class stretch :style width:900px
+[[./img/leaks-model1.png]]
+
+** Offshore Leaks (2)
+#+ATTR_HTML: :class stretch :style width:900px
+[[./img/leaks-model2.png]]
+
+** Offshore Leaks Evolution
+The [[https://github.com/Ontotext-AD/leaks/commit/3ef04ff99751247dfc876295cce54264259085e8#diff-76e7f343443a2e76fcadc0fcba335d2d][model will be evolving]] as we unravel more of the data
+#+ATTR_HTML: :class stretch :style width:1000px
+[[./img/leaks-model-evolution.png]]
+
 * Next Steps
 Perl hackers wanted:
 - Publish on Github
