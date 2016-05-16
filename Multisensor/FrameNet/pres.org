@@ -139,7 +139,7 @@ Prefixes (registered in [[http://prefix.cc/fn,frame,fe,lu,st][prefix.cc]]):
 #+ATTR_HTML: :class stretch :style width:1000px
 [[./img/fntbox-marks.png]]
 
-*** fntbox Understanding (1A)
+*** fntbox Understanding (1A) 
 To understand *fntbox* consider the classes in two groups and navigate top-down.
 
 (1) Text and annotations (FN and other linguistic info):

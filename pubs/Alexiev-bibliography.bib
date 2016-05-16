@@ -670,9 +670,10 @@ keywords={Europeana, task force, EDM, FRBR, FRBRoo, CIDOC CRM, ontology}
   journal      = {PeerJ (submitted)},
   year         = 2015,
   month        = nov,
-  url          = {https://peerj.com/preprints/1982v1/},
+  url          = {https://peerj.com/preprints/1982/},
   url_Preprint = {http://vladimiralexiev.github.io/pubs/peerj-reviewing-8026-v0.pdf},
   keywords     = {HCLS, dataset, VOID, ontology},
+  doi          = {10.7287/peerj.preprints.1982v1},
   abstract     = {Access to consistent, high-quality metadata is critical to finding, understanding, and reusing scientific data. However, while there are many relevant vocabularies for the annotation of a dataset, none sufficiently captures all the necessary metadata. This prevents uniform indexing and querying of dataset repositories. Towards providing a practical guide for producing a high quality description of biomedical datasets, the W3C Semantic Web for Health Care and the Life Sciences Interest Group (HCLSIG) identified RDF vocabularies that could be used to specify common metadata elements and their value sets. The resulting guideline covers elements of description, identification, attribution, versioning, provenance, and content summarization. This guideline reuses existing vocabularies, and is intended to meet key functional requirements including indexing, discovery, exchange, query, and retrieval of datasets. The resulting metadata profile is generic and could be used by other domains with an interest in providing machine readable descriptions of versioned datasets.},
 }
 
@@ -865,6 +866,18 @@ keywords={Europeana, task force, EDM, FRBR, FRBRoo, CIDOC CRM, ontology}
   keywords     = {RDF, visualization, PlantUML, cultural heritage, NLP, NIF, EHRI},
   type         = {presentation},
   abstract     = {RDF is a graph data model, thus often the best way to understand RDF data schemas (ontologies, application profiles, RDF shapes) is with a diagram. We describe a tool (rdfpuml) that makes true diagrams from Turtle examples using PlantUML and GraphViz. Diagram readability is of prime concern, and rdfpuml introduces a few diagram control mechanisms using triples in the puml: namespace. We give examples from Getty CONA (Mappings of museum data to CIDOC CRM), Multisensor (NLP2RDF/NIF, FrameNet), EHRI (Holocaust Research into Jewish social networks), Duraspace (Portland Common Data Model for holding metadata in institutional repositories)},
+
+titleSWIB16={rdfpuml for True RDF Diagrams and R2RML Generation},
+abstractSWIB16={RDF is a graph data model, thus often the best way to understand RDF data schemas (ontologies, application profiles, RDF shapes) is with a diagram. In our semantic web modeling efforts in the last few years (especially for complex cultural data mapped to CIDOC CRM), we find that diagrams of various aspects of the mapping are the most important mechanism to communicate effectively to domain experts.
+
+Many RDF visualization tools exist, but they either focus on large graphs (where the details are not easily visible), or the visualization results are not satisfactory, or manual tweaking of the diagrams is required.
+
+We describe a new tool (rdfpuml) that makes true diagrams directly from Turtle examples using PlantUML and GraphViz. Diagram readability is of prime concern, and rdfpuml introduces various diagram control mechanisms using triples in the puml: namespace. Special attention is paid to inlining and visualizing various Reification mechanisms (described with PRV). Since no manual tweaking is needed, the modeling Turtle files and generated diagrams can be subject to efficient source control.
+
+We give examples from Getty CONA and the Getty Museum (mappings of museum data to CIDOC CRM), Multisensor (NIF and FrameNet), EHRI (Holocaust Research into Jewish social networks), Duraspace (Portland Common Data Model for holding metadata in institutional repositories), Video annotation.
+
+At the end we discuss recent efforts to generate R2RML template code directly from the same Turtle used to generate diagrams; and plans to visualize RDF Shapes.},
+
 }
 
 @Misc{Alexiev-OpenData2016,
