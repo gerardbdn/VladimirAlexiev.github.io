@@ -2,7 +2,7 @@
 #+STARTUP: showeverything
 #+TITLE: FN goes NIF: Integrating FrameNet in NIF
 #+DATE: Linked Data in Linguistics (LDL-2016). Portoroz, Slovenia, May 2016
-#+AUTHOR: Vladimir Alexiev, Gerard Casamayor
+#+AUTHOR: Vladimir Alexiev, Gerard Casamayor (Presenting: Neli Hateva)
 #+EMAIL: Ontotext Corp, University Pompeu Fabra
 #+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline author:t c:nil creator:comment
 #+OPTIONS: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t p:nil pri:nil stat:t tags:t
@@ -14,7 +14,7 @@
 #+LANGUAGE: en
 #+SELECT_TAGS: export
 
-#+REVEAL_TITLE_SLIDE_TEMPLATE: <h2>%t</h2><h3>%a</h3><h4>%e</h4><h4>%d</h4><p class='center'>2D interactive presentation: press <a href='javascript:Reveal.toggleOverview()'>O for overview</a>, <a href='../../reveal.js/js/reveal-help.html' target='_blank'>H for help</a>.</p><p class='center'>Proudly made in plain text with <a href='https://github.com/hakimel/reveal.js/'>reveal.js</a>, <a href='https://github.com/yjwen/org-reveal'>org-reveal</a>, <a href='http://orgmode.org'>org-mode</a> and <a href='http://www.gnu.org/s/emacs/'>emacs</a>.</p><p class='center'><a href='pres-full.html'>Normal continuous HTML</a></p><p class='center'><a href='https://github.com/VladimirAlexiev/VladimirAlexiev.github.io/tree/master/Multisensor/FrameNet'>Github source & accompanying materials</a></p>
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <h2>%t</h2><h3>%a</h3><h4>%e</h4><h4>%d</h4><p class='center'>2D interactive presentation: press <a href='javascript:Reveal.toggleOverview()'>O for overview</a>, <a href='../../reveal.js/js/reveal-help.html' target='_blank'>H for help</a>.</p><p class='center'><a href='pres-full.html'>Normal continuous HTML</a>.</p><p class='center'><a href='https://github.com/VladimirAlexiev/VladimirAlexiev.github.io/tree/master/Multisensor/FrameNet'>Github source & accompanying materials</a>.</p>
 
 * What is FrameNet
 [[https://framenet.icsi.berkeley.edu/fndrupal/][FrameNet]] (FN) is a large-scale linguistic resource for English developed at  ICSI (UC Berkeley).
@@ -407,12 +407,14 @@ select * {
 
 ** Actual Example (1)
 - /42% of this cost - some $183b - is the annual direct medical and extended care expenses/
+[[Control-click%20for%20full%20size][Control-click for full size]]
 #+ATTR_HTML: :class stretch :style width:1200px
 [[./img/MS-Frame-complex-part1.png]]
 
 ** Actual Example (2)
 - 12 frames
 - in addition to FN frames, includes ~fe-upf:Linguistic_situation~ to connect the graph
+[[./img/MS-Frame-complex-part2.png][Control-click for full size]]
 #+ATTR_HTML: :class stretch :style width:1200px
 [[./img/MS-Frame-complex-part2.png]]
 
