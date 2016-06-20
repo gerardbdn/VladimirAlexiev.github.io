@@ -1,0 +1,7 @@
+#!/bin/sh
+# -*- tab-width: 54; -*-
+echo "Books, thesis, conference proceedings	" `grep -Ei '@(.*thesis|book|proceedings){' *.bib|wc -l`
+echo "Tech reports, manuals, deliverables, ontologies	" `grep -Ei '@(manual|techreport){'         *.bib|wc -l` 
+echo "Conference papers, journal articles	" `grep -Ei '@(inproceedings|article){'     *.bib|wc -l`
+echo "Presentations, posters, blog posts	" `grep -Ei '{(presentation|poster|blog)}'  *.bib|wc -l`
+echo "TOTAL	" `grep -Ei '@[a-z]+{'                      *.bib|wc -l`
