@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Mulstisensor Validation Log</title>
+<title>Multisensor Validation Log</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Vladimir Alexiev" />
@@ -137,7 +137,7 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">Mulstisensor Validation Log</h1>
+<h1 class="title">Multisensor Validation Log</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
@@ -173,7 +173,7 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#sec-2-4">2.4. Content Alignment</a>
 <ul>
-<li><a href="#sec-2-4-1">2.4.1. <span class="todo TODO">TODO</span> One Annotation Per Pair</a></li>
+<li><a href="#sec-2-4-1">2.4.1. <span class="todo TODO">TODO</span> One Annotation Per Pair&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Babis">Babis</span></span></a></li>
 <li><a href="#sec-2-4-2">2.4.2. <span class="todo TODO">TODO</span> Add to Ontology&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Vladimir">Vladimir</span></span></a></li>
 <li><a href="#sec-2-4-3">2.4.3. CAP Query</a></li>
 <li><a href="#sec-2-4-4">2.4.4. <span class="todo TODO">TODO</span> Other CAP Queries</a></li>
@@ -185,7 +185,7 @@ for the JavaScript code in this tag.
 </div>
 </div>
 <p>
-<a href="http://VladimirAlexiev.github.io/Multisensor/validation.html">HTML Rendered version</a>
+<a href="https://github.com/VladimirAlexiev/VladimirAlexiev.github.io/blob/master/Multisensor/validation.org">Github Source</a>, <a href="http://VladimirAlexiev.github.io/Multisensor/validation.html">HTML Rendered version</a>
 </p>
 
 <div id="outline-container-sec-1" class="outline-2">
@@ -199,9 +199,19 @@ Whenever a defect is posted in Jira, I'll track the issue number.
 </p>
 
 <p>
-If you see mistakes or imprecise info (eg the scope of a particular service is described wrong, or a particular issue is in fact a non-issue),
-please contact me on skype://valexiev1 and I'll correct it.
-Even better, you could edit this file on github (it's a plain text file!) and send me a pull request.
+Please contact me on skype://valexiev1 for corrections/additions.
+Even better, you could <a href="https://github.com/VladimirAlexiev/VladimirAlexiev.github.io/edit/master/Multisensor/validation.org">edit this file on github</a> (it's a plain text file!) and send me a pull request.
+</p>
+<ul class="org-ul">
+<li>Mistakes or imprecise info (eg the scope of a particular service is described wrong, or a particular issue is in fact a non-issue)
+</li>
+<li>When an issue is resolved
+</li>
+<li>When an issue should be canceled
+</li>
+</ul>
+<p>
+I'll also attend weekly calls related to RDF data and validation, and update this.
 </p>
 
 <p>
@@ -550,13 +560,13 @@ This complicates data management, because both of these graphs need to be update
 </div>
 
 <div id="outline-container-sec-2-4-1" class="outline-4">
-<h4 id="sec-2-4-1"><span class="section-number-4">2.4.1</span> <span class="todo TODO">TODO</span> One Annotation Per Pair</h4>
+<h4 id="sec-2-4-1"><span class="section-number-4">2.4.1</span> <span class="todo TODO">TODO</span> One Annotation Per Pair&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Babis">Babis</span></span></h4>
 <div class="outline-text-4" id="text-2-4-1">
 <p>
 After consultation with Babis, we decided to change the representation as follows:
 </p>
 <ul class="org-ul">
-<li>Write annotations in their own graph <a href="http://data.multisensorproject.eu/similarity">http://data.multisensorproject.eu/similarity</a>, outside of any SIMMO graph.
+<li>Write annotations in their own graph <a href="http://data.multisensorproject.eu/CAP">http://data.multisensorproject.eu/CAP</a>, outside of any SIMMO graph.
 The CAP service will be called periodically, search globally in the SIMMO DB, and overwrite the similarity graph.
 </li>
 <li>Write one annotation per pair
@@ -574,8 +584,8 @@ so there's no need to repeat for the other SIMMO.
 
 <div class="org-src-container">
 
-<pre class="src src-Turtle">graph <span style="color: #0000ff;">&lt;http://data.multisensorproject.eu/similarity&gt;</span> {
-  <span style="color: #0000ff;">&lt;http://data.multisensorproject.eu/similarity/123&gt;</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">oa:</span><span style="color: #008b8b;">Annotation</span>;
+<pre class="src src-Turtle">graph <span style="color: #0000ff;">&lt;http://data.multisensorproject.eu/CAP&gt;</span> {
+  <span style="color: #0000ff;">&lt;http://data.multisensorproject.eu/CAP/123&gt;</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">oa:</span><span style="color: #008b8b;">Annotation</span>;
     <span style="color: #228b22;">oa:</span><span style="color: #008b8b;">hasBody</span>        
       <span style="color: #0000ff;">&lt;http://data.multisensorproject.eu/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c304&gt;</span>,
       <span style="color: #0000ff;">&lt;http://data.multisensorproject.eu/content/ca34bb35770bfa55434a0689d64e1e6a60611047&gt;</span>;
@@ -584,7 +594,7 @@ so there's no need to repeat for the other SIMMO.
     <span style="color: #228b22;">oa:</span><span style="color: #008b8b;">annotatedBy</span> <span style="color: #0000ff;">&lt;http://data.multisensorproject.eu/agent/CAP&gt;</span>;
     <span style="color: #228b22;">oa:</span><span style="color: #008b8b;">annotatedAt</span> <span style="color: #8b2252;">"2016-01-11T12:00:00"</span><span style="color: #008b8b;">^^xsd:dateTime</span> .
 
-  <span style="color: #0000ff;">&lt;http://data.multisensorproject.eu/similarity/124&gt;</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">oa:</span><span style="color: #008b8b;">Annotation</span>;
+  <span style="color: #0000ff;">&lt;http://data.multisensorproject.eu/CAP/124&gt;</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">oa:</span><span style="color: #008b8b;">Annotation</span>;
     <span style="color: #228b22;">oa:</span><span style="color: #008b8b;">hasBody</span>        
       <span style="color: #0000ff;">&lt;http://data.multisensorproject.eu/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c304&gt;</span>,
       <span style="color: #0000ff;">&lt;http://data.multisensorproject.eu/content/57e07befbda355c2eca2ee521926071ee9f5c719&gt;</span>;

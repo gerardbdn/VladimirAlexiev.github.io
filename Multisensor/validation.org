@@ -1,4 +1,4 @@
-#+TITLE: Mulstisensor Validation Log
+#+TITLE: Multisensor Validation Log
 #+DATE: <2016-06-28>
 #+AUTHOR: Vladimir Alexiev
 #+EMAIL: vladimir.alexiev@ontotext.com
@@ -12,7 +12,7 @@
 #+LANGUAGE: en
 #+SELECT_TAGS: export
 
-[[http://VladimirAlexiev.github.io/Multisensor/validation.html][HTML Rendered version]]
+[[https://github.com/VladimirAlexiev/VladimirAlexiev.github.io/blob/master/Multisensor/validation.org][Github Source]], [[http://VladimirAlexiev.github.io/Multisensor/validation.html][HTML Rendered version]]
 
 * Intro
 From now until the end of the project I'll keep a detailed log of what I validated and defects I found.
@@ -20,9 +20,12 @@ I'll use Org-mode mechanisms to track the defects (tags TODO, DONE, CANCELED) an
 The numbers in brackets after a section name show the resolved vs total defects.
 Whenever a defect is posted in Jira, I'll track the issue number.
 
-If you see mistakes or imprecise info (eg the scope of a particular service is described wrong, or a particular issue is in fact a non-issue),
-please contact me on skype://valexiev1 and I'll correct it.
-Even better, you could edit this file on github (it's a plain text file!) and send me a pull request.
+Please contact me on skype://valexiev1 for corrections/additions.
+Even better, you could [[https://github.com/VladimirAlexiev/VladimirAlexiev.github.io/edit/master/Multisensor/validation.org][edit this file on github]] (it's a plain text file!) and send me a pull request.
+- Mistakes or imprecise info (eg the scope of a particular service is described wrong, or a particular issue is in fact a non-issue)
+- When an issue is resolved
+- When an issue should be canceled
+I'll also attend weekly calls related to RDF data and validation, and update this.
 
 IMPORTANT: Just because an issue is listed in the section for a particular service, doesn't necessarily mean that service created the defect!
 
@@ -228,9 +231,9 @@ It is *not* executed as part of the SIMMO pipeline, but periodically.
 Each annotation is symmetric, so it's written twice: in the SIMMO graphs of each of the two SIMMOs.
 This complicates data management, because both of these graphs need to be updated.
 
-*** TODO One Annotation Per Pair
+*** TODO One Annotation Per Pair                                    :Babis:
 After consultation with Babis, we decided to change the representation as follows:
-- Write annotations in their own graph <http://data.multisensorproject.eu/similarity>, outside of any SIMMO graph.
+- Write annotations in their own graph <http://data.multisensorproject.eu/CAP>, outside of any SIMMO graph.
   The CAP service will be called periodically, search globally in the SIMMO DB, and overwrite the similarity graph.
 - Write one annotation per pair
 - Use custom ~oa:motivatedBy~: ~ms:linking-similar~ vs ~ms:linking-contradictory~ to express similarity vs contradiction
@@ -241,8 +244,8 @@ Please note that the representation is completely symmetric regarding the two SI
 so there's no need to repeat for the other SIMMO.
 
 #+BEGIN_SRC Turtle
-graph <http://data.multisensorproject.eu/similarity> {
-  <http://data.multisensorproject.eu/similarity/123> a oa:Annotation;
+graph <http://data.multisensorproject.eu/CAP> {
+  <http://data.multisensorproject.eu/CAP/123> a oa:Annotation;
     oa:hasBody        
       <http://data.multisensorproject.eu/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c304>,
       <http://data.multisensorproject.eu/content/ca34bb35770bfa55434a0689d64e1e6a60611047>;
@@ -251,7 +254,7 @@ graph <http://data.multisensorproject.eu/similarity> {
     oa:annotatedBy <http://data.multisensorproject.eu/agent/CAP>;
     oa:annotatedAt "2016-01-11T12:00:00"^^xsd:dateTime .
 
-  <http://data.multisensorproject.eu/similarity/124> a oa:Annotation;
+  <http://data.multisensorproject.eu/CAP/124> a oa:Annotation;
     oa:hasBody        
       <http://data.multisensorproject.eu/content/53a0938bc4770c6ba0e7d7b9ca88a637f9e9c304>,
       <http://data.multisensorproject.eu/content/57e07befbda355c2eca2ee521926071ee9f5c719>;
