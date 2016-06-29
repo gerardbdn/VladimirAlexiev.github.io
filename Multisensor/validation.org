@@ -38,7 +38,7 @@ Or we could simply use the doc:
 if you need a new query, or a query needs optimization, please write a comment in red,
 and notify me in a gdoc comment (add +vladimir@sirma.bg to the comment).
 
-* Validation [0/12]
+* Validation [0/14]
 
 ** Advanced Context Extraction Service [0/2]
 <2016-06-23 Thu>: checked [[http://grinder1.multisensorproject.eu/cepfiles/rdf_validation/context_extraction_validation/0e6b24-CONTEXT_EXTRACTION-22-6-2016.ttl][0e6b24-CONTEXT_EXTRACTION-22-6-2016.ttl]]
@@ -288,6 +288,13 @@ ms:linking-contradictory a owl:NamedIndividual, oa:Motivation;
   skos:prefLabel "linking-contradictory"@en;
   rdfs:comment "Motivation that represents a symmetric link between two *contradictory* articles"@en.
 #+END_SRC
+
+*** QUE fise:confidence for CAP?
+In example sent by Babis, I see fise:confidence=1.6439653807554948. 
+But AFAIK a confidence is the probability that something is true, so it should be <=1.
+Guess this is some other sort of *score*, and maybe it's better to use our own property?
+
+This is really nit-picking, so we can cancel it.
 
 *** CAP Query
 Given a ~$simmo~, find similar or contradictory articles, and their similarity/contradiction scores.
