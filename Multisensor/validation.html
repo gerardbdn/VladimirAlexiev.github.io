@@ -157,8 +157,8 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#sec-2-2">2.2. Entity Alignment Service <code>[0/5]</code></a>
 <ul>
-<li><a href="#sec-2-2-1">2.2.1. <span class="todo TODO">TODO</span> Skip vacuous Babelfy enrichments</a></li>
-<li><a href="#sec-2-2-2">2.2.2. <span class="todo TODO">TODO</span> Alignment removes nif:Phrase?</a></li>
+<li><a href="#sec-2-2-1">2.2.1. <span class="todo TODO">TODO</span> Also remove taIdentConf, taIdentProv</a></li>
+<li><a href="#sec-2-2-2">2.2.2. <span class="todo TODO">TODO</span> Leave Dependency Links</a></li>
 <li><a href="#sec-2-2-3">2.2.3. <span class="todo TODO">TODO</span> Use Prefixes in alignment.log</a></li>
 </ul>
 </li>
@@ -298,7 +298,18 @@ The log has 90 actions. I checked these 4 actions:
 </pre>
 
 <p>
-The corresponding RDF fragments are:
+This corresponds to two annotations:
+</p>
+<ul class="org-ul">
+<li>&lt;#char=1444,1461&gt; found by Named Entity Recognition: "Margaret Thatcher" detected as the politician, with link to DBpedia (longer; correct)
+</li>
+<li>&lt;#char=1453,1461&gt; found by Entity Linking: "Thatcher" detected as a "roof builder" with link to Bbelnet (shorter; incorrect)
+</li>
+</ul>
+
+<p>
+The Entity Alignment service prefers the longer annotation, and removes 3 properties from the shorter annotation.
+What is left in the RDF is this:
 </p>
 <div class="org-src-container">
 
@@ -327,35 +338,32 @@ The corresponding RDF fragments are:
         <span style="color: #228b22;">foaf:</span><span style="color: #008b8b;">name</span>  <span style="color: #8b2252;">"Margaret Thatcher"</span> .
 </pre>
 </div>
-
-<p>
-As you can see, the first enrichment (from Babelfy) is vacuous, as it doesn't have <code>taClassRef</code>, <code>taIdentRef</code>.
-I don't understand exactly what the service does, but if it removes this enrichment, that would be good.
-</p>
 </div>
 
 <div id="outline-container-sec-2-2-1" class="outline-4">
-<h4 id="sec-2-2-1"><span class="section-number-4">2.2.1</span> <span class="todo TODO">TODO</span> Skip vacuous Babelfy enrichments</h4>
+<h4 id="sec-2-2-1"><span class="section-number-4">2.2.1</span> <span class="todo TODO">TODO</span> Also remove taIdentConf, taIdentProv</h4>
 <div class="outline-text-4" id="text-2-2-1">
 <p>
-Rather than relying on the Alignment service to remove vacuous Babelfy enrichments,
-it would be better if the Entity Lookup service does not emit them in the first place.
+In the example above, <code>taClassRef</code> and <code>taIdentRef</code> were removed. 
+This makes the other two props <code>nif-ann:taIdentConf</code> and <code>nif-ann:taIdentProv</code> useless.
+Remove them too.
 </p>
 </div>
 </div>
 
 <div id="outline-container-sec-2-2-2" class="outline-4">
-<h4 id="sec-2-2-2"><span class="section-number-4">2.2.2</span> <span class="todo TODO">TODO</span> Alignment removes nif:Phrase?</h4>
+<h4 id="sec-2-2-2"><span class="section-number-4">2.2.2</span> <span class="todo TODO">TODO</span> Leave Dependency Links</h4>
 <div class="outline-text-4" id="text-2-2-2">
 <p>
-alignment.log says:
+Entity Alignment also seems to remove the dependency links, eg:
 </p>
 <pre class="example">
-Removed: (#char=1453,1461, rdf:type, nif:Phrase)
+&lt;#char=1444,1452&gt; nif:dependency          &lt;#char=1453,1461&gt;
+&lt;#char=1444,1452&gt; upf-deep:deepDependency &lt;#char=1453,1461&gt;
 </pre>
 
 <p>
-However, the respective node has type <code>nif:Word</code> not <code>nif:Phrase</code>. Not sure what's going on
+However, this can make the dependency and FrameNet graphs disconnected. So leave the dependencies alone.
 </p>
 </div>
 </div>
@@ -675,7 +683,7 @@ The gdoc maybe has 2 queries related to CAP. Not sure I'm looking at the right s
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-06-28&gt;</span></span></p>
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-06-29&gt;</span></span></p>
 <p class="author">Author: Vladimir Alexiev</p>
 <p class="creator">Emacs 25.0.50.1 (Org mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>

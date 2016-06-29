@@ -1,5 +1,5 @@
 #+TITLE: Multisensor Validation Log
-#+DATE: <2016-06-28>
+#+DATE: <2016-06-29>
 #+AUTHOR: Vladimir Alexiev
 #+EMAIL: vladimir.alexiev@ontotext.com
 #+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline author:t c:nil
@@ -11,6 +11,7 @@
 #+KEYWORDS:
 #+LANGUAGE: en
 #+SELECT_TAGS: export
+#+TODO: TODO QUE | DONE CANCEL
 
 [[https://github.com/VladimirAlexiev/VladimirAlexiev.github.io/blob/master/Multisensor/validation.org][Github Source]], [[http://VladimirAlexiev.github.io/Multisensor/validation.html][HTML Rendered version]]
 
@@ -65,7 +66,12 @@ The log has 90 actions. I checked these 4 actions:
 2016-06-21 16:22:18 INFO  Alignment:156 - Removed: (#char=1453,1461, itsrdf:taIdentRef, null)
 #+END_EXAMPLE
 
-The corresponding RDF fragments are:
+This corresponds to two annotations:
+- <#char=1444,1461> found by Named Entity Recognition: "Margaret Thatcher" detected as the politician, with link to DBpedia (longer; correct)
+- <#char=1453,1461> found by Entity Linking: "Thatcher" detected as a "roof builder" with link to Bbelnet (shorter; incorrect)
+
+The Entity Alignment service prefers the longer annotation, and removes 3 properties from the shorter annotation.
+What is left in the RDF is this:
 #+BEGIN_SRC Turtle
 <#char=1453,1461>
         a                     nif:Word ;
@@ -92,18 +98,17 @@ dbr:Margaret_Thatcher
         foaf:name  "Margaret Thatcher" .
 #+END_SRC
 
-As you can see, the first enrichment (from Babelfy) is vacuous, as it doesn't have ~taClassRef~, ~taIdentRef~.
-I don't understand exactly what the service does, but if it removes this enrichment, that would be good.
+*** TODO Also remove taIdentConf, taIdentProv
+In the example above, ~taClassRef~ and ~taIdentRef~ were removed. 
+This makes the other two props ~nif-ann:taIdentConf~ and ~nif-ann:taIdentProv~ useless.
+Remove them too.
 
-*** TODO Skip vacuous Babelfy enrichments
-Rather than relying on the Alignment service to remove vacuous Babelfy enrichments,
-it would be better if the Entity Lookup service does not emit them in the first place.
+*** TODO Leave Dependency Links
+Entity Alignment also seems to remove the dependency links, eg:
+: <#char=1444,1452> nif:dependency          <#char=1453,1461>
+: <#char=1444,1452> upf-deep:deepDependency <#char=1453,1461>
 
-*** TODO Alignment removes nif:Phrase?
-alignment.log says:
-: Removed: (#char=1453,1461, rdf:type, nif:Phrase)
-
-However, the respective node has type ~nif:Word~ not ~nif:Phrase~. Not sure what's going on
+However, this can make the dependency and FrameNet graphs disconnected. So leave the dependencies alone.
 
 *** TODO Use Prefixes in alignment.log
 I shortened the excerpt from alignment.log above to improve readability:
