@@ -174,8 +174,8 @@ for the JavaScript code in this tag.
 <li><a href="#sec-2-4">2.4. Content Alignment</a>
 <ul>
 <li><a href="#sec-2-4-1">2.4.1. <span class="todo TODO">TODO</span> One Annotation Per Pair&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Babis">Babis</span></span></a></li>
-<li><a href="#sec-2-4-2">2.4.2. <span class="todo TODO">TODO</span> Add to Ontology&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Vladimir">Vladimir</span></span></a></li>
-<li><a href="#sec-2-4-3">2.4.3. <span class="todo QUE">QUE</span> fise:confidence for CAP?</a></li>
+<li><a href="#sec-2-4-2">2.4.2. <span class="todo TODO">TODO</span> Use ms:score not fise:confidence for CAP</a></li>
+<li><a href="#sec-2-4-3">2.4.3. <span class="todo TODO">TODO</span> Add to Ontology&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Vladimir">Vladimir</span></span></a></li>
 <li><a href="#sec-2-4-4">2.4.4. CAP Query</a></li>
 <li><a href="#sec-2-4-5">2.4.5. <span class="todo TODO">TODO</span> Other CAP Queries</a></li>
 </ul>
@@ -618,8 +618,23 @@ so there's no need to repeat for the other SIMMO.
 </div>
 
 <div id="outline-container-sec-2-4-2" class="outline-4">
-<h4 id="sec-2-4-2"><span class="section-number-4">2.4.2</span> <span class="todo TODO">TODO</span> Add to Ontology&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Vladimir">Vladimir</span></span></h4>
+<h4 id="sec-2-4-2"><span class="section-number-4">2.4.2</span> <span class="todo TODO">TODO</span> Use ms:score not fise:confidence for CAP</h4>
 <div class="outline-text-4" id="text-2-4-2">
+<p>
+In an example sent by Babis, I see fise:confidence=1.6439653807554948. 
+But confidence is the probability that something is true, so it should be &lt;=1.
+Guess this is some other sort of <b>score</b>, and maybe it's better to use our own property?
+</p>
+
+<p>
+Decided with Babis to use a property <code>ms:score</code> (see next).
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-4-3" class="outline-4">
+<h4 id="sec-2-4-3"><span class="section-number-4">2.4.3</span> <span class="todo TODO">TODO</span> Add to Ontology&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Vladimir">Vladimir</span></span></h4>
+<div class="outline-text-4" id="text-2-4-3">
 <p>
 The following will be in <a href="./img/ontology.ttl">./img/ontology.ttl</a>, so they don't need to be repeated by CAP for every similarity link.
 </p>
@@ -632,30 +647,24 @@ The following will be in <a href="./img/ontology.ttl">./img/ontology.ttl</a>, so
   <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">inScheme</span> <span style="color: #228b22;">oa:</span><span style="color: #008b8b;">motivationScheme</span>;
   <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">broader</span> <span style="color: #228b22;">oa:</span><span style="color: #008b8b;">linking</span>;
   <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">prefLabel</span> <span style="color: #8b2252;">"linking-similar"</span>@en;
-  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">comment</span> <span style="color: #8b2252;">"Motivation that represents a symmetric link between two *similar* articles"</span><span style="color: #228b22;">@en.</span>
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">comment</span> <span style="color: #8b2252;">"Motivation that represents a symmetric link between two *similar* articles"</span>@en;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">isDefinedBy</span> <span style="color: #228b22;">ms:</span><span style="color: #008b8b;"> </span><span style="color: #228b22;">.</span>
 
 <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">linking-contradictory</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">owl:</span><span style="color: #008b8b;">NamedIndividual,</span> <span style="color: #228b22;">oa:</span><span style="color: #008b8b;">Motivation</span>;
   <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">inScheme</span> <span style="color: #228b22;">oa:</span><span style="color: #008b8b;">motivationScheme</span>;
   <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">broader</span> <span style="color: #228b22;">oa:</span><span style="color: #008b8b;">linking</span>;
   <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">prefLabel</span> <span style="color: #8b2252;">"linking-contradictory"</span>@en;
-  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">comment</span> <span style="color: #8b2252;">"Motivation that represents a symmetric link between two *contradictory* articles"</span>@en.
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">comment</span> <span style="color: #8b2252;">"Motivation that represents a symmetric link between two *contradictory* articles"</span>@en;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">isDefinedBy</span> <span style="color: #228b22;">ms:</span><span style="color: #008b8b;"> </span><span style="color: #228b22;">.</span>
+
+<span style="color: #228b22;">ms:</span><span style="color: #008b8b;">score</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">owl:</span><span style="color: #008b8b;">DatatypeProperty</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">domain</span> <span style="color: #228b22;">oa:</span><span style="color: #008b8b;">Annotation</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">range</span>  <span style="color: #228b22;">xsd:</span><span style="color: #008b8b;">decimal</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">label</span> <span style="color: #8b2252;">"score"</span>@en;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">comment</span> <span style="color: #8b2252;">"Strength of an Annotation, eg the link between two entities"</span>@en;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">isDefinedBy</span> <span style="color: #228b22;">ms:</span><span style="color: #008b8b;"> </span>.
 </pre>
 </div>
-</div>
-</div>
-
-<div id="outline-container-sec-2-4-3" class="outline-4">
-<h4 id="sec-2-4-3"><span class="section-number-4">2.4.3</span> <span class="todo QUE">QUE</span> fise:confidence for CAP?</h4>
-<div class="outline-text-4" id="text-2-4-3">
-<p>
-In example sent by Babis, I see fise:confidence=1.6439653807554948. 
-But AFAIK a confidence is the probability that something is true, so it should be &lt;=1.
-Guess this is some other sort of <b>score</b>, and maybe it's better to use our own property?
-</p>
-
-<p>
-This is really nit-picking, so we can cancel it.
-</p>
 </div>
 </div>
 
