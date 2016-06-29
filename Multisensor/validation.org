@@ -270,6 +270,13 @@ graph <http://data.multisensorproject.eu/CAP> {
 }
 #+END_SRC
 
+*** TODO Use ms:score not fise:confidence for CAP
+In an example sent by Babis, I see fise:confidence=1.6439653807554948. 
+But confidence is the probability that something is true, so it should be <=1.
+Guess this is some other sort of *score*, and maybe it's better to use our own property?
+
+Decided with Babis to use a custom property ~ms:score~ (see next).
+
 *** TODO Add to Ontology                                         :Vladimir:
 The following will be in [[./img/ontology.ttl]], so they don't need to be repeated by CAP for every similarity link.
 #+BEGIN_SRC Turtle
@@ -280,30 +287,32 @@ ms:linking-similar a owl:NamedIndividual, oa:Motivation;
   skos:inScheme oa:motivationScheme;
   skos:broader oa:linking;
   skos:prefLabel "linking-similar"@en;
-  rdfs:comment "Motivation that represents a symmetric link between two *similar* articles"@en.
+  rdfs:comment "Motivation that represents a symmetric link between two *similar* articles"@en;
+  rdfs:isDefinedBy ms: .
 
 ms:linking-contradictory a owl:NamedIndividual, oa:Motivation;
   skos:inScheme oa:motivationScheme;
   skos:broader oa:linking;
   skos:prefLabel "linking-contradictory"@en;
-  rdfs:comment "Motivation that represents a symmetric link between two *contradictory* articles"@en.
+  rdfs:comment "Motivation that represents a symmetric link between two *contradictory* articles"@en;
+  rdfs:isDefinedBy ms: .
+
+ms:score a owl:DatatypeProperty;
+  rdfs:domain oa:Annotation;
+  rdfs:range  xsd:decimal;
+  rdfs:label "score"@en;
+  rdfs:comment "Strength of an Annotation, eg the link between two entities"@en;
+  rdfs:isDefinedBy ms: .
 #+END_SRC
-
-*** QUE fise:confidence for CAP?
-In example sent by Babis, I see fise:confidence=1.6439653807554948. 
-But AFAIK a confidence is the probability that something is true, so it should be <=1.
-Guess this is some other sort of *score*, and maybe it's better to use our own property?
-
-This is really nit-picking, so we can cancel it.
 
 *** CAP Query
 Given a ~$simmo~, find similar or contradictory articles, and their similarity/contradiction scores.
 #+BEGIN_SRC sparql
-select ?article ?motivation ?confidence {
+select ?article ?motivation ?score {
   [a oa:Annotation;
    oa:annotatedBy <http://data.multisensorproject.eu/agent/CAP>;
    oa:hasBody $simmo, ?article;
-   fise:confidence ?confidence;
+   ms:score ?score;
    oa:motivatedBy ?motivation
   ]
   filter ($simmo != ?article)
