@@ -1,3 +1,4 @@
+
 # Multisensor ontologies
 @prefix ms:             <http://data.multisensorproject.eu/ontology#> .
 @prefix upf-deep:       <http://taln.upf.edu/upf-deep#> .
@@ -15,6 +16,7 @@
 # External datasets
 @prefix bn:             <http://babelnet.org/rdf/> .
 @prefix dbr:            <http://dbpedia.org/resource/> .
+@prefix yago:           <http://yago-knowledge.org/resource/>.
 @prefix twitter:        <http://twitter.com/>.
 @prefix twitter_tag:    <http://twitter.com/hashtag/>.
 @prefix twitter_user:   <http://twitter.com/intent/user?user_id=> .
@@ -30,6 +32,12 @@
 @prefix sioc:           <http://rdfs.org/sioc/ns#>.
 @prefix skos:           <http://www.w3.org/2004/02/skos/core#>.
 
+# System ontologies
+@prefix rdf:            <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:           <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:            <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:            <http://www.w3.org/2001/XMLSchema#> .
+
 # Linguistic and Annotation ontologies
 @prefix fam:            <http://vocab.fusepool.info/fam#>.
 @prefix fise:           <http://fise.iks-project.eu/ontology/>.
@@ -37,9 +45,11 @@
 @prefix marl:           <http://purl.org/marl/ns#> .
 @prefix nerd:           <http://nerd.eurecom.fr/ontology#> .
 @prefix nif:            <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+@prefix nif-ann:        <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-annotation#>.
 @prefix oa:             <http://www.w3.org/ns/oa#>.
 @prefix olia:           <http://purl.org/olia/olia.owl#> .
 @prefix penn:           <http://purl.org/olia/penn.owl#> .
+@prefix stanford:       <http://purl.org/olia/stanford.owl#>.
 
 # FrameNet ontologies
 @prefix fn:             <http://www.ontologydesignpatterns.org/ont/framenet/tbox/> .
@@ -48,13 +58,7 @@
 @prefix lu:             <http://www.ontologydesignpatterns.org/ont/framenet/abox/lu/> .
 @prefix st:             <http://www.ontologydesignpatterns.org/ont/framenet/abox/semType/> .
 
-# System ontologies
-@prefix rdf:            <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs:           <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix owl:            <http://www.w3.org/2002/07/owl#> .
-@prefix xsd:            <http://www.w3.org/2001/XMLSchema#> .
-
-# common statistical ontologies (CUBE, SDMX)
+# Common statistical ontologies (CUBE, SDMX)
 @prefix qb:             <http://purl.org/linked-data/cube#> .
 @prefix sdmx-code:      <http://purl.org/linked-data/sdmx/2009/code#> .
 @prefix sdmx-attribute: <http://purl.org/linked-data/sdmx/2009/attribute#> .
@@ -82,7 +86,7 @@
 @prefix indicator:      <http://worldbank.270a.info/classification/indicator/> .
 @prefix property:       <http://worldbank.270a.info/property/> .
 
-# Auxiliary
+# Auxiliary prefixes
 @prefix puml:           <http://plantuml.com/ontology#>.
 @prefix prov:           <http://www.w3.org/ns/prov#>.
-
+@prefix ex:             <http://example.org/>.
