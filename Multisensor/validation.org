@@ -1,5 +1,5 @@
 #+TITLE: Multisensor Validation Log
-#+DATE: <2016-06-29>
+#+DATE: <2016-06-30>
 #+AUTHOR: Vladimir Alexiev
 #+EMAIL: vladimir.alexiev@ontotext.com
 #+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline author:t c:nil
@@ -38,22 +38,67 @@ Or we could simply use the doc:
 if you need a new query, or a query needs optimization, please write a comment in red,
 and notify me in a gdoc comment (add +vladimir@sirma.bg to the comment).
 
-* Validation [0/14]
+* Validation [1/16]
 
-** Advanced Context Extraction Service [0/2]
+** Entity Linking Service [0/1]
+
+*** TODO Underscores to Spaces
+The EL service emits Babelnet entity labels in up to 4 languages, eg
+#+BEGIN_SRC Turtle
+bn:s00088614v  skos:prefLabel  "zu_befriedigen"@de , "satisfacer"@es , "satisfaire"@fr , "задоволи"@bg .
+bn:s00014609n  skos:prefLabel  "Kuchen"@de , "Pastel_(gastronomía)"@es , "Gâteau"@fr , "Торта"@bg .
+bn:s01718102n  skos:prefLabel  "I_do_not_want_what_I_haven't_got"@es , "I_Don't_Want_What_I_Haven't_Got"@en , "I_Do_Not_Want_What_I_Haven't_Got"@fr .
+bn:s02229586n  skos:prefLabel  "UHC_Hamburg"@en , "Uhlenhorster_HC"@fr .
+#+END_SRC
+For reasons unknown, Babelnet uses underscores (eg see [[http://babelnet.org/rdf/page/UHC_Hamburg_n_EN][UHC_Hamburg_n_EN]]).
+I think EL should convert the underscores to spaces to make the label more natural.
+
+Should we also remove disambiguations, which are trailing parenthesized parts, eg "Pastel_(gastronomía)" -> "Pastel"?
+Since these labels are not used for NLP tasks, and the disambiguations are very useful for understanding what the entity is, let's leave them.
+
+** Advanced Context Extraction Service [1/3]
 <2016-06-23 Thu>: checked [[http://grinder1.multisensorproject.eu/cepfiles/rdf_validation/context_extraction_validation/0e6b24-CONTEXT_EXTRACTION-22-6-2016.ttl][0e6b24-CONTEXT_EXTRACTION-22-6-2016.ttl]]
 
 This service adds new Text Characteristics properties (technicality, fluency, richness) to the context.
 
-*** TODO Wrong prefix for Text Characteristics
+*** DONE Wrong prefix for Text Characteristics
 Text Characteristics (technicality, fluency, richness):
 - currently use <http://data.multisensor.eu/ontology#>
 - but the correct prefix is <http://data.multisensorproject.eu/ontology#>
 
+Victor <2016-06-30 Thu>: updated the prefix
+
 *** TODO Crawler to decode HTML entities
 It would be good if the crawler decodes HTML entities before storing in dc:subject (possibly also dc:title, dc:description). Eg:
-: dc:subject       "Europ&auml;ische Union, ISIN_FR0003500008, Brexit,
-:   Erholungskurs, Europa, Paris, Gro&szlig;britannien" , "Economy, Business & Finance" ;
+#+BEGIN_SRC Turtle
+dc:subject
+  "Europ&auml;ische Union, ISIN_FR0003500008, Brexit, Erholungskurs, Europa, Paris, Gro&szlig;britannien" ,
+  "Economy, Business & Finance" ;
+#+END_SRC
+
+*** TODO Keywords vs Category
+Victor: both of the following fields extracted by the crawler are mapped to dc:subject:
+- category: eg "Economy, Business & Finance" 
+- keywords: eg "Europaische Union, ISIN_FR0003500008, Brexit, Erholungskurs, Europa, Paris, Grossbritannien"
+Should we separe them in different properties?
+
+Vladimir: 
+[[https://iptc.org][IPTC]] is the [[https://iptc.org/about-iptc/][Global Standards Body]] of the News Media industry. 
+[[https://iptc.org/standards/media-topics/][IPTC Media Topics]] is a list of 1100 [[http://cv.iptc.org/newscodes/mediatopic][Media Topics]] developed as an extension of the earlier  [[http://cv.iptc.org/newscodes/subjectcode][Subject Codes]].
+You can [[http://show.newscodes.org/index.html?newscodes%3Dmedtop&lang%3Den-GB&startTo%3DShow][explore them interactively]] and will see that Multisensor "categories" are similar to these topics/subjects; 
+and we'll continue to map them to ~dc:subject~.
+
+On the other hand, Multisensor "keywords" are free keywords that describe a lot more specific things.
+We'll map them to ~schema:keywords~, defined as 
+"Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas":
+#+BEGIN_SRC Turtle
+dc:subject "Economy, Business & Finance";
+schema:keywords "Europaische Union, ISIN_FR0003500008, Brexit, Erholungskurs, Europa, Paris, Grossbritannien";
+#+END_SRC
+
+It would be nice to:
+- Split both categories and keywords on ", " and " & " and emit as separate values
+- Map our categories to IPTC Media Topics
 
 ** Entity Alignment Service [0/5]
 <2016-06-28 Tue>: checked [[http://grinder1.multisensorproject.eu/cepfiles/rdf_validation/entity_alignment/0181e1-ENTITY_ALIGNMENT-21-6-2016.ttl][0181e1-ENTITY_ALIGNMENT-21-6-2016.ttl]] and alignment.log (by email)
@@ -143,8 +188,8 @@ This is a completely cosmetic issue, we can cancel it.
 #+END_SRC
 
 *** TODO Refresh Prefixes
-I've added http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-annotation# to prefixes a month ago.
-Please refresh from [[./img/prefixes.ttl]], so new files to validate use them
+I've added http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-annotation# to [[./img/prefixes.ttl]] (committed <2016-06-30 Thu>)
+Please refresh from [[./img/prefixes.ttl]], so new validation files use this prefix.
 
 *** TODO nif:anchorOf or not?
 I've been saying all along to skip ~nif:anchorOf~ so as not to create too many literals.
