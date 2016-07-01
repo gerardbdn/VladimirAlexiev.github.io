@@ -34,7 +34,7 @@
      - [[#use-prefixes-in-alignmentlog][Use Prefixes in alignment.log]]
    - [[#summarization-service][Summarization Service]]
      - [[#refresh-prefixes][Refresh Prefixes]]
-     - [[#nifanchorof-or-not][nif:anchorOf or not?]]
+     - [[#nifanchorof][nif:anchorOf]]
      - [[#why-nif-anntaidentconf-is-0][Why nif-ann:taIdentConf is 0?]]
      - [[#msgenericconcept-vs-msspecificconcept][ms:GenericConcept vs ms:SpecificConcept]]
      - [[#optimize-summarization-queries][Optimize Summarization Queries]]
@@ -88,7 +88,7 @@ Should we separe them in different properties?
 
 Vladimir: 
 [[https://iptc.org][IPTC]] is the [[https://iptc.org/about-iptc/][Global Standards Body]] of the News Media industry. 
-[[https://iptc.org/standards/media-topics/][IPTC Media Topics]] is a list of 1100 [[http://cv.iptc.org/newscodes/mediatopic][Media Topics]] developed as an extension of the earlier  [[http://cv.iptc.org/newscodes/subjectcode][Subject Codes]].
+[[https://iptc.org/standards/media-topics/][IPTC Media Topics]] is a list of 1100 [[http://cv.iptc.org/newscodes/mediatopic][Media Topics]] developed as an extension of the earlier [[http://cv.iptc.org/newscodes/subjectcode][Subject Codes]].
 You can [[http://show.newscodes.org/index.html?newscodes%3Dmedtop&lang%3Den-GB&startTo%3DShow][explore them interactively]] and will see that Multisensor "categories" are similar to these topics/subjects; 
 and we'll continue to map them to ~dc:subject~.
 
@@ -110,8 +110,11 @@ In order to keep track of which and when the “curated selected data” have be
 and match them with the current version of the CEP service.
 
 Vladimir: we can use ~dct:issued~ for this purpose:
-
- 
+#+BEGIN_SRC Turtle
+dc:date    "2016-06-20T18:45:07.000+02:00"^^xsd:dateTime ; # date crawled
+dct:issued "2016-06-30T12:34:56.000+02:00"^^xsd:dateTime ; # date processed by pipeline and ingested to GDB
+#+END_SRC
+But who will make this second timestamp? 
 
 ** Entity Linking Service
 
@@ -232,7 +235,14 @@ This is a completely cosmetic issue, we can cancel it.
 I've added http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-annotation# to [[./img/prefixes.ttl]] (committed <2016-06-30 Thu>)
 Please refresh from [[./img/prefixes.ttl]], so new validation files use this prefix.
 
-*** TODO nif:anchorOf or not?
+Gerard: what exactly are we suppposed to do with the prefixes file.
+- Once loaded in the repo (Boyan's job), we can make queries without mentioning the prefixes.
+Should we load it into Sesame somehow so that triples are generated with prefixes? 
+If so, could you give us some code showing how to do it?
+- I think the validation files use prefixes, because prefixes.ttl is prepended, then passed through RIOT.
+  I think Victor made that script. The other prefixes are there, so it's just a matter of refreshing
+
+*** TODO nif:anchorOf
 I've been saying all along to skip ~nif:anchorOf~ so as not to create too many literals.
 Above, UPF has done just that; while the other services emit it.
 
@@ -241,6 +251,10 @@ But with the number of SIMMOs loaded, it has not been too taxing for GDB.
 
 ~nif:literalAnnotation~ and ~nif:lemma~ provide sufficient info about the phrase, 
 so maybe we don't need ~nif:anchorOf~. We could cancel this issue.
+
+Gerard: If they can be sustained by GraphDB, I vote in favor of keeping them as they help *a lot* when debugging. 
+
+Vladimir: so decided: if the Entity Lookup makes a new node, add anchorOf to it.
 
 *** TODO Why nif-ann:taIdentConf is 0?
 In the above example, ~nif-ann:taIdentConf is 0. 

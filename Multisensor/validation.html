@@ -151,43 +151,44 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#sec-2-1">Context</a>
 <ul>
-<li><a href="#sec-2-1-1">Crawler to decode HTML entities</a></li>
-<li><a href="#sec-2-1-2">Keywords vs Category</a></li>
+<li><a href="#sec-2-1-1"><span class="todo TODO">TODO</span> Crawler to decode HTML entities</a></li>
+<li><a href="#sec-2-1-2"><span class="todo TODO">TODO</span> Keywords vs Category</a></li>
+<li><a href="#sec-2-1-3"><span class="todo TODO">TODO</span> Ingest Timestamp</a></li>
 </ul>
 </li>
 <li><a href="#sec-2-2">Entity Linking Service</a>
 <ul>
-<li><a href="#sec-2-2-1">Underscores to Spaces</a></li>
+<li><a href="#sec-2-2-1"><span class="todo TODO">TODO</span> Underscores to Spaces</a></li>
 </ul>
 </li>
 <li><a href="#sec-2-3">Advanced Context Extraction Service</a>
 <ul>
-<li><a href="#sec-2-3-1">Wrong prefix for Text Characteristics</a></li>
+<li><a href="#sec-2-3-1"><span class="done DONE">DONE</span> Wrong prefix for Text Characteristics</a></li>
 </ul>
 </li>
 <li><a href="#sec-2-4">Entity Alignment Service</a>
 <ul>
-<li><a href="#sec-2-4-1">Also remove taIdentConf, taIdentProv</a></li>
-<li><a href="#sec-2-4-2">Leave Dependency Links</a></li>
-<li><a href="#sec-2-4-3">Use Prefixes in alignment.log</a></li>
+<li><a href="#sec-2-4-1"><span class="done DONE">DONE</span> Also remove taIdentConf, taIdentProv</a></li>
+<li><a href="#sec-2-4-2"><span class="done DONE">DONE</span> Leave Dependency Links</a></li>
+<li><a href="#sec-2-4-3"><span class="todo TODO">TODO</span> Use Prefixes in alignment.log</a></li>
 </ul>
 </li>
 <li><a href="#sec-2-5">Summarization Service</a>
 <ul>
-<li><a href="#sec-2-5-1">Refresh Prefixes</a></li>
-<li><a href="#sec-2-5-2">nif:anchorOf or not?</a></li>
-<li><a href="#sec-2-5-3">Why nif-ann:taIdentConf is 0?</a></li>
-<li><a href="#sec-2-5-4">ms:GenericConcept vs ms:SpecificConcept</a></li>
-<li><a href="#sec-2-5-5">Optimize Summarization Queries</a></li>
+<li><a href="#sec-2-5-1"><span class="todo TODO">TODO</span> Refresh Prefixes</a></li>
+<li><a href="#sec-2-5-2"><span class="todo TODO">TODO</span> nif:anchorOf</a></li>
+<li><a href="#sec-2-5-3"><span class="todo TODO">TODO</span> Why nif-ann:taIdentConf is 0?</a></li>
+<li><a href="#sec-2-5-4"><span class="todo TODO">TODO</span> ms:GenericConcept vs ms:SpecificConcept</a></li>
+<li><a href="#sec-2-5-5"><span class="done DONE">DONE</span> Optimize Summarization Queries</a></li>
 </ul>
 </li>
 <li><a href="#sec-2-6">Content Alignment</a>
 <ul>
-<li><a href="#sec-2-6-1">One Annotation Per Pair&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Babis">Babis</span></span></a></li>
-<li><a href="#sec-2-6-2">Use ms:score not fise:confidence for CAP</a></li>
-<li><a href="#sec-2-6-3">Add to Ontology&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Vladimir">Vladimir</span></span></a></li>
+<li><a href="#sec-2-6-1"><span class="todo TODO">TODO</span> One Annotation Per Pair&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Babis">Babis</span></span></a></li>
+<li><a href="#sec-2-6-2"><span class="todo TODO">TODO</span> Use ms:score not fise:confidence for CAP</a></li>
+<li><a href="#sec-2-6-3"><span class="todo TODO">TODO</span> Add to Ontology&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Vladimir">Vladimir</span></span></a></li>
 <li><a href="#sec-2-6-4">CAP Query</a></li>
-<li><a href="#sec-2-6-5">Other CAP Queries</a></li>
+<li><a href="#sec-2-6-5"><span class="todo TODO">TODO</span> Other CAP Queries</a></li>
 </ul>
 </li>
 </ul>
@@ -255,7 +256,7 @@ and notify me in a gdoc comment (add +vladimir@sirma.bg to the comment).
 <h3 id="sec-2-1">Context</h3>
 <div class="outline-text-3" id="text-2-1">
 </div><div id="outline-container-sec-2-1-1" class="outline-4">
-<h4 id="sec-2-1-1">Crawler to decode HTML entities</h4>
+<h4 id="sec-2-1-1"><span class="todo TODO">TODO</span> Crawler to decode HTML entities</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <p>
 It would be good if the crawler decodes HTML entities before storing in dc:subject (possibly also dc:title, dc:description). Eg:
@@ -271,7 +272,7 @@ It would be good if the crawler decodes HTML entities before storing in dc:subje
 </div>
 
 <div id="outline-container-sec-2-1-2" class="outline-4">
-<h4 id="sec-2-1-2">Keywords vs Category</h4>
+<h4 id="sec-2-1-2"><span class="todo TODO">TODO</span> Keywords vs Category</h4>
 <div class="outline-text-4" id="text-2-1-2">
 <p>
 Victor: both of the following fields extracted by the crawler are mapped to dc:subject:
@@ -289,7 +290,7 @@ Should we separe them in different properties?
 <p>
 Vladimir: 
 <a href="https://iptc.org">IPTC</a> is the <a href="https://iptc.org/about-iptc/">Global Standards Body</a> of the News Media industry. 
-<a href="https://iptc.org/standards/media-topics/">IPTC Media Topics</a> is a list of 1100 <a href="http://cv.iptc.org/newscodes/mediatopic">Media Topics</a> developed as an extension of the earlier  <a href="http://cv.iptc.org/newscodes/subjectcode">Subject Codes</a>.
+<a href="https://iptc.org/standards/media-topics/">IPTC Media Topics</a> is a list of 1100 <a href="http://cv.iptc.org/newscodes/mediatopic">Media Topics</a> developed as an extension of the earlier <a href="http://cv.iptc.org/newscodes/subjectcode">Subject Codes</a>.
 You can <a href="http://show.newscodes.org/index.html?newscodes=medtop&lang=en-GB&startTo=Show">explore them interactively</a> and will see that Multisensor "categories" are similar to these topics/subjects; 
 and we'll continue to map them to <code>dc:subject</code>.
 </p>
@@ -317,13 +318,37 @@ It would be nice to:
 </ul>
 </div>
 </div>
+
+<div id="outline-container-sec-2-1-3" class="outline-4">
+<h4 id="sec-2-1-3"><span class="todo TODO">TODO</span> Ingest Timestamp</h4>
+<div class="outline-text-4" id="text-2-1-3">
+<p>
+Victor: introduce the date when the article have been processed in RDF. 
+In order to keep track of which and when the “curated selected data” have been processed,
+and match them with the current version of the CEP service.
+</p>
+
+<p>
+Vladimir: we can use <code>dct:issued</code> for this purpose:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-Turtle"><span style="color: #228b22;">dc:</span><span style="color: #008b8b;">date</span>    <span style="color: #8b2252;">"2016-06-20T18:45:07.000+02:00"</span><span style="color: #008b8b;">^^xsd:dateTime</span> ; <span style="color: #b22222;"># date </span><span style="color: #228b22;">crawled</span>
+<span style="color: #228b22;">dct:</span><span style="color: #008b8b;">issued</span> <span style="color: #8b2252;">"2016-06-30T12:34:56.000+02:00"</span><span style="color: #008b8b;">^^xsd:dateTime</span> ; <span style="color: #b22222;"># date processed by pipeline and ingested to GDB</span>
+</pre>
+</div>
+<p>
+But who will make this second timestamp? 
+</p>
+</div>
+</div>
 </div>
 
 <div id="outline-container-sec-2-2" class="outline-3">
 <h3 id="sec-2-2">Entity Linking Service</h3>
 <div class="outline-text-3" id="text-2-2">
 </div><div id="outline-container-sec-2-2-1" class="outline-4">
-<h4 id="sec-2-2-1">Underscores to Spaces</h4>
+<h4 id="sec-2-2-1"><span class="todo TODO">TODO</span> Underscores to Spaces</h4>
 <div class="outline-text-4" id="text-2-2-1">
 <p>
 The EL service emits Babelnet entity labels in up to 4 languages, eg
@@ -362,7 +387,7 @@ This service adds new Text Characteristics properties (technicality, fluency, ri
 </div>
 
 <div id="outline-container-sec-2-3-1" class="outline-4">
-<h4 id="sec-2-3-1">Wrong prefix for Text Characteristics</h4>
+<h4 id="sec-2-3-1"><span class="done DONE">DONE</span> Wrong prefix for Text Characteristics</h4>
 <div class="outline-text-4" id="text-2-3-1">
 <p>
 Text Characteristics (technicality, fluency, richness):
@@ -442,7 +467,7 @@ What is left in the RDF is this:
 </div>
 
 <div id="outline-container-sec-2-4-1" class="outline-4">
-<h4 id="sec-2-4-1">Also remove taIdentConf, taIdentProv</h4>
+<h4 id="sec-2-4-1"><span class="done DONE">DONE</span> Also remove taIdentConf, taIdentProv</h4>
 <div class="outline-text-4" id="text-2-4-1">
 <p>
 In the example above, <code>taClassRef</code> and <code>taIdentRef</code> were removed. 
@@ -453,7 +478,7 @@ Remove them too.
 </div>
 
 <div id="outline-container-sec-2-4-2" class="outline-4">
-<h4 id="sec-2-4-2">Leave Dependency Links</h4>
+<h4 id="sec-2-4-2"><span class="done DONE">DONE</span> Leave Dependency Links</h4>
 <div class="outline-text-4" id="text-2-4-2">
 <p>
 Entity Alignment also seems to remove the dependency links, eg:
@@ -470,7 +495,7 @@ However, this can make the dependency and FrameNet graphs disconnected. So leave
 </div>
 
 <div id="outline-container-sec-2-4-3" class="outline-4">
-<h4 id="sec-2-4-3">Use Prefixes in alignment.log</h4>
+<h4 id="sec-2-4-3"><span class="todo TODO">TODO</span> Use Prefixes in alignment.log</h4>
 <div class="outline-text-4" id="text-2-4-3">
 <p>
 I shortened the excerpt from alignment.log above to improve readability:
@@ -518,17 +543,34 @@ This is a completely cosmetic issue, we can cancel it.
 </div>
 
 <div id="outline-container-sec-2-5-1" class="outline-4">
-<h4 id="sec-2-5-1">Refresh Prefixes</h4>
+<h4 id="sec-2-5-1"><span class="todo TODO">TODO</span> Refresh Prefixes</h4>
 <div class="outline-text-4" id="text-2-5-1">
 <p>
 I've added <a href="http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-annotation">http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-annotation</a># to <a href="./img/prefixes.ttl">./img/prefixes.ttl</a> (committed <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-06-30 Thu&gt;</span></span>)
 Please refresh from <a href="./img/prefixes.ttl">./img/prefixes.ttl</a>, so new validation files use this prefix.
 </p>
+
+<p>
+Gerard: what exactly are we suppposed to do with the prefixes file.
+</p>
+<ul class="org-ul">
+<li>Once loaded in the repo (Boyan's job), we can make queries without mentioning the prefixes.
+</li>
+</ul>
+<p>
+Should we load it into Sesame somehow so that triples are generated with prefixes? 
+If so, could you give us some code showing how to do it?
+</p>
+<ul class="org-ul">
+<li>I think the validation files use prefixes, because prefixes.ttl is prepended, then passed through RIOT.
+I think Victor made that script. The other prefixes are there, so it's just a matter of refreshing
+</li>
+</ul>
 </div>
 </div>
 
 <div id="outline-container-sec-2-5-2" class="outline-4">
-<h4 id="sec-2-5-2">nif:anchorOf or not?</h4>
+<h4 id="sec-2-5-2"><span class="todo TODO">TODO</span> nif:anchorOf</h4>
 <div class="outline-text-4" id="text-2-5-2">
 <p>
 I've been saying all along to skip <code>nif:anchorOf</code> so as not to create too many literals.
@@ -544,11 +586,19 @@ But with the number of SIMMOs loaded, it has not been too taxing for GDB.
 <code>nif:literalAnnotation</code> and <code>nif:lemma</code> provide sufficient info about the phrase, 
 so maybe we don't need <code>nif:anchorOf</code>. We could cancel this issue.
 </p>
+
+<p>
+Gerard: If they can be sustained by GraphDB, I vote in favor of keeping them as they help <b>a lot</b> when debugging. 
+</p>
+
+<p>
+Vladimir: so decided: if the Entity Lookup makes a new node, add anchorOf to it.
+</p>
 </div>
 </div>
 
 <div id="outline-container-sec-2-5-3" class="outline-4">
-<h4 id="sec-2-5-3">Why nif-ann:taIdentConf is 0?</h4>
+<h4 id="sec-2-5-3"><span class="todo TODO">TODO</span> Why nif-ann:taIdentConf is 0?</h4>
 <div class="outline-text-4" id="text-2-5-3">
 <p>
 In the above example, ~nif-ann:taIdentConf is 0. 
@@ -589,7 +639,7 @@ Is 0 some sort of bug, or does Babelfy actually return 0 confidence for some con
 </div>
 
 <div id="outline-container-sec-2-5-4" class="outline-4">
-<h4 id="sec-2-5-4">ms:GenericConcept vs ms:SpecificConcept</h4>
+<h4 id="sec-2-5-4"><span class="todo TODO">TODO</span> ms:GenericConcept vs ms:SpecificConcept</h4>
 <div class="outline-text-4" id="text-2-5-4">
 <p>
 Gerard wrote about the last example: 'generic' concept produced by Babelfy. 
@@ -603,7 +653,7 @@ It also seems to me that concepts like "open source" and "pastry" are <code>ms:S
 </div>
 
 <div id="outline-container-sec-2-5-5" class="outline-4">
-<h4 id="sec-2-5-5">Optimize Summarization Queries</h4>
+<h4 id="sec-2-5-5"><span class="done DONE">DONE</span> Optimize Summarization Queries</h4>
 <div class="outline-text-4" id="text-2-5-5">
 <p>
 Gerard wrote some of the Summarization queries are slow.
@@ -669,7 +719,7 @@ This complicates data management, because both of these graphs need to be update
 </div>
 
 <div id="outline-container-sec-2-6-1" class="outline-4">
-<h4 id="sec-2-6-1">One Annotation Per Pair&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Babis">Babis</span></span></h4>
+<h4 id="sec-2-6-1"><span class="todo TODO">TODO</span> One Annotation Per Pair&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Babis">Babis</span></span></h4>
 <div class="outline-text-4" id="text-2-6-1">
 <p>
 After consultation with Babis, we decided to change the representation as follows:
@@ -718,7 +768,7 @@ so there's no need to repeat for the other SIMMO.
 </div>
 
 <div id="outline-container-sec-2-6-2" class="outline-4">
-<h4 id="sec-2-6-2">Use ms:score not fise:confidence for CAP</h4>
+<h4 id="sec-2-6-2"><span class="todo TODO">TODO</span> Use ms:score not fise:confidence for CAP</h4>
 <div class="outline-text-4" id="text-2-6-2">
 <p>
 In an example sent by Babis, I see fise:confidence=1.6439653807554948. 
@@ -733,7 +783,7 @@ Decided with Babis to use a custom property <code>ms:score</code> (see next).
 </div>
 
 <div id="outline-container-sec-2-6-3" class="outline-4">
-<h4 id="sec-2-6-3">Add to Ontology&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Vladimir">Vladimir</span></span></h4>
+<h4 id="sec-2-6-3"><span class="todo TODO">TODO</span> Add to Ontology&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Vladimir">Vladimir</span></span></h4>
 <div class="outline-text-4" id="text-2-6-3">
 <p>
 The following will be in <a href="./img/ontology.ttl">./img/ontology.ttl</a>, so they don't need to be repeated by CAP for every similarity link.
@@ -791,7 +841,7 @@ Given a <code>$simmo</code>, find similar or contradictory articles, and their s
 </div>
 
 <div id="outline-container-sec-2-6-5" class="outline-4">
-<h4 id="sec-2-6-5">Other CAP Queries</h4>
+<h4 id="sec-2-6-5"><span class="todo TODO">TODO</span> Other CAP Queries</h4>
 <div class="outline-text-4" id="text-2-6-5">
 <p>
 The gdoc maybe has 2 queries related to CAP. Not sure I'm looking at the right section. Maybe we should just delete them.
