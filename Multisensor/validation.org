@@ -1,10 +1,10 @@
 #+TITLE: Multisensor Validation Log
-#+DATE: <2016-06-30>
+#+DATE: <2016-07-01>
 #+AUTHOR: Vladimir Alexiev
 #+EMAIL: vladimir.alexiev@ontotext.com
 #+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline author:t c:nil
-#+OPTIONS: creator:comment d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
-#+OPTIONS: p:nil pri:nil stat:t tags:t tasks:t tex:t timestamp:nil toc:3 todo:t |:t
+#+OPTIONS: creator:comment d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:nil
+#+OPTIONS: p:nil pri:nil stat:t tags:t tasks:t tex:t timestamp:nil toc:nil todo:t |:t
 #+CREATOR: Emacs 25.0.50.1 (Org mode 8.2.10)
 #+DESCRIPTION:
 #+EXCLUDE_TAGS: noexport
@@ -14,6 +14,34 @@
 #+TODO: TODO QUE | DONE CANCEL
 
 [[https://github.com/VladimirAlexiev/VladimirAlexiev.github.io/blob/master/Multisensor/validation.org][Github Source]], [[http://VladimirAlexiev.github.io/Multisensor/validation.html][HTML Rendered version]]
+
+
+* Table of Contents                                                     :TOC:
+ - [[#intro][Intro]]
+   - [[#queries][Queries]]
+ - [[#validation-][Validation ]]
+   - [[#entity-linking-service-][Entity Linking Service ]]
+     - [[#underscores-to-spaces][Underscores to Spaces]]
+   - [[#advanced-context-extraction-service-][Advanced Context Extraction Service ]]
+     - [[#wrong-prefix-for-text-characteristics][Wrong prefix for Text Characteristics]]
+     - [[#crawler-to-decode-html-entities][Crawler to decode HTML entities]]
+     - [[#keywords-vs-category][Keywords vs Category]]
+   - [[#entity-alignment-service-][Entity Alignment Service ]]
+     - [[#also-remove-taidentconf-taidentprov][Also remove taIdentConf, taIdentProv]]
+     - [[#leave-dependency-links][Leave Dependency Links]]
+     - [[#use-prefixes-in-alignmentlog][Use Prefixes in alignment.log]]
+   - [[#summarization-service-][Summarization Service ]]
+     - [[#refresh-prefixes][Refresh Prefixes]]
+     - [[#nifanchorof-or-not][nif:anchorOf or not?]]
+     - [[#why-nif-anntaidentconf-is-0][Why nif-ann:taIdentConf is 0?]]
+     - [[#msgenericconcept-vs-msspecificconcept][ms:GenericConcept vs ms:SpecificConcept]]
+     - [[#optimize-summarization-queries][Optimize Summarization Queries]]
+   - [[#content-alignment][Content Alignment]]
+     - [[#one-annotation-per-pair][One Annotation Per Pair]]
+     - [[#use-msscore-not-fiseconfidence-for-cap][Use ms:score not fise:confidence for CAP]]
+     - [[#add-to-ontology][Add to Ontology]]
+     - [[#cap-query][CAP Query]]
+     - [[#other-cap-queries][Other CAP Queries]]
 
 * Intro
 From now until the end of the project I'll keep a detailed log of what I validated and defects I found.
