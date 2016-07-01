@@ -4,7 +4,7 @@
 #+EMAIL: vladimir.alexiev@ontotext.com
 #+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline author:t c:nil
 #+OPTIONS: creator:comment d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:nil
-#+OPTIONS: p:nil pri:nil stat:t tags:t tasks:t tex:t timestamp:nil toc:nil todo:t |:t
+#+OPTIONS: p:nil pri:nil stat:t tags:t tasks:t tex:t timestamp:nil toc:t todo:nil |:t
 #+CREATOR: Emacs 25.0.50.1 (Org mode 8.2.10)
 #+DESCRIPTION:
 #+EXCLUDE_TAGS: noexport
@@ -16,21 +16,23 @@
 [[https://github.com/VladimirAlexiev/VladimirAlexiev.github.io/blob/master/Multisensor/validation.org][Github Source]], [[http://VladimirAlexiev.github.io/Multisensor/validation.html][HTML Rendered version]]
 
 
-* Table of Contents                                                     :TOC:
+* Table of Contents                                            :TOC:noexport:
  - [[#intro][Intro]]
    - [[#queries][Queries]]
- - [[#validation-][Validation ]]
-   - [[#entity-linking-service-][Entity Linking Service ]]
-     - [[#underscores-to-spaces][Underscores to Spaces]]
-   - [[#advanced-context-extraction-service-][Advanced Context Extraction Service ]]
-     - [[#wrong-prefix-for-text-characteristics][Wrong prefix for Text Characteristics]]
+ - [[#validation][Validation]]
+   - [[#context][Context]]
      - [[#crawler-to-decode-html-entities][Crawler to decode HTML entities]]
      - [[#keywords-vs-category][Keywords vs Category]]
-   - [[#entity-alignment-service-][Entity Alignment Service ]]
+     - [[#ingest-timestamp][Ingest Timestamp]]
+   - [[#entity-linking-service][Entity Linking Service]]
+     - [[#underscores-to-spaces][Underscores to Spaces]]
+   - [[#advanced-context-extraction-service][Advanced Context Extraction Service]]
+     - [[#wrong-prefix-for-text-characteristics][Wrong prefix for Text Characteristics]]
+   - [[#entity-alignment-service][Entity Alignment Service]]
      - [[#also-remove-taidentconf-taidentprov][Also remove taIdentConf, taIdentProv]]
      - [[#leave-dependency-links][Leave Dependency Links]]
      - [[#use-prefixes-in-alignmentlog][Use Prefixes in alignment.log]]
-   - [[#summarization-service-][Summarization Service ]]
+   - [[#summarization-service][Summarization Service]]
      - [[#refresh-prefixes][Refresh Prefixes]]
      - [[#nifanchorof-or-not][nif:anchorOf or not?]]
      - [[#why-nif-anntaidentconf-is-0][Why nif-ann:taIdentConf is 0?]]
@@ -66,35 +68,9 @@ Or we could simply use the doc:
 if you need a new query, or a query needs optimization, please write a comment in red,
 and notify me in a gdoc comment (add +vladimir@sirma.bg to the comment).
 
-* Validation [1/16]
+* Validation
 
-** Entity Linking Service [0/1]
-
-*** TODO Underscores to Spaces
-The EL service emits Babelnet entity labels in up to 4 languages, eg
-#+BEGIN_SRC Turtle
-bn:s00088614v  skos:prefLabel  "zu_befriedigen"@de , "satisfacer"@es , "satisfaire"@fr , "задоволи"@bg .
-bn:s00014609n  skos:prefLabel  "Kuchen"@de , "Pastel_(gastronomía)"@es , "Gâteau"@fr , "Торта"@bg .
-bn:s01718102n  skos:prefLabel  "I_do_not_want_what_I_haven't_got"@es , "I_Don't_Want_What_I_Haven't_Got"@en , "I_Do_Not_Want_What_I_Haven't_Got"@fr .
-bn:s02229586n  skos:prefLabel  "UHC_Hamburg"@en , "Uhlenhorster_HC"@fr .
-#+END_SRC
-For reasons unknown, Babelnet uses underscores (eg see [[http://babelnet.org/rdf/page/UHC_Hamburg_n_EN][UHC_Hamburg_n_EN]]).
-I think EL should convert the underscores to spaces to make the label more natural.
-
-Should we also remove disambiguations, which are trailing parenthesized parts, eg "Pastel_(gastronomía)" -> "Pastel"?
-Since these labels are not used for NLP tasks, and the disambiguations are very useful for understanding what the entity is, let's leave them.
-
-** Advanced Context Extraction Service [1/3]
-<2016-06-23 Thu>: checked [[http://grinder1.multisensorproject.eu/cepfiles/rdf_validation/context_extraction_validation/0e6b24-CONTEXT_EXTRACTION-22-6-2016.ttl][0e6b24-CONTEXT_EXTRACTION-22-6-2016.ttl]]
-
-This service adds new Text Characteristics properties (technicality, fluency, richness) to the context.
-
-*** DONE Wrong prefix for Text Characteristics
-Text Characteristics (technicality, fluency, richness):
-- currently use <http://data.multisensor.eu/ontology#>
-- but the correct prefix is <http://data.multisensorproject.eu/ontology#>
-
-Victor <2016-06-30 Thu>: updated the prefix
+** Context
 
 *** TODO Crawler to decode HTML entities
 It would be good if the crawler decodes HTML entities before storing in dc:subject (possibly also dc:title, dc:description). Eg:
@@ -128,7 +104,44 @@ It would be nice to:
 - Split both categories and keywords on ", " and " & " and emit as separate values
 - Map our categories to IPTC Media Topics
 
-** Entity Alignment Service [0/5]
+*** TODO Ingest Timestamp
+Victor: introduce the date when the article have been processed in RDF. 
+In order to keep track of which and when the “curated selected data” have been processed,
+and match them with the current version of the CEP service.
+
+Vladimir: we can use ~dct:issued~ for this purpose:
+
+ 
+
+** Entity Linking Service
+
+*** TODO Underscores to Spaces
+The EL service emits Babelnet entity labels in up to 4 languages, eg
+#+BEGIN_SRC Turtle
+bn:s00088614v  skos:prefLabel  "zu_befriedigen"@de , "satisfacer"@es , "satisfaire"@fr , "задоволи"@bg .
+bn:s00014609n  skos:prefLabel  "Kuchen"@de , "Pastel_(gastronomía)"@es , "Gâteau"@fr , "Торта"@bg .
+bn:s01718102n  skos:prefLabel  "I_do_not_want_what_I_haven't_got"@es , "I_Don't_Want_What_I_Haven't_Got"@en , "I_Do_Not_Want_What_I_Haven't_Got"@fr .
+bn:s02229586n  skos:prefLabel  "UHC_Hamburg"@en , "Uhlenhorster_HC"@fr .
+#+END_SRC
+For reasons unknown, Babelnet uses underscores (eg see [[http://babelnet.org/rdf/page/UHC_Hamburg_n_EN][UHC_Hamburg_n_EN]]).
+I think EL should convert the underscores to spaces to make the label more natural.
+
+Should we also remove disambiguations, which are trailing parenthesized parts, eg "Pastel_(gastronomía)" -> "Pastel"?
+Since these labels are not used for NLP tasks, and the disambiguations are very useful for understanding what the entity is, let's leave them.
+
+** Advanced Context Extraction Service
+<2016-06-23 Thu>: checked [[http://grinder1.multisensorproject.eu/cepfiles/rdf_validation/context_extraction_validation/0e6b24-CONTEXT_EXTRACTION-22-6-2016.ttl][0e6b24-CONTEXT_EXTRACTION-22-6-2016.ttl]]
+
+This service adds new Text Characteristics properties (technicality, fluency, richness) to the context.
+
+*** DONE Wrong prefix for Text Characteristics
+Text Characteristics (technicality, fluency, richness):
+- currently use <http://data.multisensor.eu/ontology#>
+- but the correct prefix is <http://data.multisensorproject.eu/ontology#>
+
+Victor <2016-06-30 Thu>: updated the prefix
+
+** Entity Alignment Service
 <2016-06-28 Tue>: checked [[http://grinder1.multisensorproject.eu/cepfiles/rdf_validation/entity_alignment/0181e1-ENTITY_ALIGNMENT-21-6-2016.ttl][0181e1-ENTITY_ALIGNMENT-21-6-2016.ttl]] and alignment.log (by email)
 
 The log has 90 actions. I checked these 4 actions:
@@ -171,12 +184,12 @@ dbr:Margaret_Thatcher
         foaf:name  "Margaret Thatcher" .
 #+END_SRC
 
-*** TODO Also remove taIdentConf, taIdentProv
+*** DONE Also remove taIdentConf, taIdentProv
 In the example above, ~taClassRef~ and ~taIdentRef~ were removed. 
 This makes the other two props ~nif-ann:taIdentConf~ and ~nif-ann:taIdentProv~ useless.
 Remove them too.
 
-*** TODO Leave Dependency Links
+*** DONE Leave Dependency Links
 Entity Alignment also seems to remove the dependency links, eg:
 : <#char=1444,1452> nif:dependency          <#char=1453,1461>
 : <#char=1444,1452> upf-deep:deepDependency <#char=1453,1461>
@@ -190,7 +203,7 @@ It would be very useful if alignment.log uses the same shortenings to improve re
 
 This is a completely cosmetic issue, we can cancel it.
 
-** Summarization Service [0/4]
+** Summarization Service
 <2016-06-28 Tue> looked at [[http://grinder1.multisensorproject.eu/cepfiles/rdf_validation/concept_with_scores_16_06_2016/2c9d5c-CONCEPT_EXTRACTION-16-6-2016.ttl][2c9d5c-CONCEPT_EXTRACTION-16-6-2016.ttl]] (concept_with_scores)
 
 #+BEGIN_SRC Turtle
@@ -266,13 +279,13 @@ Annotations of concepts produced by the concept extraction service should contai
 
 It also seems to me that concepts like "open source" and "pastry" are ~ms:SpecificConcept~.
 
-*** TODO Optimize Summarization Queries
+*** DONE Optimize Summarization Queries
 Gerard wrote some of the Summarization queries are slow.
 Please mark which ones need optimization, and provide ~$graph~ for testing.
-
-- I made tentative new variant for 8.6 "Get Specific Concepts"
 - Used the standard notation ~$param~ to indicate an input parameter, rather than ~__PARAM__~
 - Moved ~FILTER~ inside ~GRAPH~, and a few more minor changes
+- The problem was that the prop path ~p1?/p2~ is slow, since ~p1?~ connects *any* node to itself.
+  Replaced with ~p1/p2|p2~, which is fast
 
 ** Content Alignment
 The Content Alignment Pipeline (CAP) is a service that executes on KB data and finds articles that are similar or contradictory to the source article.
