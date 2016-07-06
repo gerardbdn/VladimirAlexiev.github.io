@@ -151,44 +151,47 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#sec-2-1">Context</a>
 <ul>
-<li><a href="#sec-2-1-1"><span class="todo TODO">TODO</span> Crawler to decode HTML entities</a></li>
-<li><a href="#sec-2-1-2"><span class="todo TODO">TODO</span> Keywords vs Category</a></li>
-<li><a href="#sec-2-1-3"><span class="todo TODO">TODO</span> Ingest Timestamp</a></li>
+<li><a href="#sec-2-1-1">Crawler to decode HTML entities</a></li>
+<li><a href="#sec-2-1-2">Keywords vs Category</a></li>
+<li><a href="#sec-2-1-3">Ingest Timestamp</a></li>
+<li><a href="#sec-2-1-4">SIMMO Quality</a></li>
+<li><a href="#sec-2-1-5">Missing Authors</a></li>
+<li><a href="#sec-2-1-6">Genre (Type)</a></li>
 </ul>
 </li>
 <li><a href="#sec-2-2">Entity Linking Service</a>
 <ul>
-<li><a href="#sec-2-2-1"><span class="todo TODO">TODO</span> Underscores to Spaces</a></li>
+<li><a href="#sec-2-2-1">Underscores to Spaces</a></li>
 </ul>
 </li>
 <li><a href="#sec-2-3">Advanced Context Extraction Service</a>
 <ul>
-<li><a href="#sec-2-3-1"><span class="done DONE">DONE</span> Wrong prefix for Text Characteristics</a></li>
+<li><a href="#sec-2-3-1">Wrong prefix for Text Characteristics</a></li>
 </ul>
 </li>
 <li><a href="#sec-2-4">Entity Alignment Service</a>
 <ul>
-<li><a href="#sec-2-4-1"><span class="done DONE">DONE</span> Also remove taIdentConf, taIdentProv</a></li>
-<li><a href="#sec-2-4-2"><span class="done DONE">DONE</span> Leave Dependency Links</a></li>
-<li><a href="#sec-2-4-3"><span class="todo TODO">TODO</span> Use Prefixes in alignment.log</a></li>
+<li><a href="#sec-2-4-1">Also remove taIdentConf, taIdentProv</a></li>
+<li><a href="#sec-2-4-2">Leave Dependency Links</a></li>
+<li><a href="#sec-2-4-3">Use Prefixes in alignment.log</a></li>
 </ul>
 </li>
 <li><a href="#sec-2-5">Summarization Service</a>
 <ul>
-<li><a href="#sec-2-5-1"><span class="todo TODO">TODO</span> Refresh Prefixes</a></li>
-<li><a href="#sec-2-5-2"><span class="todo TODO">TODO</span> nif:anchorOf</a></li>
-<li><a href="#sec-2-5-3"><span class="todo TODO">TODO</span> Why nif-ann:taIdentConf is 0?</a></li>
-<li><a href="#sec-2-5-4"><span class="todo TODO">TODO</span> ms:GenericConcept vs ms:SpecificConcept</a></li>
-<li><a href="#sec-2-5-5"><span class="done DONE">DONE</span> Optimize Summarization Queries</a></li>
+<li><a href="#sec-2-5-1">Refresh Prefixes</a></li>
+<li><a href="#sec-2-5-2">nif:anchorOf</a></li>
+<li><a href="#sec-2-5-3">Why nif-ann:taIdentConf is 0?</a></li>
+<li><a href="#sec-2-5-4">ms:GenericConcept vs ms:SpecificConcept</a></li>
+<li><a href="#sec-2-5-5">Optimize Summarization Queries</a></li>
 </ul>
 </li>
 <li><a href="#sec-2-6">Content Alignment</a>
 <ul>
-<li><a href="#sec-2-6-1"><span class="todo TODO">TODO</span> One Annotation Per Pair&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Babis">Babis</span></span></a></li>
-<li><a href="#sec-2-6-2"><span class="todo TODO">TODO</span> Use ms:score not fise:confidence for CAP</a></li>
-<li><a href="#sec-2-6-3"><span class="todo TODO">TODO</span> Add to Ontology&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Vladimir">Vladimir</span></span></a></li>
+<li><a href="#sec-2-6-1">One Annotation Per Pair&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Babis">Babis</span></span></a></li>
+<li><a href="#sec-2-6-2">Use ms:score not fise:confidence for CAP</a></li>
+<li><a href="#sec-2-6-3">Add to Ontology&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Vladimir">Vladimir</span></span></a></li>
 <li><a href="#sec-2-6-4">CAP Query</a></li>
-<li><a href="#sec-2-6-5"><span class="todo TODO">TODO</span> Other CAP Queries</a></li>
+<li><a href="#sec-2-6-5">Other CAP Queries</a></li>
 </ul>
 </li>
 </ul>
@@ -256,7 +259,7 @@ and notify me in a gdoc comment (add +vladimir@sirma.bg to the comment).
 <h3 id="sec-2-1">Context</h3>
 <div class="outline-text-3" id="text-2-1">
 </div><div id="outline-container-sec-2-1-1" class="outline-4">
-<h4 id="sec-2-1-1"><span class="todo TODO">TODO</span> Crawler to decode HTML entities</h4>
+<h4 id="sec-2-1-1">Crawler to decode HTML entities</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <p>
 It would be good if the crawler decodes HTML entities before storing in dc:subject (possibly also dc:title, dc:description). Eg:
@@ -272,33 +275,33 @@ It would be good if the crawler decodes HTML entities before storing in dc:subje
 </div>
 
 <div id="outline-container-sec-2-1-2" class="outline-4">
-<h4 id="sec-2-1-2"><span class="todo TODO">TODO</span> Keywords vs Category</h4>
+<h4 id="sec-2-1-2">Keywords vs Category</h4>
 <div class="outline-text-4" id="text-2-1-2">
 <p>
 Victor: both of the following fields extracted by the crawler are mapped to dc:subject:
 </p>
 <ul class="org-ul">
-<li>category: eg "Economy, Business &amp; Finance" 
+<li><b>category</b>: eg "Economy, Business &amp; Finance" 
 </li>
-<li>keywords: eg "Europaische Union, ISIN_FR0003500008, Brexit, Erholungskurs, Europa, Paris, Grossbritannien"
+<li><b>keywords</b>: eg "Europaische Union, ISIN_FR0003500008, Brexit, Erholungskurs, Europa, Paris, Grossbritannien"
 </li>
 </ul>
 <p>
-Should we separe them in different properties?
+Should we separate them in different properties?
 </p>
 
 <p>
 Vladimir: 
 <a href="https://iptc.org">IPTC</a> is the <a href="https://iptc.org/about-iptc/">Global Standards Body</a> of the News Media industry. 
-<a href="https://iptc.org/standards/media-topics/">IPTC Media Topics</a> is a list of 1100 <a href="http://cv.iptc.org/newscodes/mediatopic">Media Topics</a> developed as an extension of the earlier <a href="http://cv.iptc.org/newscodes/subjectcode">Subject Codes</a>.
-You can <a href="http://show.newscodes.org/index.html?newscodes=medtop&lang=en-GB&startTo=Show">explore them interactively</a> and will see that Multisensor "categories" are similar to these topics/subjects; 
-and we'll continue to map them to <code>dc:subject</code>.
+<a href="https://iptc.org/standards/media-topics/">IPTC Media Topics</a> is a list of 1100 <a href="http://cv.iptc.org/newscodes/mediatopic">Media Topics</a> developed as an extension from earlier IPTC <a href="http://cv.iptc.org/newscodes/subjectcode">Subject Codes</a>.
+You can <a href="http://show.newscodes.org/index.html?newscodes=medtop&lang=en-GB&startTo=Show">explore interactively</a> and will see that Multisensor <b>categories</b> are similar to these topics/subjects; 
+so we'll continue to map them to <code>dc:subject</code>.
 </p>
 
 <p>
-On the other hand, Multisensor "keywords" are free keywords that describe a lot more specific things.
+On the other hand, Multisensor <b>keywords</b> are free keywords that describe a lot more specific things.
 We'll map them to <code>schema:keywords</code>, defined as 
-"Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas":
+"Keywords or tags used to describe the content. Multiple entries in a keywords list are typically delimited by commas":
 </p>
 <div class="org-src-container">
 
@@ -311,16 +314,20 @@ We'll map them to <code>schema:keywords</code>, defined as
 It would be nice to:
 </p>
 <ul class="org-ul">
-<li>Split both categories and keywords on ", " and " &amp; " and emit as separate values
+<li>Split keywords on ", " and and emit as separate values
+<ul class="org-ul">
+<li>(don't split categories, since the 3 words really represent one category)
 </li>
-<li>Map our categories to IPTC Media Topics
+</ul>
+</li>
+<li>Map our categories to IPTC Media Topics. This is quite harder
 </li>
 </ul>
 </div>
 </div>
 
 <div id="outline-container-sec-2-1-3" class="outline-4">
-<h4 id="sec-2-1-3"><span class="todo TODO">TODO</span> Ingest Timestamp</h4>
+<h4 id="sec-2-1-3">Ingest Timestamp</h4>
 <div class="outline-text-4" id="text-2-1-3">
 <p>
 Victor: introduce the date when the article have been processed in RDF. 
@@ -333,13 +340,273 @@ Vladimir: we can use <code>dct:issued</code> for this purpose:
 </p>
 <div class="org-src-container">
 
-<pre class="src src-Turtle"><span style="color: #228b22;">dc:</span><span style="color: #008b8b;">date</span>    <span style="color: #8b2252;">"2016-06-20T18:45:07.000+02:00"</span><span style="color: #008b8b;">^^xsd:dateTime</span> ; <span style="color: #b22222;"># date </span><span style="color: #228b22;">crawled</span>
-<span style="color: #228b22;">dct:</span><span style="color: #008b8b;">issued</span> <span style="color: #8b2252;">"2016-06-30T12:34:56.000+02:00"</span><span style="color: #008b8b;">^^xsd:dateTime</span> ; <span style="color: #b22222;"># date processed by pipeline and ingested to GDB</span>
+<pre class="src src-Turtle"><span style="color: #228b22;">ms-content:</span>b3f35
+  <span style="color: #228b22;">dc:</span><span style="color: #008b8b;">date</span>    <span style="color: #8b2252;">"2016-06-20T18:45:07.000+02:00"</span><span style="color: #008b8b;">^^xsd:dateTime</span> ; <span style="color: #b22222;"># date crawled</span>
+  <span style="color: #228b22;">dct:</span><span style="color: #008b8b;">issued</span> <span style="color: #8b2252;">"2016-06-30T12:34:56.000+02:00"</span><span style="color: #008b8b;">^^xsd:dateTime</span> ; <span style="color: #b22222;"># date processed by pipeline and ingested to GDB</span>
 </pre>
 </div>
 <p>
-But who will make this second timestamp? 
+Boyan will add this second timestamp in the POST method.
 </p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-1-4" class="outline-4">
+<h4 id="sec-2-1-4">SIMMO Quality</h4>
+<div class="outline-text-4" id="text-2-1-4">
+<p>
+Victor: the field "c_quality" is sent now. Values can be:
+</p>
+<ul class="org-ul">
+<li>0 = no quality assigned
+</li>
+<li>1 = high quality
+</li>
+<li>2 = medium quality
+</li>
+<li>3 = low quality
+</li>
+<li>5 = curated
+</li>
+</ul>
+<p>
+Vladimir:
+</p>
+<ul class="org-ul">
+<li>The scale should be reordered to be monotonically increasing
+</li>
+<li>Maybe instead of 0, we should omit the statement
+</li>
+<li>Is there a value 4?
+</li>
+<li>About value 5: do we have metadata who &amp; when curated it?
+</li>
+</ul>
+
+<p>
+Vladimir: I searched for a <a href="http://lov.okfn.org/dataset/lov/terms?q=quality&type=property&page=2">quality property on LOV</a>, couldn't find anything really appropriate:
+</p>
+<ul class="org-ul">
+<li><a href="http://www.w3.org/ns/dcat#dataQuality">http://www.w3.org/ns/dcat#dataQuality</a>: this is about datasets, but is deprecated: 
+"This should not be used to describe the data collection characteristics, other more specialized statistical properties can be used instead". 
+But I don't see such statistical properties
+</li>
+<li><a href="http://def.seegrid.csiro.au/isotc211/iso19115/2003/metadata#dataQualityInfo">http://def.seegrid.csiro.au/isotc211/iso19115/2003/metadata#dataQualityInfo</a>:
+this is about ISO 19115 "Geographic information — metadata"
+<a href="http://def.seegrid.csiro.au/isotc211/iso19115/2003/dataquality">http://def.seegrid.csiro.au/isotc211/iso19115/2003/dataquality</a> is a whole separate module on Quality
+</li>
+<li><a href="http://purl.oclc.org/NET/ssnx/ssn#qualityOfObservation">http://purl.oclc.org/NET/ssnx/ssn#qualityOfObservation</a>: this is about Semantic Sensor Networks.
+It makes reference to resultQuality in <a href="http://portal.opengeospatial.org/files/?artifact_id=41579">ISO 19156</a> "Geographic information — Observations and measurements"
+</li>
+</ul>
+
+<p>
+Finally from a link at Europeana DQC, I found the 
+W3C <a href="https://www.w3.org/TR/vocab-dqv/">Data Quality Vocabulary</a> <code>dqv:</code>. 
+We'll use that vocabulary, and the <a href="https://www.w3.org/TR/vocab-dqv/#DimensionsofZaveri">Linked Data Quality Dimensions</a> <code>ldqd:</code> by Zaveri.
+First we add a <code>dqv:Metric</code> to the Multisensor ontology:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-Turtle"><span style="color: #a020f0;">@prefix</span> <span style="color: #228b22;">dqv:</span><span style="color: #008b8b;"> </span> <span style="color: #0000ff;">&lt;http://www.w3.org/ns/dqv#&gt;</span><span style="color: #b22222;"> .</span>
+<span style="color: #a020f0;">@prefix</span> <span style="color: #228b22;">ldqd:</span><span style="color: #008b8b;"> </span><span style="color: #0000ff;">&lt;http://www.w3.org/2016/05/ldqd#&gt;</span><span style="color: #b22222;"> </span><span style="color: #228b22;">.</span>
+
+<span style="color: #228b22;">ms:</span><span style="color: #008b8b;">accuracy</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">dqv:</span><span style="color: #008b8b;">Metric</span>;
+  <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">prefLabel</span> <span style="color: #8b2252;">"Accuracy"</span>@en;
+  <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">definition</span> <span style="color: #8b2252;">"""Degree to which SIMMO dat</span><span style="color: #a020f0;">a</span><span style="color: #8b2252;"> correctly represents the real world </span><span style="color: #228b22;">facts:</span>
+<span style="color: #8b2252;">1=low, 2=medium, 3=high, 5=manually curated"""</span>@en ;
+  <span style="color: #228b22;">dqv:</span><span style="color: #008b8b;">inDimension</span> <span style="color: #228b22;">ldqd:</span><span style="color: #008b8b;">semanticAccuracy</span>;
+  <span style="color: #228b22;">dqv:</span><span style="color: #008b8b;">expectedDataType</span> <span style="color: #228b22;">xsd:</span><span style="color: #008b8b;">integer</span>.
+</pre>
+</div>
+
+<p>
+Then for each SIMMO that has a quality rating (those that don't have a rating get no extra statements):
+</p>
+<div class="org-src-container">
+
+<pre class="src src-Turtle"><span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">b3f35</span> <span style="color: #228b22;">dqv:</span><span style="color: #008b8b;">hasQualityMeasurement</span> <span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">b3f35-quality</span><span style="color: #228b22;">.</span>
+
+<span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">b3f35-quality</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">dqv:</span><span style="color: #008b8b;">QualityMeasurement</span> ;
+   <span style="color: #228b22;">dqv:</span><span style="color: #008b8b;">isMeasurementOf</span> <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">accuracy</span>; <span style="color: #228b22;">dqv:</span><span style="color: #008b8b;">value</span> 3.
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-1-5" class="outline-4">
+<h4 id="sec-2-1-5">Missing Authors</h4>
+<div class="outline-text-4" id="text-2-1-5">
+<div class="org-src-container">
+
+<pre class="src src-sparql"><span style="color: #a020f0;">select</span> * {<span style="color: #a0522d;">?x</span> a foaf:Document} 
+<span style="color: #b22222;"># 112k SIMMOs</span>
+<span style="color: #a020f0;">select</span> * {<span style="color: #a0522d;">?x</span> a foaf:Document; dc:creator <span style="color: #a0522d;">?y</span>}
+<span style="color: #b22222;"># 10.5k authors, only 9.4%</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-1-6" class="outline-4">
+<h4 id="sec-2-1-6">Genre (Type)</h4>
+<div class="outline-text-4" id="text-2-1-6">
+<div class="org-src-container">
+
+<pre class="src src-sparql"><span style="color: #a020f0;">select</span> * {<span style="color: #a0522d;">?x</span> a foaf:Document; dc:type <span style="color: #a0522d;">?y</span>} 
+<span style="color: #b22222;"># 20k, that's 17.9%</span>
+</pre>
+</div>
+
+<p>
+Distribution of Genre:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sparql"><span style="color: #a020f0;">select</span> <span style="color: #a0522d;">?y</span> (count(*) <span style="color: #a020f0;">as</span> <span style="color: #a0522d;">?c</span>)
+{<span style="color: #a0522d;">?x</span> a foaf:Document; dc:type <span style="color: #a0522d;">?y</span>}
+<span style="color: #a020f0;">group</span> <span style="color: #a020f0;">by</span> <span style="color: #a0522d;">?y</span> <span style="color: #a020f0;">order</span> <span style="color: #a020f0;">by</span> <span style="color: #a020f0;">desc</span>(<span style="color: #a0522d;">?c</span>)
+</pre>
+</div>
+<table border="1" cellspacing="0" cellpadding="2" rules="all" frame="box">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="right" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Genre/Type</th>
+<th scope="col" class="right">Count</th>
+<th scope="col" class="left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">article</td>
+<td class="right">14768</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">music</td>
+<td class="right">2886</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">website</td>
+<td class="right">1087</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">speech</td>
+<td class="right">813</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">sound</td>
+<td class="right">407</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">food</td>
+<td class="right">83</td>
+<td class="left">?? Maybe "recipe"</td>
+</tr>
+
+<tr>
+<td class="left">video</td>
+<td class="right">25</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Article</td>
+<td class="right">25</td>
+<td class="left">normalize to "article"</td>
+</tr>
+
+<tr>
+<td class="left">single</td>
+<td class="right">11</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">song</td>
+<td class="right">11</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Speech</td>
+<td class="right">11</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Ogg</td>
+<td class="right">11</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">video.other</td>
+<td class="right">7</td>
+<td class="left">normalize to "video"</td>
+</tr>
+
+<tr>
+<td class="left">news</td>
+<td class="right">6</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">ARTICLE</td>
+<td class="right">4</td>
+<td class="left">normalize to "article"</td>
+</tr>
+
+<tr>
+<td class="left">media</td>
+<td class="right">2</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">blog</td>
+<td class="right">1</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">slideshow</td>
+<td class="right">1</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">video.movie</td>
+<td class="right">1</td>
+<td class="left">normalize to "video"</td>
+</tr>
+
+<tr>
+<td class="left">tumblr-feed:entry</td>
+<td class="right">1</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -348,7 +615,7 @@ But who will make this second timestamp?
 <h3 id="sec-2-2">Entity Linking Service</h3>
 <div class="outline-text-3" id="text-2-2">
 </div><div id="outline-container-sec-2-2-1" class="outline-4">
-<h4 id="sec-2-2-1"><span class="todo TODO">TODO</span> Underscores to Spaces</h4>
+<h4 id="sec-2-2-1">Underscores to Spaces</h4>
 <div class="outline-text-4" id="text-2-2-1">
 <p>
 The EL service emits Babelnet entity labels in up to 4 languages, eg
@@ -387,7 +654,7 @@ This service adds new Text Characteristics properties (technicality, fluency, ri
 </div>
 
 <div id="outline-container-sec-2-3-1" class="outline-4">
-<h4 id="sec-2-3-1"><span class="done DONE">DONE</span> Wrong prefix for Text Characteristics</h4>
+<h4 id="sec-2-3-1">Wrong prefix for Text Characteristics</h4>
 <div class="outline-text-4" id="text-2-3-1">
 <p>
 Text Characteristics (technicality, fluency, richness):
@@ -467,7 +734,7 @@ What is left in the RDF is this:
 </div>
 
 <div id="outline-container-sec-2-4-1" class="outline-4">
-<h4 id="sec-2-4-1"><span class="done DONE">DONE</span> Also remove taIdentConf, taIdentProv</h4>
+<h4 id="sec-2-4-1">Also remove taIdentConf, taIdentProv</h4>
 <div class="outline-text-4" id="text-2-4-1">
 <p>
 In the example above, <code>taClassRef</code> and <code>taIdentRef</code> were removed. 
@@ -478,7 +745,7 @@ Remove them too.
 </div>
 
 <div id="outline-container-sec-2-4-2" class="outline-4">
-<h4 id="sec-2-4-2"><span class="done DONE">DONE</span> Leave Dependency Links</h4>
+<h4 id="sec-2-4-2">Leave Dependency Links</h4>
 <div class="outline-text-4" id="text-2-4-2">
 <p>
 Entity Alignment also seems to remove the dependency links, eg:
@@ -495,7 +762,7 @@ However, this can make the dependency and FrameNet graphs disconnected. So leave
 </div>
 
 <div id="outline-container-sec-2-4-3" class="outline-4">
-<h4 id="sec-2-4-3"><span class="todo TODO">TODO</span> Use Prefixes in alignment.log</h4>
+<h4 id="sec-2-4-3">Use Prefixes in alignment.log</h4>
 <div class="outline-text-4" id="text-2-4-3">
 <p>
 I shortened the excerpt from alignment.log above to improve readability:
@@ -543,7 +810,7 @@ This is a completely cosmetic issue, we can cancel it.
 </div>
 
 <div id="outline-container-sec-2-5-1" class="outline-4">
-<h4 id="sec-2-5-1"><span class="todo TODO">TODO</span> Refresh Prefixes</h4>
+<h4 id="sec-2-5-1">Refresh Prefixes</h4>
 <div class="outline-text-4" id="text-2-5-1">
 <p>
 I've added <a href="http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-annotation">http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-annotation</a># to <a href="./img/prefixes.ttl">./img/prefixes.ttl</a> (committed <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-06-30 Thu&gt;</span></span>)
@@ -570,7 +837,7 @@ I think Victor made that script. The other prefixes are there, so it's just a ma
 </div>
 
 <div id="outline-container-sec-2-5-2" class="outline-4">
-<h4 id="sec-2-5-2"><span class="todo TODO">TODO</span> nif:anchorOf</h4>
+<h4 id="sec-2-5-2">nif:anchorOf</h4>
 <div class="outline-text-4" id="text-2-5-2">
 <p>
 I've been saying all along to skip <code>nif:anchorOf</code> so as not to create too many literals.
@@ -598,7 +865,7 @@ Vladimir: so decided: if the Entity Lookup makes a new node, add anchorOf to it.
 </div>
 
 <div id="outline-container-sec-2-5-3" class="outline-4">
-<h4 id="sec-2-5-3"><span class="todo TODO">TODO</span> Why nif-ann:taIdentConf is 0?</h4>
+<h4 id="sec-2-5-3">Why nif-ann:taIdentConf is 0?</h4>
 <div class="outline-text-4" id="text-2-5-3">
 <p>
 In the above example, ~nif-ann:taIdentConf is 0. 
@@ -639,7 +906,7 @@ Is 0 some sort of bug, or does Babelfy actually return 0 confidence for some con
 </div>
 
 <div id="outline-container-sec-2-5-4" class="outline-4">
-<h4 id="sec-2-5-4"><span class="todo TODO">TODO</span> ms:GenericConcept vs ms:SpecificConcept</h4>
+<h4 id="sec-2-5-4">ms:GenericConcept vs ms:SpecificConcept</h4>
 <div class="outline-text-4" id="text-2-5-4">
 <p>
 Gerard wrote about the last example: 'generic' concept produced by Babelfy. 
@@ -653,7 +920,7 @@ It also seems to me that concepts like "open source" and "pastry" are <code>ms:S
 </div>
 
 <div id="outline-container-sec-2-5-5" class="outline-4">
-<h4 id="sec-2-5-5"><span class="done DONE">DONE</span> Optimize Summarization Queries</h4>
+<h4 id="sec-2-5-5">Optimize Summarization Queries</h4>
 <div class="outline-text-4" id="text-2-5-5">
 <p>
 Gerard wrote some of the Summarization queries are slow.
@@ -719,7 +986,7 @@ This complicates data management, because both of these graphs need to be update
 </div>
 
 <div id="outline-container-sec-2-6-1" class="outline-4">
-<h4 id="sec-2-6-1"><span class="todo TODO">TODO</span> One Annotation Per Pair&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Babis">Babis</span></span></h4>
+<h4 id="sec-2-6-1">One Annotation Per Pair&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Babis">Babis</span></span></h4>
 <div class="outline-text-4" id="text-2-6-1">
 <p>
 After consultation with Babis, we decided to change the representation as follows:
@@ -768,7 +1035,7 @@ so there's no need to repeat for the other SIMMO.
 </div>
 
 <div id="outline-container-sec-2-6-2" class="outline-4">
-<h4 id="sec-2-6-2"><span class="todo TODO">TODO</span> Use ms:score not fise:confidence for CAP</h4>
+<h4 id="sec-2-6-2">Use ms:score not fise:confidence for CAP</h4>
 <div class="outline-text-4" id="text-2-6-2">
 <p>
 In an example sent by Babis, I see fise:confidence=1.6439653807554948. 
@@ -783,7 +1050,7 @@ Decided with Babis to use a custom property <code>ms:score</code> (see next).
 </div>
 
 <div id="outline-container-sec-2-6-3" class="outline-4">
-<h4 id="sec-2-6-3"><span class="todo TODO">TODO</span> Add to Ontology&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Vladimir">Vladimir</span></span></h4>
+<h4 id="sec-2-6-3">Add to Ontology&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Vladimir">Vladimir</span></span></h4>
 <div class="outline-text-4" id="text-2-6-3">
 <p>
 The following will be in <a href="./img/ontology.ttl">./img/ontology.ttl</a>, so they don't need to be repeated by CAP for every similarity link.
@@ -841,7 +1108,7 @@ Given a <code>$simmo</code>, find similar or contradictory articles, and their s
 </div>
 
 <div id="outline-container-sec-2-6-5" class="outline-4">
-<h4 id="sec-2-6-5"><span class="todo TODO">TODO</span> Other CAP Queries</h4>
+<h4 id="sec-2-6-5">Other CAP Queries</h4>
 <div class="outline-text-4" id="text-2-6-5">
 <p>
 The gdoc maybe has 2 queries related to CAP. Not sure I'm looking at the right section. Maybe we should just delete them.
@@ -858,7 +1125,7 @@ The gdoc maybe has 2 queries related to CAP. Not sure I'm looking at the right s
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-01&gt;</span></span></p>
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-06&gt;</span></span></p>
 <p class="author">Author: Vladimir Alexiev</p>
 <p class="creator">Emacs 25.0.50.1 (Org mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>

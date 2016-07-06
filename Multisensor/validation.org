@@ -1,5 +1,5 @@
 #+TITLE: Multisensor Validation Log
-#+DATE: <2016-07-01>
+#+DATE: <2016-07-06>
 #+AUTHOR: Vladimir Alexiev
 #+EMAIL: vladimir.alexiev@ontotext.com
 #+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline author:t c:nil
@@ -24,6 +24,9 @@
      - [[#crawler-to-decode-html-entities][Crawler to decode HTML entities]]
      - [[#keywords-vs-category][Keywords vs Category]]
      - [[#ingest-timestamp][Ingest Timestamp]]
+     - [[#simmo-quality][SIMMO Quality]]
+     - [[#missing-authors][Missing Authors]]
+     - [[#genre-type][Genre (Type)]]
    - [[#entity-linking-service][Entity Linking Service]]
      - [[#underscores-to-spaces][Underscores to Spaces]]
    - [[#advanced-context-extraction-service][Advanced Context Extraction Service]]
@@ -80,29 +83,30 @@ dc:subject
   "Economy, Business & Finance" ;
 #+END_SRC
 
-*** TODO Keywords vs Category
+*** DONE Keywords vs Category
 Victor: both of the following fields extracted by the crawler are mapped to dc:subject:
-- category: eg "Economy, Business & Finance" 
-- keywords: eg "Europaische Union, ISIN_FR0003500008, Brexit, Erholungskurs, Europa, Paris, Grossbritannien"
-Should we separe them in different properties?
+- *category*: eg "Economy, Business & Finance" 
+- *keywords*: eg "Europaische Union, ISIN_FR0003500008, Brexit, Erholungskurs, Europa, Paris, Grossbritannien"
+Should we separate them in different properties?
 
 Vladimir: 
 [[https://iptc.org][IPTC]] is the [[https://iptc.org/about-iptc/][Global Standards Body]] of the News Media industry. 
-[[https://iptc.org/standards/media-topics/][IPTC Media Topics]] is a list of 1100 [[http://cv.iptc.org/newscodes/mediatopic][Media Topics]] developed as an extension of the earlier [[http://cv.iptc.org/newscodes/subjectcode][Subject Codes]].
-You can [[http://show.newscodes.org/index.html?newscodes%3Dmedtop&lang%3Den-GB&startTo%3DShow][explore them interactively]] and will see that Multisensor "categories" are similar to these topics/subjects; 
-and we'll continue to map them to ~dc:subject~.
+[[https://iptc.org/standards/media-topics/][IPTC Media Topics]] is a list of 1100 [[http://cv.iptc.org/newscodes/mediatopic][Media Topics]] developed as an extension from earlier IPTC [[http://cv.iptc.org/newscodes/subjectcode][Subject Codes]].
+You can [[http://show.newscodes.org/index.html?newscodes%3Dmedtop&lang%3Den-GB&startTo%3DShow][explore interactively]] and will see that Multisensor *categories* are similar to these topics/subjects; 
+so we'll continue to map them to ~dc:subject~.
 
-On the other hand, Multisensor "keywords" are free keywords that describe a lot more specific things.
+On the other hand, Multisensor *keywords* are free keywords that describe a lot more specific things.
 We'll map them to ~schema:keywords~, defined as 
-"Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas":
+"Keywords or tags used to describe the content. Multiple entries in a keywords list are typically delimited by commas":
 #+BEGIN_SRC Turtle
 dc:subject "Economy, Business & Finance";
 schema:keywords "Europaische Union, ISIN_FR0003500008, Brexit, Erholungskurs, Europa, Paris, Grossbritannien";
 #+END_SRC
 
 It would be nice to:
-- Split both categories and keywords on ", " and " & " and emit as separate values
-- Map our categories to IPTC Media Topics
+- Split keywords on ", " and and emit as separate values
+  - (don't split categories, since the 3 words really represent one category)
+- Map our categories to IPTC Media Topics. This is quite harder
 
 *** TODO Ingest Timestamp
 Victor: introduce the date when the article have been processed in RDF. 
@@ -111,10 +115,101 @@ and match them with the current version of the CEP service.
 
 Vladimir: we can use ~dct:issued~ for this purpose:
 #+BEGIN_SRC Turtle
-dc:date    "2016-06-20T18:45:07.000+02:00"^^xsd:dateTime ; # date crawled
-dct:issued "2016-06-30T12:34:56.000+02:00"^^xsd:dateTime ; # date processed by pipeline and ingested to GDB
+ms-content:b3f35
+  dc:date    "2016-06-20T18:45:07.000+02:00"^^xsd:dateTime ; # date crawled
+  dct:issued "2016-06-30T12:34:56.000+02:00"^^xsd:dateTime ; # date processed by pipeline and ingested to GDB
 #+END_SRC
-But who will make this second timestamp? 
+Boyan will add this second timestamp in the POST method.
+
+*** TODO SIMMO Quality
+Victor: the field "c_quality" is sent now. Values can be:
+- 0 = no quality assigned
+- 1 = high quality
+- 2 = medium quality
+- 3 = low quality
+- 5 = curated
+Vladimir:
+- The scale should be reordered to be monotonically increasing
+- Maybe instead of 0, we should omit the statement
+- Is there a value 4?
+- About value 5: do we have metadata who & when curated it?
+
+Vladimir: I searched for a [[http://lov.okfn.org/dataset/lov/terms?q%3Dquality&type%3Dproperty&page%3D2][quality property on LOV]], couldn't find anything really appropriate:
+- http://www.w3.org/ns/dcat#dataQuality: this is about datasets, but is deprecated: 
+  "This should not be used to describe the data collection characteristics, other more specialized statistical properties can be used instead". 
+  But I don't see such statistical properties
+- http://def.seegrid.csiro.au/isotc211/iso19115/2003/metadata#dataQualityInfo:
+  this is about ISO 19115 "Geographic information — metadata"
+  http://def.seegrid.csiro.au/isotc211/iso19115/2003/dataquality is a whole separate module on Quality
+- http://purl.oclc.org/NET/ssnx/ssn#qualityOfObservation: this is about Semantic Sensor Networks.
+  It makes reference to resultQuality in [[http://portal.opengeospatial.org/files/?artifact_id%3D41579][ISO 19156]] "Geographic information — Observations and measurements"
+
+Finally from a link at Europeana DQC, I found the 
+W3C [[https://www.w3.org/TR/vocab-dqv/][Data Quality Vocabulary]] ~dqv:~. 
+We'll use that vocabulary, and the [[https://www.w3.org/TR/vocab-dqv/#DimensionsofZaveri][Linked Data Quality Dimensions]] ~ldqd:~ by Zaveri.
+First we add a ~dqv:Metric~ to the Multisensor ontology:
+#+BEGIN_SRC Turtle
+@prefix dqv:  <http://www.w3.org/ns/dqv#> .
+@prefix ldqd: <http://www.w3.org/2016/05/ldqd#> .
+
+ms:accuracy a dqv:Metric;
+  skos:prefLabel "Accuracy"@en;
+  skos:definition """Degree to which SIMMO data correctly represents the real world facts:
+1=low, 2=medium, 3=high, 5=manually curated"""@en ;
+  dqv:inDimension ldqd:semanticAccuracy;
+  dqv:expectedDataType xsd:integer.
+#+END_SRC
+
+Then for each SIMMO that has a quality rating (those that don't have a rating get no extra statements):
+#+BEGIN_SRC Turtle
+ms-content:b3f35 dqv:hasQualityMeasurement ms-content:b3f35-quality.
+
+ms-content:b3f35-quality a dqv:QualityMeasurement ;
+   dqv:isMeasurementOf ms:accuracy; dqv:value 3.
+#+END_SRC
+
+*** TODO Missing Authors
+#+BEGIN_SRC sparql
+select * {?x a foaf:Document} 
+# 112k SIMMOs
+select * {?x a foaf:Document; dc:creator ?y}
+# 10.5k authors, only 9.4%
+#+END_SRC
+
+*** TODO Genre (Type)
+#+BEGIN_SRC sparql
+select * {?x a foaf:Document; dc:type ?y} 
+# 20k, that's 17.9%
+#+END_SRC
+
+Distribution of Genre:
+#+BEGIN_SRC sparql
+select ?y (count(*) as ?c)
+{?x a foaf:Document; dc:type ?y}
+group by ?y order by desc(?c)
+#+END_SRC
+| Genre/Type        | Count | Notes                  |
+|-------------------+-------+------------------------|
+| article           | 14768 |                        |
+| music             |  2886 |                        |
+| website           |  1087 |                        |
+| speech            |   813 |                        |
+| sound             |   407 |                        |
+| food              |    83 | ?? Maybe "recipe"      |
+| video             |    25 |                        |
+| Article           |    25 | normalize to "article" |
+| single            |    11 |                        |
+| song              |    11 |                        |
+| Speech            |    11 |                        |
+| Ogg               |    11 |                        |
+| video.other       |     7 | normalize to "video"   |
+| news              |     6 |                        |
+| ARTICLE           |     4 | normalize to "article" |
+| media             |     2 |                        |
+| blog              |     1 |                        |
+| slideshow         |     1 |                        |
+| video.movie       |     1 | normalize to "video"   |
+| tumblr-feed:entry |     1 |                        |
 
 ** Entity Linking Service
 
