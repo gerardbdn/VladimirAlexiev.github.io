@@ -2,6 +2,7 @@
 #+DATE: <2016-07-07>
 #+AUTHOR: Vladimir Alexiev
 #+EMAIL: vladimir.alexiev@ontotext.com
+#+SETUP: showeverything
 #+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline author:t c:nil
 #+OPTIONS: creator:comment d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:nil
 #+OPTIONS: p:nil pri:nil stat:t tags:t tasks:t tex:t timestamp:nil toc:t todo:nil |:t
@@ -27,9 +28,6 @@
      - [[#simmo-quality][SIMMO Quality]]
      - [[#missing-authors][Missing Authors]]
      - [[#genre-type][Genre (Type)]]
-     - [[#simmo-quality-1][SIMMO Quality]]
-     - [[#missing-authors-1][Missing Authors]]
-     - [[#genre-type-1][Genre (Type)]]
    - [[#entity-linking-service][Entity Linking Service]]
      - [[#underscores-to-spaces][Underscores to Spaces]]
    - [[#advanced-context-extraction-service][Advanced Context Extraction Service]]
@@ -182,94 +180,6 @@ ms-content:b3f35 dqv:hasQualityMeasurement ms-content:b3f35-quality.
 
 ms-content:b3f35-quality a dqv:QualityMeasurement ;
    dqv:isMeasurementOf ms:accuracy; dqv:value ms:accuracy-curated.
-#+END_SRC
-
-*** TODO Missing Authors
-#+BEGIN_SRC sparql
-select * {?x a foaf:Document} 
-# 112k SIMMOs
-select * {?x a foaf:Document; dc:creator ?y}
-# 10.5k authors, only 9.4%
-#+END_SRC
-
-*** TODO Genre (Type)
-#+BEGIN_SRC sparql
-select * {?x a foaf:Document; dc:type ?y} 
-# 20k, that's 17.9%
-#+END_SRC
-
-Distribution of Genre:
-#+BEGIN_SRC sparql
-select ?y (count(*) as ?c)
-{?x a foaf:Document; dc:type ?y}
-group by ?y order by desc(?c)
-#+END_SRC
-| Genre/Type        | Count | Notes                  |
-|-------------------+-------+------------------------|
-| article           | 14768 |                        |
-| music             |  2886 |                        |
-| website           |  1087 |                        |
-| speech            |   813 |                        |
-| sound             |   407 |                        |
-| food              |    83 | ?? Maybe "recipe"      |
-| video             |    25 |                        |
-| Article           |    25 | normalize to "article" |
-| single            |    11 |                        |
-| song              |    11 |                        |
-| Speech            |    11 |                        |
-| Ogg               |    11 |                        |
-| video.other       |     7 | normalize to "video"   |
-| news              |     6 |                        |
-| ARTICLE           |     4 | normalize to "article" |
-| media             |     2 |                        |
-| blog              |     1 |                        |
-| slideshow         |     1 |                        |
-| video.movie       |     1 | normalize to "video"   |
-| tumblr-feed:entry |     1 |                        |
-
-*** TODO SIMMO Quality
-Victor: the field "c_quality" is sent now. Values can be:
-- 0 = no quality assigned
-- 1 = high quality
-- 2 = medium quality
-- 3 = low quality
-- 5 = curated
-Vladimir:
-- The scale should be reordered to be monotonically increasing
-- Maybe instead of 0, we should omit the statement
-- Is there a valuel 4?
-- Do we have metadata who & when curated it?
-
-Vladimir: I searched for a [[http://lov.okfn.org/dataset/lov/terms?q%3Dquality&type%3Dproperty&page%3D2][quality property on LOV]], couldn't find anything really appropriate.
-- http://www.w3.org/ns/dcat#dataQuality: this is about datasets, but is deprecated: 
-  "This should not be used to describe the data collection characteristics, other more specialized statistical properties can be used instead". 
-  But I don't see such statistical properties
-- http://def.seegrid.csiro.au/isotc211/iso19115/2003/metadata#dataQualityInfo:
-  this is about ISO 19115 "Geographic information — metadata"
-  http://def.seegrid.csiro.au/isotc211/iso19115/2003/dataquality is a whole separate module on Quality
-- http://purl.oclc.org/NET/ssnx/ssn#qualityOfObservation: this is about Semantic Sensor Networks.
-  It makes reference to resultQuality in [[http://portal.opengeospatial.org/files/?artifact_id%3D41579][ISO 19156]] "Geographic information — Observations and measurements"
-
-Finally I found the W3C [[https://www.w3.org/TR/vocab-dqv/][Data Quality Vocabulary]] ~dqv:~. We'll use [[https://www.w3.org/TR/vocab-dqv/#DimensionsofZaveri][Linked Data Quality Dimensions]] ~ldqd:~ by Zaveri.
-First we add a ~dqv:Metric~ to the Multisensor ontology:
-#+BEGIN_SRC Turtle
-@prefix dqv:  <http://www.w3.org/ns/dqv#> .
-@prefix ldqd: <http://www.w3.org/2016/05/ldqd#> .
-
-ms:accuracy a dqv:Metric;
-  skos:prefLabel "Accuracy"@en;
-  skos:definition """Degree to which SIMMO data correctly represents the real world facts:
-1=low, 2=medium, 3=high, 5=manually curated"""@en ;
-  dqv:inDimension ldqd:semanticAccuracy;
-  dqv:expectedDataType xsd:integer.
-#+END_SRC
-
-Then for each SIMMO that has a quality rating (those that don't have a rating get no extra statements):
-#+BEGIN_SRC Turtle
-ms-content:b3f35 dqv:hasQualityMeasurement ms-content:b3f35-quality.
-
-ms-content:b3f35-quality a dqv:QualityMeasurement ;
-   dqv:isMeasurementOf ms:accuracy; dqv:value 3.
 #+END_SRC
 
 *** TODO Missing Authors
