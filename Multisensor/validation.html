@@ -157,6 +157,9 @@ for the JavaScript code in this tag.
 <li><a href="#sec-2-1-4">SIMMO Quality</a></li>
 <li><a href="#sec-2-1-5">Missing Authors</a></li>
 <li><a href="#sec-2-1-6">Genre (Type)</a></li>
+<li><a href="#sec-2-1-7">SIMMO Quality</a></li>
+<li><a href="#sec-2-1-8">Missing Authors</a></li>
+<li><a href="#sec-2-1-9">Genre (Type)</a></li>
 </ul>
 </li>
 <li><a href="#sec-2-2">Entity Linking Service</a>
@@ -373,13 +376,18 @@ Victor: the field "c_quality" is sent now. Values can be:
 Vladimir:
 </p>
 <ul class="org-ul">
-<li>The scale should be reordered to be monotonically increasing
+<li>Instead of a numeric scale (which is not monotonically increasing), let's use a nominal (symbolic) scale.
 </li>
-<li>Maybe instead of 0, we should omit the statement
+<li>Instead of 0, we should omit the statement
 </li>
-<li>Is there a value 4?
+<li>There is no value 4
 </li>
-<li>About value 5: do we have metadata who &amp; when curated it?
+<li>About value 5: do we have metadata who &amp; when curated it? Should we record in RDF something more than the number? 
+The selected quality ontology (DQV, see below) allows to record a lot of detail: who, when, according to what methodology&#x2026;
+<ul class="org-ul">
+<li>Leszek (skype:letschke): we do not provide any additional meta data.
+</li>
+</ul>
 </li>
 </ul>
 
@@ -413,10 +421,21 @@ First we add a <code>dqv:Metric</code> to the Multisensor ontology:
 
 <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">accuracy</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">dqv:</span><span style="color: #008b8b;">Metric</span>;
   <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">prefLabel</span> <span style="color: #8b2252;">"Accuracy"</span>@en;
-  <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">definition</span> <span style="color: #8b2252;">"""Degree to which SIMMO dat</span><span style="color: #a020f0;">a</span><span style="color: #8b2252;"> correctly represents the real world </span><span style="color: #228b22;">facts:</span>
-<span style="color: #8b2252;">1=low, 2=medium, 3=high, 5=manually curated"""</span>@en ;
+  <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">definition</span> <span style="color: #8b2252;">"Degree to which SIMMO data correctly represents real world facts."</span>@en;
   <span style="color: #228b22;">dqv:</span><span style="color: #008b8b;">inDimension</span> <span style="color: #228b22;">ldqd:</span><span style="color: #008b8b;">semanticAccuracy</span>;
-  <span style="color: #228b22;">dqv:</span><span style="color: #008b8b;">expectedDataType</span> <span style="color: #228b22;">xsd:</span><span style="color: #008b8b;">integer</span>.
+  <span style="color: #228b22;">dqv:</span><span style="color: #008b8b;">expectedDataType</span> <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">Accuracy</span><span style="color: #228b22;">.</span>
+
+<span style="color: #228b22;">ms:</span><span style="color: #008b8b;">Accuracy</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">owl:</span><span style="color: #008b8b;">Class,</span> <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">ConceptScheme</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">label</span> <span style="color: #8b2252;">"Accuracy values"</span><span style="color: #228b22;">@en.</span>
+<span style="color: #228b22;">ms:</span><span style="color: #008b8b;">accuracy-low</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">Accuracy,</span> <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">Concept</span>; <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">inScheme</span> <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">Accuracy</span>;
+  <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">prefLabel</span> <span style="color: #8b2252;">"Low accuracy"</span><span style="color: #228b22;">@en.</span>
+<span style="color: #228b22;">ms:</span><span style="color: #008b8b;">accuracy-medium</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">Accuracy,</span> <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">Concept</span>; <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">inScheme</span> <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">Accuracy</span>;
+  <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">prefLabel</span> <span style="color: #8b2252;">"Medium accuracy"</span><span style="color: #228b22;">@en.</span>
+<span style="color: #228b22;">ms:</span><span style="color: #008b8b;">accuracy-high</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">Accuracy,</span> <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">Concept</span>; <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">inScheme</span> <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">Accuracy</span>;
+  <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">prefLabel</span> <span style="color: #8b2252;">"High accuracy"</span><span style="color: #228b22;">@en.</span>
+<span style="color: #228b22;">ms:</span><span style="color: #008b8b;">accuracy-curated</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">Accuracy,</span> <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">Concept</span>; <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">inScheme</span> <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">Accuracy</span>;
+  <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">prefLabel</span> <span style="color: #8b2252;">"Manually curated"</span>@en;
+  <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">note</span> <span style="color: #8b2252;">"Highest accuracy"</span>@en.
 </pre>
 </div>
 
@@ -428,7 +447,7 @@ Then for each SIMMO that has a quality rating (those that don't have a rating ge
 <pre class="src src-Turtle"><span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">b3f35</span> <span style="color: #228b22;">dqv:</span><span style="color: #008b8b;">hasQualityMeasurement</span> <span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">b3f35-quality</span><span style="color: #228b22;">.</span>
 
 <span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">b3f35-quality</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">dqv:</span><span style="color: #008b8b;">QualityMeasurement</span> ;
-   <span style="color: #228b22;">dqv:</span><span style="color: #008b8b;">isMeasurementOf</span> <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">accuracy</span>; <span style="color: #228b22;">dqv:</span><span style="color: #008b8b;">value</span> 3.
+   <span style="color: #228b22;">dqv:</span><span style="color: #008b8b;">isMeasurementOf</span> <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">accuracy</span>; <span style="color: #228b22;">dqv:</span><span style="color: #008b8b;">value</span> <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">accuracy-curated</span>.
 </pre>
 </div>
 </div>
@@ -610,9 +629,9 @@ Distribution of Genre:
 </div>
 </div>
 
-<div id="outline-container-sec-2-1-4" class="outline-4">
-<h4 id="sec-2-1-4">SIMMO Quality</h4>
-<div class="outline-text-4" id="text-2-1-4">
+<div id="outline-container-sec-2-1-7" class="outline-4">
+<h4 id="sec-2-1-7">SIMMO Quality</h4>
+<div class="outline-text-4" id="text-2-1-7">
 <p>
 Victor: the field "c_quality" is sent now. Values can be:
 </p>
@@ -691,9 +710,9 @@ Then for each SIMMO that has a quality rating (those that don't have a rating ge
 </div>
 </div>
 
-<div id="outline-container-sec-2-1-5" class="outline-4">
-<h4 id="sec-2-1-5">Missing Authors</h4>
-<div class="outline-text-4" id="text-2-1-5">
+<div id="outline-container-sec-2-1-8" class="outline-4">
+<h4 id="sec-2-1-8">Missing Authors</h4>
+<div class="outline-text-4" id="text-2-1-8">
 <div class="org-src-container">
 
 <pre class="src src-sparql"><span style="color: #a020f0;">select</span> * {<span style="color: #a0522d;">?x</span> a foaf:Document} 
@@ -705,9 +724,9 @@ Then for each SIMMO that has a quality rating (those that don't have a rating ge
 </div>
 </div>
 
-<div id="outline-container-sec-2-1-6" class="outline-4">
-<h4 id="sec-2-1-6">Genre (Type)</h4>
-<div class="outline-text-4" id="text-2-1-6">
+<div id="outline-container-sec-2-1-9" class="outline-4">
+<h4 id="sec-2-1-9">Genre (Type)</h4>
+<div class="outline-text-4" id="text-2-1-9">
 <div class="org-src-container">
 
 <pre class="src src-sparql"><span style="color: #a020f0;">select</span> * {<span style="color: #a0522d;">?x</span> a foaf:Document; dc:type <span style="color: #a0522d;">?y</span>} 
@@ -1382,7 +1401,7 @@ The gdoc maybe has 2 queries related to CAP. Not sure I'm looking at the right s
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-06&gt;</span></span></p>
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-07&gt;</span></span></p>
 <p class="author">Author: Vladimir Alexiev</p>
 <p class="creator">Emacs 25.0.50.1 (Org mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>

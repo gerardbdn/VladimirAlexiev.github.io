@@ -1,5 +1,5 @@
 #+TITLE: Multisensor Validation Log
-#+DATE: <2016-07-06>
+#+DATE: <2016-07-07>
 #+AUTHOR: Vladimir Alexiev
 #+EMAIL: vladimir.alexiev@ontotext.com
 #+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline author:t c:nil
@@ -27,6 +27,9 @@
      - [[#simmo-quality][SIMMO Quality]]
      - [[#missing-authors][Missing Authors]]
      - [[#genre-type][Genre (Type)]]
+     - [[#simmo-quality-1][SIMMO Quality]]
+     - [[#missing-authors-1][Missing Authors]]
+     - [[#genre-type-1][Genre (Type)]]
    - [[#entity-linking-service][Entity Linking Service]]
      - [[#underscores-to-spaces][Underscores to Spaces]]
    - [[#advanced-context-extraction-service][Advanced Context Extraction Service]]
@@ -129,10 +132,12 @@ Victor: the field "c_quality" is sent now. Values can be:
 - 3 = low quality
 - 5 = curated
 Vladimir:
-- The scale should be reordered to be monotonically increasing
-- Maybe instead of 0, we should omit the statement
-- Is there a value 4?
-- About value 5: do we have metadata who & when curated it?
+- Instead of a numeric scale (which is not monotonically increasing), let's use a nominal (symbolic) scale.
+- Instead of 0, we should omit the statement
+- There is no value 4
+- About value 5: do we have metadata who & when curated it? Should we record in RDF something more than the number? 
+  The selected quality ontology (DQV, see below) allows to record a lot of detail: who, when, according to what methodology...
+  - Leszek (skype:letschke): we do not provide any additional meta data.
 
 Vladimir: I searched for a [[http://lov.okfn.org/dataset/lov/terms?q%3Dquality&type%3Dproperty&page%3D2][quality property on LOV]], couldn't find anything really appropriate:
 - http://www.w3.org/ns/dcat#dataQuality: this is about datasets, but is deprecated: 
@@ -154,10 +159,21 @@ First we add a ~dqv:Metric~ to the Multisensor ontology:
 
 ms:accuracy a dqv:Metric;
   skos:prefLabel "Accuracy"@en;
-  skos:definition """Degree to which SIMMO data correctly represents the real world facts:
-1=low, 2=medium, 3=high, 5=manually curated"""@en ;
+  skos:definition "Degree to which SIMMO data correctly represents real world facts."@en;
   dqv:inDimension ldqd:semanticAccuracy;
-  dqv:expectedDataType xsd:integer.
+  dqv:expectedDataType ms:Accuracy.
+
+ms:Accuracy a owl:Class, skos:ConceptScheme;
+  rdfs:label "Accuracy values"@en.
+ms:accuracy-low a ms:Accuracy, skos:Concept; skos:inScheme ms:Accuracy;
+  skos:prefLabel "Low accuracy"@en.
+ms:accuracy-medium a ms:Accuracy, skos:Concept; skos:inScheme ms:Accuracy;
+  skos:prefLabel "Medium accuracy"@en.
+ms:accuracy-high a ms:Accuracy, skos:Concept; skos:inScheme ms:Accuracy;
+  skos:prefLabel "High accuracy"@en.
+ms:accuracy-curated a ms:Accuracy, skos:Concept; skos:inScheme ms:Accuracy;
+  skos:prefLabel "Manually curated"@en;
+  skos:note "Highest accuracy"@en.
 #+END_SRC
 
 Then for each SIMMO that has a quality rating (those that don't have a rating get no extra statements):
@@ -165,7 +181,7 @@ Then for each SIMMO that has a quality rating (those that don't have a rating ge
 ms-content:b3f35 dqv:hasQualityMeasurement ms-content:b3f35-quality.
 
 ms-content:b3f35-quality a dqv:QualityMeasurement ;
-   dqv:isMeasurementOf ms:accuracy; dqv:value 3.
+   dqv:isMeasurementOf ms:accuracy; dqv:value ms:accuracy-curated.
 #+END_SRC
 
 *** TODO Missing Authors
