@@ -1,11 +1,11 @@
 #+TITLE: Multisensor Validation Log
-#+DATE: <2016-07-07>
+#+DATE: <2016-07-08>
 #+AUTHOR: Vladimir Alexiev
 #+EMAIL: vladimir.alexiev@ontotext.com
 #+SETUP: showeverything
 #+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline author:t c:nil
 #+OPTIONS: creator:comment d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:nil
-#+OPTIONS: p:nil pri:nil stat:t tags:t tasks:t tex:t timestamp:nil toc:t todo:nil |:t
+#+OPTIONS: p:nil pri:nil stat:t tags:t tasks:t tex:t timestamp:nil toc:t todo:t |:t
 #+CREATOR: Emacs 25.0.50.1 (Org mode 8.2.10)
 #+DESCRIPTION:
 #+EXCLUDE_TAGS: noexport
@@ -16,38 +16,36 @@
 
 [[https://github.com/VladimirAlexiev/VladimirAlexiev.github.io/blob/master/Multisensor/validation.org][Github Source]], [[http://VladimirAlexiev.github.io/Multisensor/validation.html][HTML Rendered version]]
 
-
 * Table of Contents                                            :TOC:noexport:
  - [[#intro][Intro]]
    - [[#queries][Queries]]
  - [[#validation][Validation]]
-   - [[#context][Context]]
-     - [[#crawler-to-decode-html-entities][Crawler to decode HTML entities]]
-     - [[#keywords-vs-category][Keywords vs Category]]
-     - [[#ingest-timestamp][Ingest Timestamp]]
-     - [[#simmo-quality][SIMMO Quality]]
-     - [[#missing-authors][Missing Authors]]
-     - [[#genre-type][Genre (Type)]]
+   - [[#context-extraction-service][Context Extraction Service]]
+     - [[#todo-crawler-to-decode-html-entities][TODO Crawler to decode HTML entities]]
+     - [[#done-keywords-vs-category][DONE Keywords vs Category]]
+     - [[#todo-ingest-timestamp][TODO Ingest Timestamp]]
+     - [[#todo-simmo-quality][TODO SIMMO Quality]]
+     - [[#cancel-missing-authors][CANCEL Missing Authors]]
+     - [[#cancel-genre-type][CANCEL Genre (Type)]]
+     - [[#done-wrong-prefix-for-text-characteristics][DONE Wrong prefix for Text Characteristics]]
    - [[#entity-linking-service][Entity Linking Service]]
-     - [[#underscores-to-spaces][Underscores to Spaces]]
-   - [[#advanced-context-extraction-service][Advanced Context Extraction Service]]
-     - [[#wrong-prefix-for-text-characteristics][Wrong prefix for Text Characteristics]]
+     - [[#todo-underscores-to-spaces][TODO Underscores to Spaces]]
    - [[#entity-alignment-service][Entity Alignment Service]]
-     - [[#also-remove-taidentconf-taidentprov][Also remove taIdentConf, taIdentProv]]
-     - [[#leave-dependency-links][Leave Dependency Links]]
-     - [[#use-prefixes-in-alignmentlog][Use Prefixes in alignment.log]]
+     - [[#done-also-remove-taidentconf-taidentprov][DONE Also remove taIdentConf, taIdentProv]]
+     - [[#done-leave-dependency-links][DONE Leave Dependency Links]]
+     - [[#todo-use-prefixes-in-alignmentlog][TODO Use Prefixes in alignment.log]]
    - [[#summarization-service][Summarization Service]]
-     - [[#refresh-prefixes][Refresh Prefixes]]
-     - [[#nifanchorof][nif:anchorOf]]
-     - [[#why-nif-anntaidentconf-is-0][Why nif-ann:taIdentConf is 0?]]
-     - [[#msgenericconcept-vs-msspecificconcept][ms:GenericConcept vs ms:SpecificConcept]]
-     - [[#optimize-summarization-queries][Optimize Summarization Queries]]
+     - [[#todo-refresh-prefixes][TODO Refresh Prefixes]]
+     - [[#todo-nifanchorof][TODO nif:anchorOf]]
+     - [[#todo-why-nif-anntaidentconf-is-0][TODO Why nif-ann:taIdentConf is 0?]]
+     - [[#todo-msgenericconcept-vs-msspecificconcept][TODO ms:GenericConcept vs ms:SpecificConcept]]
+     - [[#done-optimize-summarization-queries][DONE Optimize Summarization Queries]]
    - [[#content-alignment][Content Alignment]]
-     - [[#one-annotation-per-pair][One Annotation Per Pair]]
-     - [[#use-msscore-not-fiseconfidence-for-cap][Use ms:score not fise:confidence for CAP]]
-     - [[#add-to-ontology][Add to Ontology]]
+     - [[#todo-one-annotation-per-pair][TODO One Annotation Per Pair]]
+     - [[#todo-use-msscore-not-fiseconfidence-for-cap][TODO Use ms:score not fise:confidence for CAP]]
+     - [[#todo-add-to-ontology][TODO Add to Ontology]]
      - [[#cap-query][CAP Query]]
-     - [[#other-cap-queries][Other CAP Queries]]
+     - [[#todo-other-cap-queries][TODO Other CAP Queries]]
 
 * Intro
 From now until the end of the project I'll keep a detailed log of what I validated and defects I found.
@@ -74,7 +72,7 @@ and notify me in a gdoc comment (add +vladimir@sirma.bg to the comment).
 
 * Validation
 
-** Context
+** Context Extraction Service
 
 *** TODO Crawler to decode HTML entities
 It would be good if the crawler decodes HTML entities before storing in dc:subject (possibly also dc:title, dc:description). Eg:
@@ -182,19 +180,28 @@ ms-content:b3f35-quality a dqv:QualityMeasurement ;
    dqv:isMeasurementOf ms:accuracy; dqv:value ms:accuracy-curated.
 #+END_SRC
 
-*** TODO Missing Authors
+*** CANCEL Missing Authors
 #+BEGIN_SRC sparql
 select * {?x a foaf:Document} 
 # 112k SIMMOs
 select * {?x a foaf:Document; dc:creator ?y}
 # 10.5k authors, only 9.4%
 #+END_SRC
+- Can we get more authors?
+Discussion <2016-07-08 Fri> [[https://quark.everis.com/jira/browse/MULTISENSO-186][MULTISENSO-186]]:
+- Andrey:  Interest in the "genre", “author” feature if available (not always retrievable by the context extraction service)
+- Ioannis: The genre and author information can only be extracted when they are available in the HTML content of the scrapped page, otherwise we cannot infer it. To this end, there is not much we can do.
+  It was quite obvious on the planning stage that not all articles have mentioned fields in HTML tags, and it could be foreseen, maybe with additional parsing methods since not always html tags do have this information, but normally all news articles have for example Author info in the body of the article. So this part can be closed, as "it" will not going to happen.
 
-*** TODO Genre (Type)
+*** CANCEL Genre (Type)
+Vladimir & Ioannis: by *Genre*, do you mean dc:type? We assume so below.
+
 #+BEGIN_SRC sparql
 select * {?x a foaf:Document; dc:type ?y} 
 # 20k, that's 17.9%
 #+END_SRC
+- Q: Can we get more genres?
+- A: Same comments as in the previous section apply.
 
 Distribution of Genre:
 #+BEGIN_SRC sparql
@@ -215,7 +222,7 @@ group by ?y order by desc(?c)
 | single            |    11 |                        |
 | song              |    11 |                        |
 | Speech            |    11 |                        |
-| Ogg               |    11 |                        |
+| Ogg               |    11 | normalize to "sound"   |
 | video.other       |     7 | normalize to "video"   |
 | news              |     6 |                        |
 | ARTICLE           |     4 | normalize to "article" |
@@ -224,6 +231,30 @@ group by ?y order by desc(?c)
 | slideshow         |     1 |                        |
 | video.movie       |     1 | normalize to "video"   |
 | tumblr-feed:entry |     1 |                        |
+<2016-07-08 Fri>
+- Vladimir: it would be nice to normalize some values, and reduce this from 20 to say 10 rows
+- Ioannis: the code to extract "type" was written over a year ago, so this would not be so simple
+- Vladimir and Ioannis: the first 5 types catch 90%, so it's only the "long tail" would need normalization... This is not so important
+
+*** DONE Wrong prefix for Text Characteristics
+Advanced Context Extraction adds new Text Characteristics properties (~ms:technicality, ms:fluency, ms:richness~) 
+to the context (property definitions omitted for brevity).
+
+Example (this particular text is fluent, but is neither rich nor technical, so we set values 5, 1, 1 respectively):
+#+BEGIN_SRC Turtle
+@base <http://data.multisensorproject.eu/content/9e9c304>.
+
+<#char=0,2000> a nif:Context;
+  nif:isString "This is the whole text of the SIMMO.\n It should continue for 2000 chars but I'll stop here"@en;
+  ms:fluency      5.0;
+  ms:richness     1.0;
+  ms:technicality 1.0.
+#+END_SRC
+
+<2016-06-23 Thu>: checked [[http://grinder1.multisensorproject.eu/cepfiles/rdf_validation/context_extraction_validation/0e6b24-CONTEXT_EXTRACTION-22-6-2016.ttl][0e6b24-CONTEXT_EXTRACTION-22-6-2016.ttl]] and Text Characteristics (technicality, fluency, richness):
+- currently use <http://data.multisensor.eu/ontology#>
+- but the correct prefix is <http://data.multisensorproject.eu/ontology#>
+Victor <2016-06-30 Thu>: updated the prefix
 
 ** Entity Linking Service
 
@@ -240,18 +271,6 @@ I think EL should convert the underscores to spaces to make the label more natur
 
 Should we also remove disambiguations, which are trailing parenthesized parts, eg "Pastel_(gastronomía)" -> "Pastel"?
 Since these labels are not used for NLP tasks, and the disambiguations are very useful for understanding what the entity is, let's leave them.
-
-** Advanced Context Extraction Service
-<2016-06-23 Thu>: checked [[http://grinder1.multisensorproject.eu/cepfiles/rdf_validation/context_extraction_validation/0e6b24-CONTEXT_EXTRACTION-22-6-2016.ttl][0e6b24-CONTEXT_EXTRACTION-22-6-2016.ttl]]
-
-This service adds new Text Characteristics properties (technicality, fluency, richness) to the context.
-
-*** DONE Wrong prefix for Text Characteristics
-Text Characteristics (technicality, fluency, richness):
-- currently use <http://data.multisensor.eu/ontology#>
-- but the correct prefix is <http://data.multisensorproject.eu/ontology#>
-
-Victor <2016-06-30 Thu>: updated the prefix
 
 ** Entity Alignment Service
 <2016-06-28 Tue>: checked [[http://grinder1.multisensorproject.eu/cepfiles/rdf_validation/entity_alignment/0181e1-ENTITY_ALIGNMENT-21-6-2016.ttl][0181e1-ENTITY_ALIGNMENT-21-6-2016.ttl]] and alignment.log (by email)
