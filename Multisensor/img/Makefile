@@ -1,4 +1,4 @@
-IGNORE = prefixes.ttl image-iiif.ttl
+IGNORE = prefixes.ttl NIF-example.ttl
 TTL    = $(filter-out $(IGNORE), $(wildcard *.ttl))
 PUML   = $(patsubst %.ttl, %.puml, $(TTL))
 PNG    = $(patsubst %.ttl, %.png, $(TTL))

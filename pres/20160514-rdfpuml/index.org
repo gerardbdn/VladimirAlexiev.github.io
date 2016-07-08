@@ -144,12 +144,14 @@ fn:AnnotationSet   puml:stereotype "(F,red)"
 #+END_COMMENT
 
 #+BEGIN_SRC Turtle
-iso:ThesaurusArray puml:stereotype "<<(A,red)ThesaurusArray, OrderedCollection>>".
-gvp:GuideTerm      puml:stereotype "<<(G,green)ThesaurusArray, OrderedCollection>>".
-gvp:Concept        puml:stereotype "<<(C,lightblue)Concept>>".
+iso:ThesaurusArray puml:stereotype "(A,red)".
+gvp:GuideTerm      puml:stereotype "(G,green)".
+gvp:Concept        puml:stereotype "(C,lightblue)".
 #+END_SRC
 #+ATTR_HTML: :class stretch :style width:400px
 [[./img/GVP-ordered-collection-Stereotype.png]]
+
+You can also use this on an individual node instead of a whole class.
 
 ** Reification
 - A statement ~<s> <p> <o>~ is also represented as a node with 3 addressing properties, and extra data is added
