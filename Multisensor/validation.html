@@ -87,7 +87,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
-<style type='text/css'> h1,h2,h3,h4,h5,h6,h7 {font-family: Arial} .author, .date, .creator {-webkit-margin-before: 0em; -webkit-margin-after: 0em} .abstract {margin: 1em; padding: 1em; border: 1px solid black} .abstract:before {content: 'Abstract: '; font-weight: bold} #preamble p {font-size: 110%%; margin-left: auto; margin-right: auto; text-align: center} th.left {text-align:left} th.right {text-align:right} th, td {line-height: 1em; border-width: 1px; border-style: solid solid; border-spacing: 2px 2px; padding: 2px 1px} .CANCELED {color: blue} .MAYBE {color: blue} .POSTPONED {color: blue} .INPROGRESS {color: orange} .NEXT {color: orange} .IER {color: orange}.underline {text-decoration:underline} </style>
+<style type='text/css'> h1,h2,h3,h4,h5,h6,h7 {font-family: Arial} .author, .date, .creator {-webkit-margin-before: 0em; -webkit-margin-after: 0em} .abstract {margin: 1em; padding: 1em; border: 1px solid black} .abstract:before {content: 'Abstract: '; font-weight: bold} #preamble p {font-size: 110%%; margin-left: auto; margin-right: auto; text-align: center} th.left {text-align:left} th.right {text-align:right} th, td {line-height: 1em; border-width: 1px; border-style: solid solid; border-spacing: 2px 2px; padding: 2px 1px} .CANCELED {color: blue} .MAYBE {color: blue} .POSTPONED {color: blue} .APPLIED {color: orange} .FOLLOW {color: orange} .INPROGRESS {color: orange} .NEXT {color: orange} .IER {color: orange}.underline {text-decoration:underline} </style>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -153,11 +153,12 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#sec-2-1-1"><span class="todo TODO">TODO</span> Crawler to decode HTML entities</a></li>
 <li><a href="#sec-2-1-2"><span class="done DONE">DONE</span> Keywords vs Category</a></li>
-<li><a href="#sec-2-1-3"><span class="todo TODO">TODO</span> Ingest Timestamp</a></li>
-<li><a href="#sec-2-1-4"><span class="todo TODO">TODO</span> SIMMO Quality</a></li>
+<li><a href="#sec-2-1-3"><span class="done DONE">DONE</span> Ingest Timestamp</a></li>
+<li><a href="#sec-2-1-4"><span class="done DONE">DONE</span> SIMMO Quality</a></li>
 <li><a href="#sec-2-1-5"><span class="done CANCEL">CANCEL</span> Missing Authors</a></li>
 <li><a href="#sec-2-1-6"><span class="done CANCEL">CANCEL</span> Genre (Type)</a></li>
 <li><a href="#sec-2-1-7"><span class="done DONE">DONE</span> Wrong prefix for Text Characteristics</a></li>
+<li><a href="#sec-2-1-8"><span class="done DONE">DONE</span> Refresh Prefixes</a></li>
 </ul>
 </li>
 <li><a href="#sec-2-2">Entity Linking Service</a>
@@ -174,11 +175,10 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#sec-2-4">Summarization Service</a>
 <ul>
-<li><a href="#sec-2-4-1"><span class="todo TODO">TODO</span> Refresh Prefixes</a></li>
-<li><a href="#sec-2-4-2"><span class="todo TODO">TODO</span> nif:anchorOf</a></li>
-<li><a href="#sec-2-4-3"><span class="todo TODO">TODO</span> Why nif-ann:taIdentConf is 0?</a></li>
-<li><a href="#sec-2-4-4"><span class="todo TODO">TODO</span> ms:GenericConcept vs ms:SpecificConcept</a></li>
-<li><a href="#sec-2-4-5"><span class="done DONE">DONE</span> Optimize Summarization Queries</a></li>
+<li><a href="#sec-2-4-1"><span class="todo QUE">QUE</span> nif:anchorOf</a></li>
+<li><a href="#sec-2-4-2"><span class="todo TODO">TODO</span> Why nif-ann:taIdentConf is 0?</a></li>
+<li><a href="#sec-2-4-3"><span class="todo TODO">TODO</span> ms:GenericConcept vs ms:SpecificConcept</a></li>
+<li><a href="#sec-2-4-4"><span class="done DONE">DONE</span> Optimize Summarization Queries</a></li>
 </ul>
 </li>
 <li><a href="#sec-2-5">Content Alignment</a>
@@ -322,8 +322,12 @@ It would be nice to:
 </div>
 
 <div id="outline-container-sec-2-1-3" class="outline-4">
-<h4 id="sec-2-1-3"><span class="todo TODO">TODO</span> Ingest Timestamp</h4>
+<h4 id="sec-2-1-3"><span class="done DONE">DONE</span> Ingest Timestamp</h4>
 <div class="outline-text-4" id="text-2-1-3">
+<p>
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-20 Wed&gt;</span></span> Almost done, only the datatype is missing.
+</p>
+
 <p>
 Victor: introduce the date when the article have been processed in RDF. 
 In order to keep track of which and when the “curated selected data” have been processed,
@@ -347,8 +351,12 @@ Boyan will add this second timestamp in the POST method.
 </div>
 
 <div id="outline-container-sec-2-1-4" class="outline-4">
-<h4 id="sec-2-1-4"><span class="todo TODO">TODO</span> SIMMO Quality</h4>
+<h4 id="sec-2-1-4"><span class="done DONE">DONE</span> SIMMO Quality</h4>
 <div class="outline-text-4" id="text-2-1-4">
+<p>
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-20&gt;</span></span> status: almost ok, but dqv:value should be symbolic (eg ms:accuracy-low) instead of numeric (1)
+</p>
+
 <p>
 Victor: the field "c_quality" is sent now. Values can be:
 </p>
@@ -432,7 +440,7 @@ First we add a <code>dqv:Metric</code> to the Multisensor ontology:
 </div>
 
 <p>
-Then for each SIMMO that has a quality rating (those that don't have a rating get no extra statements):
+Then for each SIMMO that has a quality rating:
 </p>
 <div class="org-src-container">
 
@@ -442,6 +450,9 @@ Then for each SIMMO that has a quality rating (those that don't have a rating ge
    <span style="color: #228b22;">dqv:</span><span style="color: #008b8b;">isMeasurementOf</span> <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">accuracy</span>; <span style="color: #228b22;">dqv:</span><span style="color: #008b8b;">value</span> <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">accuracy-curated</span>.
 </pre>
 </div>
+<p>
+(Those SIMMOS that don't have a rating get no extra statements)
+</p>
 </div>
 </div>
 
@@ -693,6 +704,33 @@ Victor <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-06-30 Th
 </p>
 </div>
 </div>
+
+<div id="outline-container-sec-2-1-8" class="outline-4">
+<h4 id="sec-2-1-8"><span class="done DONE">DONE</span> Refresh Prefixes</h4>
+<div class="outline-text-4" id="text-2-1-8">
+<p>
+I've added <a href="http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-annotation">http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-annotation</a># to <a href="./img/prefixes.ttl">./img/prefixes.ttl</a> (committed <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-06-30 Thu&gt;</span></span>)
+Please refresh from <a href="./img/prefixes.ttl">./img/prefixes.ttl</a>, so new validation files use this prefix.
+</p>
+
+<p>
+Gerard: what exactly are we suppposed to do with the prefixes file.
+</p>
+<ul class="org-ul">
+<li>Once loaded in the repo (Boyan's job), we can make queries without mentioning the prefixes.
+</li>
+</ul>
+<p>
+Should we load it into Sesame somehow so that triples are generated with prefixes? 
+If so, could you give us some code showing how to do it?
+</p>
+<ul class="org-ul">
+<li>I think the validation files use prefixes, because prefixes.ttl is prepended, then passed through RIOT.
+I think Victor made that script. The other prefixes are there, so it's just a matter of refreshing
+</li>
+</ul>
+</div>
+</div>
 </div>
 
 <div id="outline-container-sec-2-2" class="outline-3">
@@ -862,35 +900,8 @@ This is a completely cosmetic issue, we can cancel it.
 </div>
 
 <div id="outline-container-sec-2-4-1" class="outline-4">
-<h4 id="sec-2-4-1"><span class="todo TODO">TODO</span> Refresh Prefixes</h4>
+<h4 id="sec-2-4-1"><span class="todo QUE">QUE</span> nif:anchorOf</h4>
 <div class="outline-text-4" id="text-2-4-1">
-<p>
-I've added <a href="http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-annotation">http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-annotation</a># to <a href="./img/prefixes.ttl">./img/prefixes.ttl</a> (committed <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-06-30 Thu&gt;</span></span>)
-Please refresh from <a href="./img/prefixes.ttl">./img/prefixes.ttl</a>, so new validation files use this prefix.
-</p>
-
-<p>
-Gerard: what exactly are we suppposed to do with the prefixes file.
-</p>
-<ul class="org-ul">
-<li>Once loaded in the repo (Boyan's job), we can make queries without mentioning the prefixes.
-</li>
-</ul>
-<p>
-Should we load it into Sesame somehow so that triples are generated with prefixes? 
-If so, could you give us some code showing how to do it?
-</p>
-<ul class="org-ul">
-<li>I think the validation files use prefixes, because prefixes.ttl is prepended, then passed through RIOT.
-I think Victor made that script. The other prefixes are there, so it's just a matter of refreshing
-</li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-sec-2-4-2" class="outline-4">
-<h4 id="sec-2-4-2"><span class="todo TODO">TODO</span> nif:anchorOf</h4>
-<div class="outline-text-4" id="text-2-4-2">
 <p>
 I've been saying all along to skip <code>nif:anchorOf</code> so as not to create too many literals.
 Above, UPF has done just that; while the other services emit it.
@@ -905,25 +916,27 @@ But with the number of SIMMOs loaded, it has not been too taxing for GDB.
 <code>nif:literalAnnotation</code> and <code>nif:lemma</code> provide sufficient info about the phrase, 
 so maybe we don't need <code>nif:anchorOf</code>. We could cancel this issue.
 </p>
-
-<p>
-Gerard: If they can be sustained by GraphDB, I vote in favor of keeping them as they help <b>a lot</b> when debugging. 
-</p>
-
-<p>
-Vladimir: so decided: if the Entity Lookup makes a new node, add anchorOf to it.
-</p>
+<ul class="org-ul">
+<li>Gerard: If they can be sustained by GraphDB, I vote in favor of keeping them as they help <b>a lot</b> when debugging. 
+</li>
+<li>Vladimir: so decided: if the Entity Lookup makes a new node, add anchorOf to it.
+</li>
+</ul>
 </div>
 </div>
 
-<div id="outline-container-sec-2-4-3" class="outline-4">
-<h4 id="sec-2-4-3"><span class="todo TODO">TODO</span> Why nif-ann:taIdentConf is 0?</h4>
-<div class="outline-text-4" id="text-2-4-3">
+<div id="outline-container-sec-2-4-2" class="outline-4">
+<h4 id="sec-2-4-2"><span class="todo TODO">TODO</span> Why nif-ann:taIdentConf is 0?</h4>
+<div class="outline-text-4" id="text-2-4-2">
 <p>
 In the above example, ~nif-ann:taIdentConf is 0. 
 In many other examples it's a good number, eg see below.
 Is 0 some sort of bug, or does Babelfy actually return 0 confidence for some concepts?
 </p>
+<ul class="org-ul">
+<li>I think it's an error, I'll get back to you as soon as as I've figured out what's causing it.
+</li>
+</ul>
 
 <p>
 <a href="http://grinder1.multisensorproject.eu/cepfiles/rdf_validation/concept_with_scores_16_06_2016/bf6fe4-CONCEPT_EXTRACTION-16-6-2016.ttl">bf6fe4-CONCEPT_EXTRACTION-16-6-2016.ttl</a>
@@ -934,10 +947,8 @@ Is 0 some sort of bug, or does Babelfy actually return 0 confidence for some con
 
 <span style="color: #0000ff;">&lt;#char=1814,1822&gt;</span>
         <span style="color: #a020f0;">a</span>                        <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">Word</span> ;
-        <span style="color: #0000ff;">&lt;http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-annotation#taIdentConf&gt;</span>
-                <span style="color: #8b2252;">"0.7619547411890493"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">double</span> ;
-        <span style="color: #0000ff;">&lt;http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-annotation#taIdentProv&gt;</span>
-                <span style="color: #0000ff;">&lt;http://babelfy.org/&gt;</span> ;
+        <span style="color: #228b22;">nif-anno:</span><span style="color: #008b8b;">taIdentConf</span>     <span style="color: #8b2252;">"0.7619547411890493"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">double</span> ;
+        <span style="color: #228b22;">nif-anno:</span><span style="color: #008b8b;">taIdentProv</span>     <span style="color: #0000ff;">&lt;http://babelfy.org/&gt;</span> ;
         <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">anchorOf</span>             <span style="color: #8b2252;">"pastries"</span> ;
         <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">beginIndex</span>           <span style="color: #8b2252;">"1814"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">nonNegativeInteger</span> ;
         <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">dependency</span>           <span style="color: #0000ff;">&lt;#char=1806,1812&gt;</span><span style="color: #b22222;"> ;</span>
@@ -957,23 +968,28 @@ Is 0 some sort of bug, or does Babelfy actually return 0 confidence for some con
 </div>
 </div>
 
+<div id="outline-container-sec-2-4-3" class="outline-4">
+<h4 id="sec-2-4-3"><span class="todo TODO">TODO</span> ms:GenericConcept vs ms:SpecificConcept</h4>
+<div class="outline-text-4" id="text-2-4-3">
+<ul class="org-ul">
+<li>Gerard (about the last example): A 'generic' concept produced by Babelfy. 
+But annotations of concepts produced by the concept extraction service should contain triples pointing to <code>ms:SpecificConcept</code>.
+</li>
+<li>Vladimir: also seems to me that concepts like "open source" and "pastry" are <code>ms:SpecificConcept</code>.
+</li>
+<li>Gerard: problems regarding the quality of the annotations shouldn't be part of the RDF validation.
+</li>
+<li>Vladimir: agree, but this log is for the project as a whole, not just syntactic validity. (Which doesn't mean I'm determining priorities!)
+</li>
+<li>Gerard: we'll be releasing updates to the concept extraction service, so expect improvements into what is considered a specific concept.
+</li>
+</ul>
+</div>
+</div>
+
 <div id="outline-container-sec-2-4-4" class="outline-4">
-<h4 id="sec-2-4-4"><span class="todo TODO">TODO</span> ms:GenericConcept vs ms:SpecificConcept</h4>
+<h4 id="sec-2-4-4"><span class="done DONE">DONE</span> Optimize Summarization Queries</h4>
 <div class="outline-text-4" id="text-2-4-4">
-<p>
-Gerard wrote about the last example: 'generic' concept produced by Babelfy. 
-Annotations of concepts produced by the concept extraction service should contain triples pointing to <code>ms:SpecificConcept</code>.
-</p>
-
-<p>
-It also seems to me that concepts like "open source" and "pastry" are <code>ms:SpecificConcept</code>.
-</p>
-</div>
-</div>
-
-<div id="outline-container-sec-2-4-5" class="outline-4">
-<h4 id="sec-2-4-5"><span class="done DONE">DONE</span> Optimize Summarization Queries</h4>
-<div class="outline-text-4" id="text-2-4-5">
 <p>
 Gerard wrote some of the Summarization queries are slow.
 Please mark which ones need optimization, and provide <code>$graph</code> for testing.
@@ -1040,6 +1056,17 @@ This complicates data management, because both of these graphs need to be update
 <div id="outline-container-sec-2-5-1" class="outline-4">
 <h4 id="sec-2-5-1"><span class="todo TODO">TODO</span> One Annotation Per Pair&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Babis">Babis</span></span></h4>
 <div class="outline-text-4" id="text-2-5-1">
+<p>
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-20 Wed&gt;</span></span>: checked with this query, don't find data:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sparql"><span style="color: #a020f0;">select</span> * <span style="color: #a020f0;">where</span> { 
+ <span style="color: #a020f0;">graph</span> <span style="color: #008b8b;">&lt;http://data.multisensorproject.eu/CAP&gt;</span> {<span style="color: #a0522d;">?s</span> <span style="color: #a0522d;">?p</span> <span style="color: #a0522d;">?o</span>}
+} <span style="color: #a020f0;">limit</span> 100
+</pre>
+</div>
+
 <p>
 After consultation with Babis, we decided to change the representation as follows:
 </p>
@@ -1177,7 +1204,7 @@ The gdoc maybe has 2 queries related to CAP. Not sure I'm looking at the right s
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-08&gt;</span></span></p>
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-20&gt;</span></span></p>
 <p class="author">Author: Vladimir Alexiev</p>
 <p class="creator">Emacs 25.0.50.1 (Org mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>

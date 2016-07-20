@@ -1,5 +1,5 @@
 #+TITLE: Multisensor Validation Log
-#+DATE: <2016-07-08>
+#+DATE: <2016-07-20>
 #+AUTHOR: Vladimir Alexiev
 #+EMAIL: vladimir.alexiev@ontotext.com
 #+SETUP: showeverything
@@ -21,31 +21,31 @@
    - [[#queries][Queries]]
  - [[#validation][Validation]]
    - [[#context-extraction-service][Context Extraction Service]]
-     - [[#todo-crawler-to-decode-html-entities][TODO Crawler to decode HTML entities]]
-     - [[#done-keywords-vs-category][DONE Keywords vs Category]]
-     - [[#todo-ingest-timestamp][TODO Ingest Timestamp]]
-     - [[#todo-simmo-quality][TODO SIMMO Quality]]
+     - [[#crawler-to-decode-html-entities][Crawler to decode HTML entities]]
+     - [[#keywords-vs-category][Keywords vs Category]]
+     - [[#ingest-timestamp][Ingest Timestamp]]
+     - [[#simmo-quality][SIMMO Quality]]
      - [[#cancel-missing-authors][CANCEL Missing Authors]]
      - [[#cancel-genre-type][CANCEL Genre (Type)]]
-     - [[#done-wrong-prefix-for-text-characteristics][DONE Wrong prefix for Text Characteristics]]
+     - [[#wrong-prefix-for-text-characteristics][Wrong prefix for Text Characteristics]]
+     - [[#refresh-prefixes][Refresh Prefixes]]
    - [[#entity-linking-service][Entity Linking Service]]
-     - [[#todo-underscores-to-spaces][TODO Underscores to Spaces]]
+     - [[#underscores-to-spaces][Underscores to Spaces]]
    - [[#entity-alignment-service][Entity Alignment Service]]
-     - [[#done-also-remove-taidentconf-taidentprov][DONE Also remove taIdentConf, taIdentProv]]
-     - [[#done-leave-dependency-links][DONE Leave Dependency Links]]
-     - [[#todo-use-prefixes-in-alignmentlog][TODO Use Prefixes in alignment.log]]
+     - [[#also-remove-taidentconf-taidentprov][Also remove taIdentConf, taIdentProv]]
+     - [[#leave-dependency-links][Leave Dependency Links]]
+     - [[#use-prefixes-in-alignmentlog][Use Prefixes in alignment.log]]
    - [[#summarization-service][Summarization Service]]
-     - [[#todo-refresh-prefixes][TODO Refresh Prefixes]]
-     - [[#todo-nifanchorof][TODO nif:anchorOf]]
-     - [[#todo-why-nif-anntaidentconf-is-0][TODO Why nif-ann:taIdentConf is 0?]]
-     - [[#todo-msgenericconcept-vs-msspecificconcept][TODO ms:GenericConcept vs ms:SpecificConcept]]
-     - [[#done-optimize-summarization-queries][DONE Optimize Summarization Queries]]
+     - [[#que-nifanchorof][QUE nif:anchorOf]]
+     - [[#why-nif-anntaidentconf-is-0][Why nif-ann:taIdentConf is 0?]]
+     - [[#msgenericconcept-vs-msspecificconcept][ms:GenericConcept vs ms:SpecificConcept]]
+     - [[#optimize-summarization-queries][Optimize Summarization Queries]]
    - [[#content-alignment][Content Alignment]]
-     - [[#todo-one-annotation-per-pair][TODO One Annotation Per Pair]]
-     - [[#todo-use-msscore-not-fiseconfidence-for-cap][TODO Use ms:score not fise:confidence for CAP]]
-     - [[#todo-add-to-ontology][TODO Add to Ontology]]
+     - [[#one-annotation-per-pair][One Annotation Per Pair]]
+     - [[#use-msscore-not-fiseconfidence-for-cap][Use ms:score not fise:confidence for CAP]]
+     - [[#add-to-ontology][Add to Ontology]]
      - [[#cap-query][CAP Query]]
-     - [[#todo-other-cap-queries][TODO Other CAP Queries]]
+     - [[#other-cap-queries][Other CAP Queries]]
 
 * Intro
 From now until the end of the project I'll keep a detailed log of what I validated and defects I found.
@@ -107,7 +107,9 @@ It would be nice to:
   - (don't split categories, since the 3 words really represent one category)
 - Map our categories to IPTC Media Topics. This is quite harder
 
-*** TODO Ingest Timestamp
+*** DONE Ingest Timestamp
+<2016-07-20 Wed> Almost done, only the datatype is missing.
+
 Victor: introduce the date when the article have been processed in RDF. 
 In order to keep track of which and when the “curated selected data” have been processed,
 and match them with the current version of the CEP service.
@@ -120,7 +122,9 @@ ms-content:b3f35
 #+END_SRC
 Boyan will add this second timestamp in the POST method.
 
-*** TODO SIMMO Quality
+*** DONE SIMMO Quality
+<2016-07-20> status: almost ok, but dqv:value should be symbolic (eg ms:accuracy-low) instead of numeric (1)
+
 Victor: the field "c_quality" is sent now. Values can be:
 - 0 = no quality assigned
 - 1 = high quality
@@ -172,13 +176,14 @@ ms:accuracy-curated a ms:Accuracy, skos:Concept; skos:inScheme ms:Accuracy;
   skos:note "Highest accuracy"@en.
 #+END_SRC
 
-Then for each SIMMO that has a quality rating (those that don't have a rating get no extra statements):
+Then for each SIMMO that has a quality rating:
 #+BEGIN_SRC Turtle
 ms-content:b3f35 dqv:hasQualityMeasurement ms-content:b3f35-quality.
 
 ms-content:b3f35-quality a dqv:QualityMeasurement ;
    dqv:isMeasurementOf ms:accuracy; dqv:value ms:accuracy-curated.
 #+END_SRC
+(Those SIMMOS that don't have a rating get no extra statements)
 
 *** CANCEL Missing Authors
 #+BEGIN_SRC sparql
@@ -255,6 +260,17 @@ Example (this particular text is fluent, but is neither rich nor technical, so w
 - currently use <http://data.multisensor.eu/ontology#>
 - but the correct prefix is <http://data.multisensorproject.eu/ontology#>
 Victor <2016-06-30 Thu>: updated the prefix
+
+*** DONE Refresh Prefixes
+I've added http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-annotation# to [[./img/prefixes.ttl]] (committed <2016-06-30 Thu>)
+Please refresh from [[./img/prefixes.ttl]], so new validation files use this prefix.
+
+Gerard: what exactly are we suppposed to do with the prefixes file.
+- Once loaded in the repo (Boyan's job), we can make queries without mentioning the prefixes.
+Should we load it into Sesame somehow so that triples are generated with prefixes? 
+If so, could you give us some code showing how to do it?
+- I think the validation files use prefixes, because prefixes.ttl is prepended, then passed through RIOT.
+  I think Victor made that script. The other prefixes are there, so it's just a matter of refreshing
 
 ** Entity Linking Service
 
@@ -359,18 +375,7 @@ This is a completely cosmetic issue, we can cancel it.
         its:taIdentRef           bn:s01157392n .
 #+END_SRC
 
-*** TODO Refresh Prefixes
-I've added http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-annotation# to [[./img/prefixes.ttl]] (committed <2016-06-30 Thu>)
-Please refresh from [[./img/prefixes.ttl]], so new validation files use this prefix.
-
-Gerard: what exactly are we suppposed to do with the prefixes file.
-- Once loaded in the repo (Boyan's job), we can make queries without mentioning the prefixes.
-Should we load it into Sesame somehow so that triples are generated with prefixes? 
-If so, could you give us some code showing how to do it?
-- I think the validation files use prefixes, because prefixes.ttl is prepended, then passed through RIOT.
-  I think Victor made that script. The other prefixes are there, so it's just a matter of refreshing
-
-*** TODO nif:anchorOf
+*** QUE nif:anchorOf
 I've been saying all along to skip ~nif:anchorOf~ so as not to create too many literals.
 Above, UPF has done just that; while the other services emit it.
 
@@ -379,15 +384,14 @@ But with the number of SIMMOs loaded, it has not been too taxing for GDB.
 
 ~nif:literalAnnotation~ and ~nif:lemma~ provide sufficient info about the phrase, 
 so maybe we don't need ~nif:anchorOf~. We could cancel this issue.
-
-Gerard: If they can be sustained by GraphDB, I vote in favor of keeping them as they help *a lot* when debugging. 
-
-Vladimir: so decided: if the Entity Lookup makes a new node, add anchorOf to it.
+- Gerard: If they can be sustained by GraphDB, I vote in favor of keeping them as they help *a lot* when debugging. 
+- Vladimir: so decided: if the Entity Lookup makes a new node, add anchorOf to it.
 
 *** TODO Why nif-ann:taIdentConf is 0?
 In the above example, ~nif-ann:taIdentConf is 0. 
 In many other examples it's a good number, eg see below.
 Is 0 some sort of bug, or does Babelfy actually return 0 confidence for some concepts?
+- I think it's an error, I'll get back to you as soon as as I've figured out what's causing it.
 
 [[http://grinder1.multisensorproject.eu/cepfiles/rdf_validation/concept_with_scores_16_06_2016/bf6fe4-CONCEPT_EXTRACTION-16-6-2016.ttl][bf6fe4-CONCEPT_EXTRACTION-16-6-2016.ttl]]
 #+BEGIN_SRC Turtle
@@ -395,10 +399,8 @@ Is 0 some sort of bug, or does Babelfy actually return 0 confidence for some con
 
 <#char=1814,1822>
         a                        nif:Word ;
-        <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-annotation#taIdentConf>
-                "0.7619547411890493"^^xsd:double ;
-        <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-annotation#taIdentProv>
-                <http://babelfy.org/> ;
+        nif-anno:taIdentConf     "0.7619547411890493"^^xsd:double ;
+        nif-anno:taIdentProv     <http://babelfy.org/> ;
         nif:anchorOf             "pastries" ;
         nif:beginIndex           "1814"^^xsd:nonNegativeInteger ;
         nif:dependency           <#char=1806,1812> ;
@@ -416,10 +418,12 @@ Is 0 some sort of bug, or does Babelfy actually return 0 confidence for some con
 #+END_SRC
 
 *** TODO ms:GenericConcept vs ms:SpecificConcept
-Gerard wrote about the last example: 'generic' concept produced by Babelfy. 
-Annotations of concepts produced by the concept extraction service should contain triples pointing to ~ms:SpecificConcept~.
-
-It also seems to me that concepts like "open source" and "pastry" are ~ms:SpecificConcept~.
+- Gerard (about the last example): A 'generic' concept produced by Babelfy. 
+  But annotations of concepts produced by the concept extraction service should contain triples pointing to ~ms:SpecificConcept~.
+- Vladimir: also seems to me that concepts like "open source" and "pastry" are ~ms:SpecificConcept~.
+- Gerard: problems regarding the quality of the annotations shouldn't be part of the RDF validation.
+- Vladimir: agree, but this log is for the project as a whole, not just syntactic validity. (Which doesn't mean I'm determining priorities!)
+- Gerard: we'll be releasing updates to the concept extraction service, so expect improvements into what is considered a specific concept.
 
 *** DONE Optimize Summarization Queries
 Gerard wrote some of the Summarization queries are slow.
@@ -465,6 +469,13 @@ Each annotation is symmetric, so it's written twice: in the SIMMO graphs of each
 This complicates data management, because both of these graphs need to be updated.
 
 *** TODO One Annotation Per Pair                                    :Babis:
+<2016-07-20 Wed>: checked with this query, don't find data:
+#+BEGIN_SRC sparql
+select * where { 
+ graph <http://data.multisensorproject.eu/CAP> {?s ?p ?o}
+} limit 100
+#+END_SRC
+
 After consultation with Babis, we decided to change the representation as follows:
 - Write annotations in their own graph <http://data.multisensorproject.eu/CAP>, outside of any SIMMO graph.
   The CAP service will be called periodically, search globally in the SIMMO DB, and overwrite the similarity graph.
