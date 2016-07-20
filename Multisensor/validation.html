@@ -164,6 +164,7 @@ for the JavaScript code in this tag.
 <li><a href="#sec-2-2">Entity Linking Service</a>
 <ul>
 <li><a href="#sec-2-2-1"><span class="todo TODO">TODO</span> Underscores to Spaces</a></li>
+<li><a href="#sec-2-2-2"><span class="todo QUE">QUE</span> Remove Disambiguation Labels?</a></li>
 </ul>
 </li>
 <li><a href="#sec-2-3">Entity Alignment Service</a>
@@ -175,7 +176,7 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#sec-2-4">Summarization Service</a>
 <ul>
-<li><a href="#sec-2-4-1"><span class="todo QUE">QUE</span> nif:anchorOf</a></li>
+<li><a href="#sec-2-4-1"><span class="todo TODO">TODO</span> nif:anchorOf</a></li>
 <li><a href="#sec-2-4-2"><span class="todo TODO">TODO</span> Why nif-ann:taIdentConf is 0?</a></li>
 <li><a href="#sec-2-4-3"><span class="todo TODO">TODO</span> ms:GenericConcept vs ms:SpecificConcept</a></li>
 <li><a href="#sec-2-4-4"><span class="done DONE">DONE</span> Optimize Summarization Queries</a></li>
@@ -354,10 +355,6 @@ Boyan will add this second timestamp in the POST method.
 <h4 id="sec-2-1-4"><span class="done DONE">DONE</span> SIMMO Quality</h4>
 <div class="outline-text-4" id="text-2-1-4">
 <p>
-<span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-20&gt;</span></span> status: almost ok, but dqv:value should be symbolic (eg ms:accuracy-low) instead of numeric (1)
-</p>
-
-<p>
 Victor: the field "c_quality" is sent now. Values can be:
 </p>
 <ul class="org-ul">
@@ -452,6 +449,10 @@ Then for each SIMMO that has a quality rating:
 </div>
 <p>
 (Those SIMMOS that don't have a rating get no extra statements)
+</p>
+
+<p>
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-20&gt;</span></span> done. Latest fix: make dqv:value symbolic (eg ms:accuracy-low) instead of numeric (1)
 </p>
 </div>
 </div>
@@ -752,12 +753,45 @@ The EL service emits Babelnet entity labels in up to 4 languages, eg
 </div>
 <p>
 For reasons unknown, Babelnet uses underscores (eg see <a href="http://babelnet.org/rdf/page/UHC_Hamburg_n_EN">UHC_Hamburg_n_EN</a>).
-I think EL should convert the underscores to spaces to make the label more natural.
+I think we should convert the underscores to spaces to make the label more natural.
 </p>
 
+<ul class="org-ul">
+<li>Can be fixed in the repo with a query like this
+<ul class="org-ul">
+<li>However this doesn't find Babelnet <b>broader</b> entities imported by ONTO. We have a list of all Babelnet entities, maybe better to use this somehow
+</li>
+</ul>
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-sparql"><span style="color: #a020f0;">delete</span> {<span style="color: #a0522d;">?x</span> skos:prefLabel <span style="color: #a0522d;">?lab</span>}
+<span style="color: #a020f0;">insert</span> {<span style="color: #a0522d;">?x</span> skos:prefLabel <span style="color: #a0522d;">?lab1</span>}
+<span style="color: #a020f0;">where</span> {
+    <span style="color: #a0522d;">?x</span> skos:prefLabel <span style="color: #a0522d;">?lab</span>
+    <span style="color: #a020f0;">filter</span> <span style="color: #a020f0;">exists</span> {[its:taIdentRef <span style="color: #a0522d;">?x</span>; nif-ann:taIdentProv <span style="color: #008b8b;">&lt;http://babelfy.org/&gt;</span>]}
+    <span style="color: #a020f0;">filter</span>(regex(<span style="color: #a0522d;">?lab</span>,<span style="color: #8b2252;">"_"</span>))
+    <span style="color: #a020f0;">bind</span>(replace(<span style="color: #a0522d;">?lab</span>,<span style="color: #8b2252;">"_"</span>," ") <span style="color: #a020f0;">as</span> <span style="color: #a0522d;">?lab1</span>)
+}
+</pre>
+</div>
+<ul class="org-ul">
+<li>UPF code that brings in new Babelnet enrichments should be fixed too
+</li>
+<li>UPF code that creates <code>nif:lemma</code> should be fixed, eg this node has lemma "basic_data"
+<a href="http://multisensor.ontotext.com/resource/ms-content/00a17bdb91543c45349f42378caeecd434c1a8f4#char=281,291">http://multisensor.ontotext.com/resource/ms-content/00a17bdb91543c45349f42378caeecd434c1a8f4#char=281,291</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2-2" class="outline-4">
+<h4 id="sec-2-2-2"><span class="todo QUE">QUE</span> Remove Disambiguation Labels?</h4>
+<div class="outline-text-4" id="text-2-2-2">
 <p>
 Should we also remove disambiguations, which are trailing parenthesized parts, eg "Pastel_(gastronomía)" -&gt; "Pastel"?
-Since these labels are not used for NLP tasks, and the disambiguations are very useful for understanding what the entity is, let's leave them.
+Since these labels are not used for NLP tasks, and the disambiguations are very useful for understanding what the entity is, I vote to leave them.
 </p>
 </div>
 </div>
@@ -900,14 +934,10 @@ This is a completely cosmetic issue, we can cancel it.
 </div>
 
 <div id="outline-container-sec-2-4-1" class="outline-4">
-<h4 id="sec-2-4-1"><span class="todo QUE">QUE</span> nif:anchorOf</h4>
+<h4 id="sec-2-4-1"><span class="todo TODO">TODO</span> nif:anchorOf</h4>
 <div class="outline-text-4" id="text-2-4-1">
 <p>
 I've been saying all along to skip <code>nif:anchorOf</code> so as not to create too many literals.
-Above, UPF has done just that; while the other services emit it.
-</p>
-
-<p>
 But with the number of SIMMOs loaded, it has not been too taxing for GDB.
 <code>nif:anchorOf</code> has been instrumental in debugging, eg of the UTF-8 and offset mismatch issues.
 </p>
@@ -919,9 +949,15 @@ so maybe we don't need <code>nif:anchorOf</code>. We could cancel this issue.
 <ul class="org-ul">
 <li>Gerard: If they can be sustained by GraphDB, I vote in favor of keeping them as they help <b>a lot</b> when debugging. 
 </li>
-<li>Vladimir: so decided: if the Entity Lookup makes a new node, add anchorOf to it.
+<li>Vladimir: so decided: if the Entity Lookup makes a new node, add <code>nif:anchorOf</code> to it.
 </li>
 </ul>
+
+<p>
+Some nodes  are missing <code>nif:anchorOf</code>, eg see
+<a href="http://multisensor.ontotext.com/resource/ms-content/00a17bdb91543c45349f42378caeecd434c1a8f4#char=281,291">http://multisensor.ontotext.com/resource/ms-content/00a17bdb91543c45349f42378caeecd434c1a8f4#char=281,291</a>.
+This has nif:lemma "basic_data" but not nif:anchorOf.
+</p>
 </div>
 </div>
 

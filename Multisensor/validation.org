@@ -31,12 +31,13 @@
      - [[#refresh-prefixes][Refresh Prefixes]]
    - [[#entity-linking-service][Entity Linking Service]]
      - [[#underscores-to-spaces][Underscores to Spaces]]
+     - [[#que-remove-disambiguation-labels][QUE Remove Disambiguation Labels?]]
    - [[#entity-alignment-service][Entity Alignment Service]]
      - [[#also-remove-taidentconf-taidentprov][Also remove taIdentConf, taIdentProv]]
      - [[#leave-dependency-links][Leave Dependency Links]]
      - [[#use-prefixes-in-alignmentlog][Use Prefixes in alignment.log]]
    - [[#summarization-service][Summarization Service]]
-     - [[#que-nifanchorof][QUE nif:anchorOf]]
+     - [[#nifanchorof][nif:anchorOf]]
      - [[#why-nif-anntaidentconf-is-0][Why nif-ann:taIdentConf is 0?]]
      - [[#msgenericconcept-vs-msspecificconcept][ms:GenericConcept vs ms:SpecificConcept]]
      - [[#optimize-summarization-queries][Optimize Summarization Queries]]
@@ -123,8 +124,6 @@ ms-content:b3f35
 Boyan will add this second timestamp in the POST method.
 
 *** DONE SIMMO Quality
-<2016-07-20> status: almost ok, but dqv:value should be symbolic (eg ms:accuracy-low) instead of numeric (1)
-
 Victor: the field "c_quality" is sent now. Values can be:
 - 0 = no quality assigned
 - 1 = high quality
@@ -184,6 +183,8 @@ ms-content:b3f35-quality a dqv:QualityMeasurement ;
    dqv:isMeasurementOf ms:accuracy; dqv:value ms:accuracy-curated.
 #+END_SRC
 (Those SIMMOS that don't have a rating get no extra statements)
+
+<2016-07-20> done. Latest fix: make dqv:value symbolic (eg ms:accuracy-low) instead of numeric (1)
 
 *** CANCEL Missing Authors
 #+BEGIN_SRC sparql
@@ -283,10 +284,27 @@ bn:s01718102n  skos:prefLabel  "I_do_not_want_what_I_haven't_got"@es , "I_Don't_
 bn:s02229586n  skos:prefLabel  "UHC_Hamburg"@en , "Uhlenhorster_HC"@fr .
 #+END_SRC
 For reasons unknown, Babelnet uses underscores (eg see [[http://babelnet.org/rdf/page/UHC_Hamburg_n_EN][UHC_Hamburg_n_EN]]).
-I think EL should convert the underscores to spaces to make the label more natural.
+I think we should convert the underscores to spaces to make the label more natural.
 
+- Can be fixed in the repo with a query like this
+  - However this doesn't find Babelnet *broader* entities imported by ONTO. We have a list of all Babelnet entities, maybe better to use this somehow
+#+BEGIN_SRC sparql
+delete {?x skos:prefLabel ?lab}
+insert {?x skos:prefLabel ?lab1}
+where {
+    ?x skos:prefLabel ?lab
+    filter exists {[its:taIdentRef ?x; nif-ann:taIdentProv <http://babelfy.org/>]}
+    filter(regex(?lab,"_"))
+    bind(replace(?lab,"_"," ") as ?lab1)
+}
+#+END_SRC
+- UPF code that brings in new Babelnet enrichments should be fixed too
+- UPF code that creates ~nif:lemma~ should be fixed, eg this node has lemma "basic_data"
+  http://multisensor.ontotext.com/resource/ms-content/00a17bdb91543c45349f42378caeecd434c1a8f4%23char=281,291
+
+*** QUE Remove Disambiguation Labels?
 Should we also remove disambiguations, which are trailing parenthesized parts, eg "Pastel_(gastronomía)" -> "Pastel"?
-Since these labels are not used for NLP tasks, and the disambiguations are very useful for understanding what the entity is, let's leave them.
+Since these labels are not used for NLP tasks, and the disambiguations are very useful for understanding what the entity is, I vote to leave them.
 
 ** Entity Alignment Service
 <2016-06-28 Tue>: checked [[http://grinder1.multisensorproject.eu/cepfiles/rdf_validation/entity_alignment/0181e1-ENTITY_ALIGNMENT-21-6-2016.ttl][0181e1-ENTITY_ALIGNMENT-21-6-2016.ttl]] and alignment.log (by email)
@@ -375,17 +393,19 @@ This is a completely cosmetic issue, we can cancel it.
         its:taIdentRef           bn:s01157392n .
 #+END_SRC
 
-*** QUE nif:anchorOf
+*** TODO nif:anchorOf
 I've been saying all along to skip ~nif:anchorOf~ so as not to create too many literals.
-Above, UPF has done just that; while the other services emit it.
-
 But with the number of SIMMOs loaded, it has not been too taxing for GDB.
 ~nif:anchorOf~ has been instrumental in debugging, eg of the UTF-8 and offset mismatch issues.
 
 ~nif:literalAnnotation~ and ~nif:lemma~ provide sufficient info about the phrase, 
 so maybe we don't need ~nif:anchorOf~. We could cancel this issue.
 - Gerard: If they can be sustained by GraphDB, I vote in favor of keeping them as they help *a lot* when debugging. 
-- Vladimir: so decided: if the Entity Lookup makes a new node, add anchorOf to it.
+- Vladimir: so decided: if the Entity Lookup makes a new node, add ~nif:anchorOf~ to it.
+
+Some nodes  are missing ~nif:anchorOf~, eg see
+http://multisensor.ontotext.com/resource/ms-content/00a17bdb91543c45349f42378caeecd434c1a8f4%23char=281,291.
+This has nif:lemma "basic_data" but not nif:anchorOf.
 
 *** TODO Why nif-ann:taIdentConf is 0?
 In the above example, ~nif-ann:taIdentConf is 0. 
