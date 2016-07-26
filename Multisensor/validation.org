@@ -27,6 +27,7 @@
      - [[#simmo-quality][SIMMO Quality]]
        - [[#cancel-represent-as-qualitymeasurement][CANCEL Represent as QualityMeasurement]]
        - [[#represent-as-qualityannotation][Represent as QualityAnnotation]]
+       - [[#quality-queries][Quality Queries]]
      - [[#cancel-missing-authors][CANCEL Missing Authors]]
      - [[#cancel-genre-type][CANCEL Genre (Type)]]
      - [[#wrong-prefix-for-text-characteristics][Wrong prefix for Text Characteristics]]
@@ -127,6 +128,11 @@ ms-content:b3f35
 Boyan will add this second timestamp in the POST method.
 
 *** DONE SIMMO Quality
+Status:
+- <2016-07-18> DONE: initial implementation
+- <2016-07-20> DONE: make dqv:value nominal (eg ms:accuracy-low) instead of numeric (eg 1)
+- <2016-07-26> TODO: use QualityAnnotation instead of QualityMeasurement
+
 Victor: the field "c_quality" is sent now. Values can be:
 - 0 = no quality assigned
 - 1 = high quality
@@ -223,16 +229,32 @@ ms-content:b3f35-quality a dqv:QualityAnnotation;
   oa:hasBody ms:accuracy-curated.
 #+END_SRC
 
+**** Quality Queries
 Querying for SIMMOs with quality is easy:
 #+BEGIN_SRC sparql
 select * {
   ?simmo a foaf:Document; dqv:hasQualityAnnotation/oa:hasBody ?quality}
 #+END_SRC
 
-Status:
-- <2016-07-18> DONE: initial implementation
-- <2016-07-20> DONE: make dqv:value symbolic (eg ms:accuracy-low) instead of numeric (1)
-- <2016-07-26> TODO: use QualityAnnotation instead of QualityMeasurement
+An update query to migrate old QualityMeasurement data to the new QualityAnnotation representation:
+#+BEGIN_SRC sparql
+delete {
+  graph ?graph {
+    ?simmo dqv:hasQualityMeasurement ?quality.
+    ?quality ?p ?v}}
+insert {
+  graph ?graph {
+    ?simmo dqv:hasQualityAnnotation ?quality.
+    ?quality a dqv:QualityAnnotation;
+      dqv:inDimension ldqd:semanticAccuracy;
+      oa:motivatedBy dqv:qualityAssessment;
+      oa:hasTarget ?simmo;
+      oa:hasBody ?value}}
+where {
+  graph ?graph {
+    ?simmo dqv:hasQualityMeasurement ?quality.
+    ?quality dqv:value ?value}}
+#+END_SRC
 
 *** CANCEL Missing Authors
 #+BEGIN_SRC sparql
