@@ -154,7 +154,12 @@ for the JavaScript code in this tag.
 <li><a href="#sec-2-1-1"><span class="todo TODO">TODO</span> Crawler to decode HTML entities</a></li>
 <li><a href="#sec-2-1-2"><span class="done DONE">DONE</span> Keywords vs Category</a></li>
 <li><a href="#sec-2-1-3"><span class="done DONE">DONE</span> Ingest Timestamp</a></li>
-<li><a href="#sec-2-1-4"><span class="done DONE">DONE</span> SIMMO Quality</a></li>
+<li><a href="#sec-2-1-4"><span class="done DONE">DONE</span> SIMMO Quality</a>
+<ul>
+<li><a href="#sec-2-1-4-1"><span class="done CANCEL">CANCEL</span> Represent as QualityMeasurement</a></li>
+<li><a href="#sec-2-1-4-2"><span class="todo TODO">TODO</span> Represent as QualityAnnotation</a></li>
+</ul>
+</li>
 <li><a href="#sec-2-1-5"><span class="done CANCEL">CANCEL</span> Missing Authors</a></li>
 <li><a href="#sec-2-1-6"><span class="done CANCEL">CANCEL</span> Genre (Type)</a></li>
 <li><a href="#sec-2-1-7"><span class="done DONE">DONE</span> Wrong prefix for Text Characteristics</a></li>
@@ -163,7 +168,7 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#sec-2-2">Entity Linking Service</a>
 <ul>
-<li><a href="#sec-2-2-1"><span class="todo TODO">TODO</span> Underscores to Spaces</a></li>
+<li><a href="#sec-2-2-1"><span class="done DONE">DONE</span> Underscores to Spaces</a></li>
 <li><a href="#sec-2-2-2"><span class="todo QUE">QUE</span> Remove Disambiguation Labels?</a></li>
 </ul>
 </li>
@@ -176,19 +181,20 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#sec-2-4">Summarization Service</a>
 <ul>
-<li><a href="#sec-2-4-1"><span class="todo TODO">TODO</span> nif:anchorOf</a></li>
+<li><a href="#sec-2-4-1"><span class="done DONE">DONE</span> nif:anchorOf</a></li>
 <li><a href="#sec-2-4-2"><span class="todo TODO">TODO</span> Why nif-ann:taIdentConf is 0?</a></li>
-<li><a href="#sec-2-4-3"><span class="todo TODO">TODO</span> ms:GenericConcept vs ms:SpecificConcept</a></li>
+<li><a href="#sec-2-4-3"><span class="done CANCEL">CANCEL</span> ms:GenericConcept vs ms:SpecificConcept</a></li>
 <li><a href="#sec-2-4-4"><span class="done DONE">DONE</span> Optimize Summarization Queries</a></li>
 </ul>
 </li>
 <li><a href="#sec-2-5">Content Alignment</a>
 <ul>
-<li><a href="#sec-2-5-1"><span class="todo TODO">TODO</span> One Annotation Per Pair&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Babis">Babis</span></span></a></li>
-<li><a href="#sec-2-5-2"><span class="todo TODO">TODO</span> Use ms:score not fise:confidence for CAP</a></li>
-<li><a href="#sec-2-5-3"><span class="todo TODO">TODO</span> Add to Ontology&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Vladimir">Vladimir</span></span></a></li>
-<li><a href="#sec-2-5-4">CAP Query</a></li>
-<li><a href="#sec-2-5-5"><span class="todo TODO">TODO</span> Other CAP Queries</a></li>
+<li><a href="#sec-2-5-1">CAP Old Model</a></li>
+<li><a href="#sec-2-5-2"><span class="done DONE">DONE</span> One Annotation Per Pair&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Babis">Babis</span></span></a></li>
+<li><a href="#sec-2-5-3"><span class="todo TODO">TODO</span> Use ms:score not fise:confidence for CAP</a></li>
+<li><a href="#sec-2-5-4"><span class="todo TODO">TODO</span> Add to Ontology&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Vladimir">Vladimir</span></span></a></li>
+<li><a href="#sec-2-5-5">CAP Query</a></li>
+<li><a href="#sec-2-5-6"><span class="done CANCEL">CANCEL</span> Other CAP Queries</a></li>
 </ul>
 </li>
 </ul>
@@ -409,6 +415,19 @@ It makes reference to resultQuality in <a href="http://portal.opengeospatial.org
 Finally from a link at Europeana DQC, I found the 
 W3C <a href="https://www.w3.org/TR/vocab-dqv/">Data Quality Vocabulary</a> <code>dqv:</code>. 
 We'll use that vocabulary, and the <a href="https://www.w3.org/TR/vocab-dqv/#DimensionsofZaveri">Linked Data Quality Dimensions</a> <code>ldqd:</code> by Zaveri.
+</p>
+</div>
+
+<div id="outline-container-sec-2-1-4-1" class="outline-5">
+<h5 id="sec-2-1-4-1"><span class="done CANCEL">CANCEL</span> Represent as QualityMeasurement</h5>
+<div class="outline-text-5" id="text-2-1-4-1">
+<p>
+Initially I tried this representation. 
+But after discussion at <a href="mailto:public-dwbp-comments@w3.org">mailto:public-dwbp-comments@w3.org</a>, it was clarified that QualityMeasurement can only be used with literal values, so this is WRONG.
+See next section for the correct representation.
+</p>
+
+<p>
 First we add a <code>dqv:Metric</code> to the Multisensor ontology:
 </p>
 <div class="org-src-container">
@@ -437,7 +456,7 @@ First we add a <code>dqv:Metric</code> to the Multisensor ontology:
 </div>
 
 <p>
-Then for each SIMMO that has a quality rating:
+Then for each SIMMO that has a quality rating (SIMMOS that don't have a rating get no extra statements):
 </p>
 <div class="org-src-container">
 
@@ -447,13 +466,74 @@ Then for each SIMMO that has a quality rating:
    <span style="color: #228b22;">dqv:</span><span style="color: #008b8b;">isMeasurementOf</span> <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">accuracy</span>; <span style="color: #228b22;">dqv:</span><span style="color: #008b8b;">value</span> <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">accuracy-curated</span>.
 </pre>
 </div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-1-4-2" class="outline-5">
+<h5 id="sec-2-1-4-2"><span class="todo TODO">TODO</span> Represent as QualityAnnotation</h5>
+<div class="outline-text-5" id="text-2-1-4-2">
 <p>
-(Those SIMMOS that don't have a rating get no extra statements)
+The correct way to use nominal values is to use QualityAnnotation instead of QualityMeasurement.
 </p>
 
 <p>
-<span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-20&gt;</span></span> done. Latest fix: make dqv:value symbolic (eg ms:accuracy-low) instead of numeric (1)
+First we define the nominal values in the ontology:
 </p>
+<div class="org-src-container">
+
+<pre class="src src-Turtle"><span style="color: #a020f0;">@prefix</span> <span style="color: #228b22;">dqv:</span><span style="color: #008b8b;"> </span> <span style="color: #0000ff;">&lt;http://www.w3.org/ns/dqv#&gt;</span><span style="color: #b22222;"> .</span>
+<span style="color: #a020f0;">@prefix</span> <span style="color: #228b22;">ldqd:</span><span style="color: #008b8b;"> </span><span style="color: #0000ff;">&lt;http://www.w3.org/2016/05/ldqd#&gt;</span><span style="color: #b22222;"> </span><span style="color: #228b22;">.</span>
+
+<span style="color: #228b22;">ms:</span><span style="color: #008b8b;">Accuracy</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">ConceptScheme</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">label</span> <span style="color: #8b2252;">"Accuracy values"</span><span style="color: #228b22;">@en.</span>
+<span style="color: #228b22;">ms:</span><span style="color: #008b8b;">accuracy-low</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">Concept</span>; <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">inScheme</span> <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">Accuracy</span>;
+  <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">prefLabel</span> <span style="color: #8b2252;">"Low accuracy"</span><span style="color: #228b22;">@en.</span>
+<span style="color: #228b22;">ms:</span><span style="color: #008b8b;">accuracy-medium</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">Concept</span>; <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">inScheme</span> <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">Accuracy</span>;
+  <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">prefLabel</span> <span style="color: #8b2252;">"Medium accuracy"</span><span style="color: #228b22;">@en.</span>
+<span style="color: #228b22;">ms:</span><span style="color: #008b8b;">accuracy-high</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">Concept</span>; <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">inScheme</span> <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">Accuracy</span>;
+  <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">prefLabel</span> <span style="color: #8b2252;">"High accuracy"</span><span style="color: #228b22;">@en.</span>
+<span style="color: #228b22;">ms:</span><span style="color: #008b8b;">accuracy-curated</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">Concept</span>; <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">inScheme</span> <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">Accuracy</span>;
+  <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">prefLabel</span> <span style="color: #8b2252;">"Manually curated"</span>@en;
+  <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">note</span> <span style="color: #8b2252;">"Highest accuracy"</span>@en.
+</pre>
+</div>
+
+<p>
+Then for every SIMMO with a quality rating:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-Turtle"><span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">b3f35</span> <span style="color: #228b22;">dqv:</span><span style="color: #008b8b;">hasQualityAnnotation</span> <span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">b3f35-quality</span><span style="color: #228b22;">.</span>
+<span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">b3f35-quality</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">dqv:</span><span style="color: #008b8b;">QualityAnnotation</span>;
+  <span style="color: #228b22;">dqv:</span><span style="color: #008b8b;">inDimension</span> <span style="color: #228b22;">ldqd:</span><span style="color: #008b8b;">semanticAccuracy</span>;
+  <span style="color: #228b22;">oa:</span><span style="color: #008b8b;">motivatedBy</span> <span style="color: #228b22;">dqv:</span><span style="color: #008b8b;">qualityAssessment</span>;
+  <span style="color: #228b22;">oa:</span><span style="color: #008b8b;">hasTarget</span> <span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">b3f35</span>;
+  <span style="color: #228b22;">oa:</span><span style="color: #008b8b;">hasBody</span> <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">accuracy-curated</span>.
+</pre>
+</div>
+
+<p>
+Querying for SIMMOs with quality is easy:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sparql"><span style="color: #a020f0;">select</span> * {
+  <span style="color: #a0522d;">?simmo</span> a foaf:Document; dqv:hasQualityAnnotation/oa:hasBody <span style="color: #a0522d;">?quality</span>}
+</pre>
+</div>
+
+<p>
+Status:
+</p>
+<ul class="org-ul">
+<li><span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-18&gt;</span></span> DONE: initial implementation
+</li>
+<li><span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-20&gt;</span></span> DONE: make dqv:value symbolic (eg ms:accuracy-low) instead of numeric (1)
+</li>
+<li><span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-26&gt;</span></span> TODO: use QualityAnnotation instead of QualityMeasurement
+</li>
+</ul>
+</div>
 </div>
 </div>
 
@@ -738,7 +818,7 @@ I think Victor made that script. The other prefixes are there, so it's just a ma
 <h3 id="sec-2-2">Entity Linking Service</h3>
 <div class="outline-text-3" id="text-2-2">
 </div><div id="outline-container-sec-2-2-1" class="outline-4">
-<h4 id="sec-2-2-1"><span class="todo TODO">TODO</span> Underscores to Spaces</h4>
+<h4 id="sec-2-2-1"><span class="done DONE">DONE</span> Underscores to Spaces</h4>
 <div class="outline-text-4" id="text-2-2-1">
 <p>
 The EL service emits Babelnet entity labels in up to 4 languages, eg
@@ -777,10 +857,14 @@ I think we should convert the underscores to spaces to make the label more natur
 </pre>
 </div>
 <ul class="org-ul">
-<li>UPF code that brings in new Babelnet enrichments should be fixed too
+<li>UPF code that brings in new Babelnet enrichments should be fixed too.
+Gerard: DONE <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-20 Wed&gt;</span></span>
+      Entitly Linking: Translations obtained from BabelNet are now issued as literals of skos:prefLabel triples without underscores.
 </li>
 <li>UPF code that creates <code>nif:lemma</code> should be fixed, eg this node has lemma "basic_data"
 <a href="http://multisensor.ontotext.com/resource/ms-content/00a17bdb91543c45349f42378caeecd434c1a8f4#char=281,291">http://multisensor.ontotext.com/resource/ms-content/00a17bdb91543c45349f42378caeecd434c1a8f4#char=281,291</a>
+Gerard: DONE <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-20 Wed&gt;</span></span>.
+      Dependency parsing: lemmas are also emitted as literals of nif:lemma triples without underscores
 </li>
 </ul>
 </div>
@@ -934,7 +1018,7 @@ This is a completely cosmetic issue, we can cancel it.
 </div>
 
 <div id="outline-container-sec-2-4-1" class="outline-4">
-<h4 id="sec-2-4-1"><span class="todo TODO">TODO</span> nif:anchorOf</h4>
+<h4 id="sec-2-4-1"><span class="done DONE">DONE</span> nif:anchorOf</h4>
 <div class="outline-text-4" id="text-2-4-1">
 <p>
 I've been saying all along to skip <code>nif:anchorOf</code> so as not to create too many literals.
@@ -957,6 +1041,10 @@ so maybe we don't need <code>nif:anchorOf</code>. We could cancel this issue.
 Some nodes  are missing <code>nif:anchorOf</code>, eg see
 <a href="http://multisensor.ontotext.com/resource/ms-content/00a17bdb91543c45349f42378caeecd434c1a8f4#char=281,291">http://multisensor.ontotext.com/resource/ms-content/00a17bdb91543c45349f42378caeecd434c1a8f4#char=281,291</a>.
 This has nif:lemma "basic_data" but not nif:anchorOf.
+</p>
+
+<p>
+Gerard <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-20 Wed&gt;</span></span> NIFUtils: new annotations created by services using this library will now emit anchors. This affects EL mostly
 </p>
 </div>
 </div>
@@ -1005,7 +1093,7 @@ Is 0 some sort of bug, or does Babelfy actually return 0 confidence for some con
 </div>
 
 <div id="outline-container-sec-2-4-3" class="outline-4">
-<h4 id="sec-2-4-3"><span class="todo TODO">TODO</span> ms:GenericConcept vs ms:SpecificConcept</h4>
+<h4 id="sec-2-4-3"><span class="done CANCEL">CANCEL</span> ms:GenericConcept vs ms:SpecificConcept</h4>
 <div class="outline-text-4" id="text-2-4-3">
 <ul class="org-ul">
 <li>Gerard (about the last example): A 'generic' concept produced by Babelfy. 
@@ -1019,7 +1107,13 @@ But annotations of concepts produced by the concept extraction service should co
 </li>
 <li>Gerard: we'll be releasing updates to the concept extraction service, so expect improvements into what is considered a specific concept.
 </li>
+<li>How is this used in the UI? Gerard thinks that only Specific concepts are (or <b>should be</b>) shown in the SIMMO's tag cloud
+</li>
 </ul>
+
+<p>
+Gerard <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-20 Wed&gt;</span></span> This should become a non issue after recent changes are incorporated to the concept service
+</p>
 </div>
 </div>
 
@@ -1051,6 +1145,56 @@ The Content Alignment Pipeline (CAP) is a service that executes on KB data and f
 It is <b>not</b> executed as part of the SIMMO pipeline, but periodically.
 </p>
 
+<p>
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-20 Wed&gt;</span></span>: selected repo <b>multisensor-test</b> and checked <a href="http://multisensor.ontotext.com/resource?uri=http://data.multisensorproject.eu/CAP/7b91365a-af00-4518-a7e7-f187f3cd44c1">http://multisensor.ontotext.com/resource?uri=http://data.multisensorproject.eu/CAP/7b91365a-af00-4518-a7e7-f187f3cd44c1</a> 
+</p>
+<ul class="org-ul">
+<li>Everything's done except "ms:score instead of fise:confidence" (Babis) and "add to Ontology" (Vladimir).
+</li>
+<li>Checked there are motivations of both kinds:
+<div class="org-src-container">
+
+<pre class="src src-sparql"><span style="color: #a020f0;">select</span> <span style="color: #a0522d;">?mot</span> (count(*) <span style="color: #a020f0;">as</span> <span style="color: #a0522d;">?c</span>) <span style="color: #a020f0;">where</span> { 
+ <span style="color: #a020f0;">graph</span> <span style="color: #008b8b;">&lt;http://data.multisensorproject.eu/CAP&gt;</span> {<span style="color: #a0522d;">?x</span> oa:motivatedBy <span style="color: #a0522d;">?mot</span>}
+} <span style="color: #a020f0;">group</span> <span style="color: #a020f0;">by</span> <span style="color: #a0522d;">?mot</span>
+</pre>
+</div>
+<p>
+ms:linking-similar: 828, ms:linking-contradictory: 860
+</p>
+</li>
+<li>one contradictory CAP annotation is <a href="http://multisensor.ontotext.com/resource?uri=http://data.multisensorproject.eu/CAP/007e1c1e-85b4-481a-a838-0e242c2afb8c">CAP/007e1c1e-85b4-481a-a838-0e242c2afb8c</a>
+  It talks about these two:
+<div class="org-src-container">
+
+<pre class="src src-sparql"><span style="color: #a020f0;">PREFIX</span> dc: <span style="color: #008b8b;">&lt;http://purl.org/dc/elements/1.1/&gt;</span>
+<span style="color: #a020f0;">PREFIX</span> nif: <span style="color: #008b8b;">&lt;http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#&gt;</span>
+<span style="color: #a020f0;">select</span> <span style="color: #a0522d;">?desc</span> <span style="color: #a0522d;">?text</span> {
+    <span style="color: #a020f0;">values</span> <span style="color: #a0522d;">?x</span> {
+        <span style="color: #008b8b;">&lt;http://data.multisensorproject.eu/content/7d76ef5e787e830b081d149d05359c21cc5a9835&gt;</span>
+        <span style="color: #008b8b;">&lt;http://data.multisensorproject.eu/content/d2b116e9c5422fda256da2913738ac000ba7b30c&gt;</span>
+    }
+    <span style="color: #a0522d;">?x</span> dc:description <span style="color: #a0522d;">?desc</span>.
+    <span style="color: #a0522d;">?y</span> nif:sourceUrl <span style="color: #a0522d;">?x</span>; nif:isString <span style="color: #a0522d;">?text</span>
+}
+</pre>
+</div>
+<ul class="org-ul">
+<li>One is about "How an Apple Watch can ruin your life"
+</li>
+<li>The other about "Employees and executives win mobility and flexibility with the SH10 TaskBook of SOREDI Touch Systems GmbH"
+</li>
+</ul>
+<p>
+Guess this is sort of contradictory: one hates one IT product, the other one praises another IT product :-)
+</p>
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-2-5-1" class="outline-4">
+<h4 id="sec-2-5-1">CAP Old Model</h4>
+<div class="outline-text-4" id="text-2-5-1">
 <p>
 <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-06-28 Tue&gt;</span></span> checked <a href="http://mklab2.iti.gr/multisensor/index.php/CAP:_Specification_of_the_service">CAP:_Specification_of_the_service</a>. It proposes the following model:
 </p>
@@ -1088,21 +1232,11 @@ Each annotation is symmetric, so it's written twice: in the SIMMO graphs of each
 This complicates data management, because both of these graphs need to be updated.
 </p>
 </div>
-
-<div id="outline-container-sec-2-5-1" class="outline-4">
-<h4 id="sec-2-5-1"><span class="todo TODO">TODO</span> One Annotation Per Pair&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Babis">Babis</span></span></h4>
-<div class="outline-text-4" id="text-2-5-1">
-<p>
-<span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-20 Wed&gt;</span></span>: checked with this query, don't find data:
-</p>
-<div class="org-src-container">
-
-<pre class="src src-sparql"><span style="color: #a020f0;">select</span> * <span style="color: #a020f0;">where</span> { 
- <span style="color: #a020f0;">graph</span> <span style="color: #008b8b;">&lt;http://data.multisensorproject.eu/CAP&gt;</span> {<span style="color: #a0522d;">?s</span> <span style="color: #a0522d;">?p</span> <span style="color: #a0522d;">?o</span>}
-} <span style="color: #a020f0;">limit</span> 100
-</pre>
 </div>
 
+<div id="outline-container-sec-2-5-2" class="outline-4">
+<h4 id="sec-2-5-2"><span class="done DONE">DONE</span> One Annotation Per Pair&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Babis">Babis</span></span></h4>
+<div class="outline-text-4" id="text-2-5-2">
 <p>
 After consultation with Babis, we decided to change the representation as follows:
 </p>
@@ -1149,9 +1283,9 @@ so there's no need to repeat for the other SIMMO.
 </div>
 </div>
 
-<div id="outline-container-sec-2-5-2" class="outline-4">
-<h4 id="sec-2-5-2"><span class="todo TODO">TODO</span> Use ms:score not fise:confidence for CAP</h4>
-<div class="outline-text-4" id="text-2-5-2">
+<div id="outline-container-sec-2-5-3" class="outline-4">
+<h4 id="sec-2-5-3"><span class="todo TODO">TODO</span> Use ms:score not fise:confidence for CAP</h4>
+<div class="outline-text-4" id="text-2-5-3">
 <p>
 In an example sent by Babis, I see fise:confidence=1.6439653807554948. 
 But confidence is the probability that something is true, so it should be &lt;=1.
@@ -1164,9 +1298,9 @@ Decided with Babis to use a custom property <code>ms:score</code> (see next).
 </div>
 </div>
 
-<div id="outline-container-sec-2-5-3" class="outline-4">
-<h4 id="sec-2-5-3"><span class="todo TODO">TODO</span> Add to Ontology&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Vladimir">Vladimir</span></span></h4>
-<div class="outline-text-4" id="text-2-5-3">
+<div id="outline-container-sec-2-5-4" class="outline-4">
+<h4 id="sec-2-5-4"><span class="todo TODO">TODO</span> Add to Ontology&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Vladimir">Vladimir</span></span></h4>
+<div class="outline-text-4" id="text-2-5-4">
 <p>
 The following will be in <a href="./img/ontology.ttl">./img/ontology.ttl</a>, so they don't need to be repeated by CAP for every similarity link.
 </p>
@@ -1200,9 +1334,9 @@ The following will be in <a href="./img/ontology.ttl">./img/ontology.ttl</a>, so
 </div>
 </div>
 
-<div id="outline-container-sec-2-5-4" class="outline-4">
-<h4 id="sec-2-5-4">CAP Query</h4>
-<div class="outline-text-4" id="text-2-5-4">
+<div id="outline-container-sec-2-5-5" class="outline-4">
+<h4 id="sec-2-5-5">CAP Query</h4>
+<div class="outline-text-4" id="text-2-5-5">
 <p>
 Given a <code>$simmo</code>, find similar or contradictory articles, and their similarity/contradiction scores.
 </p>
@@ -1222,9 +1356,9 @@ Given a <code>$simmo</code>, find similar or contradictory articles, and their s
 </div>
 </div>
 
-<div id="outline-container-sec-2-5-5" class="outline-4">
-<h4 id="sec-2-5-5"><span class="todo TODO">TODO</span> Other CAP Queries</h4>
-<div class="outline-text-4" id="text-2-5-5">
+<div id="outline-container-sec-2-5-6" class="outline-4">
+<h4 id="sec-2-5-6"><span class="done CANCEL">CANCEL</span> Other CAP Queries</h4>
+<div class="outline-text-4" id="text-2-5-6">
 <p>
 The gdoc maybe has 2 queries related to CAP. Not sure I'm looking at the right section. Maybe we should just delete them.
 </p>
@@ -1240,7 +1374,7 @@ The gdoc maybe has 2 queries related to CAP. Not sure I'm looking at the right s
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-20&gt;</span></span></p>
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-26&gt;</span></span></p>
 <p class="author">Author: Vladimir Alexiev</p>
 <p class="creator">Emacs 25.0.50.1 (Org mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>

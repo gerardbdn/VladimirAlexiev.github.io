@@ -1,5 +1,5 @@
 #+TITLE: Multisensor Validation Log
-#+DATE: <2016-07-20>
+#+DATE: <2016-07-26>
 #+AUTHOR: Vladimir Alexiev
 #+EMAIL: vladimir.alexiev@ontotext.com
 #+SETUP: showeverything
@@ -25,6 +25,8 @@
      - [[#keywords-vs-category][Keywords vs Category]]
      - [[#ingest-timestamp][Ingest Timestamp]]
      - [[#simmo-quality][SIMMO Quality]]
+       - [[#cancel-represent-as-qualitymeasurement][CANCEL Represent as QualityMeasurement]]
+       - [[#represent-as-qualityannotation][Represent as QualityAnnotation]]
      - [[#cancel-missing-authors][CANCEL Missing Authors]]
      - [[#cancel-genre-type][CANCEL Genre (Type)]]
      - [[#wrong-prefix-for-text-characteristics][Wrong prefix for Text Characteristics]]
@@ -39,14 +41,15 @@
    - [[#summarization-service][Summarization Service]]
      - [[#nifanchorof][nif:anchorOf]]
      - [[#why-nif-anntaidentconf-is-0][Why nif-ann:taIdentConf is 0?]]
-     - [[#msgenericconcept-vs-msspecificconcept][ms:GenericConcept vs ms:SpecificConcept]]
+     - [[#cancel-msgenericconcept-vs-msspecificconcept][CANCEL ms:GenericConcept vs ms:SpecificConcept]]
      - [[#optimize-summarization-queries][Optimize Summarization Queries]]
    - [[#content-alignment][Content Alignment]]
+     - [[#cap-old-model][CAP Old Model]]
      - [[#one-annotation-per-pair][One Annotation Per Pair]]
      - [[#use-msscore-not-fiseconfidence-for-cap][Use ms:score not fise:confidence for CAP]]
      - [[#add-to-ontology][Add to Ontology]]
      - [[#cap-query][CAP Query]]
-     - [[#other-cap-queries][Other CAP Queries]]
+     - [[#cancel-other-cap-queries][CANCEL Other CAP Queries]]
 
 * Intro
 From now until the end of the project I'll keep a detailed log of what I validated and defects I found.
@@ -151,6 +154,12 @@ Vladimir: I searched for a [[http://lov.okfn.org/dataset/lov/terms?q%3Dquality&t
 Finally from a link at Europeana DQC, I found the 
 W3C [[https://www.w3.org/TR/vocab-dqv/][Data Quality Vocabulary]] ~dqv:~. 
 We'll use that vocabulary, and the [[https://www.w3.org/TR/vocab-dqv/#DimensionsofZaveri][Linked Data Quality Dimensions]] ~ldqd:~ by Zaveri.
+
+**** CANCEL Represent as QualityMeasurement
+Initially I tried this representation. 
+But after discussion at [[mailto:public-dwbp-comments@w3.org]], it was clarified that QualityMeasurement can only be used with literal values, so this is WRONG.
+See next section for the correct representation.
+
 First we add a ~dqv:Metric~ to the Multisensor ontology:
 #+BEGIN_SRC Turtle
 @prefix dqv:  <http://www.w3.org/ns/dqv#> .
@@ -175,16 +184,55 @@ ms:accuracy-curated a ms:Accuracy, skos:Concept; skos:inScheme ms:Accuracy;
   skos:note "Highest accuracy"@en.
 #+END_SRC
 
-Then for each SIMMO that has a quality rating:
+Then for each SIMMO that has a quality rating (SIMMOS that don't have a rating get no extra statements):
 #+BEGIN_SRC Turtle
 ms-content:b3f35 dqv:hasQualityMeasurement ms-content:b3f35-quality.
 
 ms-content:b3f35-quality a dqv:QualityMeasurement ;
    dqv:isMeasurementOf ms:accuracy; dqv:value ms:accuracy-curated.
 #+END_SRC
-(Those SIMMOS that don't have a rating get no extra statements)
 
-<2016-07-20> done. Latest fix: make dqv:value symbolic (eg ms:accuracy-low) instead of numeric (1)
+**** TODO Represent as QualityAnnotation
+The correct way to use nominal values is to use QualityAnnotation instead of QualityMeasurement.
+
+First we define the nominal values in the ontology:
+#+BEGIN_SRC Turtle
+@prefix dqv:  <http://www.w3.org/ns/dqv#> .
+@prefix ldqd: <http://www.w3.org/2016/05/ldqd#> .
+
+ms:Accuracy a skos:ConceptScheme;
+  rdfs:label "Accuracy values"@en.
+ms:accuracy-low a skos:Concept; skos:inScheme ms:Accuracy;
+  skos:prefLabel "Low accuracy"@en.
+ms:accuracy-medium a skos:Concept; skos:inScheme ms:Accuracy;
+  skos:prefLabel "Medium accuracy"@en.
+ms:accuracy-high a skos:Concept; skos:inScheme ms:Accuracy;
+  skos:prefLabel "High accuracy"@en.
+ms:accuracy-curated a skos:Concept; skos:inScheme ms:Accuracy;
+  skos:prefLabel "Manually curated"@en;
+  skos:note "Highest accuracy"@en.
+#+END_SRC
+
+Then for every SIMMO with a quality rating:
+#+BEGIN_SRC Turtle
+ms-content:b3f35 dqv:hasQualityAnnotation ms-content:b3f35-quality.
+ms-content:b3f35-quality a dqv:QualityAnnotation;
+  dqv:inDimension ldqd:semanticAccuracy;
+  oa:motivatedBy dqv:qualityAssessment;
+  oa:hasTarget ms-content:b3f35;
+  oa:hasBody ms:accuracy-curated.
+#+END_SRC
+
+Querying for SIMMOs with quality is easy:
+#+BEGIN_SRC sparql
+select * {
+  ?simmo a foaf:Document; dqv:hasQualityAnnotation/oa:hasBody ?quality}
+#+END_SRC
+
+Status:
+- <2016-07-18> DONE: initial implementation
+- <2016-07-20> DONE: make dqv:value symbolic (eg ms:accuracy-low) instead of numeric (1)
+- <2016-07-26> TODO: use QualityAnnotation instead of QualityMeasurement
 
 *** CANCEL Missing Authors
 #+BEGIN_SRC sparql
@@ -275,7 +323,7 @@ If so, could you give us some code showing how to do it?
 
 ** Entity Linking Service
 
-*** TODO Underscores to Spaces
+*** DONE Underscores to Spaces
 The EL service emits Babelnet entity labels in up to 4 languages, eg
 #+BEGIN_SRC Turtle
 bn:s00088614v  skos:prefLabel  "zu_befriedigen"@de , "satisfacer"@es , "satisfaire"@fr , "задоволи"@bg .
@@ -298,9 +346,13 @@ where {
     bind(replace(?lab,"_"," ") as ?lab1)
 }
 #+END_SRC
-- UPF code that brings in new Babelnet enrichments should be fixed too
+- UPF code that brings in new Babelnet enrichments should be fixed too.
+  Gerard: DONE <2016-07-20 Wed>
+	Entitly Linking: Translations obtained from BabelNet are now issued as literals of skos:prefLabel triples without underscores.
 - UPF code that creates ~nif:lemma~ should be fixed, eg this node has lemma "basic_data"
   http://multisensor.ontotext.com/resource/ms-content/00a17bdb91543c45349f42378caeecd434c1a8f4%23char=281,291
+  Gerard: DONE <2016-07-20 Wed>.
+	Dependency parsing: lemmas are also emitted as literals of nif:lemma triples without underscores
 
 *** QUE Remove Disambiguation Labels?
 Should we also remove disambiguations, which are trailing parenthesized parts, eg "Pastel_(gastronomía)" -> "Pastel"?
@@ -393,7 +445,7 @@ This is a completely cosmetic issue, we can cancel it.
         its:taIdentRef           bn:s01157392n .
 #+END_SRC
 
-*** TODO nif:anchorOf
+*** DONE nif:anchorOf
 I've been saying all along to skip ~nif:anchorOf~ so as not to create too many literals.
 But with the number of SIMMOs loaded, it has not been too taxing for GDB.
 ~nif:anchorOf~ has been instrumental in debugging, eg of the UTF-8 and offset mismatch issues.
@@ -406,6 +458,8 @@ so maybe we don't need ~nif:anchorOf~. We could cancel this issue.
 Some nodes  are missing ~nif:anchorOf~, eg see
 http://multisensor.ontotext.com/resource/ms-content/00a17bdb91543c45349f42378caeecd434c1a8f4%23char=281,291.
 This has nif:lemma "basic_data" but not nif:anchorOf.
+
+Gerard <2016-07-20 Wed> NIFUtils: new annotations created by services using this library will now emit anchors. This affects EL mostly
 
 *** TODO Why nif-ann:taIdentConf is 0?
 In the above example, ~nif-ann:taIdentConf is 0. 
@@ -437,13 +491,16 @@ Is 0 some sort of bug, or does Babelfy actually return 0 confidence for some con
         its:taIdentRef           bn:s00060957n .
 #+END_SRC
 
-*** TODO ms:GenericConcept vs ms:SpecificConcept
+*** CANCEL ms:GenericConcept vs ms:SpecificConcept
 - Gerard (about the last example): A 'generic' concept produced by Babelfy. 
   But annotations of concepts produced by the concept extraction service should contain triples pointing to ~ms:SpecificConcept~.
 - Vladimir: also seems to me that concepts like "open source" and "pastry" are ~ms:SpecificConcept~.
 - Gerard: problems regarding the quality of the annotations shouldn't be part of the RDF validation.
 - Vladimir: agree, but this log is for the project as a whole, not just syntactic validity. (Which doesn't mean I'm determining priorities!)
 - Gerard: we'll be releasing updates to the concept extraction service, so expect improvements into what is considered a specific concept.
+- How is this used in the UI? Gerard thinks that only Specific concepts are (or *should be*) shown in the SIMMO's tag cloud
+
+Gerard <2016-07-20 Wed> This should become a non issue after recent changes are incorporated to the concept service
 
 *** DONE Optimize Summarization Queries
 Gerard wrote some of the Summarization queries are slow.
@@ -457,6 +514,34 @@ Please mark which ones need optimization, and provide ~$graph~ for testing.
 The Content Alignment Pipeline (CAP) is a service that executes on KB data and finds articles that are similar or contradictory to the source article.
 It is *not* executed as part of the SIMMO pipeline, but periodically.
 
+<2016-07-20 Wed>: selected repo *multisensor-test* and checked http://multisensor.ontotext.com/resource?uri=http://data.multisensorproject.eu/CAP/7b91365a-af00-4518-a7e7-f187f3cd44c1 
+- Everything's done except "ms:score instead of fise:confidence" (Babis) and "add to Ontology" (Vladimir).
+- Checked there are motivations of both kinds:
+  #+BEGIN_SRC sparql
+select ?mot (count(*) as ?c) where { 
+ graph <http://data.multisensorproject.eu/CAP> {?x oa:motivatedBy ?mot}
+} group by ?mot
+#+END_SRC
+  ms:linking-similar: 828, ms:linking-contradictory: 860
+- one contradictory CAP annotation is [[http://multisensor.ontotext.com/resource?uri%3Dhttp:%2F%2Fdata.multisensorproject.eu%2FCAP%2F007e1c1e-85b4-481a-a838-0e242c2afb8c][CAP/007e1c1e-85b4-481a-a838-0e242c2afb8c]]
+  It talks about these two:
+  #+BEGIN_SRC sparql
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX nif: <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#>
+select ?desc ?text {
+    values ?x {
+        <http://data.multisensorproject.eu/content/7d76ef5e787e830b081d149d05359c21cc5a9835>
+        <http://data.multisensorproject.eu/content/d2b116e9c5422fda256da2913738ac000ba7b30c>
+    }
+    ?x dc:description ?desc.
+    ?y nif:sourceUrl ?x; nif:isString ?text
+}
+#+END_SRC
+  - One is about "How an Apple Watch can ruin your life"
+  - The other about "Employees and executives win mobility and flexibility with the SH10 TaskBook of SOREDI Touch Systems GmbH"
+  Guess this is sort of contradictory: one hates one IT product, the other one praises another IT product :-)
+
+*** CAP Old Model
 <2016-06-28 Tue> checked [[http://mklab2.iti.gr/multisensor/index.php/CAP:_Specification_of_the_service][CAP:_Specification_of_the_service]]. It proposes the following model:
 
 #+BEGIN_SRC Turtle
@@ -488,13 +573,7 @@ It is *not* executed as part of the SIMMO pipeline, but periodically.
 Each annotation is symmetric, so it's written twice: in the SIMMO graphs of each of the two SIMMOs.
 This complicates data management, because both of these graphs need to be updated.
 
-*** TODO One Annotation Per Pair                                    :Babis:
-<2016-07-20 Wed>: checked with this query, don't find data:
-#+BEGIN_SRC sparql
-select * where { 
- graph <http://data.multisensorproject.eu/CAP> {?s ?p ?o}
-} limit 100
-#+END_SRC
+*** DONE One Annotation Per Pair                                    :Babis:
 
 After consultation with Babis, we decided to change the representation as follows:
 - Write annotations in their own graph <http://data.multisensorproject.eu/CAP>, outside of any SIMMO graph.
@@ -578,7 +657,7 @@ select ?article ?motivation ?score {
 }
 #+END_SRC
 
-*** TODO Other CAP Queries
+*** CANCEL Other CAP Queries
 The gdoc maybe has 2 queries related to CAP. Not sure I'm looking at the right section. Maybe we should just delete them.
 - 2.8 "Retrieve the concepts in the SIMMO (Select)": wrote something simple
 - 2.9 "Retrieve the concepts in the SIMMO (Construct)": don't know what is needed
