@@ -22,6 +22,7 @@
 @prefix twitter_user:   <http://twitter.com/intent/user?user_id=> .
 
 # Commonly used ontologies
+@prefix bibo:           <http://purl.org/ontology/bibo/>.
 @prefix dbo:            <http://dbpedia.org/ontology/> .
 @prefix dbp:            <http://dbpedia.org/property/> .
 @prefix dc:             <http://purl.org/dc/elements/1.1/> .

@@ -55,6 +55,9 @@
      - [[#babelnet-multilingual-labels][BabelNet Multilingual Labels]]
      - [[#add-spanish-babelnet-labels][Add Spanish BabelNet Labels]]
      - [[#translated-content-queries][Translated-content Queries]]
+       - [[#find-entities][Find Entities]]
+       - [[#select-single-label][Select Single Label]]
+       - [[#find-translations-][Find Translations ]]
 
 * Intro
 From now until the end of the project I'll keep a detailed log of what I validated and defects I found.
@@ -878,6 +881,7 @@ This concept has [[http://babelnet.org/synset?word%3DBater%C3%ADa%2Bde%2Bion%2Bd
 Do you need to add Spanish labels?
 
 *** Translated-content Queries
+**** Find Entities
 All queries for a single language (eg find concepts) won't change. 
 Eg here is how to find entities in the original and translated SIMMOs (hopefully the same entities will be recognized).
 We just change the graph:
@@ -895,6 +899,7 @@ select distinct ?concept ?label {
 }
 #+END_SRC
 
+**** Select Single Label
 We can filter to entity labels in the selected language, implementing "language fall-back".
 ~coalesce()~ picks the first bound variable.
 We don't need it for EN since we assume all BN concepts have EN.
@@ -911,4 +916,28 @@ select distinct * {
   graph ms-content:156e0d-en {[] itsrdf:taIdentRef ?entity}.
   ?entity skos:prefLabel ?label filter(lang(?labelEn)="en")
 }
+#+END_SRC
+
+**** Find Translations 
+To find all translations of a SIMMO we make a query across graphs (i.e. in the default graph, which is a union of all graphs).
+Remember that ~$~ indicates a query paramter (while ~?~ indicates a free variable):
+#+BEGIN_SRC sparql
+select * {
+  ?translatedSIMMO bibo:translationOf $SIMMO; dc:language ?translatedLang}
+#+END_SRC
+
+To find all translations in a given language:
+#+BEGIN_SRC sparql
+select * {
+  ?translatedSIMMO bibo:translationOf ?SIMMO; dc:language $lang}
+#+END_SRC
+
+To find all original SIMMOs (not translations):
+#+BEGIN_SRC sparql
+select * {?simmo filter not exists {?simmo bibo:translationOf []}}
+#+END_SRC
+
+To check whether a given SIMMO is a translation:
+#+BEGIN_SRC sparql
+ask {$simmo bibo:translationOf []}
 #+END_SRC
