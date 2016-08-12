@@ -1,5 +1,5 @@
 #+TITLE: Multisensor Validation Log
-#+DATE: <2016-07-26>
+#+DATE: <2016-08-12>
 #+AUTHOR: Vladimir Alexiev
 #+EMAIL: vladimir.alexiev@ontotext.com
 #+SETUP: showeverything
@@ -51,6 +51,10 @@
      - [[#add-to-ontology][Add to Ontology]]
      - [[#cap-query][CAP Query]]
      - [[#cancel-other-cap-queries][CANCEL Other CAP Queries]]
+   - [[#content-translation][Content Translation]]
+     - [[#babelnet-multilingual-labels][BabelNet Multilingual Labels]]
+     - [[#add-spanish-babelnet-labels][Add Spanish BabelNet Labels]]
+     - [[#translated-content-queries][Translated-content Queries]]
 
 * Intro
 From now until the end of the project I'll keep a detailed log of what I validated and defects I found.
@@ -131,7 +135,7 @@ Boyan will add this second timestamp in the POST method.
 Status:
 - <2016-07-18> DONE: initial implementation
 - <2016-07-20> DONE: make dqv:value nominal (eg ms:accuracy-low) instead of numeric (eg 1)
-- <2016-07-26> TODO: use QualityAnnotation instead of QualityMeasurement
+- <2016-07-26> DONE: use QualityAnnotation instead of QualityMeasurement
 
 Victor: the field "c_quality" is sent now. Values can be:
 - 0 = no quality assigned
@@ -198,7 +202,7 @@ ms-content:b3f35-quality a dqv:QualityMeasurement ;
    dqv:isMeasurementOf ms:accuracy; dqv:value ms:accuracy-curated.
 #+END_SRC
 
-**** TODO Represent as QualityAnnotation
+**** DONE Represent as QualityAnnotation
 The correct way to use nominal values is to use QualityAnnotation instead of QualityMeasurement.
 
 First we define the nominal values in the ontology:
@@ -345,7 +349,7 @@ If so, could you give us some code showing how to do it?
 
 ** Entity Linking Service
 
-*** DONE Underscores to Spaces
+*** TODO Underscores to Spaces
 The EL service emits Babelnet entity labels in up to 4 languages, eg
 #+BEGIN_SRC Turtle
 bn:s00088614v  skos:prefLabel  "zu_befriedigen"@de , "satisfacer"@es , "satisfaire"@fr , "задоволи"@bg .
@@ -375,6 +379,9 @@ where {
   http://multisensor.ontotext.com/resource/ms-content/00a17bdb91543c45349f42378caeecd434c1a8f4%23char=281,291
   Gerard: DONE <2016-07-20 Wed>.
 	Dependency parsing: lemmas are also emitted as literals of nif:lemma triples without underscores
+- IMPORTANT <2016-08-12 Fri> Now we have two labels per BN concept per language. Must remove the superfluous ones. Eg:
+  - bn:s03113558n: "Royal Ordnance Factories F.C."@en and "Royal_Ordnance_Factories_F.C."@en
+  - bn:s00124949n: "Prefijo del Segmento de Programa"@es and "Prefijo_del_Segmento_de_Programa"@es
 
 *** QUE Remove Disambiguation Labels?
 Should we also remove disambiguations, which are trailing parenthesized parts, eg "Pastel_(gastronomía)" -> "Pastel"?
@@ -683,3 +690,225 @@ select ?article ?motivation ?score {
 The gdoc maybe has 2 queries related to CAP. Not sure I'm looking at the right section. Maybe we should just delete them.
 - 2.8 "Retrieve the concepts in the SIMMO (Select)": wrote something simple
 - 2.9 "Retrieve the concepts in the SIMMO (Construct)": don't know what is needed
+
+** TODO Content Translation
+Scenario: we have a SIMMO in original language ES that is machine-translated to EN & DE. 
+- All textual elements are translated: title, description, body.
+  - The example below also shows subject & keywords in different languages. If you can only produce them in EN, that's fine
+- However, video ASR text is not translated.
+  (TODO: if this assumption is wrong, let me know.)
+- Both original and translations are annotated with NIF.
+We want to record all NIF information against original and translated separately, so there's no confusion.
+If the article includes multimedia, we want to attach it only to the original, to avoid data duplication.
+
+Solution: we need separate roots (foaf:Document), so we store the original and translation(s) in separate named graphs.
+- the translated-content graph has language-specific suffix; the original-content graph does not have such suffix
+- the translated content has link ~bibo:translationOf~ to the original
+
+Files: http://grinder1.multisensorproject.eu/cepfiles/multiTest/validated/
+
+Root:
+#+BEGIN_SRC Turtle
+# ES original
+graph ms-content:156e0d {
+  ms-content:156e0d a foaf:Document ;
+    dbp:countryCode  "ES" ;
+    dc:creator       "Alberto Iglesias Fraga" ;
+    dc:date          "2016-07-28T23:45:07.000+02:00"^^xsd:dateTime ;
+    dc:description   "SONY ha iniciado negociaciones con Murata Manufacturing para la venta de su negocio de baterías. La operación culminará en marzo de 2017...";
+    dc:language      "es" ;
+    dc:source        "cloud.ticbeat.com" ;
+    dc:subject       "Economía, Negocios y Finanzas" ;
+    dc:title         "SONY se desprenderá de su negocio de baterías" ;
+    dc:type          "article" ;
+    schema:keywords  "Sony, baterías, Murata Manufacturing";
+    dct:source       <http://feedproxy.google.com/~r/rwwes/~3/z2KuGYx6FiY/> .
+
+# EN translation
+graph ms-content:156e0d-en {
+  ms-content:156e0d-en a foaf:Document ;
+    bibo:translationOf ms-content:156e0d; # IMPORTANT!
+    dbp:countryCode   "ES" ;
+    dc:creator        "Alberto Iglesias Fraga" ;
+    dc:date           "2016-07-28T23:45:07.000+02:00"^^xsd:dateTime ;
+    dc:description    "SONY has begun negotiations with Murata Manufacturing for the sale of its battery business. The operation will culminate in March 2017 ..." ;
+    dc:language       "en" ;
+    dc:source         "cloud.ticbeat.com" ;
+    dc:subject        "Economy, Business & Finance" ;
+    dc:title          "SONY is clear from its battery business" ;
+    dc:type           "article" ;
+    schema:keywords   "Sony, batteries, Murata Manufacturing";
+    dct:source        <http://feedproxy.google.com/~r/rwwes/~3/z2KuGYx6FiY/> .
+}
+
+# DE translation
+graph ms-content:156e0d-de {
+  ms-content:156e0d-de a foaf:Document ;
+    bibo:translationOf ms-content:156e0d; # IMPORTANT!
+    dbp:countryCode   "ES" ;
+    dc:creator        "Alberto Iglesias Fraga" ;
+    dc:date           "2016-07-28T23:45:07.000+02:00"^^xsd:dateTime ;
+    dc:description    "SONY hat die Verhandlungen mit Murata Manufacturing für den Verkauf seiner Batterie-Geschäft begonnen. Die Operation wird März 2017 gipfeln ..." ;
+    dc:language       "de" ;
+    dc:source         "cloud.ticbeat.com" ;
+    dc:subject        "Economy, Business & Finanzen" ;
+    dc:title          "SONY ist klar von seiner Batteriegeschäft" ;
+    dc:type           "article" ;
+    schema:keywords   "Sony, Batterien, Murata Manufacturing";
+    dct:source        <http://feedproxy.google.com/~r/rwwes/~3/z2KuGYx6FiY/> .
+}
+#+END_SRC
+
+Context:
+#+BEGIN_SRC Turtle
+# ES original
+graph ms-content:156e0d {
+  <http://data.multisensorproject.eu/content/156e0d#char=0,2131> a nif:Context ;
+    ms:fluency       "1.22"^^xsd:double ;
+    ms:richness      "1.86"^^xsd:double ;
+    ms:technicality  "2.78"^^xsd:double ;
+    nif:beginIndex   "0"^^xsd:nonNegativeInteger ;
+    nif:endIndex     "2131"^^xsd:nonNegativeInteger ;
+    nif:isString     "SONY se desprenderá de su negocio de baterías\n\nSONY sigue inmersa en la profunda reestructuración..." ;
+    nif:sourceUrl    ms-content:b156e0d .
+}
+
+# EN translation
+graph ms-content:156e0d-en {
+  <http://data.multisensorproject.eu/content/156e0d-en#char=0,1800> a nif:Context ;
+    ms:fluency       "1.25"^^xsd:double ; # hopefully will be similar to original, but won't be identical
+    ms:richness      "1.81"^^xsd:double ;
+    ms:technicality  "2.70"^^xsd:double ;
+    nif:beginIndex   "0"^^xsd:nonNegativeInteger ;
+    nif:endIndex     "1800"^^xsd:nonNegativeInteger ; # Assuming EN comes out shorter than ES
+    nif:isString     "SONY is clear from its battery business\n\nSONY still immersed in deep restructuring ..." ;
+    nif:sourceUrl    ms-content:b156e0d-en .
+}
+
+# EN translation
+graph ms-content:156e0d-de {
+  <http://data.multisensorproject.eu/content/156e0d-de#char=0,2200> a nif:Context ;
+    ms:fluency       "1.12"^^xsd:double ; # hopefully will be similar to original, but won't be identical
+    ms:richness      "1.56"^^xsd:double ;
+    ms:technicality  "2.41"^^xsd:double ;
+    nif:beginIndex   "0"^^xsd:nonNegativeInteger ;
+    nif:endIndex     "2200"^^xsd:nonNegativeInteger ; # Assuming DE comes out longer than ES
+    nif:isString     "SONY ist von seiner Batterie-Geschäft\n\nSONY klar immer noch in einer tiefen Umstrukturierung getaucht ..." ;
+    nif:sourceUrl    ms-content:b156e0d-de .
+}
+#+END_SRC
+
+Some NIF annotations:
+#+BEGIN_SRC Turtle
+# ES original
+graph ms-content:156e0d {
+  <http://data.multisensorproject.eu/content/156e0d#char=1199,1224> a nif:Phrase ;
+    nif:anchorOf           "batería de iones de litio" ;
+    nif:beginIndex         "1199"^^xsd:nonNegativeInteger ;
+    nif:endIndex           "1224"^^xsd:nonNegativeInteger ;
+    nif:referenceContext   <http://data.multisensorproject.eu/content/b156e0d#char=0,2131> ;
+    nif-ann:taIdentConf    "1.0"^^xsd:double ;
+    nif-ann:taIdentProv    <http://babelfy.org/> ;
+    its:taClassRef         ms:GenericConcept ;
+    its:taIdentRef         bn:s01289274n .
+}
+
+# The BN labels are submitted in the SIMMO graph but stored in the default graph, thus the same for all languages
+bn:s01289274n skos:prefLabel "LiIon"@de, "Li-ion cell"@en, "Batteries lithium-ion"@fr, "Литиево-йонна батерия"@bg .
+
+# EN translation
+graph ms-content:156e0d-en {
+  <http://data.multisensorproject.eu/content/156e0d-en#char=1100,1119> a nif:Phrase ;
+    nif:anchorOf           "lithium ion battery" ;
+    nif:beginIndex         "1100"^^xsd:nonNegativeInteger ;
+    nif:endIndex           "1119"^^xsd:nonNegativeInteger ;
+    nif:referenceContext   <http://data.multisensorproject.eu/content/b156e0d-en#char=0,1800> ;
+    nif-ann:taIdentConf    "1.0"^^xsd:double ;
+    nif-ann:taIdentProv    <http://babelfy.org/> ;
+    its:taClassRef         ms:GenericConcept ;
+    its:taIdentRef         bn:s01289274n .
+}
+
+# DE translation
+graph ms-content:156e0d-de {
+  <http://data.multisensorproject.eu/content/156e0d-en#char=1200,1218> a nif:Phrase ;
+    nif:anchorOf           "Lithium-Ionen-Akku" ;
+    nif:beginIndex         "1200"^^xsd:nonNegativeInteger ;
+    nif:endIndex           "1218"^^xsd:nonNegativeInteger ;
+    nif:referenceContext   <http://data.multisensorproject.eu/content/b156e0d-de#char=0,2200> ;
+    nif-ann:taIdentConf    "1.0"^^xsd:double ;
+    nif-ann:taIdentProv    <http://babelfy.org/> ;
+    its:taClassRef         ms:GenericConcept ;
+    its:taIdentRef         bn:s01289274n .
+}
+#+END_SRC
+
+Multimedia is only present in the original-content graph:
+#+BEGIN_SRC Turtle
+graph ms-content:156e0d {
+  ms-content:156e0d dct:hasPart 
+    <http://cloud.ticbeat.com/2016/07/sony-baterías-explosión.mp4>,
+    <http://cloud.ticbeat.com/2016/07/sony-batería.jpg> 
+
+  <http://cloud.ticbeat.com/2016/07/sony-baterías-explosión.mp4> 
+    a dctype:MovingImage;
+    dc:format "video/mp4".
+
+  <http://cloud.ticbeat.com/2016/07/sony-batería.jpg> 
+    a dctype:StillImage;
+    dc:format "image/jpeg".
+}
+#+END_SRC
+
+*** TODO BabelNet Multilingual Labels
+The Entity Linking Service can find BN concepts in any language, because BN concepts have multilingual labels.
+This is unrelated to whether the SIMMO is translated to another language or not.
+It's up to the UI to filter BN labels and show only labels in the selected language.
+
+However, not all BN concepts have labels in all MS languages.
+Therefore the UI should implement some *language fall-back* logic:
+- if no label in the selected language is available, show the EN label
+- TODO Boyan: check whether all BN concepts have EN labels.
+
+*** TODO Add Spanish BabelNet Labels
+Gerard, as we saw above, Babelfy recognizes "batería de iones de litio" 
+but bn:s01289274n does not have ES label (has EN, FR, DE, BG).
+This concept has [[http://babelnet.org/synset?word%3DBater%C3%ADa%2Bde%2Bion%2Bde%2Blitio&lang%3DES&details%3D1&orig%3DBater%C3%ADa%2Bde%2Bion%2Bde%2Blitio][ES representation on the BN site]]. 
+
+Do you need to add Spanish labels?
+
+*** Translated-content Queries
+All queries for a single language (eg find concepts) won't change. 
+Eg here is how to find entities in the original and translated SIMMOs (hopefully the same entities will be recognized).
+We just change the graph:
+#+BEGIN_SRC SPARQL
+# ES Original
+select distinct ?concept ?label {
+  graph ms-content:156e0d {[] itsrdf:taIdentRef ?entity}.
+  ?entity skos:prefLabel ?label
+}
+
+# EN Translation
+select distinct ?concept ?label {
+  graph ms-content:156e0d-en {[] itsrdf:taIdentRef ?entity}.
+  ?entity skos:prefLabel ?label
+}
+#+END_SRC
+
+We can filter to entity labels in the selected language, implementing "language fall-back".
+~coalesce()~ picks the first bound variable.
+We don't need it for EN since we assume all BN concepts have EN.
+#+BEGIN_SRC SPARQL
+# ES Original
+select distinct ?concept (coalesce(?labelEs,?labelEn) as ?label) {
+  graph ms-content:156e0d {[] itsrdf:taIdentRef ?entity}.
+  ?entity skos:prefLabel ?labelEn filter(lang(?labelEn)="en")
+  optional {?entity skos:prefLabel ?labelEs filter(lang(?labelEn)="es")}
+}
+
+# EN Translation
+select distinct * {
+  graph ms-content:156e0d-en {[] itsrdf:taIdentRef ?entity}.
+  ?entity skos:prefLabel ?label filter(lang(?labelEn)="en")
+}
+#+END_SRC

@@ -157,7 +157,7 @@ for the JavaScript code in this tag.
 <li><a href="#sec-2-1-4"><span class="done DONE">DONE</span> SIMMO Quality</a>
 <ul>
 <li><a href="#sec-2-1-4-1"><span class="done CANCEL">CANCEL</span> Represent as QualityMeasurement</a></li>
-<li><a href="#sec-2-1-4-2"><span class="todo TODO">TODO</span> Represent as QualityAnnotation</a></li>
+<li><a href="#sec-2-1-4-2"><span class="done DONE">DONE</span> Represent as QualityAnnotation</a></li>
 <li><a href="#sec-2-1-4-3">Quality Queries</a></li>
 </ul>
 </li>
@@ -169,7 +169,7 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#sec-2-2">Entity Linking Service</a>
 <ul>
-<li><a href="#sec-2-2-1"><span class="done DONE">DONE</span> Underscores to Spaces</a></li>
+<li><a href="#sec-2-2-1"><span class="todo TODO">TODO</span> Underscores to Spaces</a></li>
 <li><a href="#sec-2-2-2"><span class="todo QUE">QUE</span> Remove Disambiguation Labels?</a></li>
 </ul>
 </li>
@@ -196,6 +196,13 @@ for the JavaScript code in this tag.
 <li><a href="#sec-2-5-4"><span class="todo TODO">TODO</span> Add to Ontology&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Vladimir">Vladimir</span></span></a></li>
 <li><a href="#sec-2-5-5">CAP Query</a></li>
 <li><a href="#sec-2-5-6"><span class="done CANCEL">CANCEL</span> Other CAP Queries</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-6"><span class="todo TODO">TODO</span> Content Translation</a>
+<ul>
+<li><a href="#sec-2-6-1"><span class="todo TODO">TODO</span> BabelNet Multilingual Labels</a></li>
+<li><a href="#sec-2-6-2"><span class="todo TODO">TODO</span> Add Spanish BabelNet Labels</a></li>
+<li><a href="#sec-2-6-3">Translated-content Queries</a></li>
 </ul>
 </li>
 </ul>
@@ -369,7 +376,7 @@ Status:
 </li>
 <li><span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-20&gt;</span></span> DONE: make dqv:value nominal (eg ms:accuracy-low) instead of numeric (eg 1)
 </li>
-<li><span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-26&gt;</span></span> TODO: use QualityAnnotation instead of QualityMeasurement
+<li><span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-26&gt;</span></span> DONE: use QualityAnnotation instead of QualityMeasurement
 </li>
 </ul>
 
@@ -483,7 +490,7 @@ Then for each SIMMO that has a quality rating (SIMMOS that don't have a rating g
 </div>
 
 <div id="outline-container-sec-2-1-4-2" class="outline-5">
-<h5 id="sec-2-1-4-2"><span class="todo TODO">TODO</span> Represent as QualityAnnotation</h5>
+<h5 id="sec-2-1-4-2"><span class="done DONE">DONE</span> Represent as QualityAnnotation</h5>
 <div class="outline-text-5" id="text-2-1-4-2">
 <p>
 The correct way to use nominal values is to use QualityAnnotation instead of QualityMeasurement.
@@ -848,7 +855,7 @@ I think Victor made that script. The other prefixes are there, so it's just a ma
 <h3 id="sec-2-2">Entity Linking Service</h3>
 <div class="outline-text-3" id="text-2-2">
 </div><div id="outline-container-sec-2-2-1" class="outline-4">
-<h4 id="sec-2-2-1"><span class="done DONE">DONE</span> Underscores to Spaces</h4>
+<h4 id="sec-2-2-1"><span class="todo TODO">TODO</span> Underscores to Spaces</h4>
 <div class="outline-text-4" id="text-2-2-1">
 <p>
 The EL service emits Babelnet entity labels in up to 4 languages, eg
@@ -895,6 +902,14 @@ Gerard: DONE <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07
 <a href="http://multisensor.ontotext.com/resource/ms-content/00a17bdb91543c45349f42378caeecd434c1a8f4#char=281,291">http://multisensor.ontotext.com/resource/ms-content/00a17bdb91543c45349f42378caeecd434c1a8f4#char=281,291</a>
 Gerard: DONE <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-20 Wed&gt;</span></span>.
       Dependency parsing: lemmas are also emitted as literals of nif:lemma triples without underscores
+</li>
+<li>IMPORTANT <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-08-12 Fri&gt;</span></span> Now we have two labels per BN concept per language. Must remove the superfluous ones. Eg:
+<ul class="org-ul">
+<li>bn:s03113558n: "Royal Ordnance Factories F.C."@en and "Royal_Ordnance_Factories_F.C."@en
+</li>
+<li>bn:s00124949n: "Prefijo del Segmento de Programa"@es and "Prefijo_del_Segmento_de_Programa"@es
+</li>
+</ul>
 </li>
 </ul>
 </div>
@@ -1401,10 +1416,304 @@ The gdoc maybe has 2 queries related to CAP. Not sure I'm looking at the right s
 </div>
 </div>
 </div>
+
+<div id="outline-container-sec-2-6" class="outline-3">
+<h3 id="sec-2-6"><span class="todo TODO">TODO</span> Content Translation</h3>
+<div class="outline-text-3" id="text-2-6">
+<p>
+Scenario: we have a SIMMO in original language ES that is machine-translated to EN &amp; DE. 
+</p>
+<ul class="org-ul">
+<li>All textual elements are translated: title, description, body.
+<ul class="org-ul">
+<li>The example below also shows subject &amp; keywords in different languages. If you can only produce them in EN, that's fine
+</li>
+</ul>
+</li>
+<li>However, video ASR text is not translated.
+(TODO: if this assumption is wrong, let me know.)
+</li>
+<li>Both original and translations are annotated with NIF.
+</li>
+</ul>
+<p>
+We want to record all NIF information against original and translated separately, so there's no confusion.
+If the article includes multimedia, we want to attach it only to the original, to avoid data duplication.
+</p>
+
+<p>
+Solution: we need separate roots (foaf:Document), so we store the original and translation(s) in separate named graphs.
+</p>
+<ul class="org-ul">
+<li>the translated-content graph has language-specific suffix; the original-content graph does not have such suffix
+</li>
+<li>the translated content has link <code>bibo:translationOf</code> to the original
+</li>
+</ul>
+
+<p>
+Files: <a href="http://grinder1.multisensorproject.eu/cepfiles/multiTest/validated/">http://grinder1.multisensorproject.eu/cepfiles/multiTest/validated/</a>
+</p>
+
+<p>
+Root:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-Turtle"><span style="color: #b22222;"># ES original</span>
+graph <span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">156e0d</span> {
+  <span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">156e0d</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">foaf:</span><span style="color: #008b8b;">Document</span> ;
+    <span style="color: #228b22;">dbp:</span><span style="color: #008b8b;">countryCode</span>  <span style="color: #8b2252;">"ES"</span> ;
+    <span style="color: #228b22;">dc:</span><span style="color: #008b8b;">creator</span>       <span style="color: #8b2252;">"Alberto Iglesias Fraga"</span> ;
+    <span style="color: #228b22;">dc:</span><span style="color: #008b8b;">date</span>          <span style="color: #8b2252;">"2016-07-28T23:45:07.000+02:00"</span><span style="color: #008b8b;">^^xsd:dateTime</span> ;
+    <span style="color: #228b22;">dc:</span><span style="color: #008b8b;">description</span>   <span style="color: #8b2252;">"SONY ha iniciado negociaciones con Murata Manufacturing para la venta de su negocio de bater&#237;as. La operaci&#243;n culminar&#225; en marzo de 2017..."</span>;
+    <span style="color: #228b22;">dc:</span><span style="color: #008b8b;">language</span>      <span style="color: #8b2252;">"es"</span> ;
+    <span style="color: #228b22;">dc:</span><span style="color: #008b8b;">source</span>        <span style="color: #8b2252;">"cloud.ticbeat.com"</span> ;
+    <span style="color: #228b22;">dc:</span><span style="color: #008b8b;">subject</span>       <span style="color: #8b2252;">"Econom&#237;a, Negocios y Finanzas"</span> ;
+    <span style="color: #228b22;">dc:</span><span style="color: #008b8b;">title</span>         <span style="color: #8b2252;">"SONY se desprender&#225; de su negocio de bater&#237;as"</span> ;
+    <span style="color: #228b22;">dc:</span><span style="color: #008b8b;">type</span>          <span style="color: #8b2252;">"article"</span> ;
+    <span style="color: #228b22;">schema:</span><span style="color: #008b8b;">keywords</span>  <span style="color: #8b2252;">"Sony, bater&#237;as, Murata Manufacturing"</span>;
+    <span style="color: #228b22;">dct:</span><span style="color: #008b8b;">source</span>       <span style="color: #0000ff;">&lt;http://feedproxy.google.com/~r/rwwes/~3/z2KuGYx6FiY/&gt;</span> .
+
+<span style="color: #b22222;"># EN translation</span>
+graph <span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">156e0d-en</span> {
+  <span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">156e0d-en</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">foaf:</span><span style="color: #008b8b;">Document</span> ;
+    <span style="color: #228b22;">bibo:</span><span style="color: #008b8b;">translationOf</span> <span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">156e0d</span>; <span style="color: #b22222;"># IMPORTANT!</span>
+    <span style="color: #228b22;">dbp:</span><span style="color: #008b8b;">countryCode</span>   <span style="color: #8b2252;">"ES"</span> ;
+    <span style="color: #228b22;">dc:</span><span style="color: #008b8b;">creator</span>        <span style="color: #8b2252;">"Alberto Iglesias Fraga"</span> ;
+    <span style="color: #228b22;">dc:</span><span style="color: #008b8b;">date</span>           <span style="color: #8b2252;">"2016-07-28T23:45:07.000+02:00"</span><span style="color: #008b8b;">^^xsd:dateTime</span> ;
+    <span style="color: #228b22;">dc:</span><span style="color: #008b8b;">description</span>    <span style="color: #8b2252;">"SONY has begun negotiations with Murata Manufacturing for the sale of its battery business. The operation will culminate in March 2017 ..."</span> ;
+    <span style="color: #228b22;">dc:</span><span style="color: #008b8b;">language</span>       <span style="color: #8b2252;">"en"</span> ;
+    <span style="color: #228b22;">dc:</span><span style="color: #008b8b;">source</span>         <span style="color: #8b2252;">"cloud.ticbeat.com"</span> ;
+    <span style="color: #228b22;">dc:</span><span style="color: #008b8b;">subject</span>        <span style="color: #8b2252;">"Economy, Business &amp; Finance"</span> ;
+    <span style="color: #228b22;">dc:</span><span style="color: #008b8b;">title</span>          <span style="color: #8b2252;">"SONY is clear from its battery business"</span> ;
+    <span style="color: #228b22;">dc:</span><span style="color: #008b8b;">type</span>           <span style="color: #8b2252;">"article"</span> ;
+    <span style="color: #228b22;">schema:</span><span style="color: #008b8b;">keywords</span>   <span style="color: #8b2252;">"Sony, batteries, Murata Manufacturing"</span>;
+    <span style="color: #228b22;">dct:</span><span style="color: #008b8b;">source</span>        <span style="color: #0000ff;">&lt;http://feedproxy.google.com/~r/rwwes/~3/z2KuGYx6FiY/&gt;</span> .
+}
+
+<span style="color: #b22222;"># DE translation</span>
+graph <span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">156e0d-de</span> {
+  <span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">156e0d-de</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">foaf:</span><span style="color: #008b8b;">Document</span> ;
+    <span style="color: #228b22;">bibo:</span><span style="color: #008b8b;">translationOf</span> <span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">156e0d</span>; <span style="color: #b22222;"># IMPORTANT!</span>
+    <span style="color: #228b22;">dbp:</span><span style="color: #008b8b;">countryCode</span>   <span style="color: #8b2252;">"ES"</span> ;
+    <span style="color: #228b22;">dc:</span><span style="color: #008b8b;">creator</span>        <span style="color: #8b2252;">"Alberto Iglesias Fraga"</span> ;
+    <span style="color: #228b22;">dc:</span><span style="color: #008b8b;">date</span>           <span style="color: #8b2252;">"2016-07-28T23:45:07.000+02:00"</span><span style="color: #008b8b;">^^xsd:dateTime</span> ;
+    <span style="color: #228b22;">dc:</span><span style="color: #008b8b;">description</span>    <span style="color: #8b2252;">"SONY hat die Verhandlungen mit Murata Manufacturing f&#252;r den Verkauf seiner Batterie-Gesch&#228;ft begonnen. Die Operation wird M&#228;rz 2017 gipfeln ..."</span> ;
+    <span style="color: #228b22;">dc:</span><span style="color: #008b8b;">language</span>       <span style="color: #8b2252;">"de"</span> ;
+    <span style="color: #228b22;">dc:</span><span style="color: #008b8b;">source</span>         <span style="color: #8b2252;">"cloud.ticbeat.com"</span> ;
+    <span style="color: #228b22;">dc:</span><span style="color: #008b8b;">subject</span>        <span style="color: #8b2252;">"Economy, Business &amp; Finanzen"</span> ;
+    <span style="color: #228b22;">dc:</span><span style="color: #008b8b;">title</span>          <span style="color: #8b2252;">"SONY ist klar von seiner Batteriegesch&#228;ft"</span> ;
+    <span style="color: #228b22;">dc:</span><span style="color: #008b8b;">type</span>           <span style="color: #8b2252;">"article"</span> ;
+    <span style="color: #228b22;">schema:</span><span style="color: #008b8b;">keywords</span>   <span style="color: #8b2252;">"Sony, Batterien, Murata Manufacturing"</span>;
+    <span style="color: #228b22;">dct:</span><span style="color: #008b8b;">source</span>        <span style="color: #0000ff;">&lt;http://feedproxy.google.com/~r/rwwes/~3/z2KuGYx6FiY/&gt;</span> .
+}
+</pre>
+</div>
+
+<p>
+Context:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-Turtle"><span style="color: #b22222;"># ES original</span>
+graph <span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">156e0d</span> {
+  <span style="color: #0000ff;">&lt;http://data.multisensorproject.eu/content/156e0d#char=0,2131&gt;</span><span style="color: #b22222;"> </span><span style="color: #a020f0;">a</span><span style="color: #b22222;"> </span><span style="color: #228b22;">nif:</span><span style="color: #008b8b;">Context</span><span style="color: #b22222;"> ;</span>
+    <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">fluency</span>       <span style="color: #8b2252;">"1.22"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">double</span> ;
+    <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">richness</span>      <span style="color: #8b2252;">"1.86"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">double</span> ;
+    <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">technicality</span>  <span style="color: #8b2252;">"2.78"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">double</span> ;
+    <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">beginIndex</span>   <span style="color: #8b2252;">"0"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">nonNegativeInteger</span> ;
+    <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">endIndex</span>     <span style="color: #8b2252;">"2131"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">nonNegativeInteger</span> ;
+    <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">isString</span>     <span style="color: #8b2252;">"SONY se desprender&#225; de su negocio de bater&#237;as\n\nSONY sigue inmersa en la profunda reestructuraci&#243;n..."</span> ;
+    <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">sourceUrl</span>    <span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">b156e0d</span> .
+}
+
+<span style="color: #b22222;"># EN translation</span>
+graph <span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">156e0d-en</span> {
+  <span style="color: #0000ff;">&lt;http://data.multisensorproject.eu/content/156e0d-en#char=0,1800&gt;</span><span style="color: #b22222;"> </span><span style="color: #a020f0;">a</span><span style="color: #b22222;"> </span><span style="color: #228b22;">nif:</span><span style="color: #008b8b;">Context</span><span style="color: #b22222;"> ;</span>
+    <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">fluency</span>       <span style="color: #8b2252;">"1.25"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">double</span> ; <span style="color: #b22222;"># hopefully will be similar to original, but won't be identical</span>
+    <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">richness</span>      <span style="color: #8b2252;">"1.81"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">double</span> ;
+    <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">technicality</span>  <span style="color: #8b2252;">"2.70"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">double</span> ;
+    <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">beginIndex</span>   <span style="color: #8b2252;">"0"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">nonNegativeInteger</span> ;
+    <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">endIndex</span>     <span style="color: #8b2252;">"1800"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">nonNegativeInteger</span> ; <span style="color: #b22222;"># Assuming EN comes out shorter than ES</span>
+    <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">isString</span>     <span style="color: #8b2252;">"SONY is clear from its battery business\n\nSONY still immersed in deep restructuring ..."</span> ;
+    <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">sourceUrl</span>    <span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">b156e0d-en</span> .
+}
+
+<span style="color: #b22222;"># EN translation</span>
+graph <span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">156e0d-de</span> {
+  <span style="color: #0000ff;">&lt;http://data.multisensorproject.eu/content/156e0d-de#char=0,2200&gt;</span><span style="color: #b22222;"> </span><span style="color: #a020f0;">a</span><span style="color: #b22222;"> </span><span style="color: #228b22;">nif:</span><span style="color: #008b8b;">Context</span><span style="color: #b22222;"> ;</span>
+    <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">fluency</span>       <span style="color: #8b2252;">"1.12"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">double</span> ; <span style="color: #b22222;"># hopefully will be similar to original, but won't be identical</span>
+    <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">richness</span>      <span style="color: #8b2252;">"1.56"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">double</span> ;
+    <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">technicality</span>  <span style="color: #8b2252;">"2.41"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">double</span> ;
+    <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">beginIndex</span>   <span style="color: #8b2252;">"0"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">nonNegativeInteger</span> ;
+    <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">endIndex</span>     <span style="color: #8b2252;">"2200"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">nonNegativeInteger</span> ; <span style="color: #b22222;"># Assuming DE comes out longer than ES</span>
+    <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">isString</span>     <span style="color: #8b2252;">"SONY ist von seiner Batterie-Gesch&#228;ft\n\nSONY klar immer noch in einer tiefen Umstrukturierung getaucht ..."</span> ;
+    <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">sourceUrl</span>    <span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">b156e0d-de</span> .
+}
+</pre>
+</div>
+
+<p>
+Some NIF annotations:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-Turtle"><span style="color: #b22222;"># ES original</span>
+graph <span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">156e0d</span> {
+  <span style="color: #0000ff;">&lt;http://data.multisensorproject.eu/content/156e0d#char=1199,1224&gt;</span><span style="color: #b22222;"> </span><span style="color: #a020f0;">a</span><span style="color: #b22222;"> </span><span style="color: #228b22;">nif:</span><span style="color: #008b8b;">Phrase</span><span style="color: #b22222;"> ;</span>
+    <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">anchorOf</span>           <span style="color: #8b2252;">"bater&#237;a de iones de litio"</span> ;
+    <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">beginIndex</span>         <span style="color: #8b2252;">"1199"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">nonNegativeInteger</span> ;
+    <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">endIndex</span>           <span style="color: #8b2252;">"1224"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">nonNegativeInteger</span> ;
+    <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">referenceContext</span>   <span style="color: #0000ff;">&lt;http://data.multisensorproject.eu/content/b156e0d#char=0,2131&gt;</span><span style="color: #b22222;"> ;</span>
+    <span style="color: #228b22;">nif-ann:</span><span style="color: #008b8b;">taIdentConf</span>    <span style="color: #8b2252;">"1.0"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">double</span> ;
+    <span style="color: #228b22;">nif-ann:</span><span style="color: #008b8b;">taIdentProv</span>    <span style="color: #0000ff;">&lt;http://babelfy.org/&gt;</span> ;
+    <span style="color: #228b22;">its:</span><span style="color: #008b8b;">taClassRef</span>         <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">GenericConcept</span> ;
+    <span style="color: #228b22;">its:</span><span style="color: #008b8b;">taIdentRef</span>         <span style="color: #228b22;">bn:</span><span style="color: #008b8b;">s01289274n</span> .
+}
+
+<span style="color: #b22222;"># The BN labels are submitted in the SIMMO graph but stored in the default graph, thus the same for all languages</span>
+<span style="color: #228b22;">bn:</span><span style="color: #008b8b;">s01289274n</span> <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">prefLabel</span> <span style="color: #8b2252;">"LiIon"</span>@de, <span style="color: #8b2252;">"Li-ion cell"</span>@en, <span style="color: #8b2252;">"Batteries lithium-ion"</span>@fr, <span style="color: #8b2252;">"&#1051;&#1080;&#1090;&#1080;&#1077;&#1074;&#1086;-&#1081;&#1086;&#1085;&#1085;&#1072; &#1073;&#1072;&#1090;&#1077;&#1088;&#1080;&#1103;"</span>@bg .
+
+<span style="color: #b22222;"># EN translation</span>
+graph <span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">156e0d-en</span> {
+  <span style="color: #0000ff;">&lt;http://data.multisensorproject.eu/content/156e0d-en#char=1100,1119&gt;</span><span style="color: #b22222;"> </span><span style="color: #a020f0;">a</span><span style="color: #b22222;"> </span><span style="color: #228b22;">nif:</span><span style="color: #008b8b;">Phrase</span><span style="color: #b22222;"> ;</span>
+    <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">anchorOf</span>           <span style="color: #8b2252;">"lithium ion battery"</span> ;
+    <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">beginIndex</span>         <span style="color: #8b2252;">"1100"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">nonNegativeInteger</span> ;
+    <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">endIndex</span>           <span style="color: #8b2252;">"1119"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">nonNegativeInteger</span> ;
+    <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">referenceContext</span>   <span style="color: #0000ff;">&lt;http://data.multisensorproject.eu/content/b156e0d-en#char=0,1800&gt;</span><span style="color: #b22222;"> ;</span>
+    <span style="color: #228b22;">nif-ann:</span><span style="color: #008b8b;">taIdentConf</span>    <span style="color: #8b2252;">"1.0"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">double</span> ;
+    <span style="color: #228b22;">nif-ann:</span><span style="color: #008b8b;">taIdentProv</span>    <span style="color: #0000ff;">&lt;http://babelfy.org/&gt;</span> ;
+    <span style="color: #228b22;">its:</span><span style="color: #008b8b;">taClassRef</span>         <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">GenericConcept</span> ;
+    <span style="color: #228b22;">its:</span><span style="color: #008b8b;">taIdentRef</span>         <span style="color: #228b22;">bn:</span><span style="color: #008b8b;">s01289274n</span> .
+}
+
+<span style="color: #b22222;"># DE translation</span>
+graph <span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">156e0d-de</span> {
+  <span style="color: #0000ff;">&lt;http://data.multisensorproject.eu/content/156e0d-en#char=1200,1218&gt;</span><span style="color: #b22222;"> </span><span style="color: #a020f0;">a</span><span style="color: #b22222;"> </span><span style="color: #228b22;">nif:</span><span style="color: #008b8b;">Phrase</span><span style="color: #b22222;"> ;</span>
+    <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">anchorOf</span>           <span style="color: #8b2252;">"Lithium-Ionen-Akku"</span> ;
+    <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">beginIndex</span>         <span style="color: #8b2252;">"1200"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">nonNegativeInteger</span> ;
+    <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">endIndex</span>           <span style="color: #8b2252;">"1218"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">nonNegativeInteger</span> ;
+    <span style="color: #228b22;">nif:</span><span style="color: #008b8b;">referenceContext</span>   <span style="color: #0000ff;">&lt;http://data.multisensorproject.eu/content/b156e0d-de#char=0,2200&gt;</span><span style="color: #b22222;"> ;</span>
+    <span style="color: #228b22;">nif-ann:</span><span style="color: #008b8b;">taIdentConf</span>    <span style="color: #8b2252;">"1.0"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">double</span> ;
+    <span style="color: #228b22;">nif-ann:</span><span style="color: #008b8b;">taIdentProv</span>    <span style="color: #0000ff;">&lt;http://babelfy.org/&gt;</span> ;
+    <span style="color: #228b22;">its:</span><span style="color: #008b8b;">taClassRef</span>         <span style="color: #228b22;">ms:</span><span style="color: #008b8b;">GenericConcept</span> ;
+    <span style="color: #228b22;">its:</span><span style="color: #008b8b;">taIdentRef</span>         <span style="color: #228b22;">bn:</span><span style="color: #008b8b;">s01289274n</span> .
+}
+</pre>
+</div>
+
+<p>
+Multimedia is only present in the original-content graph:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-Turtle">graph <span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">156e0d</span> {
+  <span style="color: #228b22;">ms-content:</span><span style="color: #008b8b;">156e0d</span> <span style="color: #228b22;">dct:</span><span style="color: #008b8b;">hasPart</span> 
+    <span style="color: #0000ff;">&lt;http://cloud.ticbeat.com/2016/07/sony-bater&#237;as-explosi&#243;n.mp4&gt;</span>,
+    <span style="color: #0000ff;">&lt;http://cloud.ticbeat.com/2016/07/sony-bater&#237;a.jpg&gt;</span> 
+
+  <span style="color: #0000ff;">&lt;http://cloud.ticbeat.com/2016/07/sony-bater&#237;as-explosi&#243;n.mp4&gt;</span> 
+    <span style="color: #a020f0;">a</span> <span style="color: #228b22;">dctype:</span><span style="color: #008b8b;">MovingImage</span>;
+    <span style="color: #228b22;">dc:</span><span style="color: #008b8b;">format</span> <span style="color: #8b2252;">"video/mp4"</span>.
+
+  <span style="color: #0000ff;">&lt;http://cloud.ticbeat.com/2016/07/sony-bater&#237;a.jpg&gt;</span> 
+    <span style="color: #a020f0;">a</span> <span style="color: #228b22;">dctype:</span><span style="color: #008b8b;">StillImage</span>;
+    <span style="color: #228b22;">dc:</span><span style="color: #008b8b;">format</span> <span style="color: #8b2252;">"image/jpeg"</span>.
+}
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-2-6-1" class="outline-4">
+<h4 id="sec-2-6-1"><span class="todo TODO">TODO</span> BabelNet Multilingual Labels</h4>
+<div class="outline-text-4" id="text-2-6-1">
+<p>
+The Entity Linking Service can find BN concepts in any language, because BN concepts have multilingual labels.
+This is unrelated to whether the SIMMO is translated to another language or not.
+It's up to the UI to filter BN labels and show only labels in the selected language.
+</p>
+
+<p>
+However, not all BN concepts have labels in all MS languages.
+Therefore the UI should implement some <b>language fall-back</b> logic:
+</p>
+<ul class="org-ul">
+<li>if no label in the selected language is available, show the EN label
+</li>
+<li>TODO Boyan: check whether all BN concepts have EN labels.
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-2-6-2" class="outline-4">
+<h4 id="sec-2-6-2"><span class="todo TODO">TODO</span> Add Spanish BabelNet Labels</h4>
+<div class="outline-text-4" id="text-2-6-2">
+<p>
+Gerard, as we saw above, Babelfy recognizes "batería de iones de litio" 
+but bn:s01289274n does not have ES label (has EN, FR, DE, BG).
+This concept has <a href="http://babelnet.org/synset?word=Batería+de+ion+de+litio&lang=ES&details=1&orig=Batería+de+ion+de+litio">ES representation on the BN site</a>. 
+</p>
+
+<p>
+Do you need to add Spanish labels?
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-6-3" class="outline-4">
+<h4 id="sec-2-6-3">Translated-content Queries</h4>
+<div class="outline-text-4" id="text-2-6-3">
+<p>
+All queries for a single language (eg find concepts) won't change. 
+Eg here is how to find entities in the original and translated SIMMOs (hopefully the same entities will be recognized).
+We just change the graph:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-SPARQL"><span style="color: #b22222;"># ES Original</span>
+<span style="color: #a020f0;">select</span> <span style="color: #a020f0;">distinct</span> <span style="color: #a0522d;">?concept</span> <span style="color: #a0522d;">?label</span> {
+  <span style="color: #a020f0;">graph</span> ms-content:156e0d {[] itsrdf:taIdentRef <span style="color: #a0522d;">?entity</span>}.
+  <span style="color: #a0522d;">?entity</span> skos:prefLabel <span style="color: #a0522d;">?label</span>
+}
+
+<span style="color: #b22222;"># EN Translation</span>
+<span style="color: #a020f0;">select</span> <span style="color: #a020f0;">distinct</span> <span style="color: #a0522d;">?concept</span> <span style="color: #a0522d;">?label</span> {
+  <span style="color: #a020f0;">graph</span> ms-content:156e0d-en {[] itsrdf:taIdentRef <span style="color: #a0522d;">?entity</span>}.
+  <span style="color: #a0522d;">?entity</span> skos:prefLabel <span style="color: #a0522d;">?label</span>
+}
+</pre>
+</div>
+
+<p>
+We can filter to entity labels in the selected language, implementing "language fall-back".
+<code>coalesce()</code> picks the first bound variable.
+We don't need it for EN since we assume all BN concepts have EN.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-SPARQL"><span style="color: #b22222;"># ES Original</span>
+<span style="color: #a020f0;">select</span> <span style="color: #a020f0;">distinct</span> <span style="color: #a0522d;">?concept</span> (coalesce(<span style="color: #a0522d;">?labelEs</span>,<span style="color: #a0522d;">?labelEn</span>) <span style="color: #a020f0;">as</span> <span style="color: #a0522d;">?label</span>) {
+  <span style="color: #a020f0;">graph</span> ms-content:156e0d {[] itsrdf:taIdentRef <span style="color: #a0522d;">?entity</span>}.
+  <span style="color: #a0522d;">?entity</span> skos:prefLabel <span style="color: #a0522d;">?labelEn</span> <span style="color: #a020f0;">filter</span>(lang(<span style="color: #a0522d;">?labelEn</span>)=<span style="color: #8b2252;">"en"</span>)
+  <span style="color: #a020f0;">optional</span> {<span style="color: #a0522d;">?entity</span> skos:prefLabel <span style="color: #a0522d;">?labelEs</span> <span style="color: #a020f0;">filter</span>(lang(<span style="color: #a0522d;">?labelEn</span>)=<span style="color: #8b2252;">"es"</span>)}
+}
+
+<span style="color: #b22222;"># EN Translation</span>
+<span style="color: #a020f0;">select</span> <span style="color: #a020f0;">distinct</span> * {
+  <span style="color: #a020f0;">graph</span> ms-content:156e0d-en {[] itsrdf:taIdentRef <span style="color: #a0522d;">?entity</span>}.
+  <span style="color: #a0522d;">?entity</span> skos:prefLabel <span style="color: #a0522d;">?label</span> <span style="color: #a020f0;">filter</span>(lang(<span style="color: #a0522d;">?labelEn</span>)=<span style="color: #8b2252;">"en"</span>)
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-26&gt;</span></span></p>
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-08-12&gt;</span></span></p>
 <p class="author">Author: Vladimir Alexiev</p>
 <p class="creator">Emacs 25.0.50.1 (Org mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
