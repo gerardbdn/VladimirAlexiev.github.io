@@ -1,5 +1,5 @@
 #+TITLE: VladimirAlexiev.github.io
-#+DATE: <2016-04-06>
+#+DATE: <2016-08-31>
 #+AUTHOR: Vladimir Alexiev
 #+EMAIL: vladimir.alexiev@ontotext.com
 #+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline author:t c:nil
@@ -13,6 +13,16 @@
 #+SELECT_TAGS: export
 
 [[http://VladimirAlexiev.github.io][HTML rendered version]]
+
+* Table of Contents                                 :TOC:noexport:
+ - [[#publications-and-tech][Publications and Tech]]
+   - [[#drafts][Drafts]]
+ - [[#presentations][Presentations]]
+ - [[#getty-vocabulary-program-lod][Getty Vocabulary Program LOD]]
+ - [[#ontotext-research-projects][Ontotext Research Projects]]
+ - [[#grammar-railroad-diagrams][Grammar Railroad Diagrams]]
+   - [[#sparql-11-query-language][SPARQL 1.1 Query Language]]
+   - [[#xsparql][XSPARQL]]
 
 * Publications and Tech
 - [[./pubs/index.html][Publications]] (with links to papers), [[./pubs/Alexiev-bibliography.bib][Alexiev-bibliography.bib]]
@@ -36,7 +46,6 @@
   - *DBpedia Ontology and Mapping Problems*: [[./pres/20150209-dbpedia/dbpedia-problems.html][presentation HTML]], [[./pres/20150209-dbpedia/dbpedia-problems-long.html][single HTML]], [[./pres/20150209-dbpedia/dbpedia-problems.pdf][PDF]]
   - *Adding a DBpedia Mapping*: [[./pres/20150209-dbpedia/add-mapping.html][presentation HTML]], [[./pres/20150209-dbpedia/add-mapping-long.html][single HTML]], [[./pres/20150209-dbpedia/add-mapping.pdf][PDF]]
   - *bg.dbpedia.org launched*: [[./pres/20150209-dbpedia/bg-dbpedia-launched.html][presentation HTML]], [[./pres/20150209-dbpedia/bg-dbpedia-launched.pdf][PDF]]
-- 
 
 * Getty Vocabulary Program LOD
 - http://vocab.getty.edu/doc: documentation (HTML for linking)
@@ -49,9 +58,13 @@
   * 2014-09-09: Getty special session (short version): [[./pres/20140905-CIDOC-GVP/short.html][presentation HTML]], [[./pres/20140905-CIDOC-GVP/GVP-LOD-CIDOC-short.pdf][PDF]]
   * [[http://www.getty.edu/research/tools/vocabularies/training.html][All presentations from these meetings]]
 
-* Ontotext FP & H2020 Research Projects
-[[./Ontotext-FP-projects-timeline.html][Frame that displays the project timeline]] at http://www.old.ontotext.com/EC_ResearchProjects. 
-It uses a Google Sheet to hold the data, and Google Charts to visualize it
+* Ontotext Research Projects
+[[./Ontotext-FP-projects-timeline.html][Ontotext EC research projects timeline]] (FP5,6,7 & H2020) at http://www.old.ontotext.com/EC_ResearchProjects. 
+It uses a [[https://docs.google.com/spreadsheets/d/1qRQbDVlRXrH4g8wcgZai65Zjn7D3N1mL-rIIzUoXmlk/edit][Google Sheet]] to hold the data, and Google Charts to visualize it.
+Hover over a project name to see its logo, dates and short description. Click to go to the project website.
+
+Static screenshot:\\
+[[./Ontotext-FP-projects-timeline.png]]
 
 * Grammar Railroad Diagrams
 Reading EBNF grammars is not easy. Seeing it on a diagram makes things easier.
