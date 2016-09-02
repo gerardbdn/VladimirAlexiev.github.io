@@ -352,7 +352,7 @@ If so, could you give us some code showing how to do it?
 
 ** Entity Linking Service
 
-*** TODO Underscores to Spaces
+*** DONE Underscores to Spaces
 The EL service emits Babelnet entity labels in up to 4 languages, eg
 #+BEGIN_SRC Turtle
 bn:s00088614v  skos:prefLabel  "zu_befriedigen"@de , "satisfacer"@es , "satisfaire"@fr , "задоволи"@bg .
@@ -385,10 +385,12 @@ where {
 - IMPORTANT <2016-08-12 Fri> Now we have two labels per BN concept per language. Must remove the superfluous ones. Eg:
   - bn:s03113558n: "Royal Ordnance Factories F.C."@en and "Royal_Ordnance_Factories_F.C."@en
   - bn:s00124949n: "Prefijo del Segmento de Programa"@es and "Prefijo_del_Segmento_de_Programa"@es
+- Gerard: The EL service only issues labels without underscores, so the ones with underscores are the ouput of running older versions of the service.
 
-*** QUE Remove Disambiguation Labels?
+*** DONE Remove Disambiguation Labels?
 Should we also remove disambiguations, which are trailing parenthesized parts, eg "Pastel_(gastronomía)" -> "Pastel"?
 Since these labels are not used for NLP tasks, and the disambiguations are very useful for understanding what the entity is, I vote to leave them.
+- Gerard: I also vote to leave them, more so considering that they can easily be postprocessed by the UI if ever needed.
 
 ** Entity Alignment Service
 <2016-06-28 Tue>: checked [[http://grinder1.multisensorproject.eu/cepfiles/rdf_validation/entity_alignment/0181e1-ENTITY_ALIGNMENT-21-6-2016.ttl][0181e1-ENTITY_ALIGNMENT-21-6-2016.ttl]] and alignment.log (by email)
@@ -493,11 +495,12 @@ This has nif:lemma "basic_data" but not nif:anchorOf.
 
 Gerard <2016-07-20 Wed> NIFUtils: new annotations created by services using this library will now emit anchors. This affects EL mostly
 
-*** TODO Why nif-ann:taIdentConf is 0?
+*** DONE Why nif-ann:taIdentConf is 0?
 In the above example, ~nif-ann:taIdentConf is 0. 
 In many other examples it's a good number, eg see below.
 Is 0 some sort of bug, or does Babelfy actually return 0 confidence for some concepts?
-- I think it's an error, I'll get back to you as soon as as I've figured out what's causing it.
+- Gerard: I think it's an error, I'll get back to you as soon as as I've figured out what's causing it.
+- Gerard: After inding no in the code and checking Babelfy's documentation, I reached the conclusion that this is normal behaviour. Take a look at this example response from Babelfy's own documentation, which contains annotations with confidence score 0: http://babelfy.org/guide#ResponseExample
 
 [[http://grinder1.multisensorproject.eu/cepfiles/rdf_validation/concept_with_scores_16_06_2016/bf6fe4-CONCEPT_EXTRACTION-16-6-2016.ttl][bf6fe4-CONCEPT_EXTRACTION-16-6-2016.ttl]]
 #+BEGIN_SRC Turtle
@@ -873,10 +876,11 @@ Therefore the UI should implement some *language fall-back* logic:
 - if no label in the selected language is available, show the EN label
 - TODO Boyan: check whether all BN concepts have EN labels.
 
-*** TODO Add Spanish BabelNet Labels
+*** CANCEL Add Spanish BabelNet Labels
 Gerard, as we saw above, Babelfy recognizes "batería de iones de litio" 
 but bn:s01289274n does not have ES label (has EN, FR, DE, BG).
 This concept has [[http://babelnet.org/synset?word%3DBater%C3%ADa%2Bde%2Bion%2Bde%2Blitio&lang%3DES&details%3D1&orig%3DBater%C3%ADa%2Bde%2Bion%2Bde%2Blitio][ES representation on the BN site]]. 
+- Gerard: missing labels are caused by using an older version of BabelNEt (2.5.1) to retrieve them. While the solution would be to use the latest version, i.e. by using the http API, I'd day it's not worth at this stage of the project. 
 
 Do you need to add Spanish labels?
 
